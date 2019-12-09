@@ -48,6 +48,7 @@ protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream&) const;
     void decode();
+
     void dig(const json_spirit::Value&);
     void coordinates(const json_spirit::Value&);
     void properties(const json_spirit::Value&);
