@@ -19,6 +19,8 @@ does it submit to any jurisdiction.
          		<documentation> The name of the input file containing the GRIB code field(s) 		</documentation>
   	</parameter>
 
+    <parameter member="test" to="bool" default="off" from="string" name="grib_tile_test">
+    </parameter>
     <parameter member="projection" to="string" default="cylindrical" from="string" name="grib_tile_projection">
     </parameter>
    <parameter member="loop" to="bool" default="off" from="string" name="grib_loop">

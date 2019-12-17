@@ -83,7 +83,6 @@ string TileDecoder::positions_symbols() {
   return positions();
 }
 bool TileDecoder::ok() {
-  return true;
   FILE* in = fopen(file_name_.c_str(), "r");
   if (!in) {
     MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
@@ -102,7 +101,9 @@ bool TileDecoder::ok() {
   error = grib_get_string(handle_, "gridName", val, &length);
   grid_ = string(val);
 
-  string path = weights();
+  if (test_) return true;
+
+  string path = positions();
   file_ = ifstream(path);
   if (!file_.good()) {
     file_.close();
@@ -140,24 +141,27 @@ double compute(double* values, double* weights, int nb, double total) {
   return val;
 }
 
+double left(float x, float min) {
+  int i = x / 10;
+  i = (i < 0) ? (i - 1) * 10 : i * 10;
+  return (i < min) ? min : i;
+}
+
+double right(float x, float max) {
+  int i = x / 10;
+  i = (i < 0) ? i * 10 : (i + 1) * 10;
+  return (i > max) ? max : i;
+}
+
 void TileDecoder::customisedPoints(const Transformation& transformation,
                                    const std::set<string>& n,
                                    CustomisedPointsList& out, bool all) {
-  /*
   string path = positions();
   Timer timer("Tile", path);
 
-  Netcdf netcdf(path, "index");
-
   map<string, string> first, last;
-  first["x"] = tostring(x_);
-  first["y"] = tostring(y_);
-  last["x"] = tostring(x_);
-  last["y"] = tostring(y_);
+
   vector<double> bbox;
-
-
-  */
 
   int error;
   vector<double> values;
@@ -168,16 +172,33 @@ void TileDecoder::customisedPoints(const Transformation& transformation,
     return;
   }
 
-  Netcdf netcdf("//Users/sylvie/tiles/index.nc", "index");
   vector<int> index;
   vector<double> latitudes;
   vector<double> longitudes;
+  if (test_) {
+    Netcdf netcdf = Netcdf("/Users/sylvie/tiles/index.nc", "value");
 
-  map<string, string> first, last;
-  first["x"] = tostring(transformation.getMinX());
-  first["y"] = tostring(transformation.getMinY());
-  last["x"] = tostring(transformation.getMaxX());
-  last["y"] = tostring(transformation.getMaxX());
+    first["x"] = tostring(left(transformation.getMinX(), -180));
+    first["y"] = tostring(left(transformation.getMinY(), -90));
+    last["x"] = tostring(right(transformation.getMaxX(), 180));
+    last["y"] = tostring(right(transformation.getMaxY(), 90));
+
+    cout << "firstx" << first["x"] << endl;
+    cout << "firsty" << first["y"] << endl;
+    cout << "lastx" << last["x"] << endl;
+    cout << "lasty" << last["y"] << endl;
+
+    netcdf.get("index", values, first, last);
+  } else {
+    Netcdf netcdf = Netcdf(path, "index");
+    cout << "NO test" << endl;
+    first["x"] = tostring(x_);
+    first["y"] = tostring(y_);
+    last["x"] = tostring(x_);
+    last["y"] = tostring(y_);
+
+    netcdf.get("index", values, first, last);
+  }
 
   /* create new handle from a message in a file*/
   codes_handle* u = codes_handle_new_from_file(0, in, PRODUCT_GRIB, &error);
@@ -194,10 +215,6 @@ void TileDecoder::customisedPoints(const Transformation& transformation,
     return;
   }
 
-  int nbpoints = netcdf.getDimension("points");
-  // netcdf.get("bounding-box", bbox, first, last);
-  netcdf.get("index", values, first, last);
-
   for (auto b = values.begin(); b != values.end(); ++b) {
     double lat = *b;
     ++b;
@@ -213,33 +230,35 @@ void TileDecoder::customisedPoints(const Transformation& transformation,
     }
   }
 
-  {
-    vector<double> uc;
-    uc.reserve(index.size());
-    vector<double> vc;
-    vc.reserve(index.size());
+  cout << "Done !" << endl;
 
-    codes_get_double_elements(u, "values", &index.front(), index.size(),
-                              &uc.front());
-    codes_get_double_elements(v, "values", &index.front(), index.size(),
-                              &vc.front());
+  vector<double> uc;
+  uc.reserve(index.size());
+  vector<double> vc;
+  vc.reserve(index.size());
 
-    auto lat = latitudes.begin();
-    auto lon = longitudes.begin();
-    auto ux = uc.begin();
-    auto vx = vc.begin();
+  codes_get_double_elements(u, "values", &index.front(), index.size(),
+                            &uc.front());
+  codes_get_double_elements(v, "values", &index.front(), index.size(),
+                            &vc.front());
 
-    while (lat != latitudes.end()) {
+  auto lat = latitudes.begin();
+  auto lon = longitudes.begin();
+  auto ux = uc.begin();
+  auto vx = vc.begin();
+
+  while (lat != latitudes.end()) {
+    if (transformation.in(*lon, *lat)) {
       CustomisedPoint* point = new CustomisedPoint(*lon, *lat, "");
       point->insert(make_pair("x_component", *ux));
       point->insert(make_pair("y_component", *vx));
       out.push_back(point);
       point->tile(true);
-      ux++;
-      vx++;
-      lat++;
-      lon++;
     }
+    ux++;
+    vx++;
+    lat++;
+    lon++;
   }
 }
 
