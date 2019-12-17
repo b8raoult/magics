@@ -26,7 +26,7 @@ matrix:
 
     - os: osx
       osx_image: xcode10.1
-      addons: 
+      addons:
         homebrew:
           packages:
             - pango
@@ -50,6 +50,13 @@ git:
   depth: 1
 
 before_install:
+  # check formatting only on linux
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      echo $(clang-format --version)
+      echo $(bash --version)
+      bash check_formatting.sh
+    fi
   # prepare install dir
   - mkdir ${INSTALL_DIR}
   # install conda
@@ -70,8 +77,8 @@ install:
   # install ecbuild
   - git clone --depth 1 https://github.com/ecmwf/ecbuild.git ${ECBUILD_SRC}
   # install magics-python source
-  - git clone -b develop --depth 1 https://github.com/ecmwf/magics-python.git ${MAGICS_PYTHON_SRC}
-  
+  - git clone -b master --depth 1 https://github.com/ecmwf/magics-python.git ${MAGICS_PYTHON_SRC}
+
   # install conda deps
   - conda install boost libnetcdf expat jinja2 xarray scipy cftime
   - conda install -c conda-forge proj4=5 eccodes pytest cairo pango pip
