@@ -152,8 +152,9 @@ message("PROJ include: ${PROJ_INCLUDE_DIR}")
 message("PROJ library: ${PROJ_LIBRARIES}")
 # endif()
 
-
 find_package( EXPAT REQUIRED )   # for MagML
+message("EXPAT include: ${EXPAT_INCLUDE_DIR}")
+message("EXPAT library: ${EXPAT_LIBRARIES}")
 
 if(APPLE)
   find_package( zlib REQUIRED )  # dependency of minizip - KMZ support
