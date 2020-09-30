@@ -104,8 +104,7 @@ ecbuild_add_library( TARGET    MagPlus
                      PUBLIC_LIBS
                         ${MAGICS_EXTRA_LIBRARIES}
                         eccodes
-
-                        PRIVATE_INCLUDES $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/clipper>
+                     PRIVATE_INCLUDES $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/clipper>
                                       ${MAGICS_PRIVATE_INCLUDE_DIRS}
 
                      PUBLIC_INCLUDES $<INSTALL_INTERFACE:${PROJ_INCLUDE_DIRS}>

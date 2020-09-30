@@ -150,6 +150,7 @@ endif()
 
 message("PROJ include: ${PROJ_INCLUDE_DIR}")
 message("PROJ library: ${PROJ_LIBRARIES}")
+list( APPEND MAGICS_PRIVATE_INCLUDE_DIRS ${PROJ_INCLUDE_DIR})
 # endif()
 
 find_package( EXPAT REQUIRED )   # for MagML
