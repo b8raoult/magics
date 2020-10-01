@@ -439,8 +439,8 @@ private:
 
 
 
-template <class T>
-map<nc_type, Accessor<T>*>* Accessor<T>::accessors_ = nullptr;
+// template <class T>
+// map<nc_type, Accessor<T>*>* Accessor<T>::accessors_ = nullptr;
 
 template <class T>
 void Accessor<T>::access(vector<T>& data, vector<size_t>& start, vector<size_t>& edges, NetVariable& var) {
