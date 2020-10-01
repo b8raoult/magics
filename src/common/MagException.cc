@@ -28,7 +28,6 @@ CannotOpenFile::CannotOpenFile(const std::string& path) {
 #ifdef MAGICS_ON_WINDOWS
     const char* estr = _strerror(NULL);
 #else
-    int e = errno;
     char estr[256];
     strerror_r(errno, estr, sizeof(estr));
 #endif

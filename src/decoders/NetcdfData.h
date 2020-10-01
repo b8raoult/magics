@@ -112,11 +112,7 @@ struct NetAttribute {
         val = string(tmp, len);
         delete[] tmp;
     }
-    void get(char*& val) {
-        size_t len;
-        nc_inq_attlen(netcdf_, id_, name_.c_str(), &len);
-        nc_get_att_text(netcdf_, id_, name_.c_str(), (char*)val);
-    }
+
 };
 
 class NetVariable;
@@ -280,20 +276,12 @@ struct NetVariable {
     double getMissing() { return missing_; }
 
     template <class T>
-    T getAttribute(const string& name, T def) {
-        T val;
+    T getAttribute(const string& name, const T& def) {
         map<string, NetAttribute>::iterator attr = attributes_.find(name);
         if (attr == attributes_.end())
             return def;
-        (*attr).second.get(val);
-        return val;
-    }
-    string getAttribute(const string& name, const char* def) { return getAttribute(name, string(def)); }
-    string getAttribute(const string& name, const string& def) {
-        map<string, NetAttribute>::iterator attr = attributes_.find(name);
-        if (attr == attributes_.end())
-            return def;
-        string val;
+        
+        T val = def;
         (*attr).second.get(val);
         return val;
     }
@@ -418,7 +406,7 @@ public:
         string val;
         (*attr).second.get(val);
 
-        return strdup(val.c_str());
+        return val;
     }
 
 
