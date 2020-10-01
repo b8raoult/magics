@@ -7,6 +7,8 @@
 
  ***************************** LICENSE END *************************************/
 
+#include <string.h>
+
 #include "TableReader.h"
 
 
