@@ -112,7 +112,7 @@ void ThreadControler::execute() {
     try {
         proc->run();
     }
-    catch (MagException& e) {
+    catch (std::exception& e) {
         magics::MagLog::error() << "** " << e.what() << " Caught in " << here << endl;
 #ifndef MAGICS_ON_WINDOWS
         magics::MagLog::error() << "** MagException is termiates thread " << pthread_self() << endl;
