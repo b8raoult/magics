@@ -116,16 +116,14 @@ void TableReader::splitLine(char* line, vector<const char*>& tokens) {
 // ---------------------------------------------------------------------------
 
 void TableReader::splitLineConsecutiveDelimiters(const char* line, vector<const char*>& tokens) {
-    char buffer[strlen(line) + 1];
+   
+    if (*line == '\0')  // return nothing if it is a blank line
+        return;
+
+    char* buffer = strdup(line);
     char* current = buffer;
     char* token  = current;
     
-    strcpy(buffer, line);
-
-    if (*current == '\0')  // return nothing if it is a blank line
-        return;
-
-
     while (*current != '\0') {
         if (*current == delimiter_)  // reached the end of a token?
         {
@@ -146,6 +144,8 @@ void TableReader::splitLineConsecutiveDelimiters(const char* line, vector<const 
 
     if (token[0] != '\0')         // safeguard against stray delimiters at the end of the line
         tokens.push_back(token);  // store a pointer to the last token
+    
+    free(buffer);
 }
 
 
