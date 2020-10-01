@@ -66,7 +66,7 @@ public:
     virtual ~TableElementDecoder() {}
 
     virtual void initialise(int numValues) = 0;
-    virtual void addValue(char* value)     = 0;
+    virtual void addValue(const char* value)     = 0;
     // virtual void decodeElement (char *element) = 0;
 
 protected:
@@ -86,7 +86,7 @@ public:
         target_(target), outputMissingIndicator_(outMiss){};
 
     void initialise(int numValues) { target_.reserve(numValues); }
-    void addValue(char* value) { target_.push_back((value[0] != '\0') ? atof(value) : outputMissingIndicator_); }
+    void addValue(const char* value) { target_.push_back((value[0] != '\0') ? atof(value) : outputMissingIndicator_); }
 
 private:
     vector<double>& target_;
@@ -106,7 +106,7 @@ public:
         target_(target), outputMissingIndicator_(outMiss){};
 
     void initialise(int numValues) { target_.reserve(numValues); }
-    void addValue(char* value) { target_.push_back((value[0] != '\0') ? value : outputMissingIndicator_); }
+    void addValue(const char* value) { target_.push_back((value[0] != '\0') ? value : outputMissingIndicator_); }
 
 private:
     vector<string>& target_;
@@ -160,10 +160,10 @@ public:
 private:
     void resizeDecoders(unsigned int numNeeded);
     int nextLineTokens(char* line, size_t sizeOfLine,
-                       vector<char*>& tokens);          // reads the next line and splits into tokens
-    void splitLine(char* line, vector<char*>& tokens);  // splits a line into tokens based on the current settings
+                       vector<const char*>& tokens);          // reads the next line and splits into tokens
+    void splitLine(char* line, vector<const char*>& tokens);  // splits a line into tokens based on the current settings
     void splitLineConsecutiveDelimiters(
-        char* line, vector<char*>& tokens);  // splits a line into tokens based on the current settings
+        const char* line, vector<const char*>& tokens);  // splits a line into tokens based on the current settings
     bool readUserMetaData(char* line, size_t sizeOfLine, string& errorMessage);  // reads user meta-data into a map
     int indexOfField(string& name);  // returns the index of the field with a given name (or -1)
     void setError(string msg) {
@@ -174,7 +174,7 @@ private:
     void ensureHaveMetaData();                                       // loads the meta-data if not already there
     void skipLines(int linesToSkip, char* line, size_t sizeOfLine);  // skips a user-defined number of rows
     TableReader::eTableReaderFieldType guessFieldType(
-        char* str);  // tries to determine whether the field is, for example, string or number
+        const char* str);  // tries to determine whether the field is, for example, string or number
 
     vector<TableElementDecoders> decoderSets_;  // each column can have multiple decoders attached to it
     vector<string*> names_;

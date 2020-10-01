@@ -170,7 +170,7 @@ void GeoPointsDecoder::xyv1(const string& line) {
 
 void GeoPointsDecoder::ncols(const string& line, const Transformation& transformation) {
     std::istringstream in(line);
-    double lat, lon, date, time, level, value;
+    double lat = missing_, lon = missing_, date, time, level, value = missing_;
     string stnid;
 
     // the column order has been detected by parseColumnNames and stored in

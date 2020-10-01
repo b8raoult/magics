@@ -89,7 +89,7 @@ void TableReader::setFieldContainer(int index, string& name, vector<string>& con
 //  NOTE: this function is destructive to the input string!
 // ---------------------------------------------------------------------------
 
-void TableReader::splitLine(char* line, vector<char*>& tokens) {
+void TableReader::splitLine(char* line, vector<const char*>& tokens) {
     char* current = line;
     char* token   = current;
 
@@ -115,9 +115,12 @@ void TableReader::splitLine(char* line, vector<char*>& tokens) {
 //  NOTE: this function is destructive to the input string!
 // ---------------------------------------------------------------------------
 
-void TableReader::splitLineConsecutiveDelimiters(char* line, vector<char*>& tokens) {
-    char* current = line;
-    char* token   = current;
+void TableReader::splitLineConsecutiveDelimiters(const char* line, vector<const char*>& tokens) {
+    char buffer[strlen(line) + 1];
+    char* current = buffer;
+    char* token  = current;
+    
+    strcpy(buffer, line);
 
     if (*current == '\0')  // return nothing if it is a blank line
         return;
@@ -208,9 +211,9 @@ int TableReader::indexOfField(string& name) {
 // takes an element and tries to decide which data type it is, e.g. number
 // ---------------------------------------------------------------------------
 
-TableReader::eTableReaderFieldType TableReader::guessFieldType(char* str) {
+TableReader::eTableReaderFieldType TableReader::guessFieldType(const char* str) {
     if (str) {
-        char* pch = str;
+        const char* pch = str;
 
         while (*pch) {
             int ch = *pch;  // any character not part of a proper number format means this is a string
@@ -226,7 +229,7 @@ TableReader::eTableReaderFieldType TableReader::guessFieldType(char* str) {
 }
 
 
-int TableReader::nextLineTokens(char* line, size_t sizeOfLine, vector<char*>& tokens) {
+int TableReader::nextLineTokens(char* line, size_t sizeOfLine, vector<const char*>& tokens) {
     // skip blank lines
 
     /*    bool gotLine = true;
@@ -289,7 +292,7 @@ bool TableReader::readUserMetaData(char* line, size_t sizeOfLine, string& errorM
         setDelimiter(' ');
 
 
-        vector<char*> tokens;
+        vector<const char*> tokens;
 
         if (nextLineTokens(line, sizeOfLine, tokens) > 0) {
             // now have one token per PARAM=VALUE - split each one into a pair
@@ -297,7 +300,7 @@ bool TableReader::readUserMetaData(char* line, size_t sizeOfLine, string& errorM
             setDelimiter('=');
 
             for (vector<string*>::size_type j = 0; j < tokens.size(); j++) {
-                vector<char*> tokens2;
+                vector<const char*> tokens2;
 
                 splitLineConsecutiveDelimiters(tokens[j], tokens2);
 
@@ -433,7 +436,7 @@ bool TableReader::getMetaData(string& errorMessage) {
     for (int i = 0; i < numLinesToCheck; i++) {
         // read the line into a buffer and split it into tokens
 
-        vector<char*> tokens;
+        vector<const char*> tokens;
 
         if (nextLineTokens(line, sizeof(line), tokens) > 0) {
             if (i == 0) {
@@ -536,7 +539,7 @@ bool TableReader::read(string& errorMessage) {
     f_.seekg(dataStart_, ios::beg);  // set to start of the data (determined by getMetaData())
 
 
-    vector<char*> tokens;
+    vector<const char*> tokens;
 
     for (int i = 0; i < numRecords_; i++) {
         // read the line into a buffer and split it into tokens
@@ -550,7 +553,7 @@ bool TableReader::read(string& errorMessage) {
                 {
                     // if we are only reading one column, then it could be a missing value
                     if (decoderSets_.size() == 1) {
-                        char* empty = "";
+                        const char* empty = "";
                         tokens.push_back(empty);
                     }
 
@@ -573,7 +576,7 @@ bool TableReader::read(string& errorMessage) {
 
             // decode the data with their various decoders - one set of decoders for each field
 
-            vector<char*>::iterator s = tokens.begin();
+            vector<const char*>::iterator s = tokens.begin();
 
             for (vector<TableElementDecoders>::iterator decoderSet = decoderSets_.begin();
                  decoderSet != decoderSets_.end(); ++decoderSet) {

@@ -100,6 +100,7 @@ public:
                      int height, float resolution, const string& technique);
     virtual bool needClipping() { return true; }
     bool method(ContourMethod* method) {
+        // FIXME: memory leak
         method = new ContourMethod();
         return true;
     }

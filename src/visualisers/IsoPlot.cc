@@ -1148,6 +1148,7 @@ void IsoPlot::isoline(Cell& cell, CellBox* parent) const {
             }  // end of levels...
 
 
+            ASSERT(box);
             box->reshape(parent);
             delete box;
 
