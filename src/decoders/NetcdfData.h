@@ -115,7 +115,7 @@ struct NetAttribute {
 
 };
 
-class NetVariable;
+struct NetVariable;
 
 
 template <class From, class To>
@@ -280,7 +280,7 @@ struct NetVariable {
         map<string, NetAttribute>::iterator attr = attributes_.find(name);
         if (attr == attributes_.end())
             return def;
-        
+
         T val = def;
         (*attr).second.get(val);
         return val;

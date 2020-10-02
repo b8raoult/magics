@@ -45,6 +45,7 @@ public:
     void visit(Transformation& transformation);
 
     void set(const XmlNode& node) {
+        // FIXME: Infinite recursion
         MagLog::debug() << "NetcdfGeoMatrixInterpretor::set(params)"
                         << "\n";
         set(node);

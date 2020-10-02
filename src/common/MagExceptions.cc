@@ -112,3 +112,4 @@ void Panic(const char* msg) {
 void Panic(const char* msg, int line, const char* file, const char* proc) {}
 
 OutOfMemory::OutOfMemory() : MagException("out of memory") {}
+

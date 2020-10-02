@@ -109,7 +109,7 @@ public:
         }
     }
 
-    ~Cell() {}
+    virtual ~Cell() {}
 
 
     const CellArray& parent_;

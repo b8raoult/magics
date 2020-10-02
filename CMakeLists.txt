@@ -29,6 +29,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 99)
 
+
 ###############################################################################
 # some build options for this project
 
@@ -184,6 +185,9 @@ if( EC_OS_NAME MATCHES "windows" )
     # Prevent fatal error C1128
     ecbuild_add_cxx_flags("/bigobj")
 
+else()
+
+  set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-overloaded-virtual -Wno-unused-variable -Wno-reorder-ctor -Wno-sign-compare")
 
 endif()
 

@@ -264,6 +264,8 @@ public:
         zindexLayer_(-1),
         transparencyLayer_(0){};
 
+    virtual ~MetviewIcon() {}
+
     void icon(const string& name, const string& cname, const string& id = "unknown") {
         iconName_  = name;
         iconClass_ = cname;
