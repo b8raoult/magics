@@ -25,9 +25,7 @@
 
 #define PTHREAD_INIT NULL
 
-MutexCond::MutexCond():
-    lock_(mutex_, std::defer_lock) {
-
+MutexCond::MutexCond(){
 }
 
 MutexCond::~MutexCond() {
@@ -35,15 +33,15 @@ MutexCond::~MutexCond() {
 }
 
 void MutexCond::lock() {
-    lock_.lock();
+    mutex_.lock();
 }
 
 void MutexCond::unlock() {
-    lock_.unlock();
+    mutex_.unlock();
 }
 
 void MutexCond::wait() {
-    cond_.wait(lock_);
+    cond_.wait(mutex_);
 }
 
 

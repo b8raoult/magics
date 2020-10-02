@@ -45,11 +45,11 @@ private:
 
     // -- Members
 
-    std::mutex mutex_;
-    std::condition_variable cond_;
+    std::recursive_mutex mutex_;
+    std::condition_variable_any cond_;
 
     // Must be last
-    std::unique_lock<std::mutex> lock_;
+//    std::unique_lock<std::mutex> lock_;
 
 };
 
