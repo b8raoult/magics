@@ -49,7 +49,7 @@ list( APPEND _common_srcs
 	CartesianTransformation.h
 	Dimension.cc
 	XCoordinate.h YCoordinate.h marsmachine.h linux.h aix.h
-	Thread.h MutexCond.h Mutex.h AutoLock.h ThreadControler.h Task.h MagExceptions.h 
+	MagExceptions.h
 	DataStats.h SciMethods.h Tephigram.cc  Tephigram.h Skewt.cc  Skewt.h Emagram.cc Emagram.h
 
 # sources
@@ -69,8 +69,7 @@ list( APPEND _common_srcs
 	LogoPlotting.cc
 	PageID.cc AnimationRules.cc Layout.cc SymbolItem.cc Symbol.cc Polyline.cc
 	Text.cc Flag.cc
-	Mutex.cc MutexCond.cc Thread.cc MagExceptions.cc
-	ThreadControler.cc Task.cc
+	MagExceptions.cc
 	DataStats.cc SciMethods.cc BasePointsHandler.cc PointsHandler.cc ProgressObject.cc
 
 # projection
