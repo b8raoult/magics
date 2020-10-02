@@ -1149,11 +1149,11 @@ void IsoPlot::isoline(Cell& cell, CellBox* parent) const {
 
             }  // end of levels...
 
-
+if (box) {
             ASSERT(box);
             box->reshape(parent);
             delete box;
-
+}
 
         }  // step to next triangle
     }
@@ -1247,9 +1247,6 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
         else
             threads_ = 4;
     }
-
-    // FIXME: remove me!!!
-    threads_ = 1;
 
     vector<IsoHelper*> consumers_;
     vector<IsoProducer*> producers_;
