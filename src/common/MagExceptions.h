@@ -32,12 +32,6 @@ public:
     virtual const char* what() const THROW_NOTHING() { return what_.c_str(); }
     MagException(const string&);
     ~MagException() THROW_NOTHING();
-    virtual bool retryOnServer() const { return false; }
-    virtual bool retryOnClient() const { return false; }
-    virtual bool terminateApplication() const { return false; }
-
-    static bool throwing();
-    static void MagExceptionStack(ostream&);
 
 protected:
     void reason(const string&);
@@ -45,8 +39,7 @@ protected:
 
 private:
     string what_;
-    // SaveStatus save_;
-    MagException* next_;
+
 };
 
 class SeriousBug : public MagException {

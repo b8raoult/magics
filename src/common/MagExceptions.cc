@@ -14,16 +14,7 @@
 #include "MagExceptions.h"
 #endif
 
-#ifndef ThreadSingleton_H
-#include "ThreadSingleton.h"
-#endif
-
 #include "magics_windef.h"
-
-static MagException*& first() {
-    static ThreadSingleton<MagException*> p;
-    return p.instance();
-}
 
 void xldb_throw(const char* c)  // To set a break point in xldb
 {
@@ -38,36 +29,20 @@ void xldb_throw(const char* c)  // To set a break point in xldb
 #endif
 }
 
-MagException::MagException() : next_(first()) {
-    first() = this;
+MagException::MagException() {
     xldb_throw("?");
 }
 
 MagException::~MagException() THROW_NOTHING() {
-    first() = next_;
 }
 
-void MagException::MagExceptionStack(ostream& out) {
-    out << "MagException stack: " << endl;
-    MagException* e = first();
-    while (e) {
-        out << e->what() << endl;
-        e = e->next_;
-    }
-    out << "End stack" << endl;
-}
 
-MagException::MagException(const string& w) : what_(w), next_(first()) {
-    first() = this;
+MagException::MagException(const string& w) : what_(w) {
     xldb_throw(w.c_str());
 }
 
 void MagException::reason(const string& w) {
     what_ = w;
-}
-
-bool MagException::throwing() {
-    return first() != 0;
 }
 
 TooManyRetries::TooManyRetries(const int retries) {
