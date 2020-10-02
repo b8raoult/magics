@@ -28,7 +28,7 @@
 #define PROJ_MSVC_DLL_IMPORT 1
 #endif
 
-#include <ProjP.h>
+#include "ProjP.h"
 
 namespace magics {
 
