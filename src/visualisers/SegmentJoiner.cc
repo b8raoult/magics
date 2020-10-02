@@ -11,6 +11,7 @@
 #include "magics.h"
 #include "SegmentJoiner.h"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
 #include "MagException.h"
