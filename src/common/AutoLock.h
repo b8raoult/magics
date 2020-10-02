@@ -16,35 +16,21 @@
 
 // The class AutoLock is used to AutoLock a mutex in a multi-threaded
 // environment. AutoLocks are MagExceptions safe.
-
-class AutoLocker {
-public:
-    static void want(void*);
-    static void got(void*);
-    static void release(void*);
-    static void analyse(void*);
-};
-
 template <class T>
-class AutoLock : public AutoLocker {
+class AutoLock {
 public:
     // -- Contructors
 
     AutoLock(T& resource) : resource_(resource) {
-        want(&resource);
         resource_.lock();
-        got(&resource);
     }
     AutoLock(T* resource) : resource_(*resource) {
-        want(resource);
         resource_.lock();
-        got(resource);
     }
 
     // -- Destructor
 
     ~AutoLock() {
-        release(&resource_);
         resource_.unlock();
     }
 

@@ -41,7 +41,7 @@ ecbuild_add_option( FEATURE CAIRO
 
 string(STRIP "${PANGOCAIRO_LIBRARIES}" PANGOCAIRO_LIBRARIES)
 if(PANGOCAIRO_FOUND)
- set(HAVE_CAIRO ON)
+  set(HAVE_CAIRO ON)
   ecbuild_enable_feature( CAIRO )
 endif()
 
@@ -126,17 +126,17 @@ set( HAVE_BUFR 1 )
 
 
 
-if( EC_OS_NAME MATCHES "windows" )
-    option(CMAKE_USE_WIN32_THREADS_INIT "using WIN32 threads" ON)
-    # message("====================== IN WINDOWS")
-    # find_package( Pthread REQUIRED )
-    # message("====================== IN WINDOWS ${PTHREAD_INCLUDE_DIR} ${PTHREAD_LIBRARIES}")
-    # list( APPEND MAGICS_EXTRA_LIBRARIES ${PTHREAD_LIBRARIES} )
-    find_package( Threads )
-else()
-  set( CMAKE_THREAD_PREFER_PTHREAD 1 )
-  find_package( Threads )
-endif()
+# if( EC_OS_NAME MATCHES "windows" )
+#     set(CMAKE_USE_WIN32_THREADS_INIT 1)
+#     # message("====================== IN WINDOWS")
+#     # find_package( Pthread REQUIRED )
+#     # message("====================== IN WINDOWS ${PTHREAD_INCLUDE_DIR} ${PTHREAD_LIBRARIES}")
+#     # list( APPEND MAGICS_EXTRA_LIBRARIES ${PTHREAD_LIBRARIES} )
+#     find_package( Threads )
+# else()
+#   set( CMAKE_THREAD_PREFER_PTHREAD 1 )
+#   find_package( Threads )
+# endif()
 
 
 # adding NO_MODULE means that if we don't find it, CMake will not generate

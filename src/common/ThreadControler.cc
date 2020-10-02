@@ -8,16 +8,9 @@
  * does it submit to any jurisdiction.
  */
 
-#ifndef marsmachine_H
-#include "marsmachine.h"
-#endif
-
 #include <assert.h>
 #include <signal.h>
 
-#if !(defined linux || defined magics_windows)
-#include <sys/sched.h>
-#endif
 
 #ifndef AutoLock_H
 #include "AutoLock.h"
@@ -44,12 +37,8 @@ using namespace magics;
 
 
 ThreadControler::ThreadControler(Thread* proc, bool detached) :
+    thread_(nullptr),
     detached_(detached),
-#ifndef MAGICS_ON_WINDOWS
-    thread_(0),
-#else
-    thread_({{0}, {0}}),
-#endif
     proc_(proc),
     running_(false) {
 }
@@ -65,6 +54,8 @@ ThreadControler::~ThreadControler() {
     else {
         delete proc_;
     }
+
+    delete thread_;
 }
 
 //------------------------------------------------------
@@ -87,48 +78,17 @@ void ThreadControler::execute() {
         cond_.signal();
     }
 
-    //=============
-
-    // We don't want to recieve reconfigure events
-
-#ifndef MAGICS_ON_WINDOWS
-    sigset_t set, old_set;
-
-    sigemptyset(&set);
-
-    sigaddset(&set, SIGHUP);
-    sigaddset(&set, SIGCHLD);
-    sigaddset(&set, SIGPIPE);
-
-#ifdef IBM
-    SYSCALL(sigthreadmask(SIG_BLOCK, &set, &old_set));
-#else
-    SYSCALL(pthread_sigmask(SIG_BLOCK, &set, &old_set));
-#endif
-#endif
-
-    //=============
 
     try {
         proc->run();
     }
     catch (std::exception& e) {
         magics::MagLog::error() << "** " << e.what() << " Caught in " << here << endl;
-#ifndef MAGICS_ON_WINDOWS
-        magics::MagLog::error() << "** MagException is termiates thread " << pthread_self() << endl;
-#else
-        pthread_t pt = pthread_self();
-        magics::MagLog::error() << "** MagException is termiates thread " << pt.p << pt.x << endl;
-#endif
+        magics::MagLog::error() << "** MagException is termiates thread " << endl;
     }
     catch (...) {
         magics::MagLog::error() << "** UNKNOWN MagException Caught in " << here << endl;
-#ifndef MAGICS_ON_WINDOWS
-        magics::MagLog::error() << "** MagException is termiates thread " << pthread_self() << endl;
-#else
-        pthread_t pt = pthread_self();
-        magics::MagLog::error() << "** MagException is termiates thread " << pt.p << pt.x << endl;
-#endif
+        magics::MagLog::error() << "** MagException is termiates thread " << endl;
     }
 
     if (proc->autodel_)
@@ -141,88 +101,59 @@ void* ThreadControler::startThread(void* data) {
 }
 
 void ThreadControler::start() {
-#ifndef MAGICS_ON_WINDOWS
-    ASSERT(thread_ == 0);
-#else
-    ASSERT(thread_.p == 0);
-    ASSERT(thread_.x == 0);
-#endif
-
-    pthread_attr_t attr;
-    pthread_attr_init(&attr);
-
-#ifdef linux
-    proc_->data_ = 0;
-
-    size_t size = 2 * 1024 * 1024;
-
-    if (!getEnvVariable("MAGPLUS_STACK_SIZE").empty()) {
-        size = tonumber(getEnvVariable("MAGPLUS_STACK_SIZE"));
-        MagLog::warning() << "MAGPLUS_STACK_SIZE jas been set to " << size << endl;
-    }
-
-    pthread_attr_setstacksize(&attr, size);
-#endif
-
-    if (detached_)
-        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-    else
-        pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+    thread_ = new std::thread(ThreadControler::startThread, this);
 
     AutoLock<MutexCond> lock(cond_);
 
-#ifdef DCE_THREADS
-    THRCALL(pthread_create(&thread_, attr, startThread, this));
-#else
-    THRCALL(pthread_create(&thread_, &attr, startThread, this));
-#endif
-
-    pthread_attr_destroy(&attr);
 
     while (!running_)
         cond_.wait();
 }
 
 void ThreadControler::kill() {
-    pthread_cancel(thread_);
+    // pthread_cancel(thread_);
 }
 
 void ThreadControler::stop() {
-    proc_->stop();
+    // proc_->stop();
 }
 
 void ThreadControler::wait() {
     ASSERT(!detached_);
-    THRCALL(pthread_join(thread_, 0));
+    thread_->join();
 }
 
 bool ThreadControler::active() {
-#ifndef MAGICS_ON_WINDOWS
-    if (thread_ != 0)
-#else
-    if (thread_.p != 0)
-#endif
-    {
-        // Try see if it exists
-
-        int policy;
-        sched_param param;
-
-        int n = pthread_getschedparam(thread_, &policy, &param);
-
-        // The thread does not exist
-        if (n != 0) {
-#ifndef MAGICS_ON_WINDOWS
-            thread_ = 0;
-#else
-            thread_.p = 0;
-            thread_.x = 0;
-#endif
-        }
-    }
-#ifndef MAGICS_ON_WINDOWS
-    return thread_ != 0;
-#else
-    return thread_.p != 0;
-#endif
+    return thread_ != nullptr;
 }
+
+// bool ThreadControler::active() {
+// #ifndef MAGICS_ON_WINDOWS
+//     if (thread_ != 0)
+// #else
+//     if (thread_.p != 0)
+// #endif
+//     {
+//         // Try see if it exists
+
+//         int policy;
+//         sched_param param;
+
+//         int n = pthread_getschedparam(thread_, &policy, &param);
+
+//         // The thread does not exist
+//         if (n != 0) {
+// #ifndef MAGICS_ON_WINDOWS
+//             thread_ = 0;
+// #else
+//             thread_.p = 0;
+//             thread_.x = 0;
+// #endif
+//         }
+//     }
+// #ifndef MAGICS_ON_WINDOWS
+//     return thread_ != 0;
+// #else
+//     return thread_.p != 0;
+// #endif
+// }

@@ -69,7 +69,7 @@ list( APPEND _common_srcs
 	LogoPlotting.cc
 	PageID.cc AnimationRules.cc Layout.cc SymbolItem.cc Symbol.cc Polyline.cc
 	Text.cc Flag.cc
-	Mutex.cc MutexCond.cc Thread.cc MagExceptions.cc AutoLocker.cc
+	Mutex.cc MutexCond.cc Thread.cc MagExceptions.cc 
 	ThreadControler.cc Task.cc
 	DataStats.cc SciMethods.cc BasePointsHandler.cc PointsHandler.cc ProgressObject.cc
 

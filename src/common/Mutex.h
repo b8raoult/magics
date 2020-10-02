@@ -18,15 +18,13 @@
 #define marsmachine_H
 #endif
 
-#ifndef marsmachine_H
-#include "marsmachine.h"
-#endif
+#include <mutex>
 
 class Mutex {
 public:
     // -- Contructors
 
-    Mutex(char tag = ' ');
+    Mutex();
 
     // -- Destructor
 
@@ -36,7 +34,6 @@ public:
 
     void lock();
     void unlock();
-    char tag() const { return tag_; }
 
     // -- Class methods
 
@@ -51,9 +48,8 @@ private:
 protected:
     // -- Members
 
-    pthread_mutex_t mutex_;
-    bool exists_;
-    char tag_;
+    std::recursive_mutex mutex_;
+
 };
 
 #endif

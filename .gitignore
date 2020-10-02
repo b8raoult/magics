@@ -28,3 +28,6 @@ build/
 *.sublime-workspace
 notebook/.ipynb_checkpoints
 compile_commands.json
+.vagrant/
+?
+Vagrantfile

@@ -14,10 +14,8 @@
 #ifndef MutexCond_H
 #define MutexCond_H
 
-#ifndef Mutex_H
-#include "Mutex.h"
-#endif
-
+#include <mutex>
+#include <condition_variable>
 // A mutex and a condition variable
 // for Producer/Consumer architectures
 
@@ -25,7 +23,7 @@ class MutexCond {
 public:
     // -- Contructors
 
-    MutexCond(char tag = ' ');
+    MutexCond();
 
     // -- Destructor
 
@@ -38,8 +36,6 @@ public:
     void wait();
     void signal();
     void broadcast();
-    bool wait(int);
-    char tag() const { return tag_; }
 
 private:
     // No copy allowed
@@ -49,10 +45,12 @@ private:
 
     // -- Members
 
-    pthread_mutex_t mutex_;
-    pthread_cond_t cond_;
-    char tag_;
-    bool inited_;
+    std::mutex mutex_;
+    std::condition_variable cond_;
+
+    // Must be last
+    std::unique_lock<std::mutex> lock_;
+
 };
 
 #endif

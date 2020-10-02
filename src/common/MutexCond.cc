@@ -10,10 +10,6 @@
 
 #include <time.h>
 
-#ifndef marsmachine_H
-#include "marsmachine.h"
-#endif
-
 #ifndef MagLog_H
 #include "MagLog.h"
 #endif
@@ -29,70 +25,33 @@
 
 #define PTHREAD_INIT NULL
 
-MutexCond::MutexCond(char tag) : tag_(tag) {
-#if 0 
-// linux
-	pthread_mutexattr_t attr = XXXXXXXXXX;
-#else
-    pthread_mutexattr_t attr;
-    pthread_condattr_t cattr;
-    THRCALL(::pthread_mutexattr_init(&attr));
-    THRCALL(::pthread_condattr_init(&cattr));
-#endif
+MutexCond::MutexCond():
+    lock_(mutex_, std::defer_lock) {
 
-#ifdef DCE_THREADS
-    THRCALL(pthread_mutex_init(&mutex_, attr));
-    THRCALL(pthread_cond_init(&cond_, cattr));
-#else
-    THRCALL(pthread_mutex_init(&mutex_, &attr));
-    THRCALL(pthread_cond_init(&cond_, &cattr));
-#endif
-
-
-    inited_ = true;
-    THRCALL(::pthread_mutexattr_destroy(&attr));
-    THRCALL(::pthread_condattr_destroy(&cattr));
 }
 
 MutexCond::~MutexCond() {
-    THRCALL(pthread_mutex_destroy(&mutex_));
 
-    pthread_cond_destroy(&cond_);  // Don't use THRCALL as some thread may be waiting for that condition
-    inited_ = false;
 }
 
 void MutexCond::lock() {
-    ASSERT(inited_);
-    THRCALL(pthread_mutex_lock(&mutex_));
+    lock_.lock();
 }
 
 void MutexCond::unlock() {
-    ASSERT(inited_);
-    THRCALL(pthread_mutex_unlock(&mutex_));
+    lock_.unlock();
 }
 
 void MutexCond::wait() {
-    ASSERT(inited_);
-    //	AutoState x('.');
-    THRCALL(pthread_cond_wait(&cond_, &mutex_));
+    cond_.wait(lock_);
 }
 
-bool MutexCond::wait(int sec) {
-    ASSERT(inited_);
-    //	AutoState x(':');
-    timespec timeout = {::time(0) + sec, 0};
-    int n            = pthread_cond_timedwait(&cond_, &mutex_, &timeout);
-    if (n && n != ETIMEDOUT)
-        THRCALL(n);
-    return n == ETIMEDOUT;
-}
 
 void MutexCond::signal() {
-    ASSERT(inited_);
-    pthread_cond_signal(&cond_);
+    cond_.notify_one();
 }
 
+
 void MutexCond::broadcast() {
-    ASSERT(inited_);
-    pthread_cond_broadcast(&cond_);
+    cond_.notify_all();
 }

@@ -14,9 +14,7 @@
 #ifndef ThreadSingleton_H
 #define ThreadSingleton_H
 
-#ifndef marsmachine_H
-#include "marsmachine.h"
-#endif
+
 
 template <class T>
 class ThreadSingleton {

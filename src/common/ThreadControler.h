@@ -14,7 +14,8 @@
 #ifndef ThreadControler_H
 #define ThreadControler_H
 
-#include <pthread.h>
+
+#include <thread>
 
 #ifndef Task_H
 #include "Task.h"
@@ -67,7 +68,7 @@ private:
 
     // -- Members
 
-    pthread_t thread_;
+    std::thread* thread_;
     Thread* proc_;
     bool running_;
 
