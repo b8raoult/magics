@@ -1248,6 +1248,8 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             threads_ = 4;
     }
 
+    // FIXME: remove me!!!
+    threads_ = 1;
 
     vector<IsoHelper*> consumers_;
     vector<IsoProducer*> producers_;
