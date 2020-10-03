@@ -18,14 +18,14 @@
 
  ******************************** LICENSE ********************************/
 
+#include "magics.h"
+
 #include "WebFormat.h"
 
-#include "magics_windef.h"
-#ifndef MAGICS_ON_WINDOWS
-#include <unistd.h>
-#endif
 
 #include <signal.h>
+#include <unistd.h>
+
 #include <new>
 #include "Timer.h"
 

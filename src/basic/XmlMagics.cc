@@ -16,6 +16,7 @@
 
 */
 
+#include <iomanip>
 
 #include "XmlMagics.h"
 #include "MagException.h"

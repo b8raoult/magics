@@ -210,7 +210,6 @@ endif()
 
 install( FILES magics.h                DESTINATION ${INSTALL_INCLUDE_DIR})
 install( FILES common/magics_export.h  DESTINATION ${INSTALL_INCLUDE_DIR})
-install( FILES common/magics_windef.h  DESTINATION ${INSTALL_INCLUDE_DIR})
 
 ## Add install include dirs to install interface
 foreach( target     MagPlus

@@ -16,7 +16,13 @@
 
    Apr 06: update for GCC 4.0 (Stephan)
 */
-#include <ProjP.h>
+#include "ProjP.h"
+#include "MagException.h"
+
+#if defined(_WIN32) && defined(_MSC_VER)
+#define PROJ_MSVC_DLL_IMPORT 1
+#endif
+
 #include <proj.h>
 
 using namespace magics;
@@ -33,10 +39,10 @@ ProjP::ProjP(const string& from, const string& to) : from_(from), to_(to), conve
     if (!context_)
         context_ = proj_context_create();
     PJ* p = proj_create_crs_to_crs(context_, from_.c_str(), to_.c_str(), NULL);
-    assert(p);
+    ASSERT(p);
     converter_ = proj_normalize_for_visualization(context_, p);
 
-    assert(converter_);
+    ASSERT(converter_);
     // double x = -180;
     // double y = 90;
     // convert(x, y);

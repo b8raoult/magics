@@ -8,11 +8,12 @@
  * does it submit to any jurisdiction.
  */
 
+#include "magics.h"
+
 #include "MagConfig.h"
-#include "MagExceptions.h"
+#include "MagException.h"
 #include "MagLog.h"
 #include "MetaData.h"
-#include "magics_windef.h"
 #include "Value.h"
 #include "JSONParser.h"
 
@@ -186,7 +187,7 @@ void StyleLibrary::init() {
         if (!dir) {
             ostringstream error;
             error << "Trying to open directory " << library << ": " << strerror(errno);
-            throw FailedSystemCall(error.str());
+            throw MagicsException(error.str());
         }
         struct dirent* entry = readdir(dir);
         while (entry) {
@@ -207,7 +208,7 @@ void StyleLibrary::init() {
         if (handle == -1) {
             ostringstream error;
             error << "Trying to open directory " << library << ": " << strerror(errno);
-            throw FailedSystemCall(error.str());
+            throw MagicsException(error.str());
         }
         else {
             do {

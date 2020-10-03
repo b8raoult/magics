@@ -23,12 +23,9 @@
 #define GeoPointsDecoder_H
 
 #include "magics.h"
-#include "magics_windef.h"
-#ifdef MAGICS_ON_WINDOWS
-#define PROJ_MSVC_DLL_IMPORT 1
-#endif
 
-#include <ProjP.h>
+
+#include "ProjP.h"
 
 #include "Data.h"
 #include "GeoPointsDecoderAttributes.h"

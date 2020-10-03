@@ -445,7 +445,7 @@ MAGICS_NO_EXPORT void QtDriver::project(MgQLayoutItem* item) const {
 		if(layout.name() != "drawing")
 			r->setBrush(Qt::cyan);
 		else
-			r->setBrush(Qt::red);	
+			r->setBrush(Qt::red);
 		//r->setTransform(tr);
 		//scene_->addItem(r);
 		//group->addToGroup(r);
@@ -491,7 +491,7 @@ MAGICS_NO_EXPORT void QtDriver::unproject() const {
     if (dimensionStack_.empty()) {
         MagLog::error() << "--->UNPROJECT ("
                         << ") Dimension stack error!" << endl;
-        assert(dimensionStack_.empty() == false);
+        ASSERT(dimensionStack_.empty() == false);
     }
 
     coordRatioX_ = scalesX_.top();
@@ -615,7 +615,7 @@ MAGICS_NO_EXPORT void QtDriver::closeLayer(MgQLayerItem* qln) const {
         return;
 
     // Get current layer item
-    // assert(qln->layer().id() == layer.id());
+    // ASSERT(qln->layer().id() == layer.id());
 
     // Pop layer item from the stack
     layerItemStack_.pop();
@@ -1084,7 +1084,7 @@ MAGICS_NO_EXPORT void QtDriver::renderText(const Text& text) const {
     MFloat pheight;
 
     // Check if all the text items has the same font, size, colour  and style
-    assert(text.textBegin() != text.textEnd());
+    ASSERT(text.textBegin() != text.textEnd());
     const MagFont& magfontFirst = (text.textBegin())->font();
     bool sameFontForItems       = true;
     for (vector<NiceText>::const_iterator niceText = text.textBegin(); niceText != text.textEnd(); niceText++) {

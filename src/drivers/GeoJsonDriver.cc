@@ -25,7 +25,7 @@
 #include <Symbol.h>
 #include <Text.h>
 
-#include "magics_windef.h"
+#include "magics.h"
 
 //! For generating ZIP files
 extern "C" {

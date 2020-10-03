@@ -109,7 +109,7 @@ void AxisItem::print(ostream& out) const {
     out << "]";
 }
 
-AxisDateItem::AxisDateItem(double position, DateTime date, int level, const string& colour, double height) :
+AxisDateItem::AxisDateItem(double position, const DateTime& date, int level, const string& colour, double height) :
     AxisItem(position, "", level, colour, height), date_(date), defaultColour_("undef") {
     // format("%w");
     // if (label_ == "0" ) colour_ = "red"; // Sunday!

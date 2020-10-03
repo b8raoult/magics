@@ -14,10 +14,14 @@
 #ifndef SegmentJoiner_H
 #define SegmentJoiner_H
 
+#include "magics.h"
 #include <cmath>
-#include "MagExceptions.h"
-#include "marsmachine.h"
+#include "MagException.h"
 
+#include <list>
+#include <deque>
+
+using namespace std;
 
 struct Point {
     double x_;
@@ -35,8 +39,6 @@ struct Segment {
     bool ok_;
     Point from_;
     Point to_;
-
-    unsigned long phash_;
 
     vector<Segment*> before_;  // Index of segment before in polyline
     vector<Segment*> after_;   //  Index of segment after in polyline

@@ -26,11 +26,8 @@
 
 #include "MagException.h"
 #include "magics.h"
-#include "magics_windef.h"
-#ifdef MAGICS_ON_WINDOWS
-#include <iterator>
-#endif
-#include <ProjP.h>
+
+#include "ProjP.h"
 
 namespace magics {
 

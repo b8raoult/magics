@@ -8,10 +8,9 @@
  * does it submit to any jurisdiction.
  */
 
-#include "magics_windef.h"
-#ifndef MAGICS_ON_WINDOWS
+#include "magics.h"
+
 #include <unistd.h>
-#endif
 
 #include <signal.h>
 #include "MetaData.h"

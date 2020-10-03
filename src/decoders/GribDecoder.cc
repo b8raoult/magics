@@ -23,7 +23,8 @@
 #include <limits>
 
 #include "Factory.h"
-#include "magics_windef.h"
+
+#include "magics.h"
 #ifndef MAGICS_ON_WINDOWS
 #include <unistd.h>
 #else
@@ -162,7 +163,7 @@ long GribDecoder::getLong(const string& key, bool warnIfKeyAbsent) const {
     if (lk != lKeys_.end()) {
         return lk->second;
     }
-    assert(current_handle_);
+    ASSERT(current_handle_);
     int err = grib_get_long(current_handle_, key.c_str(), &val);
     if (err) {
         if (warnIfKeyAbsent) {
@@ -260,7 +261,7 @@ void GribDecoder::setDouble(const string& key, double val) const {
 }
 
 void GribDecoder::scale(const string& metadata, double& scaling, double& offset) {
-    assert(false);
+    ASSERT(false);
 }
 
 bool GribDecoder::isEarthOblate() const {

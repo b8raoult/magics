@@ -20,7 +20,6 @@
 
 
 #include "IsoPlot.h"
-#include "AutoLock.h"
 #include "Colour.h"
 #include "Factory.h"
 #include "Histogram.h"
@@ -28,15 +27,16 @@
 #include "LegendVisitor.h"
 #include "MagClipper.h"
 #include "MatrixHandler.h"
-#include "ThreadControler.h"
 #include "Timer.h"
 #include "UserPoint.h"
 
+#include <thread>
 
 namespace magics {
 
 
-static MutexCond producerMutex_;
+static std::mutex producer_mutex_;
+static std::condition_variable producer_cond_;
 
 IsoPlot::IsoPlot() {
     setTag("isoline");
@@ -506,11 +506,13 @@ public:
     IsoPlot& parent_;
     CellBox& cell_;
     bool more_;
-    MutexCond cond_;
+
+    std::mutex mutex_;
+    std::condition_variable cond_;
 };
 
 
-class IsoProducer : public Thread {
+class IsoProducer  {
 public:
     IsoProducer(int n, IsoProducerData& data) : n_(n), objects_(data) {}
     void run() {
@@ -1127,15 +1129,15 @@ void IsoPlot::isoline(Cell& cell, CellBox* parent) const {
                     // We send it to a thread!
                     const int t = (*l) % threads_;
                     {
-                        AutoLock<MutexCond> lockproducer(producerMutex_);
+                        std::unique_lock<std::mutex> lockproducer(producer_mutex_);
                         {
-                            AutoLock<MutexCond> lock(segments_[t]->cond_);
+                            std::unique_lock<std::mutex> lock(segments_[t]->mutex_);
                             segments_[t]->segments_.push_back(
                                 make_pair(levels_[*l], std::make_pair(make_pair(x1, y1), std::make_pair(x2, y2))));
                             if (segments_[t]->segments_.size() >= 2000)
-                                segments_[t]->cond_.signal();
+                                segments_[t]->cond_.notify_one();
                         }
-                        producerMutex_.signal();
+                        producer_cond_.notify_one();
                     }
                 }
 
@@ -1147,11 +1149,11 @@ void IsoPlot::isoline(Cell& cell, CellBox* parent) const {
 
             }  // end of levels...
 
-
+if (box) {
             ASSERT(box);
             box->reshape(parent);
             delete box;
-
+}
 
         }  // step to next triangle
     }
@@ -1168,6 +1170,11 @@ inline bool getEnv(const string& name, bool def) {
     return def;
 }
 
+template<class T>
+void run(T* p) {
+    // TODO: Try/catch
+    p->run();
+}
 
 void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent) {
     const Transformation& transformation = parent.transformation();
@@ -1241,14 +1248,13 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             threads_ = 4;
     }
 
-
     vector<IsoHelper*> consumers_;
     vector<IsoProducer*> producers_;
 
     {
         Timer timer("Threading", "Threading");
-        AutoVector<ThreadControler> consumers;
-        AutoVector<ThreadControler> producers;
+        AutoVector<std::thread> consumers;
+        AutoVector<std::thread> producers;
         segments_.clear();
         colourShapes_.clear();
         lines_.clear();
@@ -1258,8 +1264,7 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             lines_.push_back(lines);
             segments_.push_back(new IsoData());
             consumers_.push_back(new IsoHelper(c, *lines, *(segments_.back())));
-            consumers.push_back(new ThreadControler(consumers_.back(), false));
-            consumers.back()->start();
+            consumers.push_back(new std::thread(run<IsoHelper>, consumers_.back()));
         }
 
         view.split(threads_);
@@ -1273,25 +1278,26 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             IsoProducerData* data = new IsoProducerData(shading_->shadingMode(), *this, *(view[i]));
             datas.push_back(data);
             producers_.push_back(new IsoProducer(c, *data));
-            producers.push_back(new ThreadControler(producers_.back(), false));
-            producers.back()->start();
+            producers.push_back(new std::thread(run<IsoProducer>, producers_.back()));
             c++;
         }
 
-        for (auto& producer : producers)
-            producer->wait();
+        for (auto& producer : producers) {
+            producer->join();
+        }
 
         // No more
         {
             for (int i = 0; i < threads_; i++) {
-                AutoLock<MutexCond> lock(segments_[i]->cond_);
+                std::unique_lock<std::mutex> lock(segments_[i]->mutex_);
                 segments_[i]->more_ = false;
-                segments_[i]->cond_.signal();
+                segments_[i]->cond_.notify_one();
             }
         }
 
-        for (auto& consumer : consumers)
-            consumer->wait();
+        for (auto& consumer : consumers) {
+            consumer->join();
+        }
     }
 
 

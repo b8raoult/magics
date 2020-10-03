@@ -520,7 +520,7 @@ void GeoJSon::decode() {
         }
         dig(value);
     }
-    catch (std::exception e) {
+    catch (std::exception& e) {
         MagLog::error() << "Could not processed the file: " << path_ << ": " << e.what() << endl;
         abort();
     }

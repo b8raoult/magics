@@ -23,9 +23,7 @@
 #define magicsplusplus_H
 
 #include <magics_config.h>
-#if defined(MAGICS_AIX_XLC)
-#include <unistd.h>  // for AIX
-#endif
+
 #include <climits>
 
 #include "magics_export.h"
@@ -69,14 +67,14 @@ using std::vector;
 
 using std::exception;
 
-#include <cassert>
+// #include <cassert>
 #include <cmath>
 
-#include "magics_windef.h"
-
-#ifdef MAGICS_ON_WINDOWS
+// #include "magics_windef.h"
+#if defined(_WIN32) && defined(_MSC_VER)
+#define MAGICS_ON_WINDOWS
 #include <io.h>
-#define strcasecmp _stricmp
+inline int strcasecmp(const char* a, const char* b) { return _stricmp(a, b); }
 #endif
 
 /*! \namespace magics

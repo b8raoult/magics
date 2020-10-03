@@ -121,7 +121,7 @@ public:
 
 class AxisDateItem : public AxisItem {
 public:
-    AxisDateItem(double position, DateTime date, int level = 0, const string& colour = "undef", double height = 0.3);
+    AxisDateItem(double position, const DateTime& date, int level = 0, const string& colour = "undef", double height = 0.3);
     ~AxisDateItem() {}
     AxisItem* clone() const {
         AxisDateItem* item = new AxisDateItem(position_, date_, level_, colour_, height_);

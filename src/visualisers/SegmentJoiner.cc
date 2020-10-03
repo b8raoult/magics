@@ -8,19 +8,22 @@
  * does it submit to any jurisdiction.
  */
 
+#include "magics.h"
 #include "SegmentJoiner.h"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
-#include "MagExceptions.h"
+#include "MagException.h"
 #include "Timer.h"
-#include "marsmachine.h"
 
 #define CHECK_COLINEAR
 #define ONE_PASS
 #define xxxPROBE 8
 
 typedef uint64_t hash_t;
+
+using namespace magics;
 
 class Hasher {
     static const hash_t MIN_BITS = 8;   // 256 entryes
