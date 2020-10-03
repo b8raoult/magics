@@ -176,11 +176,19 @@ if( EC_OS_NAME MATCHES "windows" )
     # Suppress warnings about using well-known C functions.
     ecbuild_add_c_flags("/D_CRT_NONSTDC_NO_DEPRECATE")
     ecbuild_add_cxx_flags("/D_CRT_NONSTDC_NO_DEPRECATE")
+    # For M_PI
+    ecbuild_add_c_flags("/D_USE_MATH_DEFINES")
+    ecbuild_add_cxx_flags("/D_USE_MATH_DEFINES")
     # Suppress C4267: warns about possible loss of data when converting 'size_t' to 'int'.
     ecbuild_add_c_flags("/wd4267")
     ecbuild_add_cxx_flags("/wd4267")
     # Suppress C4800: forcing value to bool 'true' or 'false'
     ecbuild_add_cxx_flags("/wd4800")
+    # Suppress C4244: convertions from double to int
+    ecbuild_add_cxx_flags("/wd4244")
+    # Suppress C4244: convertions from double to float
+    ecbuild_add_cxx_flags("/wd4305")
+
 
     # Prevent fatal error C1128
     ecbuild_add_cxx_flags("/bigobj")

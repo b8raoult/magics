@@ -208,7 +208,7 @@ void StyleLibrary::init() {
         if (handle == -1) {
             ostringstream error;
             error << "Trying to open directory " << library << ": " << strerror(errno);
-            throw FailedSystemCall(error.str());
+            throw MagicsException(error.str());
         }
         else {
             do {
