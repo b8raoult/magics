@@ -48,7 +48,7 @@ list( APPEND _common_srcs
 	MagicsFormat.h
 	CartesianTransformation.h
 	Dimension.cc
-	XCoordinate.h YCoordinate.h 
+	XCoordinate.h YCoordinate.h
 	MagExceptions.h
 	DataStats.h SciMethods.h Tephigram.cc  Tephigram.h Skewt.cc  Skewt.h Emagram.cc Emagram.h
 
@@ -101,7 +101,7 @@ list( APPEND _common_srcs
  )
 
 if( EC_OS_NAME MATCHES "windows" )
-	list( APPEND _common_srcs win_time.h win_time.cc magics_windows.h magics_windows.cc )
+	list( APPEND _common_srcs win_time.h win_time.cc)
 endif()
 
 list( APPEND _common_templates
