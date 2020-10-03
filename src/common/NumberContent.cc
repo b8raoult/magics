@@ -9,7 +9,7 @@
  */
 
 #include "NumberContent.h"
-#include "MagExceptions.h"
+#include "MagException.h"
 #include "JSON.h"
 #include "Translator.h"
 #include "DoubleContent.h"
@@ -21,9 +21,9 @@ namespace magics {
 //----------------------------------------------------------------------------------------------------------------------
 
 
-class BadBoolConversion : public MagException {
+class BadBoolConversion : public MagicsException {
 public:
-    BadBoolConversion(const std::string& w) : MagException(std::string("Bad Bool Conversion: ") + w) {}
+    BadBoolConversion(const std::string& w) : MagicsException(std::string("Bad Bool Conversion: ") + w) {}
 };
 
 //----------------------------------------------------------------------------------------------------------------------

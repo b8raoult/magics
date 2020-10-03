@@ -13,7 +13,7 @@
 
 #include <cmath>
 #include <limits>
-#include "MagExceptions.h"
+#include "MagException.h"
 #include "Timer.h"
 
 #define CHECK_COLINEAR
@@ -21,6 +21,8 @@
 #define xxxPROBE 8
 
 typedef uint64_t hash_t;
+
+using namespace magics;
 
 class Hasher {
     static const hash_t MIN_BITS = 8;   // 256 entryes

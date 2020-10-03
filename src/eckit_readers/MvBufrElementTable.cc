@@ -11,7 +11,7 @@
 #include "MvBufrEdition.h"
 #include "eccodes.h"
 
-#include <assert.h>
+#include <ASSERT.h>
 #include <iostream>
 
 #define MV_CODES_CHECK(a, msg) codesCheck(#a, __FILE__, __LINE__, a, msg)

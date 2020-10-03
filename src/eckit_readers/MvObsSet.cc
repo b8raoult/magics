@@ -23,9 +23,9 @@
 //  May 1994 Original version.
 //--------------------------------------------------------------------
 
+#include "MagException.h"
 #include "MvObsSet.h"
 
-#include <assert.h>
 #include <cerrno>
 #include <cstring>
 #include <iostream>
@@ -33,6 +33,8 @@
 #ifdef METVIEW_PREPBUFR
 #include "MvPrepBufrPrep.h"
 #endif
+
+using namespace magics;
 
 int MAX_MESSAGE_LENGTH = 32000;  // e maybe delete in the future
 
@@ -320,7 +322,7 @@ bool MvObsSet::write(MvObs& anObs) {
 }
 
 bool MvObsSet::writeCompressed(MvObs* obs) {
-    assert(obs);
+    ASSERT(obs);
 
     if (!obs->compressData())
         return false;
@@ -358,7 +360,7 @@ bool MvObsSet::writeCompressed(MvObs* obs) {
 }
 
 bool MvObsSet::writeCompressed(MvObs* obs, const std::vector<int>& subsetVec) {
-    assert(obs);
+    ASSERT(obs);
 
     if (!obs->compressData())
         return false;
@@ -592,7 +594,7 @@ MvObs MvObsSetIterator::operator()(ENextReturn returnType) {
 
 void MvObsSetIterator::setFilterProgressStep(int filterProgressStep) {
     filterProgressStep_ = filterProgressStep;
-    assert(filterProgressStep_ >= 0);
+    ASSERT(filterProgressStep_ >= 0);
     if (filterProgressStep_ == 0)
         filterProgressStep_ = 1;
 }

@@ -11,7 +11,7 @@
 #include "magics.h"
 
 #include "MagConfig.h"
-#include "MagExceptions.h"
+#include "MagException.h"
 #include "MagLog.h"
 #include "MetaData.h"
 #include "Value.h"
@@ -187,7 +187,7 @@ void StyleLibrary::init() {
         if (!dir) {
             ostringstream error;
             error << "Trying to open directory " << library << ": " << strerror(errno);
-            throw FailedSystemCall(error.str());
+            throw MagicsException(error.str());
         }
         struct dirent* entry = readdir(dir);
         while (entry) {

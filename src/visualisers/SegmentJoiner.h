@@ -16,7 +16,7 @@
 
 #include "magics.h"
 #include <cmath>
-#include "MagExceptions.h"
+#include "MagException.h"
 
 #include <list>
 #include <deque>
