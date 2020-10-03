@@ -11,9 +11,7 @@
 #ifndef MagMagExceptions_H
 #define MagMagExceptions_H
 
-#ifndef marsmachine_H
-#include "marsmachine.h"
-#endif
+#include "magics.h"
 
 #ifndef MagLog_H
 #include "MagLog.h"
@@ -29,9 +27,8 @@ void Panic(const char* msg, int line, const char* file, const char* proc);
 
 class MagException : public exception {
 public:
-    virtual const char* what() const THROW_NOTHING() { return what_.c_str(); }
+    virtual const char* what() const noexcept { return what_.c_str(); }
     MagException(const string&);
-    ~MagException() THROW_NOTHING();
 
 protected:
     void reason(const string&);
@@ -173,16 +170,14 @@ inline void Panic(int code, const char* msg, int line, const char* file, const c
 // For compatibility
 //--------------------------------------------------------------
 class OutOfMemory : public MagException {
-    virtual bool terminateApplication() const { return true; }
-    virtual const char* what() const THROW_NOTHING() { return "OutOfMemory"; }
+    virtual const char* what() const noexcept { return "OutOfMemory"; }
 
 public:
     OutOfMemory();
 };
 
-#define THRCALL(a) ThrCall(a, #a, __LINE__, __FILE__, __FUNCTION__)
 #define SYSCALL(a) SysCall(a, #a, __LINE__, __FILE__, __FUNCTION__)
 #define ASSERT(a) Assert(!(a), #a, __LINE__, __FILE__, __FUNCTION__)
-#define PANIC(a) Panic((a), #a, __LINE__, __FILE__, __FUNCTION__)
+// #define PANIC(a) Panic((a), #a, __LINE__, __FILE__, __FUNCTION__)
 
 #endif

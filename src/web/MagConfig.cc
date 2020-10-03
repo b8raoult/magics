@@ -8,11 +8,12 @@
  * does it submit to any jurisdiction.
  */
 
+#include "magics.h"
+
 #include "MagConfig.h"
 #include "MagExceptions.h"
 #include "MagLog.h"
 #include "MetaData.h"
-#include "magics_windef.h"
 #include "Value.h"
 #include "JSONParser.h"
 

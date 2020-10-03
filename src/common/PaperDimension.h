@@ -25,7 +25,6 @@
 #include "Factory.h"
 #include "MagTranslator.h"
 #include "magics.h"
-#include "magics_windef.h"
 
 namespace magics {
 

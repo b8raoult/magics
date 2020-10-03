@@ -16,7 +16,6 @@
 
 
 #include "magics.h"
-#include "magics_windef.h"
 
 #ifdef MAGICS_ON_WINDOWS
 #include "win_time.h"

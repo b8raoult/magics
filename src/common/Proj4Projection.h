@@ -23,10 +23,6 @@
 #include <Transformation.h>
 #include <XmlNode.h>
 
-#include "magics_windef.h"
-#ifdef MAGICS_ON_WINDOWS
-#define PROJ_MSVC_DLL_IMPORT 1
-#endif
 
 #include "ProjP.h"
 

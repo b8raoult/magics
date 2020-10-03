@@ -60,7 +60,6 @@
 #include <MagTranslator.h>
 #include <magics.h>
 #include "MagicsObserver.h"
-#include "magics_windef.h"
 
 namespace magics {
 

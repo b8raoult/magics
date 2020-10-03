@@ -48,7 +48,7 @@ list( APPEND _common_srcs
 	MagicsFormat.h
 	CartesianTransformation.h
 	Dimension.cc
-	XCoordinate.h YCoordinate.h marsmachine.h linux.h aix.h
+	XCoordinate.h YCoordinate.h 
 	MagExceptions.h
 	DataStats.h SciMethods.h Tephigram.cc  Tephigram.h Skewt.cc  Skewt.h Emagram.cc Emagram.h
 

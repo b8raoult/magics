@@ -14,31 +14,15 @@
 #include "MagExceptions.h"
 #endif
 
-#include "magics_windef.h"
-
-void xldb_throw(const char* c)  // To set a break point in xldb
-{
-#ifndef MAGICS_ON_WINDOWS
-    if (getenv("PAUSE_MagExceptionS")) {
-        std::cout << "debug me " << getpid() << endl;
-        pause();
-    }
-
-    if (getenv("ABORT_MagExceptionS"))
-        Panic(c);
-#endif
-}
-
 MagException::MagException() {
-    xldb_throw("?");
 }
 
-MagException::~MagException() THROW_NOTHING() {
-}
+
+
+
 
 
 MagException::MagException(const string& w) : what_(w) {
-    xldb_throw(w.c_str());
 }
 
 void MagException::reason(const string& w) {
@@ -96,20 +80,4 @@ ShortFile::ShortFile(const string& file) : ReadError(string("Short file while re
 
 Ostore::Ostore(const string& msg) : MagException(string("ObjectStore: ") + msg) {}
 
-void Panic(const char* msg) {
-#ifndef MAGICS_ON_WINDOWS
-    msg = msg ? msg : "(null message)";
-
-    if (getenv("SLEEP_ON_PANIC")) {
-        ::kill(::getpid(), SIGSTOP);
-    }
-    else
-        ::kill(::getpid(), SIGABRT);
-    ::pause();
-#endif
-}
-
-void Panic(const char* msg, int line, const char* file, const char* proc) {}
-
 OutOfMemory::OutOfMemory() : MagException("out of memory") {}
-

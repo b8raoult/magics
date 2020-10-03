@@ -23,7 +23,7 @@
 #include <gd.h>
 #endif
 
-#include "magics_windef.h"
+#include "magics.h"
 
 using namespace magics;
 

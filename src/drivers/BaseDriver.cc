@@ -38,7 +38,7 @@
 #include <System.h>
 #include <Timer.h>
 
-#include "magics_windef.h"
+#include "magics.h"
 
 using namespace magics;
 

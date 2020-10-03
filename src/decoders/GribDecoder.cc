@@ -23,7 +23,8 @@
 #include <limits>
 
 #include "Factory.h"
-#include "magics_windef.h"
+
+#include "magics.h"
 #ifndef MAGICS_ON_WINDOWS
 #include <unistd.h>
 #else
