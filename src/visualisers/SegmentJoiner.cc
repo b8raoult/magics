@@ -8,13 +8,13 @@
  * does it submit to any jurisdiction.
  */
 
+#include "magics.h"
 #include "SegmentJoiner.h"
 
 #include <cmath>
 #include <limits>
 #include "MagExceptions.h"
 #include "Timer.h"
-#include "marsmachine.h"
 
 #define CHECK_COLINEAR
 #define ONE_PASS

@@ -67,7 +67,7 @@ using std::vector;
 
 using std::exception;
 
-#include <cassert>
+// #include <cassert>
 #include <cmath>
 
 // #include "magics_windef.h"

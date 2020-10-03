@@ -14,10 +14,14 @@
 #ifndef SegmentJoiner_H
 #define SegmentJoiner_H
 
+#include "magics.h"
 #include <cmath>
 #include "MagExceptions.h"
-#include "marsmachine.h"
 
+#include <list>
+#include <deque>
+
+using namespace std;
 
 struct Point {
     double x_;
