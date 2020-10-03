@@ -40,8 +40,6 @@ struct Segment {
     Point from_;
     Point to_;
 
-    unsigned long phash_;
-
     vector<Segment*> before_;  // Index of segment before in polyline
     vector<Segment*> after_;   //  Index of segment after in polyline
 
