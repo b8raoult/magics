@@ -24,9 +24,9 @@ void convert(const deque<PaperPoint>& in, ClipperLib::Path& out, bool print = fa
         cout << " -----------start---------------------------" << endl;
     for (auto pt = in.begin(); pt != in.end(); ++pt) {
         if (print)
-            cout << "     subj.push_back(MyPoint(" << long(pt->x_ * scale_) << ", " << long(pt->y_ * scale_)
+            cout << "     subj.push_back(MyPoint(" << ClipperLib::cInt(pt->x_ * scale_) << ", " << ClipperLib::cInt(pt->y_ * scale_)
                  << ").get());" << endl;
-        out.push_back(ClipperLib::IntPoint(long(pt->x_ * scale_), long(pt->y_ * scale_)));
+        out.push_back(ClipperLib::IntPoint(ClipperLib::cInt(pt->x_ * scale_), ClipperLib::cInt(pt->y_ * scale_)));
     }
     int orientation = ClipperLib::Orientation(out);
     if (print)
@@ -219,7 +219,7 @@ bool MagClipper::in(const Polyline& poly, const PaperPoint& point) {
     ClipperLib::Path path;
     convert(poly.polygon(), path);
 
-    return ClipperLib::PointInPolygon(ClipperLib::IntPoint(long(point.x_ * scale_), long(point.y_ * scale_)), path);
+    return ClipperLib::PointInPolygon(ClipperLib::IntPoint(ClipperLib::cInt(point.x_ * scale_), ClipperLib::cInt(point.y_ * scale_)), path);
 }
 
 MagClipper::MagClipper() {}
