@@ -189,6 +189,7 @@ if( EC_OS_NAME MATCHES "windows" )
     # Suppress C4244: convertions from double to float
     ecbuild_add_cxx_flags("/wd4305")
 
+#### /D PROJ_MSVC_DLL_IMPORT
 
     # Prevent fatal error C1128
     ecbuild_add_cxx_flags("/bigobj")

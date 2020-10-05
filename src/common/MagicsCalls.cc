@@ -23,6 +23,7 @@
 #include <MagicsGlobal.h>
 #include <MagicsParameter.h>
 #include <WebFormat.h>
+#include "py_calls.h"
 
 extern "C" {
 #include <magics_api.h>

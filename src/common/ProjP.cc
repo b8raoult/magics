@@ -19,9 +19,6 @@
 #include "ProjP.h"
 #include "MagException.h"
 
-// #if defined(_WIN32) && defined(_MSC_VER)
-// #define PROJ_MSVC_DLL_IMPORT 1
-// #endif
 
 #include <proj.h>
 
