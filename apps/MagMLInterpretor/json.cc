@@ -10,7 +10,9 @@
 
 #include "magics.h"
 
+#ifndef MAGICS_ON_WINDOWS
 #include <unistd.h>
+#endif
 
 #include <signal.h>
 #include "MetaData.h"

@@ -12,9 +12,11 @@
 #include <MagClipper.h>
 #include <Polyline.h>
 
+#include "clipper.hpp"
+
 using namespace magics;
 
-double scale_ = 1e7;
+const double scale_ = 1e7;
 
 void convert(const deque<PaperPoint>& in, ClipperLib::Path& out, bool print = false) {
     out.reserve(in.size());
@@ -22,9 +24,9 @@ void convert(const deque<PaperPoint>& in, ClipperLib::Path& out, bool print = fa
         cout << " -----------start---------------------------" << endl;
     for (auto pt = in.begin(); pt != in.end(); ++pt) {
         if (print)
-            cout << "     subj.push_back(MyPoint(" << long(pt->x_ * scale_) << ", " << long(pt->y_ * scale_)
+            cout << "     subj.push_back(MyPoint(" << ClipperLib::cInt(pt->x_ * scale_) << ", " << ClipperLib::cInt(pt->y_ * scale_)
                  << ").get());" << endl;
-        out.push_back(ClipperLib::IntPoint(long(pt->x_ * scale_), long(pt->y_ * scale_)));
+        out.push_back(ClipperLib::IntPoint(ClipperLib::cInt(pt->x_ * scale_), ClipperLib::cInt(pt->y_ * scale_)));
     }
     int orientation = ClipperLib::Orientation(out);
     if (print)
@@ -55,8 +57,11 @@ void MagClipper::clipOpened(const Polyline& subject, const Polyline& clip, vecto
     try {
         clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
     }
+    catch (std::exception& e) {
+        std::cout << "Clipping error 1 " << e.what() << endl;
+    }
     catch (...) {
-        cout << "ERROR" << endl;
+        std::cout << "Clipping error 1 (unknown)" << endl;
     }
 
     ClipperLib::PolyNode* node = solution.GetFirst();
@@ -128,7 +133,11 @@ void MagClipper::clipClosed(const Polyline& subject, const Polyline& clip, vecto
         try {
             clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
         }
+        catch (std::exception& e) {
+            std::cout << "Clipping error 2 " << e.what() << endl;
+        }
         catch (...) {
+            std::cout << "Clipping error 2 (unknown)" << endl;
         }
 
         Polyline* poly = 0;
@@ -166,7 +175,11 @@ void MagClipper::clipClosed(const Polyline& subject, const Polyline& clip, vecto
             out.push_back(helper[*outer]);
         }
     }
+    catch (std::exception& e) {
+        std::cout << "Clipping error 3 " << e.what() << endl;
+    }
     catch (...) {
+        std::cout << "Clipping error 3 (unknown)" << endl;
     }
 }
 
@@ -188,8 +201,11 @@ void MagClipper::add(const Polyline& subject, const Polyline& clip, vector<Polyl
     try {
         clipper.Execute(ClipperLib::ctUnion, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
     }
+    catch (std::exception& e) {
+        std::cout << "Clipping error 4 " << e.what() << endl;
+    }
     catch (...) {
-        MagLog::warning() << "Clipping warning " << endl;
+        std::cout << "Clipping error 4 (unknown)" << endl;
     }
     for (auto path = solution.begin(); path != solution.end(); ++path) {
         Polyline* poly = new Polyline();
@@ -203,7 +219,7 @@ bool MagClipper::in(const Polyline& poly, const PaperPoint& point) {
     ClipperLib::Path path;
     convert(poly.polygon(), path);
 
-    return ClipperLib::PointInPolygon(ClipperLib::IntPoint(long(point.x_ * scale_), long(point.y_ * scale_)), path);
+    return ClipperLib::PointInPolygon(ClipperLib::IntPoint(ClipperLib::cInt(point.x_ * scale_), ClipperLib::cInt(point.y_ * scale_)), path);
 }
 
 MagClipper::MagClipper() {}

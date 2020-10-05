@@ -1124,7 +1124,7 @@ void WrepJSon::clim_step(const Value& value) {
 }
 
 void WrepJSon::time(const Value& value) {
-    
+
     MagLog::dev() << "found -> time= " << value.get_value<string>() << endl;
     time_ = value.get_value<string>();
 }
