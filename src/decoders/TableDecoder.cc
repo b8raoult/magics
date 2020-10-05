@@ -24,6 +24,7 @@
 #include "TableReader.h"
 #include "TextVisitor.h"
 #include "Tokenizer.h"
+#include "MagException.h"
 
 
 using namespace ::magics;
@@ -138,7 +139,7 @@ void TableDecoder::prepareGeo() {
     ok = reader.read(error);
     if (!ok) {
         MagLog::error() << error << endl;
-        return;
+        throw MagicsException("TableDecoder reader error: " + error);
     }
 
     vector<double>::iterator x = this->x_values_.begin();
@@ -263,7 +264,8 @@ void TableDecoder::prepareXY() {
     ok = reader.read(error);
     if (!ok) {
         MagLog::error() << error << endl;
-        return;
+        throw MagicsException("TableDecoder reader error: " + error);
+        // return;
     }
 
     // Now we interpret
@@ -439,7 +441,11 @@ void TableDecoder::visit(Transformation& transformation) {
             }
         }
     }
+    catch (std::exception& e) {
+        std::cout << "ERROR: TableDecoder::visit " << e.what() << endl;
+    }
     catch (...) {
+        std::cout << "ERROR: TableDecoder::visit (unknown exception)" << endl;
     }
 }
 

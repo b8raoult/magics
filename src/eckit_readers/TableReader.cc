@@ -8,7 +8,9 @@
  ***************************** LICENSE END *************************************/
 
 #include "TableReader.h"
+#include "MagException.h"
 
+using namespace magics;
 
 void TableReader::resizeDecoders(unsigned int numNeeded) {
     // do we need to resize our list of decoders?
@@ -244,6 +246,9 @@ int TableReader::nextLineTokens(char* line, size_t sizeOfLine, vector<char*>& to
     //    if (gotLine)
     if (f_.getline(line, sizeOfLine)) {
         // parse the line into tokens
+
+        // FIXME: Use getline(std::string) instead
+        ASSERT(!f_.fail()); // The line is longer than sizeOfLine
 
         streamsize numread = f_.gcount();
 
@@ -561,7 +566,7 @@ bool TableReader::read(string& errorMessage) {
                 }
                 else  // otherwise, the disparity in numbers indicates a problem
                 {
-                    char msg[128];
+                    char msg[1024];
                     sprintf(msg, "TableReader: record %d has %u elements, but the first record has %u. Failed to read.",
                             i + 1, (unsigned int)tokens.size(), (unsigned int)decoderSets_.size());
                     errorMessage = msg;
