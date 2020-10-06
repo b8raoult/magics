@@ -25,7 +25,11 @@ Regex::Regex(const std::string& s, bool shell) : str_(s) {
     // Log::debug() << "Regex " << str_ << std::endl;
     if (shell) {
         long len = s.length() * 3 + 1;
+#ifdef MAGICS_ON_WINDOWS
+        char buffer[1024];
+#else
         char buffer[len];
+#endif
         char* re = buffer;
 
         std::string::size_type i = 0;

@@ -55,7 +55,7 @@ static void execute(const std::string& action, const Value& p) {
             continue;
         }
 
-        if (value.isNumber() or value.isDouble()) {
+        if (value.isNumber() || value.isDouble()) {
             double d = value;
             if (long(d) == d) {
                 check(name, py_seti(name.c_str(), long(d)));
@@ -76,7 +76,7 @@ static void execute(const std::string& action, const Value& p) {
                     s++;
                     continue;
                 }
-                if (value.isNumber() or value.isDouble()) {
+                if (value.isNumber() || value.isDouble()) {
                     double v = value;
                     if (long(v) == v) {
                         i++;
