@@ -79,7 +79,7 @@ void WebFormat::prepare(const string& magml, const map<string, string>& params, 
     ifstream in(magml.c_str());
     if (!in) {
         MagLog::error() << " Can not open file " << magml << endl;
-        throw(MagicsException("no file"));
+        throw CannotOpenFile(magml);
     }
 
     ofstream& out = file();
