@@ -48,6 +48,8 @@
 #include <stdexcept>
 #include <vector>
 #include <sstream>
+#include <iostream>
+#include <iomanip>
 
 namespace ClipperLib {
 
@@ -854,6 +856,16 @@ ClipperBase::~ClipperBase()  // destructor
 
 void RangeTest(const IntPoint& Pt, bool& useFullRange) {
     if (useFullRange) {
+
+        if(Pt.X == 0 ) {
+
+            cInt nY = -Pt.Y;
+            std::cout << "Range test " << sizeof(Pt.X) << " " << nY << " " << Pt.Y << " h " << hiRange
+            << " = " << std::hex << nY << " " << std::hex << Pt.Y << " h "<< std::hex << hiRange
+            << std::dec << std::endl;
+
+        }
+
         if (Pt.X > hiRange || Pt.Y > hiRange || -Pt.X > hiRange || -Pt.Y > hiRange) {
             std::ostringstream oss;
             oss << "Coordinate outside allowed range. Pt=" << Pt <<" hiRange=" << hiRange;
