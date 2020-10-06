@@ -126,25 +126,12 @@ set( HAVE_BUFR 1 )
 
 
 
-
-# if( EC_OS_NAME MATCHES "windows" )
-#     set(CMAKE_USE_WIN32_THREADS_INIT 1)
-#     # message("====================== IN WINDOWS")
-#     # find_package( Pthread REQUIRED )
-#     # message("====================== IN WINDOWS ${PTHREAD_INCLUDE_DIR} ${PTHREAD_LIBRARIES}")
-#     # list( APPEND MAGICS_EXTRA_LIBRARIES ${PTHREAD_LIBRARIES} )
-#     find_package( Threads )
-# else()
-#   set( CMAKE_THREAD_PREFER_PTHREAD 1 )
-#   find_package( Threads )
-# endif()
-
-
 # adding NO_MODULE means that if we don't find it, CMake will not generate
 # strange error messages about not being able to find the FindProj4.cmake file.
 # this should find proj if it has been installed via CMake, but if it has been
 # installed via autotools, then we will need to try another method
 #ecbuild_find_package(NAME PROJ4 VERSION 6.1.0 QUIET )
+
 # find_package( PROJ4 6.1.0 NO_MODULE )
 # if(NOT PROJ4_FOUND)
 find_package(PROJ 6.1.0 REQUIRED)
@@ -159,6 +146,8 @@ list( APPEND MAGICS_PRIVATE_INCLUDE_DIRS ${PROJ_INCLUDE_DIR})
 
 
 find_package( EXPAT REQUIRED )   # for MagML
+message("EXPAT include: ${EXPAT_INCLUDE_DIR}")
+message("EXPAT library: ${EXPAT_LIBRARIES}")
 
 if(APPLE)
   find_package( zlib REQUIRED )  # dependency of minizip - KMZ support
@@ -185,9 +174,9 @@ if( EC_OS_NAME MATCHES "windows" )
     # Suppress C4800: forcing value to bool 'true' or 'false'
     ecbuild_add_cxx_flags("/wd4800")
     # Suppress C4244: convertions from double to int
-    ecbuild_add_cxx_flags("/wd4244")
+    #ecbuild_add_cxx_flags("/wd4244")
     # Suppress C4244: convertions from double to float
-    ecbuild_add_cxx_flags("/wd4305")
+    #ecbuild_add_cxx_flags("/wd4305")
 
 #### /D PROJ_MSVC_DLL_IMPORT
 
@@ -240,8 +229,12 @@ if( EC_OS_NAME MATCHES "windows" )
     # It's part of the Windows SDK so no need to search for it.
     list( APPEND MAGICS_EXTRA_LIBRARIES ws2_32 )
     # We need to find zlib.lib
-    find_library( ZLIB_LIB zlib PATHS ENV PATH )
-    list( APPEND MAGICS_EXTRA_LIBRARIES ${ZLIB_LIB} )
+    # find_library( ZLIB_LIB zlib PATHS ENV PATH )
+    # list( APPEND MAGICS_EXTRA_LIBRARIES ${ZLIB_LIB} )
+    find_package( ZLIB REQUIRED )   # for MagML
+    message("ZLIB include: ${ZLIB_INCLUDE_DIR}")
+    message("ZLIB library: ${ZLIB_LIBRARIES}")
+    list( APPEND MAGICS_EXTRA_LIBRARIES ${ZLIB_LIBRARIES} )
 endif()
 
 ecbuild_debug("MAGICS_EXTRA_DEFINITIONS  => ${MAGICS_EXTRA_DEFINITIONS}")

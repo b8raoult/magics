@@ -3,21 +3,16 @@
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
+
     "configurations": [
         {
-            "name": "Python: Current File",
-            "type": "python",
-            "request": "launch",
-            "program": "${file}",
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "(lldb) Attach",
+            "name": "Debug magjson",
             "type": "cppdbg",
-            "request": "attach",
-            "program": "/usr/local/opt/python/bin/python3.7",
-            "processId": "${command:pickProcess}",
-            "MIMode": "lldb"
-        },
-    ]
+            "program": "c:/build/magics/bin/Debug/magdebug.exe",
+            "request": "launch",
+            "cwd": " C:/Users/mab/Documents/magics/regression/climetlab",
+            "stopAtEntry": true,
+            "args": ["csv-table.yaml"],
+            "additionalSOLibSearchPath":"c:/build/magics/bin/Debug"
+        }]
 }
