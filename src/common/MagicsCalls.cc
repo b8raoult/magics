@@ -874,6 +874,45 @@ static SimpleTranslator eps_maximum_font_name("eps_maximum_font_name", "eps_maxi
 static SimpleTranslator magnifier_text_font_name("magnifier_text_font_name", "magnifier_text_font");
 static SimpleTranslator symbol_text_font_name("symbol_text_font_name", "symbol_text_font");
 
+// =================================================================
+
+template <class T> const char* python_1(T proc) {
+    try {
+        proc();
+    }
+    catch (std::exception& e) {
+        static char buffer[512];
+        strncpy(buffer, e.what(), sizeof(buffer));
+        std::cout << "EXCEPTION " << e.what() << std::endl;
+        return buffer;
+    }
+    catch(...) {
+         std::cout << "EXCEPTION unknown" << std::endl;
+         return "Unknown exception";
+    }
+    return NULL;
+}
+
+// TODO: cahnge the python side to throw if the string starts with '!'
+
+template <class T> const char* python_2(T proc) {
+    try {
+        return proc();
+    }
+    catch (std::exception& e) {
+        static char buffer[512];
+        buffer[0] = '!';
+        strncpy(buffer + 1, e.what(), sizeof(buffer) - 1);
+        std::cout << "EXCEPTION " << e.what() << std::endl;
+        return buffer;
+    }
+    catch(...) {
+         std::cout << "EXCEPTION unknown" << std::endl;
+         return "!Unknown exception";
+    }
+}
+
+
 extern "C" {
 
 /* **************************************************************************
@@ -885,8 +924,9 @@ extern "C" {
 ****************************************************************************/
 
 MAGICS_EXPORT void popen_() {
-    if (magics_ == 0)
-        magics_ = new FortranMagics();
+    delete magics_;
+    // if (magics_ == 0)
+    magics_ = new FortranMagics();
     magics_->popen();
 }
 
@@ -1244,33 +1284,13 @@ MAGICS_EXPORT void pinfo_() {
 
 ****************************************************************************/
 // FIXME: Not thread safe...
-#define PYTHON(python, magics)           \
-    MAGICS_EXPORT const char* python() { \
-        try {                            \
-            magics();                    \
-        }                                \
-        catch (exception& e) {            \
-            static char buffer[512];     \
-            strncpy(buffer, e.what(), sizeof(buffer)); \
-            return buffer;             \
-        }                                \
-        return NULL;                     \
-    }
 
-// TODO: cahnge the python side to throw if the string starts with '!'
-#define PYTHONS(python, magics)          \
-    MAGICS_EXPORT const char* python() { \
-        try {                            \
-            return magics();             \
-        }                                \
-        catch (exception& e) {            \
-            static char buffer[512];     \
-            buffer[0] = '!'; \
-            strncpy(buffer+1, e.what(), sizeof(buffer)-1); \
-            return buffer;             \
-        }                                \
-        return NULL;                     \
-    }
+
+
+
+#define PYTHON(python, magics)  MAGICS_EXPORT const char* python() {  return python_1(magics); }
+#define PYTHONS(python, magics) MAGICS_EXPORT const char* python() {  return python_2(magics); }
+
 
 MAGICS_EXPORT void mag_open() {
     popen_();
@@ -1321,7 +1341,8 @@ PYTHON(py_line, pline_)
 MAGICS_EXPORT void mag_legend() {
     magics_->simplelegend();
 }
-PYTHON(py_legend, magics_->simplelegend)
+PYTHON(py_legend, mag_legend)
+
 MAGICS_EXPORT void mag_test() {
     ptest_();
 }
