@@ -1,0 +1,40 @@
+plot:
+  - output:
+      output_formats: [png]
+      output_name: x
+      output_name_first_page_number: False
+      output_width: 680
+      page_frame: False
+      page_id_line: False
+      page_x_length: 10.0
+      page_y_length: 5.0
+      subpage_x_length: 10.0
+      subpage_x_position: 0.0
+      subpage_y_length: 5.0
+      subpage_y_position: 0.0
+      super_page_x_length: 10.0
+      super_page_y_length: 5.0
+
+  - mmap:
+      subpage_lower_left_latitude: -90.0
+      subpage_lower_left_longitude: 0.0
+      subpage_map_projection: polar_stereographic
+      subpage_upper_right_latitude: 90.0
+      subpage_upper_right_longitude: 360.0
+
+  - mcoast:
+      map_boundaries: True
+      map_coastline_colour: tan
+      map_coastline_land_shade: True
+      map_coastline_land_shade_colour: cream
+      map_grid: False
+      map_grid_colour: tan
+      map_grid_frame: True
+      map_grid_frame_thickness: 5
+      map_label: False
+
+  - mcoast:
+      map_grid: False
+      map_grid_frame: True
+      map_grid_frame_thickness: 5
+      map_label: False

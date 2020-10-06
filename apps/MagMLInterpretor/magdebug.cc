@@ -13,24 +13,16 @@
 #include "magics.h"
 #include "py_calls.h"
 #include "MagException.h"
+#include "YAMLParser.h"
 
 using namespace magics;
 
 int main(int argc, char** argv) {
 
-    char line[10240];
-
     try {
         ASSERT(argc == 2);
-        ifstream in(argv[1]);
-        if(!in) {
-            throw CannotOpenFile(argv[1]);
-        }
-
-        while(in.getline(line, sizeof(line))) {
-            std::cout << line << std::endl;
-        }
-
+        auto p = YAMLParser::decodeFile(argv[1]);
+        std::cout << p << std::endl;
     }
     catch(std::exception& e) {
         std::cout << e.what() << std::endl;
