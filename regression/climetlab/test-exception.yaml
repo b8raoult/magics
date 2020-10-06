@@ -1,11 +1,11 @@
 plot:
   - output:
       output_formats: [png]
-      output_name: x
-      output_name_first_page_number: False
+      output_name: test-exception
+      output_name_first_page_number: false
       output_width: 680
-      page_frame: False
-      page_id_line: False
+      page_frame: false
+      page_id_line: false
       page_x_length: 10.0
       page_y_length: 5.0
       subpage_x_length: 10.0
@@ -23,18 +23,18 @@ plot:
       subpage_upper_right_longitude: 360.0
 
   - mcoast:
-      map_boundaries: True
+      map_boundaries: true
       map_coastline_colour: tan
-      map_coastline_land_shade: True
+      map_coastline_land_shade: true
       map_coastline_land_shade_colour: cream
-      map_grid: False
+      map_grid: false
       map_grid_colour: tan
-      map_grid_frame: True
+      map_grid_frame: true
       map_grid_frame_thickness: 5
-      map_label: False
+      map_label: false
 
   - mcoast:
-      map_grid: False
-      map_grid_frame: True
+      map_grid: false
+      map_grid_frame: true
       map_grid_frame_thickness: 5
-      map_label: False
+      map_label: false
