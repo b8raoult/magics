@@ -47,6 +47,7 @@ static std::map<std::string, action_proc> actions = {
     {"mmetgraph", py_metgraph},
     {"mnetcdf", py_netcdf},
     {"mobs", py_obs},
+    {"modb", py_odb},
     {"moverlay", py_overlay},
     {"mraw", py_raw},
     {"msymb", py_symb},
