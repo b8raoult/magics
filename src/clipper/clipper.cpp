@@ -47,6 +47,7 @@
 #include <ostream>
 #include <stdexcept>
 #include <vector>
+#include <sstream>
 
 namespace ClipperLib {
 
@@ -853,8 +854,11 @@ ClipperBase::~ClipperBase()  // destructor
 
 void RangeTest(const IntPoint& Pt, bool& useFullRange) {
     if (useFullRange) {
-        if (Pt.X > hiRange || Pt.Y > hiRange || -Pt.X > hiRange || -Pt.Y > hiRange)
-            throw clipperException("Coordinate outside allowed range");
+        if (Pt.X > hiRange || Pt.Y > hiRange || -Pt.X > hiRange || -Pt.Y > hiRange) {
+            std::ostringstream oss;
+            oss << "Coordinate outside allowed range. Pt=" << Pt <<" hiRange=" << hiRange;
+            throw clipperException(oss.str().c_str());
+        }
     }
     else if (Pt.X > loRange || Pt.Y > loRange || -Pt.X > loRange || -Pt.Y > loRange) {
         useFullRange = true;
