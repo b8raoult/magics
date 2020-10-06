@@ -22,7 +22,45 @@ using namespace magics;
 typedef const char* (*action_proc)();
 
 static std::map<std::string, action_proc> actions = {
-    {"output", nullptr}, {"mmap", nullptr}, {"mcoast", py_coast}, {"mtable", py_table}, {"msymb", py_symb},
+    {"mboxplot", py_boxplot},
+    {"mcoast", py_coast},
+    {"mcont", py_cont},
+    {"mepsbar", py_epsbar},
+    {"mepscloud", py_epscloud},
+    {"mepsgraph", py_epsgraph},
+    {"mepsinput", py_epsinput},
+    {"mepslight", py_epslight},
+    {"mepsplumes", py_epsplumes},
+    {"mepsshading", py_epsshading},
+    {"mepswave", py_epswave},
+    {"mepswind", py_epswind},
+    {"mgeojson", py_geojson},
+    {"mgrib", py_grib},
+    {"mimage", py_image},
+    {"mimport", py_import},
+    {"minput", py_input},
+    {"mlegend", py_legend},
+    {"mline", py_line},
+    {"mmap", nullptr},
+    {"mmapgen", py_mapgen},
+    {"mmetbufr", py_metbufr},
+    {"mmetgraph", py_metgraph},
+    {"mnetcdf", py_netcdf},
+    {"mobs", py_obs},
+    {"moverlay", py_overlay},
+    {"mraw", py_raw},
+    {"msymb", py_symb},
+    {"mtable", py_table},
+    {"mtaylor", py_taylor},
+    {"mtephi", py_tephi},
+    {"mtext", py_text},
+    {"mtile", py_tile},
+    {"mwind", py_wind},
+    {"mwrepjson", py_wrepjson},
+    {"output", nullptr},
+    // {"page", py_new_page},
+
+
 };
 
 static void check(const string& name, const char* msg) {
