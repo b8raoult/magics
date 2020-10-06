@@ -14,7 +14,6 @@
 #ifndef magics_Regex_h
 #define magics_Regex_h
 
-#include <regex.h>
 
 #include <string>
 
@@ -28,10 +27,8 @@ public:
 
 // -- Contructors
 
-	Regex(const std::string& = ".*",bool shell = false, bool extended=true);
-	Regex(const Regex&);
+	Regex(const std::string& = ".*",bool shell = false);
 
-	~Regex();
 
 // -- Methods
 
@@ -41,7 +38,6 @@ public:
 
 	operator const std::string&() const  { return str_; }
 
-	bool operator==(const Regex& other) const { return str_ == other.str_; }
 
 protected: // methods
 
@@ -50,8 +46,6 @@ protected: // methods
 private: // members
 
 	std::string str_;
-	regex_t re_;
-	bool extended_;
 
 private: // methods
 
