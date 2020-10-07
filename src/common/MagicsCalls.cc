@@ -1567,7 +1567,6 @@ MAGICS_EXPORT void mag_setc(const char* name, const char* value) {
 }
 
 MAGICS_EXPORT const char* py_setr(const char* name, const double value) {
-    std::cerr << "====== py_setr " << name << " - " << value << std::endl;
     try {
         mag_setr(name, value);
     }
