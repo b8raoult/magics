@@ -179,7 +179,7 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         delete box;
     }
     catch (MagicsException& e) {
-        throw e;  // forwarding exception
+        throw;  // forwarding exception
     }
 }
 

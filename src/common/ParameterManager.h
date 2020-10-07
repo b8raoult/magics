@@ -208,9 +208,9 @@ public:
             try {
                 object = SimpleObjectMaker<T>::create(def);
             }
-            catch (NoFactoryException& e2) {
-                MagLog::error() << "default [" << def << "] not found ---> contact Magics team" << endl;
-                throw e2;
+            catch (NoFactoryException& e) {
+                MagLog::error() << "default [" << def << "] not found ---> contact Magics team " << e.what() << endl;
+                throw;
             }
         }
     }

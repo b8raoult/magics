@@ -27,6 +27,7 @@
 #include <sstream>
 #include "Factory.h"
 #include "MagTranslator.h"
+#include "MagException.h"
 
 using std::istream;
 
@@ -42,8 +43,8 @@ class XmlNode;
 
 
 */
-struct BadRgbFormat {
-    BadRgbFormat() {}
+struct BadRgbFormat : public MagicsException {
+    BadRgbFormat(const std::string & value): MagicsException("BadRgbFormat: [" + value + "]") {}
     ~BadRgbFormat() {}
 };
 
@@ -68,8 +69,8 @@ struct Rgb {
     friend istream& operator>>(istream& s, Rgb& p);
 };
 
-struct BadHslFormat {
-    BadHslFormat() {}
+struct BadHslFormat : public MagicsException {
+    BadHslFormat(const std::string & value): MagicsException("BadHslFormat: [" + value + "]") {}
     ~BadHslFormat() {}
 };
 

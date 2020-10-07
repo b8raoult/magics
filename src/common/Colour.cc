@@ -388,7 +388,7 @@ Rgb::Rgb(const string& name) : red_(1.), green_(1.), blue_(1.), alpha_(1.) {
     in.get(token, '(');
 
     if (in.eof())
-        throw BadRgbFormat();
+        throw BadRgbFormat(name);
 
     if (magCompare(token.str(), "rgb")) {
         in.ignore(name.length(), '(');
@@ -396,12 +396,12 @@ Rgb::Rgb(const string& name) : red_(1.), green_(1.), blue_(1.), alpha_(1.) {
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadRgbFormat();
+            throw BadRgbFormat(name);
         in >> green_;
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadRgbFormat();
+            throw BadRgbFormat(name);
         in >> blue_;
     }
     else if (magCompare(token.str(), "rgba")) {
@@ -411,24 +411,24 @@ Rgb::Rgb(const string& name) : red_(1.), green_(1.), blue_(1.), alpha_(1.) {
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadRgbFormat();
+            throw BadRgbFormat(name);
         in >> green_;
 
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadRgbFormat();
+            throw BadRgbFormat(name);
         in >> blue_;
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadRgbFormat();
+            throw BadRgbFormat(name);
         in >> alpha_;
         if (alpha_ < 0 || alpha_ > 1)
-            throw BadRgbFormat();
+            throw BadRgbFormat(name);
     }
     else
-        throw BadRgbFormat();
+        throw BadRgbFormat(name);
     if (red_ > 1 || green_ > 1 || blue_ > 1) {
         // WE are using the second convention ( Colour defined between, 0 and 1)
         red_ = red_ / 256;
@@ -437,11 +437,11 @@ Rgb::Rgb(const string& name) : red_(1.), green_(1.), blue_(1.), alpha_(1.) {
         blue_  = blue_ / 256.;
     }
     if (red_ < 0 || red_ > 1)
-        throw BadRgbFormat();
+        throw BadRgbFormat(name);
     if (green_ < 0 || green_ > 1)
-        throw BadRgbFormat();
+        throw BadRgbFormat(name);
     if (blue_ < 0 || blue_ > 1)
-        throw BadRgbFormat();
+        throw BadRgbFormat(name);
 }
 
 
@@ -452,58 +452,58 @@ Hsl::Hsl(const string& name) {
     in.get(token, '(');
 
     if (in.eof())
-        throw BadHslFormat();
+        throw BadHslFormat(name);
 
     if (magCompare(token.str(), "HSL")) {
         in.ignore(name.length(), '(');
         in >> hue_;
         if (hue_ < 0 || hue_ > 360)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadHslFormat();
+            throw BadHslFormat(name);
         in >> saturation_;
         if (saturation_ < 0 || saturation_ > 1)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadHslFormat();
+            throw BadHslFormat(name);
         in >> light_;
         if (light_ < 0 || light_ > 1)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
         alpha_ = 1.;
     }
     else if (magCompare(token.str(), "HSLA")) {
         in.ignore(name.length(), '(');
         in >> hue_;
         if (hue_ < 0 || hue_ > 360)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadHslFormat();
+            throw BadHslFormat(name);
         in >> saturation_;
         if (saturation_ < 0 || saturation_ > 1)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadHslFormat();
+            throw BadHslFormat(name);
         in >> light_;
         if (light_ < 0 || light_ > 1)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
 
         in.ignore(name.length(), ',');
         if (in.eof())
-            throw BadHslFormat();
+            throw BadHslFormat(name);
         in >> alpha_;
         if (alpha_ < 0 || alpha_ > 1)
-            throw BadHslFormat();
+            throw BadHslFormat(name);
     }
     else
-        throw BadHslFormat();
+        throw BadHslFormat(name);
 }
 
 
@@ -513,22 +513,22 @@ istream& operator>>(istream& s, Rgb& p) {
     s >> token;
 
     if (token != "RGB")
-        throw BadRgbFormat();
+        throw BadRgbFormat(token);
 
     s.ignore(256, '(');
     s >> p.red_;
     if (p.red_ < 0 || p.red_ > 1)
-        throw BadRgbFormat();
+        throw BadRgbFormat(token);
 
     s.ignore(256, ',');
     s >> p.green_;
     if (p.green_ < 0 || p.green_ > 1)
-        throw BadRgbFormat();
+        throw BadRgbFormat(token);
     s.ignore(256, ',');
 
     s >> p.blue_;
     if (p.blue_ < 0 || p.blue_ > 1)
-        throw BadRgbFormat();
+        throw BadRgbFormat(token);
 
     return s;
 }
@@ -539,22 +539,22 @@ istream& operator>>(istream& s, Hsl& p) {
     s >> token;
 
     if (token != "HSL")
-        throw BadHslFormat();
+        throw BadHslFormat(token);
 
     s.ignore(256, '(');
     s >> p.hue_;
     if (p.hue_ < 0 || p.hue_ > 360)
-        throw BadHslFormat();
+        throw BadHslFormat(token);
 
     s.ignore(256, ',');
     s >> p.saturation_;
     if (p.saturation_ < 0 || p.saturation_ > 1)
-        throw BadHslFormat();
+        throw BadHslFormat(token);
     s.ignore(256, ',');
 
     s >> p.light_;
     if (p.light_ < 0 || p.light_ > 1)
-        throw BadHslFormat();
+        throw BadHslFormat(token);
     return s;
 }
 bool Colour::none() const {
