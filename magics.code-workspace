@@ -96,7 +96,9 @@
 			"memory_resource": "cpp",
 			"ranges": "cpp",
 			"stop_token": "cpp",
-			"cfenv": "cpp"
+			"cfenv": "cpp",
+			"regex": "cpp",
+			"shared_mutex": "cpp"
 		}
 	}
 }

@@ -876,44 +876,64 @@ static SimpleTranslator symbol_text_font_name("symbol_text_font_name", "symbol_t
 
 // =================================================================
 
+static std::string _last_error;
+
+static void last_error(const std::string& error) {
+    _last_error = error;
+}
+
+static void last_error(std::exception& e) {
+    last_error(e.what());
+}
+
+static void clear_error() {
+    last_error("");
+}
+
+static const char* last_error() {
+    return _last_error.size() ? _last_error.c_str() : nullptr;
+}
+
 template <class T> const char* python_1(const char* name, T proc) {
+    clear_error();
     try {
         proc();
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
+        last_error(e);
         std::cout << "EXCEPTION in " << name << ": " << e.what() << std::endl;
-        return buffer;
     }
     catch(...) {
          std::cout << "EXCEPTION in " << name << ": unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
-// TODO: cahnge the python side to throw if the string starts with '!'
-
 template <class T> const char* python_2(const char* name, T proc) {
+    clear_error();
+
     try {
         return proc();
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        buffer[0] = '!';
-        strncpy(buffer + 1, e.what(), sizeof(buffer) - 1);
+        last_error(e);
         std::cout << "EXCEPTION in " << name << ": " << e.what() << std::endl;
-        return buffer;
     }
     catch(...) {
          std::cout << "EXCEPTION in " << name << ": unknown" << std::endl;
-         return "!Unknown exception";
+         last_error("Unknown exception");
     }
+
+    return nullptr;
 }
 
 
 extern "C" {
+
+MAGICS_EXPORT const char* magics_last_error() {
+    return last_error();
+}
 
 /* **************************************************************************
 
@@ -1491,16 +1511,14 @@ MAGICS_EXPORT const char* py_new(const char* page) {
         mag_new(page);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_new: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_new: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_new(const char* page) {
@@ -1512,16 +1530,14 @@ MAGICS_EXPORT const char* py_reset(const char* name) {
         mag_reset(name);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_reset: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_reset: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_reset(const char* name) {
@@ -1533,16 +1549,14 @@ MAGICS_EXPORT const char* py_setc(const char* name, const char* value) {
         mag_setc(name, value);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_setc: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_setc: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_setc(const char* name, const char* value) {
@@ -1557,16 +1571,14 @@ MAGICS_EXPORT const char* py_setr(const char* name, const double value) {
         mag_setr(name, value);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_setr: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_setr: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_setr(const char* name, const double value) {
@@ -1582,16 +1594,14 @@ MAGICS_EXPORT const char* py_seti(const char* name, const int value) {
         mag_seti(name, value);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_seti: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_seti: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_seti(const char* name, const int value) {
@@ -1612,16 +1622,14 @@ MAGICS_EXPORT const char* py_set1r(const char* name, const double* data, const i
         mag_set1r(name, data, dim1);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_set1r: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_set1r: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_set1r(const char* name, const double* data, const int dim1) {
@@ -1644,10 +1652,15 @@ MAGICS_EXPORT const char* py_set2r(const char* name, const double* data, const i
     try {
         mag_set2r(name, data, dim1, dim2);
     }
-    catch (exception& e) {
-        return e.what();
+    catch (std::exception& e) {
+        std::cout << "EXCEPTION in py_set2r: " << e.what() << std::endl;
+        last_error(e);
     }
-    return NULL;
+    catch(...) {
+         std::cout << "EXCEPTION in py_set2r: unknown" << std::endl;
+         last_error("Unknown exception");
+    }
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_set2r(const char* name, const double* data, const int dim1, const int dim2) {
@@ -1679,16 +1692,14 @@ MAGICS_EXPORT const char* py_set1i(const char* name, const int* data, const int 
         mag_set1i(name, data, dim1);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_set1i: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_set1i: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_set1i(const char* name, const int* data, const int dim1) {
@@ -1712,16 +1723,14 @@ MAGICS_EXPORT const char* py_set2i(const char* name, const int* data, const int 
         mag_set2i(name, data, dim1, dim2);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_set2i: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_set2i: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_set2i(const char* name, const int* data, const int dim1, const int dim2) {
@@ -1751,16 +1760,14 @@ MAGICS_EXPORT const char* py_set1c(const char* name, const char** data, const in
         mag_set1c(name, data, dim1);
     }
     catch (std::exception& e) {
-        static char buffer[512];
-        strncpy(buffer, e.what(), sizeof(buffer));
         std::cout << "EXCEPTION in py_set1c: " << e.what() << std::endl;
-        return buffer;
+        last_error(e);
     }
     catch(...) {
          std::cout << "EXCEPTION in py_set1c: unknown" << std::endl;
-         return "Unknown exception";
+         last_error("Unknown exception");
     }
-    return NULL;
+    return last_error();
 }
 
 MAGICS_EXPORT void mag_set1c(const char* name, const char** data, const int dim) {
