@@ -371,10 +371,10 @@ bool TableReader::getMetaData(string& errorMessage) {
 
     // basic sanity checks
 
-    if (path().empty()) {
-        errorMessage = "TableReader: Path is empty - will not read.";
-        return false;
-    }
+    // if (path().empty()) {
+    //     errorMessage = "TableReader: Path is empty - will not read.";
+    //     return false;
+    // }
 
 
     // try to open the file for reading
@@ -383,6 +383,7 @@ bool TableReader::getMetaData(string& errorMessage) {
 
     if (f_.fail()) {
         errorMessage = "TableReader: Could not open table file: " + path();
+        throw CannotOpenFile(path());
         return false;
     }
 

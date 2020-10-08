@@ -1845,6 +1845,7 @@ MAGICS_EXPORT void mag_enqc(const char* name, char* value) {
     strcpy(value, magics.c_str());
 }
 
+// TODO: add a try/catch
 MAGICS_EXPORT void mag_add_warning_listener(void* data, void (*cb)(void*, const char*)) {
     MagLog::addWarningListener(data, cb);
 }

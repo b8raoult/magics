@@ -141,6 +141,7 @@ public:
     bool operator<(const Colour& other) const { return name_ < other.name_; }
 
     Hsl hsl() const;
+    operator Rgb() const { return rgb_; }
 
     void setColour(const string&);
     void setColour(float, float, float, float = 1.);
