@@ -18,7 +18,7 @@
 
 using namespace magics;
 
-#include <Symbol.h>
+#include "Symbol.h"
 #include <expat.h>
 
 

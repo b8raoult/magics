@@ -10,7 +10,7 @@
 
 // File Exception
 // Sylvie Lamy-Thepaut - ECMWF Mar 02
-#include <MagException.h>
+#include "MagException.h"
 #include <string.h>
 
 using namespace magics;

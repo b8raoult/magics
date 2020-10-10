@@ -19,9 +19,9 @@
 #ifndef MPP_GDDriver_H
 #define MPP_GDDriver_H
 
-#include <BaseDriver.h>
-#include <GDDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "GDDriverAttributes.h"
+#include "XmlNode.h"
 
 #include <gd.h>
 

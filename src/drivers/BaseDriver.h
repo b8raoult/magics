@@ -55,9 +55,9 @@
 
 #include <stack>
 
-#include <BaseDriverAttributes.h>
-#include <Colour.h>
-#include <MagTranslator.h>
+#include "BaseDriverAttributes.h"
+#include "Colour.h"
+#include "MagTranslator.h"
 #include <magics.h>
 #include "MagicsObserver.h"
 

@@ -16,14 +16,14 @@
 
 */
 
-#include <Arrow.h>
-#include <Flag.h>
-#include <GeoJsonDriver.h>
-#include <Image.h>
-#include <Layer.h>
-#include <Polyline.h>
-#include <Symbol.h>
-#include <Text.h>
+#include "Arrow.h"
+#include "Flag.h"
+#include "GeoJsonDriver.h"
+#include "Image.h"
+#include "Layer.h"
+#include "Polyline.h"
+#include "Symbol.h"
+#include "Text.h"
 #include "MagicsSettings.h"
 
 #include "magics.h"

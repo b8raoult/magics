@@ -22,11 +22,11 @@
 #ifndef TitleTemplate_H
 #define TitleTemplate_H
 
-#include <AutoVector.h>
-#include <Data.h>
-#include <Factory.h>
-#include <TitleField.h>
-#include <TitleTemplateAttributes.h>
+#include "AutoVector.h"
+#include "Data.h"
+#include "Factory.h"
+#include "TitleField.h"
+#include "TitleTemplateAttributes.h"
 #include <magics.h>
 
 #include <stack>

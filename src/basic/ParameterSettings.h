@@ -18,9 +18,9 @@
 #ifndef ParameterSet_H
 #define ParameterSet_H
 
-#include <Colour.h>
-#include <MagTranslator.h>
-#include <XmlNode.h>
+#include "Colour.h"
+#include "MagTranslator.h"
+#include "XmlNode.h"
 #include <magics.h>
 
 void buildkeys(const vector<string>& roots, const string&, vector<string>& keys);

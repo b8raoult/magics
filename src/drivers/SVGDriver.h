@@ -19,9 +19,9 @@
 #ifndef _SVGDriver_H
 #define _SVGDriver_H
 
-#include <BaseDriver.h>
-#include <SVGDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "SVGDriverAttributes.h"
+#include "XmlNode.h"
 
 namespace magics {
 

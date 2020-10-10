@@ -19,10 +19,10 @@
 #ifndef _Tephigram
 #define _Tephigram
 
-#include <Coordinate.h>
-#include <TephigramAttributes.h>
-#include <Transformation.h>
-#include <XmlNode.h>
+#include "Coordinate.h"
+#include "TephigramAttributes.h"
+#include "Transformation.h"
+#include "XmlNode.h"
 
 namespace magics {
 

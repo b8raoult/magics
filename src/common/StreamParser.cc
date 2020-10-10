@@ -13,7 +13,7 @@
 /// @date Sep 2012
 
 #include "StreamParser.h"
-#include <MagException.h>
+#include "MagException.h"
 #include "Translator.h"
 
 

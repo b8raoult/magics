@@ -8,9 +8,9 @@
  * does it submit to any jurisdiction.
  */
 
-#include <Emagram.h>
-#include <MagClipper.h>
-#include <Polyline.h>
+#include "Emagram.h"
+#include "MagClipper.h"
+#include "Polyline.h"
 #include "MagJSon.h"
 #include "SciMethods.h"
 

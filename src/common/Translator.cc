@@ -12,7 +12,7 @@
 
 // #include "magics/exception/Exceptions.h"
 // #include "StringTools.h"
-#include <MagException.h>
+#include "MagException.h"
 #include "Tokenizer.h"
 #include "Translator.h"
 

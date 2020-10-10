@@ -16,15 +16,15 @@
 
 */
 
-#include <BasicSceneObject.h>
-#include <GridPlotting.h>
-#include <LabelPlotting.h>
-#include <MagJSon.h>
-#include <MatrixHandler.h>
-#include <MetaData.h>
-#include <ParameterSettings.h>
-#include <PolarStereographicProjection.h>
-#include <Text.h>
+#include "BasicSceneObject.h"
+#include "GridPlotting.h"
+#include "LabelPlotting.h"
+#include "MagJSon.h"
+#include "MatrixHandler.h"
+#include "MetaData.h"
+#include "ParameterSettings.h"
+#include "PolarStereographicProjection.h"
+#include "Text.h"
 #include <math.h>
 
 using namespace magics;

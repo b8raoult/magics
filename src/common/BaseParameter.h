@@ -23,7 +23,7 @@
 #define BaseParameter_H
 
 
-#include <PaperPoint.h>
+#include "PaperPoint.h"
 #include "MagException.h"
 #include "Matrix.h"
 #include "magics.h"
@@ -34,7 +34,7 @@ typedef grib_handle* GribHandlePtr;
 #endif
 
 
-#include <MagLog.h>
+#include "MagLog.h"
 
 
 namespace magics {

@@ -19,9 +19,9 @@
 #ifndef _CairoDriver_H
 #define _CairoDriver_H
 
-#include <BaseDriver.h>
-#include <CairoDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "CairoDriverAttributes.h"
+#include "XmlNode.h"
 
 
 #include <cairo.h>

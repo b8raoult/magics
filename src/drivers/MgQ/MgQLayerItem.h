@@ -19,7 +19,7 @@
 #ifndef _MgQLayerItem_H
 #define _MgQLayerItem_H
 
-#include <Layer.h>
+#include "Layer.h"
 #include "MgQ.h"
 
 using magics::Layer;

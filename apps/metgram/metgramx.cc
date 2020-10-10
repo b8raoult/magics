@@ -10,10 +10,10 @@
 
 #include <iostream>
 
-#include <ParameterManager.h>
-#include <XmlMagics.h>
+#include "ParameterManager.h"
+#include "XmlMagics.h"
 
-#include <XmlReader.h>
+#include "XmlReader.h"
 
 using namespace std;
 using namespace magics;

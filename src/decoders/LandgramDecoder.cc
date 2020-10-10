@@ -21,7 +21,7 @@
 
 
 #include "LandgramDecoder.h"
-#include <TextVisitor.h>
+#include "TextVisitor.h"
 #include <limits>
 #include "Factory.h"
 using namespace magics;

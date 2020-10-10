@@ -19,14 +19,14 @@
 #ifndef _MPP_QtDriver_H
 #define _MPP_QtDriver_H
 
-#include <BaseDriver.h>
-#include <QtDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "QtDriverAttributes.h"
+#include "XmlNode.h"
 
 #include <QColor>
 #include <QMap>
 
-//#include <Qt/qqwidget.h>
+//#include "Qt/qqwidget.h"
 
 class QGraphicsItem;
 class QGraphicsScene;

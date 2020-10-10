@@ -16,8 +16,8 @@
 
 */
 
-#include <Polyline.h>
-#include <TaylorProjection.h>
+#include "Polyline.h"
+#include "TaylorProjection.h"
 
 using namespace magics;
 

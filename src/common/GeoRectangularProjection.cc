@@ -16,16 +16,16 @@
 
 */
 
-#include <GeoRectangularProjection.h>
+#include "GeoRectangularProjection.h"
 
-#include <Polyline.h>
-#include <Text.h>
+#include "Polyline.h"
+#include "Text.h"
 
-#include <GridPlotting.h>
-#include <LabelPlotting.h>
-#include <MatrixHandler.h>
-#include <SceneVisitor.h>
-#include <UserPoint.h>
+#include "GridPlotting.h"
+#include "LabelPlotting.h"
+#include "MatrixHandler.h"
+#include "SceneVisitor.h"
+#include "UserPoint.h"
 #include "MagJSon.h"
 #include "ParameterSettings.h"
 

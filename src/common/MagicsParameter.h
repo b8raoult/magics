@@ -20,8 +20,8 @@
 #ifndef MagicsParameter_H
 #define MagicsParameter_H
 
-#include <BaseParameter.h>
-#include <MagLog.h>
+#include "BaseParameter.h"
+#include "MagLog.h"
 #include <magics.h>
 
 namespace magics {

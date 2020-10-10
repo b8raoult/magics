@@ -19,9 +19,9 @@
 #ifndef MPP_PostScriptDriver_H
 #define MPP_PostScriptDriver_H
 
-#include <BaseDriver.h>
-#include <PostScriptDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "PostScriptDriverAttributes.h"
+#include "XmlNode.h"
 
 namespace magics {
 /*! \class PostScriptDriver

@@ -32,11 +32,11 @@
         saveFlag: 1:on 0:off  (PNG only) AS EARLY AS POSSIBLE!
 */
 
-#include <GDDriver.h>
-#include <Image.h>
-#include <Polyline.h>
-#include <Symbol.h>
-#include <Text.h>
+#include "GDDriver.h"
+#include "Image.h"
+#include "Polyline.h"
+#include "Symbol.h"
+#include "Text.h"
 
 #include <gdfontl.h>
 

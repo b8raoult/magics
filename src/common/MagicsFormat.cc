@@ -9,7 +9,7 @@
  */
 
 #include "MagicsFormat.h"
-#include <MagLog.h>
+#include "MagLog.h"
 #include <iomanip>
 #include <ios>
 #include <iostream>

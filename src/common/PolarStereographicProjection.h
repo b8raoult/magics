@@ -19,9 +19,9 @@
 #ifndef _PolarStereographicProjection_H
 #define _PolarStereographicProjection_H
 
-#include <PolarStereographicProjectionAttributes.h>
-#include <Transformation.h>
-#include <XmlNode.h>
+#include "PolarStereographicProjectionAttributes.h"
+#include "Transformation.h"
+#include "XmlNode.h"
 
 namespace magics {
 

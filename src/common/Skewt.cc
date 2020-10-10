@@ -8,9 +8,9 @@
  * does it submit to any jurisdiction.
  */
 
-#include <MagClipper.h>
-#include <Polyline.h>
-#include <Skewt.h>
+#include "MagClipper.h"
+#include "Polyline.h"
+#include "Skewt.h"
 #include "MagJSon.h"
 #include "SciMethods.h"
 

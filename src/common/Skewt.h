@@ -11,10 +11,10 @@
 #ifndef SKEWT_H
 #define SKEWT_H
 
-#include <Coordinate.h>
-#include <TephigramAttributes.h>
-#include <Transformation.h>
-#include <XmlNode.h>
+#include "Coordinate.h"
+#include "TephigramAttributes.h"
+#include "Transformation.h"
+#include "XmlNode.h"
 
 namespace magics {
 

@@ -19,9 +19,9 @@
 #ifndef _GeoRectangularProjection_H
 #define _GeoRectangularProjection_H
 
-#include <GeoRectangularProjectionAttributes.h>
-#include <Transformation.h>
-#include <XmlNode.h>
+#include "GeoRectangularProjectionAttributes.h"
+#include "Transformation.h"
+#include "XmlNode.h"
 
 namespace magics {
 

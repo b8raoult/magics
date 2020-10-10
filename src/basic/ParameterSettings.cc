@@ -15,8 +15,8 @@
     Started: 2004
 
 */
-#include <ParameterSettings.h>
-#include <Path.h>
+#include "ParameterSettings.h"
+#include "Path.h"
 
 void buildkeys(const vector<string>& roots, const string& name, vector<string>& keys) {
     keys.push_back(name);

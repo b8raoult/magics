@@ -9,8 +9,8 @@
  * does it submit to any jurisdiction.
  */
 
-#include <MagClipper.h>
-#include <Polyline.h>
+#include "MagClipper.h"
+#include "Polyline.h"
 
 #include "clipper.hpp"
 

@@ -16,14 +16,14 @@
 
 */
 
-#include <Arrow.h>
-#include <Flag.h>
-#include <Image.h>
-#include <KMLDriver.h>
-#include <Layer.h>
-#include <Polyline.h>
-#include <Symbol.h>
-#include <Text.h>
+#include "Arrow.h"
+#include "Flag.h"
+#include "Image.h"
+#include "KMLDriver.h"
+#include "Layer.h"
+#include "Polyline.h"
+#include "Symbol.h"
+#include "Text.h"
 
 #include "magics.h"
 
@@ -47,7 +47,7 @@ extern "C" {
 #endif
 
 #ifdef HAVE_CAIRO
-#include <CairoDriver.h>
+#include "CairoDriver.h"
 #include <cairo.h>
 #endif
 

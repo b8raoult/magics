@@ -16,15 +16,15 @@
 
 */
 
-#include <GridPlotting.h>
-#include <LabelPlotting.h>
-#include <Layer.h>
-#include <MagJSon.h>
-#include <MatrixHandler.h>
-#include <ParameterSettings.h>
-#include <Polyline.h>
-#include <Proj4Projection.h>
-#include <Text.h>
+#include "GridPlotting.h"
+#include "LabelPlotting.h"
+#include "Layer.h"
+#include "MagJSon.h"
+#include "MatrixHandler.h"
+#include "ParameterSettings.h"
+#include "Polyline.h"
+#include "Proj4Projection.h"
+#include "Text.h"
 
 #include <cmath>
 

@@ -19,9 +19,9 @@
 #ifndef _TaylorProjection_H
 #define _TaylorProjection_H
 
-#include <TaylorProjectionAttributes.h>
-#include <Transformation.h>
-#include <XmlNode.h>
+#include "TaylorProjectionAttributes.h"
+#include "Transformation.h"
+#include "XmlNode.h"
 
 namespace magics {
 

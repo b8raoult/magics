@@ -19,9 +19,9 @@
 #ifndef _GeoJsonDriver_H
 #define _GeoJsonDriver_H
 
-#include <BaseDriver.h>
-#include <GeoJsonDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "GeoJsonDriverAttributes.h"
+#include "XmlNode.h"
 
 namespace magics {
 

@@ -16,12 +16,12 @@
 
 */
 
-#include <Image.h>
-#include <Polyline.h>
-#include <PostScriptDriver.h>
-#include <Symbol.h>
-#include <System.h>
-#include <Text.h>
+#include "Image.h"
+#include "Polyline.h"
+#include "PostScriptDriver.h"
+#include "Symbol.h"
+#include "System.h"
+#include "Text.h"
 #include <iomanip>
 
 /*! \brief function to convert between PS ISO encoding and Unicode

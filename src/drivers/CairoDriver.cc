@@ -37,15 +37,15 @@ Something like:
 */
 #include <cairo.h>
 
-#include <CairoDriver.h>
+#include "CairoDriver.h"
 
-#include <Image.h>
-#include <ImportObject.h>
-#include <Polyline.h>
-#include <Symbol.h>
-#include <System.h>
-#include <Text.h>
-#include <Timer.h>
+#include "Image.h"
+#include "ImportObject.h"
+#include "Polyline.h"
+#include "Symbol.h"
+#include "System.h"
+#include "Text.h"
+#include "Timer.h"
 
 #include <iconv.h>  // Only for AIX?
 #include <pango/pangocairo.h>

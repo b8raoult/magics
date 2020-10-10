@@ -16,10 +16,10 @@
 
    Apr 06: update for GCC 4.0 (Stephan)
 */
-#include <MagConfig.h>
-#include <MagException.h>
-#include <MagLog.h>
-#include <NetcdfData.h>
+#include "MagConfig.h"
+#include "MagException.h"
+#include "MagLog.h"
+#include "NetcdfData.h"
 #include <algorithm>
 
 

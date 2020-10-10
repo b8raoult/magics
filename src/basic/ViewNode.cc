@@ -21,7 +21,7 @@
 
 #include "ViewNode.h"
 
-#include <MagConfig.h>
+#include "MagConfig.h"
 
 #include "AnimationRules.h"
 #include "Dimension.h"

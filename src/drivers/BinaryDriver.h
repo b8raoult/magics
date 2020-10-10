@@ -19,9 +19,9 @@
 #ifndef _MPP_BinaryDriver_H
 #define _MPP_BinaryDriver_H
 
-#include <BaseDriver.h>
-#include <BinaryDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "BinaryDriverAttributes.h"
+#include "XmlNode.h"
 
 namespace magics {
 

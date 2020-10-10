@@ -16,8 +16,8 @@
 
 */
 
-#include <Polyline.h>
-#include <Tephigram.h>
+#include "Polyline.h"
+#include "Tephigram.h"
 #include "MagClipper.h"
 #include "MagJSon.h"
 #include "SciMethods.h"

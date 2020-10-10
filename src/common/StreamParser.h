@@ -15,7 +15,7 @@
 #ifndef magics_StreamParser_h
 #define magics_StreamParser_h
 
-#include <MagException.h>
+#include "MagException.h"
 #include <set>
 
 

@@ -18,16 +18,16 @@
  \sa magics_api.h
 */
 
-#include <CompatibilityHelper.h>
-#include <FortranMagics.h>
-#include <MagLog.h>
-#include <MagicsParameter.h>
-#include <MagicsSettings.h>
-#include <WebFormat.h>
+#include "CompatibilityHelper.h"
+#include "FortranMagics.h"
+#include "MagLog.h"
+#include "MagicsParameter.h"
+#include "MagicsSettings.h"
+#include "WebFormat.h"
+#include "MagicsCalls.h"
+#include "magics.h"
+#include "magics_api.h"
 
-extern "C" {
-#include <magics_api.h>
-}
 /*
  * (C) Copyright 1996-2016 ECMWF.
  *
@@ -48,16 +48,15 @@ extern "C" {
  \sa magics_api.h
 */
 
-#include "MagicsCalls.h"
-#include "magics.h"
-// #include <MagLog.h>
-// #include <MagicsSettings.h>
-// #include <MagicsParameter.h>
-// #include <WebFormat.h>
+
+// #include "MagLog.h"
+// #include "MagicsSettings.h"
+// #include "MagicsParameter.h"
+// #include "WebFormat.h"
 // #include "py_calls.h"
 
 // extern "C" {
-// #include <magics_api.h>
+// #include "magics_api.h"
 // }
 
 using namespace magics;

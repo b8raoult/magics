@@ -19,9 +19,9 @@
 #ifndef _Proj4Projection_H
 #define _Proj4Projection_H
 
-#include <Proj4ProjectionAttributes.h>
-#include <Transformation.h>
-#include <XmlNode.h>
+#include "Proj4ProjectionAttributes.h"
+#include "Transformation.h"
+#include "XmlNode.h"
 
 
 #include "ProjP.h"

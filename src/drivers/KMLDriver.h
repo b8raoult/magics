@@ -19,9 +19,9 @@
 #ifndef _KMLDriver_H
 #define _KMLDriver_H
 
-#include <BaseDriver.h>
-#include <KMLDriverAttributes.h>
-#include <XmlNode.h>
+#include "BaseDriver.h"
+#include "KMLDriverAttributes.h"
+#include "XmlNode.h"
 
 namespace magics {
 
