@@ -9,6 +9,7 @@
  */
 
 #include <string>
+#include <vector>
 
 namespace magics {
 
