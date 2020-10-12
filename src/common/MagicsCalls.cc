@@ -992,64 +992,9 @@ static SimpleTranslator symbol_text_font_name("symbol_text_font_name", "symbol_t
 
 // =================================================================
 
-static std::string _last_error;
-
-static void last_error(const std::string& error) {
-    _last_error = error;
-}
-
-static void last_error(std::exception& e) {
-    last_error(e.what());
-}
-
-static void clear_error() {
-    last_error("");
-}
-
-static const char* last_error() {
-    return _last_error.size() ? _last_error.c_str() : nullptr;
-}
-
-template <class T> const char* python_1(const char* name, T proc) {
-    clear_error();
-    try {
-        proc();
-    }
-    catch (std::exception& e) {
-        last_error(e);
-        std::cout << "EXCEPTION in " << name << ": " << e.what() << std::endl;
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in " << name << ": unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
-
-template <class T> const char* python_2(const char* name, T proc) {
-    clear_error();
-
-    try {
-        return proc();
-    }
-    catch (std::exception& e) {
-        last_error(e);
-        std::cout << "EXCEPTION in " << name << ": " << e.what() << std::endl;
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in " << name << ": unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-
-    return nullptr;
-}
-
 
 extern "C" {
 
-MAGICS_EXPORT const char* magics_last_error() {
-    return last_error();
-}
 
 /* **************************************************************************
 
@@ -1435,61 +1380,49 @@ MAGICS_EXPORT void pinfo_() {
 
 
 
-
-#define PYTHON(python, magics)  MAGICS_EXPORT const char* python() {  return python_1(#python, magics); }
-#define PYTHONS(python, magics) MAGICS_EXPORT const char* python() {  return python_2(#python, magics); }
-
-
 MAGICS_EXPORT void mag_open() {
     popen_();
 }
-PYTHON(py_open, popen_)
 
 MAGICS_EXPORT void mag_mute() {
     MagicsGlobal::silent(true);
 }
-PYTHON(py_mute, mag_mute)
 
 MAGICS_EXPORT void mag_unmute() {
     MagicsGlobal::silent(false);
 }
-PYTHON(py_unmute, mag_unmute)
 
 MAGICS_EXPORT void mag_set_python_context() {
     MagicsGlobal::compatibility(false);
 }
-PYTHON(py_set_python, mag_set_python_context)
+
 MAGICS_EXPORT void mag_keep_compatibility() {
     MagicsGlobal::compatibility(true);
 }
-PYTHON(py_keep_compatibility, mag_keep_compatibility)
 
 MAGICS_EXPORT int mag_close() {
     return pclose_();
 }
-PYTHON(py_close, pclose_)
+
 MAGICS_EXPORT void mag_coast() {
     pcoast_();
 }
-PYTHON(py_coast, pcoast_)
+
 MAGICS_EXPORT void mag_grib() {
     pgrib_();
 }
-PYTHON(py_grib, pgrib_)
-PYTHONS(py_metagrib, metagrib_)
-PYTHONS(py_knowndrivers, knowndrivers_)
+
 MAGICS_EXPORT void mag_mapgen() {
     pmapgen_();
 }
-PYTHON(py_mapgen, pmapgen_)
+
 MAGICS_EXPORT void mag_line() {
     pline_();
 }
-PYTHON(py_line, pline_)
+
 MAGICS_EXPORT void mag_legend() {
     magics_->simplelegend();
 }
-PYTHON(py_legend, mag_legend)
 
 MAGICS_EXPORT void mag_test() {
     ptest_();
@@ -1497,65 +1430,63 @@ MAGICS_EXPORT void mag_test() {
 MAGICS_EXPORT void mag_odb() {
     podb_();
 }
-PYTHON(py_odb, podb_)
+
 MAGICS_EXPORT void mag_import() {
     pimport_();
 }
-PYTHON(py_import, pimport_)
+
 MAGICS_EXPORT void mag_overlay() {
     poverlay_();
 }
-PYTHON(py_overlay, poverlay_)
+
 MAGICS_EXPORT void mag_netcdf() {
     pnetcdf_();
 }
-PYTHON(py_netcdf, pnetcdf_)
-PYTHONS(py_metanetcdf, metanetcdf_)
-PYTHONS(py_metainput, metainput_)
+
 MAGICS_EXPORT void mag_cont() {
     pcont_();
 }
-PYTHON(py_cont, pcont_)
+
 MAGICS_EXPORT void mag_input() {
     pinput_();
 }
-PYTHON(py_input, pinput_)
+
 MAGICS_EXPORT void mag_table() {
     ptable_();
 }
-PYTHON(py_table, ptable_)
+
 MAGICS_EXPORT void mag_obs() {
     pobs_();
 }
-PYTHON(py_obs, pobs_)
+
 MAGICS_EXPORT void mag_raw() {
     praw_();
 }
-PYTHON(py_raw, praw_)
+
 MAGICS_EXPORT void mag_image() {
     pimage_();
 }
-PYTHON(py_image, pimage_)
+
 MAGICS_EXPORT void mag_plot() {
     pplot_();
 }
-PYTHON(py_plot, pplot_)
+
 MAGICS_EXPORT void mag_text() {
     ptext_();
 }
-PYTHON(py_text, ptext_)
+
 MAGICS_EXPORT void mag_wind() {
     pwind_();
 }
-PYTHON(py_wind, pwind_)
+
 MAGICS_EXPORT void mag_symb() {
     psymb_();
 }
-PYTHON(py_symb, psymb_)
+
 MAGICS_EXPORT void mag_boxplot() {
     pboxplot_();
 }
-PYTHON(py_boxplot, pboxplot_)
+
 MAGICS_EXPORT void mag_taylor() {
     ptaylor_();
 }
@@ -1563,128 +1494,72 @@ MAGICS_EXPORT void mag_tile() {
     ptile_();
 }
 
-PYTHON(py_tile, ptile_)
-
-PYTHON(py_taylor, ptaylor_)
 MAGICS_EXPORT void mag_tephi() {
     ptephi_();
 }
-PYTHON(py_tephi, ptephi_)
+
 MAGICS_EXPORT void mag_geojson() {
     pgeojson_();
 }
-PYTHON(py_geojson, pgeojson_)
+
 MAGICS_EXPORT void mag_wrepjson() {
     pwrepjson_();
 }
-PYTHON(py_wrepjson, pwrepjson_)
+
 MAGICS_EXPORT void mag_epsinput() {
     pepsinput_();
 }
-PYTHON(py_epsinput, pepsinput_)
+
 MAGICS_EXPORT void mag_epscloud() {
     pepscloud_();
 }
-PYTHON(py_epscloud, pepscloud_)
+
 MAGICS_EXPORT void mag_metgraph() {
     pmetgraph_();
 }
-PYTHON(py_metgraph, pmetgraph_)
+
 MAGICS_EXPORT void mag_metbufr() {
     pmetbufr_();
 }
-PYTHON(py_metbufr, pmetbufr_)
+
 
 MAGICS_EXPORT void mag_epsgraph() {
     pepsgraph_();
 }
-PYTHON(py_epsgraph, pepsgraph_)
 
 MAGICS_EXPORT void mag_epswave() {
     pepswave_();
 }
-PYTHON(py_epswave, pepswave_)
 
 MAGICS_EXPORT void mag_epswind() {
     pepswind_();
 }
-PYTHON(py_epswind, pepswind_)
-
 MAGICS_EXPORT void mag_epsbar() {
     pepsbar_();
 }
-PYTHON(py_epsbar, pepsbar_)
 
 MAGICS_EXPORT void mag_epsshading() {
     pepsshading_();
 }
-PYTHON(py_epsshading, pepsshading_)
 
 MAGICS_EXPORT void mag_epsplumes() {
     pepsplumes_();
 }
-PYTHON(py_epsplumes, pepsplumes_)
 
 MAGICS_EXPORT void mag_epslight() {
     pepslight_();
 }
-PYTHON(py_epslight, pepslight_)
 
 MAGICS_EXPORT const char* detect(const char* data, const char* dimension) {
     return magics_->detect(string(data), string(dimension));
-}
-
-MAGICS_EXPORT const char* py_new(const char* page) {
-    try {
-        mag_new(page);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_new: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_new: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
 }
 
 MAGICS_EXPORT void mag_new(const char* page) {
     magics_->pnew(page);
 }
 
-MAGICS_EXPORT const char* py_reset(const char* name) {
-    try {
-        mag_reset(name);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_reset: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_reset: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
-
 MAGICS_EXPORT void mag_reset(const char* name) {
     ParameterManager::reset(name);
-}
-
-MAGICS_EXPORT const char* py_setc(const char* name, const char* value) {
-    try {
-        mag_setc(name, value);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_setc: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_setc: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
 }
 
 MAGICS_EXPORT void mag_setc(const char* name, const char* value) {
@@ -1694,20 +1569,6 @@ MAGICS_EXPORT void mag_setc(const char* name, const char* value) {
     // cout << "setc("<<name<<","<<value<<")"<<endl;
 }
 
-MAGICS_EXPORT const char* py_setr(const char* name, const double value) {
-    try {
-        mag_setr(name, value);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_setr: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_setr: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
 
 MAGICS_EXPORT void mag_setr(const char* name, const double value) {
     std::string n(name);
@@ -1717,21 +1578,6 @@ MAGICS_EXPORT void mag_setr(const char* name, const double value) {
 
     ParameterManager::set(n, value);
 
-}
-
-MAGICS_EXPORT const char* py_seti(const char* name, const int value) {
-    try {
-        mag_seti(name, value);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_seti: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_seti: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
 }
 
 MAGICS_EXPORT void mag_seti(const char* name, const int value) {
@@ -1747,20 +1593,6 @@ MAGICS_EXPORT void mag_act(const char* a, const char* b, const char* c) {
     pact_(a, b, c, aa.size(), bb.size(), cc.size());
 }
 
-MAGICS_EXPORT const char* py_set1r(const char* name, const double* data, const int dim1) {
-    try {
-        mag_set1r(name, data, dim1);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_set1r: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_set1r: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
 
 MAGICS_EXPORT void mag_set1r(const char* name, const double* data, const int dim1) {
     std::string n(name);
@@ -1778,20 +1610,6 @@ MAGICS_EXPORT void mag_set1r(const char* name, const double* data, const int dim
     }
 }
 
-MAGICS_EXPORT const char* py_set2r(const char* name, const double* data, const int dim1, const int dim2) {
-    try {
-        mag_set2r(name, data, dim1, dim2);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_set2r: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_set2r: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
 
 MAGICS_EXPORT void mag_set2r(const char* name, const double* data, const int dim1, const int dim2) {
     string param(name);
@@ -1820,20 +1638,6 @@ MAGICS_EXPORT void mag_set3r(const char*, const double*, const int, const int, c
     }
 }
 
-MAGICS_EXPORT const char* py_set1i(const char* name, const int* data, const int dim1) {
-    try {
-        mag_set1i(name, data, dim1);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_set1i: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_set1i: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
 
 MAGICS_EXPORT void mag_set1i(const char* name, const int* data, const int dim1) {
     std::string param(name);
@@ -1854,20 +1658,6 @@ MAGICS_EXPORT void mag_set1i(const char* name, const int* data, const int dim1) 
     }
 }
 
-MAGICS_EXPORT const char* py_set2i(const char* name, const int* data, const int dim1, const int dim2) {
-    try {
-        mag_set2i(name, data, dim1, dim2);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_set2i: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_set2i: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
-}
 
 MAGICS_EXPORT void mag_set2i(const char* name, const int* data, const int dim1, const int dim2) {
     string param(name);
@@ -1893,21 +1683,6 @@ MAGICS_EXPORT void mag_set3i(const char*, const int*, const int, const int, cons
     }
 
     MagLog::warning() << "pset3i --> not yet implemented\n";
-}
-
-MAGICS_EXPORT const char* py_set1c(const char* name, const char** data, const int dim1) {
-    try {
-        mag_set1c(name, data, dim1);
-    }
-    catch (std::exception& e) {
-        std::cout << "EXCEPTION in py_set1c: " << e.what() << std::endl;
-        last_error(e);
-    }
-    catch(...) {
-         std::cout << "EXCEPTION in py_set1c: unknown" << std::endl;
-         last_error("Unknown exception");
-    }
-    return last_error();
 }
 
 MAGICS_EXPORT void mag_set1c(const char* name, const char** data, const int dim) {
@@ -2014,23 +1789,21 @@ MAGICS_EXPORT void mag_pie() {
 MAGICS_EXPORT void mag_graph() {
     pgraph_();
 }
-PYTHON(py_graph, pgraph_)
+
 MAGICS_EXPORT void mag_axis() {
     paxis_();
 }
-PYTHON(py_axis, paxis_)
+
 MAGICS_EXPORT void mag_geo() {
     pgeo_();
 }
-PYTHON(py_geo, pgeo_)
 MAGICS_EXPORT void mag_eps() {
     peps_();
 }
-PYTHON(py_eps, peps_)
+
 MAGICS_EXPORT void mag_print() {
     pprint_();
 }
-PYTHON(py_print, pprint_)
 
 MAGICS_EXPORT void mag_info() {
     MagLog::userInfo() << "INFO:\n"
@@ -2046,7 +1819,6 @@ MAGICS_EXPORT void mag_info() {
                        << "INFO:\n";
 }
 
-PYTHON(py_info, mag_info)
 }  // end of extern "C"
 
 MagicsParameter<double> paxis_min_value("axis_min_value", 0);
