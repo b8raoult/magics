@@ -1042,4 +1042,3 @@ void FortranMagics::pboxplot() {
 }
 
 FortranMagics* FortranMagics::singleton_ = 0;
-MagicsGlobal* MagicsGlobal::singleton_   = 0;

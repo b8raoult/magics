@@ -206,6 +206,7 @@ static std::map<std::string, command_proc> commands = {{"plot", plot}};
 
 
 void MagYaml::processFile(const std::string& path) {
+    py_set_python();
     ValueMap p = YAMLParser::decodeFile(path);
     for (auto j = p.begin(); j != p.end(); ++j) {
         std::string command = (*j).first;

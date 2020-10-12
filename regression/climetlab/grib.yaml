@@ -35,6 +35,7 @@ plot:
     grib_field_position: 0
     grib_file_address_mode: byte_offset
     grib_input_file_name: test.grib
+    foo: 2
 - mcont:
     contour_automatic_setting: ecmwf
     legend: false

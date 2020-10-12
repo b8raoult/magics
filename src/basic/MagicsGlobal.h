@@ -25,32 +25,22 @@ namespace magics {
 
 class MagicsGlobal : public MagicsGlobalAttributes {
 public:
-    MagicsGlobal(){};
-    ~MagicsGlobal(){};
-    static bool silent() {
-        global();
-        return singleton_->silent_;
-    }
-    static void silent(bool s) {
-        global();
-        singleton_->silent_ = s;
-    }
-    static bool compatibility() {
-        global();
-        return singleton_->compatibility_;
-    }
-    static void compatibility(bool c) {
-        global();
-        singleton_->compatibility_ = c;
-    }
+
+    static bool silent();
+    static void silent(bool s);
+    static bool compatibility();
+    static void compatibility(bool c);
+
+    static bool strict();
+    static void strict(bool c);
 
 protected:
-    static MagicsGlobal* singleton_;
-    static MagicsGlobal* global() {
-        if (!singleton_)
-            singleton_ = new MagicsGlobal();
-        return singleton_;
-    }
+
+    MagicsGlobal(){};
+    ~MagicsGlobal(){};
+
+    static MagicsGlobal& instance();
+
     void print(ostream& s) const { MagicsGlobalAttributes::print(s); }
 
 private:

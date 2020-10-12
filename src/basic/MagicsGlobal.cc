@@ -21,5 +21,31 @@
 
 namespace magics {
 
+bool MagicsGlobal::silent() {
+    return instance().silent_;
+}
+
+void magics::MagicsGlobal::silent(bool s) {
+    instance().silent_ = s;
+}
+
+bool MagicsGlobal::compatibility() {
+    return instance().compatibility_;
+}
+
+void MagicsGlobal::compatibility(bool c) {
+    instance().compatibility_ = c;
+}
+
+bool MagicsGlobal::strict() {
+    // TODO: make a proper setting
+    return !compatibility();
+}
+
+
+MagicsGlobal& MagicsGlobal::instance() {
+    static MagicsGlobal g;
+    return g;
+}
 
 }  // namespace magics

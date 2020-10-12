@@ -70,6 +70,6 @@ private:
     }
 };
 
-#include "DefinitionTable.hcc"
+#include "DefinitionTable.cc"
 }  // namespace magics
 #endif
