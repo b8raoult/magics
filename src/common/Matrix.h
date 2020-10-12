@@ -139,12 +139,12 @@ public:
     OutOfRange(double r, double c) {
         ostringstream s;
         s << "Out of Range: Cannot access [" << r << ", " << c << "]" << ends;
-        what_ = s.str();
+        reason(s.str());
     }
     OutOfRange(double x) {
         ostringstream s;
         s << "Out of Range: Cannot access [" << x << "]" << ends;
-        what_ = s.str();
+        reason(s.str());
     }
 };
 

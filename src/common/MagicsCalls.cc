@@ -109,6 +109,9 @@ public:
     IgnoreConverter(const string& param) : CompatibilityHelper(param), parameter_(param) {}
     ~IgnoreConverter() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Deprecated: parameter '" + parameter_ + "'");
+        }
         MagLog::info() << "Deprecated: Parameter " << parameter_ << " is not needed anymore --> setting is ignored"
                        << std::endl;
         return true;
@@ -123,6 +126,9 @@ public:
     ComingSoonConverter(const string& param) : CompatibilityHelper(param), parameter_(param) {}
     ~ComingSoonConverter() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + parameter_ + "' not yet implemented");
+        }
         MagLog::info() << "Coming soon: Parameter " << parameter_ << " will be implemented soon" << std::endl;
         return true;
     }
@@ -140,6 +146,9 @@ public:
     GribSubareaExtraction() : CompatibilityHelper("grib_subarea_extraction") {}
     ~GribSubareaExtraction() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'grib_subarea_extraction' not required anymore");
+        }
         MagLog::info() << "Compatibility issue: Parameter grib_subarea_extraction "
                           "not required anymore.\n"
                        << std::endl;
@@ -165,6 +174,9 @@ public:
         CompatibilityHelper(from), from_(from), to_(to), both_(both) {}
     ~SimpleTranslator() {}
     void deprecated() {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+        }
         MagLog::warning() << "Compatibility issue: Parameter " << from_ << " is deprecated : consider using " << to_
                           << " instead\n";
     }
@@ -282,6 +294,10 @@ public:
     WindArrowLegend() : CompatibilityHelper("wind_arrow_legend") {}
     ~WindArrowLegend() {}
     bool operator()(const string& leg) {
+         if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'wind_arrow_legend' is deprecated. Please use 'legend'");
+        }
+
         MagLog::info() << "Compatibility issue: wind_arrow_legend is deprecated.\n"
                        << "               Please use legend instead." << std::endl;
         ParameterManager::set("legend", leg);
@@ -317,6 +333,10 @@ public:
     PsFileName() : CompatibilityHelper("ps_file_name") {}
     ~PsFileName() {}
     bool operator()(const string& file) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'ps_file_name' is deprecated. Please use 'output_name'");
+        }
+
         MagLog::info() << "Compatibility issue: ps_file_name is deprecated.\n"
                        << "               Please use output_name instead." << std::endl;
         ParameterManager::set("output_legacy_name", file);
@@ -332,6 +352,10 @@ public:
     PsDevice() : CompatibilityHelper("ps_device") {}
     ~PsDevice() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'ps_device' is deprecated'");
+        }
+
         MagLog::info() << "Compatibility issue: ps_device was removed.\n"
                        << "               Please use other PostScript driver "
                           "parameter instead."
@@ -347,6 +371,9 @@ public:
     OutputPsDevice() : CompatibilityHelper("output_ps_device") {}
     ~OutputPsDevice() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'output_ps_device' is deprecated'");
+        }
         MagLog::info() << "Compatibility issue: output_ps_device is deprecated." << std::endl;
         return true;
     }
@@ -359,6 +386,9 @@ public:
     PsHelp() : CompatibilityHelper("ps_help") {}
     ~PsHelp() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'ps_help' is deprecated'");
+        }
         MagLog::info() << "Compatibility issue: Parameter ps_help was removed.\n" << std::endl;
         return false;
     }
@@ -371,6 +401,9 @@ public:
     PsMetric() : CompatibilityHelper("ps_metric") {}
     ~PsMetric() {}
     bool operator()(const string&) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'ps_metric' is deprecated'");
+        }
         MagLog::info() << "Compatibility issue: Parameter ps_metric was removed.\n" << std::endl;
         return false;
     }
@@ -405,6 +438,9 @@ public:
     OutputResolution() : CompatibilityHelper("output_resolution") {}
     ~OutputResolution() {}
     bool operator()(int) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'output_resolution' is deprecated'");
+        }
         MagLog::info() << "Deprecated parameter: output_resolution is not used anymore.\n"
                        << "        Vector formats already used highes resolution and PNG uses "
                           "300 DPI."
@@ -418,24 +454,36 @@ public:
     GraphValuesConverter(const string& from, const string& to) : CompatibilityHelper(from), from_(from), to_(to) {}
 
     bool operator()(const doublearray& values) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+        }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
                        << "               Please use " << to_ << " instead." << std::endl;
         ParameterManager::set(to_, values);
         return true;
     }
     bool operator()(const stringarray& values) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+        }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
                        << "               Please use " << to_ << " instead." << std::endl;
         ParameterManager::set(to_, values);
         return true;
     }
     bool operator()(const string& value) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+        }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
                        << "               Please use " << to_ << " instead." << std::endl;
         ParameterManager::set(to_, value);
         return true;
     }
     bool operator()(double value) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+        }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
                        << "               Please use " << to_ << " instead." << std::endl;
         ParameterManager::set(to_, value);
@@ -519,6 +567,9 @@ public:
     DeviceFileName() : CompatibilityHelper("device_file_name") {}
     ~DeviceFileName() {}
     bool operator()(const string& file) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'device_file_name' is deprecated. Please use 'output_name'");
+        }
         MagLog::info() << "Compatibility issue: Parameter device_file_name is deprecated.\n"
                        << "               Please use output_name instead." << std::endl;
         ParameterManager::set("output_legacy_name", file);
@@ -536,6 +587,9 @@ public:
     DeviceWidth() : CompatibilityHelper("device_width") {}
     ~DeviceWidth() {}
     bool operator()(const int width) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'device_width' is deprecated. Please use 'output_width'");
+        }
         MagLog::info() << "Compatibility issue: Parameter device_width is deprecated.\n"
                        << "             Please use output_width instead." << std::endl;
         ParameterManager::set("output_width", width);
@@ -552,6 +606,9 @@ public:
     DeviceQualityLevel() : CompatibilityHelper("device_quality_level") {}
     ~DeviceQualityLevel() {}
     bool operator()(const int quality) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'device_quality_level' is deprecated. Please use 'output_jpg_quality'");
+        }
         MagLog::info() << "Compatibility issue: Parameter device_quality_level is "
                           "deprecated.\n"
                        << "             Please use output_jpg_quality instead." << std::endl;
@@ -571,6 +628,12 @@ public:
     }
     ~TextQuality() {}
     bool operator()(const string& quality) {
+
+
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + base_ + "quality' is deprecated. Please use '" + base_ + "font' and '" + base_ + "font_style'");
+        }
+
         MagLog::info() << "Compatibility issue: Parameter " << base_ << "quality is deprecated.\n"
                        << "               Please use " << base_ << "font and " << base_ << "font_style instead."
                        << std::endl;
@@ -606,6 +669,10 @@ public:
     TextHeight(const string& from, const string& to) : CompatibilityHelper(from), from_(from), to_(to) {}
     ~TextHeight() {}
     bool operator()(double height) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+        }
+
         MagLog::warning() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
                           << "               Please use " << to_ << " instead. " << to_ << " has been set to " << height
                           << std::endl;
@@ -622,12 +689,22 @@ public:
     TextFontHeight(const string& from, const string& to) : CompatibilityHelper(from), from_(from), to_(to) {}
     ~TextFontHeight() {}
     bool operator()(double height) {
+
         if (from_ != to_) {
+            if(MagicsGlobal::strict()) {
+                throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
+            }
+
             MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
                            << "               Please use " << to_ << " instead. " << to_ << " has been set to "
                            << height << std::endl;
         }
         else {
+
+             if(MagicsGlobal::strict()) {
+                throw MagicsException("Parameter '" + from_ + "' is now a string");
+            }
+
             MagLog::info() << from_
                            << " is now expecting a string : consider to change your "
                               "setting for psetc "
@@ -655,6 +732,9 @@ public:
     GdFileName() : CompatibilityHelper("gd_file_name") {}
     ~GdFileName() {}
     bool operator()(const string& file) {
+        if(MagicsGlobal::strict()) {
+                 throw MagicsException("The value 'none' for parameter 'subpage_map_projection' is deprecated. Please use 'cartesian'");
+            }
         MagLog::info() << "Compatibility issue: Parameter gd_file_name is deprecated.\n"
                        << "              Please use output_name instead." << std::endl;
         ParameterManager::set("output_legacy_name", file);
@@ -670,6 +750,13 @@ public:
     bool operator()(const string& projection) {
         string fix = projection;
         if (magCompare(projection, "none")) {
+
+
+            if(MagicsGlobal::strict()) {
+                 throw MagicsException("The value [none] for parameter 'subpage_map_projection' is deprecated. Please use 'cartesian'");
+            }
+
+
             fix = "cartesian";
             MagLog::info() << "Compatibility issue: The value [none] for Parameter "
                               "subpage_map_projection is deprecated.\n"
@@ -689,6 +776,12 @@ public:
     DeviceCompatibilityHelper() : CompatibilityHelper("device") {}
     ~DeviceCompatibilityHelper() {}
     bool operator()(const string& device) {
+
+
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'device' is deprecated. Please use 'output_format'");
+        }
+
         MagLog::info() << "Compatibility issue: the parameter device is deprecated.\n"
                        << "              Please use the parameter output_format instead!" << endl;
 
@@ -730,17 +823,35 @@ public:
     bool operator()(const string& setting) {
         // cout << " setting -->" << setting << endl;
         if (magCompare(setting, "eccharts")) {
+
+            if(MagicsGlobal::strict()) {
+                throw MagicsException("'ecchart' is automatic deprecated. Please use 'ecmwf'");
+            }
+
             MagLog::info() << "Compatibility issue: ecchart automatic contour is "
                               "deprecated, consider using ecmwf\n";
             return false;
         }
         if (magCompare(setting, "web")) {
+
+            if(MagicsGlobal::strict()) {
+                throw MagicsException("'ecchart' is automatic deprecated. Please use 'ecmwf'");
+            }
+
+
             MagLog::warning() << "Compatibility issue: web automatic contour is now "
                                  "deprecated, use ecmwf instead\n";
             ParameterManager::set("contour_automatic_setting", "ecmwf");
             return true;
         }
         if (magCompare(setting, "on")) {
+
+
+            if(MagicsGlobal::strict()) {
+                throw MagicsException("'ecchart' is automatic deprecated. Please use 'ecmwf'");
+            }
+
+
             MagLog::warning() << "Compatibility issue: on for  automatic contour is "
                                  "now deprecated, use ecmwf instead\n";
             ParameterManager::set("contour_automatic_setting", "ecmwf");
@@ -755,6 +866,11 @@ public:
     WindArrowIndexHead() : CompatibilityHelper("wind_arrow_head_index") {}
     ~WindArrowIndexHead() {}
     bool operator()(int index) {
+        if(MagicsGlobal::strict()) {
+            throw MagicsException("Parameter 'wind_arrow_index_head' is deprecated. Please use 'wind_arrow_head_ratio'");
+        }
+
+
         MagLog::info() << "Compatibility issue: Parameter wind_arrow_index_head "
                           "does not exist anymore.\n"
                        << "            use wind_arrow_head_shape and "
@@ -1004,6 +1120,9 @@ MAGICS_EXPORT void podb_() {
 #ifdef HAVE_ODB
     magics_->podb();
 #else
+    if(MagicsGlobal::strict()) {
+        throw NotSupported("ODB support is NOT enabled!");
+    }
     MagLog::warning() << "ODB support is NOT enabled!\n";
 #endif
 }
@@ -1031,7 +1150,14 @@ MAGICS_EXPORT void pobs_() {
 MAGICS_EXPORT void praw_() {
 #ifdef MAGICS_NETPBM
     MagLog::warning() << "praw->not implemented\n";
+    if(MagicsGlobal::strict()) {
+        NOTIMP;
+    }
 #else
+    if(MagicsGlobal::strict()) {
+        throw NotSupported("Netpbm NOT supported!");
+    }
+
     MagLog::warning() << "Netpbm NOT supported!" << endl;
 #endif
 }
@@ -1097,6 +1223,9 @@ MAGICS_EXPORT void psetc_(const char* name, const char* value, int namel, int va
         ParameterManager::set(string(name, namel), val);
     }
     catch (MagicsException& e) {
+        if(MagicsGlobal::strict()) {
+            throw;
+        }
         MagLog::error() << e << "\n";
     }
 }
@@ -1108,9 +1237,10 @@ MAGICS_EXPORT void pseti_(const char* name, const int* value, int namel) {
         ParameterManager::set(string(name, namel), int(*value));
     }
     catch (MagicsException& e) {
-        (void)e;  // prevent 'unreferenced local variable' compiler warning
-        double fvalue = *value;
-        mag_setr(name, fvalue);
+        if(MagicsGlobal::strict()) {
+            throw;
+        }
+        MagLog::error() << e << "\n";
     }
 }
 
@@ -1120,13 +1250,10 @@ MAGICS_EXPORT void pset1i_(const char* name, const int* data, const int* dim, in
         mag_set1i(n.c_str(), data, *dim);
     }
     catch (MagicsException& e) {
-        (void)e;
-        int s          = *dim;
-        double* fvalue = new double[s];
-        for (int i = 0; i < s; i++)
-            fvalue[i] = data[i];
-        mag_set1r(name, fvalue, *dim);
-        delete[] fvalue;
+        if(MagicsGlobal::strict()) {
+            throw;
+        }
+        MagLog::error() << e << "\n";
     }
 }
 
@@ -1135,15 +1262,11 @@ MAGICS_EXPORT void pset2i_(const char* name, const int* data, const int* dim1, c
     try {
         mag_set2i(n.c_str(), data, *dim1, *dim2);
     }
-
     catch (MagicsException& e) {
-        (void)e;
-        int dim        = *dim1 * *dim2;
-        double* fvalue = new double[dim];
-        for (int i = 0; i < dim; i++)
-            fvalue[i] = data[i];
-        mag_set2r(name, fvalue, *dim1, *dim2);
-        delete[] fvalue;
+        if(MagicsGlobal::strict()) {
+            throw;
+        }
+        MagLog::error() << e << "\n";
     }
 }
 
@@ -1176,6 +1299,11 @@ MAGICS_EXPORT void pset1c_(const char* name, const char* value, const int* dim, 
         ParameterManager::set(n, values);
     }
     catch (MagicsException& e) {
+
+        if(MagicsGlobal::strict()) {
+            throw;
+        }
+
         MagLog::error() << e << "\n";
     }
 }
@@ -1586,7 +1714,9 @@ MAGICS_EXPORT void mag_setr(const char* name, const double value) {
 
     if (CompatibilityHelper::check(n, value))
         return;
+
     ParameterManager::set(n, value);
+
 }
 
 MAGICS_EXPORT const char* py_seti(const char* name, const int value) {
@@ -1685,6 +1815,9 @@ MAGICS_EXPORT void mag_set2r(const char* name, const double* data, const int dim
 
 MAGICS_EXPORT void mag_set3r(const char*, const double*, const int, const int, const int) {
     MagLog::warning() << "pset3r --> not yet implemented\n";
+    if(MagicsGlobal::strict()) {
+        NOTIMP;
+    }
 }
 
 MAGICS_EXPORT const char* py_set1i(const char* name, const int* data, const int dim1) {
@@ -1714,6 +1847,9 @@ MAGICS_EXPORT void mag_set1i(const char* name, const int* data, const int dim1) 
         ParameterManager::set(param, values);
     }
     catch (MagicsException& e) {
+        if(MagicsGlobal::strict()) {
+            throw;
+        }
         MagLog::error() << e << "\n";
     }
 }
@@ -1752,6 +1888,10 @@ MAGICS_EXPORT void mag_set2i(const char* name, const int* data, const int dim1, 
 }
 
 MAGICS_EXPORT void mag_set3i(const char*, const int*, const int, const int, const int) {
+    if(MagicsGlobal::strict()) {
+        NOTIMP;
+    }
+
     MagLog::warning() << "pset3i --> not yet implemented\n";
 }
 
@@ -1793,6 +1933,9 @@ MAGICS_EXPORT void mag_set1c(const char* name, const char** data, const int dim)
         ParameterManager::set(param, values);
     }
     catch (MagicsException& e) {
+        if(MagicsGlobal::strict()) {
+                throw;
+        }
         MagLog::error() << e << "\n";
     }
     // cout << "set1c("<<name<<","<<data[0]<<","<<dim<<")"<<endl;

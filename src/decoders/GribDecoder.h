@@ -55,7 +55,7 @@ public:
     GribFileMagException(const string& file, int index) {
         ostringstream s;
         s << "Grib decoding failed: field " << index << " in " << file << endl;
-        what_ = s.str();
+        reason(s.str());
     }
 };
 

@@ -16,12 +16,19 @@
 using namespace magics;
 
 
+MagicsException::MagicsException(const std::string &why) : what_(why) {
+    if (std::getenv("MAGICS_ABORT_EXCEPTION")) {
+        std::abort();
+    }
+}
+
+
 AssertionFailed::AssertionFailed(const char* msg, int line, const char* file, const char* proc) {
     ostringstream s;
 
     s << "Assertion failed: " << msg << " in " << proc << ", line " << line << " of " << file;
 
-    what_ = s.str();
+    reason(s.str());
 }
 
 CannotOpenFile::CannotOpenFile(const std::string& path) {
@@ -34,3 +41,10 @@ CannotOpenFile::CannotOpenFile(const std::string& path) {
     reason("Cannot open file " + path + ": " + string(estr));
 
 }
+
+NotYetImplemented::NotYetImplemented(const std::string &type, const std::string &method) :
+    MagicsException(type + " " + method + " : not yet implemented... ") {}
+
+MethodNotYetImplemented::MethodNotYetImplemented(const std::string &method) : NotYetImplemented("Method", method) {}
+
+ParameterNotYetImplemented::ParameterNotYetImplemented(const std::string &param) : NotYetImplemented("Parameter", param) {}

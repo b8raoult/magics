@@ -130,9 +130,9 @@ static void execute(const std::string& action, const Value& p) {
                     s++;
                     continue;
                 }
-                if (value.isNumber() || value.isDouble()) {
-                    double v = value;
-                    if (long(v) == v) {
+                if (e.isNumber() || e.isDouble()) {
+                    double v = e;
+                    if (int(v) == v) {
                         i++;
                     }
                     else {
@@ -141,7 +141,7 @@ static void execute(const std::string& action, const Value& p) {
                     continue;
                 }
                 std::ostringstream oss;
-                oss << "Value type not supported in list: " << name << " = " << value;
+                oss << "Value type not supported in list: " << name << " = " << value << " e=" << e;
                 throw MagicsException(oss.str());
             }
             if (s) {
@@ -153,19 +153,18 @@ static void execute(const std::string& action, const Value& p) {
                 }
                 check(name, py_set1c(name.c_str(), v.data(), v.size()));
             }
-
-            if (d) {
+            else if (d) {
                 std::vector<double> v;
                 for (auto e : l) {
                     v.push_back(e);
                 }
                 check(name, py_set1r(name.c_str(), v.data(), v.size()));
             }
-
-            if (i) {
+            else if (i) {
                 std::vector<int> v;
                 for (auto e : l) {
-                    v.push_back(e);
+                    double d = e;
+                    v.push_back(int(d));
                 }
                 check(name, py_set1i(name.c_str(), v.data(), v.size()));
             }

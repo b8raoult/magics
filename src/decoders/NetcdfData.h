@@ -34,14 +34,14 @@ class NoSuchNetcdfVariable : public MagicsException {
 public:
     NoSuchNetcdfVariable(const string& var) :
         MagicsException("Netcdf MagException:  Can not find variable ---> " + var) {
-        MagLog::warning() << what_ << "\n";
+        MagLog::warning() << what() << "\n";
     }
 };
 class NoSuchNetcdfDimension : public MagicsException {
 public:
     NoSuchNetcdfDimension(const string& dim) :
         MagicsException("Netcdf MagException :  Can not find dimension ---> " + dim) {
-        MagLog::warning() << what_ << "\n";
+        MagLog::warning() << what() << "\n";
     }
 };
 
@@ -49,7 +49,7 @@ class NoSuchNetcdfFile : public MagicsException {
 public:
     NoSuchNetcdfFile(const string& file) :
         MagicsException("Netcdf MagException: The file " + file + " does not exist or is not a valid netcdf file") {
-        MagLog::error() << what_ << "\n";
+        MagLog::error() << what() << "\n";
     }
 };
 class Netcdf;
