@@ -27,7 +27,7 @@ extern "C" {
 
 MAGICS_EXPORT void mag_set_python_context();
 MAGICS_EXPORT void mag_open();
-MAGICS_EXPORT int mag_close();
+MAGICS_EXPORT void mag_close();
 MAGICS_EXPORT void mag_coast();
 MAGICS_EXPORT void mag_grib();
 MAGICS_EXPORT void mag_mapgen();

@@ -90,6 +90,8 @@ FortranMagics::~FortranMagics() {
         delete output_;
     singleton_ = 0;
 
+    ParameterManager::resetAll();
+
     /*
     ParameterManager::release();
     TitleTemplate::release();
