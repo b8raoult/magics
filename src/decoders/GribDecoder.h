@@ -307,6 +307,7 @@ public:
         handle2_         = 0;
         handle3_         = 0;
         Data::dimension_ = 1;
+        ASSERT(handle);
     }
     GribEntryDecoder(grib_handle* handle1, grib_handle* handle2) {
         field_   = handle1;
@@ -315,6 +316,8 @@ public:
         handle3_ = 0;
 
         Data::dimension_ = 2;
+        ASSERT(handle1);
+        ASSERT(handle2);
     }
     GribEntryDecoder(grib_handle* handle1, grib_handle* handle2, grib_handle* handle3) {
         field_           = handle1;
@@ -322,6 +325,9 @@ public:
         handle2_         = handle2;
         handle3_         = handle3;
         Data::dimension_ = 3;
+        ASSERT(handle1);
+        ASSERT(handle2);
+        ASSERT(handle3);
     }
     ~GribEntryDecoder() {}
 

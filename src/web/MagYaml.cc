@@ -64,6 +64,10 @@ static std::map<std::string, action_proc> actions = {
 
 };
 
+// TODO: NO globals!!!
+
+static std::map<std::string, std::set<std::string> > reset;
+
 static void check(const string& name, const char* msg) {
     if (msg) {
         std::ostringstream oss;
@@ -77,6 +81,13 @@ static void execute(const std::string& action, const Value& p) {
     if (k == actions.end()) {
         throw MagicsException("Unknown action: " + action);
     }
+
+    // Reset previous settings
+    for(auto r: reset[action]) {
+        py_reset(r.c_str());
+    }
+    reset[action].clear();
+
     action_proc proc = (*k).second;
 
 
@@ -84,6 +95,8 @@ static void execute(const std::string& action, const Value& p) {
     for (auto j = param.begin(); j != param.end(); ++j) {
         std::string name = (*j).first;
         Value value      = (*j).second;
+
+        reset[action].insert(name);
 
         if (value.isBool()) {
             check(name, py_setc(name.c_str(), bool(value) ? "on" : "off"));

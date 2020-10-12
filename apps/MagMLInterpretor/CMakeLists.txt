@@ -20,8 +20,8 @@ ecbuild_add_executable(
 
 
 ecbuild_add_executable(
-		TARGET		magdebug
-		SOURCES		magdebug.cc
+		TARGET		magics
+		SOURCES		magics.cc
 		DEFINITIONS	${MAGICS_EXTRA_DEFINITIONS}
 		LIBS		MagPlus ${MAGICS_EXTRA_LIBRARIES}
 		)

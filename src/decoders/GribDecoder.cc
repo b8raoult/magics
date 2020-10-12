@@ -187,6 +187,7 @@ string GribDecoder::getstring(const string& key, bool warnIfKeyAbsent, bool cach
     char val[1024];
     size_t length = 1024;
 
+    ASSERT(current_handle_);
     int err = grib_get_string(current_handle_, key.c_str(), val, &length);
 
     if (err) {
@@ -213,7 +214,7 @@ string GribDecoder::getString(const string& key, bool warnIfKeyAbsent) const {
     // otherwise we build a name...
 
     current_handle_   = field_;
-    GribDecoder* grib = const_cast<GribDecoder*>(this);
+    // GribDecoder* grib = const_cast<GribDecoder*>(this);
     value             = getstring(key, warnIfKeyAbsent, false);
 
     if (component2_) {
@@ -236,6 +237,7 @@ double GribDecoder::getDouble(const string& key, bool warnIfKeyAbsent) const {
         return dk->second;
     }
     double val;
+    ASSERT(current_handle_);
     int err = grib_get_double(current_handle_, key.c_str(), &val);
     if (err) {
         if (warnIfKeyAbsent) {
@@ -248,6 +250,7 @@ double GribDecoder::getDouble(const string& key, bool warnIfKeyAbsent) const {
 }
 
 void GribDecoder::setDouble(const string& key, double val) const {
+    ASSERT(current_handle_);
     int err = grib_set_double(current_handle_, key.c_str(), val);
     if (err) {
         MagLog::warning() << "ecCodes: cannot find key [" << key << "]  - " << grib_get_error_message(err) << "\n";
@@ -742,12 +745,9 @@ grib_handle* GribDecoder::open(grib_handle* grib, bool sendmsg) {
     FILE* file = fopen(file_name_.c_str(), "rb");
 
     if (!file) {
-        ostringstream error;
-        error << "file can not be opened [" << file_name_ << "] " << std::strerror(errno) << std::endl;
-        MagLog::broadcast();
         valid_ = false;
-        throw MagicsException(error.str());
-        return 0;
+        MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
+        throw CannotOpenFile(file_name_);
     }
 
     if (loop_) {
@@ -1302,7 +1302,7 @@ public:
             tree.visit(*this);
         }
         catch (MagicsException& e) {
-            MagLog::debug() << e.what() << endl;
+            MagLog::error() << e.what() << endl;
         }
     }
     string str() const { return out.str(); }
@@ -1421,7 +1421,7 @@ void GribDecoder::visit(ValuesCollector& points) {
         inlons[i] = std::fmod(points[i].x(), 360.);
         if (inlons[i] < 0.)
             inlons[i] += 360.;
-        i++;
+        i++; // FIXME: double increment
     }
 
     double missing = getDouble("missingValue");

@@ -4,7 +4,7 @@
 			"path": "."
 		},
 		{
-			"path": "../magics-python"
+			"path": "../magics-python-b8raoult"
 		}
 	],
 	"settings": {
@@ -98,7 +98,8 @@
 			"stop_token": "cpp",
 			"cfenv": "cpp",
 			"regex": "cpp",
-			"shared_mutex": "cpp"
+			"shared_mutex": "cpp",
+			"__functional_03": "cpp"
 		}
 	}
 }
