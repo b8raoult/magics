@@ -10,15 +10,14 @@
 
 
 #include "ListContent.h"
-#include "JSON.h"
 #include <MagException.h>
+#include "JSON.h"
 
 #include <iostream>
 
 namespace magics {
 
 //----------------------------------------------------------------------------------------------------------------------
-
 
 
 ListContent::ListContent() {}
@@ -166,7 +165,6 @@ bool ListContent::contains(const Value& v) const {
 }
 
 void ListContent::dump(std::ostream& out, size_t depth, bool indent) const {
-
     if (indent) {
         size_t n = depth;
         while (n-- > 0) {

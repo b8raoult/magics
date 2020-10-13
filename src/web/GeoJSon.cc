@@ -11,8 +11,8 @@
 #include "GeoJSon.h"
 #include "BinningObject.h"
 #include "Factory.h"
-#include "Value.h"
 #include "JSONParser.h"
+#include "Value.h"
 
 using namespace magics;
 
@@ -194,8 +194,8 @@ public:
     }
     virtual void decode(const Value& value) {
         ValueList point = value.get_value<ValueList>();
-        lon_        = point[0].get_value<double>();
-        lat_        = point[1].get_value<double>();
+        lon_            = point[0].get_value<double>();
+        lat_            = point[1].get_value<double>();
     }
     void print() {}
     double lat_;
@@ -411,7 +411,7 @@ GeoJSon::GeoJSon() : current_(0), parent_(0), matrix_(0) {
 GeoJSon::~GeoJSon() {}
 
 string GeoObject::convert(const Value& value) {
-    if(value.isString() || value.isNumber() || value.isDouble()) {
+    if (value.isString() || value.isNumber() || value.isDouble()) {
         std::string s(value);
         return s;
     }
@@ -502,7 +502,7 @@ void GeoJSon::decode() {
     try {
         Value value;
         if (magCompare(type_, "string")) {
-           value = JSONParser::decodeString(input_);
+            value = JSONParser::decodeString(input_);
         }
         else {
             try {

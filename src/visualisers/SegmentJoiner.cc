@@ -8,8 +8,8 @@
  * does it submit to any jurisdiction.
  */
 
-#include "magics.h"
 #include "SegmentJoiner.h"
+#include "magics.h"
 
 #include <algorithm>
 #include <cmath>

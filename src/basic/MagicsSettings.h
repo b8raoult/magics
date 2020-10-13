@@ -26,7 +26,6 @@ namespace magics {
 
 class MagicsSettings : public MagicsSettingsAttributes {
 public:
-
     MAGICS_EXPORT static bool silent();
     MAGICS_EXPORT static void silent(bool s);
     MAGICS_EXPORT static bool compatibility();
@@ -36,7 +35,6 @@ public:
     MAGICS_EXPORT static void strict(bool c);
 
 protected:
-
     MagicsSettings(){};
     ~MagicsSettings(){};
 

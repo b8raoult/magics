@@ -69,5 +69,4 @@ MAGICS_EXPORT void penqr_(const char* name, float* value, int length) {
     penqr_double(name, &tmp, length);
     *value = float(tmp);
 }
-
 }

@@ -23,79 +23,75 @@ namespace magics {
 //----------------------------------------------------------------------------------------------------------------------
 
 class ListContent : public Content {
-
 protected:
+    // -- Constructor
 
-// -- Constructor
-
-	ListContent();
-	ListContent(const ValueList&);
-	ListContent(const Value&);
+    ListContent();
+    ListContent(const ValueList&);
+    ListContent(const Value&);
 
 
-// -- Destructor
+    // -- Destructor
 
-	virtual ~ListContent();
+    virtual ~ListContent();
 
-// -- Overridden methods
+    // -- Overridden methods
 
     // -- From Content
 
     virtual int compare(const Content& other) const;
 
-    virtual void value(bool& n)        const;
-    virtual void value(long long& n)   const;
-    virtual void value(double& n)      const;
+    virtual void value(bool& n) const;
+    virtual void value(long long& n) const;
+    virtual void value(double& n) const;
     virtual void value(std::string& n) const;
-    virtual void value(ValueMap& n)    const { Content::value(n); }
-    virtual void value(ValueList& n)   const;
+    virtual void value(ValueMap& n) const { Content::value(n); }
+    virtual void value(ValueList& n) const;
 
-    virtual int  compareBool(const BoolContent&)            const {return -1; }
-    virtual int  compareNumber(const NumberContent&)        const {return -1; }
-    virtual int  compareDouble(const DoubleContent&)        const {return -1; }
-    virtual int  compareString(const StringContent&)        const {return -1; }
-    virtual int  compareNil(const NilContent&)              const {return -1; }
-    virtual int  compareList(const ListContent&)            const;
-    virtual int  compareMap(const MapContent&)              const {return 1; }
-    virtual int  compareOrderedMap(const OrderedMapContent&) const { return 1; }
+    virtual int compareBool(const BoolContent&) const { return -1; }
+    virtual int compareNumber(const NumberContent&) const { return -1; }
+    virtual int compareDouble(const DoubleContent&) const { return -1; }
+    virtual int compareString(const StringContent&) const { return -1; }
+    virtual int compareNil(const NilContent&) const { return -1; }
+    virtual int compareList(const ListContent&) const;
+    virtual int compareMap(const MapContent&) const { return 1; }
+    virtual int compareOrderedMap(const OrderedMapContent&) const { return 1; }
 
     virtual Content* add(const Content&) const;
-	virtual Content* sub(const Content&) const;
-	virtual Content* mul(const Content&) const;
-	virtual Content* div(const Content&) const;
+    virtual Content* sub(const Content&) const;
+    virtual Content* mul(const Content&) const;
+    virtual Content* div(const Content&) const;
     virtual Content* mod(const Content&) const;
 
     virtual Content* addList(const ListContent&) const;
 
-	virtual void   print(std::ostream&) const;
-    virtual void   json(JSON&)     const;
-	virtual std::string typeName() const       { return "List"; }
+    virtual void print(std::ostream&) const;
+    virtual void json(JSON&) const;
+    virtual std::string typeName() const { return "List"; }
 
-	virtual bool   isList() const         { return true; }
+    virtual bool isList() const { return true; }
     virtual Value& element(const Value&);
     virtual bool contains(const Value& key) const;
     virtual Content* clone() const;
     virtual size_t size() const;
-    virtual void    dump(std::ostream& out, size_t depth, bool indent=true) const;
+    virtual void dump(std::ostream& out, size_t depth, bool indent = true) const;
 
 private:
+    ListContent(const ListContent&);
+    ListContent& operator=(const ListContent&);
 
-	ListContent(const ListContent&);
-	ListContent& operator=(const ListContent&);
-
-// -- Members
+    // -- Members
 
     ValueList value_;
 
-// -- Class Members
+    // -- Class Members
 
-	friend class Value;
-
+    friend class Value;
 };
 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-} // namespace magics
+}  // namespace magics
 
 #endif

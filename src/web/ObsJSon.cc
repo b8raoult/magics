@@ -11,9 +11,9 @@
 #include "ObsJSon.h"
 #include <locale>
 #include "CustomisedPoint.h"
+#include "JSONParser.h"
 #include "MetaData.h"
 #include "Value.h"
-#include "JSONParser.h"
 
 using namespace magics;
 

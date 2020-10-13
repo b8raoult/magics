@@ -111,5 +111,4 @@ MAGICS_EXPORT void pset3r_(char* name, double* data, int* dim, int* dim2, int* d
 MAGICS_EXPORT void penqr_(char* name, double* value, int length) {
     penqr_double(name, value, length);
 }
-
 }

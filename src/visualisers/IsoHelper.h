@@ -27,8 +27,8 @@
 #include "IntervalMap.h"
 #include "Polyline.h"
 
-#include <mutex>
 #include <condition_variable>
+#include <mutex>
 
 namespace magics {
 

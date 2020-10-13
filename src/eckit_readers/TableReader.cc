@@ -248,7 +248,7 @@ int TableReader::nextLineTokens(char* line, size_t sizeOfLine, vector<char*>& to
         // parse the line into tokens
 
         // FIXME: Use getline(std::string) instead
-        ASSERT(!f_.fail()); // The line is longer than sizeOfLine
+        ASSERT(!f_.fail());  // The line is longer than sizeOfLine
 
         streamsize numread = f_.gcount();
 
@@ -556,7 +556,9 @@ bool TableReader::read(string& errorMessage) {
                 {
                     // if we are only reading one column, then it could be a missing value
                     if (decoderSets_.size() == 1) {
-                        static char empty[1] = {0,};
+                        static char empty[1] = {
+                            0,
+                        };
                         tokens.push_back(empty);
                     }
 

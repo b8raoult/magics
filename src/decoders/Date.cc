@@ -153,10 +153,12 @@ MagDate::operator string() const {
 }
 
 MagDate::operator tm() const {
-    struct tm tm_date = {0,};
-    tm_date.tm_mday   = day();
-    tm_date.tm_mon    = month() - 1;
-    tm_date.tm_year   = year() - 1900;
+    struct tm tm_date = {
+        0,
+    };
+    tm_date.tm_mday = day();
+    tm_date.tm_mon  = month() - 1;
+    tm_date.tm_year = year() - 1900;
 
     int mm = month();
     int yy = year();

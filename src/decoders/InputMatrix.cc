@@ -27,7 +27,6 @@
 #include "Transformation.h"
 
 
-
 using namespace magics;
 
 InputMatrix::InputMatrix() : matrix_(0), u_(0), v_(0), speed_(0), direction_(0) {

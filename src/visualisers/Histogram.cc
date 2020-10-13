@@ -139,7 +139,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         delete cartesian;
         return;
     }
-    
+
     vector<int> y;
     vector<double> x;
     for (IntervalMap<int>::const_iterator count = counter_.begin(); count != counter_.end(); ++count) {

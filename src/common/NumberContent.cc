@@ -9,10 +9,10 @@
  */
 
 #include "NumberContent.h"
-#include "MagException.h"
-#include "JSON.h"
-#include "Translator.h"
 #include "DoubleContent.h"
+#include "JSON.h"
+#include "MagException.h"
+#include "Translator.h"
 
 #include <iostream>
 
@@ -30,7 +30,6 @@ public:
 
 
 NumberContent::NumberContent(long long l) : value_(l) {}
-
 
 
 Content* NumberContent::clone() const {

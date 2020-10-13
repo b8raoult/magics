@@ -24,41 +24,39 @@ namespace magics {
 
 class Regex {
 public:
+    // -- Contructors
 
-// -- Contructors
-
-	Regex(const std::string& = ".*",bool shell = false);
-
-
-// -- Methods
-
-	Regex& operator=(const Regex&);
-
-	bool match(const std::string& s) const;
-
-	operator const std::string&() const  { return str_; }
+    Regex(const std::string& = ".*", bool shell = false);
 
 
-protected: // methods
+    // -- Methods
 
-	void print(std::ostream&) const;
+    Regex& operator=(const Regex&);
 
-private: // members
+    bool match(const std::string& s) const;
 
-	std::string str_;
+    operator const std::string&() const { return str_; }
 
-private: // methods
 
-	void compile(const char*);
+protected:  // methods
+    void print(std::ostream&) const;
 
-	friend std::ostream& operator<<(std::ostream& s,const Regex& p) { p.print(s); return s; }
+private:  // members
+    std::string str_;
 
+private:  // methods
+    void compile(const char*);
+
+    friend std::ostream& operator<<(std::ostream& s, const Regex& p) {
+        p.print(s);
+        return s;
+    }
 };
 
 
 //--------------------------------------------------------------------------------------------------
 
 
-} // namespace magics
+}  // namespace magics
 
 #endif

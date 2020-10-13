@@ -32,7 +32,6 @@
 using namespace magics;
 
 
-
 NetcdfMatrixInterpretor::NetcdfMatrixInterpretor() {}
 
 

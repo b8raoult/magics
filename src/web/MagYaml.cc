@@ -14,8 +14,8 @@
 #include "MagYaml.h"
 
 #include "MagException.h"
-#include "YAMLParser.h"
 #include "MagicsCalls.h"
+#include "YAMLParser.h"
 
 using namespace magics;
 
@@ -75,7 +75,7 @@ static void execute(const std::string& action, const Value& p) {
     }
 
     // Reset previous settings
-    for(auto r: reset[action]) {
+    for (auto r : reset[action]) {
         MagicsCalls::reset(r);
     }
     reset[action].clear();
@@ -185,7 +185,6 @@ static std::map<std::string, command_proc> commands = {{"plot", plot}};
 
 
 void MagYaml::processFile(const std::string& path) {
-    
     ValueMap p = YAMLParser::decodeFile(path);
     for (auto j = p.begin(); j != p.end(); ++j) {
         std::string command = (*j).first;

@@ -49,8 +49,8 @@ class BaseParameter {
 public:
     BaseParameter(const string& name);
     virtual ~BaseParameter();
-    virtual void reset()                        = 0;
-    virtual BaseParameter* clone()              = 0;
+    virtual void reset()           = 0;
+    virtual BaseParameter* clone() = 0;
     const string& name() const { return name_; }
 
     virtual void set(const double&);

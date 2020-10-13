@@ -75,8 +75,8 @@ void ShapeDecoder::customisedPoints(const std::set<string>&, CustomisedPointsLis
         hDBF       = DBFOpen(dbf.c_str(), "rb");
         if (!hSHP || !hDBF) {
             if (MagicsSettings::strict()) {
-            throw CannotOpenFile(shp);
-        }
+                throw CannotOpenFile(shp);
+            }
             MagLog::error() << "Can not open points Shapefile " << shp << endl;
             return;
         }

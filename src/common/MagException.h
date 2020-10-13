@@ -20,7 +20,7 @@ class MagicsException : public exception {
 public:
     MagicsException(const string& why = "");
 
-    void reason(const std::string& what) { what_= what;}
+    void reason(const std::string& what) { what_ = what; }
 
     virtual const char* what() const throw() { return what_.c_str(); }
     virtual ~MagicsException() throw() {}
@@ -44,8 +44,7 @@ public:
 
 class NotSupported : public MagicsException {
 public:
-    NotSupported(const string& msg) :
-        MagicsException(msg) {}
+    NotSupported(const string& msg) : MagicsException(msg) {}
 };
 
 class NotYetImplemented : public MagicsException {

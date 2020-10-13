@@ -24,36 +24,35 @@ namespace magics {
 
 class NilContent : public Content {
 protected:
-
-// -- Constructors
+    // -- Constructors
 
     NilContent();
 
-// -- Destructors
+    // -- Destructors
 
     virtual ~NilContent();
 
-// -- Overridden Methods
+    // -- Overridden Methods
 
     // From Content
 
     virtual int compare(const Content& other) const;
 
-    virtual void value(bool& n)        const { Content::value(n); }
-    virtual void value(long long& n)   const { Content::value(n); }
-    virtual void value(double& n)      const { Content::value(n); }
+    virtual void value(bool& n) const { Content::value(n); }
+    virtual void value(long long& n) const { Content::value(n); }
+    virtual void value(double& n) const { Content::value(n); }
     virtual void value(std::string& n) const { Content::value(n); }
-    virtual void value(ValueList& n)   const;
-    virtual void value(ValueMap& n)    const { Content::value(n); }
+    virtual void value(ValueList& n) const;
+    virtual void value(ValueMap& n) const { Content::value(n); }
 
-    virtual int  compareBool(const BoolContent&)            const {return -1; }
-    virtual int  compareNumber(const NumberContent&)        const {return -1; }
-    virtual int  compareDouble(const DoubleContent&)        const {return -1; }
-    virtual int  compareString(const StringContent&)        const {return -1; }
-    virtual int  compareNil(const NilContent&)              const;
-    virtual int  compareList(const ListContent&)            const {return 1; }
-    virtual int  compareMap(const MapContent&)              const {return 1; }
-    virtual int  compareOrderedMap(const OrderedMapContent&) const { return 1; }
+    virtual int compareBool(const BoolContent&) const { return -1; }
+    virtual int compareNumber(const NumberContent&) const { return -1; }
+    virtual int compareDouble(const DoubleContent&) const { return -1; }
+    virtual int compareString(const StringContent&) const { return -1; }
+    virtual int compareNil(const NilContent&) const;
+    virtual int compareList(const ListContent&) const { return 1; }
+    virtual int compareMap(const MapContent&) const { return 1; }
+    virtual int compareOrderedMap(const OrderedMapContent&) const { return 1; }
 
     virtual Content* add(const Content&) const;
     virtual Content* sub(const Content&) const;
@@ -61,24 +60,23 @@ protected:
     virtual Content* div(const Content&) const;
     virtual Content* mod(const Content&) const;
 
-    virtual Content* addNil(const NilContent&)  const;
-    virtual Content* subNil(const NilContent&)  const;
-    virtual Content* mulNil(const NilContent&)  const;
-    virtual Content* divNil(const NilContent&)  const;
+    virtual Content* addNil(const NilContent&) const;
+    virtual Content* subNil(const NilContent&) const;
+    virtual Content* mulNil(const NilContent&) const;
+    virtual Content* divNil(const NilContent&) const;
 
-    virtual bool     isNil()     const  { return true; }
-    virtual std::string   typeName()  const  { return "Nil"; }
-    virtual void     print(std::ostream&) const;
-    virtual void   json(JSON&)     const;
+    virtual bool isNil() const { return true; }
+    virtual std::string typeName() const { return "Nil"; }
+    virtual void print(std::ostream&) const;
+    virtual void json(JSON&) const;
     virtual Content* clone() const;
-    virtual void    dump(std::ostream& out, size_t depth, bool indent=true) const;
+    virtual void dump(std::ostream& out, size_t depth, bool indent = true) const;
 
     virtual bool contains(const Value&) const;
 
 
 private:
-
-// -- No copy allowed
+    // -- No copy allowed
 
     NilContent(const NilContent&);
     NilContent& operator=(const NilContent&);
@@ -89,6 +87,6 @@ private:
 
 //----------------------------------------------------------------------------------------------------------------------
 
-} // namespace magics
+}  // namespace magics
 
 #endif

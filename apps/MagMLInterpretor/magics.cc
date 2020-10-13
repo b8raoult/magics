@@ -14,7 +14,6 @@
 using namespace magics;
 
 int main(int argc, char** argv) {
-
     MagicsSettings::strict(true);
 
     try {

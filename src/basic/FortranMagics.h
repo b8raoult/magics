@@ -42,7 +42,6 @@ class LegendVisitor;
 
 class FortranMagics : public std::stack<BasicSceneObject*> {
 public:
-
     typedef void (FortranMagics::*Action)();
 
     void popen();
@@ -154,7 +153,6 @@ protected:
     bool polyinput_todo_;
 
 private:
-
     FortranMagics();
     ~FortranMagics();
 

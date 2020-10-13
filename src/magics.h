@@ -74,7 +74,9 @@ using std::exception;
 #if defined(_WIN32) && defined(_MSC_VER)
 #define MAGICS_ON_WINDOWS
 #include <io.h>
-inline int strcasecmp(const char* a, const char* b) { return _stricmp(a, b); }
+inline int strcasecmp(const char* a, const char* b) {
+    return _stricmp(a, b);
+}
 #endif
 
 /*! \namespace magics

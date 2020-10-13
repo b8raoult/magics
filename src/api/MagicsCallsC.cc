@@ -21,8 +21,8 @@
 #include <CompatibilityHelper.h>
 #include <FortranMagics.h>
 #include <MagLog.h>
-#include <MagicsSettings.h>
 #include <MagicsParameter.h>
+#include <MagicsSettings.h>
 #include <WebFormat.h>
 
 extern "C" {

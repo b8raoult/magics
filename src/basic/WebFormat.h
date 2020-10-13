@@ -89,7 +89,9 @@ public:
 
     MAGICS_EXPORT static void magml(const string&);
     MAGICS_EXPORT static void json(const string&);
-    MAGICS_EXPORT static void set(const string& param, const string& value) { instance().insert(make_pair(param, value)); }
+    MAGICS_EXPORT static void set(const string& param, const string& value) {
+        instance().insert(make_pair(param, value));
+    }
     MAGICS_EXPORT static map<string, string>& parameters() { return instance(); }
 
 

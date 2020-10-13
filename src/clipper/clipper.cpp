@@ -856,7 +856,7 @@ void RangeTest(const IntPoint& Pt, bool& useFullRange) {
 #if defined(_WIN32) && defined(_MSC_VER)
         // It looks like on Windows, comparaison with 0x8000000000000000 always fail
         static const cInt overflow = 0x8000000000000000;
-        if(Pt.X == overflow || Pt.Y == overflow) {
+        if (Pt.X == overflow || Pt.Y == overflow) {
             throw clipperException("Coordinate outside allowed range");
         }
 #endif

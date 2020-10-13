@@ -86,7 +86,7 @@ int normal_main(int argc, char** argv) {
                 alarm(0);
 #endif
             }
-            catch ( MagicsException& e ) {
+            catch (MagicsException& e) {
                 std::cout << argv[0] << " FAILED to dispatch JSON file! " << e.what() << endl;
                 exit(1);
             }
@@ -119,7 +119,7 @@ int server_main(int argc, char** argv) {
     return 0;
 }
 
-int main(int argc, char *argv[], char *envp[]) {
+int main(int argc, char* argv[], char* envp[]) {
     std::cout << "Here" << std::endl;
     if (getenv("MAGJSON_SERVER_MODE")) {
         server_main(argc, argv);

@@ -174,7 +174,7 @@ Symbol* SymbolProperties::symbol(const string& type) const {
 
         return symbol;
     }
-    
+
     ASSERT(symbol);
 
     symbol->setColour(colour_);

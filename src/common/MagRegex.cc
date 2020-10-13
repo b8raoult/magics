@@ -76,7 +76,6 @@ Regex::Regex(const std::string& s, bool shell) : str_(s) {
         re[j] = 0;
         str_  = re;
     }
-
 }
 
 void Regex::print(std::ostream& s) const {
@@ -86,7 +85,6 @@ void Regex::print(std::ostream& s) const {
 bool Regex::match(const std::string& s) const {
     return std::regex_match(s, std::regex(str_));
 }
-
 
 
 //----------------------------------------------------------------------------------------------------------------------

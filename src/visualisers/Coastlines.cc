@@ -26,12 +26,12 @@
 
 using namespace magics;
 
-Coastlines::Coastlines(): layer_(0) {
+Coastlines::Coastlines() : layer_(0) {
     setInfo("_datatype", "Coastlines");
 }
 
 Coastlines::~Coastlines() {
-    if (layer_){
+    if (layer_) {
         // FIME: Double delete
         // delete layer_;
     }

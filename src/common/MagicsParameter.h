@@ -29,25 +29,23 @@ namespace magics {
 template <class T>
 class MagicsParameter : public BaseParameter {
 public:
-    MagicsParameter(const string& name, const T& def) :
-        BaseParameter(name), default_(def), value_(def) {}
+    MagicsParameter(const string& name, const T& def) : BaseParameter(name), default_(def), value_(def) {}
 
     ~MagicsParameter() {}
 
     void get(T& value) const { value = value_; }
     void reset() { value_ = default_; }
 
-    BaseParameter* clone() { return new MagicsParameter<T>(this->name_, this->default_); } // FIXME: default or value?
+    BaseParameter* clone() { return new MagicsParameter<T>(this->name_, this->default_); }  // FIXME: default or value?
 
     string type() const { return getType(default_); }
 
     void set(const T& value) { value_ = value; }
 
 protected:
-
     void print(ostream& out) const { out << name_ << "[" << value_ << ", " << default_ << "]"; }
 
-   T default_;
+    T default_;
     T value_;
 
 private:

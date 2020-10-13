@@ -20,11 +20,11 @@
 */
 
 #include "TableDecoder.h"
+#include "MagException.h"
 #include "SciMethods.h"
 #include "TableReader.h"
 #include "TextVisitor.h"
 #include "Tokenizer.h"
-#include "MagException.h"
 
 
 using namespace ::magics;

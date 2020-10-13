@@ -12,6 +12,11 @@ case "${unameOut}" in
 esac
 
 for file in $files; do
+    if [[ $file =~ "attributes" ]]; then
+        echo "Skipping autoformat check for file: $file"
+	continue
+    fi
+
     if [[ $file =~ "drivers/minizip" ]]; then
         # Skip minizip because clang-format breaks this code to the point where it doesn't
         # compile.

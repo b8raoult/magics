@@ -19,9 +19,9 @@
 */
 
 #include "CompatibilityHelper.h"
+#include "MagException.h"
 #include "MagLog.h"
 #include "MagicsSettings.h"
-#include "MagException.h"
 
 /*! \defgroup compatibility Compatibility to MAGICS 6 for deprecated parameters
 
@@ -43,7 +43,7 @@
 namespace magics {
 
 void CompatibilityHelper::resetAll() {
-    for(auto j = compatibility_.begin(); j != compatibility_.end(); ++j) {
+    for (auto j = compatibility_.begin(); j != compatibility_.end(); ++j) {
         (*j).second->reset();
     }
 }
@@ -67,7 +67,7 @@ public:
     IgnoreConverter(const string& param) : CompatibilityHelper(param), parameter_(param) {}
     ~IgnoreConverter() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Deprecated: parameter '" + parameter_ + "'");
         }
         MagLog::info() << "Deprecated: Parameter " << parameter_ << " is not needed anymore --> setting is ignored"
@@ -84,7 +84,7 @@ public:
     ComingSoonConverter(const string& param) : CompatibilityHelper(param), parameter_(param) {}
     ~ComingSoonConverter() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + parameter_ + "' not yet implemented");
         }
         MagLog::info() << "Coming soon: Parameter " << parameter_ << " will be implemented soon" << std::endl;
@@ -104,7 +104,7 @@ public:
     GribSubareaExtraction() : CompatibilityHelper("grib_subarea_extraction") {}
     ~GribSubareaExtraction() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'grib_subarea_extraction' not required anymore");
         }
         MagLog::info() << "Compatibility issue: Parameter grib_subarea_extraction "
@@ -131,7 +131,7 @@ public:
         CompatibilityHelper(from), from_(from), to_(to), both_(both) {}
     ~SimpleTranslator() {}
     void deprecated() {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
         }
         MagLog::warning() << "Compatibility issue: Parameter " << from_ << " is deprecated : consider using " << to_
@@ -251,7 +251,7 @@ public:
     WindArrowLegend() : CompatibilityHelper("wind_arrow_legend") {}
     ~WindArrowLegend() {}
     bool operator()(const string& leg) {
-         if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'wind_arrow_legend' is deprecated. Please use 'legend'");
         }
 
@@ -290,7 +290,7 @@ public:
     PsFileName() : CompatibilityHelper("ps_file_name") {}
     ~PsFileName() {}
     bool operator()(const string& file) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'ps_file_name' is deprecated. Please use 'output_name'");
         }
 
@@ -309,7 +309,7 @@ public:
     PsDevice() : CompatibilityHelper("ps_device") {}
     ~PsDevice() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'ps_device' is deprecated'");
         }
 
@@ -328,7 +328,7 @@ public:
     OutputPsDevice() : CompatibilityHelper("output_ps_device") {}
     ~OutputPsDevice() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'output_ps_device' is deprecated'");
         }
         MagLog::info() << "Compatibility issue: output_ps_device is deprecated." << std::endl;
@@ -343,7 +343,7 @@ public:
     PsHelp() : CompatibilityHelper("ps_help") {}
     ~PsHelp() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'ps_help' is deprecated'");
         }
         MagLog::info() << "Compatibility issue: Parameter ps_help was removed.\n" << std::endl;
@@ -358,7 +358,7 @@ public:
     PsMetric() : CompatibilityHelper("ps_metric") {}
     ~PsMetric() {}
     bool operator()(const string&) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'ps_metric' is deprecated'");
         }
         MagLog::info() << "Compatibility issue: Parameter ps_metric was removed.\n" << std::endl;
@@ -395,7 +395,7 @@ public:
     OutputResolution() : CompatibilityHelper("output_resolution") {}
     ~OutputResolution() {}
     bool operator()(int) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'output_resolution' is deprecated'");
         }
         MagLog::info() << "Deprecated parameter: output_resolution is not used anymore.\n"
@@ -411,7 +411,7 @@ public:
     GraphValuesConverter(const string& from, const string& to) : CompatibilityHelper(from), from_(from), to_(to) {}
 
     bool operator()(const doublearray& values) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
         }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
@@ -420,7 +420,7 @@ public:
         return true;
     }
     bool operator()(const stringarray& values) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
         }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
@@ -429,7 +429,7 @@ public:
         return true;
     }
     bool operator()(const string& value) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
         }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
@@ -438,7 +438,7 @@ public:
         return true;
     }
     bool operator()(double value) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
         }
         MagLog::info() << "Compatibility issue: Parameter " << from_ << " is deprecated.\n"
@@ -524,7 +524,7 @@ public:
     DeviceFileName() : CompatibilityHelper("device_file_name") {}
     ~DeviceFileName() {}
     bool operator()(const string& file) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'device_file_name' is deprecated. Please use 'output_name'");
         }
         MagLog::info() << "Compatibility issue: Parameter device_file_name is deprecated.\n"
@@ -544,7 +544,7 @@ public:
     DeviceWidth() : CompatibilityHelper("device_width") {}
     ~DeviceWidth() {}
     bool operator()(const int width) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'device_width' is deprecated. Please use 'output_width'");
         }
         MagLog::info() << "Compatibility issue: Parameter device_width is deprecated.\n"
@@ -563,7 +563,7 @@ public:
     DeviceQualityLevel() : CompatibilityHelper("device_quality_level") {}
     ~DeviceQualityLevel() {}
     bool operator()(const int quality) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'device_quality_level' is deprecated. Please use 'output_jpg_quality'");
         }
         MagLog::info() << "Compatibility issue: Parameter device_quality_level is "
@@ -585,10 +585,9 @@ public:
     }
     ~TextQuality() {}
     bool operator()(const string& quality) {
-
-
-        if(MagicsSettings::strict()) {
-            throw MagicsException("Parameter '" + base_ + "quality' is deprecated. Please use '" + base_ + "font' and '" + base_ + "font_style'");
+        if (MagicsSettings::strict()) {
+            throw MagicsException("Parameter '" + base_ + "quality' is deprecated. Please use '" + base_ +
+                                  "font' and '" + base_ + "font_style'");
         }
 
         MagLog::info() << "Compatibility issue: Parameter " << base_ << "quality is deprecated.\n"
@@ -626,7 +625,7 @@ public:
     TextHeight(const string& from, const string& to) : CompatibilityHelper(from), from_(from), to_(to) {}
     ~TextHeight() {}
     bool operator()(double height) {
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
         }
 
@@ -646,9 +645,8 @@ public:
     TextFontHeight(const string& from, const string& to) : CompatibilityHelper(from), from_(from), to_(to) {}
     ~TextFontHeight() {}
     bool operator()(double height) {
-
         if (from_ != to_) {
-            if(MagicsSettings::strict()) {
+            if (MagicsSettings::strict()) {
                 throw MagicsException("Parameter '" + from_ + "' is deprecated. Please use '" + to_ + "'");
             }
 
@@ -657,8 +655,7 @@ public:
                            << height << std::endl;
         }
         else {
-
-             if(MagicsSettings::strict()) {
+            if (MagicsSettings::strict()) {
                 throw MagicsException("Parameter '" + from_ + "' is now a string");
             }
 
@@ -689,9 +686,10 @@ public:
     GdFileName() : CompatibilityHelper("gd_file_name") {}
     ~GdFileName() {}
     bool operator()(const string& file) {
-        if(MagicsSettings::strict()) {
-                 throw MagicsException("The value 'none' for parameter 'subpage_map_projection' is deprecated. Please use 'cartesian'");
-            }
+        if (MagicsSettings::strict()) {
+            throw MagicsException(
+                "The value 'none' for parameter 'subpage_map_projection' is deprecated. Please use 'cartesian'");
+        }
         MagLog::info() << "Compatibility issue: Parameter gd_file_name is deprecated.\n"
                        << "              Please use output_name instead." << std::endl;
         ParameterManager::set("output_legacy_name", file);
@@ -707,10 +705,9 @@ public:
     bool operator()(const string& projection) {
         string fix = projection;
         if (magCompare(projection, "none")) {
-
-
-            if(MagicsSettings::strict()) {
-                 throw MagicsException("The value [none] for parameter 'subpage_map_projection' is deprecated. Please use 'cartesian'");
+            if (MagicsSettings::strict()) {
+                throw MagicsException(
+                    "The value [none] for parameter 'subpage_map_projection' is deprecated. Please use 'cartesian'");
             }
 
 
@@ -733,9 +730,7 @@ public:
     DeviceCompatibilityHelper() : CompatibilityHelper("device") {}
     ~DeviceCompatibilityHelper() {}
     bool operator()(const string& device) {
-
-
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw MagicsException("Parameter 'device' is deprecated. Please use 'output_format'");
         }
 
@@ -780,8 +775,7 @@ public:
     bool operator()(const string& setting) {
         // cout << " setting -->" << setting << endl;
         if (magCompare(setting, "eccharts")) {
-
-            if(MagicsSettings::strict()) {
+            if (MagicsSettings::strict()) {
                 throw MagicsException("'ecchart' is automatic deprecated. Please use 'ecmwf'");
             }
 
@@ -790,8 +784,7 @@ public:
             return false;
         }
         if (magCompare(setting, "web")) {
-
-            if(MagicsSettings::strict()) {
+            if (MagicsSettings::strict()) {
                 throw MagicsException("'ecchart' is automatic deprecated. Please use 'ecmwf'");
             }
 
@@ -802,9 +795,7 @@ public:
             return true;
         }
         if (magCompare(setting, "on")) {
-
-
-            if(MagicsSettings::strict()) {
+            if (MagicsSettings::strict()) {
                 throw MagicsException("'ecchart' is automatic deprecated. Please use 'ecmwf'");
             }
 
@@ -823,8 +814,9 @@ public:
     WindArrowIndexHead() : CompatibilityHelper("wind_arrow_head_index") {}
     ~WindArrowIndexHead() {}
     bool operator()(int index) {
-        if(MagicsSettings::strict()) {
-            throw MagicsException("Parameter 'wind_arrow_index_head' is deprecated. Please use 'wind_arrow_head_ratio'");
+        if (MagicsSettings::strict()) {
+            throw MagicsException(
+                "Parameter 'wind_arrow_index_head' is deprecated. Please use 'wind_arrow_head_ratio'");
         }
 
 
@@ -1064,4 +1056,4 @@ public:
 static PageIDWarning page_id_line_logo_plot;
 static CoastlinesResolution map_coastline_resolution;
 
-} // namespace magics
+}  // namespace magics

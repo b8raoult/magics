@@ -107,7 +107,6 @@ public:
         }
 
         for (auto& entry : template_) {
-
             try {
                 unique_ptr<TitleFieldHandler> object(SimpleObjectMaker<TitleFieldHandler>::create(entry->name()));
                 (*object)(*entry, lines, data);
@@ -117,7 +116,6 @@ public:
                 MagLog::debug() << "Can Not Create the TitleFieldHandler for " << entry->name() << "\n";
                 (*entry)(lines);
             }
-
         }
 
         for (vector<string>::iterator line = lines.begin(); line != lines.end(); ++line)
@@ -125,7 +123,6 @@ public:
                 out.push_back(*line);
     }
 
-   
 
     bool verify(const GribDecoder& data) const;
 

@@ -16,9 +16,9 @@
 
 #include <deque>
 
+#include "Counted.h"
 #include "ObjectParser.h"
 #include "Value.h"
-#include "Counted.h"
 
 namespace magics {
 
@@ -28,19 +28,14 @@ namespace magics {
 struct YAMLItem;
 
 class YAMLParser : public ObjectParser {
-
-
-
-public: // methods
-
-    YAMLParser(std::istream & in);
+public:  // methods
+    YAMLParser(std::istream& in);
     virtual ~YAMLParser();
 
-    static Value decodeFile(const std::string & path);
-    static Value decodeString(const std::string & str);
+    static Value decodeFile(const std::string& path);
+    static Value decodeString(const std::string& str);
 
 private:
-
     std::deque<YAMLItem*> items_;
     YAMLItem* last_;
 
@@ -51,7 +46,6 @@ private:
     std::map<Value, Value> anchors_;
 
 private:
-
     void loadItem();
     const YAMLItem& nextItem();
     const YAMLItem& peekItem();
@@ -67,7 +61,7 @@ private:
 
     virtual Value parseValue();
 
-    virtual Value parseString(char quote='"');
+    virtual Value parseString(char quote = '"');
     virtual Value parseNumber();
 
     Value parseStringOrNumber(bool& isKey);
@@ -84,14 +78,11 @@ private:
     friend struct YAMLItemEndDocument;
     friend struct YAMLItemAnchor;
     friend struct YAMLItemReference;
-
-
-
 };
 
 
 //----------------------------------------------------------------------------------------------------------------------
 
-} // namespace magics
+}  // namespace magics
 
 #endif

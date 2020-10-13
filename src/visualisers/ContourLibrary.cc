@@ -23,8 +23,8 @@
 #include "ContourLibrary.h"
 #include "Layer.h"
 #include "MetaData.h"
-#include "VisDefInfo.h"
 #include "Value.h"
+#include "VisDefInfo.h"
 
 using namespace magics;
 
@@ -107,7 +107,7 @@ bool ContourLibrary::setInfoObject(string type) {
 #include "MagConfig.h"
 
 void EcChartData::callback(const string& name, const Value& value) {
-    int iname                  = atoi(name.c_str());
+    int iname       = atoi(name.c_str());
     ValueMap object = value.get_value<ValueMap>();
     data_.insert(make_pair(iname, map<string, string>()));
     for (auto entry = object.begin(); entry != object.end(); ++entry) {

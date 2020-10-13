@@ -22,10 +22,10 @@
 #include "ObsDecoder.h"
 #include "CustomisedPoint.h"
 #include "Factory.h"
+#include "MagicsSettings.h"
 #include "MvObs.h"
 #include "TextVisitor.h"
 #include "expat.h"
-#include "MagicsSettings.h"
 
 using namespace magics;
 

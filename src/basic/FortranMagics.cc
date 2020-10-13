@@ -25,6 +25,7 @@
 #include "BoxPlotDecoder.h"
 #include "BoxPlotVisualiser.h"
 #include "Coastlines.h"
+#include "CompatibilityHelper.h"
 #include "Contour.h"
 #include "GeoPointsDecoder.h"
 #include "GraphPlotting.h"
@@ -52,7 +53,6 @@
 #include "VisualAction.h"
 #include "Wind.h"
 #include "XYList.h"
-#include "CompatibilityHelper.h"
 
 #ifdef HAVE_NETCDF
 #include "NetcdfDecoder.h"
@@ -106,14 +106,17 @@ void FortranMagics::reset() {
     polyinput_todo_   = false;
 
 
-    while(actions_.size()) { actions_.pop(); }
+    while (actions_.size()) {
+        actions_.pop();
+    }
 
     // TODO: clear memory
     texts_.clear();
     legends_.clear();
     later_.clear();
-    while(axis_.size()) { axis_.pop(); }
-
+    while (axis_.size()) {
+        axis_.pop();
+    }
 
 
     ParameterManager::reset();
@@ -890,7 +893,7 @@ void FortranMagics::epsinput() {
 void FortranMagics::metgraph() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     MetgramGraph* graph = new MetgramGraph();
 
@@ -900,7 +903,7 @@ void FortranMagics::metgraph() {
 void FortranMagics::epscloud() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsCloud* epscloud = new EpsCloud();
 
@@ -909,7 +912,7 @@ void FortranMagics::epscloud() {
 void FortranMagics::epsplumes() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsPlume* plumes = new EpsPlume();
 
@@ -919,7 +922,7 @@ void FortranMagics::epsplumes() {
 void FortranMagics::epsgraph() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsGraph* epsgraph = new EpsGraph();
     action_->visdef(epsgraph);
@@ -928,7 +931,7 @@ void FortranMagics::epsgraph() {
 void FortranMagics::epslight() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsLight* epslight = new EpsLight();
     action_->visdef(epslight);
@@ -937,7 +940,7 @@ void FortranMagics::epslight() {
 void FortranMagics::epswave() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsWave* eps = new EpsWave();
     action_->visdef(eps);
@@ -946,7 +949,7 @@ void FortranMagics::epswave() {
 void FortranMagics::epswind() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsWind* epswind = new EpsWind();
     action_->visdef(epswind);
@@ -959,7 +962,7 @@ void FortranMagics::epsbar() {
 void FortranMagics::epsshading() {
     actions();
 
-    ASSERT (action_);
+    ASSERT(action_);
 
     EpsShade* eps = new EpsShade();
     action_->visdef(eps);
@@ -984,8 +987,7 @@ void FortranMagics::paxis() {
         }
     }
     catch (MagicsException& e) {
-
-        if(MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw;
         }
 

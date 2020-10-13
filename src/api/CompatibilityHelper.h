@@ -58,8 +58,9 @@ public:
     virtual bool operator()(bool) { return false; }
 
     static void resetAll();
+
 protected:
     static map<string, CompatibilityHelper*> compatibility_;
 };
 
-} // namespace magics
+}  // namespace magics

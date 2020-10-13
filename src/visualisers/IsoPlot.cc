@@ -512,7 +512,7 @@ public:
 };
 
 
-class IsoProducer  {
+class IsoProducer {
 public:
     IsoProducer(int n, IsoProducerData& data) : n_(n), objects_(data) {}
     void run() {
@@ -1149,11 +1149,11 @@ void IsoPlot::isoline(Cell& cell, CellBox* parent) const {
 
             }  // end of levels...
 
-if (box) {
-            ASSERT(box);
-            box->reshape(parent);
-            delete box;
-}
+            if (box) {
+                ASSERT(box);
+                box->reshape(parent);
+                delete box;
+            }
 
         }  // step to next triangle
     }
@@ -1170,7 +1170,7 @@ inline bool getEnv(const string& name, bool def) {
     return def;
 }
 
-template<class T>
+template <class T>
 void run(T* p) {
     // TODO: Try/catch
     p->run();

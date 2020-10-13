@@ -14,12 +14,12 @@
 #ifndef SegmentJoiner_H
 #define SegmentJoiner_H
 
-#include "magics.h"
 #include <cmath>
 #include "MagException.h"
+#include "magics.h"
 
-#include <list>
 #include <deque>
+#include <list>
 
 using namespace std;
 

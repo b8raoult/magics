@@ -112,7 +112,6 @@ struct NetAttribute {
         val = string(tmp, len);
         delete[] tmp;
     }
-
 };
 
 struct NetVariable;

@@ -50,7 +50,6 @@ public:
         initMethods_["polar_south"] = &Epsg::polarsouthinit;
         initMethods_["EPSG:32661"]  = &Epsg::epsg32661;
         initMethods_["EPSG:32761"]  = &Epsg::epsg32761;
-        
     }
     string name_;
     string definition_;
@@ -122,7 +121,7 @@ public:
         definition_ = def.str();
     }
 
-      void epsg32661(const Proj4Projection& from) {
+    void epsg32661(const Proj4Projection& from) {
         ostringstream def;
 
         def << "+proj=stere +lat_0=90 +lat_ts=90 ";
