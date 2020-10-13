@@ -15,51 +15,51 @@
 
 #include "MagException.h"
 #include "YAMLParser.h"
-#include "py_calls.h"
+#include "MagicsCalls.h"
 
 using namespace magics;
 
-typedef const char* (*action_proc)();
+typedef void (*action_proc)();
 
 static std::map<std::string, action_proc> actions = {
-    {"mboxplot", py_boxplot},
-    {"mcoast", py_coast},
-    {"mcont", py_cont},
-    {"mepsbar", py_epsbar},
-    {"mepscloud", py_epscloud},
-    {"mepsgraph", py_epsgraph},
-    {"mepsinput", py_epsinput},
-    {"mepslight", py_epslight},
-    {"mepsplumes", py_epsplumes},
-    {"mepsshading", py_epsshading},
-    {"mepswave", py_epswave},
-    {"mepswind", py_epswind},
-    {"mgeojson", py_geojson},
-    {"mgrib", py_grib},
-    {"mimage", py_image},
-    {"mimport", py_import},
-    {"minput", py_input},
-    {"mlegend", py_legend},
-    {"mline", py_line},
+    {"mboxplot", MagicsCalls::boxplot},
+    {"mcoast", MagicsCalls::coast},
+    {"mcont", MagicsCalls::cont},
+    {"mepsbar", MagicsCalls::epsbar},
+    {"mepscloud", MagicsCalls::epscloud},
+    {"mepsgraph", MagicsCalls::epsgraph},
+    {"mepsinput", MagicsCalls::epsinput},
+    {"mepslight", MagicsCalls::epslight},
+    {"mepsplumes", MagicsCalls::epsplumes},
+    {"mepsshading", MagicsCalls::epsshading},
+    {"mepswave", MagicsCalls::epswave},
+    {"mepswind", MagicsCalls::epswind},
+    {"mgeojson", MagicsCalls::geojson},
+    {"mgrib", MagicsCalls::grib},
+    {"mimage", MagicsCalls::image},
+    {"mimport", MagicsCalls::import},
+    {"minput", MagicsCalls::input},
+    {"mlegend", MagicsCalls::legend},
+    {"mline", MagicsCalls::line},
     {"mmap", nullptr},
-    {"mmapgen", py_mapgen},
-    {"mmetbufr", py_metbufr},
-    {"mmetgraph", py_metgraph},
-    {"mnetcdf", py_netcdf},
-    {"mobs", py_obs},
-    {"modb", py_odb},
-    {"moverlay", py_overlay},
-    {"mraw", py_raw},
-    {"msymb", py_symb},
-    {"mtable", py_table},
-    {"mtaylor", py_taylor},
-    {"mtephi", py_tephi},
-    {"mtext", py_text},
-    {"mtile", py_tile},
-    {"mwind", py_wind},
-    {"mwrepjson", py_wrepjson},
+    {"mmapgen", MagicsCalls::mapgen},
+    {"mmetbufr", MagicsCalls::metbufr},
+    {"mmetgraph", MagicsCalls::metgraph},
+    {"mnetcdf", MagicsCalls::netcdf},
+    {"mobs", MagicsCalls::obs},
+    {"modb", MagicsCalls::odb},
+    {"moverlay", MagicsCalls::overlay},
+    {"mraw", MagicsCalls::raw},
+    {"msymb", MagicsCalls::symb},
+    {"mtable", MagicsCalls::table},
+    {"mtaylor", MagicsCalls::taylor},
+    {"mtephi", MagicsCalls::tephi},
+    {"mtext", MagicsCalls::text},
+    {"mtile", MagicsCalls::tile},
+    {"mwind", MagicsCalls::wind},
+    {"mwrepjson", MagicsCalls::wrepjson},
     {"output", nullptr},
-    // {"page", py_new_page},
+    // {"page", MagicsCalls::new_page},
 
 
 };
@@ -67,14 +67,6 @@ static std::map<std::string, action_proc> actions = {
 // TODO: NO globals!!!
 
 static std::map<std::string, std::set<std::string> > reset;
-
-static void check(const string& name, const char* msg) {
-    if (msg) {
-        std::ostringstream oss;
-        oss << "Exception: " << name << ": " << msg;
-        throw MagicsException(oss.str());
-    }
-}
 
 static void execute(const std::string& action, const Value& p) {
     auto k = actions.find(action);
@@ -84,7 +76,7 @@ static void execute(const std::string& action, const Value& p) {
 
     // Reset previous settings
     for(auto r: reset[action]) {
-        py_reset(r.c_str());
+        MagicsCalls::reset(r);
     }
     reset[action].clear();
 
@@ -99,23 +91,23 @@ static void execute(const std::string& action, const Value& p) {
         reset[action].insert(name);
 
         if (value.isBool()) {
-            check(name, py_setc(name.c_str(), bool(value) ? "on" : "off"));
+            MagicsCalls::setc(name, bool(value) ? "on" : "off");
             continue;
         }
 
         if (value.isString()) {
             std::string s = value;
-            check(name, py_setc(name.c_str(), s.c_str()));
+            MagicsCalls::setc(name, s);
             continue;
         }
 
         if (value.isNumber() || value.isDouble()) {
             double d = value;
             if (long(d) == d) {
-                check(name, py_seti(name.c_str(), long(d)));
+                MagicsCalls::seti(name, long(d));
             }
             else {
-                check(name, py_setr(name.c_str(), d));
+                MagicsCalls::setr(name, d);
             }
             continue;
         }
@@ -145,28 +137,16 @@ static void execute(const std::string& action, const Value& p) {
                 throw MagicsException(oss.str());
             }
             if (s) {
-                std::vector<std::string> tmp;
-                std::vector<const char*> v;
-                for (auto e : l) {
-                    tmp.push_back(e);
-                    v.push_back(tmp.back().c_str());
-                }
-                check(name, py_set1c(name.c_str(), v.data(), v.size()));
+                std::vector<std::string> values(l.begin(), l.end());
+                MagicsCalls::set1c(name, values);
             }
             else if (d) {
-                std::vector<double> v;
-                for (auto e : l) {
-                    v.push_back(e);
-                }
-                check(name, py_set1r(name.c_str(), v.data(), v.size()));
+                std::vector<double> values(l.begin(), l.end());
+                MagicsCalls::set1r(name, values);
             }
             else if (i) {
-                std::vector<int> v;
-                for (auto e : l) {
-                    double d = e;
-                    v.push_back(int(d));
-                }
-                check(name, py_set1i(name.c_str(), v.data(), v.size()));
+                std::vector<int> values(l.begin(), l.end());
+                MagicsCalls::set1i(name, values);
             }
             continue;
         }
@@ -178,7 +158,7 @@ static void execute(const std::string& action, const Value& p) {
     }
 
     if (proc) {
-        check(action, proc());
+        proc();
     }
 }
 
@@ -186,7 +166,7 @@ static void execute(const std::string& action, const Value& p) {
 static void plot(const std::string&, const Value& param) {
     ValueList actions = param;
 
-    check("plot", py_open());
+    MagicsCalls::open();
 
     for (auto j = actions.begin(); j != actions.end(); ++j) {
         ValueMap p = (*j);
@@ -195,7 +175,7 @@ static void plot(const std::string&, const Value& param) {
         }
     }
 
-    check("plot", py_close());
+    MagicsCalls::close();
 }
 
 typedef void (*command_proc)(const std::string&, const Value&);
@@ -205,7 +185,7 @@ static std::map<std::string, command_proc> commands = {{"plot", plot}};
 
 
 void MagYaml::processFile(const std::string& path) {
-    py_set_python();
+    MagicsCalls::strict();
     ValueMap p = YAMLParser::decodeFile(path);
     for (auto j = p.begin(); j != p.end(); ++j) {
         std::string command = (*j).first;

@@ -23,7 +23,7 @@ public:
     // =================================================================
     static void axis();
     static void boxplot();
-    static int close();
+    static void close();
     static void coast();
     static void cont();
     static void eps();
@@ -105,6 +105,7 @@ public:
 
     static const char* detect(const std::string& data, const std::string& dimension);
 
+    static void strict(bool = true);
 };
 
 

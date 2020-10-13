@@ -57,7 +57,8 @@ const char* c_char(const char* name, T proc) {
 template <class T>
 int c_int(const char* name, T proc) {
     try {
-        return proc();
+        proc();
+        return 0;
     }
     catch (std::exception& e) {
         MagLog::error() << "EXCEPTION in " << name << "_(): " << e.what() << std::endl;

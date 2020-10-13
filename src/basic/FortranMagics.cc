@@ -21,35 +21,35 @@
 
 #include "FortranMagics.h"
 
-#include "Coastlines.h"
-#include "LegendVisitor.h"
-#include "MagicsGlobal.h"
-#include "RootSceneNode.h"
-#include "SceneNode.h"
-#include "TextVisitor.h"
-#include "Timer.h"
-#include "ViewNode.h"
-#include "VisualAction.h"
-#include "GribDecoder.h"
 #include "Axis.h"
 #include "BoxPlotDecoder.h"
 #include "BoxPlotVisualiser.h"
+#include "Coastlines.h"
 #include "Contour.h"
 #include "GeoPointsDecoder.h"
 #include "GraphPlotting.h"
+#include "GribDecoder.h"
 #include "ImportAction.h"
 #include "ImportObjectHandler.h"
 #include "ImportPlot.h"
 #include "InputMatrix.h"
+#include "LegendVisitor.h"
+#include "MagicsGlobal.h"
 #include "MapGenDecoder.h"
 #include "MetaData.h"
+#include "RootSceneNode.h"
+#include "SceneNode.h"
 #include "SimplePolylineInput.h"
 #include "SimplePolylineVisualiser.h"
 #include "SymbolInput.h"
 #include "SymbolPlotting.h"
 #include "TaylorGrid.h"
+#include "TextVisitor.h"
+#include "Timer.h"
 #include "TitleTemplate.h"
 #include "UserPoint.h"
+#include "ViewNode.h"
+#include "VisualAction.h"
 #include "Wind.h"
 #include "XYList.h"
 
@@ -108,6 +108,12 @@ void FortranMagics::print(ostream& out) const {
 
 void FortranMagics::popen() {
     MagLog::info() << "popen()" << endl;
+
+
+    ParameterManager::reset();
+    Layout::reset();
+
+
     if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
         MagLog::userInfo() << "----------------------------------------------------"
                               "--------------\n";
@@ -137,42 +143,34 @@ void FortranMagics::popen() {
   Here is where the real magics is happen. Everything is dispatched, followed
   by a comprehensive clean-up.
 */
-int FortranMagics::pclose(bool catch_exceptions) {
+void FortranMagics::pclose() {
     MagLog::info() << "pclose()" << endl;
-    singleton_ = 0;
-    try {
-        if (!empty_) {
-            finish();
-            dispatch();
-        }
 
-        if (root_ && drivers_) {
-            BasicGraphicsObject* object = root_->close();
-            if (object) {
-                /***   Start clean-up  ***/
-                drivers_->dispatch(object);
-                drivers_->closeDrivers();
+    if (!empty_) {
+        finish();
+        dispatch();
+    }
 
-                delete root_;
-                delete drivers_;
-                delete output_;
+    if (root_ && drivers_) {
+        BasicGraphicsObject* object = root_->close();
+        if (object) {
+            /***   Start clean-up  ***/
+            drivers_->dispatch(object);
+            drivers_->closeDrivers();
 
-                drivers_ = 0;
-                root_    = 0;
-                output_  = 0;
-            }
+            delete root_;
+            delete drivers_;
+            delete output_;
+
+            drivers_ = 0;
+            root_    = 0;
+            output_  = 0;
         }
     }
-    catch (MagicsException& e) {
-        MagLog::error() << "Errors reported:" << e.what() << " - No plot produced  " << endl;
-        MagLog::error().flush();
 
-        if(!catch_exceptions) {
-            throw;
-        }
+    ParameterManager::reset();
+    Layout::reset();
 
-        return -1;
-    }
 
     // the Magics log messages are not broadcast until the next log event -
     // therefore, the last log message will not be broadcast. We fix that by
@@ -181,12 +179,6 @@ int FortranMagics::pclose(bool catch_exceptions) {
     // scenes.
     MagLog::info().flush();
 
-    // We reset all the parameters to their default,
-    // then a consecutive call to popen will not be affected by the current
-    // values.
-    ParameterManager::reset();
-
-    Layout::reset();
 
     if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
         MagLog::userInfo() << "----------------------------------------------------"
@@ -198,8 +190,6 @@ int FortranMagics::pclose(bool catch_exceptions) {
         MagLog::userInfo() << "----------------------------------------------------"
                               "--------------\n";
     }
-    singleton_ = 0;
-    return 0;
 }
 
 void FortranMagics::drivers() {
@@ -854,7 +844,6 @@ void FortranMagics::wrepjson() {
     action_->data(wrep);
 }
 void FortranMagics::metbufr() {
-
     actions();
     action_ = new VisualAction();
 

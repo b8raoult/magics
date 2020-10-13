@@ -25,7 +25,7 @@
 extern "C" {
 #endif
 
-MAGICS_EXPORT void mag_set_python_context();
+MAGICS_EXPORT void mag_set_python();
 MAGICS_EXPORT void mag_open();
 MAGICS_EXPORT void mag_close();
 MAGICS_EXPORT void mag_coast();

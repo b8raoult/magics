@@ -63,11 +63,18 @@ void MagicsCalls::boxplot() {
     magics_->pboxplot();
 }
 
-int MagicsCalls::close() {
-    int code = magics_->pclose(false);
+void MagicsCalls::close() {
+    try {
+        magics_->pclose();
+    }
+    catch (...) {
+        delete magics_;
+        magics_ = 0;
+        throw;
+    }
+
     delete magics_;
     magics_ = 0;
-    return code;
 }
 
 void MagicsCalls::coast() {
@@ -254,7 +261,7 @@ void MagicsCalls::raw() {
 }
 
 void MagicsCalls::set_python() {
-    NOTIMP;
+    strict(true);
 }
 
 void MagicsCalls::symb() {
@@ -352,6 +359,11 @@ void MagicsCalls::setr(const std::string& name, double value) {
     ParameterManager::set(name, value);
 }
 
+
+void MagicsCalls::set1r(const std::string& name, const std::vector<double>& data) {
+    set1r(name, data.data(), data.size());
+}
+
 void MagicsCalls::set1r(const std::string& name, const double* data, const int dim1) {
     ASSERT(data);
 
@@ -397,6 +409,10 @@ void MagicsCalls::seti(const std::string& name, int value) {
     ParameterManager::set(name, value);
 }
 
+
+void MagicsCalls::set1i(const std::string& name, const std::vector<int>& data) {
+    set1i(name, data.data(), data.size());
+}
 
 void MagicsCalls::set1i(const std::string& name, const int* data, const int dim1) {
     ASSERT(data);
@@ -533,5 +549,10 @@ const char* MagicsCalls::detect(const std::string& data, const std::string& dime
     return magics_->detect(data, dimension);
 }
 
+
+void MagicsCalls::strict(bool on) {
+    // TODO: Come back
+    MagicsGlobal::compatibility(on);
+}
 
 }  // namespace magics
