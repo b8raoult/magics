@@ -94,6 +94,16 @@ MAGICS_EXPORT const char* magics_last_error() {
     return last_error();
 }
 
+MAGICS_EXPORT const char* magics_home() {
+    return MagicsCalls::home();
+}
+
+
+MAGICS_EXPORT const char* home() {
+    return MagicsCalls::home();
+}
+
+
 #define PYTHON_VOID(NAME) \
     MAGICS_EXPORT const char* py_##NAME() { return python_void(#NAME, MagicsCalls::NAME); }
 

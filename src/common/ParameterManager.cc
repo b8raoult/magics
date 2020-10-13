@@ -73,49 +73,6 @@ void ParameterManager::set(const string &name, const char *value) {
     set(name, std::string(value));
 }
 
-void ParameterManager::setLocal(const BaseParameter *from) {
-    ASSERT(table_);
-    BaseParameter* param = (*table_).parameter(from->name());
-    if (param)
-        try {
-        param->setLocal(from);
-    }
-    catch (MagicsException& e) {
-        if(MagicsGlobal::strict()) {
-            throw;
-        }
-        MagLog::warning() << "MagException > " << e << "\n";
-    }
-    else {
-        if(MagicsGlobal::strict()) {
-            throw UnknownParameter(from->name());
-        }
-        MagLog::warning() << "The parameter " << from->name() << " was not found.\n";
-    }
-}
-
-void ParameterManager::resetLocal(const string &name) {
-    ASSERT(table_);
-    BaseParameter* param = (*table_).parameter(name);
-    if (param) {
-        try {
-            param->resetLocal();
-        }
-        catch (MagicsException& e) {
-            if(MagicsGlobal::strict()) {
-                throw;
-            }
-            MagLog::warning() << "MagException > " << e << "\n";
-        }
-    }
-    else {
-        if(MagicsGlobal::strict()) {
-            throw UnknownParameter(name);
-        }
-        MagLog::warning() << "The parameter " << name << " was not found.\n";
-    }
-}
-
 void ParameterManager::reset(const string &name) {
     ASSERT(table_);
     BaseParameter* param = (*table_).parameter(name);
@@ -130,55 +87,55 @@ void ParameterManager::release() {
 
 BaseParameter *ParameterManager::getCopy(const string &name) {
     ASSERT(table_);
-    BaseParameter* param = (*table_).parameter(name);
+    BaseParameter* param = (*table_).parameter(name); ASSERT(param);
     return (param) ? param->clone() : 0;
 }
 
 double ParameterManager::getDouble(const string &name) {
     double value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 int ParameterManager::getInt(const string &name) {
     int value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 string ParameterManager::getString(const string &name) {
     string value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 stringarray ParameterManager::getStringArray(const string &name) {
     stringarray value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 doublearray ParameterManager::getDoubleArray(const string &name) {
     doublearray value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 intarray ParameterManager::getIntArray(const string &name) {
     intarray value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 longintarray ParameterManager::getLongIntArray(const string &name) {
     longintarray value;
-    get(name, value);
+    ASSERT(get(name, value));
     return value;
 }
 
 bool ParameterManager::getBool(const string &name) {
     string s;
-    get(name, s);
+    ASSERT(get(name, s));
     s = lowerCase(s);
 
     if (s == "no" || s == "off" || s == "false")

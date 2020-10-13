@@ -50,8 +50,6 @@ public:
     BaseParameter(const string& name);
     virtual ~BaseParameter();
     virtual void reset()                        = 0;
-    virtual void setLocal(const BaseParameter*) = 0;
-    virtual void resetLocal()                   = 0;
     virtual BaseParameter* clone()              = 0;
     const string& name() const { return name_; }
 

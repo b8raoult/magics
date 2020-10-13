@@ -60,11 +60,6 @@ public:
 
     static void set(const string& name, const char* value);
 
-    static void setLocal(const BaseParameter* from);
-
-    static void resetLocal(const string& name);
-
-
     static void reset(const string& name);
 
     static void release();
