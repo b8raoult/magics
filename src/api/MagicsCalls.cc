@@ -179,7 +179,9 @@ void MagicsCalls::input() {
 
 void MagicsCalls::legend() {
     ASSERT(magics_);
-    magics_->plegend();
+    // FIXME: why?
+    // magics_->plegend();
+    magics_->simplelegend();
 }
 
 void MagicsCalls::line() {

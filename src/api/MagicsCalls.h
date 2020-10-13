@@ -103,7 +103,7 @@ public:
     static const char* home();
     static const char* version();
 
-    static const char*  detect(const std::string& data, const std::string& dimension);
+    static const char* detect(const std::string& data, const std::string& dimension);
 
 };
 

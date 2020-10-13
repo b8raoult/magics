@@ -145,8 +145,8 @@ C_CHAR(metanetcdf)    // TODO: review name
 
 ****************************************************************************/
 
-static std::string fortran_string(const char* p, int len, bool lstrip = false) {
-    std::string s(p, len);
+static std::string fortran_string(const char* s_ptr, int s_len, bool lstrip = false) {
+    std::string s(s_ptr, s_len);
     // remove the space at the start and end of the string
     string::size_type index1 = lstrip ? s.find_first_not_of(" ") : 0;
     string::size_type index2 = s.find_last_not_of(" ");
@@ -155,14 +155,14 @@ static std::string fortran_string(const char* p, int len, bool lstrip = false) {
 
 //================================================================
 
-MAGICS_EXPORT void psetc_(const char* namep, const char* valuep, int namel, int valuel) {
-    std::string name  = fortran_string(namep, namel);
-    std::string value = fortran_string(valuep, valuel);
+MAGICS_EXPORT void psetc_(const char* name_ptr, const char* value_ptr, int name_len, int valuel) {
+    std::string name  = fortran_string(name_ptr, name_len);
+    std::string value = fortran_string(value_ptr, valuel);
     c_void("setc", [name, value] { MagicsCalls::setc(name, value); });
 }
 
-MAGICS_EXPORT void pset1c_(const char* namep, const char* value, const int* dim, int namel, int valuel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset1c_(const char* name_ptr, const char* value, const int* dim, int name_len, int valuel) {
+    std::string name = fortran_string(name_ptr, name_len);
     stringarray values;
     for (int i = 0; i < *dim; i++) {
         values.push_back(fortran_string(value + i * valuel, valuel));
@@ -172,68 +172,78 @@ MAGICS_EXPORT void pset1c_(const char* namep, const char* value, const int* dim,
 
 //================================================================
 
-MAGICS_EXPORT void pseti_(const char* namep, const int* value, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pseti_(const char* name_ptr, const int* value, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("seti", [name, value] { MagicsCalls::seti(name, *value); });
 }
 
-MAGICS_EXPORT void pset1i_(const char* namep, const int* data, const int* dim, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset1i_(const char* name_ptr, const int* data, const int* dim, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("set1i", [name, data, dim] { MagicsCalls::set1i(name, data, *dim); });
 }
 
-MAGICS_EXPORT void pset2i_(const char* namep, const int* data, const int* dim1, const int* dim2, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset2i_(const char* name_ptr, const int* data, const int* dim1, const int* dim2, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("set2i", [name, data, dim1, dim2] { MagicsCalls::set2i(name, data, *dim1, *dim2); });
 }
 
-MAGICS_EXPORT void pset3i_(const char* namep, const int* data, const int* dim1, const int* dim2, const int* dim3,
-                           int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset3i_(const char* name_ptr, const int* data, const int* dim1, const int* dim2, const int* dim3,
+                           int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("set3i", [name, data, dim1, dim2, dim3] { MagicsCalls::set3i(name, data, *dim1, *dim2, *dim3); });
 }
 
 //================================================================
-MAGICS_EXPORT void psetr_double(const char* namep, const double* value, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void psetr_double(const char* name_ptr, const double* value, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("setr", [name, value] { MagicsCalls::setr(name, *value); });
 }
 
-MAGICS_EXPORT void pset1r_double(const char* namep, const double* data, const int* dim, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset1r_double(const char* name_ptr, const double* data, const int* dim, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("set1r", [name, data, dim] { MagicsCalls::set1r(name, data, *dim); });
 }
 
-MAGICS_EXPORT void pset2r_double(const char* namep, const double* data, const int* dim1, const int* dim2, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset2r_double(const char* name_ptr, const double* data, const int* dim1, const int* dim2, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("set2r", [name, data, dim1, dim2] { MagicsCalls::set2r(name, data, *dim1, *dim2); });
 }
 
-MAGICS_EXPORT void pset3r_double(const char* namep, const double* data, const int* dim1, const int* dim2,
-                                 const int* dim3, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void pset3r_double(const char* name_ptr, const double* data, const int* dim1, const int* dim2,
+                                 const int* dim3, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("set3r", [name, data, dim1, dim2, dim3] { MagicsCalls::set3r(name, data, *dim1, *dim2, *dim3); });
 }
 
-MAGICS_EXPORT void penqr_double(const char* namep, double* value, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void penqr_double(const char* name_ptr, double* value, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("enqr", [name, value] { MagicsCalls::enqr(name, value); });
 }
 
 //================================================================
 
-MAGICS_EXPORT void penqi_(const char* namep, int* value, int namel) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void penqi_(const char* name_ptr, int* value, int name_len) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("enqi", [name, value] { MagicsCalls::enqi(name, value); });
 }
 
-MAGICS_EXPORT void penqc_(const char* namep, char* value, int namel, int vlength) {
-    std::string name = fortran_string(namep, namel);
+MAGICS_EXPORT void penqc_(const char* name_ptr, char* value, int name_len, int vlength) {
+    std::string name = fortran_string(name_ptr, name_len);
     c_void("enqc", [name, value] { MagicsCalls::enqc(name, value); });
 
     for (int i = strlen(value); i < vlength; i++) {
         value[i] = ' ';
     }
+}
+
+//================================================================
+
+
+MAGICS_EXPORT const char *detect_(const char* data_ptr, char* dimension_ptr, int data_len, int dimension_len) {
+    std::string data = fortran_string(data_ptr, data_len);
+    std::string dimension = fortran_string(dimension_ptr, dimension_len);
+
+    return c_char("detect", [data, dimension] { return MagicsCalls::detect(data, dimension); });
 }
 
 }  // end of extern "C"
