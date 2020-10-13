@@ -172,7 +172,7 @@ void MagicsCalls::metgraph() {
 }
 
 void MagicsCalls::mute() {
-    MagicsGlobal::silent(true);
+    MagicsSettings::silent(true);
 }
 
 void MagicsCalls::netcdf() {
@@ -187,7 +187,7 @@ void MagicsCalls::odb() {
 #ifdef HAVE_ODB
     FortranMagics::instance().podb();
 #else
-    if (MagicsGlobal::strict()) {
+    if (MagicsSettings::strict()) {
         throw NotSupported("ODB support is NOT enabled!");
     }
     MagLog::warning() << "ODB support is NOT enabled!\n";
@@ -243,7 +243,7 @@ void MagicsCalls::tile() {
 }
 
 void MagicsCalls::unmute() {
-    MagicsGlobal::silent(false);
+    MagicsSettings::silent(false);
 }
 
 void MagicsCalls::wind() {
@@ -495,7 +495,7 @@ const char* MagicsCalls::detect(const std::string& data, const std::string& dime
 
 void MagicsCalls::strict(bool on) {
     // TODO: Come back
-    MagicsGlobal::compatibility(on);
+    MagicsSettings::compatibility(on);
 }
 
 }  // namespace magics

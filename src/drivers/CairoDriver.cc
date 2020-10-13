@@ -378,7 +378,7 @@ MAGICS_NO_EXPORT void CairoDriver::write_tiff() const {
 
     TIFF* tif = TIFFOpen(fileName_.c_str(), "w");
     if (!tif) {
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(fileName_);
         }
         MagLog::warning() << "CairoDriver: Unable to open TIFF file " << fileName_ << std::endl;
@@ -387,7 +387,7 @@ MAGICS_NO_EXPORT void CairoDriver::write_tiff() const {
 
     GTIF* gtif = GTIFNew(tif);
     if (!gtif) {
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(fileName_);
         }
         MagLog::warning() << "CairoDriver: Unable to open GeoTIFF file " << fileName_ << std::endl;

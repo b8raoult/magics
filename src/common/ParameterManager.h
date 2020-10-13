@@ -24,7 +24,7 @@
 #include <MagException.h>
 #include <MagLog.h>
 #include <magics.h>
-#include <MagicsGlobal.h>
+#include <MagicsSettings.h>
 
 
 namespace magics {
@@ -51,7 +51,7 @@ public:
             param->set(value);
         }
         else {
-            if(MagicsGlobal::strict()) {
+            if(MagicsSettings::strict()) {
                 throw UnknownParameter(name);
             }
             MagLog::warning() << "The parameter '" << name << "' was not found.\n";
@@ -100,7 +100,7 @@ public:
 
         BaseParameter* param = (*table_).parameter(name);
         if (!param) {
-            if(MagicsGlobal::strict()) {
+            if(MagicsSettings::strict()) {
                 throw UnknownParameter(name);
             }
             MagLog::warning() << "parameter \"" << name << "\" not found " << endl;
@@ -114,7 +114,7 @@ public:
         }
         catch (NoFactoryException&) {
 
-            if(MagicsGlobal::strict()) {
+            if(MagicsSettings::strict()) {
                 throw;
             }
 

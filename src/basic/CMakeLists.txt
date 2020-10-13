@@ -18,8 +18,8 @@ LayoutManager.h
 LegendVisitor.cc
 LegendVisitor.h
 MagicsEvent.h
-MagicsGlobal.cc
-MagicsGlobal.h
+MagicsSettings.cc
+MagicsSettings.h
 MagicsObserver.h
 MagnifierVisitor.cc
 MagnifierVisitor.h

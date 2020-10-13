@@ -34,7 +34,7 @@
 #include "ImportPlot.h"
 #include "InputMatrix.h"
 #include "LegendVisitor.h"
-#include "MagicsGlobal.h"
+#include "MagicsSettings.h"
 #include "MapGenDecoder.h"
 #include "MetaData.h"
 #include "RootSceneNode.h"
@@ -135,7 +135,7 @@ void FortranMagics::popen() {
     MagLog::info() << "popen()" << endl;
 
 
-    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
+    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsSettings::silent()) {
         MagLog::userInfo() << "----------------------------------------------------"
                               "--------------\n";
         MagLog::userInfo() << "\n";
@@ -201,7 +201,7 @@ void FortranMagics::pclose() {
     MagLog::info().flush();
 
 
-    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
+    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsSettings::silent()) {
         MagLog::userInfo() << "----------------------------------------------------"
                               "--------------\n";
         MagLog::userInfo() << "    COMPLETED\n";
@@ -625,7 +625,7 @@ void FortranMagics::pgrib() {
     int index;
     ParameterManager::get("grib_field_position", index);
 
-    if (grib == gribfile && MagicsGlobal::compatibility()) {
+    if (grib == gribfile && MagicsSettings::compatibility()) {
         if (index == gribindex_) {
             gribindex_++;
         }
@@ -889,10 +889,9 @@ void FortranMagics::epsinput() {
 #include "MetgramGraph.h"
 void FortranMagics::metgraph() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epscloud -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     MetgramGraph* graph = new MetgramGraph();
 
     action_->visdef(graph);
@@ -900,20 +899,18 @@ void FortranMagics::metgraph() {
 
 void FortranMagics::epscloud() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epscloud -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsCloud* epscloud = new EpsCloud();
 
     action_->visdef(epscloud);
 }
 void FortranMagics::epsplumes() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epsplumes -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsPlume* plumes = new EpsPlume();
 
     action_->visdef(plumes);
@@ -921,40 +918,36 @@ void FortranMagics::epsplumes() {
 
 void FortranMagics::epsgraph() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epscloud -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsGraph* epsgraph = new EpsGraph();
     action_->visdef(epsgraph);
 }
 
 void FortranMagics::epslight() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epslight-> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsLight* epslight = new EpsLight();
     action_->visdef(epslight);
 }
 
 void FortranMagics::epswave() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epscloud -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsWave* eps = new EpsWave();
     action_->visdef(eps);
 }
 
 void FortranMagics::epswind() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epscloud -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsWind* epswind = new EpsWind();
     action_->visdef(epswind);
 }
@@ -965,10 +958,9 @@ void FortranMagics::epsbar() {
 }
 void FortranMagics::epsshading() {
     actions();
-    if (!action_) {
-        MagLog::error() << "epscloud -> No data defined " << endl;
-        exit(1);
-    }
+
+    ASSERT (action_);
+
     EpsShade* eps = new EpsShade();
     action_->visdef(eps);
 }
@@ -992,6 +984,11 @@ void FortranMagics::paxis() {
         }
     }
     catch (MagicsException& e) {
+
+        if(MagicsSettings::strict()) {
+            throw;
+        }
+
         MagLog::error() << e << "\n";
     }
     empty_ = false;  // Force the generation of the plot!

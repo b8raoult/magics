@@ -745,7 +745,7 @@ grib_handle* GribDecoder::open(grib_handle* grib, bool sendmsg) {
     FILE* file = fopen(file_name_.c_str(), "rb");
 
     if (!file) {
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(file_name_);
         }
 

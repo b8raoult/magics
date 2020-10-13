@@ -25,7 +25,7 @@
 #include "MvObs.h"
 #include "TextVisitor.h"
 #include "expat.h"
-#include "MagicsGlobal.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
@@ -187,7 +187,7 @@ BufrIdentifiers::BufrIdentifiers(int centre) : centre_(centre) {
     FILE* in = fopen(file.str().c_str(), "r");
 
     if (!in) {
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(file.str());
         }
 
@@ -196,7 +196,7 @@ BufrIdentifiers::BufrIdentifiers(int centre) : centre_(centre) {
         in = fopen(deffile.str().c_str(), "r");
         MagLog::warning() << "No definition file for [" << centre << "]: We use ECMWF definitions " << endl;
 
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(deffile.str());
         }
     }
@@ -242,7 +242,7 @@ BufrFamily::BufrFamily(const string& centre) : centre_(centre) {
 
     FILE* in = fopen(file.str().c_str(), "r");
     if (!in) {
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(file.str());
         }
         return;

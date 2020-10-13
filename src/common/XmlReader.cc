@@ -22,7 +22,7 @@
 #include "XmlReader.h"
 #include "MagException.h"
 #include "MagLog.h"
-#include "MagicsGlobal.h"
+#include "MagicsSettings.h"
 #include "expat.h"
 
 
@@ -131,7 +131,7 @@ void XmlReader::interpret(const string& xml, XmlTree* tree) {
     FILE* in = fopen(xml.c_str(), "r");
 
     if (!in) {
-        if (MagicsGlobal::strict()) {
+        if (MagicsSettings::strict()) {
             throw CannotOpenFile(xml);
         }
         MagLog::dev() << "XmlDecoder: can not open file " << xml << endl;

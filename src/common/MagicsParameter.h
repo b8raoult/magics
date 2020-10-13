@@ -29,8 +29,8 @@ namespace magics {
 template <class T>
 class MagicsParameter : public BaseParameter {
 public:
-    MagicsParameter(const string& name, const T& def, const string& migration = "") :
-        BaseParameter(name), default_(def), value_(def), migration_(migration) {}
+    MagicsParameter(const string& name, const T& def) :
+        BaseParameter(name), default_(def), value_(def) {}
 
     ~MagicsParameter() {}
 
@@ -44,10 +44,11 @@ public:
     void set(const T& value) { value_ = value; }
 
 protected:
+
     void print(ostream& out) const { out << name_ << "[" << value_ << ", " << default_ << "]"; }
-    T default_;
+
+   T default_;
     T value_;
-    string migration_;
 
 private:
     // No copy allowed
