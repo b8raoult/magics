@@ -152,7 +152,7 @@ public:
         if (both_)
             ParameterManager::reset(from_);
         else {
-            deprecated();
+            // deprecated();
         }
         ParameterManager::reset(to_);
     }
