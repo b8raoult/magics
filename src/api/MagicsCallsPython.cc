@@ -150,10 +150,10 @@ PYTHON_VOID(unmute)  // TODO: review name
 PYTHON_VOID(wind)
 PYTHON_VOID(wrepjson)
 
-PYTHON_CHAR(known_drivers)  // TODO: review name
-PYTHON_CHAR(meta_grib)      // TODO: review name
-PYTHON_CHAR(meta_input)     // TODO: review name
-PYTHON_CHAR(meta_netcdf)    // TODO: review name
+PYTHON_CHAR(knowndrivers)  // TODO: review name
+PYTHON_CHAR(metagrib)      // TODO: review name
+PYTHON_CHAR(metainput)     // TODO: review name
+PYTHON_CHAR(metanetcdf)    // TODO: review name
 
 MAGICS_EXPORT const char* py_new(const char* page) {
     return python_void("new", [page] { MagicsCalls::page(page); });
@@ -164,35 +164,35 @@ MAGICS_EXPORT const char* py_reset(const char* name) {
 }
 
 MAGICS_EXPORT const char* py_setc(const char* name, const char* value) {
-    return python_void("setc", [name, value] { MagicsCalls::set(name, value); });
+    return python_void("setc", [name, value] { MagicsCalls::setc(name, value); });
 }
 
 MAGICS_EXPORT const char* py_setr(const char* name, const double value) {
-    return python_void("setr", [name, value] { MagicsCalls::set(name, value); });
+    return python_void("setr", [name, value] { MagicsCalls::setr(name, value); });
 }
 
 MAGICS_EXPORT const char* py_seti(const char* name, const int value) {
-    return python_void("seti", [name, value] { MagicsCalls::set(name, value); });
+    return python_void("seti", [name, value] { MagicsCalls::seti(name, value); });
 }
 
 MAGICS_EXPORT const char* py_set1r(const char* name, const double* data, const int dim1) {
-    return python_void("set1r", [name, data, dim1] { MagicsCalls::set(name, data, dim1); });
+    return python_void("set1r", [name, data, dim1] { MagicsCalls::set1r(name, data, dim1); });
 }
 
 MAGICS_EXPORT const char* py_set2r(const char* name, const double* data, const int dim1, const int dim2) {
-    return python_void("set2r", [name, data, dim1, dim2] { MagicsCalls::set(name, data, dim1, dim2); });
+    return python_void("set2r", [name, data, dim1, dim2] { MagicsCalls::set2r(name, data, dim1, dim2); });
 }
 
 MAGICS_EXPORT const char* py_set1i(const char* name, const int* data, const int dim1) {
-    return python_void("set1i", [name, data, dim1] { MagicsCalls::set(name, data, dim1); });
+    return python_void("set1i", [name, data, dim1] { MagicsCalls::set1i(name, data, dim1); });
 }
 
 MAGICS_EXPORT const char* py_set2i(const char* name, const int* data, const int dim1, const int dim2) {
-    return python_void("set2i", [name, data, dim1, dim2] { MagicsCalls::set(name, data, dim1, dim2); });
+    return python_void("set2i", [name, data, dim1, dim2] { MagicsCalls::set2i(name, data, dim1, dim2); });
 }
 
 MAGICS_EXPORT const char* py_set1c(const char* name, const char** data, const int dim1) {
-    return python_void("set1c", [name, data, dim1] { MagicsCalls::set(name, data, dim1); });
+    return python_void("set1c", [name, data, dim1] { MagicsCalls::set1c(name, data, dim1); });
 }
 
 

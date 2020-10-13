@@ -8,14 +8,16 @@
  * nor does it submit to any jurisdiction.
  */
 
+#include <string>
+
 namespace magics {
 
 class MagicsCalls {
 public:
-    static const char* known_drivers();
-    static const char* meta_grib();
-    static const char* meta_input();
-    static const char* meta_netcdf();
+    static const char* knowndrivers();
+    static const char* metagrib();
+    static const char* metainput();
+    static const char* metanetcdf();
     static const char* keep_compatibility();
 
     // =================================================================
@@ -67,17 +69,40 @@ public:
     static void wrepjson();
     static void info();
 
-    static void page(const char* page);
-    static void reset(const char* name);
+    static void page(const std::string& page);
+    static void reset(const std::string& name);
 
-    static void set(const char* name, const char* value);
-    static void set(const char* name, int value);
-    static void set(const char* name, double value);
-    static void set(const char* name, const double* data, const int dim1);
-    static void set(const char* name, const double* data, const int dim1, const int dim2);
-    static void set(const char* name, const int* data, const int dim1);
-    static void set(const char* name, const int* data, const int dim1, const int dim2);
-    static void set(const char* name, const char** data, const int dim1);
+    static void setc(const std::string& name, const char* value);
+    static void setc(const std::string& name, const std::string& value);
+    static void set1c(const std::string& name, const char** data, const int dim1);
+    static void set1c(const std::string& name, const std::vector<std::string>& data);
+
+    static void seti(const std::string& name, int value);
+    static void set1i(const std::string& name, const int* data, const int dim1);
+    static void set1i(const std::string& name, const std::vector<int>& data);
+    static void set2i(const std::string& name, const int* data, const int dim1, const int dim2);
+    static void set3i(const std::string& name, const int* data, const int dim1, const int dim2, const int dim3);
+
+    static void setr(const std::string& name, double value);
+    static void set1r(const std::string& name, const double* data, const int dim1);
+    static void set1r(const std::string& name, const std::vector<double>& data);
+    static void set2r(const std::string& name, const double* data, const int dim1, const int dim2);
+    static void set3r(const std::string& name, const double* data, const int dim1, const int dim2, const int dim3);
+
+    static void enqr(const std::string& name, double* value);
+    static void enqi(const std::string& name, int* value);
+    static void enqc(const std::string& name, char* value);
+
+    static void add_warning_listener(void* data, void (*cb)(void*, const char*));
+    static void add_error_listener(void* data, void (*cb)(void*, const char*));
+    static void add_info_listener(void* data, void (*cb)(void*, const char*));
+    static void add_debug_listener(void* data, void (*cb)(void*, const char*));
+    static void clear_listeners();
+
+    static const char* home();
+    static const char* version();
+
 };
+
 
 }  // namespace magics
