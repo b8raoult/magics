@@ -24,8 +24,8 @@ void convert(const deque<PaperPoint>& in, ClipperLib::Path& out, bool print = fa
         cout << " -----------start---------------------------" << endl;
     for (auto pt = in.begin(); pt != in.end(); ++pt) {
         if (print)
-            cout << "     subj.push_back(MyPoint(" << ClipperLib::cInt(pt->x_ * scale_) << ", " << ClipperLib::cInt(pt->y_ * scale_)
-                 << ").get());" << endl;
+            cout << "     subj.push_back(MyPoint(" << ClipperLib::cInt(pt->x_ * scale_) << ", "
+                 << ClipperLib::cInt(pt->y_ * scale_) << ").get());" << endl;
         out.push_back(ClipperLib::IntPoint(ClipperLib::cInt(pt->x_ * scale_), ClipperLib::cInt(pt->y_ * scale_)));
     }
     int orientation = ClipperLib::Orientation(out);
@@ -54,15 +54,9 @@ void MagClipper::clipOpened(const Polyline& subject, const Polyline& clip, vecto
     convert(clip.polygon(), path_clip);
 
     clipper.AddPath(path_clip, ClipperLib::ptClip, true);
-    try {
-        clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
-    }
-    catch (std::exception& e) {
-        std::cout << "Clipping error 1 " << e.what() << endl;
-    }
-    catch (...) {
-        std::cout << "Clipping error 1 (unknown)" << endl;
-    }
+
+    clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+
 
     ClipperLib::PolyNode* node = solution.GetFirst();
 
@@ -110,76 +104,63 @@ void MagClipper::clipClosed(const Polyline& subject, const Polyline& clip, vecto
     ClipperLib::Clipper clipper, clipper_holes;
 
     convert(subject.polygon(), path_subject);
-    try {
-        int orientation = ClipperLib::Orientation(path_subject);
-        if (ClipperLib::Orientation(path_subject) == 0) {
-            ClipperLib::ReversePath(path_subject);
-        }
 
-        // cout << "Add line" << ClipperLib::Orientation(path_subject) << endl;
-        clipper.AddPath(path_subject, ClipperLib::ptSubject, true);
-        convert(clip.polygon(), path_clip);
-        for (auto hole = subject.beginHoles(); hole != subject.endHoles(); ++hole) {
-            ClipperLib::Path path;
-            convert(*hole, path);
-            if (ClipperLib::Orientation(path) == 1) {
-                ClipperLib::ReversePath(path);
-            }
-            // cout << "Add Hole" << ClipperLib::Orientation(path) << endl;
-            clipper.AddPath(path, ClipperLib::ptSubject, true);
-        }
+    int orientation = ClipperLib::Orientation(path_subject);
+    if (ClipperLib::Orientation(path_subject) == 0) {
+        ClipperLib::ReversePath(path_subject);
+    }
 
-        clipper.AddPath(path_clip, ClipperLib::ptClip, true);
-        try {
-            clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+    // cout << "Add line" << ClipperLib::Orientation(path_subject) << endl;
+    clipper.AddPath(path_subject, ClipperLib::ptSubject, true);
+    convert(clip.polygon(), path_clip);
+    for (auto hole = subject.beginHoles(); hole != subject.endHoles(); ++hole) {
+        ClipperLib::Path path;
+        convert(*hole, path);
+        if (ClipperLib::Orientation(path) == 1) {
+            ClipperLib::ReversePath(path);
         }
-        catch (std::exception& e) {
-            std::cout << "Clipping error 2 " << e.what() << endl;
+        // cout << "Add Hole" << ClipperLib::Orientation(path) << endl;
+        clipper.AddPath(path, ClipperLib::ptSubject, true);
+    }
+
+    clipper.AddPath(path_clip, ClipperLib::ptClip, true);
+
+    clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+
+
+    Polyline* poly = 0;
+    vector<ClipperLib::Paths::iterator> couters;
+    map<ClipperLib::Paths::iterator, Polyline*> helper;
+    vector<ClipperLib::Paths::iterator> choles;
+
+    for (auto path = solution.begin(); path != solution.end(); ++path) {
+        orientation = ClipperLib::Orientation(*path);
+        if (orientation == 1) {
+            couters.push_back(path);
+            Polyline* poly = new Polyline();
+            convert(*path, poly->polygon());
+            poly->close();
+            helper.insert(make_pair(path, poly));
         }
-        catch (...) {
-            std::cout << "Clipping error 2 (unknown)" << endl;
-        }
-
-        Polyline* poly = 0;
-        vector<ClipperLib::Paths::iterator> couters;
-        map<ClipperLib::Paths::iterator, Polyline*> helper;
-        vector<ClipperLib::Paths::iterator> choles;
-
-        for (auto path = solution.begin(); path != solution.end(); ++path) {
-            orientation = ClipperLib::Orientation(*path);
-            if (orientation == 1) {
-                couters.push_back(path);
-                Polyline* poly = new Polyline();
-                convert(*path, poly->polygon());
-                poly->close();
-                helper.insert(make_pair(path, poly));
-            }
-            else {
-                choles.push_back(path);
-            }
-        }
-
-        for (auto hole = choles.begin(); hole != choles.end(); ++hole) {
-            Polyline poly;
-            convert(**hole, poly.polygon());
-            poly.close();
-            for (auto outer = couters.begin(); outer != couters.end(); ++outer)
-                if (ClipperLib::PointInPolygon((*hole)->front(), **outer)) {
-                    helper[*outer]->newHole(poly);
-
-                    break;
-                }
-        }
-
-        for (auto outer = couters.begin(); outer != couters.end(); ++outer) {
-            out.push_back(helper[*outer]);
+        else {
+            choles.push_back(path);
         }
     }
-    catch (std::exception& e) {
-        std::cout << "Clipping error 3 " << e.what() << endl;
+
+    for (auto hole = choles.begin(); hole != choles.end(); ++hole) {
+        Polyline poly;
+        convert(**hole, poly.polygon());
+        poly.close();
+        for (auto outer = couters.begin(); outer != couters.end(); ++outer)
+            if (ClipperLib::PointInPolygon((*hole)->front(), **outer)) {
+                helper[*outer]->newHole(poly);
+
+                break;
+            }
     }
-    catch (...) {
-        std::cout << "Clipping error 3 (unknown)" << endl;
+
+    for (auto outer = couters.begin(); outer != couters.end(); ++outer) {
+        out.push_back(helper[*outer]);
     }
 }
 
@@ -198,15 +179,9 @@ void MagClipper::add(const Polyline& subject, const Polyline& clip, vector<Polyl
     convert(clip.polygon(), path_clip);
 
     clipper.AddPath(path_clip, ClipperLib::ptClip, true);
-    try {
-        clipper.Execute(ClipperLib::ctUnion, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
-    }
-    catch (std::exception& e) {
-        std::cout << "Clipping error 4 " << e.what() << endl;
-    }
-    catch (...) {
-        std::cout << "Clipping error 4 (unknown)" << endl;
-    }
+
+    clipper.Execute(ClipperLib::ctUnion, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+
     for (auto path = solution.begin(); path != solution.end(); ++path) {
         Polyline* poly = new Polyline();
         convert(*path, poly->polygon());
@@ -219,7 +194,8 @@ bool MagClipper::in(const Polyline& poly, const PaperPoint& point) {
     ClipperLib::Path path;
     convert(poly.polygon(), path);
 
-    return ClipperLib::PointInPolygon(ClipperLib::IntPoint(ClipperLib::cInt(point.x_ * scale_), ClipperLib::cInt(point.y_ * scale_)), path);
+    return ClipperLib::PointInPolygon(
+        ClipperLib::IntPoint(ClipperLib::cInt(point.x_ * scale_), ClipperLib::cInt(point.y_ * scale_)), path);
 }
 
 MagClipper::MagClipper() {}

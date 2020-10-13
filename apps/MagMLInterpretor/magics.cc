@@ -14,12 +14,12 @@ using namespace magics;
 
 int main(int argc, char** argv) {
     try {
-        for(int i = 1; i < argc; i++){
+        for (int i = 1; i < argc; i++) {
             MagYaml::processFile(argv[i]);
         }
     }
     catch (std::exception& e) {
-        std::cout << e.what() << std::endl;
+        std::cerr << "Magics: terminated with exception: " << e.what() << std::endl;
         exit(1);
     }
 

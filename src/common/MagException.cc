@@ -10,13 +10,13 @@
 
 // File Exception
 // Sylvie Lamy-Thepaut - ECMWF Mar 02
-#include <string.h>
 #include <MagException.h>
+#include <string.h>
 
 using namespace magics;
 
 
-MagicsException::MagicsException(const std::string &why) : what_(why) {
+MagicsException::MagicsException(const std::string& why) : what_(why) {
     if (std::getenv("MAGICS_ABORT_EXCEPTION")) {
         std::abort();
     }
@@ -39,12 +39,12 @@ CannotOpenFile::CannotOpenFile(const std::string& path) {
     strerror_r(errno, estr, sizeof(estr));
 #endif
     reason("Cannot open file " + path + ": " + string(estr));
-
 }
 
-NotYetImplemented::NotYetImplemented(const std::string &type, const std::string &method) :
+NotYetImplemented::NotYetImplemented(const std::string& type, const std::string& method) :
     MagicsException(type + " " + method + " : not yet implemented... ") {}
 
-MethodNotYetImplemented::MethodNotYetImplemented(const std::string &method) : NotYetImplemented("Method", method) {}
+MethodNotYetImplemented::MethodNotYetImplemented(const std::string& method) : NotYetImplemented("Method", method) {}
 
-ParameterNotYetImplemented::ParameterNotYetImplemented(const std::string &param) : NotYetImplemented("Parameter", param) {}
+ParameterNotYetImplemented::ParameterNotYetImplemented(const std::string& param) :
+    NotYetImplemented("Parameter", param) {}
