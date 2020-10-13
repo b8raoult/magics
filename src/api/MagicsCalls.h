@@ -71,6 +71,7 @@ public:
 
     static void page(const std::string& page);
     static void reset(const std::string& name);
+    static void resets();
 
     static void setc(const std::string& name, const char* value);
     static void setc(const std::string& name, const std::string& value);
@@ -101,6 +102,8 @@ public:
 
     static const char* home();
     static const char* version();
+
+    static const char*  detect(const std::string& data, const std::string& dimension);
 
 };
 

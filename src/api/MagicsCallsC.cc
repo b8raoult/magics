@@ -68,10 +68,10 @@ void c_void(const char* name, T proc) {
         proc();
     }
     catch (std::exception& e) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": " << e.what() << std::endl;
+        MagLog::error() << "EXCEPTION in mag_" << name << "(): " << e.what() << std::endl;
     }
     catch (...) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": unknown" << std::endl;
+        MagLog::error() << "EXCEPTION in mag_" << name << "(): unknown" << std::endl;
     }
 }
 
@@ -82,10 +82,10 @@ const char* c_char(const char* name, T proc) {
         return proc();
     }
     catch (std::exception& e) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": " << e.what() << std::endl;
+        MagLog::error() << "EXCEPTION in mag_" << name << "(): " << e.what() << std::endl;
     }
     catch (...) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": unknown" << std::endl;
+        MagLog::error() << "EXCEPTION in mag_" << name << "(): unknown" << std::endl;
     }
 
     return nullptr;

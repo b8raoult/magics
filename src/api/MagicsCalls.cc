@@ -18,18 +18,12 @@
  \sa magics_api.h
 */
 
-// #include <CompatibilityHelper.h>
 #include "MagicsCalls.h"
 #include "CompatibilityHelper.h"
 #include "FortranMagics.h"
 
-// #include <MagLog.h>
-// #include <MagicsGlobal.h>
-// #include <MagicsParameter.h>
-// #include <WebFormat.h>
 
 FortranMagics* magics_ = 0;
-
 
 namespace magics {
 
@@ -315,6 +309,12 @@ void MagicsCalls::reset(const std::string& name) {
     ParameterManager::reset(name);
 }
 
+void MagicsCalls::resets() {
+    ParameterManager::reset();
+}
+
+//=================================
+
 void MagicsCalls::setc(const std::string& name, const std::string& value) {
     if (CompatibilityHelper::check(name, value))
         return;
@@ -326,11 +326,23 @@ void MagicsCalls::setc(const std::string& name, const char* value) {
     setc(name, std::string(value));
 }
 
-void MagicsCalls::seti(const std::string& name, int value) {
-    if (CompatibilityHelper::check(name, value))
-        return;
-    ParameterManager::set(name, value);
+void MagicsCalls::set1c(const std::string& name, const char** data, const int dim) {
+    ASSERT(data);
+
+    //	MagLog::dev() << "entry in the new mag_set1c\n";
+    //	MagLog::dev() << "\tmag_set1c("  << dim << " entries);\n";
+    stringarray values;
+
+    for (int i = 0; i < dim; i++) {
+        ASSERT(data[i]);
+        values.push_back(data[i]);
+    }
+
+    set1c(name, values);
 }
+
+//=================================
+
 
 void MagicsCalls::setr(const std::string& name, double value) {
     if (CompatibilityHelper::check(name, value))
@@ -370,6 +382,20 @@ void MagicsCalls::set2r(const std::string& name, const double* data, const int d
     MagLog::dev() << "Parameter " << name << " set to " << matrix << "\n";
 }
 
+void MagicsCalls::set3r(const std::string& name, const double* data, const int dim1, const int dim2, const int dim3) {
+    NOTIMP;
+}
+
+//=================================
+
+
+void MagicsCalls::seti(const std::string& name, int value) {
+    if (CompatibilityHelper::check(name, value))
+        return;
+    ParameterManager::set(name, value);
+}
+
+
 void MagicsCalls::set1i(const std::string& name, const int* data, const int dim1) {
     ASSERT(data);
 
@@ -406,29 +432,10 @@ void MagicsCalls::set3i(const std::string& name, const int* data, const int dim1
     NOTIMP;
 }
 
-
-void MagicsCalls::set1c(const std::string& name, const char** data, const int dim) {
-    ASSERT(data);
-
-    //	MagLog::dev() << "entry in the new mag_set1c\n";
-    //	MagLog::dev() << "\tmag_set1c("  << dim << " entries);\n";
-    stringarray values;
-
-    for (int i = 0; i < dim; i++) {
-        ASSERT(data[i]);
-        values.push_back(data[i]);
-    }
-
-    set1c(name, values);
-}
-
-void MagicsCalls::set3r(const std::string& name, const double* data, const int dim1, const int dim2, const int dim3) {
-    NOTIMP;
-}
+//=================================
 
 
 void MagicsCalls::enqr(const std::string& n, double* value) {
-
     std::string name = n;
 
     ASSERT(value);
@@ -519,67 +526,10 @@ const char* MagicsCalls::home() {
     return home.c_str();
 }
 
+const char* MagicsCalls::detect(const std::string& data, const std::string& dimension) {
+    ASSERT(magics_);
+    return magics_->detect(data, dimension);
+}
+
 
 }  // namespace magics
-
-#if 0
-
-
-
-MAGICS_EXPORT void presets_() {
-    ParameterManager::reset();
-}
-
-MAGICS_EXPORT void preset_(const std::string& name, int length) {
-    std::string n(name, length);
-    CompatibilityHelper::reset(n);
-    mag_reset(n.c_str());
-}
-
-
-MAGICS_EXPORT void penqi_(const std::string& name, int* value, int length) {
-    std::string n(name, length);
-    mag_enqi(n.c_str(), value);
-}
-
-MAGICS_EXPORT void penqc_(const std::string& name, char* value, int length, int vlength) {
-    std::string n(name, length);
-    mag_enqc(n.c_str(), value);
-
-    for (int i = strlen(value); i < vlength; i++)
-        value[i] = ' ';
-}
-
-MAGICS_EXPORT const char* detect_(const char* data, char* dimension, int l1, int l2) {
-    std::string sdata(data, l1);
-    std::string sdim(dimension, l2);
-
-    return magics_->detect(sdata, sdim);
-}
-
-
-
-/* **************************************************************************
-
-***
-***  C interface  ( calling Fortran 90 interface above )
-***
-
-****************************************************************************/
-// FIXME: Not thread safe...
-
-
-
-
-MAGICS_EXPORT const char* detect(const char* data, const char* dimension) {
-    return magics_->detect(string(data), string(dimension));
-}
-
-
-
-
-}
-
-}  // end of extern "C"
-
-#endif

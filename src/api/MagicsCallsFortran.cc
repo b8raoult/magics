@@ -18,9 +18,9 @@
  \sa magics_api.h
 */
 #include "MagException.h"
+#include "MagLog.h"
 #include "MagicsCalls.h"
 #include "magics.h"
-#include "MagLog.h"
 
 using namespace magics;
 
@@ -32,10 +32,10 @@ void c_void(const char* name, T proc) {
         proc();
     }
     catch (std::exception& e) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": " << e.what() << std::endl;
+        MagLog::error() << "EXCEPTION in " << name << "_(): " << e.what() << std::endl;
     }
     catch (...) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": unknown" << std::endl;
+        MagLog::error() << "EXCEPTION in " << name << "_(): unknown" << std::endl;
     }
 }
 
@@ -45,10 +45,10 @@ const char* c_char(const char* name, T proc) {
         return proc();
     }
     catch (std::exception& e) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": " << e.what() << std::endl;
+        MagLog::error() << "EXCEPTION in " << name << "_(): " << e.what() << std::endl;
     }
     catch (...) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": unknown" << std::endl;
+        MagLog::error() << "EXCEPTION in " << name << "_(): unknown" << std::endl;
     }
 
     return nullptr;
@@ -60,10 +60,10 @@ int c_int(const char* name, T proc) {
         return proc();
     }
     catch (std::exception& e) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": " << e.what() << std::endl;
+        MagLog::error() << "EXCEPTION in " << name << "_(): " << e.what() << std::endl;
     }
     catch (...) {
-        MagLog::error() << "EXCEPTION in mag_" << name << ": unknown" << std::endl;
+        MagLog::error() << "EXCEPTION in " << name << "_(): unknown" << std::endl;
     }
 
     return -1;
@@ -73,6 +73,70 @@ int c_int(const char* name, T proc) {
 extern "C" {
 
 
+
+#define C_VOID(NAME) \
+    MAGICS_EXPORT void NAME##_() { c_void(#NAME, MagicsCalls::NAME); }
+
+#define C_CHAR(NAME) \
+    MAGICS_EXPORT const char* NAME##_() { return c_char(#NAME, MagicsCalls::NAME); }
+
+#define C_INT(NAME) \
+    MAGICS_EXPORT int NAME##_() { return c_int(#NAME, MagicsCalls::NAME); }
+
+
+C_VOID(axis)
+C_VOID(boxplot)
+C_INT(close)
+C_VOID(coast)
+C_VOID(cont)
+C_VOID(eps)
+C_VOID(epsbar)
+C_VOID(epscloud)
+C_VOID(epsgraph)
+C_VOID(epsinput)
+C_VOID(epslight)
+C_VOID(epsplumes)
+C_VOID(epsshading)
+C_VOID(epswave)
+C_VOID(epswind)
+C_VOID(geo)
+C_VOID(geojson)
+C_VOID(graph)
+C_VOID(grib)
+C_VOID(image)
+C_VOID(import)
+C_VOID(info)
+C_VOID(input)
+C_VOID(keep_compatibility)  // TODO: review name
+C_VOID(legend)
+C_VOID(line)
+C_VOID(mapgen)
+C_VOID(metbufr)
+C_VOID(metgraph)
+C_VOID(mute)
+C_VOID(netcdf)
+C_VOID(obs)
+C_VOID(odb)
+C_VOID(open)
+C_VOID(overlay)
+C_VOID(plot)
+C_VOID(print)
+C_VOID(raw)
+C_VOID(set_python)  // TODO: review name
+C_VOID(symb)
+C_VOID(table)
+C_VOID(taylor)
+C_VOID(tephi)
+C_VOID(text)
+C_VOID(tile)
+C_VOID(unmute)  // TODO: review name
+C_VOID(wind)
+C_VOID(wrepjson)
+
+C_CHAR(knowndrivers)  // TODO: review name
+C_CHAR(metagrib)      // TODO: review name
+C_CHAR(metainput)     // TODO: review name
+C_CHAR(metanetcdf)    // TODO: review name
 /* **************************************************************************
 
 ***
@@ -145,8 +209,8 @@ MAGICS_EXPORT void pset2r_double(const char* namep, const double* data, const in
     c_void("set2r", [name, data, dim1, dim2] { MagicsCalls::set2r(name, data, *dim1, *dim2); });
 }
 
-MAGICS_EXPORT void pset3r_double(const char* namep, const double* data, const int* dim1, const int* dim2, const int* dim3,
-                           int namel) {
+MAGICS_EXPORT void pset3r_double(const char* namep, const double* data, const int* dim1, const int* dim2,
+                                 const int* dim3, int namel) {
     std::string name = fortran_string(namep, namel);
     c_void("set3r", [name, data, dim1, dim2, dim3] { MagicsCalls::set3r(name, data, *dim1, *dim2, *dim3); });
 }
@@ -167,8 +231,9 @@ MAGICS_EXPORT void penqc_(const char* namep, char* value, int namel, int vlength
     std::string name = fortran_string(namep, namel);
     c_void("enqc", [name, value] { MagicsCalls::enqc(name, value); });
 
-    for (int i = strlen(value); i < vlength; i++)
+    for (int i = strlen(value); i < vlength; i++) {
         value[i] = ' ';
+    }
 }
 
 }  // end of extern "C"

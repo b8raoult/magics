@@ -85,7 +85,7 @@
 #include "magics_export.h"
 
 extern "C" {
-    
+
 void psetr_double(const char* namep, const double* value, int namel);
 void pset1r_double(const char* namep, const double* data, const int* dim, int namel);
 void pset2r_double(const char* namep, const double* data, const int* dim1, const int* dim2, int namel);
@@ -111,4 +111,5 @@ MAGICS_EXPORT void pset3r_(char* name, double* data, int* dim, int* dim2, int* d
 MAGICS_EXPORT void penqr_(char* name, double* value, int length) {
     penqr_double(name, value, length);
 }
+
 }

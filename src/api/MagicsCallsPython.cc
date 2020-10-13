@@ -58,10 +58,10 @@ const char* python_void(const char* name, T proc) {
     }
     catch (std::exception& e) {
         last_error(e);
-        std::cout << "EXCEPTION in py_" << name << ": " << e.what() << std::endl;
+        std::cout << "EXCEPTION in py_" << name << "(): " << e.what() << std::endl;
     }
     catch (...) {
-        std::cout << "EXCEPTION in py_" << name << ": unknown" << std::endl;
+        std::cout << "EXCEPTION in py_" << name << "(): unknown" << std::endl;
         last_error("Unknown exception");
     }
     return last_error();
@@ -76,10 +76,10 @@ const char* python_char(const char* name, T proc) {
     }
     catch (std::exception& e) {
         last_error(e);
-        std::cout << "EXCEPTION in py_" << name << ": " << e.what() << std::endl;
+        std::cout << "EXCEPTION in py_" << name << "(): " << e.what() << std::endl;
     }
     catch (...) {
-        std::cout << "EXCEPTION in py_" << name << ": unknown" << std::endl;
+        std::cout << "EXCEPTION in py_" << name << "(): unknown" << std::endl;
         last_error("Unknown exception");
     }
 
