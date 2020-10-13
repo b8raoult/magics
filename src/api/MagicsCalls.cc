@@ -23,29 +23,23 @@
 #include "FortranMagics.h"
 
 
-FortranMagics* magics_ = 0;
-
 namespace magics {
 
 
 const char* MagicsCalls::knowndrivers() {
-    ASSERT(magics_);
-    return magics_->knownDrivers();
+    return FortranMagics::instance().knownDrivers();
 }
 
 const char* MagicsCalls::metagrib() {
-    ASSERT(magics_);
-    return magics_->metagrib();
+    return FortranMagics::instance().metagrib();
 }
 
 const char* MagicsCalls::metainput() {
-    ASSERT(magics_);
-    return magics_->metainput();
+    return FortranMagics::instance().metainput();
 }
 
 const char* MagicsCalls::metanetcdf() {
-    ASSERT(magics_);
-    return magics_->metanetcdf();
+    return FortranMagics::instance().metanetcdf();
 }
 
 const char* MagicsCalls::keep_compatibility() {
@@ -54,37 +48,23 @@ const char* MagicsCalls::keep_compatibility() {
 
 // =================================================================
 void MagicsCalls::axis() {
-    ASSERT(magics_);
-    magics_->paxis();
+    FortranMagics::instance().paxis();
 }
 
 void MagicsCalls::boxplot() {
-    ASSERT(magics_);
-    magics_->pboxplot();
+    FortranMagics::instance().pboxplot();
 }
 
 void MagicsCalls::close() {
-    try {
-        magics_->pclose();
-    }
-    catch (...) {
-        delete magics_;
-        magics_ = 0;
-        throw;
-    }
-
-    delete magics_;
-    magics_ = 0;
+    FortranMagics::instance().pclose();
 }
 
 void MagicsCalls::coast() {
-    ASSERT(magics_);
-    magics_->pcoast();
+    FortranMagics::instance().pcoast();
 }
 
 void MagicsCalls::cont() {
-    ASSERT(magics_);
-    magics_->pcont();
+    FortranMagics::instance().pcont();
 }
 
 void MagicsCalls::eps() {
@@ -92,53 +72,43 @@ void MagicsCalls::eps() {
 }
 
 void MagicsCalls::epsbar() {
-    ASSERT(magics_);
-    magics_->epsbar();
+    FortranMagics::instance().epsbar();
 }
 
 void MagicsCalls::epscloud() {
-    ASSERT(magics_);
-    magics_->epscloud();
+    FortranMagics::instance().epscloud();
 }
 
 void MagicsCalls::epsgraph() {
-    ASSERT(magics_);
-    magics_->epsgraph();
+    FortranMagics::instance().epsgraph();
 }
 
 void MagicsCalls::epsinput() {
-    ASSERT(magics_);
-    magics_->epsinput();
+    FortranMagics::instance().epsinput();
 }
 
 void MagicsCalls::epslight() {
-    ASSERT(magics_);
-    magics_->epslight();
+    FortranMagics::instance().epslight();
 }
 
 void MagicsCalls::epsplumes() {
-    ASSERT(magics_);
-    magics_->epsplumes();
+    FortranMagics::instance().epsplumes();
 }
 
 void MagicsCalls::epsshading() {
-    ASSERT(magics_);
-    magics_->epsshading();
+    FortranMagics::instance().epsshading();
 }
 
 void MagicsCalls::epswave() {
-    ASSERT(magics_);
-    magics_->epswave();
+    FortranMagics::instance().epswave();
 }
 
 void MagicsCalls::epswind() {
-    ASSERT(magics_);
-    magics_->epswind();
+    FortranMagics::instance().epswind();
 }
 
 void MagicsCalls::geo() {
-    ASSERT(magics_);
-    magics_->pgeo();
+    FortranMagics::instance().pgeo();
 }
 
 void MagicsCalls::geojson() {
@@ -146,23 +116,19 @@ void MagicsCalls::geojson() {
 }
 
 void MagicsCalls::graph() {
-    ASSERT(magics_);
-    magics_->pgraph();
+    FortranMagics::instance().pgraph();
 }
 
 void MagicsCalls::grib() {
-    ASSERT(magics_);
-    magics_->pgrib();
+    FortranMagics::instance().pgrib();
 }
 
 void MagicsCalls::image() {
-    ASSERT(magics_);
-    magics_->pimage();
+    FortranMagics::instance().pimage();
 }
 
 void MagicsCalls::import() {
-    ASSERT(magics_);
-    magics_->pimport();
+    FortranMagics::instance().pimport();
 }
 
 void MagicsCalls::info() {
@@ -180,35 +146,29 @@ void MagicsCalls::info() {
 }
 
 void MagicsCalls::input() {
-    ASSERT(magics_);
-    magics_->pinput();
+    FortranMagics::instance().pinput();
 }
 
 void MagicsCalls::legend() {
-    ASSERT(magics_);
     // FIXME: why?
-    // magics_->plegend();
-    magics_->simplelegend();
+    // FortranMagics::instance().plegend();
+    FortranMagics::instance().simplelegend();
 }
 
 void MagicsCalls::line() {
-    ASSERT(magics_);
-    magics_->pline();
+    FortranMagics::instance().pline();
 }
 
 void MagicsCalls::mapgen() {
-    ASSERT(magics_);
-    magics_->pmapgen();
+    FortranMagics::instance().pmapgen();
 }
 
 void MagicsCalls::metbufr() {
-    ASSERT(magics_);
-    magics_->metbufr();
+    FortranMagics::instance().metbufr();
 }
 
 void MagicsCalls::metgraph() {
-    ASSERT(magics_);
-    magics_->metgraph();
+    FortranMagics::instance().metgraph();
 }
 
 void MagicsCalls::mute() {
@@ -216,19 +176,16 @@ void MagicsCalls::mute() {
 }
 
 void MagicsCalls::netcdf() {
-    ASSERT(magics_);
-    magics_->pnetcdf();
+    FortranMagics::instance().pnetcdf();
 }
 
 void MagicsCalls::obs() {
-    ASSERT(magics_);
-    magics_->pobs();
+    FortranMagics::instance().pobs();
 }
 
 void MagicsCalls::odb() {
 #ifdef HAVE_ODB
-    ASSERT(magics_);
-    magics_->podb();
+    FortranMagics::instance().podb();
 #else
     if (MagicsGlobal::strict()) {
         throw NotSupported("ODB support is NOT enabled!");
@@ -238,14 +195,11 @@ void MagicsCalls::odb() {
 }
 
 void MagicsCalls::open() {
-    delete magics_;
-    magics_ = new FortranMagics();
-    magics_->popen();
+    FortranMagics::instance().popen();
 }
 
 void MagicsCalls::overlay() {
-    ASSERT(magics_);
-    magics_->poverlay();
+    FortranMagics::instance().poverlay();
 }
 
 void MagicsCalls::plot() {
@@ -265,33 +219,27 @@ void MagicsCalls::set_python() {
 }
 
 void MagicsCalls::symb() {
-    ASSERT(magics_);
-    magics_->psymb();
+    FortranMagics::instance().psymb();
 }
 
 void MagicsCalls::table() {
-    ASSERT(magics_);
-    magics_->ptable();
+    FortranMagics::instance().ptable();
 }
 
 void MagicsCalls::taylor() {
-    ASSERT(magics_);
-    magics_->ptaylor();
+    FortranMagics::instance().ptaylor();
 }
 
 void MagicsCalls::tephi() {
-    ASSERT(magics_);
-    magics_->ptephi();
+    FortranMagics::instance().ptephi();
 }
 
 void MagicsCalls::text() {
-    ASSERT(magics_);
-    magics_->ptext();
+    FortranMagics::instance().ptext();
 }
 
 void MagicsCalls::tile() {
-    ASSERT(magics_);
-    magics_->ptile();
+    FortranMagics::instance().ptile();
 }
 
 void MagicsCalls::unmute() {
@@ -299,18 +247,15 @@ void MagicsCalls::unmute() {
 }
 
 void MagicsCalls::wind() {
-    ASSERT(magics_);
-    magics_->pwind();
+    FortranMagics::instance().pwind();
 }
 
 void MagicsCalls::wrepjson() {
-    ASSERT(magics_);
-    magics_->wrepjson();
+    FortranMagics::instance().wrepjson();
 }
 
 void MagicsCalls::page(const std::string& page) {
-    ASSERT(magics_);
-    magics_->pnew(page);
+    FortranMagics::instance().pnew(page);
 }
 
 void MagicsCalls::reset(const std::string& name) {
@@ -474,8 +419,7 @@ void MagicsCalls::enqr(const std::string& n, double* value) {
             double val;
             ParameterManager::get(name, val);
             if (!magCompare(projection, "cartesian")) {
-                ASSERT(magics_);
-                magics_->prepare();
+                FortranMagics::instance().prepare();
                 name = name + "_internal";
             }
         }
@@ -545,8 +489,7 @@ const char* MagicsCalls::home() {
 }
 
 const char* MagicsCalls::detect(const std::string& data, const std::string& dimension) {
-    ASSERT(magics_);
-    return magics_->detect(data, dimension);
+    return FortranMagics::instance().detect(data, dimension);
 }
 
 

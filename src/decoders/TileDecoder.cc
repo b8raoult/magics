@@ -84,8 +84,11 @@ string TileDecoder::positions_symbols() {
 }
 
 bool TileDecoder::ok() {
-    FILE* in = fopen(file_name_.c_str(), "r");
+    FILE* in = fopen(file_name_.c_str(), "rb");
     if (!in) {
+        if (MagicsGlobal::strict()) {
+            throw CannotOpenFile(file_name_);
+        }
         MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
         return false;
     }
@@ -163,8 +166,11 @@ void TileDecoder::customisedPoints(const Transformation& transformation, const s
 
     int error;
 
-    FILE* in = fopen(file_name_.c_str(), "r");
+    FILE* in = fopen(file_name_.c_str(), "rb");
     if (!in) {
+        if (MagicsGlobal::strict()) {
+            throw CannotOpenFile(file_name_);
+        }
         MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
         return;
     }
@@ -255,8 +261,11 @@ PointsHandler& TileDecoder::points(const Transformation& t, bool) {
 
     int error;
 
-    FILE* in = fopen(file_name_.c_str(), "r");
+    FILE* in = fopen(file_name_.c_str(), "rb");
     if (!in) {
+        if (MagicsGlobal::strict()) {
+            throw CannotOpenFile(file_name_);
+        }
         MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
         pointsHandlers_.push_back(new PointsHandler(points_));
         return *(pointsHandlers_.back());
@@ -447,8 +456,11 @@ void TileDecoder::decode() {
         netcdf.get("bounding-box", bbox, first, last);
 
         int error;
-        FILE* in = fopen(file_name_.c_str(), "r");
+        FILE* in = fopen(file_name_.c_str(), "rb");
         if (!in) {
+            if (MagicsGlobal::strict()) {
+                throw CannotOpenFile(file_name_);
+            }
             MagLog::error() << "ERROR: unable to create handle from file" << file_name_ << endl;
             return;
         }

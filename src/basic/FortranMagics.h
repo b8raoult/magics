@@ -42,9 +42,9 @@ class LegendVisitor;
 
 class FortranMagics : public std::stack<BasicSceneObject*> {
 public:
-    FortranMagics();
-    ~FortranMagics();
+
     typedef void (FortranMagics::*Action)();
+
     void popen();
     void pclose();
     void pnew(const string&);
@@ -100,16 +100,8 @@ public:
 
     void pwind();
 
-    static FortranMagics& magics() {
-        if (!singleton_)
-            singleton_ = new FortranMagics();
-        return *singleton_;
-    }
-    static void close() {
-        if (singleton_)
-            delete singleton_;
-        singleton_ = 0;
-    }
+    static FortranMagics& instance();
+
     void subpage();
     void page();
     void newpage();
@@ -132,12 +124,14 @@ public:
 
     const char* knownDrivers();
 
+    void reset();
+
 protected:
     //! Method to print string about this class on to a stream of type ostream.
     void print(ostream&) const;
     void finish();
     void dispatch();
-    static FortranMagics* singleton_;
+
     DriverManager* drivers_;
     FortranRootSceneNode* root_;
     OutputHandler* output_;
@@ -147,8 +141,10 @@ protected:
     vector<LegendVisitor*> legends_;
     vector<BasicSceneObject*> later_;
     stack<Axis*> axis_;
+
     BasicSceneObject* axisContainer_;
     VisualAction* action_;
+
     bool empty_;
     int gribindex_;
     bool legend_todo_;
@@ -158,6 +154,10 @@ protected:
     bool polyinput_todo_;
 
 private:
+
+    FortranMagics();
+    ~FortranMagics();
+
     //! Copy constructor - No copy allowed
     FortranMagics(const FortranMagics&);
     //! Overloaded << operator to copy - No copy allowed

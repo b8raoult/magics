@@ -57,6 +57,7 @@ public:
     virtual bool operator()(const intarray&) { return false; }
     virtual bool operator()(bool) { return false; }
 
+    static void resetAll();
 protected:
     static map<string, CompatibilityHelper*> compatibility_;
 };

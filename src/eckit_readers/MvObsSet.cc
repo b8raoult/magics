@@ -23,8 +23,9 @@
 //  May 1994 Original version.
 //--------------------------------------------------------------------
 
-#include "MagException.h"
 #include "MvObsSet.h"
+#include "MagException.h"
+#include "MagicsGlobal.h"
 
 #include <cerrno>
 #include <cstring>
@@ -137,6 +138,10 @@ bool MvObsSet::Open(const char* aFileName) {
     // Open bufr file
     _ecFile = fopen(aFileName, _IO_mode.c_str());
     if (!_ecFile) {
+        if (MagicsGlobal::strict()) {
+            throw CannotOpenFile(aFileName);
+        }
+
         std::cerr << " >>> MvObsSet::Open - ERROR opening file \'" << aFileName << "\' - " << std::strerror(errno)
                   << std::endl;
         return false;

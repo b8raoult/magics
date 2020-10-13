@@ -74,7 +74,6 @@ int c_int(const char* name, T proc) {
 extern "C" {
 
 
-
 #define C_VOID(NAME) \
     MAGICS_EXPORT void NAME##_() { c_void(#NAME, MagicsCalls::NAME); }
 
@@ -205,7 +204,8 @@ MAGICS_EXPORT void pset1r_double(const char* name_ptr, const double* data, const
     c_void("set1r", [name, data, dim] { MagicsCalls::set1r(name, data, *dim); });
 }
 
-MAGICS_EXPORT void pset2r_double(const char* name_ptr, const double* data, const int* dim1, const int* dim2, int name_len) {
+MAGICS_EXPORT void pset2r_double(const char* name_ptr, const double* data, const int* dim1, const int* dim2,
+                                 int name_len) {
     std::string name = fortran_string(name_ptr, name_len);
     c_void("set2r", [name, data, dim1, dim2] { MagicsCalls::set2r(name, data, *dim1, *dim2); });
 }
@@ -240,8 +240,8 @@ MAGICS_EXPORT void penqc_(const char* name_ptr, char* value, int name_len, int v
 //================================================================
 
 
-MAGICS_EXPORT const char *detect_(const char* data_ptr, char* dimension_ptr, int data_len, int dimension_len) {
-    std::string data = fortran_string(data_ptr, data_len);
+MAGICS_EXPORT const char* detect_(const char* data_ptr, char* dimension_ptr, int data_len, int dimension_len) {
+    std::string data      = fortran_string(data_ptr, data_len);
     std::string dimension = fortran_string(dimension_ptr, dimension_len);
 
     return c_char("detect", [data, dimension] { return MagicsCalls::detect(data, dimension); });

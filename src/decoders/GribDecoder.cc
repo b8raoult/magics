@@ -213,9 +213,9 @@ string GribDecoder::getString(const string& key, bool warnIfKeyAbsent) const {
     string value;
     // otherwise we build a name...
 
-    current_handle_   = field_;
+    current_handle_ = field_;
     // GribDecoder* grib = const_cast<GribDecoder*>(this);
-    value             = getstring(key, warnIfKeyAbsent, false);
+    value = getstring(key, warnIfKeyAbsent, false);
 
     if (component2_) {
         current_handle_ = component2_;
@@ -745,9 +745,13 @@ grib_handle* GribDecoder::open(grib_handle* grib, bool sendmsg) {
     FILE* file = fopen(file_name_.c_str(), "rb");
 
     if (!file) {
+        if (MagicsGlobal::strict()) {
+            throw CannotOpenFile(file_name_);
+        }
+
         valid_ = false;
         MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
-        throw CannotOpenFile(file_name_);
+        return 0;
     }
 
     if (loop_) {
@@ -967,7 +971,7 @@ bool GribLoop::hasMore() {
         file_ = fopen(path_.c_str(), "r");
         if (!file_) {
             MagLog::error() << "file can not be opened [" << path_ << "] " << std::strerror(errno) << std::endl;
-            throw GribFileMagException(path_, 0);
+            throw CannotOpenFile(path_);
         }
     }
 
@@ -1421,7 +1425,7 @@ void GribDecoder::visit(ValuesCollector& points) {
         inlons[i] = std::fmod(points[i].x(), 360.);
         if (inlons[i] < 0.)
             inlons[i] += 360.;
-        i++; // FIXME: double increment
+        i++;  // FIXME: double increment
     }
 
     double missing = getDouble("missingValue");

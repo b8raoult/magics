@@ -24,6 +24,7 @@
 #include <Polyline.h>
 #include <Symbol.h>
 #include <Text.h>
+#include "MagicsGlobal.h"
 
 #include "magics.h"
 
@@ -152,11 +153,18 @@ void GeoJsonDriver::close() {
 
                 err = zipOpenNewFileInZip(zf, filename, 0, 0, 0, 0, 0, 0, Z_DEFLATED, Z_DEFAULT_COMPRESSION);
 
-                if (err != ZIP_OK)
+                if (err != ZIP_OK) {
+                    if (MagicsGlobal::strict()) {
+                        throw CannotOpenFile(filename);
+                    }
                     MagLog::error() << "Could NOT open ZIP file " << filename << endl;
+                }
                 else {
                     fin = fopen(filename, "rb");
                     if (fin == 0) {
+                        if (MagicsGlobal::strict()) {
+                            throw CannotOpenFile(filename);
+                        }
                         MagLog::error() << "Open file " << filename << " to be added to ZIP FAILED!" << endl;
                         return;
                     }

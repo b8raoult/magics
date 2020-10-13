@@ -40,10 +40,13 @@
 #include "WebFormat.h"
 
 
-extern FortranMagics* magics_;
-
 namespace magics {
 
+void CompatibilityHelper::resetAll() {
+    for(auto j = compatibility_.begin(); j != compatibility_.end(); ++j) {
+        (*j).second->reset();
+    }
+}
 
 class NoMoreGribex : public CompatibilityHelper {
 public:
@@ -118,8 +121,7 @@ public:
     GribFieldPosition() : CompatibilityHelper("grib_field_position") {}
     ~GribFieldPosition() {}
     bool operator()(int) {
-        ASSERT(magics_);
-        magics_->resetGrib();
+        FortranMagics::instance().resetGrib();
         return false;
     }
 };
@@ -211,29 +213,29 @@ public:
     ~ActionInterceptor() {}
 
     bool operator()(double val) {
-        (magics_->*action_)();
+        (FortranMagics::instance().*action_)();
         return false;
     }
 
     virtual bool operator()(int val) {
-        (magics_->*action_)();
+        (FortranMagics::instance().*action_)();
         return false;
     }
     virtual bool operator()(const string& val) {
-        (magics_->*action_)();
+        (FortranMagics::instance().*action_)();
         return false;
     }
 
     virtual bool operator()(const doublearray& val) {
-        (magics_->*action_)();
+        (FortranMagics::instance().*action_)();
         return false;
     }
     virtual bool operator()(const stringarray& val) {
-        (magics_->*action_)();
+        (FortranMagics::instance().*action_)();
         return false;
     }
     virtual bool operator()(bool val) {
-        (magics_->*action_)();
+        (FortranMagics::instance().*action_)();
         return false;
     }
 
@@ -766,7 +768,7 @@ public:
         MagLog::info() << "Compatibility issue: The legend is turned on!\n";
         ParameterManager::set("legend", "on");
         // Act as a Action routine!...
-        magics_->plegend();
+        FortranMagics::instance().plegend();
         return false;
     }
 };

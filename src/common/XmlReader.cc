@@ -22,7 +22,10 @@
 #include "XmlReader.h"
 #include "MagException.h"
 #include "MagLog.h"
+#include "MagicsGlobal.h"
 #include "expat.h"
+
+
 using namespace magics;
 
 XmlReader::XmlReader(bool tag) : dataAsTag_(tag) {}
@@ -128,6 +131,9 @@ void XmlReader::interpret(const string& xml, XmlTree* tree) {
     FILE* in = fopen(xml.c_str(), "r");
 
     if (!in) {
+        if (MagicsGlobal::strict()) {
+            throw CannotOpenFile(xml);
+        }
         MagLog::dev() << "XmlDecoder: can not open file " << xml << endl;
         MagLog::error() << "XmlDecoder: can not open file " << xml << endl;
         return;

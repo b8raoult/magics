@@ -52,6 +52,7 @@
 #include "VisualAction.h"
 #include "Wind.h"
 #include "XYList.h"
+#include "CompatibilityHelper.h"
 
 #ifdef HAVE_NETCDF
 #include "NetcdfDecoder.h"
@@ -70,6 +71,8 @@ FortranMagics::FortranMagics() :
     drivers_(0),
     output_(0),
     action_(0),
+    root_(0),
+    axisContainer_(0),
     empty_(true),
     gribindex_(0),
     legend_todo_(false),
@@ -78,24 +81,44 @@ FortranMagics::FortranMagics() :
     polyinput_todo_(false)
 
 {
-    ASSERT(singleton_ == 0);
-    singleton_ = this;
+    reset();
 }
 
 FortranMagics::~FortranMagics() {
-    if (drivers_)
-        delete drivers_;
-    //	if ( root_ ) delete root_;
-    if (output_)
-        delete output_;
-    singleton_ = 0;
+    reset();
+}
 
-    /*
-    ParameterManager::release();
-    TitleTemplate::release();
+void FortranMagics::reset() {
+    delete drivers_;
+    drivers_ = 0;
 
-    GribDecoder::releaseContext();
-    */
+    delete output_;
+    output_ = 0;
+
+    delete root_;
+    root_ = 0;
+
+    empty_            = true;
+    gribindex_        = 0;
+    legend_todo_      = false;
+    symbolinput_todo_ = false;
+    matrixinput_todo_ = false;
+    polyinput_todo_   = false;
+
+
+    while(actions_.size()) { actions_.pop(); }
+
+    // TODO: clear memory
+    texts_.clear();
+    legends_.clear();
+    later_.clear();
+    while(axis_.size()) { axis_.pop(); }
+
+
+
+    ParameterManager::reset();
+    Layout::reset();
+    CompatibilityHelper::resetAll();
 }
 
 /*!
@@ -107,11 +130,9 @@ void FortranMagics::print(ostream& out) const {
 }
 
 void FortranMagics::popen() {
+    reset();
+
     MagLog::info() << "popen()" << endl;
-
-
-    ParameterManager::reset();
-    Layout::reset();
 
 
     if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
@@ -568,6 +589,8 @@ const char* FortranMagics::metanetcdf() {
     static string temp;
     temp = out.str();
     return temp.c_str();
+#else
+    return 0;
 #endif
 }
 
@@ -1030,4 +1053,7 @@ void FortranMagics::pboxplot() {
     action_->visdef(plot);
 }
 
-FortranMagics* FortranMagics::singleton_ = 0;
+FortranMagics& FortranMagics::instance() {
+    static FortranMagics instance_;
+    return instance_;
+}
