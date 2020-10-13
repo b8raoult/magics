@@ -332,6 +332,7 @@ PointsHandler& TileDecoder::points(const Transformation& t, bool) {
     return *(pointsHandlers_.back());
 #else
     MagLog::warning() << " TileDecoder> Can NOT work because NetCDF was DISABLED in Magics!" << endl;
+    NOTIMP;
 #endif
 }
 

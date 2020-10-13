@@ -39,6 +39,7 @@ void MagicsGlobal::compatibility(bool c) {
 
 bool MagicsGlobal::strict() {
     // TODO: make a proper setting
+    return true;
     return !compatibility();
 }
 
