@@ -2,7 +2,7 @@ magics:
   mcont:
     contour: false
     contour_description: ERICHA 24-h accumulations from observations
-    contour_internal_reduction_factor: '6'
+    contour_internal_reduction_factor: 6
     contour_label: false
     contour_level_list:
     - 0.2

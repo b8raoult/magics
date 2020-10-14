@@ -1,8 +1,6 @@
 magics:
   mcont:
     contour: true
-    contour_above_line_colour: reddish_orange
-    contour_below_line_style: solid
     contour_description: 'Method : contour Interval : 2 Colour : Split contour Used
       for temperature'
     contour_highlight: false
@@ -11,8 +9,7 @@ magics:
     contour_label: true
     contour_label_blanking: false
     contour_label_frequency: 1
-    contour_label_height: 0.6
-    contour_label_quality: high
+    contour_label_height: 0
     contour_legend_text: 'Contours multi-coloured (Range: -20/40)'
     contour_level_list:
     - -20
@@ -75,7 +72,6 @@ magics:
     - reddish_orange
     - reddish_orange
     contour_line_colour_rainbow_method: list
-    contour_line_plotting: split
     contour_line_thickness: 4
     contour_line_thickness_rainbow_list:
     - 2
@@ -112,7 +108,5 @@ magics:
     contour_max_level: 40
     contour_min_level: -20
     contour_shade: false
-    contour_split_level: 10
-    contour_split_line_colour: bluish_purple
     contour_title: Contour (Multi-colour, Interval 2)
 

@@ -39,5 +39,4 @@ magics:
     contour_shade_method: area_fill
     contour_shade_technique: cell_shading
     contour_title: 'Contour shade (Range: -0.5 / 7)'
-    grib_scaling_of_retrieved_fields: false
 

@@ -21,5 +21,4 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: Contour shade (From 0.1 to 1)
-    input_field_supress_below: 0.1
 

@@ -4,7 +4,7 @@ magics:
     contour_highlight: false
     contour_label: true
     contour_label_colour: navy
-    contour_label_height: '0.4'
+    contour_label_height: 0.4
     contour_legend_text: 'Contour coloured lines (Range: 5/70)'
     contour_level_list:
     - 5

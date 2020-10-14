@@ -6,7 +6,6 @@ magics:
     contour_label: false
     contour_label_colour: black
     contour_label_format: (F4.1)
-    contour_label_quality: high
     contour_legend_text: 'Contour shade (Range: 0.05 / 5)'
     contour_level_list:
     - 0.05

@@ -11,7 +11,7 @@ magics:
     contour_label_blanking: false
     contour_label_colour: blue
     contour_label_frequency: 1
-    contour_label_height: 0.4
+    contour_label_height: 0
     contour_legend_text: Interval 10, minimum 30 (in m/s)
     contour_level_selection_type: interval
     contour_line_colour: yellow

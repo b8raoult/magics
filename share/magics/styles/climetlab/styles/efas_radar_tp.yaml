@@ -2,7 +2,7 @@ magics:
   mcont:
     contour: false
     contour_description: EFAS soil moisture
-    contour_internal_reduction_factor: '6'
+    contour_internal_reduction_factor: 6
     contour_label: false
     contour_level_list:
     - 0.1

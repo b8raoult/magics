@@ -6,12 +6,11 @@ magics:
     - rgba(0,0,1,1)
     - rgba(0,0,0,1)
     - none
-    symbol_advanced_table_colour_method:
-    - list
+    symbol_advanced_table_colour_method: list
     symbol_advanced_table_height_list:
-    - '0.1'
-    - '0.1'
-    - none
+    - 0.1
+    - 0.1
+    - 0
     symbol_advanced_table_level_list:
     - 0
     - 0.5
@@ -20,10 +19,8 @@ magics:
     symbol_advanced_table_marker_list:
     - 15
     - 15
-    - null
-    symbol_advanced_table_selection_type:
-    - list
-    symbol_table_mode:
-    - advanced
+    - 0
+    symbol_advanced_table_selection_type: list
+    symbol_table_mode: advanced
     symbol_type: marker
 

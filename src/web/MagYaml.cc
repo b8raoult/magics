@@ -16,6 +16,7 @@
 #include "MagException.h"
 #include "MagParser.h"
 #include "MagicsCalls.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
@@ -183,12 +184,18 @@ static void plot(const std::string&, const Value& param) {
 static void styles(const std::string&, const Value& param) {
     ValueList actions = param;
 
+    MagicsSettings::silent(true);
+
+    MagicsCalls::open();
+
     for (auto j = actions.begin(); j != actions.end(); ++j) {
         ValueMap p = (*j);
         for (auto k = p.begin(); k != p.end(); ++k) {
             execute((*k).first, (*k).second);
         }
     }
+
+    // No close == no plot
 }
 
 

@@ -13,14 +13,37 @@ FIX = {
     "shade_min_level": "contour_shade_min_level",
     "shade_technique": "contour_shade_technique",
     "level_selection_type": "contour_level_selection_type",
-    "wind_arrow_legend": "legend",
+}
+
+SKIP = {
+    # Not needed
+    "contour_label_quality",
+    # Marked as not implemented
+    "wind_arrow_cross_boundary",
+    # Does not exists
+    "input_field_supress_below",
+    "contour_hilo_suppress_radius",
+    "contour_hilo_quality",
+    "contour_data_transformation",
+    "contour_above_line_colour",
+    "contour_below_line_colour",
+    "contour_below_line_style",
+    "contour_line_plotting",
+    "contour_split_level",
+    "contour_split_line_colour",
+    # Metview only below:
+    "contour_shade_label_blanking",
+    "grib_scaling_of_retrieved_fields",
+    # xml is in 'unused'
+    "image_colour_table_creation_mode",
+    "image_pixel_selection_frequency",
 }
 
 
 def number(x):
 
     if x in ("None", "none"):
-        return None
+        return 0
 
     try:
         return int(x)
@@ -63,6 +86,9 @@ def tidy(x):
     if isinstance(x, dict):
         d = {}
         for k, v in x.items():
+            if k in SKIP:
+                continue
+
             k = FIX.get(k, k)
             if k not in ("legend"):
                 assert (
@@ -82,6 +108,8 @@ def tidy(x):
                 "contour_shade_marker_table",
                 "symbol_advanced_table_level_list",
                 "symbol_advanced_table_marker_list",
+                "contour_gradients_step_list",
+                "symbol_advanced_table_height_list",
             ):
                 d[k] = [number(y) for y in d[k].split("/")]
 
@@ -96,17 +124,22 @@ def tidy(x):
                 "wind_flag_length",
                 "wind_flag_origin_marker_size",
                 "wind_arrow_calm_below",
-                "symbol_height"
+                "symbol_height",
+                "symbol_marker_index",
+                "contour_label_height",
+                "symbol_text_font_size",
+                "contour_internal_reduction_factor",
+                "contour_interpolation_ceiling"
             ):
                 d[k] = number(d[k])
 
             if "_colour" in k and isinstance(d[k], str):
                 d[k] = d[k].lower()
 
-            if "_list" in k and isinstance(d[k], str):
+            if k.endswith("_list") and isinstance(d[k], str):
                 d[k] = tidy(d[k].split("/"))
 
-            if "_table" in k and isinstance(d[k], str):
+            if k.endswith("_table") and isinstance(d[k], str):
                 d[k] = tidy(d[k].split("/"))
 
         return d

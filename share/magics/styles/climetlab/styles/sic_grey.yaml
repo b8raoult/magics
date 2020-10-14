@@ -2,7 +2,7 @@ magics:
   mcont:
     contour: false
     contour_description: 'Method : contour shade Level list : (0.20/1.) Colour : Grey'
-    contour_interpolation_ceiling: 1.0
+    contour_interpolation_ceiling: 1
     contour_label: false
     contour_legend_text: Contour shade (One level from 0.2 to 1)
     contour_level_list:
@@ -17,5 +17,4 @@ magics:
     contour_shade_min_level: 0
     contour_shade_min_level_colour: grey
     contour_title: Contour shade (Grey from 0.2 to 1.00)
-    input_field_supress_below: 0.2
 

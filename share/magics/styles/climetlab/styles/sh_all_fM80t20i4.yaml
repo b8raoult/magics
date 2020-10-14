@@ -3,16 +3,15 @@ magics:
     contour: false
     contour_description: 'Method : Area fill Level range : -80 to 20 Interval : 4
       Thickness : 3 Colour : All colours Used for temperature (500hPa)'
-    contour_highlight_contour: dash
     contour_highlight_frequency: 100
+    contour_highlight_style: dash
     contour_highlight_thickness: 5
     contour_hilo: false
     contour_interval: 4
     contour_label: false
-    contour_label_quality: high
     contour_legend_text: 'Contour shade (Range: -80 / 20)'
     contour_level_selection_type: interval
-    contour_line_contour: dot
+    contour_line_style: dot
     contour_line_thickness: 3
     contour_shade: true
     contour_shade_colour_list:

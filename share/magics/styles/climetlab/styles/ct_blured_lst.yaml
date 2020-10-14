@@ -9,8 +9,7 @@ magics:
     contour_label: true
     contour_label_colour: black
     contour_label_frequency: 1
-    contour_label_height: 0.3
-    contour_label_quality: high
+    contour_label_height: 0
     contour_legend_text: Range -10/0.2, blue for negative, red for positive
     contour_level_list:
     - -10

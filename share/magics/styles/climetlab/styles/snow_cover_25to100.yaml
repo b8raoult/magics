@@ -21,5 +21,4 @@ magics:
     contour_shade_min_level: 20
     contour_shade_min_level_colour: grey
     contour_title: 'Contour shade (Range: 25 to 100 as percentage)'
-    input_field_supress_below: 1
 

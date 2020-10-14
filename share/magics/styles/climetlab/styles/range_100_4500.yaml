@@ -6,7 +6,6 @@ magics:
     contour_hilo: false
     contour_interval: 200
     contour_label: false
-    contour_label_quality: high
     contour_level_list:
     - 100
     - 200
@@ -49,7 +48,6 @@ magics:
     - rgb(0,0,0.2)
     - blue
     contour_shade_colour_method: calculate
-    contour_shade_label_blanking: true
     contour_shade_method: area_fill
     contour_shade_min_level: 100
     contour_title: Shade from 100 to 4500 (orange-blue)

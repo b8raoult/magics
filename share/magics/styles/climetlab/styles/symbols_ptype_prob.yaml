@@ -24,8 +24,7 @@ magics:
     - rgb(0.64,0.64,0.64)
     - rgb(0.83,0.83,0.83)
     - white
-    symbol_advanced_table_colour_method:
-    - list
+    symbol_advanced_table_colour_method: list
     symbol_advanced_table_level_list:
     - 1
     - 2
@@ -50,9 +49,7 @@ magics:
     - 21
     symbol_advanced_table_marker_list:
     - 18
-    symbol_advanced_table_selection_type:
-    - list
-    symbol_table_mode:
-    - advanced
+    symbol_advanced_table_selection_type: list
+    symbol_table_mode: advanced
     symbol_type: marker
 

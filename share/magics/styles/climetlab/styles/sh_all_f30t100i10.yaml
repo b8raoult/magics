@@ -1,6 +1,5 @@
 magics:
   mcont:
-    contour_data_transformation: isotachs
     contour_description: 'Method : contour shade Level range : 30 to 100 Interval
       : 10 Colour : All colours Used for wind'
     contour_hi_min_value: 15

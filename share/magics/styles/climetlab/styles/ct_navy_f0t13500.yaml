@@ -4,7 +4,6 @@ magics:
     contour_description: 'Method : Contour level range (0 to 13500)'
     contour_highlight: false
     contour_label: true
-    contour_label_quality: high
     contour_legend_text: 'Contour (Range: 0/13500)'
     contour_level_list:
     - 0

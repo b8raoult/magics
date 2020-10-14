@@ -4,7 +4,7 @@ magics:
     contour_description: 'Method : Area fill Level range : 0.6 to 0.8 Interval : 0.02
       Colour : red Used for Lake shape factor'
     contour_hilo: false
-    contour_interpolation_ceiling: '0.8'
+    contour_interpolation_ceiling: 0.8
     contour_interval: 0.02
     contour_label: false
     contour_legend_text: 'Contour shade (Range: 0.6 / 0.8), used for Lake shape factor'

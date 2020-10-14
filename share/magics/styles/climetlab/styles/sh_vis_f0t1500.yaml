@@ -4,7 +4,7 @@ magics:
     contour_description: Red range:0/1500 used for low visibility
     contour_highlight: false
     contour_hilo: false
-    contour_internal_reduction_factor: 4.0
+    contour_internal_reduction_factor: 4
     contour_label: false
     contour_legend_text: 'Shade (Range: 0 / 1500 )'
     contour_level_list:
@@ -27,7 +27,6 @@ magics:
     - rgb(0.76,0.99,0)
     - rgb(0,0.99,0.3)
     contour_shade_colour_method: list
-    contour_shade_label_blanking: true
     contour_shade_method: area_fill
     contour_shade_technique: polygon_shading
     contour_title: 'Shade (Range: 0 / 1500 ) for low visibility'

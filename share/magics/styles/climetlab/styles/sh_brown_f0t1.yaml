@@ -33,7 +33,6 @@ magics:
     - rgb(0.9,0.9,0.9)
     - white
     contour_shade_colour_method: list
-    contour_shade_label_blanking: false
     contour_shade_max_level: 1
     contour_shade_min_level: 0
     contour_shade_technique: cell_shading

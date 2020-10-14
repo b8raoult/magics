@@ -20,7 +20,6 @@ magics:
     - 25
     contour_level_selection_type: level_list
     contour_line_colour: red
-    contour_method: conicon
     contour_reference_level: 2
     contour_shade: true
     contour_shade_colour_list:

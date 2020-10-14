@@ -6,7 +6,6 @@ magics:
     contour_hilo: false
     contour_label: true
     contour_label_frequency: 2
-    contour_label_quality: high
     contour_legend_text: 'Additional 2 (Range: -80/56 by 2)'
     contour_level_list:
     - -50

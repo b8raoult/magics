@@ -20,12 +20,10 @@ magics:
     - rgb(1,1,0.5213)
     - rgb(1,1,0.7684)
     - rgb(1,1,1)
-    symbol_advanced_table_colour_method:
-    - list
+    symbol_advanced_table_colour_method: list
     symbol_advanced_table_height_list:
-    - '0.15'
-    symbol_advanced_table_height_method:
-    - list
+    - 0.15
+    symbol_advanced_table_height_method: list
     symbol_advanced_table_level_list:
     - 0.0001
     - 0.0002
@@ -46,9 +44,7 @@ magics:
     - 20
     symbol_advanced_table_marker_list:
     - 18
-    symbol_advanced_table_selection_type:
-    - list
-    symbol_table_mode:
-    - advanced
+    symbol_advanced_table_selection_type: list
+    symbol_table_mode: advanced
     symbol_type: marker
 

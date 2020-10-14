@@ -5,7 +5,6 @@ magics:
     contour_highlight: false
     contour_hilo: false
     contour_label: false
-    contour_legend: false
     contour_level_list:
     - -0.5
     - 0.5
@@ -142,8 +141,8 @@ magics:
     - hsl(237,0.22,0.33)
     - hsl(262,0.13,0.25)
     contour_shade_colour_method: list
-    contour_shade_label_blanking: false
     contour_shade_method: area_fill
     contour_shade_technique: cell_shading
     contour_title: Single colour scheme for combined clouds (All)
+    legend: false
 

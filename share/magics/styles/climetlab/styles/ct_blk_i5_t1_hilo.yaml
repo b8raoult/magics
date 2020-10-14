@@ -6,7 +6,6 @@ magics:
     contour_highlight_colour: black
     contour_highlight_thickness: 2
     contour_hilo: true
-    contour_hilo_suppress_radius: 30
     contour_interval: 5
     contour_label: false
     contour_legend_text: Interval 5, with H/L, no labels

@@ -11,8 +11,7 @@ magics:
     contour_interval: 2
     contour_label: true
     contour_label_frequency: 2
-    contour_label_height: 0.4
-    contour_label_quality: high
+    contour_label_height: 0
     contour_legend_text: 'Contour (Range: -2 / 36)'
     contour_level_selection_type: interval
     contour_line_colour: black

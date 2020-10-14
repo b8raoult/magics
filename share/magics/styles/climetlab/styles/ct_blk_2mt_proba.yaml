@@ -5,7 +5,7 @@ magics:
     contour_hilo: false
     contour_label: true
     contour_label_frequency: 2
-    contour_label_height: 0.4
+    contour_label_height: 0
     contour_level_list:
     - 5
     - 35

@@ -4,7 +4,7 @@ magics:
     contour_description: 'Method : Area fill Level range : -68 to 0 Interval : 4 Colour
       : blue Used for Lake ice temperature'
     contour_hilo: false
-    contour_interpolation_ceiling: '-0.99999'
+    contour_interpolation_ceiling: -0.99999
     contour_interval: 4
     contour_label: false
     contour_legend_text: 'Contour shade (Range: -68 / 0)'

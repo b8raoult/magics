@@ -8,16 +8,15 @@ magics:
     - none
     - blue
     - black
-    symbol_advanced_table_colour_method:
-    - list
+    symbol_advanced_table_colour_method: list
     symbol_advanced_table_height_list:
-    - '0.3'
-    - '0.3'
-    - '0.3'
-    - '0.3'
-    - '0.3'
-    - '0.4'
-    - '0.4'
+    - 0.3
+    - 0.3
+    - 0.3
+    - 0.3
+    - 0.3
+    - 0.4
+    - 0.4
     symbol_advanced_table_level_list:
     - 0
     - 0.5
@@ -29,13 +28,11 @@ magics:
     symbol_advanced_table_marker_list:
     - 15
     - 15
-    - null
+    - 0
     - 20
     - 20
     - 4
-    symbol_advanced_table_selection_type:
-    - list
-    symbol_table_mode:
-    - advanced
+    symbol_advanced_table_selection_type: list
+    symbol_table_mode: advanced
     symbol_type: marker
 

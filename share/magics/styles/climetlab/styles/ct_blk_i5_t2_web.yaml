@@ -6,12 +6,10 @@ magics:
     contour_highlight_thickness: 4
     contour_hilo: true
     contour_hilo_height: 0.5
-    contour_hilo_quality: medium
-    contour_hilo_suppress_radius: 110
     contour_interval: 5
     contour_label: true
     contour_label_frequency: 2
-    contour_label_height: 0.4
+    contour_label_height: 0
     contour_legend_text: Interval 5, thickness 2
     contour_level_selection_type: interval
     contour_line_colour: black
