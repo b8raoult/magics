@@ -1,0 +1,8 @@
+eccharts_layer: cds_sst_spread
+match:
+- paramId: '34'
+  shortName: sst
+  type: es
+styles:
+- sh_blue_f0t5_i1
+

@@ -1,0 +1,8 @@
+eccharts_layer: cds_bfi
+match:
+- paramId: '140253'
+  shortName: bfi
+- long_name: Benjamin-Feir index
+styles:
+- sh_blkred_fM10t10_22
+

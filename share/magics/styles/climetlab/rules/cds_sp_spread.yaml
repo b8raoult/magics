@@ -1,0 +1,8 @@
+eccharts_layer: cds_sp_spread
+match:
+- paramId: '134'
+  shortName: sp
+  type: es
+styles:
+- sh_magenta_f01t50
+

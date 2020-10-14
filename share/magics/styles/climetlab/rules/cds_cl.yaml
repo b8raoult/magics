@@ -1,0 +1,8 @@
+eccharts_layer: cds_cl
+match:
+- paramId: '26'
+  shortName: cl
+- long_name: Lake cover
+styles:
+- sh_purple_f01t1
+

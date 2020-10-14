@@ -1,0 +1,9 @@
+eccharts_layer: msl_spread
+match:
+- paramId: '151'
+  shortName: msl
+  type: es
+styles:
+- sh_blu_f02t50
+- sh_range_f02t50
+

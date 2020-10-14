@@ -1,0 +1,11 @@
+eccharts_layer: cds_tvh
+match:
+- paramId:
+  - '30'
+  shortName:
+  - tvh
+- long_name:
+  - Type of high vegetation
+styles:
+- mrk_grn_f0t19lst
+

@@ -1,0 +1,8 @@
+eccharts_layer: cds_istl4
+match:
+- paramId: '38'
+  shortName: istl4
+- long_name: Ice temperature layer 4
+styles:
+- sh_blu_fM14tM16
+

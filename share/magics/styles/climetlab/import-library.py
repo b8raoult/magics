@@ -188,15 +188,28 @@ for path in os.listdir(ecmwf):
             except Exception as e:
                 print(e)
 
+used = {}
 for k, v in matches.items():
-    if "prefered_units" in v:
-        print(k, v["prefered_units"])
-        for n in v["styles"]:
-            styles[n].setdefault("contour_units", v["prefered_units"])
+    units = v.pop("prefered_units", None)
+    for n in v["styles"]:
+        if n in styles:
+            if units:
+                styles[n].setdefault("contour_units", units)
+            used[n] = styles[n]
+        else:
+            print(k, 'no style named', n)
 
 
-for k, v in styles.items():
+
+for k, v in used.items():
 
     y = dict(magics=dict(mcont=v))
     with open(os.path.join(here, "styles", k + ".yaml"), "w") as f:
+        print(yaml.safe_dump(y, default_flow_style=False), file=f)
+
+
+for k, v in matches.items():
+
+    y = v
+    with open(os.path.join(here, "rules", k + ".yaml"), "w") as f:
         print(yaml.safe_dump(y, default_flow_style=False), file=f)

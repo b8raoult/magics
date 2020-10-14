@@ -1,0 +1,11 @@
+eccharts_layer: cds_es
+match:
+- paramId:
+  - '44'
+  shortName:
+  - es
+- long_name:
+  - Snow evaporation
+styles:
+- sh_blugrn_f0t1lst
+
