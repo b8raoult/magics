@@ -10,7 +10,7 @@
 
 #include "magics.h"
 
-#include "JSONParser.h"
+#include "MagParser.h"
 #include "MagConfig.h"
 #include "MagException.h"
 #include "MagLog.h"
@@ -32,7 +32,7 @@ using namespace magics;
 
 MagConfigHandler::MagConfigHandler(const string& config, MagConfig& magics) {
     try {
-        Value value = JSONParser::decodeFile(config);
+        Value value = MagParser::decodeFile(config);
 
         if (value.isList()) {
             ValueList values = value.get_value<ValueList>();
@@ -451,7 +451,7 @@ void NetcdfGuess::callback(const string& name, const Value& value) {
 
 void DimensionGuess::init() {
     try {
-        Value value = JSONParser::decodeFile(definitions_);
+        Value value = MagParser::decodeFile(definitions_);
 
         ValueMap object = value.get_value<ValueMap>();
 

@@ -50,13 +50,5 @@ does it submit to any jurisdiction.
 			inherit_parent_reqs="no">
 			<documentation>Lowest level for contours to be shaded</documentation>
 		</parameter>
-		<parameter from="string"
-			name="contour_units"
-			default=""
-			member="units"
-			to="string"
-			inherit_parent_reqs="no">
-			<documentation>Units used to define contour attributes</documentation>
-		</parameter>
 	</class>
 </magics>

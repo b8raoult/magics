@@ -54,7 +54,6 @@ public:
 	double min_;
 	double max_shade_;
 	double min_shade_;
-	string units_;
 	 
 
 private:

@@ -15,7 +15,7 @@
 
 #include "MagException.h"
 #include "MagicsCalls.h"
-#include "YAMLParser.h"
+#include "MagParser.h"
 
 using namespace magics;
 
@@ -185,7 +185,7 @@ static std::map<std::string, command_proc> commands = {{"plot", plot}};
 
 
 void MagYaml::processFile(const std::string& path) {
-    ValueMap p = YAMLParser::decodeFile(path);
+    ValueMap p = MagParser::decodeFile(path);
     for (auto j = p.begin(); j != p.end(); ++j) {
         std::string command = (*j).first;
         auto k              = commands.find(command);

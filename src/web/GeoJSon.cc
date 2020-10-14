@@ -11,7 +11,7 @@
 #include "GeoJSon.h"
 #include "BinningObject.h"
 #include "Factory.h"
-#include "JSONParser.h"
+#include "MagParser.h"
 #include "Value.h"
 
 using namespace magics;
@@ -502,12 +502,12 @@ void GeoJSon::decode() {
     try {
         Value value;
         if (magCompare(type_, "string")) {
-            value = JSONParser::decodeString(input_);
+            value = MagParser::decodeString(input_);
         }
         else {
             try {
                 ifstream is(path_.c_str());
-                value = JSONParser::decodeString(path_);
+                value = MagParser::decodeString(path_);
             }
             catch (std::exception& e) {
                 MagLog::error() << "JSON error in file: " << path_ << ": " << e.what() << endl;

@@ -14,7 +14,7 @@
 #include "EfiLegendEntry.h"
 #include "IntervalMap.h"
 #include "JSON.h"
-#include "JSONParser.h"
+#include "MagParser.h"
 #include "MagException.h"
 #include "MetaData.h"
 #include "TextVisitor.h"
@@ -1007,7 +1007,7 @@ void WrepJSon::data() {
 
 void WrepJSon::basic() {
     try {
-        Value value     = JSONParser::decodeFile(file_);
+        Value value     = MagParser::decodeFile(file_);
         ValueMap object = value.get_value<ValueMap>();
 
         for (auto entry = object.begin(); entry != object.end(); ++entry) {

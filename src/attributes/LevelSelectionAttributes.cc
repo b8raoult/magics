@@ -29,8 +29,7 @@ LevelSelectionAttributes::LevelSelectionAttributes():
 	max_(ParameterManager::getDouble("contour_max_level")),
 	min_(ParameterManager::getDouble("contour_min_level")),
 	max_shade_(ParameterManager::getDouble("contour_shade_max_level")),
-	min_shade_(ParameterManager::getDouble("contour_shade_min_level")),
-	units_(ParameterManager::getString("contour_units"))
+	min_shade_(ParameterManager::getDouble("contour_shade_min_level"))
 	
 	
 {
@@ -53,7 +52,6 @@ void LevelSelectionAttributes::set(const std::map<string, string>& params)
 	setAttribute(prefix, "contour_min_level", min_, params);
 	setAttribute(prefix, "contour_shade_max_level", max_shade_, params);
 	setAttribute(prefix, "contour_shade_min_level", min_shade_, params);
-	setAttribute(prefix, "contour_units", units_, params);
 	
 	
 }
@@ -64,7 +62,6 @@ void LevelSelectionAttributes::copy(const LevelSelectionAttributes& other)
 	min_ = other.min_;
 	max_shade_ = other.max_shade_;
 	min_shade_ = other.min_shade_;
-	units_ = other.units_;
 	
 }
 
@@ -107,7 +104,6 @@ void LevelSelectionAttributes::print(ostream& out)  const
 	out << " min = " <<  min_;
 	out << " max_shade = " <<  max_shade_;
 	out << " min_shade = " <<  min_shade_;
-	out << " units = " <<  units_;
 	
 	out << "]" << "\n";
 }
@@ -123,8 +119,6 @@ void LevelSelectionAttributes::toxml(ostream& out)  const
 	niceprint(out,max_shade_);
 	out << ", \"contour_shade_min_level\":";
 	niceprint(out,min_shade_);
-	out << ", \"contour_units\":";
-	niceprint(out,units_);
 	
 }
 
@@ -132,4 +126,3 @@ static MagicsParameter<double> contour_max_level("contour_max_level", 1.0e+21);
 static MagicsParameter<double> contour_min_level("contour_min_level", -1.0e+21);
 static MagicsParameter<double> contour_shade_max_level("contour_shade_max_level", 1.0e+21);
 static MagicsParameter<double> contour_shade_min_level("contour_shade_min_level", -1.0e+21);
-static MagicsParameter<string> contour_units("contour_units", "");

@@ -18,19 +18,15 @@
 namespace magics {
 
 
-static Value MagParser::decodeFile(const std::string& path) {
-    std::cerr << "MagParser::decodeFile " << path.substr(path.size() - 5) << std::endl;
-    try {
-        if (path.substr(path.size() - 5) == ".json") {
-            return JSONParser::decodeFile(str);
-        }
+Value MagParser::decodeFile(const std::string& path) {
+    if (path.substr(path.size() - 5) == ".json") {
+        return JSONParser::decodeFile(path);
     }
-    catch (...) {
-    }
-    return YAMLParser::decodeFile(str);
+
+    return YAMLParser::decodeFile(path);
 }
 
-static Value MagParser::decodeString(const std::string& str) {
+Value MagParser::decodeString(const std::string& str) {
     try {
         return JSONParser::decodeString(str);
     }
@@ -43,5 +39,3 @@ static Value MagParser::decodeString(const std::string& str) {
 //----------------------------------------------------------------------------------------------------------------------
 
 }  // namespace magics
-
-#endif

@@ -68,10 +68,6 @@ void LevelSelectionWrapper::set(const MagRequest& request)
 		double min_shade_value = request("CONTOUR_SHADE_MIN_LEVEL");
 		levelselection_->min_shade_ = min_shade_value;
 		}
-	if  (request.countValues("CONTOUR_UNITS") ) {
-		string units_value = request("CONTOUR_UNITS");
-		levelselection_->units_ = units_value;
-		}
 	
 	
 }

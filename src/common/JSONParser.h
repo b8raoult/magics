@@ -21,7 +21,7 @@ namespace magics {
 //----------------------------------------------------------------------------------------------------------------------
 
 class JSONParser : public ObjectParser {
-private:  // methods
+public:  // methods
     JSONParser(std::istream& in);
 
     static Value decodeFile(const std::string& path);

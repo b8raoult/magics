@@ -23,7 +23,7 @@ list( APPEND _common_srcs
 	BinaryObject.h
 	Arrow.h
 	Flag.h
-	Image.h 
+	Image.h
 	ArrowProperties.h
 	MagicsParameter.cc MagicsParameter.h Clipper.h LogoPlottingBase.h
 	TableDefinitionCompute.cc
@@ -81,7 +81,7 @@ list( APPEND _common_srcs
 	# Value.cc Value.h
 
 	JSONParser.cc JSONParser.h MagRegex.h MagRegex.cc
-	YAMLParser.cc YAMLParser.h
+	YAMLParser.cc YAMLParser.h MagParser.cc MagParser.h
 	ObjectParser.cc ObjectParser.h
 	Translator.cc Translator.h
 	StreamParser.cc StreamParser.h

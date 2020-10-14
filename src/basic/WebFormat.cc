@@ -135,13 +135,3 @@ TempFile::~TempFile() {
     ofs.close();
     remove(filename);
 }
-
-TempFile::TempFile() : filename(tmpnam(0)), ofs(filename) {
-    if (!ofs)
-        return;
-}
-
-TempFile::~TempFile() {
-    ofs.close();
-    remove(filename);
-}

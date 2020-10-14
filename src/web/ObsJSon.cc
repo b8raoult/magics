@@ -11,7 +11,7 @@
 #include "ObsJSon.h"
 #include <locale>
 #include "CustomisedPoint.h"
-#include "JSONParser.h"
+#include "MagParser.h"
 #include "MetaData.h"
 #include "Value.h"
 
@@ -59,7 +59,7 @@ void ObsJSon::decode() {
     }
 
     try {
-        Value value = JSONParser::decodeFile(path_);
+        Value value = MagParser::decodeFile(path_);
 
         ValueMap object = value.get_value<ValueMap>();
 
