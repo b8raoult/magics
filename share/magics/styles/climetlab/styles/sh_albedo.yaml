@@ -1,6 +1,5 @@
 magics:
   mcont:
-    XXX_contour_shade_technique: grid_shading
     contour: false
     contour_description: 'Method : Albedo'
     contour_label: false

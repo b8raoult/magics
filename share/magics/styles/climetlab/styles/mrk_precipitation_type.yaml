@@ -6,21 +6,20 @@ magics:
     contour_hilo: false
     contour_label: false
     contour_legend_text: Markers
+    contour_level_list:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    contour_level_selection_type: list
     contour_method: linear
-    contour_title: 'CONTOUR: Marker for preciptation type (1 to 8)'
-    level_list:
-    - '1'
-    - '2'
-    - '3'
-    - '4'
-    - '5'
-    - '6'
-    - '7'
-    - '8'
-    - '9'
-    level_selection_type: list
-    shade: true
-    shade_colour_table:
+    contour_shade: true
+    contour_shade_colour_table:
     - green
     - none
     - red
@@ -29,9 +28,8 @@ magics:
     - navy
     - turquoise
     - orange
-    shade_marker_table:
-    - '18'
-    shade_technique: marker
-    xxx_shade_height_table:
-    - '0.2'
+    contour_shade_marker_table:
+    - 18
+    contour_shade_technique: marker
+    contour_title: 'CONTOUR: Marker for preciptation type (1 to 8)'
 

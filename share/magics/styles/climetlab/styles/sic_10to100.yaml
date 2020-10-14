@@ -1,8 +1,8 @@
 magics:
   mcont:
-    CONTOUR_INTERPOLATION_CEILING: 1
     contour: false
     contour_description: 'Method : contour shade Level list : (0.20/1.) Colour : Grey'
+    contour_interpolation_ceiling: 1
     contour_label: false
     contour_legend_text: Contour shade (One level from 0.1 to 1)
     contour_level_list:

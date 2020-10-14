@@ -1,6 +1,5 @@
 magics:
   mcont:
-    XXXcontour_shade_technique: grid_shading
     contour: false
     contour_description: 'Method: contour shade min:-500 max:8000'
     contour_hilo: false

@@ -1,7 +1,5 @@
 magics:
   mcont:
-    XXXcontour_line_colour_rainbow_max_level_colour: red
-    XXXcontour_line_colour_rainbow_min_level_colour: '#28e0ed'
     contour_description: 'Method : Rainbow contour from 5 to 70'
     contour_highlight: false
     contour_label: true

@@ -3,7 +3,17 @@ import json
 import yaml
 import re
 
-FIX = {}
+FIX = {
+    "level_list": "contour_level_list",
+    "shade": "contour_shade",
+    "shade_colour_table": "contour_shade_colour_table",
+    "shade_height_table": "contour_shade_height_table",
+    "shade_marker_table": "contour_shade_marker_table",
+    "shade_max_level": "contour_shade_max_level",
+    "shade_min_level": "contour_shade_min_level",
+    "shade_technique": "contour_shade_technique",
+    "level_selection_type": "contour_level_selection_type",
+}
 
 
 def number(x):
@@ -50,7 +60,15 @@ def tidy(x):
         d = {}
         for k, v in x.items():
             k = FIX.get(k, k)
-            # assert k.startswith("contour"), k
+            if k not in ("legend"):
+                assert (
+                    k.startswith("wind")
+                    or k.startswith("input")
+                    or k.startswith("contour")
+                    or k.startswith("symbol")
+                    or k.startswith("grib")
+                    or k.startswith("image")
+                ), k
             d[k] = tidy(v)
 
             if k in (

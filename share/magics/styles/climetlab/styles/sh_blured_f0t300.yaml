@@ -1,6 +1,5 @@
 magics:
   mcont:
-    XXXcontour_internal_reduction_factor: 4
     contour_description: 'Method : contour shade, with contours Level list : (0.5/2/4/10/25/50/100/250)
       Colour : from blue to red Used for precipitation'
     contour_highlight: false

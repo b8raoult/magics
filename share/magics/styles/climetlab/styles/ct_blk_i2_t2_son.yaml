@@ -13,6 +13,4 @@ magics:
     contour_line_colour: black
     contour_line_thickness: 2
     contour_title: Contour ANOM (interval 2, thickness 2, black)
-    xxxgrib_scaling_of_derived_fields: false
-    xxxgrib_scaling_of_retrieved_fields: false
 
