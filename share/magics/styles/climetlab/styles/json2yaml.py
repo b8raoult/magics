@@ -34,6 +34,7 @@ SKIP = {
     # Metview only below:
     "contour_shade_label_blanking",
     "grib_scaling_of_retrieved_fields",
+    "grib_scaling_of_derived_fields",
     # xml is in 'unused'
     "image_colour_table_creation_mode",
     "image_pixel_selection_frequency",
@@ -90,15 +91,15 @@ def tidy(x):
                 continue
 
             k = FIX.get(k, k)
-            if k not in ("legend"):
-                assert (
-                    k.startswith("wind")
-                    or k.startswith("input")
-                    or k.startswith("contour")
-                    or k.startswith("symbol")
-                    or k.startswith("grib")
-                    or k.startswith("image")
-                ), k
+            assert (
+                k.startswith("legend")
+                or k.startswith("wind")
+                or k.startswith("input")
+                or k.startswith("contour")
+                or k.startswith("symbol")
+                or k.startswith("grib")
+                or k.startswith("image")
+            ), k
             d[k] = tidy(v)
 
             if k in (
@@ -129,7 +130,7 @@ def tidy(x):
                 "contour_label_height",
                 "symbol_text_font_size",
                 "contour_internal_reduction_factor",
-                "contour_interpolation_ceiling"
+                "contour_interpolation_ceiling",
             ):
                 d[k] = number(d[k])
 

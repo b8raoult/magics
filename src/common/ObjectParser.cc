@@ -151,7 +151,12 @@ std::string ObjectParser::unicode() {
     return utf8(code);
 }
 
+
 Value ObjectParser::parseString(char quote) {
+
+    bool save = comments_;
+    comments_ = false;
+
     consume(quote);
     std::string s;
     for (;;) {
@@ -197,6 +202,7 @@ Value ObjectParser::parseString(char quote) {
                         s += c;
                     }
                     else {
+                        comments_ = save;
                         throw StreamParser::Error(std::string("ObjectParser::parseString invalid escaped char '") + c +
                                                   "'");
                     }
@@ -205,6 +211,7 @@ Value ObjectParser::parseString(char quote) {
         }
         else {
             if (c == quote) {
+                comments_ = save;
                 return Value(s);
             }
             s += c;

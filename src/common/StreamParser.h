@@ -46,13 +46,15 @@ protected:  // members
     size_t line_;
     size_t pos_;
 
+    bool comments_;
+
+
 private:  // members
     StreamParser(const StreamParser&);
     StreamParser& operator=(const StreamParser&);
 
     std::istream& in_;
 
-    bool comments_;
     std::set<char> comment_;
 
     char _get();

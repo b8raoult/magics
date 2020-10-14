@@ -4,7 +4,6 @@ magics:
     contour_description: 'Method: contour shade min:-500 max:8000'
     contour_hilo: false
     contour_label: false
-    legend_title: Orography (in m)
     contour_level_list:
     - -500
     - 0
@@ -42,5 +41,5 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: -500
     contour_title: Orography (in m)
-    grib_scaling_of_derived_fields: false
-    grib_scaling_of_retrieved_fields: true
+    legend_title_text: Orography (in m)
+
