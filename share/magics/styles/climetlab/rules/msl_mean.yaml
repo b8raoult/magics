@@ -1,4 +1,3 @@
-eccharts_layer: msl_mean
 match:
 - paramId: '151'
   shortName: msl

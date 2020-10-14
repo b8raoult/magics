@@ -1,4 +1,3 @@
-eccharts_layer: efi_swh_field
 match:
 - paramId: '132216'
   shortName: maxswhi

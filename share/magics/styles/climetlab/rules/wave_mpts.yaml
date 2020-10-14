@@ -1,4 +1,3 @@
-eccharts_layer: wave_mpts
 match:
 - paramId: '140239'
   shortName: mpts

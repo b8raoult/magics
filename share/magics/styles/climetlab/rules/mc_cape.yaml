@@ -1,4 +1,3 @@
-eccharts_layer: mc_cape
 match:
 - paramId: '59'
   shortName: cape

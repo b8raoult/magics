@@ -1,4 +1,3 @@
-eccharts_layer: mofc_10_t_anomaly
 match:
 - levelist:
   - '10'

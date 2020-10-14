@@ -53,9 +53,14 @@ public:
         offset  = 0;
     }
 
+    // All in one
+    virtual StyleEntry* getStyle(Data& data, const  std::string& library_path) { return nullptr; }
+
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream&) const;
+
+    void setCriteria(MetaDataCollector&, const string&);
 
 private:
     //! Copy constructor - No copy allowed
@@ -142,7 +147,6 @@ public:
     void askId(MetaDataCollector&);
 
     bool checkId(MetaDataCollector&, MetaDataCollector&) { return true; }
-    void setCriteria(MetaDataCollector&, const string&);
 
     // set the map to set the contour!
     void getStyle(MetaDataCollector&, MagDef&, StyleEntry&);
@@ -166,7 +170,6 @@ public:
     void askId(MetaDataCollector&);
 
     bool checkId(MetaDataCollector&, MetaDataCollector&) { return false; }
-    void setCriteria(MetaDataCollector&, const string&);
 
     // set the map to set the contour!
     void getStyle(MetaDataCollector&, MagDef&, StyleEntry&);

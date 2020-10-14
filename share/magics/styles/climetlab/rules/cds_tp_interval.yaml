@@ -1,4 +1,3 @@
-eccharts_layer: cds_tp_interval
 match:
 - long_name:
   - Precipitation

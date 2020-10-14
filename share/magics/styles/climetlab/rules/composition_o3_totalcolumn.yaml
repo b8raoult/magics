@@ -1,4 +1,3 @@
-eccharts_layer: composition_o3_totalcolumn
 match:
 - paramId: '210206'
   shortName: gtco3

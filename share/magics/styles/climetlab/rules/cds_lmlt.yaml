@@ -1,4 +1,3 @@
-eccharts_layer: cds_lmlt
 match:
 - paramId:
   - '228008'

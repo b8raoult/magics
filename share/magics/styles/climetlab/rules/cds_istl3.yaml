@@ -1,4 +1,3 @@
-eccharts_layer: cds_istl3
 match:
 - paramId: '37'
   shortName: istl3

@@ -1,4 +1,3 @@
-eccharts_layer: composition_pm10
 match:
 - paramId: '210074'
   shortName: pm10

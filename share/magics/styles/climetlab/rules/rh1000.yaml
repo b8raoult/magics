@@ -1,12 +1,3 @@
-eccharts_layer:
-- rh1000
-- rh925
-- rh_850h_field
-- rh800
-- rh_7h_field
-- rh600
-- rh500
-- 250rh
 match:
 - levelist:
   - '1000'

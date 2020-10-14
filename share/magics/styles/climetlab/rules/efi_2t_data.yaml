@@ -1,7 +1,3 @@
-eccharts_layer:
-- efi_2t_data
-- efi_2tmax_data
-- efi_2tmin_data
 match:
 - paramId:
   - '132167'

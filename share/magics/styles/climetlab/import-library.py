@@ -190,6 +190,7 @@ for path in os.listdir(ecmwf):
 
 used = {}
 for k, v in matches.items():
+    v.pop("eccharts_layer", None)
     units = v.pop("prefered_units", None)
     for n in v["styles"]:
         if n in styles:

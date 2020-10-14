@@ -1,4 +1,3 @@
-eccharts_layer: cds_tp_interval_spread
 match:
 - paramId: '228'
   shortName: tp

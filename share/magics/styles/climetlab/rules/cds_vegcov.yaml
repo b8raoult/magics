@@ -1,4 +1,3 @@
-eccharts_layer: cds_vegcov
 match:
 - paramId:
   - '28'

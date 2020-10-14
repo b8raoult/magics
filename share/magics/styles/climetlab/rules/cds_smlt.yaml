@@ -1,4 +1,3 @@
-eccharts_layer: cds_smlt
 match:
 - paramId: '45'
   shortName: smlt

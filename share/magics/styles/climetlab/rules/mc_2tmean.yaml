@@ -1,7 +1,3 @@
-eccharts_layer:
-- mc_2tmean
-- mc_2tmax
-- mc_2tmin
 match:
 - paramId:
   - '228004'

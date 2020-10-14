@@ -1,7 +1,3 @@
-eccharts_layer:
-- swh_prob_data
-- cp_rate_prob
-- tp_rate_prob
 match:
 - paramId:
   - '131001'

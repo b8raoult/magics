@@ -1,4 +1,3 @@
-eccharts_layer: cds_ilspf
 match:
 - paramId: '228217'
   shortName: ilspf

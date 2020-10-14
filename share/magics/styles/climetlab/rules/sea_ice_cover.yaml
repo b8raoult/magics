@@ -1,4 +1,3 @@
-eccharts_layer: sea_ice_cover
 match:
 - paramId: '31'
   shortName: ci

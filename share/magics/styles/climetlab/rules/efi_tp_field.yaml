@@ -1,4 +1,3 @@
-eccharts_layer: efi_tp_field
 match:
 - paramId: '132228'
   shortName: tpi

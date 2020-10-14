@@ -1,4 +1,3 @@
-eccharts_layer: sim_image_ir
 match:
 - channel: 9
   paramId: '260510'

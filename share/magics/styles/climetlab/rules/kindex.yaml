@@ -1,4 +1,3 @@
-eccharts_layer: kindex
 match:
 - paramId: '260121'
   shortName: kx

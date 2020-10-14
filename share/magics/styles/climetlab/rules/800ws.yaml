@@ -1,7 +1,3 @@
-eccharts_layer:
-- 800ws
-- 700ws
-- 600ws
 match:
 - levelist:
   - '800'

@@ -1,4 +1,3 @@
-eccharts_layer: lcc
 match:
 - paramId:
   - '186'

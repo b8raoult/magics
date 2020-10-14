@@ -1,4 +1,3 @@
-eccharts_layer: wave_wefm
 match:
 - paramId: '140112'
   shortName: wefxm

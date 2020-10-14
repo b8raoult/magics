@@ -1,8 +1,3 @@
-eccharts_layer:
-- tp_rate
-- sf_rate
-- cp_rate
-- lsp_rate
 match:
 - paramId:
   - '3059'

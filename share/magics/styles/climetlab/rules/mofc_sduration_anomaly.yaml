@@ -1,4 +1,3 @@
-eccharts_layer: mofc_sduration_anomaly
 match:
 - paramId: '173189'
   shortName: sundara

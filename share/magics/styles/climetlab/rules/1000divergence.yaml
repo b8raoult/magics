@@ -1,9 +1,3 @@
-eccharts_layer:
-- 1000divergence
-- 925divergence
-- 700divergence
-- 500divergence
-- 300divergence
 match:
 - levelist:
   - '1000'

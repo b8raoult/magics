@@ -69,10 +69,12 @@ public:
 };
 
 void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
-    try {
-        ParameterManager::set("contour_automatic_library_path", library_path_);
-        ContourLibrary* library = MagTranslator<string, ContourLibrary>()(setting_);
+    ParameterManager::set("contour_automatic_library_path", library_path_);
+    ContourLibrary* library = MagTranslator<string, ContourLibrary>()(setting_);
 
+    styleInfo_ = library->getStyle(data, library_path_);
+
+    if (!styleInfo_) {
         MetaDataCollector request, needAttributes;
 
         bool legend_only = contour_->legend_only_;
@@ -121,66 +123,63 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         }
 
         contour_->legend_only_ = legend_only;
+    }
 
-        delete library;
+    delete library;
 
-        data.getReady(parent.transformation());
-        if (!data.valid()) {
-            throw MagicsException("Invalid data for contouring");
-        }
+    data.getReady(parent.transformation());
+    if (!data.valid()) {
+        throw MagicsException("Invalid data for contouring");
+    }
 
-        if (data.matrix().tile()) {
-            (*this->contour_)(data.matrix(), parent);
-            return;
-        }
-        MatrixHandler* box = data.matrix().getReady(parent.transformation());
-        if (!box) {
-            throw MagicsException("Invalid data for contouring");
-        }
-        if (!box->rows() || !box->columns()) {
-            (*this->contour_)(data, parent);
-            (*this->grid_)(data, parent);
-            matrix_ = 0;
-            delete box;
-            return;
-        }
-
-        matrix_ = (*this->method_).handler(*box, parent);
-        // matrix_ = box;
-
-        if (this->floor_ != -INT_MAX || this->ceiling_ != INT_MAX)
-            matrix_ = new MatrixTreshold(*matrix_, this->floor_, this->ceiling_);
-
-        {
-            Timer timer("setMinMax", "setMainMax");
-            double min, max;
-            {
-                Timer timer("Max", "Max");
-                min = matrix_->min();
-            }
-            {
-                Timer timer("MIN", "MIN");
-                max = matrix_->max();
-            }
-            (*this->contour_).adjust(min, max);
-        }
-        {
-            Timer timer("CONTOUR", "CONTOUR");
-            (*this->contour_)(*matrix_, parent);
-        }
+    if (data.matrix().tile()) {
+        (*this->contour_)(data.matrix(), parent);
+        return;
+    }
+    MatrixHandler* box = data.matrix().getReady(parent.transformation());
+    if (!box) {
+        throw MagicsException("Invalid data for contouring");
+    }
+    if (!box->rows() || !box->columns()) {
         (*this->contour_)(data, parent);
-        if (magCompare(this->grid_->getType(), "akima"))
-            (*this->grid_)(*matrix_, parent);
-        else
-            (*this->grid_)(data, parent);
-        (*this->hilo_)(*matrix_, parent);
-
-        // We do not need the box anymore!
+        (*this->grid_)(data, parent);
+        matrix_ = 0;
         delete box;
+        return;
     }
-    catch (MagicsException& e) {
-        throw;  // forwarding exception
+
+    matrix_ = (*this->method_).handler(*box, parent);
+    // matrix_ = box;
+
+    if (this->floor_ != -INT_MAX || this->ceiling_ != INT_MAX)
+        matrix_ = new MatrixTreshold(*matrix_, this->floor_, this->ceiling_);
+
+    {
+        Timer timer("setMinMax", "setMainMax");
+        double min, max;
+        {
+            Timer timer("Max", "Max");
+            min = matrix_->min();
+        }
+        {
+            Timer timer("MIN", "MIN");
+            max = matrix_->max();
+        }
+        (*this->contour_).adjust(min, max);
     }
+    {
+        Timer timer("CONTOUR", "CONTOUR");
+        (*this->contour_)(*matrix_, parent);
+    }
+    (*this->contour_)(data, parent);
+    if (magCompare(this->grid_->getType(), "akima"))
+        (*this->grid_)(*matrix_, parent);
+    else
+        (*this->grid_)(data, parent);
+    (*this->hilo_)(*matrix_, parent);
+
+    // We do not need the box anymore!
+    delete box;
 }
 
 void Contour::visit(Data& data, HistoVisitor& visitor) {

@@ -1,4 +1,3 @@
-eccharts_layer: composition_uvindex
 match:
 - paramId: '214002'
   shortName: uvbed

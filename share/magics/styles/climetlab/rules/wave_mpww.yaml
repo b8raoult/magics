@@ -1,4 +1,3 @@
-eccharts_layer: wave_mpww
 match:
 - paramId: '140236'
   shortName: mpww

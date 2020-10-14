@@ -1,7 +1,3 @@
-eccharts_layer:
-- 850vorticity
-- 300vorticity
-- 250vorticity
 match:
 - levelist:
   - '850'

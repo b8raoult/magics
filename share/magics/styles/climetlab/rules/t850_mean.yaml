@@ -1,6 +1,3 @@
-eccharts_layer:
-- t850_mean
-- t500_mean
 match:
 - levelist:
   - '850'

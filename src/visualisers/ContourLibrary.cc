@@ -104,6 +104,13 @@ bool ContourLibrary::setInfoObject(string type) {
         return false;
 }
 
+void ContourLibrary::setCriteria(MetaDataCollector& request, const string& criteria) {
+    request[criteria] = "";
+    MetaDataAttribute attribute;
+    attribute.setSource(MetaDataAttribute::GribApiSource);
+    request.setAttribute(criteria, attribute);
+}
+
 #include "MagConfig.h"
 
 void EcChartData::callback(const string& name, const Value& value) {
@@ -152,12 +159,7 @@ EcChartLibrary::EcChartLibrary() : contours_("contours"), default_set_("default"
 
 EcChartLibrary::~EcChartLibrary() {}
 
-void EcChartLibrary::setCriteria(MetaDataCollector& request, const string& criteria) {
-    request[criteria] = "";
-    MetaDataAttribute attribute;
-    attribute.setSource(MetaDataAttribute::GribApiSource);
-    request.setAttribute(criteria, attribute);
-}
+
 
 void EcChartLibrary::askId(MetaDataCollector& request) {
     // main keywords
@@ -270,12 +272,6 @@ void WebLibrary::askId(MetaDataCollector& request) {
     }
 }
 
-void WebLibrary::setCriteria(MetaDataCollector& request, const string& criteria) {
-    request[criteria] = "";
-    MetaDataAttribute attribute;
-    attribute.setSource(MetaDataAttribute::GribApiSource);
-    request.setAttribute(criteria, attribute);
-}
 
 // set the map to set the contour!
 void WebLibrary::getStyle(MetaDataCollector& data, MagDef& contour, StyleEntry& info) {

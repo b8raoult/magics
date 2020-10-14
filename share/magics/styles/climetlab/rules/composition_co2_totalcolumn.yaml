@@ -1,4 +1,3 @@
-eccharts_layer: composition_co2_totalcolumn
 match:
 - paramId: '210064'
   shortName: tcco2

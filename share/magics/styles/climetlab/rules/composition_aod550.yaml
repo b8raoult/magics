@@ -1,4 +1,3 @@
-eccharts_layer: composition_aod550
 match:
 - paramId: '210207'
   shortName: aod550

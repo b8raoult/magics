@@ -1,4 +1,3 @@
-eccharts_layer: z300_spread
 match:
 - levelist:
   - '300'

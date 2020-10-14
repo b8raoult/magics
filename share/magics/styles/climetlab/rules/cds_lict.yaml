@@ -1,4 +1,3 @@
-eccharts_layer: cds_lict
 match:
 - paramId: '228013'
   shortName: lict

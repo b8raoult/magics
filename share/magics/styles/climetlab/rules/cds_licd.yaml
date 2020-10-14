@@ -1,4 +1,3 @@
-eccharts_layer: cds_licd
 match:
 - paramId: '228014'
   shortName: licd

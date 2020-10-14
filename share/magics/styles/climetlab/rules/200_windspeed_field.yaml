@@ -1,4 +1,3 @@
-eccharts_layer: 200_windspeed_field
 match:
 - levelist:
   - '200'

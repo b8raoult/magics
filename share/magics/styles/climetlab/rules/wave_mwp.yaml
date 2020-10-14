@@ -1,4 +1,3 @@
-eccharts_layer: wave_mwp
 match:
 - paramId: '140232'
   shortName: mwp

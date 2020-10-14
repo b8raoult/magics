@@ -1,4 +1,3 @@
-eccharts_layer: composition_fire
 match:
 - paramId: '210099'
   shortName: frpfire

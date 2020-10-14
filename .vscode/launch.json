@@ -5,6 +5,8 @@
     "version": "0.2.0",
     "configurations": [
 
+
+
         {
             "name": "Python: Current File",
             "type": "python",
@@ -25,9 +27,12 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/../../build/${workspaceFolderBasename}/bin/magics",
-            "args": ["${file}"],
+            // "args": ["${file}"],
+            "args": ["grib.yaml"],
             "cwd": "${workspaceFolder}/regression/climetlab",
-            "MIMode": "lldb"
-        },
-    ]
-}
+            "MIMode": "lldb",
+            "env": {
+                "MAGPLUS_HOME": "${workspaceFolder}"
+            }
+        ]
+    }

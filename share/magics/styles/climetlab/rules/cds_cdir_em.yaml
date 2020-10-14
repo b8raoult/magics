@@ -1,4 +1,3 @@
-eccharts_layer: cds_cdir_em
 match:
 - paramId: '228022'
   shortName: cdir

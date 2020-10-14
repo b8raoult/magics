@@ -1,12 +1,3 @@
-eccharts_layer:
-- z925
-- z850
-- z800
-- z700
-- z600
-- z500_field
-- z300
-- z250
 match:
 - levelist:
   - '250'

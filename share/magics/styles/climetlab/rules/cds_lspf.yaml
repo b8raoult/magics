@@ -1,4 +1,3 @@
-eccharts_layer: cds_lspf
 match:
 - paramId: '50'
   shortName: lspf

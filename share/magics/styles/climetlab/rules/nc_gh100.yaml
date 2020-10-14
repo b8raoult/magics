@@ -1,5 +1,3 @@
-eccharts_layer:
-- nc_gh100
 match:
 - levelist:
   - '1'

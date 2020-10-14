@@ -1,6 +1,3 @@
-eccharts_layer:
-- 500pv
-- 300pv
 match:
 - levelist:
   - '1000'

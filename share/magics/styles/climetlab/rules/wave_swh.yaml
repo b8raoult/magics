@@ -1,4 +1,3 @@
-eccharts_layer: wave_swh
 match:
 - paramId: '140229'
   shortName: swh

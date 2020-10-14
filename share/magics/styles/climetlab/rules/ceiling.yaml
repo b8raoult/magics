@@ -1,4 +1,3 @@
-eccharts_layer: ceiling
 match:
 - paramId: '260109'
   shortName: ceil

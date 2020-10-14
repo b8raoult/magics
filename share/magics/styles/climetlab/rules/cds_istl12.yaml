@@ -1,4 +1,3 @@
-eccharts_layer: cds_istl12
 match:
 - paramId:
   - '35'

@@ -1,6 +1,3 @@
-eccharts_layer:
-- mc_10fg
-- mc_10ws
 match:
 - paramId:
   - '49'

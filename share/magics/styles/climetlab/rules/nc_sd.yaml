@@ -1,4 +1,3 @@
-eccharts_layer: nc_sd
 match:
 - standard_name:
   - thickness_of_convective_snowfall_amount

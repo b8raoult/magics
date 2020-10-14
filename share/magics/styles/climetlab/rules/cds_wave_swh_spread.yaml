@@ -1,4 +1,3 @@
-eccharts_layer: cds_wave_swh_spread
 match:
 - paramId: '140229'
   shortName: swh

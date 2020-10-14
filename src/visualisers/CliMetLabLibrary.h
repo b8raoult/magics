@@ -33,18 +33,8 @@ public:
     CliMetLabLibrary();
     virtual ~CliMetLabLibrary();
 
-    // set the meta data to be collected
-    void askId(MetaDataCollector&);
 
-    bool checkId(MetaDataCollector&, MetaDataCollector&);
-    void setCriteria(MetaDataCollector&, const string&);
-
-    // set the map to set the contour!
-    void getStyle(MetaDataCollector&, MagDef&, StyleEntry&);
-    void getStyle(const string&, MagDef&);
-
-    void getScaling(MetaDataCollector&, double&, double&);
-
+    virtual StyleEntry* getStyle(Data& data, const std::string& library_path);
 
 
 protected:

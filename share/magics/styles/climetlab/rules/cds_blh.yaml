@@ -1,4 +1,3 @@
-eccharts_layer: cds_blh
 match:
 - paramId: '159'
   shortName: blh

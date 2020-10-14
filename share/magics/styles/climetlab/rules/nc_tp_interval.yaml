@@ -1,4 +1,3 @@
-eccharts_layer: nc_tp_interval
 match:
 - paramId: '228228'
   shortName: tp

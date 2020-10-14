@@ -1,4 +1,3 @@
-eccharts_layer: mc_sf
 match:
 - paramId: '144'
   shortName: sf

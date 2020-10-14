@@ -1,7 +1,3 @@
-eccharts_layer:
-- genesis_hr
-- genesis_td
-- genesis_ts
 match:
 - paramId:
   - '131090'

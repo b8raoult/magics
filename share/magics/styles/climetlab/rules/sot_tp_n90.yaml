@@ -1,17 +1,3 @@
-eccharts_layer:
-- sot_tp_n90
-- sot_sf_n90
-- sot_2t_n90
-- sot_2t_n10
-- sot_2tmin_n90
-- sot_2tmin_n10
-- sot_2tmax_n90
-- sot_2tmax_n10
-- sot_ws_n90
-- sot_wg_n90
-- sot_cape_n90
-- sot_capeshear_n90
-- sot_swh_n90
 match:
 - paramId:
   - '132228'

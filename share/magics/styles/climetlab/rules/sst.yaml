@@ -1,4 +1,3 @@
-eccharts_layer: sst
 match:
 - paramId: '34'
   shortName: sst

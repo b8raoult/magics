@@ -1,4 +1,3 @@
-eccharts_layer: 2t_dewpoint
 match:
 - paramId: '168'
   shortName: 2d

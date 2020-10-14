@@ -1,9 +1,3 @@
-eccharts_layer:
-- t925
-- t850_field
-- t800
-- t700
-- t600
 match:
 - levelist:
   - '900'
