@@ -23,9 +23,7 @@
 #include <CairoDriverAttributes.h>
 #include <XmlNode.h>
 
-#ifdef _AIX
-#undef HAVE_STDLIB_H
-#endif
+
 #include <cairo.h>
 
 namespace magics {

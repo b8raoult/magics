@@ -28,7 +28,7 @@ namespace magics {
 struct YAMLItem;
 
 class YAMLParser : public ObjectParser {
-public:  // methods
+private:  // methods
     YAMLParser(std::istream& in);
     virtual ~YAMLParser();
 
