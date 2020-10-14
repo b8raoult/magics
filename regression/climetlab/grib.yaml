@@ -36,7 +36,7 @@ plot:
     grib_file_address_mode: byte_offset
     grib_input_file_name: test.grib
 - mcont:
-    contour_automatic_setting: llll
+    contour_automatic_setting: climetlab
     legend: false
 - mcoast:
     map_grid: false

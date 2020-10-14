@@ -50,6 +50,8 @@ Contour.cc
 Contour.h
 ContourLibrary.cc
 ContourLibrary.h
+CliMetLabLibrary.cc
+CliMetLabLibrary.h
 ContourMethod.h
 CountSelectionType.cc
 CountSelectionType.h
