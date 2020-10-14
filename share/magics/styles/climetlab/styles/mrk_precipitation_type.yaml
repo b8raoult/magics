@@ -1,0 +1,37 @@
+magics:
+  mcont:
+    contour: false
+    contour_description: 'CONTOUR: Marker for precipitation type (range: 1 to 8)'
+    contour_highlight: false
+    contour_hilo: false
+    contour_label: false
+    contour_legend_text: Markers
+    contour_method: linear
+    contour_title: 'CONTOUR: Marker for preciptation type (1 to 8)'
+    level_list:
+    - '1'
+    - '2'
+    - '3'
+    - '4'
+    - '5'
+    - '6'
+    - '7'
+    - '8'
+    - '9'
+    level_selection_type: list
+    shade: true
+    shade_colour_table:
+    - green
+    - none
+    - red
+    - none
+    - blue
+    - navy
+    - turquoise
+    - orange
+    shade_marker_table:
+    - '18'
+    shade_technique: marker
+    xxx_shade_height_table:
+    - '0.2'
+
