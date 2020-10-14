@@ -14,8 +14,8 @@
 #include "MagYaml.h"
 
 #include "MagException.h"
-#include "MagicsCalls.h"
 #include "MagParser.h"
+#include "MagicsCalls.h"
 
 using namespace magics;
 
@@ -178,13 +178,27 @@ static void plot(const std::string&, const Value& param) {
     MagicsCalls::close();
 }
 
+
+// Checking style files
+static void styles(const std::string&, const Value& param) {
+    ValueList actions = param;
+
+    for (auto j = actions.begin(); j != actions.end(); ++j) {
+        ValueMap p = (*j);
+        for (auto k = p.begin(); k != p.end(); ++k) {
+            execute((*k).first, (*k).second);
+        }
+    }
+}
+
+
 typedef void (*command_proc)(const std::string&, const Value&);
 
 
-static std::map<std::string, command_proc> commands = {{"plot", plot}};
+static std::map<std::string, command_proc> commands = {{"plot", plot}, {"magics", styles}};
 
 
-void MagYaml::processFile(const std::string& path) {
+void MagYaml::execute(const std::string& path) {
     ValueMap p = MagParser::decodeFile(path);
     for (auto j = p.begin(); j != p.end(); ++j) {
         std::string command = (*j).first;

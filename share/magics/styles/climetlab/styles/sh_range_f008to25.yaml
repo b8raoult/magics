@@ -9,15 +9,15 @@ magics:
     - 0.8
     - 1.2
     - 1.6
-    - 2.0
+    - 2
     - 2.5
-    - 5.0
+    - 5
     - 7.5
-    - 10.0
+    - 10
     - 12.5
-    - 15.0
-    - 20.0
-    - 25.0
+    - 15
+    - 20
+    - 25
     contour_level_selection_type: level_list
     contour_line_colour: red
     contour_method: conicon

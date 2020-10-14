@@ -9,17 +9,17 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Range: 0 / 50, default colours)'
     contour_level_list:
-    - 0.0
+    - 0
     - 0.5
-    - 1.0
+    - 1
     - 1.5
-    - 2.0
+    - 2
     - 2.5
-    - 3.0
+    - 3
     - 3.5
-    - 4.0
+    - 4
     - 4.5
-    - 5.0
+    - 5
     - 5.5
     - 6
     - 10
@@ -30,13 +30,13 @@ magics:
     contour_shade: true
     contour_shade_colour_list:
     - rgb(0.6,0.78,0.91)
-    - rgb(0.0,0.61,0.87)
-    - rgb(0.0,0.48,0.74)
+    - rgb(0,0.61,0.87)
+    - rgb(0,0.48,0.74)
     - rgb(0.14,0.35,0.62)
     - rgb(0.14,0.56,0.43)
     - rgb(0.41,0.69,0.35)
     - rgb(0.65,0.78,0.41)
-    - rgb(1.0,0.956863,0.607843)
+    - rgb(1,0.956863,0.607843)
     - rgb(0.95,0.81,0.21)
     - rgb(0.91,0.7,0.21)
     - rgb(0.86,0.52,0.25)

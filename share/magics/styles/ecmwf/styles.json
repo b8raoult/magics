@@ -263,9 +263,7 @@
         "contour_legend_text" : "Interval 2, thickness 2",
         "contour_line_colour" : "black",
         "contour_line_thickness" : 2,
-        "contour_title" : "Contour ANOM (interval 2, thickness 2, black)",
-        "xxxgrib_scaling_of_derived_fields" : "off",
-        "xxxgrib_scaling_of_retrieved_fields" : "off"
+        "contour_title" : "Contour ANOM (interval 2, thickness 2, black)"
     },
     "ct_blk_i2_t4" : {
         "contour_description" : "Method : contour Interval : 2 Thickness : 4 Colour : Black Used for msl",
@@ -550,7 +548,7 @@
     "ct_blup_f0t100lst_t2" : {
         "contour_description" : "Method : contour Level list : (5/35/65/95) % Thickness : 2 Colour : Blue-purple Used for probability",
         "contour_highlight" : "on",
-        "contour_highlight_color" : "blue_purple",
+        "contour_highlight_colour" : "blue_purple",
         "contour_highlight_frequency" : 4,
         "contour_highlight_thickness" : 4,
         "contour_hilo" : "off",
@@ -558,7 +556,7 @@
         "contour_legend_text" : "Range 0-100%",
         "contour_level_list" : "-5/5/35/65/95",
         "contour_level_selection_type" : "level_list",
-        "contour_line_color" : "blue_purple",
+        "contour_line_colour" : "blue_purple",
         "contour_line_thickness" : 2,
         "contour_max_level" : 95,
         "contour_min_level" : -5,
@@ -1161,8 +1159,6 @@
         "contour_title" : "Blue contours for probabilities (thickness 2)"
     },
     "ct_rainbow_f05t70" : {
-        "XXXcontour_line_colour_rainbow_max_level_colour" : "red",
-        "XXXcontour_line_colour_rainbow_min_level_colour" : "#28E0ED",
         "contour_description" : "Method : Rainbow contour from 5 to 70",
         "contour_highlight" : "off",
         "contour_label" : "on",
@@ -1861,8 +1857,6 @@
         "symbol_type" : "marker"
     },
     "efas_radar_tp" : {
-        "OLD_contour_level_list" : "0./0.3/0.6/1/2/3/4/5/6/8/10/13/16/20/25/35/50/50000",
-        "OLDcontour_shade_colour_list" : "RGBa(214, 226, 255, 0.1)/RGB(142, 178, 255)/RGB(99, 112, 247)/RGB(0, 99, 255)/RGB(0, 150, 150)/RGB(0, 198, 51)/RGB(99, 255, 0)/RGB(198, 255, 51)/RGB(255, 255, 0)/RGB(255, 198, 0)/RGB(255, 160, 0)/RGB(255, 124, 0)/RGB(255, 25, 0)/RGB(162, 10, 40)/RGB(156, 21, 157)/RGB(210, 148, 210)/RGB(246, 233, 246)",
         "contour" : "off",
         "contour_description" : "EFAS soil moisture",
         "contour_internal_reduction_factor" : "6",
@@ -1876,8 +1870,6 @@
         "contour_title" : "EFAS soil moisture"
     },
     "efas_radar_tpr24hacc" : {
-        "OLD_contour_level_list" : "0./0.3/0.6/1/2/3/4/5/6/8/10/13/16/20/25/35/50/50000",
-        "OLD_contour_shade_colour_list" : "RGBa(214, 226, 255, 0.1)/RGB(142, 178, 255)/RGB(99, 112, 247)/RGB(0, 99, 255)/RGB(0, 150, 150)/RGB(0, 198, 51)/RGB(99, 255, 0)/RGB(198, 255, 51)/RGB(255, 255, 0)/RGB(255, 198, 0)/RGB(255, 160, 0)/RGB(255, 124, 0)/RGB(255, 25, 0)/RGB(162, 10, 40)/RGB(156, 21, 157)/RGB(210, 148, 210)/RGB(246, 233, 246)",
         "contour" : "off",
         "contour_description" : "ERICHA 24-h accumulations from observations",
         "contour_internal_reduction_factor" : "6",
@@ -2114,9 +2106,6 @@
         "shade_technique" : "marker"
     },
     "mrk_efi_wg_f06t1" : {
-        "Xcontour_level_list" : "0.6/0.8/1.5",
-        "Xcontour_level_selection_type" : "level_list",
-        "Xcontour_shade_colour_method" : "list",
         "contour" : "off",
         "contour_description" : "Method : Marker Level range : 0.5 to 1.0 Interval : 0.1 Colour : Bluish purple",
         "contour_highlight" : "off",
@@ -2148,8 +2137,7 @@
         "shade" : "on",
         "shade_colour_table" : "green/none/red/none/blue/navy/turquoise/orange",
         "shade_marker_table" : "18",
-        "shade_technique" : "marker",
-        "xxx_shade_height_table" : "0.2"
+        "shade_technique" : "marker"
     },
     "narrow_range_2t_anomaly" : {
         "contour" : "off",
@@ -2262,7 +2250,6 @@
         "contour_title" : "Shade from 100 to 4500 (orange-blue)"
     },
     "range_50_9000" : {
-        "XXXcontour_shade_colour_list" : "rgb(0.01,0.45,0.99)/rgb(0.01,0.73,0.99)/rgb(0.01,0.99,0.95)/ rgb(0.02,0.70,0.65)/rgb(0.01,0.99,0.21)/rgb(0.77,0.99,0.01)/ rgb(0.99,0.58,0.01)/rgb(0.99,0.08,0.01)/rgb(0.70,0.04,0.49)/rgb(0.70,0.04,0.49)/rgb(1,0,1)/rgb(0.50,0.01,0.99)",
         "contour" : "off",
         "contour_description" : "Method : shading, Range: 50 to 9000 (Used for CAPE)",
         "contour_hilo" : "off",
@@ -2730,7 +2717,6 @@
         "contour_title" : "Contour shade  (Range: 0 / 1000, YlGnBu colours)"
     },
     "sh_albedo" : {
-        "XXX_contour_shade_technique" : "grid_shading",
         "contour" : "off",
         "contour_description" : "Method : Albedo",
         "contour_label" : "off",
@@ -4137,9 +4123,6 @@
         "contour_title" : "Contour shade (-32/32)"
     },
     "sh_anomaly_rb_m24t24" : {
-        "XXX1contour_level_list" : "-24/-18/-14/-10/-7/-5/-3/ -2/-1/None/1/2/3/5/7/10/14/18/24",
-        "XXX1contour_shade_colour_list" : "#2C19FF/#2C19FF/#2C19FF/#4433FF/#5B4CFF/#7266FF/#8A7FFF/#A199FF/none/none/#FFB2BB/#FF99A5/#FF7F8E/#FF6678/#FF4C61/#FF334B/#FF1934/#FF001E",
-        "XXXcontour_shade_colour_list" : "#2C19FF/#2C19FF/#2C19FF/#4433FF/#5B4CFF/#7266FF/#8A7FFF/#A199FF/#B8B2FF/#FFCCD2/#FFB2BB/#FF99A5/#FF7F8E/#FF6678/#FF4C61/#FF334B/#FF1934/#FF001E",
         "contour" : "off",
         "contour_description" : "Method : Temperature anomaly",
         "contour_hilo" : "off",
@@ -4517,7 +4500,6 @@
         "contour_title" : "Contour shade (Range: 0.5 / 250, with isolines)"
     },
     "sh_blured_f0t300" : {
-        "XXXcontour_internal_reduction_factor" : 4,
         "contour_description" : "Method : contour shade, with contours Level list : (0.5/2/4/10/25/50/100/250) Colour : from blue to red Used for precipitation",
         "contour_highlight" : "off",
         "contour_hilo" : "off",
@@ -5089,7 +5071,6 @@
         "contour_title" : "Orography shading with 28 levels"
     },
     "sh_fM09t60_l25_oro_grid" : {
-        "Xcontour_method" : "linear",
         "contour" : "off",
         "contour_description" : "Method: contour shade min:-90 max:6000 28 levels (grid shading)",
         "contour_hilo" : "off",
@@ -6047,7 +6028,6 @@
         "contour_title" : "Contour shade (Range: 302.0 / 406.0, nipy_spectral colours)"
     },
     "sh_orog_metres" : {
-        "XXXcontour_shade_technique" : "grid_shading",
         "contour" : "off",
         "contour_description" : "Method: contour shade min:-500 max:8000",
         "contour_hilo" : "off",
@@ -7362,7 +7342,7 @@
         "contour_title" : "Contour shade (0-1, intervals in octas)"
     },
     "sic_10to100" : {
-        "CONTOUR_INTERPOLATION_CEILING" : 1,
+        "contour_interpolation_ceiling" : 1,
         "contour" : "off",
         "contour_description" : "Method : contour shade Level list : (0.20/1.) Colour : Grey",
         "contour_label" : "off",

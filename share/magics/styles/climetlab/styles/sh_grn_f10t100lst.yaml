@@ -23,13 +23,13 @@ magics:
     contour_shade_colour_list:
     - rgb(1,1,0.4)
     - greenish_yellow
-    - rgb(0.58,1,0.0)
+    - rgb(0.58,1,0)
     - avocado
     - evergreen
-    - rgb(0.0,0.33,0.28)
-    - rgb(0.0,0.26,0.28)
-    - rgb(0.0,0.2,0.44)
-    - rgb(0.0,0.2,0.64)
+    - rgb(0,0.33,0.28)
+    - rgb(0,0.26,0.28)
+    - rgb(0,0.2,0.44)
+    - rgb(0,0.2,0.64)
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_shade_min_level: 10

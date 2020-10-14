@@ -6,7 +6,7 @@ magics:
     contour_legend_text: Transparent blue for -70 to 0 (One level)
     contour_level_list:
     - -70
-    - 0.0
+    - 0
     contour_level_selection_type: level_list
     contour_shade: true
     contour_shade_colour_direction: anti_clockwise

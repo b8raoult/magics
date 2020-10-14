@@ -26,17 +26,17 @@ magics:
     contour_line_colour_rainbow: true
     contour_line_colour_rainbow_colour_list:
     - black
-    - rgb(0.45,0.45,1.0)
-    - rgb(0.45,0.45,1.0)
-    - rgb(0.45,0.45,1.0)
-    - rgb(0.45,0.45,1.0)
+    - rgb(0.45,0.45,1)
+    - rgb(0.45,0.45,1)
+    - rgb(0.45,0.45,1)
+    - rgb(0.45,0.45,1)
     - rgb(0,0.8,0.8)
-    - rgb(0.0,0.8,0.8)
+    - rgb(0,0.8,0.8)
     - rgb(0.2,0.95,0.2)
     - rgb(0.2,0.95,0.2)
-    - rgb(1.0,0.7,0.1)
-    - rgb(1.0,0.7,0.1)
-    - rgb(1.0,0.5,0.5)
+    - rgb(1,0.7,0.1)
+    - rgb(1,0.7,0.1)
+    - rgb(1,0.5,0.5)
     - magenta
     - magenta
     contour_line_colour_rainbow_method: list

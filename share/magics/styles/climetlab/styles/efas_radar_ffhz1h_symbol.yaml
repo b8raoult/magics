@@ -11,10 +11,10 @@ magics:
     symbol_advanced_table_height_list:
     - '0.2'
     symbol_advanced_table_level_list:
-    - 1.0
-    - 2.0
-    - 3.0
-    - 4.0
+    - 1
+    - 2
+    - 3
+    - 4
     symbol_advanced_table_marker_list:
     - 18
     symbol_advanced_table_selection_type:

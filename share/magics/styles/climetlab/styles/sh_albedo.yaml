@@ -29,7 +29,7 @@ magics:
     - rgb(0.7,0.7,0.7)
     - rgb(0.8,0.8,0.8)
     - rgb(0.9,0.9,0.9)
-    - rgb(1.0,1.0,1.0)
+    - rgb(1,1,1)
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: Contour shade (Albedo)

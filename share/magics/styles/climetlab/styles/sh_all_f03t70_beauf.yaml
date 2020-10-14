@@ -12,7 +12,7 @@ magics:
     - 1.6
     - 3.4
     - 5.5
-    - 8.0
+    - 8
     - 10.8
     - 13.9
     - 17.2
@@ -20,7 +20,7 @@ magics:
     - 24.5
     - 28.5
     - 32.7
-    - 50.0
+    - 50
     contour_level_selection_type: level_list
     contour_shade: true
     contour_shade_colour_list:

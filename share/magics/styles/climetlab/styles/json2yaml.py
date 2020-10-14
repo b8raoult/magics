@@ -13,6 +13,7 @@ FIX = {
     "shade_min_level": "contour_shade_min_level",
     "shade_technique": "contour_shade_technique",
     "level_selection_type": "contour_level_selection_type",
+    "wind_arrow_legend": "legend",
 }
 
 
@@ -23,8 +24,11 @@ def number(x):
 
     try:
         return int(x)
-    except:
-        return float(x)
+    except Exception:
+        s = float(x)
+        if s == int(s):
+            return int(s)
+        return s
 
 
 def scale(x):
@@ -89,6 +93,10 @@ def tidy(x):
                 "contour_min_level",
                 "contour_interval",
                 "contour_reference_level",
+                "wind_flag_length",
+                "wind_flag_origin_marker_size",
+                "wind_arrow_calm_below",
+                "symbol_height"
             ):
                 d[k] = number(d[k])
 

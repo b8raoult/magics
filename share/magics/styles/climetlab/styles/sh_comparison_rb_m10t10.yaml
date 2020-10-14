@@ -7,28 +7,28 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Range: -20 / 20)'
     contour_level_list:
-    - -8.0
-    - -7.0
-    - -6.0
-    - -5.0
-    - -4.0
-    - -3.0
+    - -8
+    - -7
+    - -6
+    - -5
+    - -4
+    - -3
     - -2.5
-    - -2.0
+    - -2
     - -1.5
-    - -1.0
+    - -1
     - -0.5
     - 0.5
-    - 1.0
+    - 1
     - 1.5
-    - 2.0
+    - 2
     - 2.5
-    - 3.0
-    - 4.0
-    - 5.0
-    - 6.0
-    - 7.0
-    - 8.0
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
     - 9
     contour_level_selection_type: level_list
     contour_shade: true

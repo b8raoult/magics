@@ -20,31 +20,31 @@ magics:
     - 0.1
     - 0.2
     - 0.5
-    - 1.0
-    - 2.0
-    - 5.0
-    - 10.0
-    - 20.0
+    - 1
+    - 2
+    - 5
+    - 10
+    - 20
     contour_level_selection_type: level_list
     contour_reference_level: 0
     contour_shade: true
     contour_shade_colour_list:
-    - rgb(0.2063,0.0,0.0)
-    - rgb(0.371,0.0,0.0)
-    - rgb(0.5358,0.0,0.0)
-    - rgb(0.7005,0.0,0.0)
-    - rgb(0.8652,0.0,0.0)
-    - rgb(1.0,0.0299,0.0)
-    - rgb(1.0,0.1946,0.0)
-    - rgb(1.0,0.3593,0.0)
-    - rgb(1.0,0.524,0.0)
-    - rgb(1.0,0.6887,0.0)
-    - rgb(1.0,0.8534,0.0)
-    - rgb(1.0,1.0,0.0272)
-    - rgb(1.0,1.0,0.2743)
-    - rgb(1.0,1.0,0.5213)
-    - rgb(1.0,1.0,0.7684)
-    - rgb(1.0,1.0,1.0)
+    - rgb(0.2063,0,0)
+    - rgb(0.371,0,0)
+    - rgb(0.5358,0,0)
+    - rgb(0.7005,0,0)
+    - rgb(0.8652,0,0)
+    - rgb(1,0.0299,0)
+    - rgb(1,0.1946,0)
+    - rgb(1,0.3593,0)
+    - rgb(1,0.524,0)
+    - rgb(1,0.6887,0)
+    - rgb(1,0.8534,0)
+    - rgb(1,1,0.0272)
+    - rgb(1,1,0.2743)
+    - rgb(1,1,0.5213)
+    - rgb(1,1,0.7684)
+    - rgb(1,1,1)
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_shade_min_level: 0

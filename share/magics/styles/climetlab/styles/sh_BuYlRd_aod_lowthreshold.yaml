@@ -23,7 +23,7 @@ magics:
     - 0.68
     - 0.74
     - 0.81
-    - 10.0
+    - 10
     contour_level_selection_type: level_list
     contour_reference_level: 0
     contour_shade: true

@@ -29,7 +29,7 @@ magics:
     - 0.865
     - 0.91
     - 0.955
-    - 10.0
+    - 10
     contour_level_selection_type: level_list
     contour_reference_level: 0
     contour_shade: true
@@ -53,7 +53,7 @@ magics:
     - rgba(0.6894,0.2253,0.0103,0.85)
     - rgba(0.618,0.1991,0.0126,0.9)
     - rgba(0.5556,0.1751,0.0142,0.95)
-    - rgba(0.498,0.1529,0.0157,1.0)
+    - rgba(0.498,0.1529,0.0157,1)
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_shade_min_level: 0

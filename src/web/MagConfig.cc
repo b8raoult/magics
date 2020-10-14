@@ -10,10 +10,10 @@
 
 #include "magics.h"
 
-#include "MagParser.h"
 #include "MagConfig.h"
 #include "MagException.h"
 #include "MagLog.h"
+#include "MagParser.h"
 #include "MetaData.h"
 #include "Value.h"
 

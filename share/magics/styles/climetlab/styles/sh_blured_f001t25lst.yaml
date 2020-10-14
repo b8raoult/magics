@@ -13,7 +13,7 @@ magics:
     - 0.4
     - 1
     - 2.5
-    - 5.0
+    - 5
     - 10
     - 25
     contour_level_selection_type: level_list

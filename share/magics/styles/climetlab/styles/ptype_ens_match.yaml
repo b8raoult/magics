@@ -6,7 +6,7 @@ magics:
     symbol_advanced_table_colour_list:
     - rgb(0.23,0.89,0.08)
     - none
-    - rgb(1.0,0.01,0.29)
+    - rgb(1,0.01,0.29)
     - none
     - lavender
     - rgb(0.268,0.268,0.9793)

@@ -26,9 +26,9 @@ magics:
     contour_reference_level: 0
     contour_shade: true
     contour_shade_colour_list:
-    - rgb(1.0,1.0,1.0)
+    - rgb(1,1,1)
     - rgb(0.9294,0.9804,0.7608)
-    - rgb(0.8039,1.0,0.8039)
+    - rgb(0.8039,1,0.8039)
     - rgb(0.6,0.9412,0.698)
     - rgb(0.3255,0.7412,0.6235)
     - rgb(0.1961,0.651,0.5882)

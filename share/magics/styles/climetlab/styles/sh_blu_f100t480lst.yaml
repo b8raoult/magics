@@ -9,7 +9,7 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Level list : (100./120/140/160/180/200/220/240/260/280/300/320/340/360/480)'
     contour_level_list:
-    - 100.0
+    - 100
     - 120
     - 140
     - 160

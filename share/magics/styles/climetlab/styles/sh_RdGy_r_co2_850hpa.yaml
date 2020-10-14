@@ -10,37 +10,37 @@ magics:
     contour_legend_text: 'Contour shade (Range: 122.5 / 411.0, RdGy_r colours)'
     contour_level_list:
     - 122.5
-    - 396.0
+    - 396
     - 396.5
-    - 397.0
+    - 397
     - 397.5
-    - 398.0
+    - 398
     - 398.5
-    - 399.0
+    - 399
     - 399.5
-    - 400.0
+    - 400
     - 400.5
-    - 401.0
+    - 401
     - 401.5
-    - 402.0
+    - 402
     - 402.5
-    - 403.0
+    - 403
     - 403.5
-    - 404.0
+    - 404
     - 404.5
-    - 405.0
+    - 405
     - 405.5
-    - 406.0
+    - 406
     - 406.5
-    - 407.0
+    - 407
     - 407.5
-    - 408.0
+    - 408
     - 408.5
-    - 409.0
+    - 409
     - 409.5
-    - 410.0
+    - 410
     - 410.5
-    - 411.0
+    - 411
     - 1460.5
     contour_level_selection_type: level_list
     contour_line_thickness: 0
@@ -78,7 +78,7 @@ magics:
     - rgb(0.6807,0.0886,0.1659)
     - rgb(0.5885,0.0591,0.1511)
     - rgb(0.4962,0.0295,0.1363)
-    - rgb(0.4039,0.0,0.1216)
+    - rgb(0.4039,0,0.1216)
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_shade_min_level: 0

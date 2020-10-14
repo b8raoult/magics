@@ -29,19 +29,19 @@ magics:
     contour_shade: true
     contour_shade_colour_list:
     - none
-    - rgb(0.92,0.92,1.0)
-    - rgb(0.8,0.8,1.0)
-    - rgb(0.68,0.68,1.0)
-    - rgb(0.56,0.56,1.0)
-    - rgb(0.45,0.45,1.0)
-    - rgb(0.4,1.0,1.0)
-    - rgb(0.0,0.8,0.8)
-    - rgb(0.6,1.0,0.6)
+    - rgb(0.92,0.92,1)
+    - rgb(0.8,0.8,1)
+    - rgb(0.68,0.68,1)
+    - rgb(0.56,0.56,1)
+    - rgb(0.45,0.45,1)
+    - rgb(0.4,1,1)
+    - rgb(0,0.8,0.8)
+    - rgb(0.6,1,0.6)
     - rgb(0.2,0.95,0.2)
-    - rgb(1.0,0.85,0.5)
-    - rgb(1.0,0.7,0.1)
-    - rgb(1.0,0.5,0.5)
-    - rgb(1.0,0.5,1.0)
+    - rgb(1,0.85,0.5)
+    - rgb(1,0.7,0.1)
+    - rgb(1,0.5,0.5)
+    - rgb(1,0.5,1)
     - magenta
     contour_shade_colour_method: list
     contour_shade_method: area_fill

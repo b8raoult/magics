@@ -9,19 +9,19 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Range: 386.0 / 401.0, diverging colours)'
     contour_level_list:
-    - 386.0
-    - 391.0
-    - 392.0
-    - 393.0
-    - 394.0
-    - 395.0
-    - 396.0
-    - 397.0
-    - 398.0
-    - 399.0
-    - 400.0
-    - 401.0
-    - 404.0
+    - 386
+    - 391
+    - 392
+    - 393
+    - 394
+    - 395
+    - 396
+    - 397
+    - 398
+    - 399
+    - 400
+    - 401
+    - 404
     contour_level_selection_type: level_list
     contour_reference_level: 0
     contour_shade: true

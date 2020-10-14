@@ -9,29 +9,29 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Range: 300.0 / 445.0, Spectral_r colours)'
     contour_level_list:
-    - 300.0
-    - 395.0
+    - 300
+    - 395
     - 397.5
-    - 400.0
+    - 400
     - 402.5
-    - 405.0
+    - 405
     - 407.5
-    - 410.0
+    - 410
     - 412.5
-    - 415.0
+    - 415
     - 417.5
-    - 420.0
+    - 420
     - 422.5
-    - 425.0
+    - 425
     - 427.5
-    - 430.0
+    - 430
     - 432.5
-    - 435.0
+    - 435
     - 437.5
-    - 440.0
+    - 440
     - 442.5
-    - 445.0
-    - 600.0
+    - 445
+    - 600
     contour_level_selection_type: level_list
     contour_line_thickness: 0
     contour_reference_level: 0

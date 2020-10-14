@@ -9,21 +9,21 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Range: 0 / 10000, all colours)'
     contour_level_list:
-    - 60.0
+    - 60
     - 77.14
     - 94.29
     - 111.43
     - 128.57
     - 145.71
     - 162.86
-    - 180.0
+    - 180
     - 197.14
     - 214.29
     - 231.43
     - 248.57
     - 265.71
     - 282.86
-    - 1000.0
+    - 1000
     contour_level_selection_type: level_list
     contour_reference_level: 0
     contour_shade: true

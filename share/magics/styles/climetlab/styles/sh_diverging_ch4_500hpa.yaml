@@ -9,22 +9,22 @@ magics:
     contour_label: false
     contour_legend_text: 'Contour shade (Range: 1620.0 / 1900.0, diverging colours)'
     contour_level_list:
-    - 1620.0
-    - 1770.0
-    - 1780.0
-    - 1790.0
-    - 1800.0
-    - 1810.0
-    - 1820.0
-    - 1830.0
-    - 1840.0
-    - 1850.0
-    - 1860.0
-    - 1870.0
-    - 1880.0
-    - 1890.0
-    - 1900.0
-    - 2360.0
+    - 1620
+    - 1770
+    - 1780
+    - 1790
+    - 1800
+    - 1810
+    - 1820
+    - 1830
+    - 1840
+    - 1850
+    - 1860
+    - 1870
+    - 1880
+    - 1890
+    - 1900
+    - 2360
     contour_level_selection_type: level_list
     contour_reference_level: 0
     contour_shade: true

@@ -19,7 +19,8 @@ namespace magics {
 
 class MagYaml {
 public:
-    MAGICS_EXPORT static void processFile(const std::string& path);
+    MAGICS_EXPORT static void execute(const std::string& path);
+    MAGICS_EXPORT static void checkStyle(const std::string& path);
 };
 
 }  // namespace magics

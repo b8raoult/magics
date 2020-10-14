@@ -16,15 +16,16 @@ using namespace magics;
 int main(int argc, char** argv) {
     MagicsSettings::strict(true);
 
+
     try {
         for (int i = 1; i < argc; i++) {
-            MagYaml::processFile(argv[i]);
+            MagYaml::execute(argv[i]);
         }
     }
     catch (std::exception& e) {
         std::cerr << "Magics: terminated with exception: " << e.what() << std::endl;
-        exit(1);
+        return 1;
     }
 
-    exit(0);
+    return 0;
 }

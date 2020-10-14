@@ -1513,7 +1513,6 @@ void LegendVisitor::visit(MetaDataVisitor& visitor) {
     }
 
 
-
     out << c1 << "\"legend_entries\" : [";
     c1 = "";
     for (auto& entry : legendEntriesInfo_) {
