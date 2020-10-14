@@ -32,6 +32,10 @@ SimpleFactory<B>::SimpleFactory(const string& name) : name_(lowerCase(name)) {
     if (!map_) {
         map_ = new map<string, SimpleFactory<B>*>();
     }
+    // This happens in the automatically gerenated files
+    // if(map_->find(name_) != map_->end()) {
+    //     std::cerr << "SimpleFactory: duplicate factory name: " + name_ << std::endl;
+    // }
     (*map_)[name_] = this;
 }
 

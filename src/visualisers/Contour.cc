@@ -193,6 +193,7 @@ static SimpleObjectMaker<EcChartLibrary, ContourLibrary> ecchart("ecchart");
 static SimpleObjectMaker<NoContourLibrary, ContourLibrary> off("off");
 static SimpleObjectMaker<WebLibrary, ContourLibrary> style_name("style_name");
 static SimpleObjectMaker<WebLibrary, ContourLibrary> ecmwf("ecmwf");
+static SimpleObjectMaker<WebLibrary, ContourLibrary> on("on");
 
 void Contour::visit(Data& data, LegendVisitor& legend) {
     if (!legend_)
