@@ -33,4 +33,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: 'Contour shade (Range: 0.05 /1000)'
+    contour_units: mm
 

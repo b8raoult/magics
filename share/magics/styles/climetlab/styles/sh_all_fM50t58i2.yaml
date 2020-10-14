@@ -123,4 +123,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: 'Additional 2 (Range: -50/58 by 2)'
+    contour_units: C
 

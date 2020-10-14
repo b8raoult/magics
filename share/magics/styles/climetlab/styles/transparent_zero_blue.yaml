@@ -15,4 +15,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: Temperature below 0 C
+    contour_units: C
 

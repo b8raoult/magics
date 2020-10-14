@@ -28,4 +28,5 @@ magics:
     contour_line_thickness: 2
     contour_shade: false
     contour_title: 'Black contour (Range: 0.1/100)'
+    contour_units: mm
 

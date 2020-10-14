@@ -45,4 +45,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_technique: cell_shading
     contour_title: Grid shading from 0.08 (similar to radar images)
+    contour_units: kg m**-2 h**-1
 

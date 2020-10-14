@@ -42,4 +42,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: Shading from 0.08
+    contour_units: kg m**-2 h**-1
 

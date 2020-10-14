@@ -16,4 +16,5 @@ magics:
     contour_line_thickness: 1
     contour_lo_colour: black
     contour_title: Contour with H/L and labels (interval 5, black)
+    contour_units: hPa
 

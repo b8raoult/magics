@@ -24,4 +24,5 @@ magics:
     contour_min_level: -1
     contour_reference_level: 15
     contour_title: 'Contour (Range: 1 / 250, thickness 2, blue)'
+    contour_units: mm
 

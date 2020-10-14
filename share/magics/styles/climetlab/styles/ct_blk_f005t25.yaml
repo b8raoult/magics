@@ -19,5 +19,6 @@ magics:
     contour_line_colour: black
     contour_shade: false
     contour_title: 'Contour black lines (Range: 0.05/1000)'
+    contour_units: mm
     legend: true
 

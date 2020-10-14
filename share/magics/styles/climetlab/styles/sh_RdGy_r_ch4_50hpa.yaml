@@ -69,4 +69,5 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: 0
     contour_title: 'Contour shade (Range: 0.0 / 2100.0, RdGy_r colours)'
+    contour_units: ppbv
 

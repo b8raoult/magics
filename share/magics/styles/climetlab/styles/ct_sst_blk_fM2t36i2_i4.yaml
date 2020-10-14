@@ -20,4 +20,5 @@ magics:
     contour_min_level: -2
     contour_reference_level: 0
     contour_title: 'Contours (Range: -2 / 36) black, interval 2'
+    contour_units: C
 

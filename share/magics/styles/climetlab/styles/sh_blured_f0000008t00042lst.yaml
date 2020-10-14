@@ -31,4 +31,5 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: 8.0e-06
     contour_title: 'Contour shade (Range: 0.000008/0.0042, with isolines)'
+    contour_units: mm
 

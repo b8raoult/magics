@@ -13,4 +13,5 @@ magics:
     contour_line_colour: green
     contour_line_thickness: 2
     contour_title: Contour (interval 5, thickness 2, green)
+    contour_units: dam
 

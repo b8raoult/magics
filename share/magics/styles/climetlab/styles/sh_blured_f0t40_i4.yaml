@@ -25,5 +25,6 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: 0
     contour_title: 'Contour shade (Range: 0 / 40)'
+    contour_units: C
     grib_missing_value_indicator: 9999
 

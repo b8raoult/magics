@@ -17,4 +17,5 @@ magics:
     contour_line_thickness: 2
     contour_reference_level: 528
     contour_title: Contour (interval 6, thickness 2, black)
+    contour_units: dam
 

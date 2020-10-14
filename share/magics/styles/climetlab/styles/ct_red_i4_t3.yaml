@@ -13,4 +13,5 @@ magics:
     contour_line_thickness: 3
     contour_reference_level: 0
     contour_title: Contour (interval 4, thickness 3)
+    contour_units: C
 

@@ -35,4 +35,5 @@ magics:
     contour_line_colour: black
     contour_line_thickness: 2
     contour_title: Contour (level list from 500 to 1050, thickness 2, black)
+    contour_units: hPa
 

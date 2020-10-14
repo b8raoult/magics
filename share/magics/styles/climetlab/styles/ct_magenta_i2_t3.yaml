@@ -14,4 +14,5 @@ magics:
     contour_line_thickness: 3
     contour_min_level: 2
     contour_title: Contour (interval 2, thickness 3)
+    contour_units: pv units
 

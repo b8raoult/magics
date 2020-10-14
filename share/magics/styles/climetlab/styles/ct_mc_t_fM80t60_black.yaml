@@ -37,4 +37,5 @@ magics:
     contour_line_thickness: 2
     contour_shade: false
     contour_title: 'Black contour (Range: -80/60)'
+    contour_units: C
 

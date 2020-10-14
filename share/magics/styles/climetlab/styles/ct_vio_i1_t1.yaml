@@ -17,4 +17,5 @@ magics:
     contour_min_level: 1
     contour_reference_level: 2
     contour_title: Contour (interval 1, thickness 1, violet)
+    contour_units: pv units
 

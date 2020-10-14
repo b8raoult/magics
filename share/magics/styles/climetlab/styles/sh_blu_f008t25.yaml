@@ -28,4 +28,5 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: 0
     contour_title: 'Contour shade (Range: 0.8 / 25), used for T spread'
+    contour_units: C
 

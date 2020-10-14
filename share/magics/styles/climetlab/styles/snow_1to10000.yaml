@@ -42,4 +42,5 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: 1
     contour_title: 'Contour shade (Range: 1 to 10000 as in operational web)'
+    contour_units: cm
 

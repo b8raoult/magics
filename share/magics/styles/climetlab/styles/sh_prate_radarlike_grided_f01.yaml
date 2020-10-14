@@ -36,4 +36,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_technique: cell_shading
     contour_title: Shading (0.1 to 256)
+    contour_units: kg m**-2 h**-1
 

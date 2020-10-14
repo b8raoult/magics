@@ -163,4 +163,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_technique: cell_shading
     contour_title: 'Black-white: Range -120/69'
+    contour_units: C
 

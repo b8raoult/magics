@@ -28,5 +28,6 @@ magics:
     contour_shade_method: area_fill
     contour_title: 'Contour shade (Level list : 0./0.001/0.002/0.003/0.004/0.005/0.01/1)
       Used for Snow evaporation'
+    contour_units: cm
     grib_missing_value_indicator: 9999
 

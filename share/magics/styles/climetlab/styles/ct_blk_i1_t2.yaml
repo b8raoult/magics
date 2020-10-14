@@ -17,4 +17,5 @@ magics:
     contour_line_thickness: 2
     contour_reference_level: 528
     contour_title: Contour (interval 1, black)
+    contour_units: hPa
 
