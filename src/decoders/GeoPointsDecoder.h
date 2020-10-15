@@ -73,8 +73,8 @@ public:
     void polar(const string&, const Transformation&);
     void lluv(const string&, const Transformation&);
     void initInfo() override;
-    void visit(MetaDataCollector&);
-    void visit(ValuesCollector&);
+    void visit(MetaDataCollector&) override;
+    void visit(ValuesCollector&) override;
     virtual std::string getUnits() const override { NOTIMP; }
 
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
@@ -96,7 +96,7 @@ protected:
 
     //! Method to print string about this class on to a stream of type ostream
     //! (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     typedef void (GeoPointsDecoder::*SimpleDecode)(const string&);
     typedef void (GeoPointsDecoder::*Decode)(const string&, const Transformation&);
     std::map<string, Decode> formats_;

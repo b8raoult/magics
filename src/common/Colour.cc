@@ -72,6 +72,9 @@ Colour::Colour(const string& name) : name_(lowerCase(name)), automatic_(false) {
         setColour(name);
     }
     catch (BadHslFormat& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         name_ = "red";
         rgb_  = Rgb(1., 0., 0., 1.);
     }
@@ -92,6 +95,9 @@ void Colour::set(const XmlNode& xml) {
         setColour(xml.data());
     }
     catch (BadHslFormat& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         name_ = "red";
         rgb_  = Rgb(1., 0., 0., 1.);
     }
@@ -99,6 +105,9 @@ void Colour::set(const XmlNode& xml) {
 
 void Colour::setColour(const string& name) {
     if (name.empty()) {
+        if (MagicsSettings::strict()) {
+            throw MagicsException("No colour name given.");
+        }
         MagLog::warning() << "No colour name given. Red used.\n";
         name_ = "red";
         rgb_  = Rgb(1., 0., 0.);
@@ -156,6 +165,9 @@ void Colour::setColour(const string& name) {
             rgb_ = (*colour).second;
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::warning() << " Invalid colour name " << name << ". Red used.\n";
         name_ = "red";
         rgb_  = Rgb(1., 0., 0.);

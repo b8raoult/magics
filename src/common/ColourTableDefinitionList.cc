@@ -51,6 +51,9 @@ void ColourTableDefinitionList::set(const XmlNode& node) {
             MagLog::dev() << "add colour---" << colour->name() << "\n";
         }
         catch (NoFactoryException& e) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
 }

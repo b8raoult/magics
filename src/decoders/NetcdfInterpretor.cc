@@ -248,6 +248,9 @@ void NetcdfInterpretor::getAttributes(Netcdf& nc, const string& varName, string&
         }
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
     }
 }
 
@@ -303,6 +306,9 @@ void NetcdfTag::decode(const string& line) {
         tree.visit(*this);
     }
     catch (MagicsException& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::debug() << e.what() << endl;
     }
 }

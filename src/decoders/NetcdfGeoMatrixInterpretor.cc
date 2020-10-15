@@ -129,6 +129,9 @@ bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
         matrix_->setMapsAxis();
     }
     catch (MagicsException& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << e << "\n";
         delete matrix_;
         matrix_ = NULL;
@@ -205,6 +208,9 @@ bool NetcdfGeoMatrixInterpretor::interpretAsPoints(PointsList& list) {
         MagLog::dev() << "everything ok" << endl;
     }
     catch (MagicsException& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << e << "\n";
         return false;
     }
@@ -307,6 +313,9 @@ void NetcdfGeoMatrixInterpretor::customisedPoints(const Transformation& transfor
         MagLog::dev() << "everything ok" << endl;
     }
     catch (MagicsException& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << e << "\n";
     }
 }

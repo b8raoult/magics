@@ -204,6 +204,9 @@ bool SymbolTableMode::accept(double value) {
         return true;
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         return false;
     }
 }

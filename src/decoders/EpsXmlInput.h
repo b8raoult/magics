@@ -46,22 +46,22 @@ public:
     EpsXmlInput();
     virtual ~EpsXmlInput();
 
-    virtual void set(const map<string, string>& map) { EpsXmlInputAttributes::set(map); }
-    virtual void set(const XmlNode& node) { EpsXmlInputAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { EpsXmlInputAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { EpsXmlInputAttributes::set(node); }
 
-    virtual void visit(Transformation&);
+    virtual void visit(Transformation&) override;
     void visit(const XmlNode& node) override;
 
-    virtual void decode();
+    virtual void decode() override;
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
         customisedPoints(n, out);
     }
-    PointsHandler& points(const Transformation& t, bool) { NOTIMP; }
+    PointsHandler& points(const Transformation& t, bool) override { NOTIMP; }
 
-    virtual void visit(TextVisitor&);
-    virtual void visit(MetaDataVisitor&);
+    virtual void visit(TextVisitor&) override;
+    virtual void visit(MetaDataVisitor&) override;
 
     virtual std::string getUnits() const override { NOTIMP; }
 

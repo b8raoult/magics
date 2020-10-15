@@ -91,6 +91,9 @@ public:
             step.yResolution(abs(data.YResolution()));
         }
         catch (...) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
     void visit(MetaDataCollector&) override;

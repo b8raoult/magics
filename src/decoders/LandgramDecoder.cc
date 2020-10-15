@@ -101,6 +101,9 @@ void LandgramDecoder::decode() {
         tree.visit(*this);
     }
     catch (MagicsException& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::debug() << e.what() << endl;
     }
 

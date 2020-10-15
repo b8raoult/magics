@@ -117,6 +117,9 @@ bool NetcdfMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
         MagLog::dev() << *matrix_ << "\n";
     }
     catch (MagicsException& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << e << "\n";
         delete matrix_;
         matrix_ = NULL;

@@ -39,6 +39,9 @@ void setMember(const string& value, unique_ptr<T>& object, const XmlNode& from) 
         object = unique_ptr<T>(new_object);
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
     }
     object->set(from);
     ;
@@ -55,6 +58,9 @@ bool acceptNode(const string& node, unique_ptr<T>& object) {
         return true;
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         return object->accept(node);
     }
 }

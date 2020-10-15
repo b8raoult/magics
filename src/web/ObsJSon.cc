@@ -73,6 +73,9 @@ void ObsJSon::decode() {
         }
     }
     catch (std::exception& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << "Could not processed the file: " << path_ << ": " << e.what() << endl;
     }
 }

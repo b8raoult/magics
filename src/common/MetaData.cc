@@ -91,6 +91,9 @@ void MetaDataVisitor::collectMetaData() {
     }
 
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
     }
 
     if (!wms_file_.empty() && styles_.size()) {
@@ -104,6 +107,9 @@ void MetaDataVisitor::collectMetaData() {
             out.close();
         }
         catch (...) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
     if (!javascript_.empty()) {
@@ -126,6 +132,9 @@ void MetaDataVisitor::collectMetaData() {
             out.close();
         }
         catch (...) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
 
@@ -149,6 +158,9 @@ void MetaDataVisitor::collectMetaData() {
             out.close();
         }
         catch (...) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
 
@@ -167,6 +179,9 @@ void MetaDataVisitor::collectMetaData() {
             out.close();
         }
         catch (...) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
     if (!efi_.empty()) {
@@ -184,6 +199,9 @@ void MetaDataVisitor::collectMetaData() {
             ofstream out(efi_.c_str());
             out << " Could not opened " << path << endl;
             out.close();
+            if (MagicsSettings::strict()) {
+            throw;
+        }
         }
     }
 }

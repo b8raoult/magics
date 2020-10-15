@@ -58,6 +58,9 @@ void Histogram::bean(PointsHandler& points) {
             count->second++;
         }
         catch (...) {
+            if (MagicsSettings::strict()) {
+            throw;
+        }
             // MagLog::debug() <<  points.current().value() << " is not in range..." << endl;
         }
 

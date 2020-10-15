@@ -634,6 +634,9 @@ void ObsDecoder::getInfo(const std::set<string>& tokens, multimap<string, string
             }
         }
         catch (NoFactoryException&) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         }
 
         for (std::set<string>::const_iterator no = noduplicate.begin(); no != noduplicate.end(); ++no) {

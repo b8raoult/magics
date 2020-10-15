@@ -442,9 +442,15 @@ void TableDecoder::visit(Transformation& transformation) {
         }
     }
     catch (std::exception& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         std::cout << "ERROR: TableDecoder::visit " << e.what() << endl;
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         std::cout << "ERROR: TableDecoder::visit (unknown exception)" << endl;
     }
 }

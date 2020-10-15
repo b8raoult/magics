@@ -115,6 +115,36 @@ public:
     string getType(const Matrix&) const;
     string getType(const DisplayType&) const;
 
+    static Justification justification(const std::string&);
+    static const std::string& justification(const Justification&);
+
+    static LineStyle lineStyle(const std::string&);
+    static const std::string& lineStyle(const LineStyle&);
+
+    static Position position(const std::string&);
+    static const std::string& position(const Position&);
+
+    static ListPolicy listPolicy(const std::string&);
+    static const std::string& listPolicy(const ListPolicy&);
+
+    static AxisAutomaticSetting axisAutomaticSetting(const std::string&);
+    static const std::string& axisAutomaticSetting(const AxisAutomaticSetting&);
+
+    static DisplayType displayType(const std::string&);
+    static const std::string& displayType(const DisplayType&);
+
+    static GraphicsFormat graphicsFormat(const std::string&);
+    static const std::string& graphicsFormat(const GraphicsFormat&);
+
+    static Hemisphere hemisphere(const std::string&);
+    static const std::string& hemisphere(const Hemisphere&);
+
+    static ArrowPosition arrowPosition(const std::string&);
+    static const std::string& arrowPosition(const ArrowPosition&);
+
+    static VerticalAlign verticalAlign(const std::string&);
+    static const std::string& verticalAlign(const VerticalAlign&);
+
     virtual string type() const = 0;
 
 protected:

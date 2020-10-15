@@ -46,6 +46,9 @@ MagConfigHandler::MagConfigHandler(const string& config, MagConfig& magics) {
         }
     }
     catch (std::exception& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << "JSON error in file: " << config << ": " << e.what() << endl;
     }
 }
@@ -467,6 +470,9 @@ void DimensionGuess::init() {
         }
     }
     catch (std::exception& e) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << "JSON error in" << definitions_ << ": " << e.what() << endl;
     }
 }

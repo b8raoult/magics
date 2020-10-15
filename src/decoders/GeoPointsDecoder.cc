@@ -330,6 +330,9 @@ void GeoPointsDecoder::decode(const Transformation& transformation) {
         in.close();
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << "Geopoints file : can not open " << path_ << endl;
     }
 }
@@ -382,6 +385,9 @@ void GeoPointsDecoder::decode() {
         in.close();
     }
     catch (...) {
+        if (MagicsSettings::strict()) {
+            throw;
+        }
         MagLog::error() << "Geopoints file : can not open " << path_ << endl;
     }
 }
