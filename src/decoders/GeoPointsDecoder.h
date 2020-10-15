@@ -75,6 +75,8 @@ public:
     void initInfo();
     void visit(MetaDataCollector&);
     void visit(ValuesCollector&);
+    virtual std::string getUnit() const override { NOTIMP; }
+
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {
         customisedPoints(t, n, out);
     }

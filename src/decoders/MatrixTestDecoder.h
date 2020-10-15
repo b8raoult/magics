@@ -44,7 +44,7 @@ public:
         NOTIMP;
     }
 
-    PointsHandler& points(const Transformation& t, bool) { NOTIMP; }
+    PointsHandler& points(const Transformation& t, bool) override { NOTIMP; }
 
 
     PointsHandler& points() { throw MethodNotYetImplemented("MatrixTestDecoder::points()"); }
@@ -53,6 +53,8 @@ public:
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         return *(matrixHandlers_.back());
     }
+
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

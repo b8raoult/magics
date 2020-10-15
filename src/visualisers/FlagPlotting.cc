@@ -59,7 +59,7 @@ Flag* FlagPlotting::southFlag(const Colour& colour) {
     south->setOriginHeight(origin_marker_size_);
     south->setHemisphere(SOUTH);
     south->setLength(length_);
-    south->setConvention(KNOTS);
+    south->setConvention(FlagConvention::KNOTS);
     southFlags_.insert(make_pair(colour, south));
     (*origin_).prepare(*south);
     return south;
@@ -79,7 +79,7 @@ Flag* FlagPlotting::northFlag(const Colour& colour) {
     north->setCrossBoundary(cross_boundary_);
     north->setOriginHeight(origin_marker_size_);
     north->setHemisphere(NORTH);
-    north->setConvention(KNOTS);
+    north->setConvention(FlagConvention::KNOTS);
     northFlags_.insert(make_pair(colour, north));
     north->setLength(length_);
     (*origin_).prepare(*north);

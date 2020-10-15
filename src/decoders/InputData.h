@@ -53,6 +53,7 @@ public:
     void getReady(const Transformation&);
     void visit(ValuesCollector&);
 
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

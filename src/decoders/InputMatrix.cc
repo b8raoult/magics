@@ -188,20 +188,7 @@ PointsHandler& InputMatrix::points(const Transformation& transformation) {
     this->pointsHandlers_.push_back(new BoxPointsHandler(this->matrix(), transformation, true));
     return *(this->pointsHandlers_.back());
 }
-void InputMatrix::scaling(double& scaling, double& offset) const {
-    scaling = 1;
-    offset  = 0;
 
-
-    WebLibrary settings;
-    MetaDataCollector needs;
-    settings.askId(needs);
-    metadata(needs);
-    settings.getScaling(needs, scaling, offset);
-
-    if (scaling == 0)
-        scaling = 1;
-}
 
 void InputMatrix::customisedPoints(const BasicThinningMethod& thinning, const Transformation& transformation,
                                    const std::set<string>&, CustomisedPointsList& points) {

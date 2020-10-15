@@ -150,7 +150,6 @@ void CliMetLabLibrary::print(ostream& out) const {
     out << "CliMetLabLibrary[]";
 }
 
-
 static SimpleObjectMaker<CliMetLabLibrary, ContourLibrary> climetlab("climetlab");
 
 

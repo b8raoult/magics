@@ -78,6 +78,8 @@ public:
     // missing)
     virtual PointsHandler& points(const Transformation&, bool) { NOTIMP; }
 
+    virtual std::string getUnit() const override { NOTIMP; }
+
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream& out) const {

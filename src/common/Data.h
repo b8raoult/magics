@@ -157,6 +157,9 @@ public:
         return uniqueOwnerId_;
     }
 
+    virtual void getScaling(double& scaling, double& offset) const;
+    virtual std::string getUnit() const = 0;
+
 protected:
     int dimension_;
     int index_;

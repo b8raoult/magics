@@ -59,23 +59,25 @@ class ObsDecoder : public ObsDecoderAttributes, public Decoder, public Data, pub
 public:
     ObsDecoder();
     virtual ~ObsDecoder();
-    virtual void set(const map<string, string>& map) { ObsDecoderAttributes::set(map); }
+    virtual void set(const map<string, string>& map)  override { ObsDecoderAttributes::set(map); }
 
-    virtual void decode();
+    virtual void decode()  override ;
 
     bool defined() { return file_name_.empty() == false; }
-    void getInfo(const std::set<string>&, multimap<string, string>&);
+    void getInfo(const std::set<string>&, multimap<string, string>&) override;
     void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool) {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool) override {
         customisedPoints(t, n, out);
     }
     virtual PointsHandler& points();
-    PointsHandler& points(const Transformation&, bool) { return points(); }
+    PointsHandler& points(const Transformation&, bool) override { return points(); }
     void visit(TitleNode&);
+
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     string title_;
 
     bool findInTypes(const string&);

@@ -46,6 +46,8 @@ public:
     PointsHandler& points(const Transformation&, bool);
     MatrixHandler& matrix();
 
+    virtual std::string getUnit() const override { NOTIMP; }
+
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream&) const;

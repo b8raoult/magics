@@ -188,6 +188,7 @@ public:
     virtual void visit(Transformation&);
     virtual void visit(TextVisitor&);
     void visit(const XmlNode& node);
+    virtual std::string getUnit() const override { NOTIMP; }
 
     virtual void decode();
 

@@ -39,15 +39,15 @@ public:
     virtual ~TileDecoder();
     // implements Decoder interface
     void decode();
-    virtual void set(const XmlNode& node) { TileDecoderAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { TileDecoderAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { TileDecoderAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { TileDecoderAttributes::set(map); }
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all);
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override;
 
-    PointsHandler& points(const Transformation& t, bool);
+    PointsHandler& points(const Transformation& t, bool) override;
 
     PointsHandler& points() { throw MethodNotYetImplemented("TileDecoder::points()"); }
-    virtual MatrixHandler& matrix() {
+    virtual MatrixHandler& matrix() override {
         decode();
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         matrixHandlers_.back()->setTile();
@@ -60,13 +60,14 @@ public:
     string positions();
     string positions_symbols();
 
-    Data* current();
-    Data* next();
+    Data* current()override;
+    Data* next()override;
 
     vector<codes_handle*> entries_;
     vector<codes_handle*>::iterator entry_;
     codes_handle* handle_;
 
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

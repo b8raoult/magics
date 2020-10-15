@@ -109,6 +109,14 @@ void Data::computeStats() {
     stats_.clear();
 }
 
+
+void Data::getScaling(double& scaling, double& offset) const {
+    scaling = 1;
+    offset = 0;
+    std::string units = getUnit();
+    std::cout << "++++++++ UNITS " << units << std::endl;
+}
+
 int Data::uniqueOwnerId_ = 0;
 DataList::DataList() {
     current_ = data_.begin();

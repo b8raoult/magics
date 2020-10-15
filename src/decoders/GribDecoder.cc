@@ -1514,6 +1514,10 @@ void GribDecoder::ask(MetaDataCollector& meta) {
     }
 }
 
+string GribDecoder::getUnit() const {
+    return getString("units");
+}
+
 void GribDecoder::visit(MetaDataVisitor& meta) {
     if (!valid_)
         return;

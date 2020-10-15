@@ -56,7 +56,6 @@ string NetcdfGeoMatrixInterpretor::proj4Detected(Netcdf& netcdf) {
 bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
     if (*matrix)
         return false;
-
     Netcdf netcdf(path_, dimension_method_);
 
     string proj4 = proj4Detected(netcdf);
@@ -72,14 +71,9 @@ bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
     *matrix = matrix_;
 
     if (automatic_scaling_) {
-        WebLibrary settings;
-        MetaDataCollector needs;
-        settings.askId(needs);
-        for (auto need = needs.begin(); need != needs.end(); ++need) {
-            need->second = getAttribute(field_, need->first, "");
-        }
-
-        settings.getScaling(needs, scaling_, offset_);
+        // FIXME: come back
+        NOTIMP;
+        // getScaling(scaling_, offset_);
     }
 
     // get the data ...

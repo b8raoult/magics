@@ -277,11 +277,7 @@ void GribInterpretor::scaling(GribDecoder& grib, double& scaling, double& offset
     bool scale   = (derived == 254) ? grib.derived_scaling_ : grib.scaling_;
 
     if (scale) {
-        WebLibrary settings;
-        MetaDataCollector needs;
-        settings.askId(needs);
-        grib.ask(needs);
-        settings.getScaling(needs, scaling, offset);
+        grib.getScaling(scaling, offset);
     }
     else {
         scaling = grib.scaling_factor_;

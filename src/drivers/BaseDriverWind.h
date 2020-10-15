@@ -175,7 +175,7 @@ MAGICS_NO_EXPORT void BaseDriver::renderWindFlag(const Flag& flag) const {
         MFloat slev2 = 5.;
         MFloat slev3 = 25.;
 
-        if (flag.getConvention() == KNOTS) {
+        if (flag.getConvention() == FlagConvention::KNOTS) {
             len *= 1.94384466;
             lev1  = 3.;
             lev2  = 7.;

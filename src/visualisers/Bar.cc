@@ -390,7 +390,7 @@ void GraphFlag::operator()(Data& data, BasicGraphicsObjectContainer& out) {
 
     flags->setOriginMarker("magics_15");
     flags->setOriginHeight(0.05);
-    flags->setConvention(KNOTS);
+    flags->setConvention(FlagConvention::KNOTS);
     int i = 0;
     double x, y, missing;
     double intensity, direction;
@@ -431,7 +431,7 @@ void GraphFlag::visit(LegendVisitor& legend) {
 
     flags->setOriginMarker("magics_15");
     flags->setOriginHeight(0.05);
-    flags->setConvention(KNOTS);
+    flags->setConvention(FlagConvention::KNOTS);
 
 
     LegendEntry* entry = new FlagEntry(legend_text_, flags);

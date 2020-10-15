@@ -51,7 +51,6 @@ public:
                           CustomisedPointsList&);
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {}
     PointsHandler& points(const Transformation& t, bool) { return points(t); }
-    void scaling(double&, double&) const;
 
     bool defined() {
         return !field_.empty() || ((!u_component_.empty() && !u_component_.empty()) ||
@@ -61,6 +60,7 @@ public:
     void release();
     void visit(MetaDataCollector&);
     void metadata(MetaDataCollector&) const;
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

@@ -50,7 +50,7 @@ public:
     virtual void set(const XmlNode& node) { EpsXmlInputAttributes::set(node); }
 
     virtual void visit(Transformation&);
-    void visit(const XmlNode& node);
+    void visit(const XmlNode& node) override;
 
     virtual void decode();
 
@@ -62,6 +62,8 @@ public:
 
     virtual void visit(TextVisitor&);
     virtual void visit(MetaDataVisitor&);
+
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

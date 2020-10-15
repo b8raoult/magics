@@ -48,6 +48,7 @@ public:
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {}
     PointsHandler& points(const Transformation&, bool) { return points(); }
 
+    virtual std::string getUnit() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
