@@ -48,11 +48,11 @@ public:
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {}
     PointsHandler& points(const Transformation&, bool) { return points(); }
 
-    virtual std::string getUnit() const override { NOTIMP; }
+    virtual std::string getUnits() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed

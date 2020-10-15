@@ -24,13 +24,13 @@
 using namespace magics;
 
 Label::Label(const string& label) :
-    label_(label), justification_(MCENTRE), verticalAlign_(MBASE), angle_(0.), blanking_(false), visible_(false) {}
+    label_(label), justification_(Justification::MCENTRE), verticalAlign_(VerticalAlign::MBASE), angle_(0.), blanking_(false), visible_(false) {}
 
 
 Label::Label(double label) :
     label_(tostring(label)),
-    justification_(MCENTRE),
-    verticalAlign_(MBASE),
+    justification_(Justification::MCENTRE),
+    verticalAlign_(VerticalAlign::MBASE),
     angle_(0.),
     blanking_(false),
     visible_(false) {}

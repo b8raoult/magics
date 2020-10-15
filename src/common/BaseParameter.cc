@@ -41,7 +41,7 @@ void BaseParameter::get(double& value) const {
     throw MistmatchType(name_, getType(value), type());
 }
 
-void BaseParameter::set(bool value) {
+void BaseParameter::set(const bool& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -157,7 +157,7 @@ void BaseParameter::get(magvector<string>& value) const {
     throw MistmatchType(name_, "stringarray", type());
 }
 
-void BaseParameter::set(LineStyle value) {
+void BaseParameter::set(const LineStyle& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -165,7 +165,7 @@ void BaseParameter::get(LineStyle& value) const {
     throw MistmatchType(name_, getType(value), type());
 }
 
-void BaseParameter::set(DisplayType value) {
+void BaseParameter::set(const DisplayType& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -173,7 +173,7 @@ void BaseParameter::get(DisplayType& value) const {
     throw MistmatchType(name_, getType(value), type());
 }
 
-void BaseParameter::set(Justification value) {
+void BaseParameter::set(const Justification& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -181,7 +181,7 @@ void BaseParameter::get(Justification& value) const {
     throw MistmatchType(name_, getType(value), type());
 }
 
-void BaseParameter::set(ListPolicy value) {
+void BaseParameter::set(const ListPolicy& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -189,7 +189,7 @@ void BaseParameter::get(ListPolicy& value) const {
     throw MistmatchType(name_, getType(value), type());
 }
 
-void BaseParameter::set(AxisAutomaticSetting value) {
+void BaseParameter::set(const AxisAutomaticSetting& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -197,7 +197,7 @@ void BaseParameter::get(AxisAutomaticSetting& value) const {
     throw MistmatchType(name_, getType(value), type());
 }
 
-void BaseParameter::set(ArrowPosition value) {
+void BaseParameter::set(const ArrowPosition& value) {
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -241,19 +241,19 @@ string BaseParameter::getType(const magvector<double>&) const {
     return "array of real";
 }
 
-string BaseParameter::getType(LineStyle) const {
+string BaseParameter::getType(const LineStyle&) const {
     return "LineStyle";
 }
 
-string BaseParameter::getType(AxisAutomaticSetting) const {
+string BaseParameter::getType(const AxisAutomaticSetting&) const {
     return "AxisAutomaticSetting";
 }
 
-string BaseParameter::getType(Justification) const {
+string BaseParameter::getType(const Justification&) const {
     return "Justification";
 }
 
-string BaseParameter::getType(ArrowPosition) const {
+string BaseParameter::getType(const ArrowPosition&) const {
     return "ArrowPosition";
 }
 

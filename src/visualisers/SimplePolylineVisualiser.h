@@ -59,7 +59,7 @@ public:
     const string& getDirection() const { return direction_; }
     stringarray getColours() const { return colours_; }
 
-    ListPolicy getPolicy() const { return M_LASTONE; }
+    ListPolicy getPolicy() const { return ListPolicy::M_LASTONE; }
     // Implements the set method ...
     void set(const map<string, string>& map) { SimplePolylineAttributes::set(map); }
     void set(const XmlNode& node) { SimplePolylineAttributes::set(node); }

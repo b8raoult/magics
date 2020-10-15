@@ -43,9 +43,9 @@ public:
     //! Method to access the data as a list of points : Used by psymb.
 
     virtual void decode(const Transformation&);
-    virtual void decode();
-    void set(const map<string, string>& map) { GeoPointsDecoderAttributes::set(map); }
-    void set(const XmlNode& node) { GeoPointsDecoderAttributes::set(node); }
+    virtual void decode() override;
+    void set(const map<string, string>& map) override { GeoPointsDecoderAttributes::set(map); }
+    void set(const XmlNode& node) override { GeoPointsDecoderAttributes::set(node); }
 
     bool parseColumnNames(const char* line);
 
@@ -75,12 +75,12 @@ public:
     void initInfo();
     void visit(MetaDataCollector&);
     void visit(ValuesCollector&);
-    virtual std::string getUnit() const override { NOTIMP; }
+    virtual std::string getUnits() const override { NOTIMP; }
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
         customisedPoints(t, n, out);
     }
-    PointsHandler& points(const Transformation& t, bool) { return points(t); }
+    PointsHandler& points(const Transformation& t, bool) override { return points(t); }
 
 protected:
     enum eGeoColType

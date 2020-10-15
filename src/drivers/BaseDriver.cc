@@ -53,7 +53,7 @@ BaseDriver::BaseDriver() :
     currentPage_(-1),
     fileName_(""),
     currentLayer_(""),
-    currentLineType_(M_SOLID),
+    currentLineType_(LineStyle::M_SOLID),
     currentLineWidth_(-1),
     currentLineStyle_(1),
     currentColour_(Colour("white")),
@@ -64,7 +64,7 @@ BaseDriver::BaseDriver() :
     alphaEnabled_(false),
     applyGaussianBlur_(-1.),
     indexHatch_(0),
-    currentShading_(M_SH_NONE),
+    currentShading_(Shading::M_SH_NONE),
     cmScale_(1.),
     xDeviceLength_(MagTranslator<double, double>().magics("SUPER_PAGE_X_LENGTH")),
     yDeviceLength_(MagTranslator<double, double>().magics("SUPER_PAGE_Y_LENGTH")),
@@ -80,7 +80,7 @@ BaseDriver::~BaseDriver() {
  \sa renderSimplePolygon
 */
 void BaseDriver::shade(const FillShadingProperties& properties) const {
-    currentShading_           = M_SH_SOLID;
+    currentShading_           = Shading::M_SH_SOLID;
     currentShadingProperties_ = &properties;
 }
 
@@ -89,7 +89,7 @@ void BaseDriver::shade(const FillShadingProperties& properties) const {
  \sa renderSimplePolygon
 */
 void BaseDriver::shade(const HatchShadingProperties& properties) const {
-    currentShading_           = M_SH_HATCH;
+    currentShading_           = Shading::M_SH_HATCH;
     currentShadingProperties_ = &properties;
 }
 
@@ -98,7 +98,7 @@ void BaseDriver::shade(const HatchShadingProperties& properties) const {
  \sa renderSimplePolygon
 */
 void BaseDriver::shade(const DotShadingProperties& properties) const {
-    currentShading_           = M_SH_DOT;
+    currentShading_           = Shading::M_SH_DOT;
     currentShadingProperties_ = &properties;
 }
 
@@ -484,7 +484,7 @@ void BaseDriver::printLine(const magics::Polyline& line) const {
                         Arrow arrow;
                         arrow.copy(*line.arrowProperties());
                         arrow.setColour(line.getColour());
-                        arrow.setArrowPosition(M_HEAD_ONLY);
+                        arrow.setArrowPosition(ArrowPosition::M_HEAD_ONLY);
                         if ((x[i] - x[i + 3]) < 0.)
                             angle += PI;
                         const double dx = sin(angle + 1.5707963267949);
@@ -506,7 +506,7 @@ void BaseDriver::printLine(const magics::Polyline& line) const {
                         text.addText(label.getText(), font.colour(), font.size());
                         text.setBlanking(label.getBlanking());
                         text.setJustification(label.getJustification());
-                        text.setVerticalAlign(MHALF);
+                        text.setVerticalAlign(VerticalAlign::MHALF);
                         text.setAngle(-setAngleY(angle));
                         text.setFont(font);
                         renderText(text);

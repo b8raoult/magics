@@ -43,13 +43,13 @@ public:
     NetcdfDecoder();
     virtual ~NetcdfDecoder();
 
-    void decode() {}
+    void decode()  override {}
     // implements BaseSceneObject interface
     virtual void set(const map<string, string>& params) override { NetcdfDecoderAttributes::set(params); }
     virtual void set(const XmlNode& node) override { NetcdfDecoderAttributes::set(node); }
     virtual void visit(MagnifierVisitor&);
 
-    virtual PointsHandler& points(const Transformation&, bool);
+    virtual PointsHandler& points(const Transformation&, bool)  override;
 
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
         customisedPoints(t, n, out);
@@ -96,7 +96,7 @@ public:
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
     void visit(TextVisitor&) override;
-    virtual std::string getUnit() const override { NOTIMP; }
+    virtual std::string getUnits() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream

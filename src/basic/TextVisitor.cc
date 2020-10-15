@@ -217,15 +217,15 @@ void TextVisitor::finish(BasicGraphicsObjectContainer& parent) {
         // Calculate the position depending on the jsutification.
         double x;
 
-        if (justification_ == MLEFT)
+        if (justification_ == Justification::MLEFT)
             x = .1;  // 0.1%
-        else if (justification_ == MRIGHT)
+        else if (justification_ == Justification::MRIGHT)
             x = 98.;  // 98 %
         else
             x = 50.;
 
         (*text)->setJustification(justification_);
-        (*text)->setVerticalAlign(MBOTTOM);
+        (*text)->setVerticalAlign(VerticalAlign::MBOTTOM);
 
 
         if (orientation_ == "horizontal") {
@@ -237,16 +237,16 @@ void TextVisitor::finish(BasicGraphicsObjectContainer& parent) {
         if (magCompare(orientation_, "bottom_top")) {
             angle = 3 * 3.14 / 2;
             ;
-            (*text)->setVerticalAlign(MTOP);
+            (*text)->setVerticalAlign(VerticalAlign::MTOP);
             gap = (*text)->noText() ? (font_size_ / abswidth) * 100 * ratio
                                     : (((*text)->getFontMax() / abswidth) * 100) * ratio;
             (*text)->push_back(PaperPoint(last, x));  // approximate position to be improved
         }
 
         if (magCompare(orientation_, "top_bottom")) {
-            if (justification_ == MLEFT)
+            if (justification_ == Justification::MLEFT)
                 x = 98.;  // 0.1%
-            else if (justification_ == MRIGHT)
+            else if (justification_ == Justification::MRIGHT)
                 x = .1;  // 98 %
             else
                 x = 50.;
@@ -357,9 +357,9 @@ void XmlTextVisitor::getReady() {
     Dimension text(font_dimension_, height.absolute(), 10);
     font_size_ = text.absolute();
 
-    layout_->display(M_DT_ABSOLUTE);
+    layout_->display(DisplayType::M_DT_ABSOLUTE);
     layout_->frame(TextVisitorAttributes::blanking_, TextVisitorAttributes::border_,
-                   *TextVisitorAttributes::border_colour_, M_SOLID, 1, Colour("white"));
+                   *TextVisitorAttributes::border_colour_, LineStyle::M_SOLID, 1, Colour("white"));
 }
 
 FortranTextVisitor::FortranTextVisitor() {}

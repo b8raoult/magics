@@ -112,8 +112,8 @@ MAGICS_NO_EXPORT void BaseDriver::renderTextSymbols(const TextSymbol& symbol) co
     for (int i = 0; i < nPos; i++) {
         if (!symbol.text().at(i).empty()) {
             Text text;
-            text.setJustification(MCENTRE);
-            text.setVerticalAlign(MHALF);
+            text.setJustification(Justification::MCENTRE);
+            text.setVerticalAlign(VerticalAlign::MHALF);
             text.setBlanking(symbol.blanking());
 
             MFloat shiftX = 0.;
@@ -125,19 +125,19 @@ MAGICS_NO_EXPORT void BaseDriver::renderTextSymbols(const TextSymbol& symbol) co
             }
             else if (symbol.position() == Symbol::M_RIGHT) {
                 shiftX = convertCM(symbol.getHeight() * .5) / coordRatioX_;
-                text.setJustification(MLEFT);
+                text.setJustification(Justification::MLEFT);
             }
             else if (symbol.position() == Symbol::M_LEFT) {
                 shiftX = -convertCM(symbol.getHeight() * .5) / coordRatioX_;
-                text.setJustification(MRIGHT);
+                text.setJustification(Justification::MRIGHT);
             }
             else if (symbol.position() == Symbol::M_BELOW) {
                 shiftY = setY(-convertCM(symbol.getHeight() * .6) / coordRatioY_);
-                text.setVerticalAlign(MTOP);
+                text.setVerticalAlign(VerticalAlign::MTOP);
             }
             else if (symbol.position() == Symbol::M_ABOVE) {
                 shiftY = setY(convertCM(symbol.getHeight() * 0.8) / coordRatioY_);
-                text.setVerticalAlign(MBOTTOM);
+                text.setVerticalAlign(VerticalAlign::MBOTTOM);
             }
 
             // MagLog::dev()<<"x: " << symbol[i].x()<<"  y: "<<symbol[i].y()<<"+"<< shiftY<< endl;
@@ -177,10 +177,10 @@ MAGICS_NO_EXPORT void BaseDriver::renderTextItem(const TextItem& textItem, const
     //
     //! \todo We need to decide if we need to align text in WMO symbols
     //
-    //	if(owner[0].x() > 0) text.setJustification(MRIGHT);
-    //	else if(owner[0].x() < 0) text.setJustification(MLEFT);
+    //	if(owner[0].x() > 0) text.setJustification(Justification::MRIGHT);
+    //	else if(owner[0].x() < 0) text.setJustification(Justification::MLEFT);
 
-    text.setVerticalAlign(MHALF);
+    text.setVerticalAlign(VerticalAlign::MHALF);
     text.setAngle(0.);
     text.addText(textItem.text(), textItem.font());
     renderText(text);
@@ -211,7 +211,7 @@ MAGICS_NO_EXPORT void BaseDriver::renderFlagItem(const FlagItem& flagItem, const
 
 MAGICS_NO_EXPORT void BaseDriver::renderSymbolItem(const SymbolItem& symbol, const ComplexSymbol& owner) const {
     setNewColour(symbol.colour());
-    setLineParameters(M_SOLID, 1.);  // reset line
+    setLineParameters(LineStyle::M_SOLID, 1.);  // reset line
     loadSymbols();
     if (sym_.empty()) {
         MagLog::error() << "BaseDriver::renderSymbols(" << symbol.symbol() << ")-> NO symbols available!" << std::endl;
@@ -329,7 +329,7 @@ MAGICS_NO_EXPORT void BaseDriver::renderSymbols(const Symbol& symbol) const {
 
     const unsigned int si = sym.elements.size();
     setNewColour(symbol.getColour());
-    setLineParameters(M_SOLID, 1.);  // reset line
+    setLineParameters(LineStyle::M_SOLID, 1.);  // reset line
 
     const MFloat pX      = 1. / coordRatioX_;
     const MFloat pY      = 1. / coordRatioY_;
@@ -352,7 +352,7 @@ MAGICS_NO_EXPORT void BaseDriver::renderSymbols(const Symbol& symbol) const {
                     circle(symbol[l].x() + cx, symbol[l].y() + cy, r, 0);
                     // We need to go back to the original values
                     setNewColour(symbol.getColour());
-                    setLineParameters(M_SOLID, 1.);
+                    setLineParameters(LineStyle::M_SOLID, 1.);
                 }
             }
         }
@@ -385,7 +385,7 @@ MAGICS_NO_EXPORT void BaseDriver::renderSymbols(const Symbol& symbol) const {
                     triangle(symbol[l].x() + cx, symbol[l].y() + cy, r, 0, li);
                     // We need to go back to the original values
                     setNewColour(symbol.getColour());
-                    setLineParameters(M_SOLID, 1.);
+                    setLineParameters(LineStyle::M_SOLID, 1.);
                 }
             }
         }
@@ -420,7 +420,7 @@ MAGICS_NO_EXPORT void BaseDriver::renderSymbols(const Symbol& symbol) const {
                         renderPolyline(vPP);
                         // We need to go back to the original values
                         setNewColour(symbol.getColour());
-                        setLineParameters(M_SOLID, 1.);
+                        setLineParameters(LineStyle::M_SOLID, 1.);
                     }
                 }
             }

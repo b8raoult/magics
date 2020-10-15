@@ -121,7 +121,7 @@ void Bar::vertical(CustomisedPointsList& points, BasicGraphicsObjectContainer& o
             font.size(annotation_size_);
             annot->setFont(font);
             annot->setText(*annotation);
-            annot->setVerticalAlign(MBOTTOM);
+            annot->setVerticalAlign(VerticalAlign::MBOTTOM);
             annot->push_back(xy);
             texts_.push_back(annot);
             annotation++;
@@ -176,7 +176,7 @@ void Bar::horizontal(CustomisedPointsList& points, BasicGraphicsObjectContainer&
             font.size(annotation_size_);
             annot->setFont(font);
             annot->setText(*annotation);
-            annot->setVerticalAlign(MBOTTOM);
+            annot->setVerticalAlign(VerticalAlign::MBOTTOM);
             annot->push_back(xy);
             texts_.push_back(annot);
             annotation++;
@@ -202,11 +202,11 @@ void Bar::fullbar_y(double y, double left, double right, BasicGraphicsObjectCont
     const Transformation& transformation = out.transformation();
     double bottom                        = y - width_ / 2;
     double top                           = y + width_ / 2;
-    if (justification_ == MLEFT) {
+    if (justification_ == Justification::MLEFT) {
         top    = y - width_;
         bottom = y;
     }
-    if (justification_ == MRIGHT) {
+    if (justification_ == Justification::MRIGHT) {
         top    = y;
         bottom = y + width_;
     }
@@ -237,11 +237,11 @@ void Bar::fullbar_x(double x, double top, double bottom, BasicGraphicsObjectCont
     const Transformation& transformation = out.transformation();
     double left                          = x - width_ / 2;
     double right                         = x + width_ / 2;
-    if (justification_ == MLEFT) {
+    if (justification_ == Justification::MLEFT) {
         left  = x - width_;
         right = x;
     }
-    if (justification_ == MRIGHT) {
+    if (justification_ == Justification::MRIGHT) {
         left  = x;
         right = x + width_;
     }
@@ -404,7 +404,7 @@ void GraphFlag::operator()(Data& data, BasicGraphicsObjectContainer& out) {
         double lat = 10;
         if (point->find("latitude") != point->end())
             lat = (*point)["latitude"];
-        flags->setHemisphere(lat > 0 ? NORTH : SOUTH);
+        flags->setHemisphere(lat > 0 ? Hemisphere::NORTH : Hemisphere::SOUTH);
         if (point->find("intensity") != point->end() && point->find("direction") != point->end()) {
             intensity = (*point)["intensity"];
             direction = (*point)["direction"];

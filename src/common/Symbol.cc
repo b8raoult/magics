@@ -254,8 +254,8 @@ void TextSymbol::redisplay(const BaseDriver& driver) const {
                 text.addText(*info, font_);
                 text.push_back(*point);
                 text.setBlanking(blanking_);
-                text.setVerticalAlign(MHALF);
-                text.setJustification(MCENTRE);
+                text.setVerticalAlign(VerticalAlign::MHALF);
+                text.setJustification(Justification::MCENTRE);
                 ++point;
                 text.redisplay(driver);
 

@@ -129,7 +129,7 @@ public:
     void visit(MetaDataVisitor&) override;
     void ask(MetaDataCollector&);
 
-    virtual std::string getUnit() const override;
+    virtual std::string getUnits() const override;
 
     const DateDescription& timeStamp() override;
     const LevelDescription& level() override;

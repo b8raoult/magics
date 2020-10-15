@@ -63,7 +63,7 @@ public:
     virtual void visit(TextVisitor&);
     virtual void visit(MetaDataVisitor&);
 
-    virtual std::string getUnit() const override { NOTIMP; }
+    virtual std::string getUnits() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

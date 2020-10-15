@@ -309,11 +309,11 @@ public:
         string val = lowerCase(s);
 
         if (val == "north")
-            return NORTH;
+            return Hemisphere::NORTH;
         if (val == "south")
-            return SOUTH;
+            return Hemisphere::SOUTH;
 
-        return NORTH;
+        return Hemisphere::NORTH;
     }
     magics::Hemisphere magics(const string& param) {
         string from;
@@ -329,11 +329,12 @@ public:
         string val = lowerCase(s);
 
         if (val == "tail")
-            return M_TAIL;
+            return ArrowPosition::M_TAIL;
         if (val == "centre")
-            return M_CENTRE;
-
-        return M_TAIL;
+            return ArrowPosition::M_CENTRE;
+        MagLog::warning() << "Invalid value '" << s << "' for a ArrowPosition,"
+                          << " changed to 'tail'" << endl;
+        return ArrowPosition::M_TAIL;
     }
     magics::ArrowPosition magics(const string& param) {
         string from;
@@ -348,16 +349,18 @@ public:
     magics::LineStyle operator()(const string& s) {
         string val = lowerCase(s);
         if (val == "solid")
-            return M_SOLID;
+            return LineStyle::M_SOLID;
         if (val == "dash")
-            return M_DASH;
+            return LineStyle::M_DASH;
         if (val == "dot")
-            return M_DOT;
+            return LineStyle::M_DOT;
         if (val == "chain_dash")
-            return M_CHAIN_DASH;
+            return LineStyle::M_CHAIN_DASH;
         if (val == "chain_dot")
-            return M_CHAIN_DOT;
-        return M_SOLID;
+            return LineStyle::M_CHAIN_DOT;
+        MagLog::warning() << "Invalid value '" << s << "' for a LineStyle,"
+                          << " changed to 'solid'" << endl;
+        return LineStyle::M_SOLID;
     }
     magics::LineStyle magics(const string& param) {
         string from;
@@ -372,16 +375,18 @@ public:
     magics::Position operator()(const string& s) {
         string val = lowerCase(s);
         if (val == "automatic")
-            return M_AUTOMATIC;
+            return Position::M_AUTOMATIC;
         if (val == "left")
-            return M_LEFT;
+            return Position::M_LEFT;
         if (val == "right")
-            return M_RIGHT;
+            return Position::M_RIGHT;
         if (val == "bottom")
-            return M_BOTTOM;
+            return Position::M_BOTTOM;
         if (val == "top")
-            return M_TOP;
-        return M_AUTOMATIC;
+            return Position::M_TOP;
+        MagLog::warning() << "Invalid value '" << s << "' for a Position,"
+                          << " changed to 'automatic'" << endl;
+        return Position::M_AUTOMATIC;
     }
     magics::Position magics(const string& param) {
         string from;
@@ -397,12 +402,14 @@ public:
         string val = lowerCase(s);
         // enum	Justification { MLEFT , MCENTRE, MRIGHT }; };
         if (val == "left")
-            return MLEFT;
+            return Justification::MLEFT;
         if (val == "centre")
-            return MCENTRE;
+            return Justification::MCENTRE;
         if (val == "right")
-            return MRIGHT;
-        return MCENTRE;
+            return Justification::MRIGHT;
+        MagLog::warning() << "Invalid value '" << val << "' for a Justification, "
+                          << " changed to 'centre'" << endl;
+        return Justification::MCENTRE;
     }
     magics::Justification magics(const string& param) {
         string from;
@@ -419,12 +426,12 @@ public:
 
         // enum	ListPolicy { M_LASTONE , M_CYCLE }; };
         if (val == "lastone")
-            return M_LASTONE;
+            return ListPolicy::M_LASTONE;
         if (val == "cycle")
-            return M_CYCLE;
-        MagLog::warning() << "Invalid value : " << val << "for a List Policy-->"
-                          << " changed to lastone" << endl;
-        return M_LASTONE;
+            return ListPolicy::M_CYCLE;
+        MagLog::warning() << "Invalid value '" << val << "' for a ListPolicy,"
+                          << " changed to 'lastone'" << endl;
+        return ListPolicy::M_LASTONE;
     }
     magics::ListPolicy magics(const string& param) {
         string from;
@@ -439,27 +446,27 @@ public:
         string val = lowerCase(s);
         // enum	ListPolicy {  m_off, m_both, m_min_only, m_max_only }; };
         if (val == "off")
-            return m_off;
+            return AxisAutomaticSetting::m_off;
         if (val == "no")
-            return m_off;
+            return AxisAutomaticSetting::m_off;
         if (val == "false")
-            return m_off;
+            return AxisAutomaticSetting::m_off;
         if (val == "on")
-            return m_both;
+            return AxisAutomaticSetting::m_both;
         if (val == "yes")
-            return m_both;
+            return AxisAutomaticSetting::m_both;
         if (val == "true")
-            return m_both;
+            return AxisAutomaticSetting::m_both;
         if (val == "both")
-            return m_both;
+            return AxisAutomaticSetting::m_both;
         if (val == "min_only")
-            return m_min_only;
+            return AxisAutomaticSetting::m_min_only;
         if (val == "max_only")
-            return m_max_only;
+            return AxisAutomaticSetting::m_max_only;
 
-        MagLog::warning() << "Invalid value : " << val << "for an  Axis Automatic Setting-->"
-                          << " changed to off" << endl;
-        return m_off;
+        MagLog::warning() << "Invalid value '" << val << "' for an  AxisAutomaticSetting, "
+                          << " changed to 'off'" << endl;
+        return AxisAutomaticSetting::m_off;
     }
     magics::AxisAutomaticSetting magics(const string& param) {
         string from;
@@ -475,16 +482,18 @@ public:
         string val = lowerCase(s);
         // enum	Justification { MLEFT , MCENTRE, MRIGHT }; };
         if (val == "inline")
-            return M_DT_INLINE;
+            return DisplayType::M_DT_INLINE;
         if (val == "block")
-            return M_DT_BLOCK;
+            return DisplayType::M_DT_BLOCK;
         if (val == "none")
-            return M_DT_NONE;
+            return DisplayType::M_DT_NONE;
         if (val == "hidden")
-            return M_DT_HIDDEN;
+            return DisplayType::M_DT_HIDDEN;
         if (val == "absolute")
-            return M_DT_ABSOLUTE;
-        return M_DT_ABSOLUTE;
+            return DisplayType::M_DT_ABSOLUTE;
+        MagLog::warning() << "Invalid value '" << s << "' for an  DisplayType, "
+                          << " changed to 'absolute'" << endl;
+        return DisplayType::M_DT_ABSOLUTE;
     }
     magics::DisplayType magics(const string& param) {
         string from;

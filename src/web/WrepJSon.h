@@ -186,26 +186,26 @@ public:
     virtual void set(const XmlNode& node) { WrepJSonAttributes::set(node); }
 
     virtual void visit(Transformation&);
-    virtual void visit(TextVisitor&);
+    virtual void visit(TextVisitor&) override;
     void visit(const XmlNode& node);
-    virtual std::string getUnit() const override { NOTIMP; }
+    virtual std::string getUnits() const override { NOTIMP; }
 
     virtual void decode();
 
     double correctDetz(double);
     double correctEpsz(double);
 
-    void visit(MetaDataVisitor&);
+    void visit(MetaDataVisitor&) override;
     void points(const Transformation&, vector<UserPoint>&);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
         customisedPoints(t, n, out);
     }
-    PointsHandler& points(const Transformation& t, bool);
+    PointsHandler& points(const Transformation& t, bool) override;
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     DateTime base_;
     vector<CustomisedPoint*> points_;
     PointsList list_;

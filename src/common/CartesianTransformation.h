@@ -129,8 +129,8 @@ public:
 
     virtual void setAutomaticX(bool automatic) { x_->automatic(automatic); }
     virtual void setAutomaticY(bool automatic) { y_->automatic(automatic); }
-    virtual bool getAutomaticX() const { return x_->automatic(); }
-    virtual bool getAutomaticY() const { return y_->automatic(); }
+    virtual bool getAutomaticX() const { return x_->automatic() != AxisAutomaticSetting::m_off; }
+    virtual bool getAutomaticY() const { return y_->automatic()!= AxisAutomaticSetting::m_off; }
 
     virtual bool in(double x, double y) const {
         double minx = std::min(x_->min(), x_->max());

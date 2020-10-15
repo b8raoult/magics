@@ -181,7 +181,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
     Polyline* frame = new Polyline();
     frame->setColour(Colour("navy"));
     frame->setThickness(1);
-    frame->setLineStyle(M_SOLID);
+    frame->setLineStyle(LineStyle::M_SOLID);
     frame->push_back(PaperPoint(xmin_, ymin_));
     frame->push_back(PaperPoint(xmax_, ymin_));
     frame->push_back(PaperPoint(xmax_, ymax_));
@@ -197,20 +197,21 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         Text* val = new Text();
         val->addText(*tick, Colour("navy"), font_size);
         val->push_back(PaperPoint(left, *tick));
-        val->setVerticalAlign(MHALF);
-        val->setJustification(MRIGHT);
+        val->setVerticalAlign(VerticalAlign::MHALF);
+        val->setJustification(Justification::MRIGHT);
         visitor.push_back(val);
         Polyline* grid = new Polyline();
         grid->setColour(Colour("grey"));
         grid->setThickness(1);
-        grid->setLineStyle(M_DOT);
+        grid->setLineStyle(LineStyle::M_DOT);
         grid->push_back(PaperPoint(xmin_, *tick));
         grid->push_back(PaperPoint(xmax_, *tick));
         visitor.push_back(grid);
         grid = new Polyline();
         grid->setColour(Colour("navy"));
         grid->setThickness(1);
-        grid->setLineStyle(M_SOLID);
+        grid->setLineStyle(LineStyle::M_DOT);
+        grid->setLineStyle(LineStyle::M_SOLID);
         grid->push_back(PaperPoint(xmin_ - (width_ * 0.025), *tick));
         grid->push_back(PaperPoint(xmin_, *tick));
         visitor.push_back(grid);
@@ -227,7 +228,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         Polyline* grid = new Polyline();
         grid->setColour(Colour("grey"));
         grid->setThickness(1);
-        grid->setLineStyle(M_DOT);
+        grid->setLineStyle(LineStyle::M_DOT);
         grid->push_back(PaperPoint(count->first.min_, ymin_));
         grid->push_back(PaperPoint(count->first.min_, ymax_));
         visitor.push_back(grid);
@@ -238,7 +239,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         bar = new Polyline();
         bar->setColour(Colour("navy"));
         bar->setThickness(1);
-        bar->setLineStyle(M_SOLID);
+        bar->setLineStyle(LineStyle::M_SOLID);
 
         bar->setFilled(true);
         bar->setFillColour(colour);
@@ -263,8 +264,8 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         if (barCnt % barLabelFreq == 0) {
             Text* from = new Text();
             from->addText(count->first.min_, Colour("navy"), font_size);
-            from->setVerticalAlign(MTOP);
-            from->setJustification(MLEFT);
+            from->setVerticalAlign(VerticalAlign::MTOP);
+            from->setJustification(Justification::MLEFT);
             from->setAngle(45.);
             from->push_back(PaperPoint(count->first.min_, bottom));
 
@@ -287,7 +288,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         Polyline* vert = new Polyline();
         vert->setColour(Colour("navy"));
         vert->setThickness(1);
-        vert->setLineStyle(M_SOLID);
+        vert->setLineStyle(LineStyle::M_SOLID);
         vert->push_back(PaperPoint(count->first.min_, ymin_));
         vert->push_back(PaperPoint(count->first.min_, ymin_ - (height_ * 0.025)));
         visitor.push_back(vert);
@@ -298,7 +299,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
     Polyline* vert = new Polyline();
     vert->setColour(Colour("navy"));
     vert->setThickness(1);
-    vert->setLineStyle(M_SOLID);
+    vert->setLineStyle(LineStyle::M_SOLID);
     vert->push_back(PaperPoint(last, ymin_));
     vert->push_back(PaperPoint(last, ymin_ - (height_ * 0.025)));
     visitor.push_back(vert);

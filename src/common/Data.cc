@@ -111,10 +111,16 @@ void Data::computeStats() {
 
 
 void Data::getScaling(double& scaling, double& offset) const {
-    scaling = 1;
-    offset = 0;
-    std::string units = getUnit();
-    std::cout << "++++++++ UNITS " << units << std::endl;
+    scaling                = 1;
+    offset                 = 0;
+    std::string data_units = getUnits();
+
+
+    std::string contour_units;
+    ParameterManager::get("contour_units", contour_units);
+
+
+    std::cout << "++++++++ UNITS DATA: " << data_units << " CONTOUR: " << contour_units << std::endl;
 }
 
 int Data::uniqueOwnerId_ = 0;

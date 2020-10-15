@@ -91,12 +91,12 @@ protected:
     virtual void add(const PaperPoint& xy) {
         static map<string, VerticalAlign> alignhandlers;
         if (alignhandlers.empty()) {
-            alignhandlers["normal"] = MNORMAL;
-            alignhandlers["top"]    = MTOP;
-            alignhandlers["cap"]    = MCAP;
-            alignhandlers["half"]   = MHALF;
-            alignhandlers["base"]   = MBASE;
-            alignhandlers["bottom"] = MBOTTOM;
+            alignhandlers["normal"] = VerticalAlign::MNORMAL;
+            alignhandlers["top"]    = VerticalAlign::MTOP;
+            alignhandlers["cap"]    = VerticalAlign::MCAP;
+            alignhandlers["half"]   = VerticalAlign::MHALF;
+            alignhandlers["base"]   = VerticalAlign::MBASE;
+            alignhandlers["bottom"] = VerticalAlign::MBOTTOM;
         }
         ostringstream nice;
         nice << MagicsFormat(format_, xy.value());
@@ -104,7 +104,7 @@ protected:
         text->addText(nice.str(), *colour_, height_);
         text->setJustification(justification_);
         map<string, VerticalAlign>::iterator pos = alignhandlers.find(lowerCase(vertical_align_));
-        VerticalAlign align                      = (pos != alignhandlers.end()) ? pos->second : MBASE;
+        VerticalAlign align                      = (pos != alignhandlers.end()) ? pos->second : VerticalAlign::MBASE;
         text->setVerticalAlign(align);
         text->push_back(xy);
         push_back(text);

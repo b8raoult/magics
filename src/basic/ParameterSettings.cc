@@ -69,16 +69,16 @@ void niceprint(ostream& out, const string& val) {
 void niceprint(ostream& out, const AxisAutomaticSetting& val) {
     string cval;
     switch (val) {
-        case m_off:
+        case AxisAutomaticSetting::m_off:
             cval = "off";
             break;
-        case m_both:
+        case AxisAutomaticSetting::m_both:
             cval = "on";
             break;
-        case m_min_only:
+        case AxisAutomaticSetting::m_min_only:
             cval = "min_only";
             break;
-        case m_max_only:
+        case AxisAutomaticSetting::m_max_only:
             cval = "max_only";
             break;
     }

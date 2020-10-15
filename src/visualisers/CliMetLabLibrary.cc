@@ -143,6 +143,13 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
 
     std::cout << best << std::endl;
 
+    MagDef def;
+    ValueMap contour = best["magics"]["mcont"];
+
+    for(auto j = contour.begin(); j != contour.end(); ++j) {
+        def[(*j).first] = std::string((*j).second);
+    }
+
     return nullptr;
 }  // namespace magics
 

@@ -111,7 +111,7 @@ public:
     PolylineProperties() :
         thickness_(1),
         dash_length_(10),
-        style_(M_SOLID),
+        style_(LineStyle::M_SOLID),
         fill_(false),
         shading_(0),
         arrow_(0),

@@ -158,7 +158,7 @@ public:
     }
 
     virtual void getScaling(double& scaling, double& offset) const;
-    virtual std::string getUnit() const = 0;
+    virtual std::string getUnits() const = 0;
 
 protected:
     int dimension_;

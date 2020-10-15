@@ -62,7 +62,7 @@ public:
     void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool)override;
     void visit(ValuesCollector&)override;
 
-    virtual std::string getUnit() const override { NOTIMP; }
+    virtual std::string getUnits() const override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

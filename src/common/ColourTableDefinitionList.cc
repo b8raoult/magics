@@ -72,7 +72,7 @@ void ColourTableDefinitionList::set(ColourTable& table, int nb) {
     // We need nb-1 colours!
     for (int i = 0; i < nb - 1; i++) {
         if (colour == colours_.end()) {
-            if (policy_ == M_LASTONE)
+            if (policy_ == ListPolicy::M_LASTONE)
                 table.push_back(Colour(colours_.back()));
             else {
                 colour = colours_.begin();

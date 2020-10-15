@@ -896,15 +896,15 @@ void Proj4Projection::labels(const LabelPlotting& label, LeftAxisVisitor& visito
             label.add(text);
             text->setText(writeLatitude(point));
             text->push_back(xy);
-            text->setJustification(MRIGHT);
-            text->setVerticalAlign(MHALF);
+            text->setJustification(Justification::MRIGHT);
+            text->setVerticalAlign(VerticalAlign::MHALF);
             text->setBlanking(true);
         }
     }
     else {
         double x = max_pcx_ - ((max_pcx_ - min_pcx_) * .1);
         // we calculate the intersection of the longitudes with the left side
-        verticalLabels(label, min_pcx_, x, MRIGHT);
+        verticalLabels(label, min_pcx_, x, Justification::MRIGHT);
     }
 }
 
@@ -925,15 +925,15 @@ void Proj4Projection::labels(const LabelPlotting& label, RightAxisVisitor& visit
             label.add(text);
             text->setText(writeLatitude(point));
             text->push_back(xy);
-            text->setJustification(MLEFT);
-            text->setVerticalAlign(MHALF);
+            text->setJustification(Justification::MLEFT);
+            text->setVerticalAlign(VerticalAlign::MHALF);
             text->setBlanking(true);
         }
     }
     else {
         // we calculate the intersection of the longitudes with the right side
         double x = min_pcx_ + ((max_pcx_ - min_pcx_) * .1);
-        verticalLabels(label, max_pcx_, x, MLEFT);
+        verticalLabels(label, max_pcx_, x, Justification::MLEFT);
     }
 }
 
@@ -955,15 +955,15 @@ void Proj4Projection::labels(const LabelPlotting& label, BottomAxisVisitor& visi
             text->setText(writeLongitude(point));
 
             text->push_back(xy);
-            text->setJustification(MCENTRE);
-            text->setVerticalAlign(MTOP);
+            text->setJustification(Justification::MCENTRE);
+            text->setVerticalAlign(VerticalAlign::MTOP);
             text->setBlanking(true);
         }
     }
     else {
         // we calculate the intersection of the longitudes with the right side
         double y = min_pcy_ + ((max_pcy_ - min_pcy_) * .8);
-        horizontalLabels(label, min_pcy_, y, MTOP);
+        horizontalLabels(label, min_pcy_, y, VerticalAlign::MTOP);
     }
 }
 
@@ -1010,7 +1010,7 @@ void Proj4Projection::verticalLabels(const LabelPlotting& label, double x, doubl
                 Text* text = new Text();
                 label.add(text);
                 text->setJustification(justif);
-                text->setVerticalAlign(MHALF);
+                text->setVerticalAlign(VerticalAlign::MHALF);
                 text->setText(writeLongitude(geo));
                 text->push_back(xy);
             }
@@ -1040,7 +1040,7 @@ void Proj4Projection::horizontalLabels(const LabelPlotting& label, double y, dou
                     continue;
                 Text* text = new Text();
                 label.add(text);
-                text->setJustification(MCENTRE);
+                text->setJustification(Justification::MCENTRE);
                 text->setVerticalAlign(align);
                 text->setText(writeLongitude(geo));
                 text->push_back(xy);
@@ -1066,15 +1066,15 @@ void Proj4Projection::labels(const LabelPlotting& label, TopAxisVisitor& visitor
             label.add(text);
             text->setText(writeLongitude(point));
             text->push_back(xy);
-            text->setJustification(MCENTRE);
-            text->setVerticalAlign(MBOTTOM);
+            text->setJustification(Justification::MCENTRE);
+            text->setVerticalAlign(VerticalAlign::MBOTTOM);
             text->setBlanking(true);
         }
     }
     else {
         // we calculate the intersection of the longitudes with the right side
         double y = min_pcy_ + ((max_pcy_ - min_pcy_) * .2);
-        horizontalLabels(label, max_pcy_, y, MBOTTOM);
+        horizontalLabels(label, max_pcy_, y, VerticalAlign::MBOTTOM);
     }
 }
 

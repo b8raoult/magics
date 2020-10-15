@@ -73,7 +73,7 @@ public:
     const Colour& getMinColour() const { return *minColour_; }
     const Colour& getMaxColour() const { return *maxColour_; }
     const string& getDirection() const { return direction_; }
-    ListPolicy getPolicy() const { return M_LASTONE; }
+    ListPolicy getPolicy() const { return ListPolicy::M_LASTONE; }
     stringarray getColours() const { return colours_; }
     floatarray getList() const { return list_; }
 

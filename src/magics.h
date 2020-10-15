@@ -133,7 +133,7 @@ typedef magvector<long int> longintarray;
 typedef magvector<double> doublearray;
 typedef magvector<double> floatarray;
 
-enum LineStyle
+enum class LineStyle
 {
     M_SOLID,
     M_DASH,
@@ -141,18 +141,27 @@ enum LineStyle
     M_CHAIN_DASH,
     M_CHAIN_DOT
 };
-enum Hemisphere
+
+std::ostream& operator<<(ostream& s, LineStyle);
+
+enum class Hemisphere
 {
     NORTH,
     SOUTH
 };
-enum Justification
+
+std::ostream& operator<<(ostream& s, Hemisphere);
+
+enum class Justification
 {
     MLEFT,
     MCENTRE,
     MRIGHT
 };
-enum Position
+
+std::ostream& operator<<(ostream& s, Justification);
+
+enum class Position
 {
     M_AUTOMATIC,
     M_TOP,
@@ -160,7 +169,10 @@ enum Position
     M_LEFT,
     M_RIGHT
 };
-enum VerticalAlign
+
+std::ostream& operator<<(ostream& s, Position);
+
+enum class VerticalAlign
 {
     MNORMAL,
     MTOP,
@@ -169,20 +181,30 @@ enum VerticalAlign
     MBASE,
     MBOTTOM
 };
-enum Shading
+
+std::ostream& operator<<(ostream& s, VerticalAlign);
+
+
+enum class Shading
 {
     M_SH_NONE,
     M_SH_SOLID,
     M_SH_HATCH,
     M_SH_DOT
 };
-enum ArrowPosition
+
+std::ostream& operator<<(ostream& s, Shading);
+
+enum class ArrowPosition
 {
     M_TAIL,
     M_CENTRE,
     M_HEAD_ONLY
 };
-enum DisplayType
+
+std::ostream& operator<<(ostream& s, ArrowPosition);
+
+enum class DisplayType
 {
     M_DT_ABSOLUTE,
     M_DT_INLINE,
@@ -190,12 +212,18 @@ enum DisplayType
     M_DT_NONE,
     M_DT_HIDDEN
 };
-enum ListPolicy
+
+std::ostream& operator<<(ostream& s, DisplayType);
+
+enum class ListPolicy
 {
     M_LASTONE,
     M_CYCLE
 };
-enum GraphicsFormat
+
+std::ostream& operator<<(ostream& s, ListPolicy);
+
+enum class GraphicsFormat
 {
     PS,
     EPS,
@@ -212,7 +240,10 @@ enum GraphicsFormat
     QT,
     GEOJSON
 };
-enum AxisAutomaticSetting
+
+std::ostream& operator<<(ostream& s, GraphicsFormat);
+
+enum class AxisAutomaticSetting
 {
     m_off,
     m_both,
@@ -220,7 +251,9 @@ enum AxisAutomaticSetting
     m_max_only
 };
 
-static double EPSILON = 1.25e-10;
+std::ostream& operator<<(ostream& s, AxisAutomaticSetting);
+
+static /*const*/ double EPSILON = 1.25e-10;
 
 template <class T>
 inline MAGICS_NO_EXPORT T abs(const T a) {
