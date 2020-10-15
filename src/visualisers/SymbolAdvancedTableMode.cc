@@ -158,19 +158,19 @@ void SymbolAdvancedTableMode::adjust(double min, double max, bool scale, const T
         map_[Interval(*level, *(level + 1))] = properties;
 
         if (marker + 1 == markers_.end()) {
-            if (marker_policy_ == ListPolicy::M_CYCLE)
+            if (marker_policy_ == ListPolicy::CYCLE)
                 marker = markers_.begin();
         }
         else
             marker++;
         if (marker_name + 1 == markers_names_.end()) {
-            if (marker_policy_ == ListPolicy::M_CYCLE)
+            if (marker_policy_ == ListPolicy::CYCLE)
                 marker_name = markers_names_.begin();
         }
         else
             marker_name++;
         if (text + 1 == text_list_.end()) {
-            if (text_policy_ == ListPolicy::M_CYCLE)
+            if (text_policy_ == ListPolicy::CYCLE)
                 text = text_list_.begin();
         }
         else

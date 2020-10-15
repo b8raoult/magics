@@ -20,6 +20,7 @@
 #include <MagLog.h>
 #include <algorithm>
 #include "MagicsObserver.h"
+#include "MagException.h"
 
 using namespace magics;
 
@@ -27,6 +28,7 @@ MagLog MagLog::log_;
 bool MagLog::header_;
 
 namespace magics {
+
 class MagLogObserver : public ostringstream {
 public:
     MagLogObserver() : silent_(false) {}
@@ -105,7 +107,6 @@ public:
     LOG callback_;
 };
 
-}  // namespace magics
 
 static MagLogObserver MYLOG;
 
@@ -365,3 +366,97 @@ void MagLog::unregisterObserver(MagicsObserver* observer) {
     if (o != log_.observers_.end())
         log_.observers_.erase(o);
 }
+
+
+std::ostream& operator<<(ostream& s, LineStyle x) {
+    switch (x) {
+        case LineStyle::SOLID:
+            s << "solid";
+            break;
+        case LineStyle::DASH:
+            s << "dash";
+            break;
+        case LineStyle::DOT:
+            s << "dot";
+            break;
+        case LineStyle::CHAIN_DASH:
+            s << "chain_dash";
+            break;
+        case LineStyle::CHAIN_DOT:
+            s << "chain_dot";
+            break;
+        default:
+            NOTIMP;
+            break;
+    }
+    return s;
+}
+
+std::ostream& operator<<(ostream& s, Hemisphere x) {
+    switch (x) {
+        case Hemisphere::NORTH:
+            s << "north";
+            break;
+        case Hemisphere::SOUTH:
+            s << "south";
+            break;
+        default:
+            NOTIMP;
+            break;
+    }
+    return s;
+}
+
+
+std::ostream& operator<<(ostream& s, Justification x) {
+    // TODO:
+    NOTIMP;
+}
+
+std::ostream& operator<<(ostream& s, Position x) {
+    // TODO:
+    NOTIMP;
+}
+
+std::ostream& operator<<(ostream& s, VerticalAlign x) {
+    // TODO:
+    NOTIMP;
+}
+
+
+std::ostream& operator<<(ostream& s, Shading x) {
+    // TODO:
+    NOTIMP;
+}
+
+
+std::ostream& operator<<(ostream& s, ArrowPosition x) {
+    // TODO:
+    NOTIMP;
+}
+
+
+std::ostream& operator<<(ostream& s, DisplayType x) {
+    // TODO:
+    NOTIMP;
+}
+
+
+std::ostream& operator<<(ostream& s, ListPolicy x) {
+    // TODO:
+    NOTIMP;
+}
+
+
+std::ostream& operator<<(ostream& s, GraphicsFormat x) {
+    // TODO:
+    NOTIMP;
+}
+
+std::ostream& operator<<(ostream& s, AxisAutomaticSetting x) {
+    // TODO:
+    NOTIMP;
+}
+
+}  // namespace magics
+

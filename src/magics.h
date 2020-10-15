@@ -135,11 +135,11 @@ typedef magvector<double> floatarray;
 
 enum class LineStyle
 {
-    M_SOLID,
-    M_DASH,
-    M_DOT,
-    M_CHAIN_DASH,
-    M_CHAIN_DOT
+    SOLID,
+    DASH,
+    DOT,
+    CHAIN_DASH,
+    CHAIN_DOT
 };
 
 std::ostream& operator<<(ostream& s, LineStyle);
@@ -154,32 +154,32 @@ std::ostream& operator<<(ostream& s, Hemisphere);
 
 enum class Justification
 {
-    MLEFT,
-    MCENTRE,
-    MRIGHT
+    LEFT,
+    CENTRE,
+    RIGHT
 };
 
 std::ostream& operator<<(ostream& s, Justification);
 
 enum class Position
 {
-    M_AUTOMATIC,
-    M_TOP,
-    M_BOTTOM,
-    M_LEFT,
-    M_RIGHT
+    AUTOMATIC,
+    TOP,
+    BOTTOM,
+    LEFT,
+    RIGHT
 };
 
 std::ostream& operator<<(ostream& s, Position);
 
 enum class VerticalAlign
 {
-    MNORMAL,
-    MTOP,
-    MCAP,
-    MHALF,
-    MBASE,
-    MBOTTOM
+    NORMAL,
+    TOP,
+    CAP,
+    HALF,
+    BASE,
+    BOTTOM
 };
 
 std::ostream& operator<<(ostream& s, VerticalAlign);
@@ -187,38 +187,38 @@ std::ostream& operator<<(ostream& s, VerticalAlign);
 
 enum class Shading
 {
-    M_SH_NONE,
-    M_SH_SOLID,
-    M_SH_HATCH,
-    M_SH_DOT
+    NONE,
+    SOLID,
+    HATCH,
+    DOT
 };
 
 std::ostream& operator<<(ostream& s, Shading);
 
 enum class ArrowPosition
 {
-    M_TAIL,
-    M_CENTRE,
-    M_HEAD_ONLY
+    TAIL,
+    CENTRE,
+    HEAD_ONLY
 };
 
 std::ostream& operator<<(ostream& s, ArrowPosition);
 
 enum class DisplayType
 {
-    M_DT_ABSOLUTE,
-    M_DT_INLINE,
-    M_DT_BLOCK,
-    M_DT_NONE,
-    M_DT_HIDDEN
+    ABSOLUTE,
+    INLINE,
+    BLOCK,
+    NONE,
+    HIDDEN
 };
 
 std::ostream& operator<<(ostream& s, DisplayType);
 
 enum class ListPolicy
 {
-    M_LASTONE,
-    M_CYCLE
+    LASTONE,
+    CYCLE
 };
 
 std::ostream& operator<<(ostream& s, ListPolicy);
@@ -245,10 +245,10 @@ std::ostream& operator<<(ostream& s, GraphicsFormat);
 
 enum class AxisAutomaticSetting
 {
-    m_off,
-    m_both,
-    m_min_only,
-    m_max_only
+    OFF,
+    BOTH,
+    MIN_ONLY,
+    MAX_ONLY
 };
 
 std::ostream& operator<<(ostream& s, AxisAutomaticSetting);

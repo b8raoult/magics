@@ -344,43 +344,43 @@ Layout* LayoutVisitor::mainLayout() const {
 
 Justification TopAxisVisitor::justificationTickLabel(const string& orientation) {
     // horizontal == parallel
-    return (magCompare(orientation, "vertical")) ? Justification::MLEFT : Justification::MCENTRE;
+    return (magCompare(orientation, "vertical")) ? Justification::LEFT : Justification::CENTRE;
 }
 
 Justification BottomAxisVisitor::justificationTickLabel(const string& orientation) {
     // horizontal == parallel
-    return (magCompare(orientation, "vertical")) ? Justification::MRIGHT : Justification::MCENTRE;
+    return (magCompare(orientation, "vertical")) ? Justification::RIGHT : Justification::CENTRE;
 }
 
 Justification LeftAxisVisitor::justificationTickLabel(const string& orientation) {
     // vertical == parallel
-    return (magCompare(orientation, "horizontal")) ? Justification::MRIGHT : Justification::MCENTRE;
+    return (magCompare(orientation, "horizontal")) ? Justification::RIGHT : Justification::CENTRE;
 }
 Justification RightAxisVisitor::justificationTickLabel(const string& orientation) {
     // vertical == parallel
-    return (magCompare(orientation, "horizontal")) ? Justification::MLEFT : Justification::MCENTRE;
+    return (magCompare(orientation, "horizontal")) ? Justification::LEFT : Justification::CENTRE;
 }
 Justification VerticalAxisVisitor::justificationTickLabel(const string& orientation) {
-    return Justification::MCENTRE;
+    return Justification::CENTRE;
 }
 
 VerticalAlign TopAxisVisitor::textAlignment(const string& orientation) {
     // horizontal == parallel
-    return (magCompare(orientation, "vertical")) ? VerticalAlign::MHALF : VerticalAlign::MTOP;
+    return (magCompare(orientation, "vertical")) ? VerticalAlign::HALF : VerticalAlign::TOP;
 }
 
 VerticalAlign BottomAxisVisitor::textAlignment(const string& orientation) {
     // horizontal == parallel
-    return (magCompare(orientation, "vertical")) ? VerticalAlign::MHALF : VerticalAlign::MBOTTOM;
+    return (magCompare(orientation, "vertical")) ? VerticalAlign::HALF : VerticalAlign::BOTTOM;
 }
 
 VerticalAlign LeftAxisVisitor::textAlignment(const string& orientation) {
     // vertical == parallel
-    return (magCompare(orientation, "horizontal")) ? VerticalAlign::MHALF : VerticalAlign::MBOTTOM;
+    return (magCompare(orientation, "horizontal")) ? VerticalAlign::HALF : VerticalAlign::BOTTOM;
 }
 VerticalAlign RightAxisVisitor::textAlignment(const string& orientation) {
     // vertical == parallel
-    return (magCompare(orientation, "horizontal")) ? VerticalAlign::MHALF : VerticalAlign::MTOP;
+    return (magCompare(orientation, "horizontal")) ? VerticalAlign::HALF : VerticalAlign::TOP;
 }
 
 double RightAxisVisitor::percentX(double percent) {

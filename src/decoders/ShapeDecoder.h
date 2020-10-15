@@ -49,14 +49,14 @@ public:
     void set(const map<string, string>& map) { ShapeDecoderAttributes::set(map); }
     void set(const XmlNode& node) { ShapeDecoderAttributes::set(node); }
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    void decode() { ASSERT(false); }
+    void decode() override { NOTIMP; }
     void needHoles(bool holes) { holes_ = holes; }
     void setPath(const string& path) { path_ = path; }
     PointsHandler& points() { NOTIMP; }
 
-    PointsHandler& points(const Transformation&, bool) { NOTIMP; }
+    PointsHandler& points(const Transformation&, bool) override { NOTIMP; }
 
-    void customisedPoints(const Transformation&, const std::set<string>& n, CustomisedPointsList& out, bool) {
+    void customisedPoints(const Transformation&, const std::set<string>& n, CustomisedPointsList& out, bool) override {
         customisedPoints(n, out);
     }
 
@@ -64,7 +64,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     bool holes_;  // Do we need to deal with the holes during decoding!.
 
     //! Method to ensure all inner rings lie within outer ring of polygon

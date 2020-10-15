@@ -185,7 +185,7 @@ public:
     virtual void set(const map<string, string>& map) { WrepJSonAttributes::set(map); }
     virtual void set(const XmlNode& node) { WrepJSonAttributes::set(node); }
 
-    virtual void visit(Transformation&);
+    virtual void visit(Transformation&) override;
     virtual void visit(TextVisitor&) override;
     void visit(const XmlNode& node);
     virtual std::string getUnits() const override { NOTIMP; }
@@ -197,7 +197,8 @@ public:
 
     void visit(MetaDataVisitor&) override;
     void points(const Transformation&, vector<UserPoint>&);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {
         customisedPoints(t, n, out);
     }
     PointsHandler& points(const Transformation& t, bool) override;

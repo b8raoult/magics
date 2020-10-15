@@ -91,16 +91,17 @@ MAGICS_NO_EXPORT void BaseDriver::renderWindArrow(const Arrow& arrow) const {
         double xx          = 0.;
         vector<PaperPoint> line;
 
-        if (pos != ArrowPosition::M_HEAD_ONLY) {
-            (pos == ArrowPosition::M_TAIL) ? line.push_back(PaperPoint(0., 0.)) : line.push_back(PaperPoint(-0.5 * norm, 0.));
-            xx = (pos == ArrowPosition::M_TAIL) ? norm : 0.5 * norm;
+        if (pos != ArrowPosition::HEAD_ONLY) {
+            (pos == ArrowPosition::TAIL) ? line.push_back(PaperPoint(0., 0.))
+                                         : line.push_back(PaperPoint(-0.5 * norm, 0.));
+            xx = (pos == ArrowPosition::TAIL) ? norm : 0.5 * norm;
             if ((index == 2) || (index == 1))
-                xx = (pos == ArrowPosition::M_TAIL) ? norm2 : (base - 0.5) * norm;
+                xx = (pos == ArrowPosition::TAIL) ? norm2 : (base - 0.5) * norm;
 
             line.push_back(PaperPoint(xx, 0));
             for_each(line.begin(), line.end(), rotate(angle, ratio));
             for_each(line.begin(), line.end(), translate(arr->point_));
-            xx = (pos == ArrowPosition::M_TAIL) ? norm : 0.5 * (norm);  // reset length
+            xx = (pos == ArrowPosition::TAIL) ? norm : 0.5 * (norm);  // reset length
 
             // Arrow base
             const int old_currentColourIndex = currentLineStyle_;
@@ -193,11 +194,12 @@ MAGICS_NO_EXPORT void BaseDriver::renderWindFlag(const Flag& flag) const {
         renderPolyline2(line);
         //		currentLineStyle_ = old_currentColourIndex;
 
-        MFloat barbFraction     = 0.;
-        int i                   = 0;
-        const MFloat lengthY    = setY(length * ratio);
-        const MFloat barbHeight = setFlagY((flag.getHemisphere() == Hemisphere::NORTH) ? (0.4 * lengthY) : (-0.4 * lengthY));
-        bool fl                 = false;
+        MFloat barbFraction  = 0.;
+        int i                = 0;
+        const MFloat lengthY = setY(length * ratio);
+        const MFloat barbHeight =
+            setFlagY((flag.getHemisphere() == Hemisphere::NORTH) ? (0.4 * lengthY) : (-0.4 * lengthY));
+        bool fl = false;
 
         if (len < lev2)
             i++;

@@ -121,7 +121,7 @@ void Bar::vertical(CustomisedPointsList& points, BasicGraphicsObjectContainer& o
             font.size(annotation_size_);
             annot->setFont(font);
             annot->setText(*annotation);
-            annot->setVerticalAlign(VerticalAlign::MBOTTOM);
+            annot->setVerticalAlign(VerticalAlign::BOTTOM);
             annot->push_back(xy);
             texts_.push_back(annot);
             annotation++;
@@ -176,7 +176,7 @@ void Bar::horizontal(CustomisedPointsList& points, BasicGraphicsObjectContainer&
             font.size(annotation_size_);
             annot->setFont(font);
             annot->setText(*annotation);
-            annot->setVerticalAlign(VerticalAlign::MBOTTOM);
+            annot->setVerticalAlign(VerticalAlign::BOTTOM);
             annot->push_back(xy);
             texts_.push_back(annot);
             annotation++;
@@ -202,11 +202,11 @@ void Bar::fullbar_y(double y, double left, double right, BasicGraphicsObjectCont
     const Transformation& transformation = out.transformation();
     double bottom                        = y - width_ / 2;
     double top                           = y + width_ / 2;
-    if (justification_ == Justification::MLEFT) {
+    if (justification_ == Justification::LEFT) {
         top    = y - width_;
         bottom = y;
     }
-    if (justification_ == Justification::MRIGHT) {
+    if (justification_ == Justification::RIGHT) {
         top    = y;
         bottom = y + width_;
     }
@@ -237,11 +237,11 @@ void Bar::fullbar_x(double x, double top, double bottom, BasicGraphicsObjectCont
     const Transformation& transformation = out.transformation();
     double left                          = x - width_ / 2;
     double right                         = x + width_ / 2;
-    if (justification_ == Justification::MLEFT) {
+    if (justification_ == Justification::LEFT) {
         left  = x - width_;
         right = x;
     }
-    if (justification_ == Justification::MRIGHT) {
+    if (justification_ == Justification::RIGHT) {
         left  = x;
         right = x + width_;
     }

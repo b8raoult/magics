@@ -210,8 +210,8 @@ public:
     virtual double offsetTitle(int);
     virtual double angleTip();
     virtual double offsetTip();
-    virtual VerticalAlign textAlignment(const string&) { return VerticalAlign::MBOTTOM; }
-    virtual Justification justificationTickLabel(const string&) { return Justification::MCENTRE; }
+    virtual VerticalAlign textAlignment(const string&) { return VerticalAlign::BOTTOM; }
+    virtual Justification justificationTickLabel(const string&) { return Justification::CENTRE; }
     virtual double percentX(double) { return 0; }
     virtual double percentY(double) { return 0; }
 
@@ -233,7 +233,7 @@ public:
     virtual double angleTip();
     virtual double offsetTip();
     virtual Justification justificationTickLabel(const string&);
-    virtual VerticalAlign textAlignment(const string&) { return VerticalAlign::MHALF; }
+    virtual VerticalAlign textAlignment(const string&) { return VerticalAlign::HALF; }
     virtual double percentX(double) { return 0; }
     virtual double percentY(double) { return 0; }
 

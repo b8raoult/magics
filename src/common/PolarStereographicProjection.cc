@@ -485,8 +485,8 @@ void PolarStereographicProjection::horizontalLabels(const LabelPlotting& label, 
         point.y(yy);
 
         Text* text = new Text();
-        text->setJustification(Justification::MCENTRE);
-        text->setVerticalAlign(top ? VerticalAlign::MBOTTOM : VerticalAlign::MTOP);
+        text->setJustification(Justification::CENTRE);
+        text->setVerticalAlign(top ? VerticalAlign::BOTTOM : VerticalAlign::TOP);
         label.add(text);
         text->setText(writeLongitude(geo));
         text->push_back(point);
@@ -539,8 +539,8 @@ void PolarStereographicProjection::verticalLabels(const LabelPlotting& label, do
 
         Text* text = new Text();
         label.add(text);
-        text->setJustification(left ? Justification::MRIGHT : Justification::MLEFT);
-        text->setVerticalAlign(VerticalAlign::MHALF);
+        text->setJustification(left ? Justification::RIGHT : Justification::LEFT);
+        text->setVerticalAlign(VerticalAlign::HALF);
         text->setText(writeLongitude(geo));
         text->push_back(point);
     }

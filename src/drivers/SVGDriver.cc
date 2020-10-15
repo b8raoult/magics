@@ -414,13 +414,13 @@ MAGICS_NO_EXPORT int SVGDriver::setLineParameters(const LineStyle linestyle, con
            << ")\""
            << " fill=\"none\"";
 
-    if (currentLineType_ == LineStyle::M_DASH)
+    if (currentLineType_ == LineStyle::DASH)
         stream << " stroke-dasharray=\"" << 2 * widi << "," << 2 * widi << "\"";
-    else if (currentLineType_ == LineStyle::M_DOT)
+    else if (currentLineType_ == LineStyle::DOT)
         stream << " stroke-dasharray=\"" << 1 * widi << "," << 2 * widi << "\"";
-    else if (currentLineType_ == LineStyle::M_CHAIN_DASH)
+    else if (currentLineType_ == LineStyle::CHAIN_DASH)
         stream << " stroke-dasharray=\"" << 4 * widi << "," << 2 * widi << "," << 2 * widi << "," << 2 * widi << "\"";
-    else if (currentLineType_ == LineStyle::M_CHAIN_DOT)
+    else if (currentLineType_ == LineStyle::CHAIN_DOT)
         stream << " stroke-dasharray=\"" << 4 * widi << "," << 2 * widi << "," << 2 * widi << "," << 2 * widi << ","
                << 2 * widi << "\"";
 
@@ -573,7 +573,7 @@ MAGICS_NO_EXPORT void SVGDriver::renderSimplePolygon(const int n, MFloat* x, MFl
     }
 
     if (count > 2) {
-        if (currentShading_ == Shading::M_SH_DOT) {
+        if (currentShading_ == Shading::DOT) {
             const DotShadingProperties* pro = (DotShadingProperties*)currentShadingProperties_;
             const int density               = (int)sqrt(pro->density_);
             if (density <= 0)
@@ -593,7 +593,7 @@ MAGICS_NO_EXPORT void SVGDriver::renderSimplePolygon(const int n, MFloat* x, MFl
                    << "<path fill=\"url(#D_" << svg_pattern_count << ")\" stroke=\"none\" " << stream.str() << "\"/>\n";
             svg_pattern_count++;
         }
-        else if (currentShading_ == Shading::M_SH_HATCH) {
+        else if (currentShading_ == Shading::HATCH) {
             const HatchShadingProperties* pro = (HatchShadingProperties*)currentShadingProperties_;
             indexHatch_                       = pro->index_;
             const int density                 = (int)(1. / pro->density_ * 150);
@@ -734,7 +734,7 @@ void SVGDriver::renderSimplePolygon(const magics::Polyline& line) const {
 
     ostringstream strFill;
 
-    if (currentShading_ == Shading::M_SH_DOT) {
+    if (currentShading_ == Shading::DOT) {
         const DotShadingProperties* pro = (DotShadingProperties*)currentShadingProperties_;
         const int density               = (int)sqrt(pro->density_);
         if (density <= 0)
@@ -754,7 +754,7 @@ void SVGDriver::renderSimplePolygon(const magics::Polyline& line) const {
         strFill << "url(#D_" << svg_pattern_count << ")";
         svg_pattern_count++;
     }
-    else if (currentShading_ == Shading::M_SH_HATCH) {
+    else if (currentShading_ == Shading::HATCH) {
         const HatchShadingProperties* pro = (HatchShadingProperties*)currentShadingProperties_;
         indexHatch_                       = pro->index_;
         const int density                 = (int)(1. / pro->density_ * 150);
@@ -813,9 +813,9 @@ MAGICS_NO_EXPORT void SVGDriver::renderText(const Text& text) const {
 
     Justification horizontalAlign = text.getJustification();
     string justification          = "middle";
-    if (horizontalAlign == Justification::MLEFT)
+    if (horizontalAlign == Justification::LEFT)
         justification = "start";
-    else if (horizontalAlign == Justification::MRIGHT)
+    else if (horizontalAlign == Justification::RIGHT)
         justification = "end";
 
     VerticalAlign verticalAlign = text.getVerticalAlign();
@@ -836,11 +836,11 @@ MAGICS_NO_EXPORT void SVGDriver::renderText(const Text& text) const {
             const string font              = magfont.name() + "_" + style;
 
             string verticalJustification = "no-change";
-            if (verticalAlign == VerticalAlign::MBASE)
+            if (verticalAlign == VerticalAlign::BASE)
                 verticalJustification = "alphabetic";
-            else if (verticalAlign == VerticalAlign::MTOP)
+            else if (verticalAlign == VerticalAlign::TOP)
                 verticalJustification = "hanging";
-            else if (verticalAlign == VerticalAlign::MHALF)
+            else if (verticalAlign == VerticalAlign::HALF)
                 verticalJustification = "middle";
 
             fontMapIter iter = FontMap_.find(font);

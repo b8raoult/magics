@@ -583,30 +583,30 @@ MAGICS_NO_EXPORT int CairoDriver::setLineParameters(const LineStyle linestyle, c
     setNewLineWidth(width);
 
 #if CAIRO_VERSION >= CAIRO_VERSION_ENCODE(1, 4, 0)
-    if (cairo_get_dash_count(cr_) == 0 && linestyle == LineStyle::M_SOLID)
+    if (cairo_get_dash_count(cr_) == 0 && linestyle == LineStyle::SOLID)
         return 0;
 #endif
     switch (linestyle) {
-        case LineStyle::M_DASH:  // 6 on - 2 off
+        case LineStyle::DASH:  // 6 on - 2 off
         {
             cairo_set_line_cap(cr_, CAIRO_LINE_CAP_SQUARE);
             const double dash_line[] = {4.};
             cairo_set_dash(cr_, dash_line, 1, 0.);
         } break;
-        case LineStyle::M_DOT:  // 1 on - 2 off
+        case LineStyle::DOT:  // 1 on - 2 off
         {
             setNewLineWidth(2 * width);
             const double dotted_line[] = {0., 6.};
             cairo_set_line_cap(cr_, CAIRO_LINE_CAP_ROUND);
             cairo_set_dash(cr_, dotted_line, 2, 0.);
         } break;
-        case LineStyle::M_CHAIN_DASH:  // 4 on - 2 off -  1 on - 2 off
+        case LineStyle::CHAIN_DASH:  // 4 on - 2 off -  1 on - 2 off
         {
             const double chain_dash_line[] = {4., 4., 0., 6.};
             cairo_set_line_cap(cr_, CAIRO_LINE_CAP_SQUARE);
             cairo_set_dash(cr_, chain_dash_line, 4, 0.);
         } break;
-        case LineStyle::M_CHAIN_DOT:  // 4 on - 2 off -  1 on - 2 off - 1 on - 2 off
+        case LineStyle::CHAIN_DOT:  // 4 on - 2 off -  1 on - 2 off - 1 on - 2 off
         {
             const double chain_dot_line[] = {4., 4., 0., 6., 0., 6.};
             cairo_set_line_cap(cr_, CAIRO_LINE_CAP_SQUARE);
@@ -792,7 +792,7 @@ MAGICS_NO_EXPORT void CairoDriver::renderSimplePolygon(const int n, MFloat* x, M
 */
 MAGICS_NO_EXPORT void CairoDriver::renderSimplePolygon() const {
 #if CAIRO_VERSION >= CAIRO_VERSION_ENCODE(1, 2, 0)
-    if (currentShading_ == Shading::M_SH_DOT) {
+    if (currentShading_ == Shading::DOT) {
         const DotShadingProperties* pro = (DotShadingProperties*)currentShadingProperties_;
         const int density               = (int)sqrt(pro->density_);
         if (density <= 0)
@@ -825,7 +825,7 @@ MAGICS_NO_EXPORT void CairoDriver::renderSimplePolygon() const {
         cairo_surface_destroy(pat_surface);
         cairo_destroy(cr2);
     }
-    else if (currentShading_ == Shading::M_SH_HATCH) {
+    else if (currentShading_ == Shading::HATCH) {
         const HatchShadingProperties* pro = (HatchShadingProperties*)currentShadingProperties_;
         indexHatch_                       = pro->index_;
         if (indexHatch_ < 1 || indexHatch_ > 6) {
@@ -880,7 +880,7 @@ MAGICS_NO_EXPORT void CairoDriver::renderSimplePolygon() const {
     }
     else
 #else
-    if (currentShading_ == Shading::M_SH_HATCH || currentShading_ == Shading::M_SH_DOT)
+    if (currentShading_ == Shading::HATCH || currentShading_ == Shading::DOT)
         MagLog::error() << "CairoDriver: For hatch and dot shading you need at least Cairo 1.2!\n"
                         << "             Solid shading used instead." << std::endl;
 #endif
@@ -888,7 +888,7 @@ MAGICS_NO_EXPORT void CairoDriver::renderSimplePolygon() const {
         cairo_fill(cr_);
     }
     cairo_restore(cr_);
-    currentShading_ = Shading::M_SH_SOLID;
+    currentShading_ = Shading::SOLID;
 }
 
 
@@ -1011,19 +1011,19 @@ MAGICS_NO_EXPORT void CairoDriver::renderText(const Text& text) const {
         double height = h / PANGO_SCALE;
 
         MFloat x = 0;
-        if (horizontal == Justification::MCENTRE)
+        if (horizontal == Justification::CENTRE)
             x = width * .5;
-        else if (horizontal == Justification::MRIGHT)
+        else if (horizontal == Justification::RIGHT)
             x = width;
 
         MFloat y = 0.;
-        if (vertical == VerticalAlign::MBASE) {
+        if (vertical == VerticalAlign::BASE) {
             y = height * .85;
         }
-        else if (vertical == VerticalAlign::MHALF) {
+        else if (vertical == VerticalAlign::HALF) {
             y = height * .5;
         }
-        else if (vertical == VerticalAlign::MBOTTOM) {
+        else if (vertical == VerticalAlign::BOTTOM) {
             y = height;
         }
 

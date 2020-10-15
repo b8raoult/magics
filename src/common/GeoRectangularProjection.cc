@@ -241,8 +241,8 @@ void GeoRectangularProjection::labels(const LabelPlotting& label, TopAxisVisitor
             text = new Text();
             label.add(text);
             text->setText(writeLongitude(point));
-            text->setJustification(Justification::MCENTRE);
-            text->setVerticalAlign(VerticalAlign::MBOTTOM);
+            text->setJustification(Justification::CENTRE);
+            text->setVerticalAlign(VerticalAlign::BOTTOM);
             text->push_back((*this)(point));
         }
     }
@@ -264,8 +264,8 @@ void GeoRectangularProjection::labels(const LabelPlotting& label, BottomAxisVisi
             text = new Text();
             label.add(text);
             text->setText(writeLongitude(point));
-            text->setJustification(Justification::MCENTRE);
-            text->setVerticalAlign(VerticalAlign::MTOP);
+            text->setJustification(Justification::CENTRE);
+            text->setVerticalAlign(VerticalAlign::TOP);
             text->push_back((*this)(point));
         }
     }
@@ -287,8 +287,8 @@ void GeoRectangularProjection::labels(const LabelPlotting& label, LeftAxisVisito
             text = new Text();
             label.add(text);
             text->setText(writeLatitude(point));
-            text->setJustification(Justification::MRIGHT);
-            text->setVerticalAlign(VerticalAlign::MHALF);
+            text->setJustification(Justification::RIGHT);
+            text->setVerticalAlign(VerticalAlign::HALF);
             text->push_back((*this)(point));
         }
     }
@@ -312,8 +312,8 @@ void GeoRectangularProjection::labels(const LabelPlotting& label, RightAxisVisit
             text = new Text();
             label.add(text);
             text->setText(writeLatitude(point));
-            text->setJustification(Justification::MLEFT);
-            text->setVerticalAlign(VerticalAlign::MHALF);
+            text->setJustification(Justification::LEFT);
+            text->setVerticalAlign(VerticalAlign::HALF);
             text->push_back((*this)(point));
         }
     }

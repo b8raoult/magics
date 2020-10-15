@@ -261,6 +261,13 @@ string BaseParameter::getType(const Matrix&) const {
     return "2DMatrix";
 }
 
+string BaseParameter::getType(const DisplayType &) const {
+    return "DisplayType";
+}
+
+string BaseParameter::getType(const ListPolicy &) const {
+    return "ListPolicy";
+}
 
 void BaseParameter::print(ostream& out) const {
     out << name_ << "[]";

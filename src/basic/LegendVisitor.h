@@ -257,7 +257,7 @@ public:
     virtual void rowBox(const PaperPoint&, BasicGraphicsObjectContainer&);
     virtual void columnBox(const PaperPoint&, BasicGraphicsObjectContainer&);
     bool needContinuousText(Text& text) {
-        text.setJustification(Justification::MLEFT);
+        text.setJustification(Justification::LEFT);
         return true;
     }
     ~LineEntry();
@@ -300,7 +300,7 @@ public:
     virtual void rowBox(const PaperPoint&, BasicGraphicsObjectContainer&);
     virtual void columnBox(const PaperPoint&, BasicGraphicsObjectContainer&);
     bool needContinuousText(Text& text) {
-        text.setJustification(Justification::MLEFT);
+        text.setJustification(Justification::LEFT);
         return true;
     }
     ~DoubleLineEntry();

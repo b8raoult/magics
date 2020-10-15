@@ -1436,13 +1436,13 @@ void IsoPlot::visit(Data& data, LegendVisitor& legend) {
     if (magCompare(legend_special_, "spaghetti")) {
         Polyline* blue = new Polyline();
         blue->setColour(Colour("blue"));
-        blue->setLineStyle(LineStyle::M_DASH);
+        blue->setLineStyle(LineStyle::DASH);
         Polyline* red = new Polyline();
         red->setColour(Colour("red"));
-        red->setLineStyle(LineStyle::M_DASH);
+        red->setLineStyle(LineStyle::DASH);
         Polyline* grey = new Polyline();
         grey->setColour(Colour("grey"));
-        grey->setLineStyle(LineStyle::M_SOLID);
+        grey->setLineStyle(LineStyle::SOLID);
         legend.add(new DoubleLineEntry("Det", blue, 0));
         legend.add(new DoubleLineEntry("Control", red, 0));
         legend.add(new DoubleLineEntry("EPS members", grey, 0));
@@ -1826,14 +1826,14 @@ void IsoPlot::setThicknessAndStyle() {
         line_style_list_.insert(make_pair(*level, *style));
         ++thickness;
         if (thickness == rainbowThicknessList_.end()) {
-            if (rainbowThicknessListPolicy_ == ListPolicy::M_LASTONE)
+            if (rainbowThicknessListPolicy_ == ListPolicy::LASTONE)
                 --thickness;
             else
                 thickness = rainbowThicknessList_.begin();
         }
         ++style;
         if (style == styles.end()) {
-            if (rainbowStyleListPolicy_ == ListPolicy::M_LASTONE)
+            if (rainbowStyleListPolicy_ == ListPolicy::LASTONE)
                 --style;
             else
                 style = styles.begin();

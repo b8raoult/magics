@@ -72,7 +72,7 @@ public:
 
     void polar(const string&, const Transformation&);
     void lluv(const string&, const Transformation&);
-    void initInfo();
+    void initInfo() override;
     void visit(MetaDataCollector&);
     void visit(ValuesCollector&);
     virtual std::string getUnits() const override { NOTIMP; }
