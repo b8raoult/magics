@@ -72,7 +72,7 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
     ParameterManager::set("contour_automatic_library_path", library_path_);
     ContourLibrary* library = MagTranslator<string, ContourLibrary>()(setting_);
 
-    styleInfo_ = library->getStyle(data, library_path_);
+    styleInfo_ = library->getStyle(data, library_path_, automaticAttributes_);
 
     if (!styleInfo_) {
         MetaDataCollector request, needAttributes;

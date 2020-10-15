@@ -38,6 +38,7 @@ plot:
 - mcont:
     contour_automatic_setting: climetlab
     legend: false
+    contour_units: C
 - mcoast:
     map_grid: false
     map_grid_frame: true

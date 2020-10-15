@@ -48,10 +48,10 @@ public:
     // se the map to set the contour!
     virtual void getStyle(MetaDataCollector&, MagDef&, StyleEntry&);
     virtual void getStyle(const string&, MagDef&) {}
-    
+
 
     // All in one
-    virtual StyleEntry* getStyle(Data& data, const  std::string& library_path) { return nullptr; }
+    virtual StyleEntry* getStyle(Data& data, const  std::string& library_path, MagDef& visdef) { return nullptr; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

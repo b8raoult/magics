@@ -118,7 +118,7 @@ void Data::getScaling(double& scaling, double& offset) const {
 
     std::string contour_units;
     ParameterManager::get("contour_units", contour_units);
-
+offset = -273.15;
 
     std::cout << "++++++++ UNITS DATA: " << data_units << " CONTOUR: " << contour_units << std::endl;
 }

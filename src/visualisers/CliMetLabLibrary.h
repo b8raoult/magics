@@ -34,15 +34,14 @@ public:
     virtual ~CliMetLabLibrary();
 
 
-    virtual StyleEntry* getStyle(Data& data, const std::string& library_path);
+    virtual StyleEntry* getStyle(Data& data, const std::string& library_path, MagDef& visdef) override;
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 
 }  // namespace magics
 #endif
-

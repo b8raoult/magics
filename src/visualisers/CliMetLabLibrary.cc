@@ -23,6 +23,7 @@
 #include "CliMetLabLibrary.h"
 #include "Data.h"
 #include "MagParser.h"
+#include "MetaData.h"
 
 #ifndef MAGICS_ON_WINDOWS
 #include <dirent.h>
@@ -38,7 +39,7 @@ CliMetLabLibrary::CliMetLabLibrary() {}
 
 CliMetLabLibrary::~CliMetLabLibrary() {}
 
-StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_path) {
+StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_path, MagDef& visdef) {
     std::string path = buildConfigPath("styles", "climetlab") + "/rules";
 
     DIR* dir = opendir(path.c_str());
@@ -142,15 +143,31 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
     }
 
     std::cout << best << std::endl;
+    std::cout << "NAME: " << best["styles"][0] << std::endl;
 
-    MagDef def;
-    ValueMap contour = best["magics"]["mcont"];
+    // ValueMap contour = best["magics"]["mcont"];
 
-    for(auto j = contour.begin(); j != contour.end(); ++j) {
-        def[(*j).first] = std::string((*j).second);
-    }
+    // for(auto j = contour.begin(); j != contour.end(); ++j) {
+    //     std::string key = (*j).first;
+    //     const Value& val = (*j).second;
+    //     if(val.isList()) {
+    //         std::ostringstream oss;
+    //         const char *sep = "";
+    //         ValueList values = val;
+    //         for(auto& v : values) {
+    //             oss << sep << v;
+    //             sep = "/";
+    //         }
+    //         visdef[(*j).first] = oss.str();
+    //     }
+    //     else {
+    //         visdef[(*j).first] = std::string(val);
+    //     }
 
-    return nullptr;
+    // }
+
+    // TODO: fill the entry
+    return new StyleEntry();
 }  // namespace magics
 
 void CliMetLabLibrary::print(ostream& out) const {
