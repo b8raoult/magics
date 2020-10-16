@@ -41,30 +41,31 @@ public:
     EpsBufr();
     virtual ~EpsBufr();
 
-    virtual void set(const map<string, string>& map)  override { EpsBufrAttributes::set(map); }
-    virtual void set(const XmlNode& node)  override { EpsBufrAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { EpsBufrAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { EpsBufrAttributes::set(node); }
 
-    virtual void visit(Transformation&)  override;
+    virtual void visit(Transformation&) override;
     void visit(const XmlNode& node);
 
-    virtual void decode()  override;
+    virtual void decode() override;
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
     virtual PointsHandler& points();
     virtual void visit(TextVisitor&) override;
     virtual void visit(MetaDataVisitor&) override;
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool) override {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool) override {
         customisedPoints(n, out);
     }
 
-    PointsHandler& points(const Transformation&, bool)  override { return points(); }
+    PointsHandler& points(const Transformation&, bool) override { return points(); }
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const  override;
+    virtual void print(ostream&) const override;
     DateTime base_;
     vector<CustomisedPoint*> points_;
     double minstep_;

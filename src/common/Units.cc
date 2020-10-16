@@ -30,7 +30,7 @@ using namespace magics;
 struct Scaling {
     double scaling_;
     double offset_;
-    Scaling(double scaling=1, double offset=0) : scaling_(scaling), offset_(offset) {}
+    Scaling(double scaling = 1, double offset = 0) : scaling_(scaling), offset_(offset) {}
 };
 
 

@@ -1206,7 +1206,7 @@ void SpotDecoder::customisedPoints(const std::set<string>&, CustomisedPointsList
         decode();
     }
     catch (...) {
-    if (MagicsSettings::strict()) {
+        if (MagicsSettings::strict()) {
             throw;
         }
         return;  // no data..
@@ -1564,8 +1564,8 @@ void EfigramDecoder::decode() {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
             date_ = lastdate;
             time_ = lasttime;
             step_ = laststep;
@@ -1591,8 +1591,8 @@ void EfigramDecoder::decode() {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
             MagLog::info() << " No Clim" << endl;
         }
 

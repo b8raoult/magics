@@ -119,7 +119,8 @@ MagnifierLayout::~MagnifierLayout() {}
 MagnifierLayout::MagnifierLayout() {}
 
 
-LayoutFrame::LayoutFrame() : thickness_(1), style_(LineStyle::SOLID), colour_("grey"), blanking_(false), visible_(false) {}
+LayoutFrame::LayoutFrame() :
+    thickness_(1), style_(LineStyle::SOLID), colour_("grey"), blanking_(false), visible_(false) {}
 
 LayoutFrame::~LayoutFrame() {}
 

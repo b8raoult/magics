@@ -19,8 +19,8 @@
 
 #include <MagLog.h>
 #include <algorithm>
-#include "MagicsObserver.h"
 #include "MagException.h"
+#include "MagicsObserver.h"
 
 using namespace magics;
 
@@ -366,7 +366,6 @@ void MagLog::unregisterObserver(MagicsObserver* observer) {
     if (o != log_.observers_.end())
         log_.observers_.erase(o);
 }
-
 
 
 }  // namespace magics

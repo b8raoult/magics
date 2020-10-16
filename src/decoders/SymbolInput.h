@@ -39,7 +39,7 @@ public:
     virtual ~SymbolInput() {}
 
     // Implements the set method ...
-    void set(const map<string, string>& map)  override { SymbolInputAttributes::set(map); }
+    void set(const map<string, string>& map) override { SymbolInputAttributes::set(map); }
 
 
     virtual void decodePoints() {
@@ -132,17 +132,18 @@ public:
         return (*this->pointsHandlers_.back());
     }
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all)  override{
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {
         customisedPoints(t, n, out);
     }
-    PointsHandler& points(const Transformation& t, bool)  override{ return points(t); }
+    PointsHandler& points(const Transformation& t, bool) override { return points(t); }
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const  override{
+    virtual void print(ostream& out) const override {
         out << "SymbolInput[";
         SymbolInputAttributes::print(out);
         out << "]";

@@ -129,7 +129,7 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
     }
 
 
-    data.applyScaling(units_); // From contour_units
+    data.applyScaling(units_);  // From contour_units
 
     data.getReady(parent.transformation());
     if (!data.valid()) {

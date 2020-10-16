@@ -170,7 +170,7 @@ void NetcdfGeoMatrixInterpretor::visit(Transformation& transformation) {
     }
 }
 
-void NetcdfGeoMatrixInterpretor::set(const XmlNode &node) {
+void NetcdfGeoMatrixInterpretor::set(const XmlNode& node) {
     // FIXME: Infinite recursion
     NOTIMP;
     MagLog::debug() << "NetcdfGeoMatrixInterpretor::set(params)"
@@ -181,13 +181,15 @@ void NetcdfGeoMatrixInterpretor::set(const XmlNode &node) {
     set(netcdf);
 }
 
-NetcdfInterpretor *NetcdfGeoMatrixInterpretor::clone() const {
+NetcdfInterpretor* NetcdfGeoMatrixInterpretor::clone() const {
     NetcdfGeoMatrixInterpretor* object = new NetcdfGeoMatrixInterpretor();
     object->clone(*this);
     return object;
 }
 
-void NetcdfGeoMatrixInterpretor::clone(const NetcdfGeoMatrixInterpretor &other) { copy(other); }
+void NetcdfGeoMatrixInterpretor::clone(const NetcdfGeoMatrixInterpretor& other) {
+    copy(other);
+}
 
 bool NetcdfGeoMatrixInterpretor::interpretAsPoints(PointsList& list) {
     Netcdf netcdf(path_, dimension_method_);

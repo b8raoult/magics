@@ -76,9 +76,10 @@ public:
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {
         customisedPoints(t, n, out);
     }
     PointsHandler& points(const Transformation& t, bool) override { return points(t); }

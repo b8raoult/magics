@@ -52,8 +52,8 @@ void ColourTableDefinitionList::set(const XmlNode& node) {
         }
         catch (NoFactoryException& e) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
 }

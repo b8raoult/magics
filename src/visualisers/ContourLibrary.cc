@@ -160,7 +160,6 @@ EcChartLibrary::EcChartLibrary() : contours_("contours"), default_set_("default"
 EcChartLibrary::~EcChartLibrary() {}
 
 
-
 void EcChartLibrary::askId(MetaDataCollector& request) {
     // main keywords
     setCriteria(request, "paramId");

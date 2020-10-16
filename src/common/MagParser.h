@@ -21,12 +21,10 @@ namespace magics {
 //----------------------------------------------------------------------------------------------------------------------
 
 
-
 class MagParser {
 public:  // methods
     static Value decodeFile(const std::string& path);
     static Value decodeString(const std::string& str);
-
 };
 
 

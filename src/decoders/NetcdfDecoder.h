@@ -43,15 +43,16 @@ public:
     NetcdfDecoder();
     virtual ~NetcdfDecoder();
 
-    void decode()  override {}
+    void decode() override {}
     // implements BaseSceneObject interface
     virtual void set(const map<string, string>& params) override { NetcdfDecoderAttributes::set(params); }
     virtual void set(const XmlNode& node) override { NetcdfDecoderAttributes::set(node); }
     virtual void visit(MagnifierVisitor&);
 
-    virtual PointsHandler& points(const Transformation&, bool)  override;
+    virtual PointsHandler& points(const Transformation&, bool) override;
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {
         customisedPoints(t, n, out);
     }
 
@@ -92,20 +93,20 @@ public:
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
     void visit(TextVisitor&) override;
-    virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual std::string getUnits() const override;
+    virtual void applyScaling(double, double) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream
     //! (virtual).
-    virtual void print(ostream&) const  override;
+    virtual void print(ostream&) const override;
 
     PointsList points_;
     Matrix* data_;
@@ -115,7 +116,6 @@ private:
     NetcdfDecoder(const NetcdfDecoder&);
     //! Overloaded << operator to copy - No copy allowed
     NetcdfDecoder& operator=(const NetcdfDecoder&);
-
 };
 
 class NetcdfLoop : public DataLoop {

@@ -76,6 +76,7 @@ void NetcdfDecoder::getInfo(map<string, string>& infos) {
     for (map<string, string>::iterator info = infos.begin(); info != infos.end(); ++info)
         info->second = data.get(info->first, info->second);
 }
+
 void NetcdfDecoder::visit(MetaDataCollector& mdc) {
     bool interpretorCalled = false;
     for (map<string, string>::iterator key = mdc.begin(); key != mdc.end(); ++key) {
@@ -130,6 +131,21 @@ void NetcdfDecoder::visit(TextVisitor& text) {
         }
         valid_ = false;
     }
+}
+
+string NetcdfDecoder::getUnits() const {
+    MetaDataCollector collector;
+    collector["units"] = "";
+    MetaDataAttribute attribute;
+    attribute.setSource(MetaDataAttribute::GribApiSource);
+    collector.setAttribute("units", attribute);
+    // FIXME: make visit() const
+    const_cast<NetcdfDecoder*>(this)->visit(collector);
+    return collector["units"];
+}
+
+void NetcdfDecoder::applyScaling(double, double) {
+    NOTIMP;
 }
 
 PointsHandler& NetcdfDecoder::points(const Transformation& transformation, bool all) {

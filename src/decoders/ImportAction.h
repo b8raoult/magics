@@ -72,14 +72,15 @@ public:
             text.addAutomaticTitle(service_ + " :" + url_);
         }
     }
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool) override {}
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&,
+                                  bool) override {}
     //! Method to access the data as a list of points
     // needMissing : if true the list will contain all the points (If they are outside the area: They will be flagged
     // missing)
-    virtual PointsHandler& points(const Transformation&, bool)  override { NOTIMP; }
+    virtual PointsHandler& points(const Transformation&, bool) override { NOTIMP; }
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

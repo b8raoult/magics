@@ -77,7 +77,7 @@ Matrix* InputMatrixRegularInterpretor::geoInterpret(Matrix* in, const InputMatri
         return in;
 
     // Apply scaling !
-// FIXME: scaling
+    // FIXME: scaling
     // double scaling;
     // double offset;
     // info.getScaling(scaling, offset);
@@ -184,7 +184,7 @@ Matrix* InputMatrixIrregularInterpretor::geoInterpret(Matrix* in, const InputMat
     vector<double>& rows    = matrix->rowsArray();
     vector<double>& columns = matrix->columnsArray();
 
-// FIXME: scaling
+    // FIXME: scaling
     // double scaling;
     // double offset;
     // info.getScaling(scaling, offset);

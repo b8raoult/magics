@@ -49,7 +49,8 @@ public:
 
     void customisedPoints(const BasicThinningMethod&, const Transformation&, const std::set<string>&,
                           CustomisedPointsList&) override;
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {}
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {}
     PointsHandler& points(const Transformation& t, bool) override { return points(t); }
 
     bool defined() {
@@ -60,8 +61,8 @@ public:
     void release() override;
     void visit(MetaDataCollector&) override;
     void metadata(MetaDataCollector&) const;
-    virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual std::string getUnits() const override;
+    virtual void applyScaling(double, double) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

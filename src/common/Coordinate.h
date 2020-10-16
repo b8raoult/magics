@@ -191,7 +191,6 @@ public:
     void toxml(ostream& out) const { XRegularCoordinateAttributes::toxml(out); }
     void set() {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 if (reverse_) {
                     max_ = std::numeric_limits<double>::max();
@@ -240,7 +239,6 @@ public:
 
     void minmax(double min, double max) {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 // set the
                 if (reverse_) {
@@ -267,7 +265,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
@@ -291,7 +289,6 @@ public:
 
     void set() {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 if (reverse_) {
                     max_ = std::numeric_limits<double>::max();
@@ -312,7 +309,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
@@ -326,7 +323,6 @@ public:
     }
     void minmax(double min, double max) {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 // set the
                 if (reverse_) {
@@ -354,7 +350,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
@@ -421,7 +417,6 @@ public:
     }
     void set() {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 if (reverse_) {
                     max_ = std::numeric_limits<double>::max();
@@ -444,13 +439,12 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
     void minmax(double min, double max) {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 // set the
                 if (reverse_) {
@@ -478,7 +472,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
@@ -503,7 +497,9 @@ public:
     virtual void dataMinMax(double min, double max) { NOTIMP; }
     virtual void dataMinMax(double min, double max, const string&) { NOTIMP; }
     AxisAutomaticSetting automatic() { return automatic_; }
-    virtual void automatic(bool automatic) { automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF); }
+    virtual void automatic(bool automatic) {
+        automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF);
+    }
     virtual void setAutomatic(AxisAutomaticSetting automatic) { automatic_ = automatic; }
 
 protected:
@@ -537,7 +533,6 @@ public:
     virtual void toxml(ostream& out) const { YLogarithmicCoordinateAttributes::toxml(out); }
     void set() {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 if (reverse_) {
                     max_ = std::numeric_limits<double>::max();
@@ -558,7 +553,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
@@ -570,7 +565,6 @@ public:
     virtual void dataMinMax(double min, double max, const string&) { NOTIMP; }
     void minmax(double min, double max) {
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 // set the
                 if (reverse_) {
@@ -598,7 +592,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
     }
@@ -623,7 +617,9 @@ public:
         return y;
     }
 
-    virtual void automatic(bool automatic) { automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
+    virtual void automatic(bool automatic) {
+        automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF;
+    }
     virtual void setAutomatic(AxisAutomaticSetting automatic) { automatic_ = automatic; }
 
 protected:
@@ -669,7 +665,9 @@ public:
         return x;
     }
     virtual string type() const { return "date"; }
-    AxisAutomaticSetting automatic() { return (automatic_ != AxisAutomaticSetting::OFF) ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
+    AxisAutomaticSetting automatic() {
+        return (automatic_ != AxisAutomaticSetting::OFF) ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF;
+    }
     void set(const XmlNode& node) { XDateCoordinateAttributes::set(node); }
     void set(const map<string, string>& map) { XDateCoordinateAttributes::set(map); }
     bool accept(const string& xml) { return XDateCoordinateAttributes::accept(xml); }
@@ -677,7 +675,9 @@ public:
     void setMin(double) {}
     void setMax(double) {}
 
-    void automatic(bool automatic) { automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF); }
+    void automatic(bool automatic) {
+        automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF);
+    }
     virtual void setAutomatic(AxisAutomaticSetting automatic) { automatic_ = (automatic); }
 
     void setMinMax(const string& min, const string& max) {
@@ -698,7 +698,6 @@ public:
         DateTime maxd_(date_max_);
 
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 // set the
                 if (reverse_) {
@@ -726,7 +725,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
         date_max_ = string(maxd_);
@@ -776,14 +775,18 @@ public:
     void set(const XmlNode& node) { YDateCoordinateAttributes::set(node); }
     void set(const map<string, string>& map) { YDateCoordinateAttributes::set(map); }
     void setAutomatic(AxisAutomaticSetting automatic) { automatic_ = (automatic); }
-    void automatic(bool automatic) { automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF); }
+    void automatic(bool automatic) {
+        automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF);
+    }
 
     virtual YCoordinate* clone() const {
         YDateCoordinate* y = new YDateCoordinate();
         // y->copy(*this);
         return y;
     }
-    AxisAutomaticSetting automatic() { return (automatic_ != AxisAutomaticSetting::OFF) ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
+    AxisAutomaticSetting automatic() {
+        return (automatic_ != AxisAutomaticSetting::OFF) ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF;
+    }
 
     void setMinMax(double, double) {}
 
@@ -812,7 +815,6 @@ public:
         DateTime maxd_(date_max_);
 
         switch (automatic_) {
-
             case AxisAutomaticSetting::BOTH:
                 // set the
                 if (reverse_) {
@@ -840,7 +842,7 @@ public:
                 break;
 
             default:
-            NOTIMP;
+                NOTIMP;
                 break;
         }
         date_max_ = string(maxd_);
@@ -876,8 +878,10 @@ public:
     void set(const XmlNode& node) { YHyperCoordinateAttributes::set(node); }
     void set(const map<string, string>& map) { YHyperCoordinateAttributes::set(map); }
     void setAutomatic(AxisAutomaticSetting automatic) { YCoordinate::setAutomatic(automatic); }
-    void setAutomatic(bool automatic) { automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
-    void automatic(bool automatic) { automatic_ = automatic ?AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
+    void setAutomatic(bool automatic) {
+        automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF;
+    }
+    void automatic(bool automatic) { automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
 
     virtual YCoordinate* clone() const {
         YHyperCoordinate* y = new YHyperCoordinate();
@@ -924,7 +928,7 @@ public:
         tokenizer(info, tokens);
         switch (automatic_) {
             case AxisAutomaticSetting::BOTH:
-            case  AxisAutomaticSetting::MIN_ONLY: {
+            case AxisAutomaticSetting::MIN_ONLY: {
                 if (reverse_) {
                     max_lon_ = tonumber(tokens[0]);
                     max_lat_ = tonumber(tokens[1]);
@@ -938,7 +942,8 @@ public:
             default:
                 break;
         }
-        automatic_ = (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MAX_ONLY : AxisAutomaticSetting::OFF;
+        automatic_ =
+            (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MAX_ONLY : AxisAutomaticSetting::OFF;
 
 
         // interpret the info : lonmin/latmin
@@ -946,8 +951,8 @@ public:
         tokens.clear();
         tokenizer(info, tokens);
         switch (automatic_) {
-            case  AxisAutomaticSetting::BOTH:
-            case  AxisAutomaticSetting::MAX_ONLY: {
+            case AxisAutomaticSetting::BOTH:
+            case AxisAutomaticSetting::MAX_ONLY: {
                 if (reverse_) {
                     min_lon_ = tonumber(tokens[2]);
                     min_lat_ = tonumber(tokens[3]);
@@ -962,7 +967,8 @@ public:
             default:
                 break;
         }
-        automatic_ = (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MIN_ONLY : AxisAutomaticSetting::OFF;
+        automatic_ =
+            (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MIN_ONLY : AxisAutomaticSetting::OFF;
     }
 
 protected:
@@ -983,7 +989,9 @@ public:
     void set(const XmlNode& node) { XHyperCoordinateAttributes::set(node); }
     void set(const map<string, string>& map) { XHyperCoordinateAttributes::set(map); }
     void setAutomatic(AxisAutomaticSetting automatic) { XCoordinate::setAutomatic(automatic); }
-    void setAutomatic(bool automatic) { automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF); }
+    void setAutomatic(bool automatic) {
+        automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF);
+    }
     void automatic(bool automatic) { automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
     vector<double> mins() {
         vector<double> mins;
@@ -1003,7 +1011,9 @@ public:
 
         return x;
     }
-    AxisAutomaticSetting automatic() { return (automatic_ != AxisAutomaticSetting::OFF) ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
+    AxisAutomaticSetting automatic() {
+        return (automatic_ != AxisAutomaticSetting::OFF) ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF;
+    }
 
     void setMinMax(double, double) {}
 
@@ -1015,8 +1025,8 @@ public:
         vector<string> tokens;
         tokenizer(info, tokens);
         switch (automatic_) {
-            case  AxisAutomaticSetting::BOTH:
-            case  AxisAutomaticSetting::MIN_ONLY: {
+            case AxisAutomaticSetting::BOTH:
+            case AxisAutomaticSetting::MIN_ONLY: {
                 if (reverse_) {
                     max_lon_ = tonumber(tokens[0]);
                     max_lat_ = tonumber(tokens[1]);
@@ -1031,7 +1041,8 @@ public:
                 break;
         }
 
-        automatic_ = (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MAX_ONLY : AxisAutomaticSetting::OFF;
+        automatic_ =
+            (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MAX_ONLY : AxisAutomaticSetting::OFF;
 
         // interpret the info : lonmin/latmin
 
@@ -1050,7 +1061,8 @@ public:
             default:
                 break;
         }
-        automatic_ = (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MIN_ONLY :  AxisAutomaticSetting::OFF;
+        automatic_ =
+            (automatic_ == AxisAutomaticSetting::BOTH) ? AxisAutomaticSetting::MIN_ONLY : AxisAutomaticSetting::OFF;
     }
     void getNewDefinition(const UserPoint& ll, const UserPoint& ur, map<string, string>& def) const {
         double lon1 = ll.x();

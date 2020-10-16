@@ -27,7 +27,11 @@
 
 namespace magics {
 
-enum class FlagConvention { SI, KNOTS };
+enum class FlagConvention
+{
+    SI,
+    KNOTS
+};
 
 class ArrowProperties {
 public:

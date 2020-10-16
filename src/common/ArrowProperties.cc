@@ -37,7 +37,7 @@ ArrowProperties::ArrowProperties() :
     headIndex_(0),
     headRatio_(0.3) {}
 
-ArrowProperties *ArrowProperties::clone() {
+ArrowProperties* ArrowProperties::clone() {
     ArrowProperties* arrow = new ArrowProperties();
     arrow->copy(*this);
     return arrow;

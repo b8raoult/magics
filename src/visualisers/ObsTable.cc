@@ -109,8 +109,8 @@ void ObsTable::add(const string& tag, const map<string, string>& def) {
         }
         catch (NoFactoryException&) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
             // FMagLog::dev() << "can not find ObsItem for : " << tag << "\n";
             cout << "can not find ObsItem for : " << tag << "\n";
         }

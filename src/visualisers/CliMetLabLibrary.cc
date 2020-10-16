@@ -162,7 +162,7 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
             ValueList values = val;
             for (auto& v : values) {
                 if (val.isBool()) {
-                    oss << sep <<( bool(v) ? "on" : "off");
+                    oss << sep << (bool(v) ? "on" : "off");
                 }
                 else {
                     oss << sep << v;

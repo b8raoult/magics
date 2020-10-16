@@ -108,8 +108,8 @@ void MetaDataVisitor::collectMetaData() {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
     if (!javascript_.empty()) {
@@ -133,8 +133,8 @@ void MetaDataVisitor::collectMetaData() {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
 
@@ -159,8 +159,8 @@ void MetaDataVisitor::collectMetaData() {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
 
@@ -180,8 +180,8 @@ void MetaDataVisitor::collectMetaData() {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
     if (!efi_.empty()) {
@@ -200,8 +200,8 @@ void MetaDataVisitor::collectMetaData() {
             out << " Could not opened " << path << endl;
             out.close();
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
 }

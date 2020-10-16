@@ -78,8 +78,8 @@ void OutputHandler::drivers(vector<string>& ds) {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
     }
 }

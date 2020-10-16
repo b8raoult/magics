@@ -24,10 +24,8 @@
 namespace magics {
 
 
-
 class Units {
 public:
-
     static bool convert(const std::string& from, const std::string& to, double& scaling, double& offset);
 };
 

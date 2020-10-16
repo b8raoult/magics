@@ -51,7 +51,7 @@ public:
 
 
     // All in one
-    virtual StyleEntry* getStyle(Data& data, const  std::string& library_path, MagDef& visdef) { return nullptr; }
+    virtual StyleEntry* getStyle(Data& data, const std::string& library_path, MagDef& visdef) { return nullptr; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

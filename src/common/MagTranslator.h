@@ -346,9 +346,7 @@ public:
 template <>
 class MagTranslator<string, magics::LineStyle> {
 public:
-    magics::LineStyle operator()(const string& s) {
-        return BaseParameter::lineStyle(lowerCase(s));
-    }
+    magics::LineStyle operator()(const string& s) { return BaseParameter::lineStyle(lowerCase(s)); }
     magics::LineStyle magics(const string& param) {
         string from;
         ParameterManager::get(param, from);
@@ -359,9 +357,7 @@ public:
 template <>
 class MagTranslator<string, magics::Position> {
 public:
-    magics::Position operator()(const string& s) {
-        return BaseParameter::position(lowerCase(s));
-    }
+    magics::Position operator()(const string& s) { return BaseParameter::position(lowerCase(s)); }
     magics::Position magics(const string& param) {
         string from;
         ParameterManager::get(param, from);
@@ -372,9 +368,7 @@ public:
 template <>
 class MagTranslator<string, magics::Justification> {
 public:
-    magics::Justification operator()(const string& s) {
-        return BaseParameter::justification(lowerCase(s));
-    }
+    magics::Justification operator()(const string& s) { return BaseParameter::justification(lowerCase(s)); }
     magics::Justification magics(const string& param) {
         string from;
         ParameterManager::get(param, from);
@@ -385,9 +379,7 @@ public:
 template <>
 class MagTranslator<string, magics::ListPolicy> {
 public:
-    magics::ListPolicy operator()(const string& s) {
-        return BaseParameter::listPolicy(lowerCase(s));
-    }
+    magics::ListPolicy operator()(const string& s) { return BaseParameter::listPolicy(lowerCase(s)); }
     magics::ListPolicy magics(const string& param) {
         string from;
         ParameterManager::get(param, from);
@@ -410,9 +402,7 @@ public:
 template <>
 class MagTranslator<string, magics::DisplayType> {
 public:
-    magics::DisplayType operator()(const string& s) {
-        return BaseParameter::displayType(lowerCase(s));
-    }
+    magics::DisplayType operator()(const string& s) { return BaseParameter::displayType(lowerCase(s)); }
     magics::DisplayType magics(const string& param) {
         string from;
         ParameterManager::get(param, from);

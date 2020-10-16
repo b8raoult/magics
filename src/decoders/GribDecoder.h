@@ -119,7 +119,7 @@ public:
     void ask(MetaDataCollector&);
 
     virtual std::string getUnits() const override;
-virtual void applyScaling(double, double) override ;
+    virtual void applyScaling(double, double) override;
 
 
     const DateDescription& timeStamp() override;
@@ -138,12 +138,13 @@ virtual void applyScaling(double, double) override ;
     void setPath(const string& path) { file_name_ = path; }
 
     RasterData& raster(const Transformation& transformation);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override{}
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {}
 
     void customisedPoints(const AutomaticThinningMethod&, const Transformation&, const std::set<string>&,
-                          CustomisedPointsList&)override;
+                          CustomisedPointsList&) override;
     void customisedPoints(const BasicThinningMethod&, const Transformation&, const std::set<string>&,
-                          CustomisedPointsList&)override;
+                          CustomisedPointsList&) override;
     void customisedPoints(const Transformation& t, CustomisedPointsList& out, double xpts, double ypts, double gap);
 
 

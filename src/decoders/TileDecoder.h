@@ -42,7 +42,8 @@ public:
     virtual void set(const XmlNode& node) override { TileDecoderAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { TileDecoderAttributes::set(map); }
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override;
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override;
 
     PointsHandler& points(const Transformation& t, bool) override;
 
@@ -60,15 +61,15 @@ public:
     string positions();
     string positions_symbols();
 
-    Data* current()override;
-    Data* next()override;
+    Data* current() override;
+    Data* next() override;
 
     vector<codes_handle*> entries_;
     vector<codes_handle*>::iterator entry_;
     codes_handle* handle_;
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

@@ -465,8 +465,8 @@ void NetcdfXYpointsInterpretor::visit(MetaDataCollector& mdc) {
         }
         catch (...) {
             if (MagicsSettings::strict()) {
-            throw;
-        }
+                throw;
+            }
         }
 
         mdc["statsType"] = "scalar";

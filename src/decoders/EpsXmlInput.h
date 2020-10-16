@@ -55,7 +55,8 @@ public:
     virtual void decode() override;
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {
         customisedPoints(n, out);
     }
     PointsHandler& points(const Transformation& t, bool) override { NOTIMP; }
@@ -64,7 +65,7 @@ public:
     virtual void visit(MetaDataVisitor&) override;
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

@@ -38,17 +38,18 @@ public:
 
     virtual void set(const map<string, string>& map) override { BoxPlotDecoderAttributes::set(map); }
 
-    virtual void set(const XmlNode& node)  override { BoxPlotDecoderAttributes::set(node); }
+    virtual void set(const XmlNode& node) override { BoxPlotDecoderAttributes::set(node); }
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all)  override {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
+                          bool all) override {
         customisedPoints(n, out);
     }
-    PointsHandler& points(const Transformation&, bool)  override { NOTIMP; }
+    PointsHandler& points(const Transformation&, bool) override { NOTIMP; }
     void getReady(const Transformation&) override;
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

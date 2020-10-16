@@ -99,7 +99,7 @@ void NoGraphShade::print(ostream& out) const {
     out << "]";
 }
 
-static SimpleObjectMaker<GraphShade , GraphShade> shading_GraphShade("shading");
-static SimpleObjectMaker<GraphShade , GraphShade> on_GraphShade("on");
-static SimpleObjectMaker<NoGraphShade , GraphShade> noshading_NoGraphShade("noshading");
-static SimpleObjectMaker<NoGraphShade , GraphShade> off_NoGraphShade("off");
+static SimpleObjectMaker<GraphShade, GraphShade> shading_GraphShade("shading");
+static SimpleObjectMaker<GraphShade, GraphShade> on_GraphShade("on");
+static SimpleObjectMaker<NoGraphShade, GraphShade> noshading_NoGraphShade("noshading");
+static SimpleObjectMaker<NoGraphShade, GraphShade> off_NoGraphShade("off");

@@ -43,7 +43,7 @@ public:
 
     void set(const map<string, string>& map) override { TableDecoderAttributes::set(map); }
     void set(const XmlNode& node) override { TableDecoderAttributes::set(node); }
-    void visit(Transformation& transformation) override ;
+    void visit(Transformation& transformation) override;
     void visit(TextVisitor& title) override;
 
     PointsHandler& points(const Transformation& transformation, bool) override;
@@ -57,13 +57,13 @@ public:
     bool check(const Transformation&, UserPoint*, stack<UserPoint>&);
     void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    void getReady(const Transformation&)override;
-    string legendText(double, double)override;
-    void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool)override;
-    void visit(ValuesCollector&)override;
+    void getReady(const Transformation&) override;
+    string legendText(double, double) override;
+    void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool) override;
+    void visit(ValuesCollector&) override;
 
     virtual std::string getUnits() const override { NOTIMP; }
-virtual void applyScaling(double, double) override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

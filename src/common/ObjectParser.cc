@@ -153,7 +153,6 @@ std::string ObjectParser::unicode() {
 
 
 Value ObjectParser::parseString(char quote) {
-
     bool save = comments_;
     comments_ = false;
 
