@@ -36,27 +36,14 @@ public:
     ArrowPlotting() {}
     virtual ~ArrowPlotting() {}
 
-    virtual void set(const map<string, string>& map) {
-        WindPlottingAttributes::set(map);
-        ArrowPlottingAttributes::set(map);
-    }
+    virtual void set(const map<string, string>& map);
 
-    virtual void set(const XmlNode& node) {
-        WindPlottingAttributes::set(node);
-        ArrowPlottingAttributes::set(node);
-    }
+    virtual void set(const XmlNode& node);
 
-    void copy(const ArrowPlotting& other) {
-        WindPlottingAttributes::copy(other);
-        ArrowPlottingAttributes::copy(other);
-    }
+    void copy(const ArrowPlotting& other);
     bool accept(const string& node) { return ArrowPlottingAttributes::accept(node); }
 
-    virtual WindPlotting* clone() {
-        ArrowPlotting* object = new ArrowPlotting();
-        object->copy(*this);
-        return object;
-    }
+    virtual WindPlotting* clone();
 
     Arrow* southArrow(const Colour&);
     Arrow* northArrow(const Colour&);

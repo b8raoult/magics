@@ -18,6 +18,10 @@
 #include "MagicsObserver.h"
 
 
-magics::MagicsObserver::MagicsObserver() { MagLog::registerObserver(this); }
+magics::MagicsObserver::MagicsObserver() {
+    MagLog::registerObserver(this);
+}
 
-magics::MagicsObserver::~MagicsObserver() { MagLog::unregisterObserver(this); }
+magics::MagicsObserver::~MagicsObserver() {
+    MagLog::unregisterObserver(this);
+}

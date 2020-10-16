@@ -18,7 +18,8 @@
 #include "PaperPoint.h"
 
 
-magics::PaperPoint::PaperPoint(double x, double y, double value, bool missing, bool border, int range, const std::__1::string &name) :
+magics::PaperPoint::PaperPoint(double x, double y, double value, bool missing, bool border, int range,
+                               const std::__1::string& name) :
     x_(x),
     y_(y),
     value_(value),
@@ -29,4 +30,5 @@ magics::PaperPoint::PaperPoint(double x, double y, double value, bool missing, b
     missing_(missing),
     border_(border) {}
 
-magics::PaperPoint::PaperPoint() : x_(0), y_(0), value_(0), name_(""), high_(false), low_(false), missing_(false), border_(false) {}
+magics::PaperPoint::PaperPoint() :
+    x_(0), y_(0), value_(0), name_(""), high_(false), low_(false), missing_(false), border_(false) {}

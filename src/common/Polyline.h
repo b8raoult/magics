@@ -30,8 +30,8 @@
 namespace magics {
 
 struct ShadingProperties {
-    ShadingProperties() {}
-    virtual ~ShadingProperties() {}
+    ShadingProperties();
+    virtual ~ShadingProperties();
     virtual ShadingProperties* clone()                = 0;
     virtual void draw(const BaseDriver& driver) const = 0;
 

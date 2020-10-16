@@ -52,11 +52,7 @@ public:
         symbol_ = convert(m);
     }
 
-    static string convert(int m) {
-        ostringstream symbol;
-        symbol << "magics_" << m;
-        return symbol.str();
-    }
+    static string convert(int m);
 
     void boundingbox(const Polyline& boundingbox);
     virtual void push_back(const PaperPoint& point, const string& = "") { vector<PaperPoint>::push_back(point); }
@@ -83,19 +79,9 @@ public:
     int outlineThickness() const { return outlineThickness_; }
     LineStyle outlineLineStyle() const { return outlineStyle_; }
 
-    void outline(bool outline, const Colour& colour, int thickness, LineStyle style) {
-        outline_          = outline;
-        outlineColour_    = colour;
-        outlineThickness_ = thickness;
-        outlineStyle_     = style;
-    }
+    void outline(bool outline, const Colour& colour, int thickness, LineStyle style);
     void connectline(bool connect) { connectLine_ = connect; }
-    void connectline(bool connectline, const Colour& colour, int thickness, LineStyle style) {
-        connectLine_          = connectline;
-        connectLineColour_    = colour;
-        connectLineThickness_ = thickness;
-        connectLineStyle_     = style;
-    }
+    void connectline(bool connectline, const Colour& colour, int thickness, LineStyle style);
     int connectLineThickness() const { return connectLineThickness_; }
     LineStyle connectLineStyle() const { return connectLineStyle_; }
     const Colour& connectLineColour() const { return connectLineColour_; }

@@ -39,15 +39,11 @@ public:
     Contour();
     virtual ~Contour();
 
-    virtual Contour* clone() const {
-        Contour* contour = new Contour();
-        contour->copy(*this);
-        return contour;
-    }
+    virtual Contour* clone() const;
     bool needLegend() { return legend_; }
     // Implements the set method ...
-    void set(const XmlNode& node) { ContourAttributes::set(node); }
-    void set(const map<string, string>& map) { ContourAttributes::set(map); }
+    void set(const XmlNode& node);
+    void set(const map<string, string>& map);
 
     // Implements the VisDefinterface
     virtual void operator()(Data&, BasicGraphicsObjectContainer&);
@@ -55,10 +51,7 @@ public:
 
     void visit(Data&, HistoVisitor&);
     void visit(MetaDataVisitor&);
-    void getReady(const LegendVisitor& legend) {
-        contour_->legend_only_ = legend.only_;
-        legendIsOn_            = true;
-    }
+    void getReady(const LegendVisitor& legend);
 
 
 protected:

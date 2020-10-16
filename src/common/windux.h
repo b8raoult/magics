@@ -6,10 +6,11 @@
 struct dirent;
 struct DIR
 
-int gettimeofday(struct timeval* t, void* timezone);
+    int
+    gettimeofday(struct timeval* t, void* timezone);
 
-DIR* opendir(const char* path) ;
-struct dirent* readdir(DIR* dir) ;
+DIR* opendir(const char* path);
+struct dirent* readdir(DIR* dir);
 void closedir(DIR* dir);
 
 #endif

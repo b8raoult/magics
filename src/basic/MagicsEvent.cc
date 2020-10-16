@@ -22,6 +22,8 @@ magics::MagicsEvent::MagicsEvent() {}
 
 magics::MagicsEvent::~MagicsEvent() {}
 
-void magics::MagicsEvent::notify(magics::MagicsObserver &) {}
+void magics::MagicsEvent::notify(magics::MagicsObserver&) {}
 
-void magics::MagicsEvent::print(std::ostream &out) const { out << "MagicsEvent[]"; }
+void magics::MagicsEvent::print(std::ostream& out) const {
+    out << "MagicsEvent[]";
+}

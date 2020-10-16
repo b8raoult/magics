@@ -237,8 +237,28 @@ void Symbol::redisplay(const BaseDriver& driver) const {
     }
 }
 
+string Symbol::convert(int m) {
+    ostringstream symbol;
+    symbol << "magics_" << m;
+    return symbol.str();
+}
+
 void Symbol::boundingbox(const Polyline& boundingbox) {
     boundingbox_ = boundingbox;
+}
+
+void Symbol::outline(bool outline, const Colour &colour, int thickness, LineStyle style) {
+    outline_          = outline;
+    outlineColour_    = colour;
+    outlineThickness_ = thickness;
+    outlineStyle_     = style;
+}
+
+void Symbol::connectline(bool connectline, const Colour &colour, int thickness, LineStyle style) {
+    connectLine_          = connectline;
+    connectLineColour_    = colour;
+    connectLineThickness_ = thickness;
+    connectLineStyle_     = style;
 }
 
 void TextSymbol::redisplay(const BaseDriver& driver) const {

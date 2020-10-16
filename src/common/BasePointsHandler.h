@@ -76,11 +76,10 @@ public:
 
 class AbstractPoints : public BasePointsHandler {
 public:
-    AbstractPoints() : helper_(0){};
-    virtual ~AbstractPoints() {
-        if (helper_)
-            delete helper_;
-    };
+    AbstractPoints();
+    ;
+    virtual ~AbstractPoints();
+    ;
     //! Method to go through the collection. The Class 0 needs to define
     // void operator()(const P&)
     template <class O>

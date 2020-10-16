@@ -201,7 +201,6 @@ void StyleLibrary::init() {
             entry = readdir(dir);
         }
         closedir(dir);
-
     }
 }
 
