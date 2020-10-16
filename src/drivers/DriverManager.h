@@ -20,7 +20,7 @@
 
 #include "BaseDriver.h"
 #include "MagicsEvent.h"
-#include <magics.h>
+#include "magics.h"
 
 namespace magics {
 

@@ -19,7 +19,7 @@
 #ifndef _MgQHistoItem_H
 #define _MgQHistoItem_H
 
-#include <magics.h>
+#include "magics.h"
 
 #include "MgQ.h"
 

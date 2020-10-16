@@ -18,8 +18,8 @@
 
 using namespace magics;
 
-#include "Symbol.h"
 #include <expat.h>
+#include "Symbol.h"
 
 
 /////////////////////////////////////////////////////

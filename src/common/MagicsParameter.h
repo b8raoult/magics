@@ -22,7 +22,7 @@
 
 #include "BaseParameter.h"
 #include "MagLog.h"
-#include <magics.h>
+#include "magics.h"
 
 namespace magics {
 

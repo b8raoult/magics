@@ -19,7 +19,7 @@
 #ifndef _MgQStepItem_H
 #define _MgQStepItem_H
 
-#include <magics.h>
+#include "magics.h"
 
 #include "MgQ.h"
 

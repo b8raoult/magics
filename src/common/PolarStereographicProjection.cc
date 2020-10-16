@@ -16,6 +16,8 @@
 
 */
 
+#include "PolarStereographicProjection.h"
+#include <math.h>
 #include "BasicSceneObject.h"
 #include "GridPlotting.h"
 #include "LabelPlotting.h"
@@ -23,9 +25,7 @@
 #include "MatrixHandler.h"
 #include "MetaData.h"
 #include "ParameterSettings.h"
-#include "PolarStereographicProjection.h"
 #include "Text.h"
-#include <math.h>
 
 using namespace magics;
 

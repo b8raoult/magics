@@ -10,8 +10,8 @@
 
 
 #include "ListContent.h"
-#include "MagException.h"
 #include "JSON.h"
+#include "MagException.h"
 
 #include <iostream>
 

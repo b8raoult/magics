@@ -24,8 +24,8 @@
 #include <io.h>
 #endif
 
-#include "Tokenizer.h"
 #include <cstring>
+#include "Tokenizer.h"
 
 using namespace magics;
 

@@ -15,12 +15,12 @@
 #include "CoastlinesWrapper.h"
 #include "FortranSceneNodeWrapper.h"
 #include "FortranViewNodeWrapper.h"
+#include "ImportObjectHandlerWrapper.h"
+#include "MetaDataWrapper.h"
 #include "MvRootSceneNodeWrapper.h"
 #include "TaylorGridWrapper.h"
 #include "TephiGridWrapper.h"
 #include "VisualAction.h"
-#include "ImportObjectHandlerWrapper.h"
-#include "MetaDataWrapper.h"
 
 
 #include "GribDecoderWrapper.h"
@@ -65,9 +65,9 @@
 #include "SkewtGrid.h"
 #include "SkewtGridWrapper.h"
 
-#include "UserPoint.h"
 #include "MagJSon.h"
 #include "MagicsEvent.h"
+#include "UserPoint.h"
 
 #include "PostScriptDriverWrapper.h"
 

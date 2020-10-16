@@ -23,11 +23,11 @@
 #ifndef Colour_H
 #define Colour_H
 
-#include <magics.h>
 #include <sstream>
 #include "Factory.h"
 #include "MagException.h"
 #include "MagTranslator.h"
+#include "magics.h"
 
 using std::istream;
 

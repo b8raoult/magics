@@ -18,8 +18,8 @@
 #ifndef SystemInfo_H
 #define SystemInfo_H
 
-#include <magics.h>
 #include <cstdlib>
+#include "magics.h"
 #ifndef MAGICS_ON_WINDOWS
 #include <pwd.h>
 #include <unistd.h>

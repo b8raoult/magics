@@ -15,15 +15,15 @@
     Started: Fri Oct 26 20:58:21 2007
 */
 
+#include "SVGDriver.h"
+#include <iomanip>
 #include "Image.h"
 #include "ImportObject.h"
 #include "Layer.h"
 #include "Polyline.h"
-#include "SVGDriver.h"
 #include "Symbol.h"
 #include "System.h"
 #include "Text.h"
-#include <iomanip>
 
 //! For generating SVGZ files
 extern "C" {

@@ -23,9 +23,9 @@
 #define BaseParameter_H
 
 
-#include "PaperPoint.h"
 #include "MagException.h"
 #include "Matrix.h"
+#include "PaperPoint.h"
 #include "magics.h"
 
 #ifdef LATER

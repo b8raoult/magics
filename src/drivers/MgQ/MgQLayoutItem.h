@@ -19,9 +19,9 @@
 #ifndef _MgQLayoutItem_H
 #define _MgQLayoutItem_H
 
-#include "PaperPoint.h"
-#include <magics.h>
 #include "Layout.h"
+#include "PaperPoint.h"
+#include "magics.h"
 
 #include "MgQ.h"
 

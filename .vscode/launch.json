@@ -27,8 +27,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/../../build/${workspaceFolderBasename}/bin/magics",
-            // "args": ["${file}"],
-            "args": ["grib.yaml"],
+            "args": ["netcdf.yaml"],
             "cwd": "${workspaceFolder}/regression/climetlab",
             "MIMode": "lldb",
             "env": {

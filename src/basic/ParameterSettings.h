@@ -21,7 +21,7 @@
 #include "Colour.h"
 #include "MagTranslator.h"
 #include "XmlNode.h"
-#include <magics.h>
+#include "magics.h"
 
 void buildkeys(const vector<string>& roots, const string&, vector<string>& keys);
 void setAttribute(const vector<string>& roots, const string& name, unique_ptr<Colour>&, const map<string, string>&);

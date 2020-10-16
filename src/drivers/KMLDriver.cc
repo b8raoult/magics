@@ -16,10 +16,10 @@
 
 */
 
+#include "KMLDriver.h"
 #include "Arrow.h"
 #include "Flag.h"
 #include "Image.h"
-#include "KMLDriver.h"
 #include "Layer.h"
 #include "Polyline.h"
 #include "Symbol.h"
@@ -47,8 +47,8 @@ extern "C" {
 #endif
 
 #ifdef HAVE_CAIRO
-#include "CairoDriver.h"
 #include <cairo.h>
+#include "CairoDriver.h"
 #endif
 
 using namespace magics;

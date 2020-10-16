@@ -10,8 +10,8 @@
 
 #include "Emagram.h"
 #include "MagClipper.h"
-#include "Polyline.h"
 #include "MagJSon.h"
+#include "Polyline.h"
 #include "SciMethods.h"
 
 using namespace magics;

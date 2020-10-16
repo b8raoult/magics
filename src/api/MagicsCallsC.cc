@@ -21,10 +21,10 @@
 #include "CompatibilityHelper.h"
 #include "FortranMagics.h"
 #include "MagLog.h"
+#include "MagicsCalls.h"
 #include "MagicsParameter.h"
 #include "MagicsSettings.h"
 #include "WebFormat.h"
-#include "MagicsCalls.h"
 #include "magics.h"
 #include "magics_api.h"
 

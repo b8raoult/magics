@@ -24,7 +24,7 @@
 #include "MagException.h"
 #include "MagLog.h"
 #include "MagicsSettings.h"
-#include <magics.h>
+#include "magics.h"
 
 
 namespace magics {

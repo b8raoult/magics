@@ -23,11 +23,11 @@
 
 #include "GridPlotting.h"
 #include "LabelPlotting.h"
+#include "MagJSon.h"
 #include "MatrixHandler.h"
+#include "ParameterSettings.h"
 #include "SceneVisitor.h"
 #include "UserPoint.h"
-#include "MagJSon.h"
-#include "ParameterSettings.h"
 
 using namespace magics;
 

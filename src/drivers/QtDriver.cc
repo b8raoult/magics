@@ -16,16 +16,16 @@
 
 */
 
+#include "QtDriver.h"
 #include "AnimationRules.h"
 #include "Flag.h"
+#include "HistoVisitor.h"
 #include "Image.h"
 #include "ImportObject.h"
 #include "Layer.h"
 #include "Polyline.h"
-#include "QtDriver.h"
 #include "Symbol.h"
 #include "Text.h"
-#include "HistoVisitor.h"
 
 #include <QApplication>
 #include <QDebug>

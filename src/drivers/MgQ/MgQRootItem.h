@@ -19,8 +19,8 @@
 #ifndef _MgQRootItem_H
 #define _MgQRootItem_H
 
-#include <magics.h>
 #include "MgQ.h"
+#include "magics.h"
 
 #include <QGraphicsItem>
 #include <QGraphicsScene>

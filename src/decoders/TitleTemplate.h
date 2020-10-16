@@ -27,7 +27,7 @@
 #include "Factory.h"
 #include "TitleField.h"
 #include "TitleTemplateAttributes.h"
-#include <magics.h>
+#include "magics.h"
 
 #include <stack>
 

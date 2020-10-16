@@ -21,10 +21,10 @@
 
 
 #include "AxisItem.h"
-#include "MagDateTime.h"
 #include <cfloat>
 #include <locale>
 #include "Axis.h"
+#include "MagDateTime.h"
 #include "MagFont.h"
 #include "MagLog.h"
 #include "MagicsFormat.h"
