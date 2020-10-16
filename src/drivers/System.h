@@ -20,12 +20,13 @@
 
 #include <cstdlib>
 #include "magics.h"
-#ifndef MAGICS_ON_WINDOWS
+
+#ifdef MAGICS_ON_WINDOWS
+#include <lmcons.h>
+#include "windux.h"
+#else
 #include <pwd.h>
 #include <unistd.h>
-#else
-#include <lmcons.h>
-#include "win_time.h"
 #endif
 
 namespace magics {
