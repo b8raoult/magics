@@ -124,7 +124,7 @@ ecbuild_find_package( NAME eccodes VERSION 2.19.0 REQUIRED
 set( HAVE_GRIB 1 )
 set( HAVE_BUFR 1 )
 
-find_package( UDUNITS2 2.0)
+# find_package( UDUNITS2 2.0)
 
 
 # adding NO_MODULE means that if we don't find it, CMake will not generate
