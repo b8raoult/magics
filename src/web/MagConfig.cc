@@ -17,11 +17,10 @@
 #include "MetaData.h"
 #include "Value.h"
 
-#ifndef MAGICS_ON_WINDOWS
-#include <dirent.h>
+#ifdef MAGICS_ON_WINDOWS
+#include "windux.h"
 #else
-#include <direct.h>
-#include <io.h>
+#include <dirent.h>
 #endif
 
 #include <cstring>
@@ -182,7 +181,6 @@ void StyleLibrary::init() {
     for (auto token = paths.begin(); token != paths.end(); ++token) {
         string path = magCompare(*token, "ecmwf") ? ecmwf : *token;
 
-#ifndef MAGICS_ON_WINDOWS
         DIR* dir = opendir(path.c_str());
         if (!dir) {
             ostringstream error;
@@ -202,28 +200,8 @@ void StyleLibrary::init() {
 
             entry = readdir(dir);
         }
-#else
-        struct _finddata_t fileinfo;
-        intptr_t handle = _findfirst((path + "/*").c_str(), &fileinfo);
-        if (handle == -1) {
-            ostringstream error;
-            error << "Trying to open directory " << library << ": " << strerror(errno);
-            throw MagicsException(error.str());
-        }
-        else {
-            do {
-                if (fileinfo.name[0] != '.') {
-                    current_ = fileinfo.name;
-                    if (current_ == "styles.json")
-                        allStyles_.init(path, "styles.json");
-                    else
-                        MagConfigHandler(path + "/" + current_, *this);
-                }
-            } while (!_findnext(handle, &fileinfo));
+        closedir(dir);
 
-            _findclose(handle);
-        }
-#endif
     }
 }
 
