@@ -18,9 +18,11 @@ LayoutManager.h
 LegendVisitor.cc
 LegendVisitor.h
 MagicsEvent.h
+MagicsEvent.cc
 MagicsSettings.cc
 MagicsSettings.h
 MagicsObserver.h
+MagicsObserver.cc
 MagnifierVisitor.cc
 MagnifierVisitor.h
 MultiVisdef.cc
@@ -42,6 +44,7 @@ TextVisitor.h
 ViewNode.cc
 ViewNode.h
 Visdef.h
+VisDef.cc
 VisualAction.cc
 VisualAction.h
 WebFormat.cc

@@ -18,7 +18,7 @@
 #include "magics.h"
 
 #ifdef MAGICS_ON_WINDOWS
-#include "win_time.h"
+#include "windux.h"
 #endif
 
 namespace magics {

@@ -30,18 +30,9 @@ namespace magics {
 class PaperPoint {
 public:
     PaperPoint(double x, double y, double value = 0, bool missing = false, bool border = false, int range = 0,
-               const string& name = "") :
-        x_(x),
-        y_(y),
-        value_(value),
-        range_(range),
-        name_(name),
-        high_(false),
-        low_(false),
-        missing_(missing),
-        border_(border) {}
+               const string& name = "");
     //~PaperPoint() {}
-    PaperPoint() : x_(0), y_(0), value_(0), name_(""), high_(false), low_(false), missing_(false), border_(false) {}
+    PaperPoint();
 
     void y(double y) { y_ = y; }
     void x(double x) { x_ = x; }

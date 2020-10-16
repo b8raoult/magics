@@ -4,7 +4,7 @@ list( APPEND _common_srcs
 	BaseParameter.h Colour.h MagException.h
 	Factory.cc Factory.h
 	ParameterManager.h Frame.h Layout.h
-	PaperPoint.h GeoPoint.h  Tokenizer.h Node.h MagTranslator.h
+	PaperPoint.h PaperPoint.cc GeoPoint.h  Tokenizer.h Node.h MagTranslator.h
 	ImageProperties.h LogoPlotting.h
 	ImportObject.h ColourTable.h PageID.h
 	Transformation.h Dimension.h
@@ -101,7 +101,7 @@ list( APPEND _common_srcs
  )
 
 if( EC_OS_NAME MATCHES "windows" )
-	list( APPEND _common_srcs win_time.h win_time.cc)
+	list( APPEND _common_srcs windux.h windux.cc)
 endif()
 
 list( APPEND _common_templates
