@@ -170,6 +170,25 @@ void NetcdfGeoMatrixInterpretor::visit(Transformation& transformation) {
     }
 }
 
+void NetcdfGeoMatrixInterpretor::set(const XmlNode &node) {
+    // FIXME: Infinite recursion
+    NOTIMP;
+    MagLog::debug() << "NetcdfGeoMatrixInterpretor::set(params)"
+                    << "\n";
+    set(node);
+    XmlNode netcdf = node;
+    netcdf.name("netcdf");
+    set(netcdf);
+}
+
+NetcdfInterpretor *NetcdfGeoMatrixInterpretor::clone() const {
+    NetcdfGeoMatrixInterpretor* object = new NetcdfGeoMatrixInterpretor();
+    object->clone(*this);
+    return object;
+}
+
+void NetcdfGeoMatrixInterpretor::clone(const NetcdfGeoMatrixInterpretor &other) { copy(other); }
+
 bool NetcdfGeoMatrixInterpretor::interpretAsPoints(PointsList& list) {
     Netcdf netcdf(path_, dimension_method_);
     string proj4 = proj4Detected(netcdf);

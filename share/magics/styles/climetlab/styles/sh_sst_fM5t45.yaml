@@ -38,5 +38,5 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: -5
     contour_title: 'Contour shade (Range: -5 / 45)'
-    contour_units: C
+    contour_units: degC
 

@@ -38,7 +38,7 @@ public:
     TileDecoder();
     virtual ~TileDecoder();
     // implements Decoder interface
-    void decode();
+    void decode() override;
     virtual void set(const XmlNode& node) override { TileDecoderAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { TileDecoderAttributes::set(map); }
 
@@ -68,6 +68,7 @@ public:
     codes_handle* handle_;
 
     virtual std::string getUnits() const override { NOTIMP; }
+virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

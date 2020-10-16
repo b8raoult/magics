@@ -178,17 +178,18 @@ public:
     Value height();
     Value station_name();
 
-    MatrixHandler& matrix();
+    MatrixHandler& matrix() override;
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
     void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);
 
-    virtual void set(const map<string, string>& map) { WrepJSonAttributes::set(map); }
-    virtual void set(const XmlNode& node) { WrepJSonAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { WrepJSonAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { WrepJSonAttributes::set(node); }
 
     virtual void visit(Transformation&) override;
     virtual void visit(TextVisitor&) override;
     void visit(const XmlNode& node);
     virtual std::string getUnits() const override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
     virtual void decode();
 

@@ -41,7 +41,7 @@ ContourAttributes::ContourAttributes():
 	method_(MagTranslator<string, ContourMethod>().magics("contour_method")),
 	hilo_(MagTranslator<string, HiLoBase>().magics("contour_hilo")),
 	grid_(MagTranslator<string, ValuePlotBase>().magics("contour_grid_value_plot"))
-	
+
 {
 }
 
@@ -57,7 +57,7 @@ void ContourAttributes::set(const std::map<string, string>& params)
 	vector<string> prefix(1);
 	int i = 0;
 	prefix[i++] = "contour";
-	
+
 	setAttribute(prefix, "legend", legend_, params);
 	setAttribute(prefix, "contour_description", description_, params);
 	setAttribute(prefix, "contour_title", title_, params);
@@ -68,12 +68,12 @@ void ContourAttributes::set(const std::map<string, string>& params)
 	setAttribute(prefix, "contour_metadata_only", metadata_only_, params);
 	setAttribute(prefix, "contour_automatic_library_path", library_path_, params);
 	setAttribute(prefix, "contour_units", units_, params);
-	
+
 	setMember(prefix, "contour", contour_, params);
 	setMember(prefix, "contour_method", method_, params);
 	setMember(prefix, "contour_hilo", hilo_, params);
 	setMember(prefix, "contour_grid_value_plot", grid_, params);
-	
+
 }
 
 void ContourAttributes::copy(const ContourAttributes& other)
@@ -92,7 +92,7 @@ void ContourAttributes::copy(const ContourAttributes& other)
 	method_ = unique_ptr<ContourMethod>(other.method_->clone());
 	hilo_ = unique_ptr<HiLoBase>(other.hilo_->clone());
 	grid_ = unique_ptr<ValuePlotBase>(other.grid_->clone());
-	
+
 }
 
 
@@ -109,7 +109,7 @@ bool ContourAttributes::accept(const string& node)
 		return true;
 	if ( acceptNode(node, grid_) )
 		return true;
-	
+
 	return false;
 }
 
@@ -122,7 +122,7 @@ void ContourAttributes::set(const XmlNode& node)
 
 	if ( magCompare(node.name(), "contour")  )
 		apply = true;
-	
+
 
 	if ( apply )
 		set(node.attributes());
@@ -131,15 +131,16 @@ void ContourAttributes::set(const XmlNode& node)
 		setMember(node.name(), method_, node);
 		setMember(node.name(), hilo_, node);
 		setMember(node.name(), grid_, node);
-		
+
 	}
+
 	for (auto &elt : node.elements())
 	{
 		setMember(elt->name(), contour_, *elt);
 		setMember(elt->name(), method_, *elt);
 		setMember(elt->name(), hilo_, *elt);
 		setMember(elt->name(), grid_, *elt);
-		
+
 	}
 }
 
@@ -160,7 +161,7 @@ void ContourAttributes::print(ostream& out)  const
 	out << " method = " <<  *method_;
 	out << " hilo = " <<  *hilo_;
 	out << " grid = " <<  *grid_;
-	
+
 	out << "]" << "\n";
 }
 
@@ -195,7 +196,7 @@ void ContourAttributes::toxml(ostream& out)  const
 	hilo_->toxml(out);
 	out << ", \"contour_grid_value_plot\":";
 	grid_->toxml(out);
-	
+
 }
 
 static MagicsParameter<string> legend("legend", "off");

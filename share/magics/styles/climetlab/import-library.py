@@ -40,6 +40,9 @@ SKIP = {
     "image_pixel_selection_frequency",
 }
 
+UNITS = {
+    "C" : "degC",
+}
 
 def number(x):
 
@@ -192,10 +195,11 @@ used = {}
 for k, v in matches.items():
     v.pop("eccharts_layer", None)
     units = v.pop("prefered_units", None)
+
     for n in v["styles"]:
         if n in styles:
             if units:
-                styles[n].setdefault("contour_units", units)
+                styles[n].setdefault("contour_units", UNITS.get(units, units))
             used[n] = styles[n]
         else:
             print(k, 'no style named', n)

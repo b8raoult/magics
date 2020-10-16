@@ -34,12 +34,12 @@ class ImportAction : public ImportActionAttributes, public Data {
 public:
     ImportAction() {}
     virtual ~ImportAction() {}
-    void set(const map<string, string>& map) { ImportActionAttributes::set(map); }
+    void set(const map<string, string>& map) override { ImportActionAttributes::set(map); }
 
 
-    string path() { return path_; }
+    string path() override { return path_; }
 
-    void visit(MetaDataCollector& collector) {
+    void visit(MetaDataCollector& collector) override {
         MetviewIcon::visit(collector);
 
         MetaDataCollector::iterator format = collector.find("MV_Format");
@@ -53,7 +53,7 @@ public:
         }
     }
 
-    void visit(TextVisitor& text) {
+    void visit(TextVisitor& text) override {
         MetaDataCollector collector;
         collector["service_name"]  = "";
         collector["service_title"] = "";
@@ -72,13 +72,14 @@ public:
             text.addAutomaticTitle(service_ + " :" + url_);
         }
     }
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool) {}
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool) override {}
     //! Method to access the data as a list of points
     // needMissing : if true the list will contain all the points (If they are outside the area: They will be flagged
     // missing)
-    virtual PointsHandler& points(const Transformation&, bool) { NOTIMP; }
+    virtual PointsHandler& points(const Transformation&, bool)  override { NOTIMP; }
 
     virtual std::string getUnits() const override { NOTIMP; }
+virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

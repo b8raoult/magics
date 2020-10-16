@@ -39,7 +39,7 @@ list( APPEND _common_srcs
 	Visualiser.h MatrixHandler.h
 	Seconds.h
 	Matrix.h Matrix.cc
-	Path.h
+	Path.h Units.cc Units.h
 	MagicsSingleton.h
 	PlotManager.h
 	Image.h

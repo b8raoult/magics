@@ -277,7 +277,8 @@ void GribInterpretor::scaling(GribDecoder& grib, double& scaling, double& offset
     bool scale   = (derived == 254) ? grib.derived_scaling_ : grib.scaling_;
 
     if (scale) {
-        grib.getScaling(scaling, offset);
+        // FIXME: scaling
+        // grib.getScaling(scaling, offset);
     }
     else {
         scaling = grib.scaling_factor_;

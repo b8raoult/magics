@@ -277,6 +277,16 @@ bool GribDecoder::isEarthOblate() const {
     return false;
 }
 
+GribDecoder::InterpolateMethod GribDecoder::interpolateMethod() const {
+    if (magCompare(interpolation_method_, "interpolate"))
+        return interpolate;
+    if (magCompare(interpolation_method_, "nearest"))
+        return nearest;
+    if (magCompare(interpolation_method_, "nearest_valid"))
+        return nearest_valid;
+    return interpolate;
+}
+
 Matrix* GribDecoder::colour(Matrix* matrix) {
     if (cHandle()) {
         colourComponent_ = matrix;
@@ -356,8 +366,8 @@ void GribDecoder::read(const Transformation& transformation) {
             interpretor_ = SimpleObjectMaker<GribInterpretor>::create(grid);
         }
         interpretor_->interpretAsMatrix(*this, transformation);
-        Matrix* matrix = u();
-        interpretor_->scaling(*this, *matrix);
+        // Matrix* matrix = u();
+        // interpretor_->scaling(*this, *matrix);
     }
     catch (NoFactoryException&) {
         if (MagicsSettings::strict()) {
@@ -367,6 +377,27 @@ void GribDecoder::read(const Transformation& transformation) {
         ;
         valid_ = false;
         throw MagicsException("Grib Decoder: Representation [] not supported.");
+    }
+}
+
+void GribDecoder::applyScaling(double scaling, double offset) {
+    
+
+    Matrix* matrix_u = u();
+    Matrix* matrix_v = v();
+
+    if(matrix_u) {
+        size_t cnt = matrix_u->size();
+        for(size_t i = 0; i < cnt; i++) {
+            (*matrix_u)[i] = (*matrix_u)[i] * scaling + offset;
+        }
+    }
+
+    if(matrix_v) {
+        size_t cnt = matrix_v->size();
+        for(size_t i = 0; i < cnt; i++) {
+            (*matrix_v)[i] = (*matrix_v)[i] * scaling + offset;
+        }
     }
 }
 
@@ -514,12 +545,6 @@ grib_handle* GribDecoder::vHandle(string& name) {
 grib_handle* GribDecoder::cHandle(string& name) {
     name = "colour_component";
     return colour_;
-}
-
-bool compare(const pair<double, double>& pt1, const pair<double, double>& pt2) {
-    if (pt1.second != pt2.second)
-        return false;
-    return pt1.second < pt2.second;
 }
 
 void GribDecoder::newPoint(const Transformation& transformation, double lat, double lon, double uc, double vc,
@@ -742,6 +767,12 @@ void GribDecoder::openSecondComponent() {
 void GribDecoder::openThirdComponent() {
     current_position_ = colour_position_;
     colour_           = open(colour_, false);
+}
+
+grib_handle *GribDecoder::id() const {
+    if (!field_)
+        const_cast<GribDecoder*>(this)->decode();
+    return field_;
 }
 
 grib_handle* GribEntryDecoder::open(grib_handle* handle, bool) {
@@ -1735,6 +1766,11 @@ MatrixHandler& GribDecoder::direction() {
 
     return *(matrixHandlers_.back());
 }
+
+string GribDecoder::layerId() {
+    decode();
+    return layerId_;
+}
 void GribDecoder::decode(const Transformation& transformation) {
     if (xComponent_ || !valid_)
         return;
@@ -1814,6 +1850,43 @@ void GribDecoder::visit(TextVisitor& title) {
     for (vector<string>::const_iterator t = titles.begin(); t != titles.end(); ++t) {
         tag.decode(*t);
     }
+}
+
+PointsHandler &GribDecoder::points() {
+    decodePoints();
+    pointsHandlers_.push_back(new PointsHandler(points_));
+    return *(pointsHandlers_.back());
+}
+
+PointsHandler &GribDecoder::points(const Transformation &transformation) {
+    decodePoints();
+    pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, true));
+    return *(pointsHandlers_.back());
+}
+
+PointsHandler &GribDecoder::points(const Transformation &transformation, bool all){
+    decodePoints();
+    pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, !all));
+    return *(pointsHandlers_.back());
+}
+
+MatrixHandler &GribDecoder::matrix(){
+    // RV MF
+    decode1D();
+    //		decode();
+    matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
+    return *(matrixHandlers_.back());
+}
+
+MatrixHandler &GribDecoder::matrix(const Transformation &transformation){
+    decode(transformation);
+    matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
+    return *(matrixHandlers_.back());
+}
+
+RasterData &GribDecoder::raster(const Transformation &transformation) {
+    decodeRaster(transformation);
+    return raster_;
 }
 
 void GribDecoder::decodeRaster(const Transformation& transformation) {

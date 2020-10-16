@@ -41,21 +41,9 @@ public:
     static NetcdfInterpretor* guess(const NetcdfInterpretor&);
     void visit(Transformation& transformation);
 
-    void set(const XmlNode& node) {
-        // FIXME: Infinite recursion
-        MagLog::debug() << "NetcdfGeoMatrixInterpretor::set(params)"
-                        << "\n";
-        set(node);
-        XmlNode netcdf = node;
-        netcdf.name("netcdf");
-        set(netcdf);
-    }
-    virtual NetcdfInterpretor* clone() const {
-        NetcdfGeoMatrixInterpretor* object = new NetcdfGeoMatrixInterpretor();
-        object->clone(*this);
-        return object;
-    }
-    void clone(const NetcdfGeoMatrixInterpretor& other) { copy(other); }
+    void set(const XmlNode& node);
+    virtual NetcdfInterpretor* clone() const;
+    void clone(const NetcdfGeoMatrixInterpretor& other);
     bool interpretAsMatrix(Matrix**);
     bool interpretAsPoints(PointsList&);
     UserPoint* newPoint(const string&, double, double, double);

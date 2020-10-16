@@ -100,6 +100,7 @@ public:
     void visit(ValuesCollector&) override;
     void visit(TextVisitor&) override;
     virtual std::string getUnits() const override { NOTIMP; }
+virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream

@@ -64,10 +64,11 @@ public:
     virtual void visit(MetaDataVisitor&) override;
 
     virtual std::string getUnits() const override { NOTIMP; }
+virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     DateTime base_;
     vector<CustomisedPoint*> points_;
     double minstep_;

@@ -70,11 +70,14 @@ public:
 
 void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
     ParameterManager::set("contour_automatic_library_path", library_path_);
-    ContourLibrary* library = MagTranslator<string, ContourLibrary>()(setting_);
+    std::unique_ptr<ContourLibrary> library(MagTranslator<string, ContourLibrary>()(setting_));
 
     styleInfo_ = library->getStyle(data, library_path_, automaticAttributes_);
 
-    if (!styleInfo_) {
+    if (styleInfo_) {
+        set(automaticAttributes_);
+    }
+    else {
         MetaDataCollector request, needAttributes;
 
         bool legend_only = contour_->legend_only_;
@@ -125,7 +128,8 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         contour_->legend_only_ = legend_only;
     }
 
-    delete library;
+
+    data.applyScaling(units_); // From contour_units
 
     data.getReady(parent.transformation());
     if (!data.valid()) {
@@ -149,6 +153,8 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
     }
 
     matrix_ = (*this->method_).handler(*box, parent);
+
+
     // matrix_ = box;
 
     if (this->floor_ != -INT_MAX || this->ceiling_ != INT_MAX)

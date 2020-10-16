@@ -143,31 +143,58 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
     }
 
     std::cout << best << std::endl;
-    std::cout << "NAME: " << best["styles"][0] << std::endl;
 
-    // ValueMap contour = best["magics"]["mcont"];
+    std::string style_name = std::string(best["styles"][0]);
+    std::cout << "NAME: " << style_name << std::endl;
 
-    // for(auto j = contour.begin(); j != contour.end(); ++j) {
-    //     std::string key = (*j).first;
-    //     const Value& val = (*j).second;
-    //     if(val.isList()) {
-    //         std::ostringstream oss;
-    //         const char *sep = "";
-    //         ValueList values = val;
-    //         for(auto& v : values) {
-    //             oss << sep << v;
-    //             sep = "/";
-    //         }
-    //         visdef[(*j).first] = oss.str();
-    //     }
-    //     else {
-    //         visdef[(*j).first] = std::string(val);
-    //     }
+    path        = buildConfigPath("styles", "climetlab") + "/styles/" + style_name + ".yaml";
+    Value style = MagParser::decodeFile(path);
 
-    // }
+    ValueMap contour = style["magics"]["mcont"];
+
+    MagDef result;
+    for (auto j = contour.begin(); j != contour.end(); ++j) {
+        std::string key  = (*j).first;
+        const Value& val = (*j).second;
+        if (val.isList()) {
+            std::ostringstream oss;
+            const char* sep  = "";
+            ValueList values = val;
+            for (auto& v : values) {
+                if (val.isBool()) {
+                    oss << sep <<( bool(v) ? "on" : "off");
+                }
+                else {
+                    oss << sep << v;
+                }
+                sep = "/";
+            }
+            result[(*j).first] = oss.str();
+            continue;
+        }
+
+        if (val.isBool()) {
+            result[(*j).first] = bool(val) ? "on" : "off";
+        }
+        else {
+            result[(*j).first] = std::string(val);
+        }
+    }
+
+    visdef = result;
+
+    std::cout << "=== VISDEF" << std::endl;
+    for (auto j = visdef.begin(); j != visdef.end(); ++j) {
+        std::cout << "--- " << (*j).first << " = " << (*j).second << std::endl;
+    }
+
+    StyleEntry* s = new StyleEntry();
+    vector<string> empty;
+    empty.push_back(style_name);
+    s->set("default", empty);
 
     // TODO: fill the entry
-    return new StyleEntry();
+    return s;
 }  // namespace magics
 
 void CliMetLabLibrary::print(ostream& out) const {

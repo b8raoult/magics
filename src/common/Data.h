@@ -50,120 +50,94 @@ class AnimationStep;
 
 class DataInMemory : public MagicsException {
 public:
-    DataInMemory() : MagicsException("Data in Memory...") {}
+    DataInMemory();
 };
 
 
 class Data : public MetviewIcon {
 public:
-    Data() : dimension_(1), valid_(true), thinningFactor_(1), name_("no_name"), binning_(0) {}
-    virtual ~Data() {
-        if (binning_)
-            delete binning_;
-    }
+    Data();
+    virtual ~Data();
     //! Method to access the data as a matrix Used by pcont action routine
-    virtual MatrixHandler& matrix() { throw MethodNotYetImplemented("Data::matrix"); }
-    virtual MatrixHandler& matrix(const Transformation&) { throw MethodNotYetImplemented("Data::matrix"); }
-    virtual MatrixHandler& norm() { throw MethodNotYetImplemented("Data::norm"); }
-    virtual MatrixHandler& direction() { throw MethodNotYetImplemented("Data::norm"); }
-    void binning(BinningObject* binning) { binning_ = binning; }
+    virtual MatrixHandler& matrix();
+    virtual MatrixHandler& matrix(const Transformation&);
+    virtual MatrixHandler& norm();
+    virtual MatrixHandler& direction();
+    void binning(BinningObject* binning);
 
-    virtual Data* current() { return this; }
-    virtual Data* next() { return 0; }
+    virtual Data* current();
+    virtual Data* next();
 
 
-    virtual void release() {}
+    virtual void release();
 
-    virtual void getReady(const Transformation&) {}
-    virtual void visit(Transformation&) {}
+    virtual void getReady(const Transformation&);
+    virtual void visit(Transformation&);
 
     // Method to access some metada from the data
     // This can be used to define some style Like in advanced curve setting!
-    virtual void getInfo(map<string, string>&) {}
+    virtual void getInfo(map<string, string>&);
 
     //! Methods to access the data as a file used by pplot action routine
-    virtual string path() { throw DataInMemory(); }
+    virtual string path();
+
     //! Methods to access the data as a RasterData used by pimage action routine.
     // virtual RasterData& raster(const Transformation&) { throw MethodNotYetImplemented("Data<P>::raster"); }
 
-    virtual void getInfo(const std::set<string>&, multimap<string, string>&) {
-        throw MethodNotYetImplemented("Data::getInfo");
-    }
+    virtual void getInfo(const std::set<string>&, multimap<string, string>&);
 
-    virtual bool check(const Transformation& transformation, UserPoint& point) {
-        bool c = transformation.in(point);
-        if (!c)
-            point.flagMissing();
-        return c;
-    }
+    virtual bool check(const Transformation& transformation, UserPoint& point);
+
     //! Method to access the data as a list of points
     // needMissing : if true the list will contain all the points ( If they are outside the area: They will be flagged
     // missing)
     virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool) = 0;
+
     //! Method to access the data as a list of points
     // needMissing : if true the list will contain all the points (If they are outside the area: They will be flagged
     // missing)
     virtual PointsHandler& points(const Transformation&, bool) = 0;
 
     virtual void customisedPoints(const AutomaticThinningMethod&, const Transformation& transformation,
-                                  const std::set<string>& need, CustomisedPointsList& out) {
-        customisedPoints(transformation, need, out, false);
-    }
+                                  const std::set<string>& need, CustomisedPointsList& out);
     virtual void customisedPoints(const BasicThinningMethod& thinning, const Transformation& transformation,
-                                  const std::set<string>& need, CustomisedPointsList& out) {
-        thinningFactor_ = thinning.factor();
-        customisedPoints(transformation, need, out, false);
-    }
-    virtual void visit(TextVisitor&) {}
-    virtual void visit(LegendVisitor&) {}
-    virtual void visit(AnimationRules&) {}
-    virtual void visit(AnimationStep&) {}
-    virtual void visit(MetaDataVisitor&) {}
-    virtual void visit(Layer& layer) {
-        MetviewIcon::visit(layer);
-        layer.name(name());
-        layer.validTime(from(), to());
-    }
-    bool valid() { return valid_; }
-    virtual void visit(MetaDataCollector& collector) { MetviewIcon::visit(collector); }
+                                  const std::set<string>& need, CustomisedPointsList& out);
+    virtual void visit(TextVisitor&);
+    virtual void visit(LegendVisitor&);
+    virtual void visit(AnimationRules&);
+    virtual void visit(AnimationStep&);
+    virtual void visit(MetaDataVisitor&);
+    virtual void visit(Layer& layer);
+    bool valid();
+    virtual void visit(MetaDataCollector& collector);
     virtual void visit(ValuesCollector&) {}
-    virtual void visit(DataIndexCollector& dc) { dc.setDataIndex(dataIndex_); }
-    virtual void visit(MagnifierCollector& magnifier) {
-        const Transformation& transformation = magnifier.transformation();
-        PointsHandler& list                  = this->points(transformation, true);
-
-        list.setToFirst();
-        while (list.more()) {
-            magnifier.push_back(transformation(list.current()));
-            list.advance();
-        }
-    }
-    virtual void initInfo() { MetviewIcon::initInfo(); }
-    string legend() { return legend_; }
+    virtual void visit(DataIndexCollector& dc);
+    virtual void visit(MagnifierCollector& magnifier);
+    virtual void initInfo();
+    string legend();
 
     // Information needed fron layer management!
-    virtual string layerId() { return (layerId_.empty()) ? iconName_ + "/ " + iconClass_ : layerId_; }
-    virtual string name() { return (iconName_.empty()) ? name_ : iconName_; }
-    virtual const DateTime& from() { return from_; }
-    virtual const DateTime& to() { return to_; }
-    virtual const DateDescription& timeStamp() { return timeStamp_; }
-    virtual const LevelDescription& level() { return dataLevel_; }
-    virtual string legendText(double, double) { return string(); }
-    int dimension() const { return dimension_; }
-    void dimension(int dim) { dimension_ = dim; }
-    void index(int i) { index_ = i; }
-    static int getUniqueOwnerId() {
-        uniqueOwnerId_++;
-        return uniqueOwnerId_;
-    }
+    virtual string layerId();
+    virtual string name();
+    virtual const DateTime& from();
+    virtual const DateTime& to();
+    virtual const DateDescription& timeStamp();
+    virtual const LevelDescription& level();
+    virtual string legendText(double, double);
+    int dimension() const;
+    void dimension(int dim);
+    void index(int i);
+    static int getUniqueOwnerId();
 
-    virtual void getScaling(double& scaling, double& offset) const;
     virtual std::string getUnits() const = 0;
+    virtual void applyScaling(const std::string& target_units);
+    virtual void applyScaling(double, double) = 0;
 
 protected:
     int dimension_;
     int index_;
     bool valid_;
+    bool scaled_;
     int thinningFactor_;
     static int uniqueOwnerId_;  // Metview usage for overlay control
 
@@ -171,7 +145,7 @@ protected:
     LevelDescription dataLevel_;
 
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "Data<P>"; }
+    virtual void print(ostream& out) const;
     virtual void computeStats();
 
     AutoVector<PointsHandler> pointsHandlers_;
@@ -207,21 +181,21 @@ private:
 
 class DataLoop : public MetviewIcon {
 public:
-    DataLoop() {}
-    virtual ~DataLoop() {}
-    virtual void set(const map<string, string>&) {}
-    virtual void set(const XmlNode&) {}
-    virtual void set(LayerNode&) {}
+    DataLoop();
+    virtual ~DataLoop();
+    virtual void set(const map<string, string>&);
+    virtual void set(const XmlNode&);
+    virtual void set(LayerNode&);
 
-    virtual void setToFirst() {}
+    virtual void setToFirst();
     virtual Data* current() = 0;
     virtual bool hasMore()  = 0;
     virtual void next()     = 0;
-    virtual void add(Data*) {}
-    virtual string layerId() { return iconName_ + "/ " + iconClass_; }
-    virtual string name() { return iconName_; }
-    virtual void visit(Transformation&) {}
-    void visit(Layer& layer) { MetviewIcon::visit(layer); }
+    virtual void add(Data*);
+    virtual string layerId();
+    virtual string name();
+    virtual void visit(Transformation&);
+    void visit(Layer& layer);
 };
 
 class DataList : public DataLoop {

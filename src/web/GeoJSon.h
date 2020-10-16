@@ -42,15 +42,16 @@ public:
     map<string, Method> methods_;
 
     void points(const Transformation&, vector<UserPoint>&);
-    void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool);
-    PointsHandler& points(const Transformation&, bool);
-    MatrixHandler& matrix();
+    void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, bool) override;
+    PointsHandler& points(const Transformation&, bool) override;
+    MatrixHandler& matrix() override;
 
     virtual std::string getUnits() const override { NOTIMP; }
+    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     void decode();
     void dig(const Value&);
     void coordinates(const Value&);

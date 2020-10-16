@@ -53,5 +53,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: 'Shade (Range: -80/60)'
-    contour_units: C
+    contour_units: degC
 

@@ -21,6 +21,174 @@
 
 
 #include "Data.h"
+#include "Units.h"
+
+int Data::uniqueOwnerId_ = 0;
+
+Data::Data() : dimension_(1), valid_(true), thinningFactor_(1), name_("no_name"), binning_(0), scaled_(false) {}
+
+Data::~Data() {
+    delete binning_;
+}
+
+MatrixHandler& Data::matrix() {
+    throw MethodNotYetImplemented("Data::matrix");
+}
+
+MatrixHandler& Data::matrix(const Transformation&) {
+    throw MethodNotYetImplemented("Data::matrix");
+}
+
+MatrixHandler& Data::norm() {
+    throw MethodNotYetImplemented("Data::norm");
+}
+
+MatrixHandler& Data::direction() {
+    throw MethodNotYetImplemented("Data::norm");
+}
+
+void Data::binning(BinningObject* binning) {
+    binning_ = binning;
+}
+
+Data* Data::current() {
+    return this;
+}
+
+Data* Data::next() {
+    return 0;
+}
+
+void Data::release() {}
+
+void Data::getReady(const Transformation&) {}
+
+void Data::visit(Transformation&) {}
+
+void Data::getInfo(map<string, string>&) {}
+
+string Data::path() {
+    throw DataInMemory();
+}
+
+void Data::getInfo(const std::set<string>&, multimap<string, string>&) {
+    throw MethodNotYetImplemented("Data::getInfo");
+}
+
+bool Data::check(const Transformation& transformation, UserPoint& point) {
+    bool c = transformation.in(point);
+    if (!c)
+        point.flagMissing();
+    return c;
+}
+
+void Data::customisedPoints(const AutomaticThinningMethod&, const Transformation& transformation,
+                            const std::set<string>& need, CustomisedPointsList& out) {
+    customisedPoints(transformation, need, out, false);
+}
+
+void Data::customisedPoints(const BasicThinningMethod& thinning, const Transformation& transformation,
+                            const std::set<string>& need, CustomisedPointsList& out) {
+    thinningFactor_ = thinning.factor();
+    customisedPoints(transformation, need, out, false);
+}
+
+void Data::visit(TextVisitor&) {}
+
+void Data::visit(LegendVisitor&) {}
+
+void Data::visit(AnimationRules&) {}
+
+void Data::visit(AnimationStep&) {}
+
+void Data::visit(MetaDataVisitor&) {}
+
+void Data::visit(Layer& layer) {
+    MetviewIcon::visit(layer);
+    layer.name(name());
+    layer.validTime(from(), to());
+}
+
+bool Data::valid() {
+    return valid_;
+}
+
+void Data::visit(MetaDataCollector& collector) {
+    MetviewIcon::visit(collector);
+}
+
+void Data::visit(DataIndexCollector& dc) {
+    dc.setDataIndex(dataIndex_);
+}
+
+void Data::visit(MagnifierCollector& magnifier) {
+    const Transformation& transformation = magnifier.transformation();
+    PointsHandler& list                  = this->points(transformation, true);
+
+    list.setToFirst();
+    while (list.more()) {
+        magnifier.push_back(transformation(list.current()));
+        list.advance();
+    }
+}
+
+void Data::initInfo() {
+    MetviewIcon::initInfo();
+}
+
+string Data::legend() {
+    return legend_;
+}
+
+string Data::layerId() {
+    return (layerId_.empty()) ? iconName_ + "/ " + iconClass_ : layerId_;
+}
+
+string Data::name() {
+    return (iconName_.empty()) ? name_ : iconName_;
+}
+
+const DateTime& Data::from() {
+    return from_;
+}
+
+const DateTime& Data::to() {
+    return to_;
+}
+
+const DateDescription& Data::timeStamp() {
+    return timeStamp_;
+}
+
+const LevelDescription& Data::level() {
+    return dataLevel_;
+}
+
+string Data::legendText(double, double) {
+    return string();
+}
+
+int Data::dimension() const {
+    return dimension_;
+}
+
+void Data::dimension(int dim) {
+    dimension_ = dim;
+}
+
+void Data::index(int i) {
+    index_ = i;
+}
+
+int Data::getUniqueOwnerId() {
+    uniqueOwnerId_++;
+    return uniqueOwnerId_;
+}
+
+void Data::print(ostream& out) const {
+    out << "Data<P>";
+}
+
 
 void Data::computeStats() {
     map<string, vector<double> >::iterator itX, itY, itV;
@@ -110,20 +278,27 @@ void Data::computeStats() {
 }
 
 
-void Data::getScaling(double& scaling, double& offset) const {
-    scaling                = 1;
-    offset                 = 0;
+void Data::applyScaling(const std::string& target_units) {
+    ASSERT(!scaled_);
+    scaled_ = true;
+
+    double scaling = 1;
+    double offset  = 0;
+
     std::string data_units = getUnits();
 
+    if (!Units::convert(data_units, target_units, scaling, offset)) {
+        return;
+    }
 
-    std::string contour_units;
-    ParameterManager::get("contour_units", contour_units);
-offset = -273.15;
+    if (scaling == 1 && offset == 0) {
+        return;
+    }
 
-    std::cout << "++++++++ UNITS DATA: " << data_units << " CONTOUR: " << contour_units << std::endl;
+    applyScaling(scaling, offset);
 }
 
-int Data::uniqueOwnerId_ = 0;
+
 DataList::DataList() {
     current_ = data_.begin();
 }
@@ -148,3 +323,33 @@ void DataList::next() {
 void DataList::add(Data* data) {
     data_.push_back(data);
 }
+
+DataLoop::DataLoop() {}
+
+DataLoop::~DataLoop() {}
+
+void DataLoop::set(const map<string, string>&) {}
+
+void DataLoop::set(const XmlNode&) {}
+
+void DataLoop::set(LayerNode&) {}
+
+void DataLoop::setToFirst() {}
+
+void DataLoop::add(Data*) {}
+
+string DataLoop::layerId() {
+    return iconName_ + "/ " + iconClass_;
+}
+
+string DataLoop::name() {
+    return iconName_;
+}
+
+void DataLoop::visit(Transformation&) {}
+
+void DataLoop::visit(Layer& layer) {
+    MetviewIcon::visit(layer);
+}
+
+DataInMemory::DataInMemory() : MagicsException("Data in Memory...") {}

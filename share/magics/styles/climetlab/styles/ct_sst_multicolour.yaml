@@ -67,5 +67,5 @@ magics:
     - 3
     - 3
     contour_title: 'Contours (Range: -2 / 36) multi-colour, interval 2'
-    contour_units: C
+    contour_units: degC
 

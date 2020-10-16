@@ -46,8 +46,8 @@ public:
     void clip(const Transformation&, const vector<Polyline>&, vector<Polyline*>&) const;
     void clipAndClose(const Transformation&, const vector<Polyline>&, vector<Polyline*>&) const;
     virtual void decode(const Transformation&, const string&, const vector<string>&);
-    void set(const map<string, string>& map) { ShapeDecoderAttributes::set(map); }
-    void set(const XmlNode& node) { ShapeDecoderAttributes::set(node); }
+    void set(const map<string, string>& map) override { ShapeDecoderAttributes::set(map); }
+    void set(const XmlNode& node) override { ShapeDecoderAttributes::set(node); }
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
     void decode() override { NOTIMP; }
     void needHoles(bool holes) { holes_ = holes; }
@@ -61,6 +61,7 @@ public:
     }
 
     virtual std::string getUnits() const override { NOTIMP; }
+virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

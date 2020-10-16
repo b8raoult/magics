@@ -101,5 +101,5 @@ magics:
     contour_shade_colour_method: list
     contour_shade_technique: cell_shading
     contour_title: 'Black-white: Range -90/-3'
-    contour_units: C
+    contour_units: degC
 

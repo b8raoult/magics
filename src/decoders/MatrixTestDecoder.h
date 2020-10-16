@@ -36,11 +36,11 @@ public:
     MatrixTestDecoder();
     virtual ~MatrixTestDecoder();
     // implements Decoder interface
-    void decode() {}
+    void decode() override {}
 
     virtual void set(const map<string, string>&) {}
 
-    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) {
+    void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out, bool all) override {
         NOTIMP;
     }
 
@@ -48,17 +48,18 @@ public:
 
 
     PointsHandler& points() { throw MethodNotYetImplemented("MatrixTestDecoder::points()"); }
-    virtual MatrixHandler& matrix() {
+    virtual MatrixHandler& matrix() override {
         decode();
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         return *(matrixHandlers_.back());
     }
 
     virtual std::string getUnits() const override { NOTIMP; }
+virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     Matrix matrix_;
 
 private:
