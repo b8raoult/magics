@@ -1,0 +1,3 @@
+# Format: [to, from, scaling, offset]
+- [K, degC, 1, -273.15]
+- ["Pa", "hPa", 0.01, 0]

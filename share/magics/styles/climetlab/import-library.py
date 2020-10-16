@@ -41,8 +41,9 @@ SKIP = {
 }
 
 UNITS = {
-    "C" : "degC",
+    "C": "degC",
 }
+
 
 def number(x):
 
@@ -202,8 +203,7 @@ for k, v in matches.items():
                 styles[n].setdefault("contour_units", UNITS.get(units, units))
             used[n] = styles[n]
         else:
-            print(k, 'no style named', n)
-
+            print(k, "no style named", n)
 
 
 for k, v in used.items():
