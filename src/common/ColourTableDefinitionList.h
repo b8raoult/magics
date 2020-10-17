@@ -37,8 +37,8 @@ public:
     ColourTableDefinitionList();
     virtual ~ColourTableDefinitionList();
     void set(const ColourTableDefinitionListInterface&);
-    void set(const XmlNode&);
-    void set(ColourTable&, int);
+    void set(const XmlNode&) override;
+    void set(ColourTable&, int)override;
 
     ColourTableDefinition* clone() const override {
         ColourTableDefinitionList* object = new ColourTableDefinitionList();
@@ -48,7 +48,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     mutable stringarray colours_;
     mutable ListPolicy policy_;
 

@@ -34,11 +34,11 @@ class MarkerValuePlotMethod : public ValuePlotMethod, public MarkerValuePlotMeth
 public:
     MarkerValuePlotMethod() : marker_(0) {}
     virtual ~MarkerValuePlotMethod() {}
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         ValuePlotMethodAttributes::set(map);
         MarkerValuePlotMethodAttributes::set(map);
     }
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         ValuePlotMethodAttributes::set(node);
         MarkerValuePlotMethodAttributes::set(node);
     }
@@ -56,13 +56,13 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "MarkerValuePlotMethod[";
         MarkerValuePlotMethodAttributes::print(out);
         out << "]";
     }
-    void reset() { marker_ = 0; }
-    virtual void add(const PaperPoint& xy) {
+    void reset() override { marker_ = 0; }
+    virtual void add(const PaperPoint& xy) override {
         if (!marker_) {
             marker_ = new Symbol();
             marker_->setMarker(marker_index_);

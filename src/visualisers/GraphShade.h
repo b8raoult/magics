@@ -76,18 +76,18 @@ public:
     NoGraphShade() {}
     virtual ~NoGraphShade() {}
 
-    virtual void set(const XmlNode&) {}
-    virtual void set(const map<string, string>&) {}
+    virtual void set(const XmlNode&) override {}
+    virtual void set(const map<string, string>&) override {}
     virtual GraphShade* clone() const override { return new NoGraphShade(); }
 
-    virtual void operator()(Polyline& poly) { poly.setFilled(false); }
-    virtual void legend(Polyline&) {}
-    void operator()(CustomisedPointsList&, vector<UserPoint>&);
-    bool needCustomised() { return false; }
+    virtual void operator()(Polyline& poly) override { poly.setFilled(false); }
+    virtual void legend(Polyline&) override {}
+    void operator()(CustomisedPointsList&, vector<UserPoint>&) override;
+    bool needCustomised() override { return false; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 

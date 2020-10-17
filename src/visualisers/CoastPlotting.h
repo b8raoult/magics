@@ -131,16 +131,16 @@ class CoastPlotting : public NoCoastPlotting, public CoastPlottingAttributes {
 public:
     CoastPlotting();
     virtual ~CoastPlotting();
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         CoastPlottingAttributes::set(node);
         NoCoastPlottingAttributes::set(node);
     }
 
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         NoCoastPlottingAttributes::set(map);
         CoastPlottingAttributes::set(map);
     }
-    bool accept(const string& node) { return NoCoastPlottingAttributes::accept(node); }
+    bool accept(const string& node) override { return NoCoastPlottingAttributes::accept(node); }
 
     virtual NoCoastPlotting* clone() const override {
         CoastPlotting* object = new CoastPlotting();
@@ -148,14 +148,14 @@ public:
         return object;
     }
 
-    virtual void visit(LegendVisitor&);
-    virtual void operator()(DrawingVisitor&);
-    virtual void operator()(PreviewVisitor&);
+    virtual void visit(LegendVisitor&) override;
+    virtual void operator()(DrawingVisitor&) override;
+    virtual void operator()(PreviewVisitor&) override;
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     void decode(const Layout&);
     void clip(const Transformation&, const vector<Polyline*>&, vector<Polyline*>&) const;

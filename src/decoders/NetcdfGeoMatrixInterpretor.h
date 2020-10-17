@@ -39,26 +39,26 @@ public:
     virtual ~NetcdfGeoMatrixInterpretor();
 
     static NetcdfInterpretor* guess(const NetcdfInterpretor&);
-    void visit(Transformation& transformation);
+    void visit(Transformation& transformation) override;
 
-    void set(const XmlNode& node);
+    void set(const XmlNode& node) override;
     virtual NetcdfInterpretor* clone() const override;
     void clone(const NetcdfGeoMatrixInterpretor& other);
-    bool interpretAsMatrix(Matrix**);
-    bool interpretAsPoints(PointsList&);
+    bool interpretAsMatrix(Matrix**) override;
+    bool interpretAsPoints(PointsList&) override;
     UserPoint* newPoint(const string&, double, double, double);
-    virtual void statsData(map<string, vector<double> >&);
-    virtual void visit(MetaDataCollector&);
-    virtual void visit(ValuesCollector&, PointsList&);
-    void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int);
+    virtual void statsData(map<string, vector<double> >&) override;
+    virtual void visit(MetaDataCollector&) override;
+    virtual void visit(ValuesCollector&, PointsList&) override;
+    void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int) override;
     string proj4Detected(Netcdf& netcdf);
     void checkProj4Units(Netcdf& netcdf, const string& variable, vector<double>& data);
 
 protected:
     //! Method to print string about this class on to a stream of type ostream
     //! (virtual).
-    virtual void print(ostream&) const;
-    Matrix* matrix_;
+    virtual void print(ostream&) const override;
+    std::unique_ptr<Matrix> matrix_;
     LatLonProjP projection_;
 
 private:

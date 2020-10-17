@@ -112,21 +112,21 @@ public:
         return method;
     }
 
-    virtual void set(const map<string, string>& map) { Akima760MethodAttributes::set(map); }
+    virtual void set(const map<string, string>& map) override { Akima760MethodAttributes::set(map); }
 
-    virtual void set(const XmlNode& node) { Akima760MethodAttributes::set(node); }
-    virtual bool accept(const string& node) {
+    virtual void set(const XmlNode& node) override { Akima760MethodAttributes::set(node); }
+    virtual bool accept(const string& node) override {
         return Akima760MethodAttributes::accept(node);
         ;
     }
 
-    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer&) {
+    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer&) override {
         return new Akima760(matrix, *this);
     }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "Akima760Method[";
         Akima760MethodAttributes::print(out);
         out << "]";

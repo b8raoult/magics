@@ -40,10 +40,10 @@ public:
     virtual void toxml(ostream&, int = 0) const {}
     virtual NoPreviewVisitor* clone() const override { return new NoPreviewVisitor(); }
 
-    void visit(BasicSceneObject&) {}
+    void visit(BasicSceneObject&) override {}
 
 protected:
-    virtual void print(ostream& s) const;
+    virtual void print(ostream& s) const override;
 
     friend ostream& operator<<(ostream& s, const NoPreviewVisitor& p) {
         p.print(s);
@@ -57,13 +57,13 @@ public:
     PreviewVisitor();
     ~PreviewVisitor();
     NoPreviewVisitor* clone() const override { return new PreviewVisitor(); }
-    void visit(BasicGraphicsObjectContainer&);
-    void redisplay(const BaseDriver& driver) const;
-    void visit(BasicSceneObject& object);
+    void visit(BasicGraphicsObjectContainer&) override;
+    void redisplay(const BaseDriver& driver) const override;
+    void visit(BasicSceneObject& object) override;
     CoastPlotting& coastlines() { return coastlines_; }
 
 protected:
-    void print(ostream& s) const;
+    void print(ostream& s) const override;
     CoastPlotting coastlines_;
 };
 

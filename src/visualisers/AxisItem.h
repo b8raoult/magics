@@ -128,19 +128,19 @@ public:
         AxisDateItem* item = new AxisDateItem(position_, date_, level_, colour_, height_);
         return item;
     }
-    const string& id() const { return id_; }
-    void format(const string&, int) const;
+    const string& id() const override { return id_; }
+    void format(const string&, int) const override;
 
     string label(const Axis&) const { return label_; }
 
-    bool sunday() const;
-    bool runday() const;
+    bool sunday() const override;
+    bool runday() const override;
 
-    bool date() const { return true; }
-    void id(const string& id) { id_ = id; }
+    bool date() const override { return true; }
+    void id(const string& id) override { id_ = id; }
 
-    bool isTick() const { return false; }
-    bool isGrid() const { return false; }
+    bool isTick() const override { return false; }
+    bool isGrid() const override { return false; }
 
 protected:
     DateTime date_;

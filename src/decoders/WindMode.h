@@ -80,12 +80,12 @@ public:
     UVWindMode() {}
     virtual ~UVWindMode() {}
     WindMode* clone() const override { return new UVWindMode(); }
-    virtual void x(Matrix&, Matrix&);
-    virtual pair<double, double> operator()(double x, double y) { return std::make_pair(x, y); }
-    ValuesCollectorData* values(double lon, double lat, double x, double y, double dist) {
+    virtual void x(Matrix&, Matrix&) override;
+    virtual pair<double, double> operator()(double x, double y) override { return std::make_pair(x, y); }
+    ValuesCollectorData* values(double lon, double lat, double x, double y, double dist) override {
         return new ValuesCollectorUVData(lon, lat, x, y, dist);
     }
-    double norm(double x, double y) const { return sqrt(x * x + y * y); }
+    double norm(double x, double y) const override { return sqrt(x * x + y * y); }
 
 private:
     //! Copy constructor - No copy allowed
@@ -100,12 +100,12 @@ public:
     SDWindMode() {}
     virtual ~SDWindMode() {}
     WindMode* clone() const override { return new SDWindMode(); }
-    virtual void x(Matrix&, Matrix&);
-    virtual pair<double, double> operator()(double x, double y);
-    ValuesCollectorData* values(double lon, double lat, double x, double y, double dist) {
+    virtual void x(Matrix&, Matrix&) override;
+    virtual pair<double, double> operator()(double x, double y) override;
+    ValuesCollectorData* values(double lon, double lat, double x, double y, double dist) override {
         return new ValuesCollectorSDData(lon, lat, x, y, dist);
     }
-    double norm(double x, double y) const { return x; }
+    double norm(double x, double y) const override { return x; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -119,7 +119,7 @@ public:
     VDWindMode() {}
     virtual ~VDWindMode() {}
     WindMode* clone() const override { return new VDWindMode(); }
-    virtual void x(Matrix&, Matrix&);
+    virtual void x(Matrix&, Matrix&) override;
     virtual void y(Matrix&, Matrix&);
 
 private:

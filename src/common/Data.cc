@@ -277,6 +277,10 @@ void Data::computeStats() {
     stats_.clear();
 }
 
+std::string Data::getUnits() const {
+    NOTIMP;
+}
+
 
 void Data::applyScaling(const std::string& target_units) {
     ASSERT(!scaled_);
@@ -285,17 +289,34 @@ void Data::applyScaling(const std::string& target_units) {
     double scaling = 1;
     double offset  = 0;
 
+    if (target_units.empty()) {
+        // Not asked by user or contour
+        defaultScaling(scaling, offset);
+        if (scaling != 1 || offset != 0) {
+            applyScaling(scaling, offset);
+        }
+    }
+
     std::string data_units = getUnits();
 
     if (!Units::convert(data_units, target_units, scaling, offset)) {
         return;
     }
 
-    if (scaling == 1 && offset == 0) {
-        return;
+    if (scaling != 1 || offset != 0) {
+        applyScaling(scaling, offset);
     }
+}
 
-    applyScaling(scaling, offset);
+
+void Data::defaultScaling(double& scaling, double& offset) {
+    scaling = 1;
+    offset  = 0;
+}
+
+
+void Data::applyScaling(double scaling, double offset) {
+    NOTIMP;
 }
 
 

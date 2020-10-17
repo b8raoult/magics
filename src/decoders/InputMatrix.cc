@@ -80,14 +80,6 @@ void InputMatrix::metadata(MetaDataCollector& visitor) const {
     }
 }
 
-string InputMatrix::getUnits() const {
-    NOTIMP;
-}
-
-void InputMatrix::applyScaling(double, double) {
-    NOTIMP;
-}
-
 void InputMatrix::getReady(const Transformation& transformation) {
     (*organization_).getReady(transformation);
 

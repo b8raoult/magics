@@ -116,19 +116,19 @@ public:
     MetgramFlags() {}
     virtual ~MetgramFlags() {}
 
-    virtual void set(const XmlNode& node) { MetgramFlagsAttributes::set(node); }
-    virtual void set(const map<string, string>& node) { MetgramFlagsAttributes::set(node); }
-    virtual bool accept(const string& node) { return magCompare(node, "flags"); }
+    virtual void set(const XmlNode& node) override { MetgramFlagsAttributes::set(node); }
+    virtual void set(const map<string, string>& node) override { MetgramFlagsAttributes::set(node); }
+    virtual bool accept(const string& node) override { return magCompare(node, "flags"); }
     virtual MetgramStyle* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new MetgramFlags();
     }
 
-    virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task);
+    virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 template <>

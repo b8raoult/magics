@@ -79,13 +79,13 @@ class ContinuousLegendMethod : public LegendMethod, public ContinuousLegendMetho
 public:
     ContinuousLegendMethod() : labelCount_(0) {}
     ~ContinuousLegendMethod() {}
-    virtual void set(const XmlNode& node) { ContinuousLegendMethodAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { ContinuousLegendMethodAttributes::set(map); }
-    virtual bool accept(const string& node) { return magCompare(node, "continuous"); }
-    virtual LegendType name() const { return CONTINUOUS; }
+    virtual void set(const XmlNode& node) override { ContinuousLegendMethodAttributes::set(node); }
+    virtual void set(const map<string, string>& map)  override{ ContinuousLegendMethodAttributes::set(map); }
+    virtual bool accept(const string& node)  override{ return magCompare(node, "continuous"); }
+    virtual LegendType name() const  override{ return CONTINUOUS; }
     LegendMethod* clone() const override { return new ContinuousLegendMethod(); }
-    virtual void row(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
-    virtual void column(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
+    virtual void row(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&) override;
+    virtual void column(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&) override;
 
 protected:
     int labelCount_;
@@ -95,13 +95,13 @@ class HistogramLegendMethod : public LegendMethod, public HistogramLegendMethodA
 public:
     HistogramLegendMethod() : labelCount_(0) {}
     ~HistogramLegendMethod() {}
-    virtual void set(const XmlNode& node) { HistogramLegendMethodAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { HistogramLegendMethodAttributes::set(map); }
-    virtual bool accept(const string& node) { return magCompare(node, "histogram"); }
-    virtual LegendType name() const { return HISTOGRAM; }
+    virtual void set(const XmlNode& node) override { HistogramLegendMethodAttributes::set(node); }
+    virtual void set(const map<string, string>& map)  override{ HistogramLegendMethodAttributes::set(map); }
+    virtual bool accept(const string& node)  override{ return magCompare(node, "histogram"); }
+    virtual LegendType name() const  override{ return HISTOGRAM; }
     LegendMethod* clone() const override { return new HistogramLegendMethod(); }
-    virtual void row(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
-    virtual void column(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
+    virtual void row(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&) override;
+    virtual void column(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&) override;
     const Colour& gridColour() const { return *histo_grid_colour_; }
     int gridThickness() const { return histo_grid_thickness_; }
     LineStyle gridStyle() const { return histo_grid_style_; }

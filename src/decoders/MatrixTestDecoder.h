@@ -55,8 +55,6 @@ public:
         return *(matrixHandlers_.back());
     }
 
-    virtual std::string getUnits() const override { NOTIMP; }
-    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

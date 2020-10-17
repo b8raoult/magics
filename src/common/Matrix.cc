@@ -437,6 +437,102 @@ double Matrix::operator()(int row, int column) const {
     double val = (*this)[row * columns_ + column];
     return val;
 }
+
+double Matrix::YResolution() const {
+    magvector<double> diff;
+    diff.reserve(rowsAxis_.size());
+    std::adjacent_difference(rowsAxis_.begin(), rowsAxis_.end(), back_inserter(diff));
+    double resol = std::accumulate(diff.begin() + 1, diff.end(), 0.) / (diff.size() - 1);
+    // MagLog::dev() << "Matrix::YResolution()--->" << resol << "\n";
+    return resol;
+}
+
+double Matrix::XResolution() const {
+    magvector<double> diff;
+    diff.reserve(columnsAxis_.size());
+    std::adjacent_difference(columnsAxis_.begin(), columnsAxis_.end(), back_inserter(diff));
+    double resol = std::accumulate(diff.begin() + 1, diff.end(), 0.) / (diff.size() - 1);
+    // MagLog::dev() << "Matrix::XResolution()--->" << resol << "\n";
+    return resol;
+}
+
+void Matrix::boundRow(double r, double &row1, int &index1, double &row2, int &index2) const {
+    index1 = this->lowerRow(r);
+    row1   = this->regular_row(index1);
+    index2 = this->upperRow(r);
+    row2   = this->regular_row(index2);
+}
+
+void Matrix::boundColumn(double r, double &column1, int &index1, double &column2, int &index2) const {
+    index1  = this->lowerColumn(r);
+    column1 = this->regular_column(index1);
+    index2  = this->upperColumn(r);
+    column2 = this->regular_column(index2);
+}
+
+int Matrix::lowerRow(double r) const {
+    int last = -1;
+    for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
+        if (i->first > r) {
+            return last;
+        }
+        last = i->second;
+    }
+    return last;
+}
+
+int Matrix::lowerColumn(double c) const {
+    int last = -1;
+    for (map<double, int>::const_iterator i = columnsMap_.begin(); i != columnsMap_.end(); ++i) {
+        if (i->first > c)
+            return last;
+        last = i->second;
+    }
+    return last;
+}
+
+void Matrix::applyScaling(double scaling, double offset) {
+    size_t cnt = (*this).size();
+    for (size_t i = 0; i < cnt; i++) {
+        (*this)[i] = (*this)[i] * scaling + offset;
+    }
+}
+
+void Matrix::print(ostream &out) const {
+    out << "Matrix<P>[";
+    out << "rowsAxis=" << rowsAxis_;
+    out << ", columnsAxis=" << columnsAxis_;
+    out << ", values=";
+    magvector<double>::print(out);
+    out << "]";
+}
+
+int Matrix::row_ind(double row) const {
+    map<double, int>::const_iterator i = rowsMap_.lower_bound(row);
+    if (same(i->first, row))
+        return i->second;
+    if (i == rowsMap_.end()) {
+        map<double, int>::const_reverse_iterator i = rowsMap_.rbegin();
+        if (same(i->first, row))
+            return i->second;
+    }
+    return -1;
+}
+
+int Matrix::column_ind(double column) const {
+    map<double, int>::const_iterator i = columnsMap_.lower_bound(column);
+
+    if (same(i->first, column))
+        return i->second;
+    if (i == columnsMap_.end()) {
+        map<double, int>::const_reverse_iterator i = columnsMap_.rbegin();
+        if (same(i->first, column))
+            return i->second;
+    }
+    return -1;
+}
+
+
 #include "MatrixHandler.h"
 GeoBoxMatrixHandler::GeoBoxMatrixHandler(const AbstractMatrix& matrix, const Transformation& transformation) :
     TransformMatrixHandler(matrix), transformation_(transformation), original_(0) {
@@ -700,4 +796,13 @@ pair<double, double> RotatedMatrixHandler::unrotate(double lat_y, double lon_x) 
         ZXMXC = -ZXMXC;
     double PXREG = ZXMXC + southPoleLon_;
     return std::make_pair(PYREG, PXREG);
+}
+
+MatrixHandler* AbstractMatrix::getReady(const Transformation&) const {
+    NOTIMP;
+    return 0;
+}
+
+void AbstractMatrix::applyScaling(double scaling, double offset) {
+    NOTIMP;
 }

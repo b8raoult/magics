@@ -42,7 +42,7 @@ plot:
     netcdf_filename: test.nc
     netcdf_value_variable: t2m
 - mcont:
-    contour_automatic_setting: ecmwf
+    contour_automatic_setting: climetlab
     legend: false
 - mcoast:
     map_grid: false

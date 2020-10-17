@@ -321,9 +321,9 @@ public:
     ~NoIsoPlot(){};
 
     // Implements the Visualiser Interface...
-    void operator()(MatrixHandler&, BasicGraphicsObjectContainer&);
+    void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) override;
 
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         if (magCompare(node.name(), "noisoline")) {
             XmlNode iso = node;
             iso.name("isoline");
@@ -338,14 +338,11 @@ public:
         return object;
     }
     bool needIsolines() { return this->label_->label(); }
-    void visit(Data&, LegendVisitor&);
-    bool method(ContourMethod*) { return false; }
+    void visit(Data&, LegendVisitor&) override;
+    bool method(ContourMethod*) override { return false; }
 
 protected:
-    void print(ostream& out) const {
-        out << "NoIsoPlot"
-            << "\n";
-    }
+    void print(ostream& out) const override { out << "NoIsoPlot[]"; }
 };
 
 

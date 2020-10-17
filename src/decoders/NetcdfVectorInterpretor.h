@@ -39,7 +39,7 @@ public:
     virtual ~NetcdfVectorInterpretor();
 
 
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         MagLog::debug() << "NetcdfVectorInterpretor::set(params)"
                         << "\n";
         XmlNode netcdf(node);

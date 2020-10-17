@@ -65,9 +65,9 @@ class LogoPlotting : public NoLogoPlotting, public LogoPlottingAttributes {
 public:
     LogoPlotting();
     virtual ~LogoPlotting();
-    virtual void set(const map<string, string>&) {}
-    virtual void set(const XmlNode&) {}
-    void toxml(ostream&, int) const {}
+    virtual void set(const map<string, string>&) override {}
+    virtual void set(const XmlNode&)  override{}
+    void toxml(ostream&, int) const  override{}
     virtual NoLogoPlotting* clone() const override {
         LogoPlotting* object = new LogoPlotting();
         return object;
@@ -77,7 +77,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     double x_;
     double y_;
@@ -115,7 +115,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed

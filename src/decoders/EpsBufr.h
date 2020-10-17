@@ -60,8 +60,6 @@ public:
 
     PointsHandler& points(const Transformation&, bool) override { return points(); }
 
-    virtual std::string getUnits() const override { NOTIMP; }
-    virtual void applyScaling(double, double) override { NOTIMP; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

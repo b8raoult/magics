@@ -35,23 +35,23 @@ public:
     virtual ~LevelListSelectionType();
 
 
-    void calculate(double min, double max, bool);
-    void set(const map<string, string>& params) {
+    void calculate(double min, double max, bool) override;
+    void set(const map<string, string>& params) override {
         LevelListSelectionTypeAttributes::set(params);
         LevelSelection::set(params);
     }
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         LevelListSelectionTypeAttributes::set(node);
         LevelSelection::set(node);
     }
-    void set(const LevelSelectionInterface& from) { list_ = from.getList(); }
+    void set(const LevelSelectionInterface& from) override { list_ = from.getList(); }
     virtual LevelSelection* clone() const override {
         LevelListSelectionType* object = new LevelListSelectionType();
         object->copy(*this);
         return object;
     }
 
-    double reference(int) const { return empty() ? -9999 : front(); }
+    double reference(int) const override { return empty() ? -9999 : front(); }
 
     void copy(const LevelListSelectionType& from) {
         LevelListSelectionTypeAttributes::copy(from);
@@ -60,7 +60,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed

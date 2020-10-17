@@ -75,8 +75,6 @@ public:
     void initInfo() override;
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
-    virtual std::string getUnits() const override { NOTIMP; }
-    virtual void applyScaling(double, double) override { NOTIMP; }
 
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
                           bool all) override {

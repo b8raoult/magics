@@ -129,9 +129,11 @@ public:
     void index(int i);
     static int getUniqueOwnerId();
 
-    virtual std::string getUnits() const = 0;
+    virtual std::string getUnits() const;
+
     virtual void applyScaling(const std::string& target_units);
-    virtual void applyScaling(double, double) = 0;
+    virtual void defaultScaling(double&, double&);
+    virtual void applyScaling(double, double);
 
 protected:
     int dimension_;

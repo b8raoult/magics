@@ -13,9 +13,14 @@ esac
 
 for file in $files; do
 
+    if [[ $file =~ "/build/" ]]; then
+        echo "Skipping autoformat check for file: $file"
+	continue
+    fi
+
     if [[ $file =~ "/attributes/" ]]; then
         echo "Skipping autoformat check for file: $file"
-	    continue
+	continue
     fi
 
     if [[ $file =~ "drivers/minizip" ]]; then

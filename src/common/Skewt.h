@@ -122,32 +122,32 @@ public:
     /*!
     \\brief return the xmin in projection coordinates!
     */
-    virtual double getMinPCX() const;
+    virtual double getMinPCX() const override;
     /*!
     \\brief return the ymin in projection coordinates!
     */
-    virtual double getMinPCY() const;
+    virtual double getMinPCY() const override;
     /*!
     \\brief return the xmax in projection coordinates!
     */
-    virtual double getMaxPCX() const;
+    virtual double getMaxPCX() const override;
     virtual double getMaxTestPCX() const;
     /*!
     \\brief return the ymax in projection coordinates!
     */
-    virtual double getMaxPCY() const;
+    virtual double getMaxPCY() const override;
 
-    virtual Polyline& getPCBoundingBox() const;
-    virtual Polyline& getUserBoundingBox() const;
+    virtual Polyline& getPCBoundingBox() const override;
+    virtual Polyline& getUserBoundingBox() const override;
 
-    virtual void setDefinition(const string&);
-    void getNewDefinition(const UserPoint&, const UserPoint&, string&) const;
-    bool in(const PaperPoint& point) const;
-    void operator()(const Polyline& poly, BasicGraphicsObjectContainer& out) const;
+    virtual void setDefinition(const string&) override;
+    void getNewDefinition(const UserPoint&, const UserPoint&, string&) const override;
+    bool in(const PaperPoint& point) const override;
+    void operator()(const Polyline& poly, BasicGraphicsObjectContainer& out) const override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     double minPCX_;
     double maxPCX_;

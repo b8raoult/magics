@@ -61,8 +61,6 @@ public:
     virtual void visit(ValuesCollector&, PointsList&){};
     virtual void visit(TextVisitor&);
 
-    virtual void applyScaling(double, double);
-
     double missing(Netcdf&) const;
     string getAttribute(const string&, const string&, const string&);
     bool cf_date(Netcdf& netcdf, const string&, const string&, string&, vector<double>&, vector<double>&);
@@ -126,11 +124,10 @@ public:
     virtual void visit(MetaDataCollector& info) override;
     virtual void visit(ValuesCollector&, PointsList&) override{};
     virtual void visit(TextVisitor& text) override;
-    virtual void applyScaling(double, double) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "NetcdfGuessInterpretor[]"; }
+    virtual void print(ostream& s) const override { s << "NetcdfGuessInterpretor[]"; }
     void setDimensions(const stringarray&, map<string, string>& first, map<string, string>& last);
     void getAttributes(Netcdf&, const string&, string&, string&);
     NetcdfInterpretor* guess() const;

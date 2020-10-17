@@ -87,7 +87,7 @@ public:
         return mode;
     }
 
-    virtual grib_handle* operator()(grib_context*, FILE* file, int position) const {
+    virtual grib_handle* operator()(grib_context*, FILE* file, int position) const override {
         grib_handle* handle = 0;
 
 
@@ -107,7 +107,7 @@ public:
     }
 
 protected:
-    void print(ostream& out) const { out << "GribAddressRecordMode\n"; }
+    void print(ostream& out) const override { out << "GribAddressRecordMode\n"; }
 };
 
 class GribAddressByteMode : public GribAddressMode {
@@ -119,7 +119,7 @@ public:
         return mode;
     }
 
-    virtual grib_handle* operator()(grib_context* context, FILE* file, int position) const {
+    virtual grib_handle* operator()(grib_context* context, FILE* file, int position) const override {
         long int offset = (long int)position;
         // cout << "OFFSET-->" << offset << endl;
         fseek(file, (long int)position, SEEK_SET);
@@ -130,7 +130,7 @@ public:
 
         return handle;
     }
-    virtual grib_handle* operator()(grib_context* context, FILE* file, long int position) const {
+    virtual grib_handle* operator()(grib_context* context, FILE* file, long int position) const override {
         fseek(file, position, SEEK_SET);
         grib_handle* handle = 0;
 
@@ -141,7 +141,7 @@ public:
     }
 
 protected:
-    void print(ostream& out) const { out << "GribAddressRecordMode\n"; }
+    void print(ostream& out) const override { out << "GribAddressRecordMode\n"; }
 };
 
 

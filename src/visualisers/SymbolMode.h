@@ -99,7 +99,7 @@ class SymbolIndividualMode : public SymbolMode, public SymbolIndividualModeAttri
 public:
     SymbolIndividualMode();
     virtual ~SymbolIndividualMode();
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         SymbolMode::set(map);
         SymbolIndividualModeAttributes::set(map);
         update();

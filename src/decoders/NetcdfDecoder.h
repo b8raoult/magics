@@ -62,6 +62,18 @@ public:
 
     void getInfo(map<string, string>&) override;
 
+    void applyScaling(double scaling, double offset) override {
+          if (!data_)
+            valid_ = (*interpretor_).interpretAsMatrix(&data_);
+        if (!valid_)
+            throw MagicsException("Unable to use data");
+
+        size_t cnt = data_->size();
+        for(size_t i = 0; i < cnt; i++) {
+            (*data_)[i] = (*data_)[i] * scaling + offset;
+        }
+    }
+
     MatrixHandler& matrix() override {
         MagLog::dev() << "NetcdfDecoder::matrix! "
                       << "\n";
@@ -100,8 +112,9 @@ public:
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
     void visit(TextVisitor&) override;
+
     virtual std::string getUnits() const override;
-    virtual void applyScaling(double, double) override;
+    virtual void defaultScaling(double&, double&) override {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream

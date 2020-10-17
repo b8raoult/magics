@@ -142,7 +142,6 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         contour_->legend_only_ = legend_only;
     }
 
-
     data.applyScaling(units_);  // From contour_units
 
     data.getReady(parent.transformation());
@@ -154,6 +153,7 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         (*this->contour_)(data.matrix(), parent);
         return;
     }
+
     MatrixHandler* box = data.matrix().getReady(parent.transformation());
     if (!box) {
         throw MagicsException("Invalid data for contouring");
@@ -166,7 +166,9 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         return;
     }
 
+
     matrix_ = (*this->method_).handler(*box, parent);
+
 
 
     // matrix_ = box;

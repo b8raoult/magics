@@ -297,9 +297,6 @@ void NetcdfInterpretor::visit(TextVisitor& title) {
     title.addAutomaticTitle(netcdf.getAttribute("title", name));
 }
 
-void NetcdfInterpretor::applyScaling(double scaling, double offset) {
-    MagLog::warning() << "Method " << *this << "::applyScaling() --> Not yet implemented.\n";
-}
 
 void NetcdfInterpretor::getAttributes(Netcdf& nc, const string& varName, string& keys, string& values) {
     try {
@@ -396,8 +393,4 @@ void NetcdfGuessInterpretor::visit(MetaDataCollector& info) {
 
 void NetcdfGuessInterpretor::visit(TextVisitor& text) {
     guess()->visit(text);
-}
-
-void NetcdfGuessInterpretor::applyScaling(double scaling, double offset) {
-    guess()->applyScaling(scaling, offset);
 }

@@ -73,11 +73,11 @@ public:
     DotGraphShadeStyle() {}
     virtual ~DotGraphShadeStyle() {}
 
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         GraphShadeStyle::set(node);
         DotGraphShadeStyleAttributes::set(node);
     }
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         GraphShadeStyle::set(map);
         DotGraphShadeStyleAttributes::set(map);
     }
@@ -86,11 +86,11 @@ public:
         return new DotGraphShadeStyle();
     }
     // void operator()(Polyline*, BasicGraphicsObjectContainer&);
-    virtual void operator()(Polyline&);
+    virtual void operator()(Polyline&) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 class HatchGraphShadeStyle : public GraphShadeStyle, public HatchGraphShadeStyleAttributes {
@@ -98,11 +98,11 @@ public:
     HatchGraphShadeStyle() {}
     virtual ~HatchGraphShadeStyle() {}
 
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         GraphShadeStyle::set(node);
         HatchGraphShadeStyleAttributes::set(node);
     }
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         GraphShadeStyle::set(map);
         HatchGraphShadeStyleAttributes::set(map);
     }
@@ -111,11 +111,11 @@ public:
         return new HatchGraphShadeStyle();
     }
     // void operator()(Polyline*, BasicGraphicsObjectContainer&);
-    void operator()(Polyline&);
+    void operator()(Polyline&) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 

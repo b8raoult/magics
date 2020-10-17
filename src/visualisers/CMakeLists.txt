@@ -6,6 +6,7 @@ Akima474Method.h
 ArrowPlotting.cc
 ArrowPlotting.h
 AutomaticContourMethod.h
+AutomaticContourMethod.cc
 Axis.cc
 Axis.h
 AxisControl.cc

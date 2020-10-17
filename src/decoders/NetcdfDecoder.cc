@@ -144,10 +144,6 @@ string NetcdfDecoder::getUnits() const {
     return collector["units"];
 }
 
-void NetcdfDecoder::applyScaling(double scaling, double offset) {
-    (*interpretor_).applyScaling(scaling, offset);
-}
-
 PointsHandler& NetcdfDecoder::points(const Transformation& transformation, bool all) {
     PointsList points;
     valid_ = (*interpretor_).interpretAsPoints(points, transformation);

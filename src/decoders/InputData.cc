@@ -441,11 +441,3 @@ void InputData::visit(ValuesCollector& points) {
             (*point).push_back(new ValuesCollectorData(at(minIdx)->x(), at(minIdx)->y(), at(minIdx)->value(), dist));
     }
 }
-
-string InputData::getUnits() const {
-    NOTIMP;
-}
-
-void InputData::applyScaling(double, double) {
-    NOTIMP;
-}

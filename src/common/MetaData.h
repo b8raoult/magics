@@ -131,7 +131,7 @@ public:
     NoMetaData() {}
     ~NoMetaData() {}
     MetaDataVisitor* clone() const override { return new NoMetaData(); }
-    virtual void visit(BasicGraphicsObjectContainer&) {}
+    virtual void visit(BasicGraphicsObjectContainer&) override {}
 };
 
 template <>

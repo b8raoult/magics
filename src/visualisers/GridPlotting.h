@@ -109,32 +109,32 @@ public:
         NoGridPlottingAttributes::copy(other);
         GridPlottingAttributes::copy(other);
     }
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         NoGridPlottingAttributes::set(node);
         GridPlottingAttributes::set(node);
     }
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         NoGridPlottingAttributes::set(map);
         GridPlottingAttributes::set(map);
     }
-    bool accept(const string& node) { return GridPlottingAttributes::accept(node); }
-    virtual void operator()(DrawingVisitor&);
-    virtual void operator()(PreviewVisitor&);
+    bool accept(const string& node) override { return GridPlottingAttributes::accept(node); }
+    virtual void operator()(DrawingVisitor&) override;
+    virtual void operator()(PreviewVisitor&) override;
 
 
     void add(Polyline&) const;
     void addFrame(Polyline&) const;
-    void layer(BasicGraphicsObjectContainer* layer) { layer_ = layer; }
+    void layer(BasicGraphicsObjectContainer* layer) override { layer_ = layer; }
 
 
     void visit(Transformation&) {}
 
 
-    virtual string colour() const { return colour_->name(); }
+    virtual string colour() const override { return colour_->name(); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 
     BasicGraphicsObjectContainer* layer_;

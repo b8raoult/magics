@@ -62,17 +62,17 @@ bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
 
 
     if (proj4.empty()) {
-        matrix_ = new Matrix();
+        matrix_.reset(new Matrix());
         matrix_->akimaEnabled();
     }
     else {
-        matrix_ = new Proj4Matrix(proj4);
+        matrix_.reset(new Proj4Matrix(proj4));
     }
-    *matrix = matrix_;
+    *matrix = matrix_.get();
 
     if (automatic_scaling_) {
         // FIXME: come back
-        NOTIMP;
+        // NOTIMP;
         // getScaling(scaling_, offset_);
     }
 
@@ -133,8 +133,7 @@ bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
             throw;
         }
         MagLog::error() << e << "\n";
-        delete matrix_;
-        matrix_ = NULL;
+        matrix_.reset(nullptr);
         return false;
     }
     return true;
