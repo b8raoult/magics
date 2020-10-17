@@ -63,11 +63,11 @@ public:
     Arrow() {}
     virtual ~Arrow() {}
 
-    virtual void redisplay(const BaseDriver& driver) const { driver.redisplay(*this); }
+    virtual void redisplay(const BaseDriver& driver) const override { driver.redisplay(*this); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "Arrow[]"; }
+    virtual void print(ostream& s) const override { s << "Arrow[]"; }
 
 private:
     //! Copy constructor - No copy allowed

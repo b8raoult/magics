@@ -35,7 +35,7 @@ public:
     NoPageID() {}
     virtual ~NoPageID() {}
 
-    virtual void set(const XmlNode&) { MagLog::dev() << "PageIDBase::set(const XmlNode&)---> to be checked!...\n"; }
+    virtual void set(const XmlNode&)  override{ MagLog::dev() << "PageIDBase::set(const XmlNode&)---> to be checked!...\n"; }
     virtual void set(const map<string, string>&) {
         MagLog::dev() << "PageIDBase::set(const map<string, string&)---> to be checked!...\n";
     }
@@ -47,12 +47,12 @@ public:
     virtual void toxml(ostream&, int = 0) const {
         MagLog::dev() << "NoPageID::virtual void toxml(ostream&, int = 0) const ---> to be checked!...\n";
     }
-    virtual bool needLegend() { return false; }
-    virtual void visit(BasicGraphicsObjectContainer&) {}
+    virtual bool needLegend()  override{ return false; }
+    virtual void visit(BasicGraphicsObjectContainer&)  override{}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "NoPageID\n"; }
+    virtual void print(ostream& out) const override { out << "NoPageID[]"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -72,10 +72,10 @@ class PageID : public NoPageID, public PageIDAttributes {
 public:
     PageID();
     virtual ~PageID();
-    virtual void set(const map<string, string>& map) { PageIDAttributes::set(map); }
-    virtual void set(const XmlNode& node) { PageIDAttributes::set(node); }
-    virtual bool accept(const string& node) { return PageIDAttributes::accept(node); }
-    virtual void visit(BasicGraphicsObjectContainer& list);
+    virtual void set(const map<string, string>& map)  override{ PageIDAttributes::set(map); }
+    virtual void set(const XmlNode& node)  override{ PageIDAttributes::set(node); }
+    virtual bool accept(const string& node)  override{ return PageIDAttributes::accept(node); }
+    virtual void visit(BasicGraphicsObjectContainer& list) override;
     virtual NoPageID* clone() const override;
 
 protected:

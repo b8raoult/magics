@@ -68,7 +68,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "FlagPlotting<P>"; }
+    virtual void print(ostream& out) const override { out << "FlagPlotting<P>"; }
     map<Colour, Flag*> northFlags_;
     map<Colour, Flag*> southFlags_;
 

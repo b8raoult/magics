@@ -55,7 +55,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     void setCriteria(MetaDataCollector&, const string&);
 
@@ -151,7 +151,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     EcChartData contours_;
     EcChartSetData default_set_;
@@ -178,7 +178,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     string libraryPath_;
 };
@@ -199,7 +199,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "NoContourLibrary[]"; }
+    virtual void print(ostream& s) const override { s << "NoContourLibrary[]"; }
 };
 
 template <>

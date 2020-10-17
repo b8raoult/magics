@@ -208,10 +208,10 @@ public:
     BaseDriver();
     virtual ~BaseDriver();
 
-    virtual void set(const XmlNode& node) { BaseDriverAttributes::set(node); }
+    virtual void set(const XmlNode& node) override { BaseDriverAttributes::set(node); }
     void setWidth(double width) { width_ = width; }
 
-    virtual void set(const std::map<string, string>& map) { BaseDriverAttributes::set(map); }
+    virtual void set(const std::map<string, string>& map) override { BaseDriverAttributes::set(map); }
 
     virtual void open() {}
     virtual void close() {}
@@ -331,7 +331,7 @@ protected:
     string getFileName(const string& extension, const unsigned int no = 0) const;
 
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     virtual void startPage() const {};
     virtual void endPage() const {};
     virtual void setNewColour(const Colour&) const {};

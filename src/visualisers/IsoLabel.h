@@ -50,7 +50,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "NoIsoLabel[]"; }
+    virtual void print(ostream& out) const  { out << "NoIsoLabel[]"; }
 
     // -- Friends
     //! Overloaded << operator to call print().

@@ -85,11 +85,11 @@ public:
     NoCoastPlotting();
     virtual ~NoCoastPlotting() {}
 
-    void set(const XmlNode& node) { NoCoastPlottingAttributes::set(node); }
+    void set(const XmlNode& node)  override{ NoCoastPlottingAttributes::set(node); }
 
-    virtual void set(const map<string, string>& map) { NoCoastPlottingAttributes::set(map); }
-    bool accept(const string& node) { return NoCoastPlottingAttributes::accept(node); }
-    virtual NoCoastPlotting* clone() const { return new NoCoastPlotting(); }
+    virtual void set(const map<string, string>& map)  override{ NoCoastPlottingAttributes::set(map); }
+    bool accept(const string& node)  override{ return NoCoastPlottingAttributes::accept(node); }
+    virtual NoCoastPlotting* clone() const  { return new NoCoastPlotting(); }
     virtual void operator()(DrawingVisitor& parent);
     virtual void operator()(PreviewVisitor&) {}
     virtual void layer(BasicGraphicsObjectContainer*) {}
@@ -98,7 +98,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "NoCoastPlotting\n"; }
+    virtual void print(ostream& out) const override { out << "NoCoastPlotting\n"; }
     typedef void (NoCoastPlotting::*Action)(DrawingVisitor&);
     std::map<string, Action> riversMethods_;
 

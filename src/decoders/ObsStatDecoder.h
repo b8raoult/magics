@@ -41,7 +41,7 @@ public:
     vector<vector<double> > rows_;
     map<string, vector<string> > definitions_;
     string name_;
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
     friend ostream& operator<<(ostream& s, const StatItem& p) {
         p.print(s);
         return s;
@@ -55,7 +55,7 @@ public:
     map<string, vector<string> > definitions_;
     vector<StatItem> data_;
     string name_;
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
     friend ostream& operator<<(ostream& s, const StatDef& p) {
         p.print(s);
         return s;
@@ -74,7 +74,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);

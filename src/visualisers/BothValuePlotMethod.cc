@@ -21,37 +21,39 @@ BothValuePlotMethod::BothValuePlotMethod() : marker_(0) {}
 
 BothValuePlotMethod::~BothValuePlotMethod() {}
 
-void BothValuePlotMethod::set(const map<string, string> &map) {
+void BothValuePlotMethod::set(const map<string, string>& map) {
     BothValuePlotMethodAttributes::set(map);
     ValuePlotMethodAttributes::set(map);
 }
 
-void BothValuePlotMethod::set(const XmlNode &node) {
+void BothValuePlotMethod::set(const XmlNode& node) {
     BothValuePlotMethodAttributes::set(node);
     ValuePlotMethodAttributes::set(node);
 }
 
-ValuePlotMethod *BothValuePlotMethod::clone() const {
+ValuePlotMethod* BothValuePlotMethod::clone() const {
     BothValuePlotMethod* object = new BothValuePlotMethod();
     object->clone(*this);
     return object;
 }
 
-void BothValuePlotMethod::clone(const BothValuePlotMethod &from) {
+void BothValuePlotMethod::clone(const BothValuePlotMethod& from) {
     BothValuePlotMethodAttributes::copy(from);
     ValuePlotMethodAttributes::copy(from);
 }
 
-void BothValuePlotMethod::print(ostream &out) const {
+void BothValuePlotMethod::print(ostream& out) const {
     out << "BothValuePlotMethod[";
     BothValuePlotMethodAttributes::print(out);
     ValuePlotMethodAttributes::print(out);
     out << "]";
 }
 
-void BothValuePlotMethod::reset() { marker_ = 0; }
+void BothValuePlotMethod::reset() {
+    marker_ = 0;
+}
 
-void magics::BothValuePlotMethod::add(const magics::PaperPoint &xy) {
+void magics::BothValuePlotMethod::add(const magics::PaperPoint& xy) {
     static map<string, TextSymbol::TextPosition> poshandlers;
     if (poshandlers.empty()) {
         poshandlers["none"]   = TextSymbol::M_NONE;

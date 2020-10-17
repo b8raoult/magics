@@ -37,7 +37,7 @@ public:
     virtual ~CountSelectionType();
 
 
-    virtual void calculate(double min, double max, bool);
+    virtual void calculate(double min, double max, bool) override;
 
     void set(const map<string, string>& params) {
         CountSelectionTypeAttributes::set(params);
@@ -57,7 +57,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed

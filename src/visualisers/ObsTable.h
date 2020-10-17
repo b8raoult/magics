@@ -44,7 +44,7 @@ public:
     void operator()(CustomisedPoint&, BasicGraphicsObjectContainer&) const;
 
 protected:
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const  {
         out << "ObsTemplate:[\n";
         for (const_iterator item = begin(); item != end(); ++item)
             out << "\t" << *(*item) << "\n";
@@ -89,7 +89,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     ObsTemplate* current_;
     double rows_;
     double columns_;

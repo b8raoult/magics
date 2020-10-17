@@ -42,12 +42,12 @@ public:
     }
     virtual void operator()(const PaperPoint&, HiLo&) {}
     virtual void clear() {}
-    void set(const map<string, string>& map) { HiLoTechniqueAttributes::set(map); }
-    void set(const XmlNode& node) { HiLoTechniqueAttributes::set(node); }
+    void set(const map<string, string>& map) override { HiLoTechniqueAttributes::set(map); }
+    void set(const XmlNode& node) override { HiLoTechniqueAttributes::set(node); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "HiLoTechnique[]"; }
+    virtual void print(ostream& s) const override { s << "HiLoTechnique[]"; }
 
 private:
     //! Copy constructor - No copy allowed

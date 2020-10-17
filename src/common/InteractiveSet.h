@@ -33,7 +33,7 @@ public:
 
     virtual void execute() {}  // protype to be confirmed!
 protected:
-    virtual void print(ostream& s) const { s << "InteractiveAction[]"; }
+    virtual void print(ostream& s) const override { s << "InteractiveAction[]"; }
     friend ostream& operator<<(ostream& s, const InteractiveAction& p) {
         p.print(s);
         return s;
@@ -50,7 +50,7 @@ public:
     virtual void redisplay(const BaseDriver&) const;
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 class InteractiveEnd : public BasicGraphicsObject {
@@ -62,7 +62,7 @@ public:
     bool reproject(const Transformation& transformation, BasicGraphicsObjectContainer& out) const;
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 
@@ -76,7 +76,7 @@ public:
     void addAction(const string& name, InteractiveAction* action) { begin_->insert(make_pair(name, action)); }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     Layer* layer_;
     string box_;
     mutable Label* label_;
@@ -106,7 +106,7 @@ public:
 
 protected:
     string url_;
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 class InteractiveMagnify : public InteractiveAction {
@@ -118,7 +118,7 @@ public:
 
 protected:
     float factor_;
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 

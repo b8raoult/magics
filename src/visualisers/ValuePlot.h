@@ -42,23 +42,23 @@ public:
         plot->copy(*this);
         return plot;
     }
-    virtual bool accept(const string& node)  override {
+    virtual bool accept(const string& node) override {
         return ValuePlotAttributes::accept(node);
         ;
     }
 
     // Implements the VisualComponent Interface...
-    void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) override ;
-    void operator()(Data&, BasicGraphicsObjectContainer&) override ;
+    void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) override;
+    void operator()(Data&, BasicGraphicsObjectContainer&) override;
 
 
-    virtual void visit(LegendVisitor&) override ;
-    virtual void set(const map<string, string>& map)  override { ValuePlotAttributes::set(map); }
-    virtual void set(const XmlNode& node) override  { ValuePlotAttributes::set(node); }
+    virtual void visit(LegendVisitor&) override;
+    virtual void set(const map<string, string>& map) override { ValuePlotAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { ValuePlotAttributes::set(node); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const override ;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed
@@ -81,11 +81,11 @@ public:
     NoValuePlot(){};
     ~NoValuePlot(){};
     ValuePlotBase* clone() const override { return new NoValuePlot(); }
-    bool accept(const string& node)  override { return magCompare(node, "nogridvalues"); }
+    bool accept(const string& node) override { return magCompare(node, "nogridvalues"); }
 
-    void operator()(MatrixHandler&, BasicGraphicsObjectContainer&)  override {}
-    void operator()(PointsHandler&, BasicGraphicsObjectContainer&)   {}
-    void visit(LegendVisitor&)  override {}
+    void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) override {}
+    void operator()(PointsHandler&, BasicGraphicsObjectContainer&) {}
+    void visit(LegendVisitor&) override {}
 };
 
 }  // namespace magics

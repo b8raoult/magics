@@ -59,7 +59,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
 
 private:
     //! Copy constructor - No copy allowed
@@ -80,16 +80,16 @@ public:
     MetgramBar() {}
     virtual ~MetgramBar() {}
 
-    virtual void set(const XmlNode& node) { MetgramBarAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { MetgramBarAttributes::set(map); }
-    virtual bool accept(const string& node) { return magCompare(node, "bar"); }
+    virtual void set(const XmlNode& node) override { MetgramBarAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { MetgramBarAttributes::set(map); }
+    virtual bool accept(const string& node) override { return magCompare(node, "bar"); }
     virtual MetgramStyle* clone() const override { return new MetgramBar(); }
 
-    virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task);
+    virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 class MetgramCurve : public MetgramStyle, public MetgramCurveAttributes {
@@ -97,7 +97,7 @@ public:
     MetgramCurve() {}
     virtual ~MetgramCurve() {}
 
-    virtual void set(const XmlNode& node) { MetgramCurveAttributes::set(node); }
+    virtual void set(const XmlNode& node)  override{ MetgramCurveAttributes::set(node); }
     virtual void set(const map<string, string>& map) { MetgramCurveAttributes::set(map); }
     virtual MetgramStyle* clone() const override { return new MetgramCurve(); }
     virtual bool accept(const string& node) { return magCompare(node, "curve"); }
@@ -107,7 +107,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 

@@ -26,7 +26,7 @@ public:
     virtual ~ProgressTask();
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     // No copy allowed

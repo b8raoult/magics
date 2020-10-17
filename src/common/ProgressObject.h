@@ -36,7 +36,7 @@ public:
     string getText() const { return progress_; }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     string progress_;
 
 private:
@@ -58,7 +58,7 @@ public:
     void redisplay(const BaseDriver& driver) const;
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 }  // namespace magics
 #endif

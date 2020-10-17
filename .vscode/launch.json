@@ -7,6 +7,8 @@
 
 
 
+
+
         {
             "name": "Python: Current File",
             "type": "python",
@@ -27,7 +29,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/../../build/${workspaceFolderBasename}/bin/magics",
-            "args": ["netcdf.yaml"],
+            "args": ["grib.yaml"],
             "cwd": "${workspaceFolder}/regression/climetlab",
             "MIMode": "lldb",
             "env": {

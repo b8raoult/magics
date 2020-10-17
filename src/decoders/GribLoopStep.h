@@ -45,7 +45,7 @@ public:
     virtual void toxml(ostream&, int = 0) const { MagLog::dev() << " const ---> to be checked!...\n"; }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
 
 private:
     //! Copy constructor - No copy allowed

@@ -69,7 +69,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "HiLoBoth"; }
+    virtual void print(ostream& out) const override { out << "HiLoBoth"; }
     virtual void operator()(const PaperPoint& point, HiLo& hilo) {
         if (!high_) {
             // Create Text List containing the position of the High

@@ -51,7 +51,7 @@ public:
     inline void setRows(int rows) { rows_ = rows; }
 
 protected:
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const  {
         out << "Raster[";
         out << size() << " points, ";
         out << min() << ", " << max() << "]";
@@ -99,7 +99,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "RasterData[]"; }
+    virtual void print(ostream& s) const override { s << "RasterData[]"; }
     TeProjection* projection_;
     double x_;
     double y_;

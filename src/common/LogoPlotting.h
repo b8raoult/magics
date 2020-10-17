@@ -45,7 +45,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "NoLogoPlotting\n"; }
+    virtual void print(ostream& out) const { out << "NoLogoPlotting[]"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -72,7 +72,7 @@ public:
         LogoPlotting* object = new LogoPlotting();
         return object;
     }
-    virtual void operator()(BasicGraphicsObjectContainer&) const;
+    virtual void operator()(BasicGraphicsObjectContainer&) const override;
 
 
 protected:
@@ -101,16 +101,16 @@ class UserLogoPlotting : public NoLogoPlotting, public UserLogoPlottingAttribute
 public:
     UserLogoPlotting();
     virtual ~UserLogoPlotting();
-    virtual void set(const map<string, string>& map) { UserLogoPlottingAttributes::set(map); }
-    virtual void set(const XmlNode& node) { UserLogoPlottingAttributes::set(node); }
-    bool accept(const string& node) { return UserLogoPlottingAttributes::accept(node); }
+    virtual void set(const map<string, string>& map) override { UserLogoPlottingAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { UserLogoPlottingAttributes::set(node); }
+    bool accept(const string& node) override { return UserLogoPlottingAttributes::accept(node); }
 
     virtual NoLogoPlotting* clone() const override {
         UserLogoPlotting* object = new UserLogoPlotting();
         object->copy(*this);
         return object;
     }
-    void operator()(BasicGraphicsObjectContainer&) const;
+    void operator()(BasicGraphicsObjectContainer&) const override;
 
 
 protected:

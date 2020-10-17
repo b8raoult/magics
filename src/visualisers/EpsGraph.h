@@ -63,7 +63,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     double resolution_;
     bool forecast_;
     bool control_;
@@ -105,7 +105,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 
 private:
@@ -138,7 +138,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     void box(CustomisedPoint&, BasicGraphicsObjectContainer& visitor);
     int cape0_;
 
@@ -173,7 +173,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     void triangle(const pair<string, float>& direction, CustomisedPoint& point, BasicGraphicsObjectContainer& visitor,
                   double pos, double max);
 
@@ -207,7 +207,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     void triangle(const pair<string, float>& direction, CustomisedPoint& point, BasicGraphicsObjectContainer& visitor,
                   double pos);
 
@@ -240,7 +240,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 
 private:
@@ -270,7 +270,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed
@@ -405,7 +405,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { EpsDirectionAttributes::print(out); }
+    virtual void print(ostream& out) const override { EpsDirectionAttributes::print(out); }
 
 
 private:
@@ -429,7 +429,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { EpsPlumeAttributes::print(out); }
+    virtual void print(ostream& out) const override { EpsPlumeAttributes::print(out); }
     typedef void (EpsPlume::*Method)(Data&, BasicGraphicsObjectContainer&);
 
     std::map<string, Method> methods_;

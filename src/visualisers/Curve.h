@@ -48,20 +48,20 @@ public:
     };
 
 
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node)  override{
         Graph::set(node);
         CurveAttributes::set(node);
     }
 
-    void operator()(Data&, BasicGraphicsObjectContainer&);
-    void visit(LegendVisitor&);
+    void operator()(Data&, BasicGraphicsObjectContainer&) override;
+    void visit(LegendVisitor&) override;
     void set(const PaperPoint&, BasicGraphicsObjectContainer&, LegendEntry&);
 
     Polyline* newCurve(BasicGraphicsObjectContainer&) const;
     PointPosition where(const UserPoint& point) const;
 
     // Implements the set method ...
-    void set(const map<string, string>& map) { CurveAttributes::set(map); }
+    void set(const map<string, string>& map) override { CurveAttributes::set(map); }
     void symbol(vector<PaperPoint>& points, BasicGraphicsObjectContainer& out);
     void legend_symbol(PaperPoint& point, BasicGraphicsObjectContainer& task);
 
@@ -78,7 +78,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     bool missing(CustomisedPoint&) const;
     std::map<string, MissingMethod> missingMethods_;
     std::map<string, CurveMethod> curveMethods_;
@@ -120,7 +120,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "CurveArea";
         Curve::print(out);
     }

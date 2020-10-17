@@ -63,7 +63,7 @@ public:
 
 protected:
     //! Method to print  about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
     IntervalMap<double> heights_;
 
 private:

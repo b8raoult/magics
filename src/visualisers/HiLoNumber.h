@@ -56,7 +56,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "HiLoNumber"; }
+    virtual void print(ostream& out) const override { out << "HiLoNumber"; }
     virtual void operator()(const PaperPoint& point, HiLo& hilo) {
         ostringstream nice;
         nice << MagicsFormat(this->format_, point.value());

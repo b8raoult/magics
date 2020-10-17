@@ -375,34 +375,34 @@ class LegendVisitor : public LayoutVisitor,
 public:
     LegendVisitor();
     virtual ~LegendVisitor();
-    virtual void getReady();
+    virtual void getReady() override;
     virtual LegendVisitor* clone() {
         NOTIMP;
         return 0;
     }
-    virtual Layout& layout() const {
+    virtual Layout& layout() const  override{
         ASSERT(layout_);
         return *layout_;
     }
-    virtual Layout* layoutPtr() const {
+    virtual Layout* layoutPtr() const  {
         ASSERT(layout_);
         return layout_;
     }
     // virtual Layout* legend()  { ASSERT( layout_); return this; }
 
-    void set(const XmlNode& node) { LegendVisitorAttributes::set(node); }
-    void set(const std::map<string, string>& map) { LegendVisitorAttributes::set(map); }
-    void add(LegendEntry* entry) { AutoVector<LegendEntry>::push_back(entry); }
+    void set(const XmlNode& node)  override{ LegendVisitorAttributes::set(node); }
+    void set(const std::map<string, string>& map)  override{ LegendVisitorAttributes::set(map); }
+    void add(LegendEntry* entry)  { AutoVector<LegendEntry>::push_back(entry); }
     void newLegend() {
         if (!AutoVector<LegendEntry>::empty())
             add(new EmptyEntry());
     }
     double getFont_size() const { return font_size_; }
     // Layout* execute(AnimationStep& step,  const Layout*);
-    void visit(BasicGraphicsObjectContainer&);
-    void visit(BasicSceneObject&);
-    void visit(AnimationStep&);
-    void visit(MetaDataVisitor&);
+    void visit(BasicGraphicsObjectContainer&) override;
+    void visit(BasicSceneObject&) override;
+    void visit(AnimationStep&) override;
+    void visit(MetaDataVisitor&) override;
     bool positional() { return positional_; }
     bool right() { return magCompare(box_position_, "right"); }
     bool top() { return magCompare(box_position_, "top"); }
@@ -426,7 +426,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     typedef string (LegendVisitor::*Composition)(const string&, const string&);
     map<string, Composition> compositions_;
     // Calculate the grid!

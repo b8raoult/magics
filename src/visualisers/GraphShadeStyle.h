@@ -41,8 +41,8 @@ public:
     GraphShadeStyle();
     virtual ~GraphShadeStyle();
 
-    virtual void set(const XmlNode& node) { GraphShadeStyleAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { GraphShadeStyleAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { GraphShadeStyleAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { GraphShadeStyleAttributes::set(map); }
     virtual GraphShadeStyle* clone() const {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new GraphShadeStyle();
@@ -52,7 +52,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed

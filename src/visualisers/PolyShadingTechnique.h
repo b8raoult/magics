@@ -68,7 +68,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "PolyShadingTechnique[]"; }
+    virtual void print(ostream& s) const override { s << "PolyShadingTechnique[]"; }
 
 
 private:
@@ -83,9 +83,9 @@ public:
     GridShading() {}
     virtual ~GridShading() {}
 
-    void set(const map<string, string>& map) { GridShadingAttributes::set(map); }
-    void set(const XmlNode& node) { GridShadingAttributes::set(node); }
-    bool accept(const string& node) { return GridShadingAttributes::accept(node); }
+    void set(const map<string, string>& map) override { GridShadingAttributes::set(map); }
+    void set(const XmlNode& node) override { GridShadingAttributes::set(node); }
+    bool accept(const string& node) override { return GridShadingAttributes::accept(node); }
 
     ShadingTechnique* clone() const override { return new GridShading(); }
     void operator()(Polyline* poly, const ColourTechnique& technique) const {
@@ -99,7 +99,7 @@ public:
     CellArray* array(MatrixHandler& matrix, IntervalMap<int>& range, const Transformation& transformation, int width,
                      int height, float resolution, const string& technique);
     virtual bool needClipping() { return true; }
-    bool method(ContourMethod* method) {
+    bool method(ContourMethod* method) override {
         // FIXME: memory leak
         method = new ContourMethod();
         return true;
@@ -107,7 +107,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    void print(ostream&) const {}
+    void print(ostream& s) const  { s << "GridShading[]"; }
 
 
 private:

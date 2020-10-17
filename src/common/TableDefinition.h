@@ -46,7 +46,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "TableDefinition[]"; }
+    virtual void print(ostream& s) const override { s << "TableDefinition[]"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -100,7 +100,7 @@ public:
 protected:
     TableDefinition<T>* helper_;
 
-    virtual void print(ostream& out) const { out << *helper_; }
+    virtual void print(ostream& out) const override { out << *helper_; }
 
 
 private:

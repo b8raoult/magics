@@ -85,7 +85,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "GribInterpretor" << endl; }
+    virtual void print(ostream& out) const  { out << "GribInterpretor" << endl; }
     map<double, map<double, int> > index_;
     int indexLon_;
     int indexLat_;

@@ -47,8 +47,8 @@ public:
         NOTIMP;
         return 0;
     }
-    virtual void set(const map<string, string>& map) { AxisMethodAttributes::set(map); }
-    virtual void set(const XmlNode& node) { AxisMethodAttributes::set(node); }
+    virtual void set(const map<string, string>& map)  override{ AxisMethodAttributes::set(map); }
+    virtual void set(const XmlNode& node)  override{ AxisMethodAttributes::set(node); }
     virtual void updateX(const Transformation&);
     virtual void updateY(const Transformation&);
     virtual void prepare(const Axis&, AxisItems&);
@@ -63,7 +63,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     virtual double value(double val) const { return val; }
     void prepare(list<double>&, double, double, double, double);
     double min_;

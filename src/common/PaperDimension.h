@@ -41,7 +41,7 @@ public:
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
 #ifdef MAGICS_ON_WINDOWS
-    virtual void print(ostream& s) const { s << "PaperDimension[]"; };
+    virtual void print(ostream& s) const override { s << "PaperDimension[]"; };
 #else
     virtual void print(ostream&) const = 0;
 #endif
@@ -73,7 +73,7 @@ public:
     ~A6() {}
 
 protected:
-    virtual void print(ostream& out) const { out << "format=a6[10.5,29.7]"; }
+    virtual void print(ostream& out) const override { out << "format=a6[10.5,29.7]"; }
 };
 
 class A5 : public PaperDimension {
@@ -85,7 +85,7 @@ public:
     ~A5() {}
 
 protected:
-    virtual void print(ostream& out) const { out << "format=a5[14.8,21.]"; }
+    virtual void print(ostream& out) const override { out << "format=a5[14.8,21.]"; }
 };
 
 class A4 : public PaperDimension {
@@ -97,7 +97,7 @@ public:
     ~A4() {}
 
 protected:
-    virtual void print(ostream& out) const { out << "format=a4[21.,29.7]"; }
+    virtual void print(ostream& out) const override { out << "format=a4[21.,29.7]"; }
 };
 
 class A3 : public PaperDimension {
@@ -109,7 +109,7 @@ public:
     ~A3() {}
 
 protected:
-    virtual void print(ostream& out) const { out << "format=a3[29.7,42.]"; }
+    virtual void print(ostream& out) const override { out << "format=a3[29.7,42.]"; }
 };
 
 template <>

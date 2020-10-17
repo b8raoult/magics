@@ -35,16 +35,16 @@ public:
     SceneNode();
     virtual ~SceneNode();
 
-    BasicSceneNode* clone() { return new SceneNode(); }
+    BasicSceneNode* clone() override { return new SceneNode(); }
 
-    void getReady();
-    void text(TextVisitor*);
-    void legend(LegendVisitor*);
-    void visit(BasicGraphicsObjectContainer& tree);
+    void getReady() override;
+    void text(TextVisitor*) override;
+    void legend(LegendVisitor*) override;
+    void visit(BasicGraphicsObjectContainer& tree) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     vector<TextVisitor*> texts_;
     LegendVisitor* legend_;
 

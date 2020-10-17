@@ -104,21 +104,21 @@ public:
     }
 
 
-    virtual void set(const map<string, string>& map)  override { Akima474MethodAttributes::set(map); }
+    virtual void set(const map<string, string>& map) override { Akima474MethodAttributes::set(map); }
 
-    virtual void set(const XmlNode& node)  override { Akima474MethodAttributes::set(node); }
-    virtual bool accept(const string& node)  override {
+    virtual void set(const XmlNode& node) override { Akima474MethodAttributes::set(node); }
+    virtual bool accept(const string& node) override {
         return Akima474MethodAttributes::accept(node);
         ;
     }
 
-    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer&) override  {
+    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer&) override {
         return new Akima474(matrix, *this);
     }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const  override {
+    virtual void print(ostream& out) const override {
         out << "Akima474Method[";
         Akima474MethodAttributes::print(out);
         out << "]";

@@ -45,7 +45,7 @@ public:
     Symbol();
     virtual ~Symbol();
 
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 
     void setMarker(int m) {
         marker_ = m;
@@ -92,7 +92,7 @@ public:
 
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     Polyline boundingbox_;
 
 private:
@@ -194,7 +194,7 @@ public:
     ComplexSymbol(int rows, int columns) : rows_(rows), columns_(columns) {}
     ~ComplexSymbol() {}
 
-    void redisplay(const BaseDriver& driver) const {
+    void redisplay(const BaseDriver& driver) const override {
         MagLog::dev() << "Redisplay -->" << *this << endl;
         driver.redisplay(*this);
     }
@@ -202,7 +202,7 @@ public:
     AutoVectorIterable<GraphicsItem> items() const { return AutoVectorIterable<GraphicsItem>(items_); }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     AutoVector<GraphicsItem> items_;
     int rows_;
     int columns_;

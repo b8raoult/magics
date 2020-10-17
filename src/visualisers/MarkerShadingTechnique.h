@@ -62,7 +62,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     vector<Symbol*>::iterator current_;
     map<Interval, Symbol*> map_;
     map<Interval, Symbol*> legend_;

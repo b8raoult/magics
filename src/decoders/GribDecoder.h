@@ -339,7 +339,7 @@ public:
 
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     vector<GribDecoder*> gribs_;
     GribDecoder* currentgrib_;
     friend class GribDecoder;
