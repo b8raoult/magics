@@ -46,7 +46,7 @@ public:
     /*!
       \brief sets  from an XML node
     */
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         Transformation::set(node);
         Proj4ProjectionAttributes::set(node);
         init();
@@ -54,7 +54,7 @@ public:
     /*!
        \brief sets  from a map
      */
-    void set(const map<string, string>& map)  override{
+    void set(const map<string, string>& map) override {
         Transformation::set(map);
         Proj4ProjectionAttributes::set(map);
         init();
@@ -211,7 +211,7 @@ public:
     void setDefinition(const string&) override;
     void reprojectComponents(double&, double&, pair<double, double>&) const override;
     void reprojectSpeedDirection(const PaperPoint& point, pair<double, double>&) const override;
-    virtual void geoProjection(int& geo) const  override{ geo = 1; }  // Useful for Streamlines !
+    virtual void geoProjection(int& geo) const override { geo = 1; }  // Useful for Streamlines !
 
     void wrap(double&, double&);
 

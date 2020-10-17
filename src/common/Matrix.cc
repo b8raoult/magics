@@ -456,14 +456,14 @@ double Matrix::XResolution() const {
     return resol;
 }
 
-void Matrix::boundRow(double r, double &row1, int &index1, double &row2, int &index2) const {
+void Matrix::boundRow(double r, double& row1, int& index1, double& row2, int& index2) const {
     index1 = this->lowerRow(r);
     row1   = this->regular_row(index1);
     index2 = this->upperRow(r);
     row2   = this->regular_row(index2);
 }
 
-void Matrix::boundColumn(double r, double &column1, int &index1, double &column2, int &index2) const {
+void Matrix::boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const {
     index1  = this->lowerColumn(r);
     column1 = this->regular_column(index1);
     index2  = this->upperColumn(r);
@@ -498,7 +498,7 @@ void Matrix::applyScaling(double scaling, double offset) {
     }
 }
 
-void Matrix::print(ostream &out) const {
+void Matrix::print(ostream& out) const {
     out << "Matrix<P>[";
     out << "rowsAxis=" << rowsAxis_;
     out << ", columnsAxis=" << columnsAxis_;

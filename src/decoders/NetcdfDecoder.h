@@ -63,13 +63,13 @@ public:
     void getInfo(map<string, string>&) override;
 
     void applyScaling(double scaling, double offset) override {
-          if (!data_)
+        if (!data_)
             valid_ = (*interpretor_).interpretAsMatrix(&data_);
         if (!valid_)
             throw MagicsException("Unable to use data");
 
         size_t cnt = data_->size();
-        for(size_t i = 0; i < cnt; i++) {
+        for (size_t i = 0; i < cnt; i++) {
             (*data_)[i] = (*data_)[i] * scaling + offset;
         }
     }

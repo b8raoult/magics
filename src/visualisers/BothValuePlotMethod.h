@@ -36,65 +36,21 @@ class Transformation;
 
 class BothValuePlotMethod : public ValuePlotMethod, public BothValuePlotMethodAttributes {
 public:
-    BothValuePlotMethod() : marker_(0) {}
-    virtual ~BothValuePlotMethod() {}
-    virtual void set(const map<string, string>& map) {
-        BothValuePlotMethodAttributes::set(map);
-        ValuePlotMethodAttributes::set(map);
-    }
-    virtual void set(const XmlNode& node) {
-        BothValuePlotMethodAttributes::set(node);
-        ValuePlotMethodAttributes::set(node);
-    }
-    virtual ValuePlotMethod* clone() const override {
-        BothValuePlotMethod* object = new BothValuePlotMethod();
-        object->clone(*this);
-        return object;
-    }
+    BothValuePlotMethod();
+    virtual ~BothValuePlotMethod();
+    virtual void set(const map<string, string>& map) override;
+    virtual void set(const XmlNode& node)  override;
+    virtual ValuePlotMethod* clone() const override;
 
-    virtual void clone(const BothValuePlotMethod& from) {
-        BothValuePlotMethodAttributes::copy(from);
-        ValuePlotMethodAttributes::copy(from);
-    }
+    virtual void clone(const BothValuePlotMethod& from);
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
-        out << "BothValuePlotMethod[";
-        BothValuePlotMethodAttributes::print(out);
-        ValuePlotMethodAttributes::print(out);
-        out << "]";
-    }
-    void reset() { marker_ = 0; }
+    virtual void print(ostream& out) const  override;
+    void reset() override ;
 
-    virtual void add(const PaperPoint& xy) {
-        static map<string, TextSymbol::TextPosition> poshandlers;
-        if (poshandlers.empty()) {
-            poshandlers["none"]   = TextSymbol::M_NONE;
-            poshandlers["left"]   = TextSymbol::M_LEFT;
-            poshandlers["top"]    = TextSymbol::M_ABOVE;
-            poshandlers["bottom"] = TextSymbol::M_BELOW;
-            poshandlers["right"]  = TextSymbol::M_RIGHT;
-            poshandlers["centre"] = TextSymbol::M_CENTRE;
-        }
-        if (!marker_) {
-            marker_                                             = new TextSymbol();
-            map<string, TextSymbol::TextPosition>::iterator pos = poshandlers.find(lowerCase(position_));
-            TextSymbol::TextPosition position = (pos != poshandlers.end()) ? pos->second : TextSymbol::M_ABOVE;
-            marker_->position(position);
-            marker_->setMarker(marker_index_);
-            marker_->setColour(*marker_colour_);
-            marker_->setHeight(marker_height_);
-            marker_->blanking(false);
-            MagFont font;
-            font.size(this->height_);
-            font.colour(*this->colour_);
-            marker_->font(font);
-            this->push_back(marker_);
-        }
-        marker_->push_back(xy, this->label(xy.value()));
-    }
+    virtual void add(const PaperPoint& xy) override ;
 
     TextSymbol* marker_;
 

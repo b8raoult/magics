@@ -93,12 +93,12 @@ public:
         HiLoMarkerBase* object = new NoHiLoMarker();
         return object;
     }
-    virtual bool accept(const string& node)  override{ return magCompare(node, "nohilo"); }
+    virtual bool accept(const string& node) override { return magCompare(node, "nohilo"); }
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const  override{ out << "No HiLo Marker defined"; }
+    virtual void print(ostream& out) const override { out << "No HiLo Marker defined"; }
 };
 
 

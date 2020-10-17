@@ -38,7 +38,7 @@ public:
     virtual ~ColourTableDefinitionList();
     void set(const ColourTableDefinitionListInterface&);
     void set(const XmlNode&) override;
-    void set(ColourTable&, int)override;
+    void set(ColourTable&, int) override;
 
     ColourTableDefinition* clone() const override {
         ColourTableDefinitionList* object = new ColourTableDefinitionList();

@@ -66,8 +66,8 @@ public:
     LogoPlotting();
     virtual ~LogoPlotting();
     virtual void set(const map<string, string>&) override {}
-    virtual void set(const XmlNode&)  override{}
-    void toxml(ostream&, int) const  override{}
+    virtual void set(const XmlNode&) override {}
+    void toxml(ostream&, int) const override {}
     virtual NoLogoPlotting* clone() const override {
         LogoPlotting* object = new LogoPlotting();
         return object;

@@ -20,6 +20,7 @@ AxisType.cc
 AxisType.h
 Bar.cc
 Bar.h
+BothValuePlotMethod.cc
 BothValuePlotMethod.h
 Boundaries.cc
 Boundaries.h
@@ -188,6 +189,7 @@ UserDate.h
 ValuePlot.cc
 ValuePlot.h
 ValuePlotBase.h
+ValuePlotMethod.cc
 ValuePlotMethod.h
 VisDefInfo.cc
 VisDefInfo.h

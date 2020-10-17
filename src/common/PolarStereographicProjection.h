@@ -40,14 +40,14 @@ public:
     /*!
       \brief sets  from an XML node
     */
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         Transformation::set(node);
         PolarStereographicProjectionAttributes::set(node);
     }
     /*!
       \brief sets  from a map
     */
-    void set(const map<string, string>& map)  override{
+    void set(const map<string, string>& map) override {
         Transformation::set(map);
         PolarStereographicProjectionAttributes::set(map);
     }
@@ -159,12 +159,12 @@ public:
     virtual void visit(MetaDataVisitor&, double, double, double, double, double, double) override;
 
     // Needed for Image processing!
-    virtual TeProjection& getProjection()  override{ return *projection_; }
-    double dimension(BasicGraphicsObjectContainer& parent) const  override{ return parent.absoluteHeight(); }
+    virtual TeProjection& getProjection() override { return *projection_; }
+    double dimension(BasicGraphicsObjectContainer& parent) const override { return parent.absoluteHeight(); }
     void getNewDefinition(const UserPoint&, const UserPoint&, string&) const override;
     void setDefinition(const string&) override;
     UserPoint reference() const override;
-    virtual void geoProjection(int& geo) const  override{ geo = 1; }  // Useful for Streamlines !
+    virtual void geoProjection(int& geo) const override { geo = 1; }  // Useful for Streamlines !
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream&) const override;

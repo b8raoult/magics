@@ -368,7 +368,7 @@ public:
         index2  = upperColumn(r);
         column2 = regular_column(index2);
     }
-    int rowIndex(double r) const  override{
+    int rowIndex(double r) const override {
         map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
         if (i != rowsMap_.end()) {
             if (same(i->first, r))
@@ -382,7 +382,7 @@ public:
         return -1;
     }
 
-    int columnIndex(double c) const  override{
+    int columnIndex(double c) const override {
         map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
         if (i != columnsMap_.end()) {
             if (same(i->first, c))
@@ -399,12 +399,12 @@ public:
     virtual ~BoxMatrixHandler() { delete original_; }
 
     // Implements the AbstractPoints interface
-    virtual bool accept(double x, double y) const  override{ return transformation_.in(x, y); }
+    virtual bool accept(double x, double y) const override { return transformation_.in(x, y); }
 
-    double minX() const  override{ return std::min(transformation_.getMinX(), transformation_.getMaxX()); }
-    double maxX() const  override{ return std::max(transformation_.getMinX(), transformation_.getMaxX()); }
-    double minY() const  override{ return std::min(transformation_.getMinY(), transformation_.getMaxY()); }
-    double maxY() const  override{ return std::max(transformation_.getMinY(), transformation_.getMaxY()); }
+    double minX() const override { return std::min(transformation_.getMinX(), transformation_.getMaxX()); }
+    double maxX() const override { return std::max(transformation_.getMinX(), transformation_.getMaxX()); }
+    double minY() const override { return std::min(transformation_.getMinY(), transformation_.getMaxY()); }
+    double maxY() const override { return std::max(transformation_.getMinY(), transformation_.getMaxY()); }
 
 protected:
     const Transformation& transformation_;
@@ -417,16 +417,16 @@ class GeoBoxMatrixHandler : public TransformMatrixHandler {
 public:
     GeoBoxMatrixHandler(const AbstractMatrix& matrix, const Transformation& transformation);
 
-    virtual const AbstractMatrix& original() const  override{
+    virtual const AbstractMatrix& original() const override {
         if (!original_)
             original_ = new GeoBoxMatrixHandler(matrix_.original(), transformation_);
         return *original_;
     }
 
-    int columns() const  override{ return columnsMap_.size(); }
-    int rows() const  override{ return rowsMap_.size(); }
+    int columns() const override { return columnsMap_.size(); }
+    int rows() const override { return rowsMap_.size(); }
 
-    int rowIndex(double r) const  override{
+    int rowIndex(double r) const override {
         map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
         if (i != rowsMap_.end()) {
             if (same(i->first, r))
@@ -440,7 +440,7 @@ public:
         return -1;
     }
 
-    int columnIndex(double c) const  override{
+    int columnIndex(double c) const override {
         map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
         if (i != columnsMap_.end()) {
             if (same(i->first, c))
@@ -454,15 +454,15 @@ public:
         return -1;
     }
 
-    inline double column(int, int column) const  override{ return regular_longitudes_[column]; }
-    inline double row(int row, int) const  override{ return regular_latitudes_[row]; }
-    double operator()(int row, int column) const  override{
+    inline double column(int, int column) const override { return regular_longitudes_[column]; }
+    inline double row(int row, int) const override { return regular_latitudes_[row]; }
+    double operator()(int row, int column) const override {
         if (columns_[column] == -1)
             return matrix_.missing();
         return matrix_(rows_[row], columns_[column]);
     }
 
-    int lowerRow(double r) const  override{
+    int lowerRow(double r) const override {
         map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
         if (i != rowsMap_.end()) {
             if (same(i->first, r))
@@ -475,7 +475,7 @@ public:
         return -1;
     }
 
-    int lowerColumn(double c) const  override{
+    int lowerColumn(double c) const override {
         map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
         if (i != columnsMap_.end()) {
             if (same(i->first, c))
@@ -488,25 +488,25 @@ public:
         return -1;
     }
 
-    double regular_row(int i) const  override{ return regular_latitudes_[i]; }
-    double regular_column(int i) const  override{ return regular_longitudes_[i]; }
+    double regular_row(int i) const override { return regular_latitudes_[i]; }
+    double regular_column(int i) const override { return regular_longitudes_[i]; }
 
     virtual ~GeoBoxMatrixHandler() { delete original_; }
 
     // Implements the AbstractPoints interface
-    virtual bool accept(double x, double y) const  override{ return transformation_.in(x, y); }
+    virtual bool accept(double x, double y) const override { return transformation_.in(x, y); }
 
-    double minX() const  override{ return std::min(transformation_.getMinX(), transformation_.getMaxX()); }
-    double maxX() const  override{ return std::max(transformation_.getMinX(), transformation_.getMaxX()); }
-    double minY() const  override{ return std::min(transformation_.getMinY(), transformation_.getMaxY()); }
-    double maxY() const  override{ return std::max(transformation_.getMinY(), transformation_.getMaxY()); }
+    double minX() const override { return std::min(transformation_.getMinX(), transformation_.getMaxX()); }
+    double maxX() const override { return std::max(transformation_.getMinX(), transformation_.getMaxX()); }
+    double minY() const override { return std::min(transformation_.getMinY(), transformation_.getMaxY()); }
+    double maxY() const override { return std::max(transformation_.getMinY(), transformation_.getMaxY()); }
 
-    double left() const  override{ return regular_longitudes_.front(); }
-    double bottom() const  override{ return regular_latitudes_.front(); }
-    double right() const  override{ return regular_longitudes_.back(); }
-    double top() const  override{ return regular_latitudes_.back(); }
+    double left() const override { return regular_longitudes_.front(); }
+    double bottom() const override { return regular_latitudes_.front(); }
+    double right() const override { return regular_longitudes_.back(); }
+    double top() const override { return regular_latitudes_.back(); }
 
-    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const  override{
+    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override {
         index1 = lowerRow(r);
         if (index1 < 0) {
             index2 = -1;
@@ -523,7 +523,7 @@ public:
         row2   = regular_latitudes_[index2];
     }
 
-    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const  override{
+    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override {
         index1 = lowerColumn(r);
         if (index1 < 0) {
             index2 = -1;

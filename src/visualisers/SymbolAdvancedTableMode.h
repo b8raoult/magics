@@ -49,12 +49,12 @@ public:
     void visit(Data&, HistoVisitor&) override;
 
 
-    void set(const map<string, string>& map)  override{
+    void set(const map<string, string>& map) override {
         SymbolAdvancedTableModeAttributes::set(map);
         SymbolMode::set(map);
         prepare();
     }
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         SymbolAdvancedTableModeAttributes::set(node);
         SymbolMode::set(node);
         prepare();
@@ -74,25 +74,25 @@ public:
         SymbolModeAttributes::copy(other);
     }
 
-    int getCount() const  override{ return count_; }
-    int getTolerance() const  override{ return tolerance_; }
-    double getReference() const  override{ return reference_; }
-    double getInterval() const  override{ return interval_; }
-    double getMin() const  override{ return min_; }
-    double getMax() const  override{ return max_; }
-    const Colour& getMinColour() const  override{ return *minColour_; }
-    const Colour& getMaxColour() const  override{ return *maxColour_; }
-    const string& getDirection() const  override{ return direction_; }
-    stringarray getColours() const  override{ return colours_; }
-    ListPolicy getPolicy() const  override{ return colour_policy_; }
-    floatarray getList() const  override{ return list_; }
-    double getMinHeight() const  override{ return height_min_; }
-    double getMaxHeight() const  override{ return height_max_; }
-    floatarray getHeights() const  override{ return heights_; }
-    ListPolicy getHeightPolicy() const  override{ return height_policy_; }
+    int getCount() const override { return count_; }
+    int getTolerance() const override { return tolerance_; }
+    double getReference() const override { return reference_; }
+    double getInterval() const override { return interval_; }
+    double getMin() const override { return min_; }
+    double getMax() const override { return max_; }
+    const Colour& getMinColour() const override { return *minColour_; }
+    const Colour& getMaxColour() const override { return *maxColour_; }
+    const string& getDirection() const override { return direction_; }
+    stringarray getColours() const override { return colours_; }
+    ListPolicy getPolicy() const override { return colour_policy_; }
+    floatarray getList() const override { return list_; }
+    double getMinHeight() const override { return height_min_; }
+    double getMaxHeight() const override { return height_max_; }
+    floatarray getHeights() const override { return heights_; }
+    ListPolicy getHeightPolicy() const override { return height_policy_; }
     int getLevels() const { return nbLevels_; }
-    float getMinOutlayer() const  override{ return outlayer_min_; }
-    float getMaxOutlayer() const  override{ return outlayer_max_; }
+    float getMinOutlayer() const override { return outlayer_min_; }
+    float getMaxOutlayer() const override { return outlayer_max_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

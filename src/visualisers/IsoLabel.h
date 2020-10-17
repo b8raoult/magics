@@ -70,13 +70,13 @@ public:
         object->copy(*this);
         return object;
     }
-    virtual void set(const map<string, string>& map)  override{ IsoLabelAttributes::set(map); }
-    virtual void set(const XmlNode& node)  override{ IsoLabelAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { IsoLabelAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { IsoLabelAttributes::set(node); }
 
-    virtual bool accept(const string& verb)  override{ return IsoLabelAttributes::accept(verb); }
-    virtual void operator()(Polyline&, double) const  override;
-    virtual bool label()  override { return true; }
-    virtual void prepare(LevelSelection& levels, const string& colour)  override{
+    virtual bool accept(const string& verb) override { return IsoLabelAttributes::accept(verb); }
+    virtual void operator()(Polyline&, double) const override;
+    virtual bool label() override { return true; }
+    virtual void prepare(LevelSelection& levels, const string& colour) override {
         //        int label = 0;
 
 
