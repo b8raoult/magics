@@ -54,7 +54,7 @@ public:
 
     double missing() const { return mono_.missing(); }
 
-#if 0 
+#if 0
      //Code from Spring. Does not work for non-regular spaced
      //interval. Remove this later.
 
@@ -97,7 +97,7 @@ public:
 
     virtual ~Akima474Method() {}
 
-    ContourMethod* clone() const {
+    ContourMethod* clone() const override {
         Akima474Method* method = new Akima474Method();
         method->copy(*this);
         return method;

@@ -46,7 +46,7 @@ public:
     void set(const XmlNode& node) { PolyShadingTechniqueAttributes::set(node); }
     bool accept(const string& node) { return PolyShadingTechniqueAttributes::accept(node); }
 
-    virtual ShadingTechnique* clone() const { return new PolyShadingTechnique(); }
+    virtual ShadingTechnique* clone() const override { return new PolyShadingTechnique(); }
 
     bool shadingMode() { return true; }
     bool hasLegend() { return true; }  // Isolien legend is not needed!
@@ -68,7 +68,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "PolyShadingTechnique[]"; }
 
 
 private:
@@ -87,7 +87,7 @@ public:
     void set(const XmlNode& node) { GridShadingAttributes::set(node); }
     bool accept(const string& node) { return GridShadingAttributes::accept(node); }
 
-    ShadingTechnique* clone() const { return new GridShading(); }
+    ShadingTechnique* clone() const override { return new GridShading(); }
     void operator()(Polyline* poly, const ColourTechnique& technique) const {
         poly->setFilled(true);
         poly->setStroke(false);

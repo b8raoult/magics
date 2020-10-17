@@ -38,7 +38,7 @@ public:
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
     virtual bool accept(const string&) { return false; }
-    virtual AxisTickLabelType* clone() const { return new AxisTickLabelType(); }
+    virtual AxisTickLabelType* clone() const override { return new AxisTickLabelType(); }
     virtual string label(const string& label) { return label; }
     virtual void toxml(ostream&) const;
 
@@ -67,7 +67,7 @@ public:
     virtual void set(const XmlNode& node) { NumberLabelTypeAttributes::set(node); }
     virtual void set(const map<string, string>& map) { NumberLabelTypeAttributes::set(map); }
     bool accept(const string& node) { return NumberLabelTypeAttributes::accept(node); }
-    virtual AxisTickLabelType* clone() const {
+    virtual AxisTickLabelType* clone() const override {
         NumberLabelType* label = new NumberLabelType();
         label->copy(*this);
         return label;
@@ -87,7 +87,7 @@ public:
     }
     virtual void set(const map<string, string>& map) { LabelListLabelTypeAttributes::set(map); }
     bool accept(const string& node) { return LabelListLabelTypeAttributes::accept(node); }
-    virtual AxisTickLabelType* clone() const {
+    virtual AxisTickLabelType* clone() const override {
         LabelListLabelType* label = new LabelListLabelType();
         label->copy(*this);
         return label;

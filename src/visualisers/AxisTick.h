@@ -44,7 +44,7 @@ public:
 
     virtual void set(const XmlNode& node) { AxisTickAttributes::set(node); }
     virtual void set(const map<string, string>& map) { AxisTickAttributes::set(map); }
-    virtual AxisTick* clone() const {
+    virtual AxisTick* clone() const override {
         AxisTick* tick = new AxisTick();
         tick->copy(*this);
         return tick;
@@ -79,7 +79,7 @@ public:
 protected:
     virtual void vertical(const AxisItems&, const Colour&, VerticalAxisVisitor&) {}
     virtual void horizontal(const AxisItems&, const Colour&, HorizontalAxisVisitor&) {}
-    AxisTick* clone() const { return new NoAxisTick(); }
+    AxisTick* clone() const override { return new NoAxisTick(); }
 };
 
 

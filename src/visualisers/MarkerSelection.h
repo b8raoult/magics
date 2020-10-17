@@ -39,7 +39,7 @@ public:
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void toxml(ostream&, int) const {}
-    virtual MarkerSelection* clone() const {
+    virtual MarkerSelection* clone() const override {
         MarkerSelection* object = new MarkerSelection();
         return object;
     }

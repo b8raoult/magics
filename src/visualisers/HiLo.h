@@ -57,7 +57,7 @@ public:
         ;
     }
 
-    virtual HiLoBase* clone() const {
+    virtual HiLoBase* clone() const override {
         HiLo* hilo = new HiLo();
         hilo->copy(*this);
         return hilo;
@@ -92,7 +92,7 @@ class NoHiLo : public HiLoBase {
 public:
     NoHiLo() {}
     virtual ~NoHiLo() {}
-    HiLoBase* clone() const { return new NoHiLo(); }
+    HiLoBase* clone() const override { return new NoHiLo(); }
     virtual void set(const map<string, string>&) {}
     virtual BasicGraphicsObject* next() { return 0; }
     virtual bool more() { return false; }
@@ -105,7 +105,7 @@ class HighHiLo : public HiLo {
 public:
     HighHiLo() {}
     virtual ~HighHiLo() {}
-    HiLoBase* clone() const {
+    HiLoBase* clone() const override {
         HiLo* hilo = new HighHiLo();
         // hilo->copy(*this);
         return hilo;
@@ -122,7 +122,7 @@ class LowHiLo : public HiLo {
 public:
     LowHiLo() {}
     virtual ~LowHiLo() {}
-    HiLoBase* clone() const {
+    HiLoBase* clone() const override {
         HiLoBase* hilo = new LowHiLo();
         // hilo->copy(*this);
         return hilo;

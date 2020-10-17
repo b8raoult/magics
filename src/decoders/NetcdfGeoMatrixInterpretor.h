@@ -42,7 +42,7 @@ public:
     void visit(Transformation& transformation);
 
     void set(const XmlNode& node);
-    virtual NetcdfInterpretor* clone() const;
+    virtual NetcdfInterpretor* clone() const override;
     void clone(const NetcdfGeoMatrixInterpretor& other);
     bool interpretAsMatrix(Matrix**);
     bool interpretAsPoints(PointsList&);

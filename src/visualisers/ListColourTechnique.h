@@ -36,7 +36,7 @@ public:
     void set(const XmlNode& node) { ListColourTechniqueAttributes::set(node); }
     bool accept(const string& node) { return ListColourTechniqueAttributes::accept(node); }
 
-    virtual ColourTechnique* clone() const {
+    virtual ColourTechnique* clone() const override {
         ListColourTechnique* object = new ListColourTechnique();
         object->copy(*this);
         return object;

@@ -79,7 +79,7 @@ class UVWindMode : public WindMode {
 public:
     UVWindMode() {}
     virtual ~UVWindMode() {}
-    WindMode* clone() const { return new UVWindMode(); }
+    WindMode* clone() const override { return new UVWindMode(); }
     virtual void x(Matrix&, Matrix&);
     virtual pair<double, double> operator()(double x, double y) { return std::make_pair(x, y); }
     ValuesCollectorData* values(double lon, double lat, double x, double y, double dist) {
@@ -99,7 +99,7 @@ class SDWindMode : public WindMode {
 public:
     SDWindMode() {}
     virtual ~SDWindMode() {}
-    WindMode* clone() const { return new SDWindMode(); }
+    WindMode* clone() const override { return new SDWindMode(); }
     virtual void x(Matrix&, Matrix&);
     virtual pair<double, double> operator()(double x, double y);
     ValuesCollectorData* values(double lon, double lat, double x, double y, double dist) {
@@ -118,7 +118,7 @@ class VDWindMode : public WindMode {
 public:
     VDWindMode() {}
     virtual ~VDWindMode() {}
-    WindMode* clone() const { return new VDWindMode(); }
+    WindMode* clone() const override { return new VDWindMode(); }
     virtual void x(Matrix&, Matrix&);
     virtual void y(Matrix&, Matrix&);
 

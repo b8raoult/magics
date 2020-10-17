@@ -38,7 +38,7 @@ public:
     virtual void set(const map<string, string>&) {}
     virtual bool accept(const string&) { return false; }
     virtual void toxml(ostream&, int = 0) const {}
-    virtual NoPreviewVisitor* clone() const { return new NoPreviewVisitor(); }
+    virtual NoPreviewVisitor* clone() const override { return new NoPreviewVisitor(); }
 
     void visit(BasicSceneObject&) {}
 
@@ -56,7 +56,7 @@ class PreviewVisitor : public NoPreviewVisitor {
 public:
     PreviewVisitor();
     ~PreviewVisitor();
-    NoPreviewVisitor* clone() const { return new PreviewVisitor(); }
+    NoPreviewVisitor* clone() const override { return new PreviewVisitor(); }
     void visit(BasicGraphicsObjectContainer&);
     void redisplay(const BaseDriver& driver) const;
     void visit(BasicSceneObject& object);

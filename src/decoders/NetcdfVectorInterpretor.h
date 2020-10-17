@@ -55,7 +55,7 @@ public:
         return magCompare(node, "vector");
     }
 
-    virtual NetcdfInterpretor* clone() const {
+    virtual NetcdfInterpretor* clone() const override {
         NetcdfVectorInterpretor* object = new NetcdfVectorInterpretor();
         object->clone(*this);
         return object;
@@ -95,7 +95,7 @@ public:
         return magCompare(node, "geovector");
     }
     static NetcdfInterpretor* guess(const NetcdfInterpretor& from);
-    virtual NetcdfInterpretor* clone() const {
+    virtual NetcdfInterpretor* clone() const override {
         NetcdfGeoVectorInterpretor* object = new NetcdfGeoVectorInterpretor();
         object->clone(*this);
         return object;
@@ -138,7 +138,7 @@ public:
         return magCompare(node, "geopolarvector");
     }
 
-    virtual NetcdfInterpretor* clone() const {
+    virtual NetcdfInterpretor* clone() const override {
         NetcdfGeoPolarMatrixInterpretor* object = new NetcdfGeoPolarMatrixInterpretor();
         object->clone(*this);
         return object;

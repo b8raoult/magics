@@ -141,7 +141,7 @@ public:
     }
 
 protected:
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "NetcdfDecoder[]"; }
     NetcdfDecoder* netcdf_;
 
 private:

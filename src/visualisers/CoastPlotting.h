@@ -142,7 +142,7 @@ public:
     }
     bool accept(const string& node) { return NoCoastPlottingAttributes::accept(node); }
 
-    virtual NoCoastPlotting* clone() const {
+    virtual NoCoastPlotting* clone() const override {
         CoastPlotting* object = new CoastPlotting();
         // object->copy(*this);
         return object;

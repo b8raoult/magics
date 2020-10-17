@@ -106,7 +106,7 @@ public:
     Akima760Method() { MagLog::dev() << "Akima760Method::Akima760Method-->" << *this << "\n"; }
     virtual ~Akima760Method() {}
 
-    ContourMethod* clone() const {
+    ContourMethod* clone() const override {
         Akima760Method* method = new Akima760Method();
         method->copy(*this);
         return method;

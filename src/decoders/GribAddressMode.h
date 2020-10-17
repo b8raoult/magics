@@ -82,7 +82,7 @@ public:
     GribAddressRecordMode() {}
     ~GribAddressRecordMode() {}
 
-    virtual GribAddressMode* clone() const {
+    virtual GribAddressMode* clone() const override {
         GribAddressMode* mode = new GribAddressRecordMode();
         return mode;
     }
@@ -114,7 +114,7 @@ class GribAddressByteMode : public GribAddressMode {
 public:
     GribAddressByteMode() {}
     ~GribAddressByteMode() {}
-    virtual GribAddressMode* clone() const {
+    virtual GribAddressMode* clone() const override {
         GribAddressMode* mode = new GribAddressByteMode();
         return mode;
     }

@@ -47,7 +47,7 @@ public:
         min_       = from.getMin();
         max_       = from.getMax();
     }
-    virtual LevelSelection* clone() const {
+    virtual LevelSelection* clone() const override {
         IntervalSelectionType* object = new IntervalSelectionType();
         object->copy(*this);
         return object;

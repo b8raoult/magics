@@ -68,7 +68,7 @@ public:
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     void toxml(ostream&, int) const {}
-    virtual NoLogoPlotting* clone() const {
+    virtual NoLogoPlotting* clone() const override {
         LogoPlotting* object = new LogoPlotting();
         return object;
     }
@@ -105,7 +105,7 @@ public:
     virtual void set(const XmlNode& node) { UserLogoPlottingAttributes::set(node); }
     bool accept(const string& node) { return UserLogoPlottingAttributes::accept(node); }
 
-    virtual NoLogoPlotting* clone() const {
+    virtual NoLogoPlotting* clone() const override {
         UserLogoPlotting* object = new UserLogoPlotting();
         object->copy(*this);
         return object;

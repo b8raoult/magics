@@ -81,7 +81,7 @@ public:
         GraphShadeStyle::set(map);
         DotGraphShadeStyleAttributes::set(map);
     }
-    virtual GraphShadeStyle* clone() const {
+    virtual GraphShadeStyle* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new DotGraphShadeStyle();
     }
@@ -106,7 +106,7 @@ public:
         GraphShadeStyle::set(map);
         HatchGraphShadeStyleAttributes::set(map);
     }
-    virtual GraphShadeStyle* clone() const {
+    virtual GraphShadeStyle* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new HatchGraphShadeStyle();
     }

@@ -45,7 +45,7 @@ public:
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
     }
     virtual void toxml(ostream&, int = 0) const {}
-    virtual NoMagnifierVisitor* clone() const {
+    virtual NoMagnifierVisitor* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new NoMagnifierVisitor();
     }
@@ -79,7 +79,7 @@ public:
 
     virtual ~MagnifierVisitor();
     void visit(BasicGraphicsObjectContainer&);
-    virtual NoMagnifierVisitor* clone() const {
+    virtual NoMagnifierVisitor* clone() const override {
         MagnifierVisitor* visitor = new MagnifierVisitor();
         visitor->owner_           = owner_;
         visitor->copy(*this);

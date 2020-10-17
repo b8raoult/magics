@@ -33,7 +33,7 @@ public:
     PolyCoast();
     ~PolyCoast();
 
-    virtual PolyCoast* clone() const;
+    virtual PolyCoast* clone() const override;
 
     virtual Polyline* getNew() const;
 

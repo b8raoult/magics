@@ -45,7 +45,7 @@ public:
         TephigramAttributes::set(map);
     }
 
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         Emagram* transformation = new Emagram();
         return transformation;
     }

@@ -41,7 +41,7 @@ public:
 
     virtual void set(const map<string, string>&) = 0;
     virtual void set(const XmlNode&)             = 0;
-    virtual HistoMode* clone() const             = 0;
+    virtual HistoMode* clone() const override    = 0;
     virtual void toxml(ostream&, int) const {}
     virtual void count(double, double) {}
     virtual void setToFirst(Layout&) {}

@@ -37,7 +37,7 @@ public:
     virtual ~ColourTableDefinitionCompute();
     void set(const ColourTableDefinitionComputeInterface&);
     void set(const XmlNode&);
-    ColourTableDefinition* clone() const {
+    ColourTableDefinition* clone() const override {
         ColourTableDefinitionCompute* object = new ColourTableDefinitionCompute();
         object->minColour_                   = minColour_;
         object->maxColour_                   = maxColour_;

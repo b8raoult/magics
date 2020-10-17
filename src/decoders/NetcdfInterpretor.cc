@@ -39,6 +39,37 @@ NetcdfGuessInterpretor::NetcdfGuessInterpretor() : delegate_(0) {}
 
 NetcdfGuessInterpretor::~NetcdfGuessInterpretor() {}
 
+bool NetcdfGuessInterpretor::interpretAsMatrix(Matrix** matrix) {
+    return guess()->interpretAsMatrix(matrix);
+}
+
+bool NetcdfGuessInterpretor::interpretAsVectors(Matrix** u, Matrix** v) {
+    return guess()->interpretAsVectors(u, v);
+}
+
+bool NetcdfGuessInterpretor::interpretAsRaster(RasterData&) {
+    NOTIMP;
+}
+
+bool NetcdfGuessInterpretor::interpretAsPoints(PointsList& out) {
+    NOTIMP;
+}
+
+void NetcdfGuessInterpretor::customisedPoints(const std::set<string>& needs, CustomisedPointsList& out) {
+    guess()->customisedPoints(needs, out);
+}
+
+void NetcdfGuessInterpretor::customisedPoints(const Transformation& transformation, const std::set<string>& needs,
+                                              CustomisedPointsList& out, int thinning) {
+    guess()->customisedPoints(transformation, needs, out, thinning);
+}
+
+NetcdfInterpretor* NetcdfGuessInterpretor::clone() const {
+    NetcdfInterpretor* object = new NetcdfInterpretor();
+    object->copy(*this);
+    return object;
+}
+
 NetcdfInterpretor* NetcdfGuessInterpretor::guess() const {
     if (delegate_)
         return delegate_;
@@ -113,6 +144,43 @@ void NetcdfInterpretor::setDimensions(const stringarray& value, map<string, stri
 }
 
 NetcdfInterpretor::~NetcdfInterpretor() {}
+
+void NetcdfInterpretor::getReady(const Transformation&) {}
+
+bool NetcdfInterpretor::interpretAsMatrix(Matrix**) {
+    MagLog::warning() << "Method " << *this << "::interpretAsMatrix() --> Not yet implemented.\n";
+    return false;
+}
+
+bool NetcdfInterpretor::interpretAsVectors(Matrix**, Matrix**) {
+    MagLog::warning() << "Method " << *this << "::interpretAsVectors() --> Not yet implemented.\n";
+    return false;
+}
+
+bool NetcdfInterpretor::interpretAsRaster(RasterData&) {
+    MagLog::warning() << "Method " << *this << "::interpretAsRaster() --> Not yet implemented.\n";
+    return false;
+}
+
+bool NetcdfInterpretor::interpretAsPoints(PointsList&) {
+    MagLog::warning() << "Method " << *this << "::interpretAsPoints() --> Not yet implemented.\n";
+    return false;
+}
+
+void NetcdfInterpretor::customisedPoints(const std::set<string>&, CustomisedPointsList&) {
+    MagLog::warning() << "Method " << *this << "::customisedPoints() --> Not yet implemented.\n";
+}
+
+void NetcdfInterpretor::customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&,
+                                         int thinning) {
+    MagLog::warning() << "Method " << *this << "::customisedPoints() --> Not yet implemented.\n";
+}
+
+NetcdfInterpretor* NetcdfInterpretor::clone() const {
+    NetcdfInterpretor* object = new NetcdfInterpretor();
+    object->copy(*this);
+    return object;
+}
 
 /*!
  Class information are given to the output-stream.
@@ -229,6 +297,10 @@ void NetcdfInterpretor::visit(TextVisitor& title) {
     title.addAutomaticTitle(netcdf.getAttribute("title", name));
 }
 
+void NetcdfInterpretor::applyScaling(double scaling, double offset) {
+    MagLog::warning() << "Method " << *this << "::applyScaling() --> Not yet implemented.\n";
+}
+
 void NetcdfInterpretor::getAttributes(Netcdf& nc, const string& varName, string& keys, string& values) {
     try {
         NetVariable var = nc.getVariable(varName);
@@ -320,4 +392,12 @@ void NetcdfGuessInterpretor::visit(MetaDataCollector& info) {
         // endl;
     }
     guess()->visit(info);
+}
+
+void NetcdfGuessInterpretor::visit(TextVisitor& text) {
+    guess()->visit(text);
+}
+
+void NetcdfGuessInterpretor::applyScaling(double scaling, double offset) {
+    guess()->applyScaling(scaling, offset);
 }

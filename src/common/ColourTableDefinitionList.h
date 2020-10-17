@@ -40,7 +40,7 @@ public:
     void set(const XmlNode&);
     void set(ColourTable&, int);
 
-    ColourTableDefinition* clone() const {
+    ColourTableDefinition* clone() const override {
         ColourTableDefinitionList* object = new ColourTableDefinitionList();
         object->colours_                  = colours_;
         return object;

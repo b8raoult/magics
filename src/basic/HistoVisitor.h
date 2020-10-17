@@ -38,7 +38,7 @@ public:
     virtual void set(const map<string, string>&) {}
     virtual bool accept(const string&) { return false; }
     virtual void toxml(ostream&, int = 0) const {}
-    virtual HistoVisitor* clone() const { return new HistoVisitor(); }
+    virtual HistoVisitor* clone() const override { return new HistoVisitor(); }
     void visit(BasicGraphicsObjectContainer&);
     void redisplay(const BaseDriver& driver) const;
     void visit(BasicSceneObject& object);

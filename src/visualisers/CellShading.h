@@ -40,7 +40,7 @@ public:
     void set(const XmlNode& node) { CellShadingAttributes::set(node); }
     bool accept(const string& node) { return CellShadingAttributes::accept(node); }
 
-    virtual ShadingTechnique* clone() const {
+    virtual ShadingTechnique* clone() const override {
         CellShading* object = new CellShading();
         return object;
     }
@@ -88,7 +88,7 @@ public:
     DumpShading();
     virtual ~DumpShading();
 
-    virtual ShadingTechnique* clone() const {
+    virtual ShadingTechnique* clone() const override {
         DumpShading* object = new DumpShading();
         return object;
     }

@@ -33,7 +33,7 @@ SelectionModeAttributes::SelectionModeAttributes():
 	background_colour_(MagTranslator<string, Colour>().magics("selection_mode_background_colour")),
 	line_colour_(MagTranslator<string, Colour>().magics("selection_mode_line_colour")),
 	line_style_(MagTranslator<string, LineStyle>().magics("selection_mode_line_style"))
-
+	
 {
 }
 
@@ -49,15 +49,15 @@ void SelectionModeAttributes::set(const std::map<string, string>& params)
 	vector<string> prefix(1);
 	int i = 0;
 	prefix[i++] = "selection_mode";
-
+	
 	setAttribute(prefix, "selection_mode_background_opacity", background_opacity_, params);
 	setAttribute(prefix, "selection_mode_line_thickness", line_thickness_, params);
 	setAttribute(prefix, "selection_mode_object_instancies", object_instancies_, params);
-
+	
 	setMember(prefix, "selection_mode_background_colour", background_colour_, params);
 	setMember(prefix, "selection_mode_line_colour", line_colour_, params);
 	setAttribute(prefix, "selection_mode_line_style", line_style_, params);
-
+	
 }
 
 void SelectionModeAttributes::copy(const SelectionModeAttributes& other)
@@ -68,7 +68,7 @@ void SelectionModeAttributes::copy(const SelectionModeAttributes& other)
 	background_colour_ = unique_ptr<Colour>(other.background_colour_->clone());
 	line_colour_ = unique_ptr<Colour>(other.line_colour_->clone());
 	line_style_ = other.line_style_;
-
+	
 }
 
 
@@ -77,7 +77,7 @@ bool SelectionModeAttributes::accept(const string& node)
 
 	if ( magCompare(node, "interactive_mode")  )
 		return true;
-
+	
 	return false;
 }
 
@@ -90,16 +90,16 @@ void SelectionModeAttributes::set(const XmlNode& node)
 
 	if ( magCompare(node.name(), "interactive_mode")  )
 		apply = true;
-
+	
 
 	if ( apply )
 		set(node.attributes());
 	else {
-
+		
 	}
 	for (auto &elt : node.elements())
 	{
-
+		
 	}
 }
 
@@ -112,7 +112,7 @@ void SelectionModeAttributes::print(ostream& out)  const
 	out << " background_colour = " <<  *background_colour_;
 	out << " line_colour = " <<  *line_colour_;
 	out << " line_style = " <<  line_style_;
-
+	
 	out << "]" << "\n";
 }
 
@@ -131,7 +131,7 @@ void SelectionModeAttributes::toxml(ostream& out)  const
 	niceprint(out, *line_colour_);
 	out << ", \"selection_mode_line_style\":";
 	niceprint(out, line_style_);
-
+	
 }
 
 static MagicsParameter<int> selection_mode_background_opacity("selection_mode_background_opacity", 75);

@@ -63,7 +63,7 @@ public:
 
     virtual bool accept(const string& node) { return SymbolAdvancedTableModeAttributes::accept(node); }
 
-    virtual SymbolMode* clone() const {
+    virtual SymbolMode* clone() const override {
         SymbolAdvancedTableMode* object = new SymbolAdvancedTableMode();
         object->copy(*this);
         return object;

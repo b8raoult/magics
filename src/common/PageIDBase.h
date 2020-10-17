@@ -41,7 +41,7 @@ public:
     virtual void set(const map<string, string>&) {
         MagLog::dev() << "PageIDBase::set(const map<string, string&)---> to be checked!...\n";
     }
-    virtual PageIDBase* clone() const {
+    virtual PageIDBase* clone() const override {
         MagLog::dev() << "PageIDBase::set(const map<string, string&)---> to be checked!...\n";
         return new PageIDBase();
     }

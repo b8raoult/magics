@@ -38,15 +38,15 @@ public:
     typedef vector<double>::const_iterator TableIterator;
     TableDefinition() {}
     virtual ~TableDefinition() {}
-    virtual TableDefinition* clone() const = 0;
-    virtual void set(const XmlNode&)       = 0;
+    virtual TableDefinition* clone() const override = 0;
+    virtual void set(const XmlNode&)                = 0;
     virtual void prepare() {}
     virtual void adjust(double, double) {}
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "TableDefinition[]"; }
 
 private:
     //! Copy constructor - No copy allowed

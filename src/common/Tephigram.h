@@ -53,7 +53,7 @@ public:
         TephigramAttributes::set(map);
     }
 
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         Tephigram* transformation = new Tephigram();
         return transformation;
     }

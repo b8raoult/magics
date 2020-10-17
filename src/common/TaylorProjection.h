@@ -52,7 +52,7 @@ public:
         TaylorProjectionAttributes::set(map);
     }
 
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         TaylorProjection* transformation = new TaylorProjection();
         transformation->copy(*this);
         return transformation;

@@ -46,7 +46,7 @@ public:
     void set(const XmlNode& node) { BoxPlotBoxAttributes::set(node); }
     void set(const map<string, string>& map) { BoxPlotBoxAttributes::set(map); }
     bool accept(const string& node) { return BoxPlotBoxAttributes::accept(node); }
-    BoxPlotBox* clone() const {
+    BoxPlotBox* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotBox();
     }
@@ -55,7 +55,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "BoxPlotBox[]"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -73,7 +73,7 @@ public:
     virtual void set(const XmlNode& node) { BoxPlotBoxBorderAttributes::set(node); }
     virtual void set(const map<string, string>& map) { BoxPlotBoxBorderAttributes::set(map); }
     bool accept(const string& node) { return BoxPlotBoxBorderAttributes::accept(node); }
-    virtual NoBoxPlotBoxBorder* clone() const {
+    virtual NoBoxPlotBoxBorder* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotBoxBorder();
     }
@@ -83,7 +83,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "BoxPlotBoxBorder[]"; }
 };
 
 
@@ -96,7 +96,7 @@ public:
     virtual void set(const map<string, string>& map) { BoxPlotMedianAttributes::set(map); }
     bool accept(const string& node) { return BoxPlotMedianAttributes::accept(node); }
 
-    virtual BoxPlotMedian* clone() const {
+    virtual BoxPlotMedian* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotMedian();
     }
@@ -106,7 +106,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "BoxPlotMedian[]"; }
 };
 
 
@@ -119,7 +119,7 @@ public:
     virtual void set(const map<string, string>& map) { BoxPlotWhiskerBorderAttributes::set(map); }
     bool accept(const string& node) { return BoxPlotWhiskerBorderAttributes::accept(node); }
 
-    virtual NoBoxPlotWhiskerBorder* clone() const {
+    virtual NoBoxPlotWhiskerBorder* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotWhiskerBorder();
     }
@@ -128,7 +128,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "BoxPlotWhiskerBorder[]"; }
 };
 
 
@@ -139,7 +139,7 @@ public:
 
     virtual void set(const XmlNode& node) { BoxPlotWhiskerBoxAttributes::set(node); }
     virtual void set(const map<string, string>& map) { BoxPlotWhiskerBoxAttributes::set(map); }
-    virtual BoxPlotWhiskerBox* clone() const {
+    virtual BoxPlotWhiskerBox* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotWhiskerBox();
     }
@@ -151,7 +151,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "BoxPlotWhiskerBox[]"; }
 };
 
 class BoxPlotWhiskerLine : public NoBoxPlotWhisker, public BoxPlotWhiskerLineAttributes {
@@ -162,7 +162,7 @@ public:
     virtual void set(const XmlNode& node) { BoxPlotWhiskerLineAttributes::set(node); }
     virtual void set(const map<string, string>& map) { BoxPlotWhiskerLineAttributes::set(map); }
     bool accept(const string& node) { return BoxPlotWhiskerLineAttributes::accept(node); }
-    virtual BoxPlotWhiskerLine* clone() const {
+    virtual BoxPlotWhiskerLine* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotWhiskerLine();
     }
@@ -172,7 +172,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "BoxPlotWhiskerLine[]"; }
 };
 
 

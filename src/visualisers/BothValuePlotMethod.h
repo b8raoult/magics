@@ -46,7 +46,7 @@ public:
         BothValuePlotMethodAttributes::set(node);
         ValuePlotMethodAttributes::set(node);
     }
-    virtual ValuePlotMethod* clone() const {
+    virtual ValuePlotMethod* clone() const override {
         BothValuePlotMethod* object = new BothValuePlotMethod();
         object->clone(*this);
         return object;

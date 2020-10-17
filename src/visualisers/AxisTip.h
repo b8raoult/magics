@@ -42,7 +42,7 @@ public:
     bool accept(const string&) { return false; }
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
-    virtual NoAxisTip* clone() const { return new NoAxisTip(); }
+    virtual NoAxisTip* clone() const override { return new NoAxisTip(); }
     void toxml(ostream&) const {}
     virtual void horizontal(const Colour&, TopAxisVisitor&) const {}
     virtual void horizontal(const Colour&, BottomAxisVisitor&) const {}
@@ -83,7 +83,7 @@ public:
 
     bool accept(const string& node) { return AxisTipAttributes::accept(node); }
 
-    virtual NoAxisTip* clone() const {
+    virtual NoAxisTip* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         AxisTip* tip = new AxisTip();
         tip->copy(*this);

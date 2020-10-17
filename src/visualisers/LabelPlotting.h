@@ -94,7 +94,7 @@ public:
     virtual ~LabelPlotting();
     void prepare(NoGridPlotting& grid);
 
-    virtual LabelPlotting* clone() const {
+    virtual LabelPlotting* clone() const override {
         LabelPlotting* object = new LabelPlotting();
         object->copy(*this);
         return object;

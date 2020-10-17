@@ -42,7 +42,7 @@ public:
     virtual void set(const map<string, string>&) {
         MagLog::dev() << "FrameBase::set(const map<string, string&)---> to be checked!...\n";
     }
-    virtual FrameBase* clone() const {
+    virtual FrameBase* clone() const override {
         MagLog::dev() << "FrameBase::set(const map<string, string&)---> to be checked!...\n";
         return new FrameBase();
     }

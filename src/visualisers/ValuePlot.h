@@ -37,7 +37,7 @@ public:
     ValuePlot();
     virtual ~ValuePlot();
 
-    virtual ValuePlotBase* clone() const {
+    virtual ValuePlotBase* clone() const override {
         ValuePlot* plot = new ValuePlot();
         plot->copy(*this);
         return plot;
@@ -80,7 +80,7 @@ class NoValuePlot : public ValuePlotBase {
 public:
     NoValuePlot(){};
     ~NoValuePlot(){};
-    ValuePlotBase* clone() const { return new NoValuePlot(); }
+    ValuePlotBase* clone() const override { return new NoValuePlot(); }
     bool accept(const string& node) { return magCompare(node, "nogridvalues"); }
 
     void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) {}

@@ -112,7 +112,7 @@ public:
 
     virtual bool accept(const string& node) { return SymbolIndividualModeAttributes::accept(node); }
 
-    virtual SymbolMode* clone() const {
+    virtual SymbolMode* clone() const override {
         SymbolIndividualMode* object = new SymbolIndividualMode();
         // SymbolIndividualModeAttributes::copy(*this);
         return object;

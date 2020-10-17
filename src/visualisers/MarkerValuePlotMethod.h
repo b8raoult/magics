@@ -42,7 +42,7 @@ public:
         ValuePlotMethodAttributes::set(node);
         MarkerValuePlotMethodAttributes::set(node);
     }
-    virtual ValuePlotMethod* clone() const {
+    virtual ValuePlotMethod* clone() const override {
         MarkerValuePlotMethod* object = new MarkerValuePlotMethod();
         object->clone(*this);
         return object;

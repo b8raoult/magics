@@ -123,14 +123,14 @@ class MetaData : public MetaDataVisitor {
 public:
     MetaData() {}
     ~MetaData() {}
-    MetaDataVisitor* clone() const { return new MetaData(); }
+    MetaDataVisitor* clone() const override { return new MetaData(); }
 };
 
 class NoMetaData : public MetaDataVisitor {
 public:
     NoMetaData() {}
     ~NoMetaData() {}
-    MetaDataVisitor* clone() const { return new NoMetaData(); }
+    MetaDataVisitor* clone() const override { return new NoMetaData(); }
     virtual void visit(BasicGraphicsObjectContainer&) {}
 };
 

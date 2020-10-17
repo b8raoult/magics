@@ -40,15 +40,19 @@ Contour::~Contour() {
         delete (styleInfo_);
 }
 
-Contour *Contour::clone() const {
+Contour* Contour::clone() const {
     Contour* contour = new Contour();
     contour->copy(*this);
     return contour;
 }
 
-void Contour::set(const XmlNode &node) { ContourAttributes::set(node); }
+void Contour::set(const XmlNode& node) {
+    ContourAttributes::set(node);
+}
 
-void Contour::set(const map<string, string> &map) { ContourAttributes::set(map); }
+void Contour::set(const map<string, string>& map) {
+    ContourAttributes::set(map);
+}
 
 /*!
  Class information are given to the output-stream.
@@ -223,7 +227,7 @@ void Contour::visit(MetaDataVisitor& visitor) {
     styleInfo_ = 0;
 }
 
-void Contour::getReady(const LegendVisitor &legend) {
+void Contour::getReady(const LegendVisitor& legend) {
     contour_->legend_only_ = legend.only_;
     legendIsOn_            = true;
 }

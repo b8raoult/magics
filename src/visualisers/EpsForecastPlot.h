@@ -36,7 +36,7 @@ public:
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
-    virtual EpsForecastPlot* clone() const { return new EpsForecastPlot(); }
+    virtual EpsForecastPlot* clone() const override { return new EpsForecastPlot(); }
 
     virtual bool forecast() { return true; }
     virtual bool control() { return true; }
@@ -45,7 +45,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "EpsForecastPlot[]"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -66,7 +66,7 @@ public:
     EpsForecastOnly() {}
     virtual ~EpsForecastOnly() {}
 
-    virtual EpsForecastPlot* clone() const { return new EpsForecastOnly(); }
+    virtual EpsForecastPlot* clone() const override { return new EpsForecastOnly(); }
 
     virtual bool forecast() { return true; }
     virtual bool control() { return false; }
@@ -77,7 +77,7 @@ public:
     EpsControlOnly() {}
     virtual ~EpsControlOnly() {}
 
-    virtual EpsForecastPlot* clone() const { return new EpsControlOnly(); }
+    virtual EpsForecastPlot* clone() const override { return new EpsControlOnly(); }
 
     virtual bool forecast() { return false; }
     virtual bool control() { return true; }
@@ -88,7 +88,7 @@ public:
     EpsNoForecast() {}
     virtual ~EpsNoForecast() {}
 
-    virtual EpsForecastPlot* clone() const { return new EpsNoForecast(); }
+    virtual EpsForecastPlot* clone() const override { return new EpsNoForecast(); }
 
     virtual bool forecast() { return false; }
     virtual bool control() { return false; }

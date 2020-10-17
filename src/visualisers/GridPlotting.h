@@ -99,7 +99,7 @@ public:
     GridPlotting();
     virtual ~GridPlotting();
 
-    virtual NoGridPlotting* clone() const {
+    virtual NoGridPlotting* clone() const override {
         GridPlotting* object = new GridPlotting();
         object->copy(*this);
         return object;

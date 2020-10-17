@@ -239,7 +239,7 @@ public:
     Akima761Method() { MagLog::dev() << "Akima761Method::Akima761Method-->" << *this << "\n"; }
     virtual ~Akima761Method() {}
 
-    ContourMethod<P>* clone() const {
+    ContourMethod<P>* clone() const override {
         Akima761Method<P>* method = new Akima761Method<P>();
         method->copy(*this);
         return method;

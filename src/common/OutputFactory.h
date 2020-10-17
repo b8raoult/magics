@@ -70,7 +70,7 @@ public:
     BinaryOutputFactory() {}
     virtual ~BinaryOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new BinaryOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new BinaryOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -79,7 +79,7 @@ public:
     PS_PsOutputFactory() {}
     virtual ~PS_PsOutputFactory() { reset(); }
 
-    virtual OutputFactory* clone() const {
+    virtual OutputFactory* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new PS_PsOutputFactory();
     }
@@ -94,7 +94,7 @@ class PS_EpsOutputFactory : public PS_PsOutputFactory {
 public:
     PS_EpsOutputFactory() {}
     virtual ~PS_EpsOutputFactory() {}
-    virtual OutputFactory* clone() const { return new PS_EpsOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new PS_EpsOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -102,7 +102,7 @@ class PS_PdfOutputFactory : public PS_PsOutputFactory {
 public:
     PS_PdfOutputFactory() {}
     virtual ~PS_PdfOutputFactory() {}
-    virtual OutputFactory* clone() const { return new PS_PdfOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new PS_PdfOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -113,7 +113,7 @@ public:
     GdOutputFactory() {}
     virtual ~GdOutputFactory() { reset(); }
 
-    virtual OutputFactory* clone() const { return new GdOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new GdOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
     virtual void reset();
 
@@ -126,7 +126,7 @@ public:
     GD_GifOutputFactory() {}
     virtual ~GD_GifOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new GD_GifOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new GD_GifOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -135,7 +135,7 @@ public:
     GD_PngOutputFactory() {}
     virtual ~GD_PngOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new GD_PngOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new GD_PngOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -144,7 +144,7 @@ public:
     GD_JpegOutputFactory() {}
     virtual ~GD_JpegOutputFactory() { reset(); }
 
-    virtual OutputFactory* clone() const { return new GD_JpegOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new GD_JpegOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -152,7 +152,7 @@ class GD_GifAnimOutputFactory : public GdOutputFactory {
 public:
     GD_GifAnimOutputFactory() {}
     virtual ~GD_GifAnimOutputFactory() { reset(); }
-    virtual OutputFactory* clone() const { return new GD_GifAnimOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new GD_GifAnimOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 #endif
@@ -162,7 +162,7 @@ public:
     SVG_SvgOutputFactory() {}
     virtual ~SVG_SvgOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new SVG_SvgOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new SVG_SvgOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -174,7 +174,7 @@ public:
     QT_OutputFactory() {}
     virtual ~QT_OutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new QT_OutputFactory();}
+    virtual OutputFactory* clone() const override { return new QT_OutputFactory();}
     virtual void set(DriverManager&, const XmlNode&);
 };
 #endif
@@ -186,7 +186,7 @@ public:
     CAIRO_PngOutputFactory() {}
     virtual ~CAIRO_PngOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new CAIRO_PngOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_PngOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -195,7 +195,7 @@ public:
     CAIRO_CairoOutputFactory() {}
     virtual ~CAIRO_CairoOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new CAIRO_CairoOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_CairoOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -204,7 +204,7 @@ public:
     CAIRO_PdfOutputFactory() {}
     virtual ~CAIRO_PdfOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new CAIRO_PdfOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_PdfOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -213,7 +213,7 @@ public:
     CAIRO_PsOutputFactory() {}
     virtual ~CAIRO_PsOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new CAIRO_PsOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_PsOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -221,7 +221,7 @@ class CAIRO_EpsOutputFactory : public OutputFactory {
 public:
     CAIRO_EpsOutputFactory() {}
     virtual ~CAIRO_EpsOutputFactory() {}
-    virtual OutputFactory* clone() const { return new CAIRO_EpsOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_EpsOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -229,7 +229,7 @@ class CAIRO_SvgOutputFactory : public OutputFactory {
 public:
     CAIRO_SvgOutputFactory() {}
     virtual ~CAIRO_SvgOutputFactory() {}
-    virtual OutputFactory* clone() const { return new CAIRO_SvgOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_SvgOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 /*
@@ -239,7 +239,7 @@ public:
     CAIRO_XOutputFactory() {}
     virtual ~CAIRO_XOutputFactory() {}
 
-    virtual OutputFactory* clone() const  { return new CAIRO_XOutputFactory(); }
+    virtual OutputFactory* clone() const override  { return new CAIRO_XOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 */
@@ -249,7 +249,7 @@ public:
     CAIRO_GeoTiffOutputFactory() {}
     virtual ~CAIRO_GeoTiffOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new CAIRO_GeoTiffOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new CAIRO_GeoTiffOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 #endif
@@ -259,7 +259,7 @@ public:
     KML_KmlOutputFactory() {}
     virtual ~KML_KmlOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new KML_KmlOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new KML_KmlOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 
@@ -268,7 +268,7 @@ public:
     GEOJSON_GeoJsonOutputFactory() {}
     virtual ~GEOJSON_GeoJsonOutputFactory() {}
 
-    virtual OutputFactory* clone() const { return new GEOJSON_GeoJsonOutputFactory(); }
+    virtual OutputFactory* clone() const override { return new GEOJSON_GeoJsonOutputFactory(); }
     virtual void set(DriverManager&, const XmlNode&);
 };
 

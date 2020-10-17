@@ -76,7 +76,7 @@ public:
     virtual void set(const XmlNode& node) { PageIDAttributes::set(node); }
     virtual bool accept(const string& node) { return PageIDAttributes::accept(node); }
     virtual void visit(BasicGraphicsObjectContainer& list);
-    virtual NoPageID* clone() const;
+    virtual NoPageID* clone() const override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

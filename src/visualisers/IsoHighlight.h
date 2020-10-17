@@ -53,7 +53,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "NoIsoHighlight[]"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -72,7 +72,7 @@ class IsoHighlight : public NoIsoHighlight, public map<double, double>, public I
 public:
     IsoHighlight() {}
     virtual ~IsoHighlight() {}
-    virtual NoIsoHighlight* clone() const {
+    virtual NoIsoHighlight* clone() const override {
         IsoHighlight* plot = new IsoHighlight();
         plot->copy(*this);
         return plot;
@@ -112,7 +112,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "IsoHighlight[]"; }
 
 private:
     //! Copy constructor - No copy allowed

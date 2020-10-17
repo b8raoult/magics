@@ -60,7 +60,7 @@ public:
         init();
     }
 
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         Proj4Projection* transformation = new Proj4Projection(definition_);
         transformation->copy(*this);
         return transformation;

@@ -45,7 +45,7 @@ public:
         LevelSelection::set(node);
     }
     void set(const LevelSelectionInterface& from) { list_ = from.getList(); }
-    virtual LevelSelection* clone() const {
+    virtual LevelSelection* clone() const override {
         LevelListSelectionType* object = new LevelListSelectionType();
         object->copy(*this);
         return object;

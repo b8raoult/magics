@@ -47,7 +47,7 @@ public:
     virtual void toxml(ostream&, int = 0) const {
         MagLog::dev() << "LabelPlottingBase::virtual void toxml(ostream&, int = 0) const ---> to be checked!...\n";
     }
-    virtual LabelPlottingBase* clone() const {
+    virtual LabelPlottingBase* clone() const override {
         MagLog::dev() << "LabelPlottingBase::set(const map<string, string&)---> to be checked!...\n";
         return new LabelPlottingBase();
     }

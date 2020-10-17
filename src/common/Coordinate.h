@@ -269,7 +269,7 @@ public:
                 break;
         }
     }
-    virtual XCoordinate* clone() const {
+    virtual XCoordinate* clone() const override {
         XRegularCoordinate* x = new XRegularCoordinate();
         x->copy(*this);
         return x;
@@ -359,7 +359,7 @@ public:
         automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF;
         set();
     }
-    virtual YCoordinate* clone() const {
+    virtual YCoordinate* clone() const override {
         YRegularCoordinate* y = new YRegularCoordinate();
         y->copy(*this);
         return y;
@@ -480,7 +480,7 @@ public:
     double operator()(double c) { return (c) ? log10(c) : 0; }
     double revert(double c) { return pow(c, 10); }
 
-    virtual XCoordinate* clone() const {
+    virtual XCoordinate* clone() const override {
         XLogarithmicCoordinate* x = new XLogarithmicCoordinate();
         x->copy(*this);
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
@@ -611,7 +611,7 @@ public:
 
     double operator()(double c) { return (c) ? log10(c) : 0; }
     double revert(double c) { return ::pow(10., c); }
-    virtual YCoordinate* clone() const {
+    virtual YCoordinate* clone() const override {
         YLogarithmicCoordinate* y = new YLogarithmicCoordinate();
         y->copy(*this);
         return y;
@@ -659,7 +659,7 @@ public:
     }
 
     string reference() { return DateTime(date_min_); }
-    virtual XCoordinate* clone() const {
+    virtual XCoordinate* clone() const override {
         XDateCoordinate* x = new XDateCoordinate();
 
         return x;
@@ -779,7 +779,7 @@ public:
         automatic_ = (automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF);
     }
 
-    virtual YCoordinate* clone() const {
+    virtual YCoordinate* clone() const override {
         YDateCoordinate* y = new YDateCoordinate();
         // y->copy(*this);
         return y;
@@ -883,7 +883,7 @@ public:
     }
     void automatic(bool automatic) { automatic_ = automatic ? AxisAutomaticSetting::BOTH : AxisAutomaticSetting::OFF; }
 
-    virtual YCoordinate* clone() const {
+    virtual YCoordinate* clone() const override {
         YHyperCoordinate* y = new YHyperCoordinate();
         // y->copy(*this);
         return y;
@@ -1006,7 +1006,7 @@ public:
         return maxs;
     }
 
-    virtual XCoordinate* clone() const {
+    virtual XCoordinate* clone() const override {
         XHyperCoordinate* x = new XHyperCoordinate();
 
         return x;

@@ -333,7 +333,7 @@ public:
             IsoPlotAttributes::set(node);
     }
 
-    IsoPlot* clone() const {
+    IsoPlot* clone() const override {
         IsoPlot* object = new NoIsoPlot();
         return object;
     }

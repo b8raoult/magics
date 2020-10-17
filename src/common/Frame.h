@@ -36,7 +36,7 @@ class Frame : public FrameBase, public FrameAttributes {
 public:
     Frame();
     virtual ~Frame();
-    virtual FrameBase* clone() const;
+    virtual FrameBase* clone() const override;
 
     void set(const map<string, string>& map) { FrameAttributes::set(map); }
     void set(const XmlNode& xml) { FrameAttributes::set(xml); }
@@ -68,7 +68,7 @@ public:
     ~NoFrame() {}
 
     bool operator()() const { return false; }
-    FrameBase* clone() const { return new NoFrame(); }
+    FrameBase* clone() const override { return new NoFrame(); }
 
 protected:
     virtual void print(ostream&) const;

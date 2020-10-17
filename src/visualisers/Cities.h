@@ -90,7 +90,7 @@ public:
 
     bool accept(const string& node) { return CitiesAttributes::accept(node); }
 
-    virtual NoCities* clone() const {
+    virtual NoCities* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new Cities();
     }

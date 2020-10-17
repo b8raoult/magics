@@ -45,7 +45,7 @@ public:
 
     virtual void set(const XmlNode& node) { AxisLineAttributes::set(node); }
     virtual void set(const map<string, string>& map) { AxisLineAttributes::set(map); }
-    virtual AxisLine* clone() const {
+    virtual AxisLine* clone() const override {
         AxisLine* line = new AxisLine();
         line->copy(*this);
         return line;
@@ -84,7 +84,7 @@ class NoAxisLine : public AxisLine {
 public:
     NoAxisLine() {}
     ~NoAxisLine() {}
-    AxisLine* clone() const { return new NoAxisLine(); }
+    AxisLine* clone() const override { return new NoAxisLine(); }
     virtual void horizontal(TopAxisVisitor&) const {}
     virtual void horizontal(BottomAxisVisitor&) const {}
     virtual void horizontal(LeftAxisVisitor&) const {}

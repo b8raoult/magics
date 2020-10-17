@@ -38,7 +38,7 @@ public:
     void set(const XmlNode&);
     void adjust(T min, T max);
 
-    TableDefinition<T>* clone() const {
+    TableDefinition<T>* clone() const override {
         TableDefinitionCompute<T>* object = new TableDefinitionCompute<T>();
         // What to do with the values!
         std::copy(this->begin(), this->end(), object->begin());
@@ -47,7 +47,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "TableDefinitionCompute<T>[]"; }
     int count_;
 
 private:

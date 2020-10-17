@@ -40,7 +40,7 @@ public:
     virtual void set(const map<string, string>& map) { HatchPolyShadingMethodAttributes::set(map); }
     virtual void set(const XmlNode& node) { HatchPolyShadingMethodAttributes::set(node); }
     virtual bool accept(const string& node) { return HatchPolyShadingMethodAttributes::accept(node); }
-    virtual PolyShadingMethod* clone() const {
+    virtual PolyShadingMethod* clone() const override {
         HatchPolyShadingMethod* object = new HatchPolyShadingMethod();
         object->copy(*this);
         return object;
@@ -51,7 +51,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "HatchPolyShadingMethod[]"; }
     vector<int> hatches_;
 
 private:

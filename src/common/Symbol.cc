@@ -247,14 +247,14 @@ void Symbol::boundingbox(const Polyline& boundingbox) {
     boundingbox_ = boundingbox;
 }
 
-void Symbol::outline(bool outline, const Colour &colour, int thickness, LineStyle style) {
+void Symbol::outline(bool outline, const Colour& colour, int thickness, LineStyle style) {
     outline_          = outline;
     outlineColour_    = colour;
     outlineThickness_ = thickness;
     outlineStyle_     = style;
 }
 
-void Symbol::connectline(bool connectline, const Colour &colour, int thickness, LineStyle style) {
+void Symbol::connectline(bool connectline, const Colour& colour, int thickness, LineStyle style) {
     connectLine_          = connectline;
     connectLineColour_    = colour;
     connectLineThickness_ = thickness;

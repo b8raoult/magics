@@ -83,7 +83,7 @@ public:
     virtual void set(const XmlNode& node) { MetgramBarAttributes::set(node); }
     virtual void set(const map<string, string>& map) { MetgramBarAttributes::set(map); }
     virtual bool accept(const string& node) { return magCompare(node, "bar"); }
-    virtual MetgramStyle* clone() const { return new MetgramBar(); }
+    virtual MetgramStyle* clone() const override { return new MetgramBar(); }
 
     virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task);
 
@@ -99,7 +99,7 @@ public:
 
     virtual void set(const XmlNode& node) { MetgramCurveAttributes::set(node); }
     virtual void set(const map<string, string>& map) { MetgramCurveAttributes::set(map); }
-    virtual MetgramStyle* clone() const { return new MetgramCurve(); }
+    virtual MetgramStyle* clone() const override { return new MetgramCurve(); }
     virtual bool accept(const string& node) { return magCompare(node, "curve"); }
     virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task);
     virtual void visit(LegendVisitor&);
@@ -119,7 +119,7 @@ public:
     virtual void set(const XmlNode& node) { MetgramFlagsAttributes::set(node); }
     virtual void set(const map<string, string>& node) { MetgramFlagsAttributes::set(node); }
     virtual bool accept(const string& node) { return magCompare(node, "flags"); }
-    virtual MetgramStyle* clone() const {
+    virtual MetgramStyle* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new MetgramFlags();
     }

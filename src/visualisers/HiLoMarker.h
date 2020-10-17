@@ -40,7 +40,7 @@ public:
     void set(const XmlNode& node) { HiLoMarkerAttributes::set(node); }
     virtual bool accept(const string& node) { return HiLoMarkerAttributes::accept(node); }
 
-    virtual HiLoMarker* clone() const {
+    virtual HiLoMarker* clone() const override {
         HiLoMarker* object = new HiLoMarker();
         object->copy(*this);
         return object;
@@ -89,7 +89,7 @@ class NoHiLoMarker : public HiLoMarkerBase {
 public:
     NoHiLoMarker() {}
     virtual ~NoHiLoMarker() {}
-    virtual HiLoMarkerBase* clone() const {
+    virtual HiLoMarkerBase* clone() const override {
         HiLoMarkerBase* object = new NoHiLoMarker();
         return object;
     }

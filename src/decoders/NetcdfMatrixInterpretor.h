@@ -55,7 +55,7 @@ public:
         return false;
     }
 
-    virtual NetcdfInterpretor* clone() const {
+    virtual NetcdfInterpretor* clone() const override {
         NetcdfMatrixInterpretor* object = new NetcdfMatrixInterpretor();
         object->clone(*this);
         return object;

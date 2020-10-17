@@ -35,7 +35,7 @@ public:
     virtual ~HistoTableMode();
     void set(const map<string, string>& map) { HistoTableModeAttributes::set(map); }
     void set(const XmlNode& node) { HistoTableModeAttributes::set(node); }
-    HistoMode* clone() const {
+    HistoMode* clone() const override {
         HistoTableMode* object;
         object->copy(*this);
         return object;

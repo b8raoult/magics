@@ -38,7 +38,7 @@ public:
     void set(const TableDefinitionListInterface<T>&);
     void set(const XmlNode&);
 
-    TableDefinition<T>* clone() const {
+    TableDefinition<T>* clone() const override {
         TableDefinitionList<T>* object = new TableDefinitionList();
         // What to do with the values!
         std::copy(this->begin(), this->end(), object->begin());
@@ -47,7 +47,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "TableDefinitionList<T>[]"; }
 
 private:
     //! Copy constructor - No copy allowed

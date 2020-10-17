@@ -41,7 +41,7 @@ public:
     virtual ~MarkerShadingTechnique();
     virtual void set(const map<string, string>& map) { MarkerShadingTechniqueAttributes::set(map); }
     virtual void set(const XmlNode& node) { MarkerShadingTechniqueAttributes::set(node); }
-    virtual ShadingTechnique* clone() const {
+    virtual ShadingTechnique* clone() const override {
         MarkerShadingTechnique* object = new MarkerShadingTechnique();
         object->copy(*this);
         return object;

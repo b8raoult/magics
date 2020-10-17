@@ -33,7 +33,7 @@ public:
 
     virtual void execute() {}  // protype to be confirmed!
 protected:
-    virtual void print(ostream&) const {}
+    virtual void print(ostream& s) const { s << "InteractiveAction[]"; }
     friend ostream& operator<<(ostream& s, const InteractiveAction& p) {
         p.print(s);
         return s;

@@ -62,7 +62,7 @@ public:
 
     void aspectRatio(double&, double&);
 
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         CartesianTransformation* object = new CartesianTransformation();
         object->copy(*this);
         return object;

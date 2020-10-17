@@ -78,7 +78,7 @@ class NoBinningObject : public BinningObject {
 public:
     NoBinningObject() {}
     ~NoBinningObject() {}
-    BinningObject* clone() const { return new NoBinningObject(); }
+    BinningObject* clone() const override { return new NoBinningObject(); }
 };
 
 

@@ -83,7 +83,7 @@ public:
     virtual void set(const map<string, string>& map) { ContinuousLegendMethodAttributes::set(map); }
     virtual bool accept(const string& node) { return magCompare(node, "continuous"); }
     virtual LegendType name() const { return CONTINUOUS; }
-    LegendMethod* clone() const { return new ContinuousLegendMethod(); }
+    LegendMethod* clone() const override { return new ContinuousLegendMethod(); }
     virtual void row(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
     virtual void column(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
 
@@ -99,7 +99,7 @@ public:
     virtual void set(const map<string, string>& map) { HistogramLegendMethodAttributes::set(map); }
     virtual bool accept(const string& node) { return magCompare(node, "histogram"); }
     virtual LegendType name() const { return HISTOGRAM; }
-    LegendMethod* clone() const { return new HistogramLegendMethod(); }
+    LegendMethod* clone() const override { return new HistogramLegendMethod(); }
     virtual void row(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
     virtual void column(LegendEntry&, double, double, Text&, BasicGraphicsObjectContainer&);
     const Colour& gridColour() const { return *histo_grid_colour_; }

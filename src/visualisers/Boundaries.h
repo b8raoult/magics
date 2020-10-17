@@ -85,7 +85,7 @@ public:
 
     bool accept(const string& node) { return BoundariesAttributes::accept(node); }
 
-    virtual NoBoundaries* clone() const {
+    virtual NoBoundaries* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new Boundaries();
     }

@@ -48,7 +48,7 @@ public:
         netcdf.name("netcdf");
         NetcdfInterpretor::set(netcdf);
     }
-    virtual NetcdfInterpretor* clone() const {
+    virtual NetcdfInterpretor* clone() const override {
         NetcdfGeopointsInterpretor* object = new NetcdfGeopointsInterpretor();
         object->clone(*this);
         return object;
@@ -96,7 +96,7 @@ public:
         netcdf.name("netcdf");
         NetcdfInterpretor::set(netcdf);
     }
-    virtual NetcdfInterpretor* clone() const {
+    virtual NetcdfInterpretor* clone() const override {
         NetcdfXYpointsInterpretor* object = new NetcdfXYpointsInterpretor();
         object->clone(*this);
         return object;

@@ -57,7 +57,7 @@ public:
     }
 
     double ratio() const;
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         GeoRectangularProjection* transformation = new GeoRectangularProjection();
         transformation->copy(*this);
         return transformation;

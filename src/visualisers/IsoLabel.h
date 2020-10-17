@@ -65,7 +65,7 @@ public:
     IsoLabel();
     virtual ~IsoLabel();
 
-    virtual IsoLabel* clone() const {
+    virtual IsoLabel* clone() const override {
         IsoLabel* object = new IsoLabel();
         object->copy(*this);
         return object;

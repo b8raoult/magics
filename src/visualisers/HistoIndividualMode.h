@@ -38,7 +38,7 @@ public:
 
     void set(const map<string, string>& map) { HistoIndividualModeAttributes::set(map); }
     void set(const XmlNode& node) { HistoIndividualModeAttributes::set(node); }
-    HistoMode* clone() const {
+    HistoMode* clone() const override {
         HistoIndividualMode* object;
         object->copy(*this);
         return object;

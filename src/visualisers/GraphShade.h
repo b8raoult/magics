@@ -78,7 +78,7 @@ public:
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
-    virtual GraphShade* clone() const { return new NoGraphShade(); }
+    virtual GraphShade* clone() const override { return new NoGraphShade(); }
 
     virtual void operator()(Polyline& poly) { poly.setFilled(false); }
     virtual void legend(Polyline&) {}

@@ -52,7 +52,7 @@ public:
         PolarStereographicProjectionAttributes::set(map);
     }
 
-    virtual Transformation* clone() const {
+    virtual Transformation* clone() const override {
         PolarStereographicProjection* transformation = new PolarStereographicProjection();
         transformation->copy(*this);
         return transformation;

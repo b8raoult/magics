@@ -119,7 +119,7 @@ public:
     void set(const ColourTechniqueInterface&);
 
 
-    virtual ColourTechnique* clone() const {
+    virtual ColourTechnique* clone() const override {
         PaletteColourTechnique* object = new PaletteColourTechnique();
         object->copy(*this);
         return object;
