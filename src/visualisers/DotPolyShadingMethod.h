@@ -39,9 +39,9 @@ public:
     DotPolyShadingMethod() {}
     virtual ~DotPolyShadingMethod() {}
 
-    virtual void set(const map<string, string>& map) { DotPolyShadingMethodAttributes::set(map); }
-    virtual void set(const XmlNode& node) { DotPolyShadingMethodAttributes::set(node); }
-    virtual bool accept(const string& node) { return DotPolyShadingMethodAttributes::accept(node); }
+    virtual void set(const map<string, string>& map)  override { DotPolyShadingMethodAttributes::set(map); }
+    virtual void set(const XmlNode& node)  override { DotPolyShadingMethodAttributes::set(node); }
+    virtual bool accept(const string& node)  override { return DotPolyShadingMethodAttributes::accept(node); }
 
 
     virtual PolyShadingMethod* clone() const override {
@@ -50,9 +50,9 @@ public:
         return object;
     }
 
-    virtual void prepare(LevelSelection& levels, const ColourTechnique& colours);
+    virtual void prepare(LevelSelection& levels, const ColourTechnique& colours) override ;
 
-    virtual void operator()(Polyline& poly) const;
+    virtual void operator()(Polyline& poly) const override ;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

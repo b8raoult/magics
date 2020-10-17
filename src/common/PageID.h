@@ -72,10 +72,10 @@ class PageID : public NoPageID, public PageIDAttributes {
 public:
     PageID();
     virtual ~PageID();
-    virtual void set(const map<string, string>& map) { PageIDAttributes::set(map); }
-    virtual void set(const XmlNode& node) { PageIDAttributes::set(node); }
-    virtual bool accept(const string& node) { return PageIDAttributes::accept(node); }
-    virtual void visit(BasicGraphicsObjectContainer& list);
+    virtual void set(const map<string, string>& map)  override { PageIDAttributes::set(map); }
+    virtual void set(const XmlNode& node)  override { PageIDAttributes::set(node); }
+    virtual bool accept(const string& node)  override { return PageIDAttributes::accept(node); }
+    virtual void visit(BasicGraphicsObjectContainer& list) override ;
     virtual NoPageID* clone() const override;
 
 protected:

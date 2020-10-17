@@ -97,17 +97,17 @@ public:
     MetgramCurve() {}
     virtual ~MetgramCurve() {}
 
-    virtual void set(const XmlNode& node) { MetgramCurveAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { MetgramCurveAttributes::set(map); }
+    virtual void set(const XmlNode& node)  override { MetgramCurveAttributes::set(node); }
+    virtual void set(const map<string, string>& map)  override { MetgramCurveAttributes::set(map); }
     virtual MetgramStyle* clone() const override { return new MetgramCurve(); }
-    virtual bool accept(const string& node) { return magCompare(node, "curve"); }
-    virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task);
-    virtual void visit(LegendVisitor&);
+    virtual bool accept(const string& node)  override { return magCompare(node, "curve"); }
+    virtual void operator()(CustomisedPointsList& points, BasicGraphicsObjectContainer& task) override ;
+    virtual void visit(LegendVisitor&) override ;
     virtual void set(const PaperPoint&, BasicGraphicsObjectContainer&) {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override ;
 };
 
 

@@ -107,7 +107,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    void print(ostream&) const {}
+    void print(ostream&s) const  override {s<<"GridShading[]";}
 
 
 private:

@@ -288,7 +288,8 @@ void Data::applyScaling(const std::string& target_units) {
 
     double scaling = 1;
     double offset  = 0;
-
+    // FIXEM: temp thing
+defaultScaling(scaling, offset);
     if (target_units.empty()) {
         // Not asked by user or contour
         defaultScaling(scaling, offset);

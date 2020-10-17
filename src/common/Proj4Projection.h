@@ -201,7 +201,7 @@ public:
     void tpers();
     void simple();
     void projectionSimple();
-    void cleaninit() { init(); }
+    void cleaninit() override { init(); }
 
     void add(double, double);
 

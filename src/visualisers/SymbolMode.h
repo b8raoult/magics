@@ -104,13 +104,13 @@ public:
         SymbolIndividualModeAttributes::set(map);
         update();
     }
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node)  override {
         SymbolMode::set(node);
         SymbolIndividualModeAttributes::set(node);
         update();
     }
 
-    virtual bool accept(const string& node) { return SymbolIndividualModeAttributes::accept(node); }
+    virtual bool accept(const string& node)  override { return SymbolIndividualModeAttributes::accept(node); }
 
     virtual SymbolMode* clone() const override {
         SymbolIndividualMode* object = new SymbolIndividualMode();
@@ -118,20 +118,20 @@ public:
         return object;
     }
 
-    void adjust(double, double, bool, const Transformation&, double);
-    virtual void visit(LegendVisitor&);
-    void prepare() {
+    void adjust(double, double, bool, const Transformation&, double) override ;
+    virtual void visit(LegendVisitor&) override ;
+    void prepare()  override {
         update();
         properties();
     }
     void update();
     void properties() const;
-    SymbolProperties operator()(double) const { return properties_; }
-    void visit(Data&, LegendVisitor&);
+    SymbolProperties operator()(double) const  override { return properties_; }
+    void visit(Data&, LegendVisitor&) override ;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override ;
     mutable SymbolProperties properties_;
     mutable vector<string>::const_iterator current_;
 
