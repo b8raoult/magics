@@ -34,14 +34,14 @@ class XmlNode;
 class AxisType {
 public:
     AxisType();
-    virtual ~AxisType() ;
+    virtual ~AxisType();
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
-    virtual AxisType* clone() const  { return new AxisType(); }
+    virtual AxisType* clone() const { return new AxisType(); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
 
 private:
     //! Copy constructor - No copy allowed

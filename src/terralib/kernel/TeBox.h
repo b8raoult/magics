@@ -126,7 +126,7 @@ struct TL_DLL TeBox {
     TeCoord2D upperRight() const { return TeCoord2D(x2_, y2_); }
 
     //! Destructor
-    ~TeBox()  {}
+    ~TeBox() {}
 
     double x1_,  //!< x coordinate of the lower left corner
         y1_,     //!< y coordinate of the lower left corner

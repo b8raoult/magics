@@ -47,7 +47,7 @@ public:
     // implements BaseSceneObject interface
     virtual void set(const map<string, string>& params) override { NetcdfDecoderAttributes::set(params); }
     virtual void set(const XmlNode& node) override { NetcdfDecoderAttributes::set(node); }
-    virtual void visit(MagnifierVisitor&) ;
+    virtual void visit(MagnifierVisitor&);
 
     virtual PointsHandler& points(const Transformation&, bool) override;
 

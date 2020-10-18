@@ -69,9 +69,9 @@ public:
     virtual void tip(LeftAxisVisitor& out) const {}
     virtual void tip(RightAxisVisitor& out) const {}
 
-    virtual void grid(DrawingVisitor&) const  {}
+    virtual void grid(DrawingVisitor&) const {}
 
-    string createLabel(const AxisItem&) ;
+    string createLabel(const AxisItem&);
 
     double min() const { return method_->min(); }
     double max() const { return method_->max(); }

@@ -178,7 +178,7 @@ public:
     }
 
     virtual void set(const XmlNode& node) override {
-        SymbolMode::set(node) ;
+        SymbolMode::set(node);
         SymbolTableModeAttributes::set(node);
         prepare();
     }

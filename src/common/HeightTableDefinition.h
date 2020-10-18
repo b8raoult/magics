@@ -39,7 +39,7 @@ public:
     HeightTableDefinition() {}
     HeightTableDefinition* clone() const override { return new HeightTableDefinition(); }
     virtual void toxml(ostream&, int) const override {}
-} override;
+};
 
 class HeightTableDefinitionList : public HeightTableDefinition {
 public:

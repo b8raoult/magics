@@ -34,7 +34,7 @@ class SimplePolylineInput : public SimplePolylineInputAttributes, public Data, p
 public:
     SimplePolylineInput();
     virtual ~SimplePolylineInput() override;
-    virtual void decode() ;
+    virtual void decode();
     void set(const map<string, string>& map) override { SimplePolylineInputAttributes::set(map); }
     void set(const XmlNode& node) override { SimplePolylineInputAttributes::set(node); }
 

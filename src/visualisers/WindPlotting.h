@@ -94,11 +94,11 @@ protected:
     void setNormal(double&, double&) {}
 
     IntervalMap<Colour> map_;
-    virtual double minSpeed()  {
+    virtual double minSpeed() {
         NOTIMP;
         return 0;
     }
-    virtual double maxSpeed()  {
+    virtual double maxSpeed() {
         NOTIMP;
         return 0;
     }

@@ -42,7 +42,7 @@ public:
     virtual void set(const XmlNode& node) override;
     virtual ValuePlotMethod* clone() const override;
 
-    virtual void clone(const BothValuePlotMethod& from) ;
+    virtual void clone(const BothValuePlotMethod& from);
 
 
 protected:

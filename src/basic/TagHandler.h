@@ -32,17 +32,17 @@ namespace magics {
 class TagHandler {
 public:
     TagHandler();
-    virtual ~TagHandler() ;
+    virtual ~TagHandler();
     void update(const string&, const string&, const string&);
     string get(const string&, const string&);
     void reset() { definitions_.erase(definitions_.begin(), definitions_.end()); }
-    virtual void addToTags(const string&, const string&)  {}
+    virtual void addToTags(const string&, const string&) {}
 
     bool hasInfos() { return definitions_.empty() == false; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
     typedef map<string, std::set<string> > DefList;
     map<string, DefList> definitions_;
 

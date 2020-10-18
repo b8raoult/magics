@@ -56,7 +56,7 @@ public:
 
     virtual void visit(LegendVisitor&) { MagLog::dev() << "ValuePlotBase::visit(LegendBase&)---> to be checked!...\n"; }
 
-    virtual string gettype() { return "unknown"; }
+    virtual string getType() { return "unknown"; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

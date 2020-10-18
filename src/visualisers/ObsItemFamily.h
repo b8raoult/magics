@@ -105,7 +105,7 @@ public:
 
     virtual void operator()(CustomisedPoint&, ComplexSymbol&) const override;
     virtual void set(const map<string, string>& def) override {
-        row_       = atoi(find(def, "row").c_str()) override;
+        row_       = atoi(find(def, "row").c_str());
         column_    = atoi(find(def, "column").c_str());
         colour_    = find(def, "colour");
         speed_     = find(def, "wind_speed", "wind_speed");

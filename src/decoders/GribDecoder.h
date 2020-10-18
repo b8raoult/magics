@@ -43,7 +43,7 @@ class GribDecoder;
 struct MatchCriteria {
     MatchCriteria() {}
     virtual ~MatchCriteria() {}
-    virtual bool verify(const GribDecoder&, const string&, const string&)  { return false; }
+    virtual bool verify(const GribDecoder&, const string&, const string&) { return false; }
 };
 
 class GribMagException : public MagicsException {
@@ -149,11 +149,11 @@ public:
     void customisedPoints(const Transformation& t, CustomisedPointsList& out, double xpts, double ypts, double gap);
 
 
-    virtual grib_handle* open(grib_handle*, bool sendMsg = true) ;
-    virtual void openField() ;
-    virtual void openFirstComponent() ;
-    virtual void openSecondComponent() ;
-    virtual void openThirdComponent() ;
+    virtual grib_handle* open(grib_handle*, bool sendMsg = true);
+    virtual void openField();
+    virtual void openFirstComponent();
+    virtual void openSecondComponent();
+    virtual void openThirdComponent();
 
 
     grib_handle* id() const;

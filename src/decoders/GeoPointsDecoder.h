@@ -42,7 +42,7 @@ public:
     virtual ~GeoPointsDecoder() override;
     //! Method to access the data as a list of points : Used by psymb.
 
-    virtual void decode(const Transformation&) ;
+    virtual void decode(const Transformation&);
     virtual void decode() override;
     void set(const map<string, string>& map) override { GeoPointsDecoderAttributes::set(map); }
     void set(const XmlNode& node) override { GeoPointsDecoderAttributes::set(node); }

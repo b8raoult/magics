@@ -34,7 +34,7 @@ public:
     virtual ~GribSatelliteInterpretor();
 
     //  virtual void interpretAsRaster(const GribDecoder&, RasterData&, const Transformation&) const override;
-    virtual void interpretAsVectors(const GribDecoder&, Matrix&, Matrix&) const override {
+    virtual void interpretAsVectors(const GribDecoder&, Matrix&, Matrix&) const {
         throw NotYetImplemented("Satellite representation", " Vectors");
     }
     virtual void interpretAsMatrix(GribDecoder&) const override;

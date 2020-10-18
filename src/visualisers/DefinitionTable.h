@@ -19,7 +19,7 @@ namespace magics {
 class BaseTable {
 public:
     BaseTable(const string& definition) : definition_(definition) {}
-    virtual ~BaseTable() override {}
+    virtual ~BaseTable() {}
     const string& info() const { return definition_; }
     string definition_;
     virtual void add(const map<string, string>&) = 0;
@@ -33,8 +33,8 @@ public:
     virtual void toxml(ostream&, int) const {}
 
 
-    const D& definition(int code) const override {
-        typename map<int, D*>::const_iterator param = map<int, D*>::find(code) override;
+    const D& definition(int code) const {
+        typename map<int, D*>::const_iterator param = map<int, D*>::find(code);
         if (param == this->end())
             return unknown_;
         return *(param->second);
@@ -45,7 +45,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const override;
+    virtual void print(ostream&) const;
     string definition_;
 
     void add(const map<string, string>& def) {
@@ -146,7 +146,7 @@ const D& DefinitionTable<D>::definitionInfo(const string& file, const string& ke
 }
 
 template <class D>
-DefinitionTable<D>::~DefinitionTable() override {}
+DefinitionTable<D>::~DefinitionTable() {}
 
 /*!
  Class information are given to the output-stream.

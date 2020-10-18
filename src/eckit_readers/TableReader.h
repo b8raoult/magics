@@ -63,7 +63,7 @@ protected:
 class TableElementDecoder {
 public:
     TableElementDecoder() : currentIndex_(0){};
-    virtual ~TableElementDecoder()  {}
+    virtual ~TableElementDecoder() {}
 
     virtual void initialise(int numValues) = 0;
     virtual void addValue(char* value)     = 0;

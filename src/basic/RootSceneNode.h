@@ -41,9 +41,7 @@ public:
     ~RootScenePage() override;
 
     BasicSceneNode* clone() { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
-    virtual RootScenePage* newPage()  {
-        return (width_) ? new RootScenePage(width_, height_) : new RootScenePage() ;
-    }
+    virtual RootScenePage* newPage() { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
     void visit(BasicGraphicsObjectContainer& tree) {
         tree.push_back(new StartPage());
         BasicSceneNode::visit(tree);
@@ -77,13 +75,13 @@ public:
     RootSceneNode();
 
     virtual ~RootSceneNode() override;
-    virtual void setPage(RootScenePage* node) ;
+    virtual void setPage(RootScenePage* node);
 
 
     double absoluteWidth() const override { return absoluteWidth_; }
     double absoluteHeight() const override { return absoluteHeight_; }
     virtual void absoluteRootWidth(double width) override {
-        scale_ = width / absoluteWidth_ ;
+        scale_ = width / absoluteWidth_;
         if (scale_ < 1)
             scale_ = 1;
         absoluteWidth_ = width;

@@ -56,10 +56,10 @@ public:
         return *(this->pointsHandlers_.back());
     }
 
-    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&) override;
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&) override;
+    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&);
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);
     void getReady(const Transformation&) override;
-    virtual void points(const Transformation&, vector<UserPoint>&) override;
+    virtual void points(const Transformation&, vector<UserPoint>&);
 
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
                           bool all) override {

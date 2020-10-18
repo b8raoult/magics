@@ -51,17 +51,17 @@ public:
         GribType
     };
 
-    virtual ~VisDefInfoBase() override;
+    virtual ~VisDefInfoBase();
 
     VisDefInfoItem* addItem(string);
     const vector<string>& keys() { return keys_; }
     string type() { return type_; }
 
-    // virtual vector<string> visDefFile(MvKeyProfile*,int)  override {return QStringList() override;}
-    // virtual MvRequest visDefRequest(MvKeyProfile*,int)  override {return MvRequest() override;}
+    // virtual vector<string> visDefFile(MvKeyProfile*,int)   {return QStringList() ;}
+    // virtual MvRequest visDefRequest(MvKeyProfile*,int)   {return MvRequest() ;}
 
-    virtual void getAttributes(MetaDataCollector&, map<string, string>&) override {}
-    override;
+    virtual void getAttributes(MetaDataCollector&, map<string, string>&) {}
+
 
     bool isLoaded() { return loaded_; }
     void clear();

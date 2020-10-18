@@ -30,11 +30,11 @@ namespace magics {
 class DriverStatic {
 public:
     DriverStatic();
-    virtual ~DriverStatic() ;
+    virtual ~DriverStatic();
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
 
 private:
     //! Copy constructor - No copy allowed

@@ -47,22 +47,19 @@ public:
     virtual bool interpretAsVectors(Matrix**, Matrix**);
     virtual bool interpretAsRaster(RasterData&);
     virtual bool interpretAsPoints(PointsList&);
-    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&) ;
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&,
-                                  int thinning) ;
+    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&);
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int thinning);
 
-    virtual bool interpretAsPoints(PointsList& points, const Transformation&)  {
-        return interpretAsPoints(points) ;
-    }
+    virtual bool interpretAsPoints(PointsList& points, const Transformation&) { return interpretAsPoints(points); }
     virtual void set(const map<string, string>& params) override { NetcdfInterpretorAttributes::set(params); }
     virtual void set(const XmlNode& node) override { NetcdfInterpretorAttributes::set(node); }
     virtual bool accept(const string& node) override { return NetcdfInterpretorAttributes::accept(node); }
-    virtual NetcdfInterpretor* clone() const ;
+    virtual NetcdfInterpretor* clone() const;
 
     virtual void statsData(map<string, vector<double> >&) {}
     virtual void visit(MetaDataCollector&) {}
-    virtual void visit(ValuesCollector&, PointsList&)  {}
-    virtual void visit(TextVisitor&) ;
+    virtual void visit(ValuesCollector&, PointsList&) {}
+    virtual void visit(TextVisitor&);
 
     double missing(Netcdf&) const;
     string getAttribute(const string&, const string&, const string&);
@@ -116,10 +113,10 @@ public:
                                   CustomisedPointsList& out, int thinning) override;
 
     virtual bool interpretAsPoints(PointsList& points, const Transformation&) override {
-        return interpretAsPoints(points) ;
+        return interpretAsPoints(points);
     }
     virtual void set(const map<string, string>& params) override { NetcdfInterpretorAttributes::set(params); }
-    virtual void set(const XmlNode& node)       override { NetcdfInterpretorAttributes::set(node); }
+    virtual void set(const XmlNode& node) override { NetcdfInterpretorAttributes::set(node); }
     virtual bool accept(const string& node) override { return NetcdfInterpretorAttributes::accept(node); }
     virtual NetcdfInterpretor* clone() const override;
 

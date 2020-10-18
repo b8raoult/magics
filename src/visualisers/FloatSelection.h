@@ -30,13 +30,13 @@ namespace magics {
 class FloatSelection : public vector<double> {
 public:
     FloatSelection();
-    virtual ~FloatSelection() override;
-    virtual void prepare() override {}
+    virtual ~FloatSelection();
+    virtual void prepare() {}
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const override;
+    virtual void print(ostream&) const;
     void calculate(double, double, int);
     void calculate(const doublearray&);
 

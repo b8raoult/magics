@@ -63,10 +63,8 @@ protected:
 class TitleFieldHandler {
 public:
     TitleFieldHandler() {}
-    virtual ~TitleFieldHandler() override{};
-    virtual void operator()(TitleField& field, vector<string>& lines, const GribDecoder&) override {
-        ASSERT(false) ;
-    }
+    virtual ~TitleFieldHandler(){};
+    virtual void operator()(TitleField& field, vector<string>& lines, const GribDecoder&) { ASSERT(false); }
 };
 
 

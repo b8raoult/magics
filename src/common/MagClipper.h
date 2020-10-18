@@ -22,7 +22,7 @@ class PaperPoint;
 class MagClipper {
 public:
     MagClipper();
-    ~MagClipper() ;
+    ~MagClipper();
 
     static void clipOpened(const Polyline& subject, const Polyline& clip, vector<Polyline*>& result);
     static void clipClosed(const Polyline& subject, const Polyline& clip, vector<Polyline*>& result);

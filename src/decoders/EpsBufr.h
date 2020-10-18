@@ -50,7 +50,7 @@ public:
     virtual void decode() override;
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    virtual PointsHandler& points() ;
+    virtual PointsHandler& points();
     virtual void visit(TextVisitor&) override;
     virtual void visit(MetaDataVisitor&) override;
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,

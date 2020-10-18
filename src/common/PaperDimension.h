@@ -31,7 +31,7 @@ namespace magics {
 class PaperDimension {
 public:
     PaperDimension() {}
-    virtual ~PaperDimension()  {}
+    virtual ~PaperDimension() {}
     void setOrientation(string orientation) { landscape_ = magCompare(orientation, "landscape"); }
 
 

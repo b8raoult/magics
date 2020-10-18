@@ -63,14 +63,13 @@ protected:
     }
     void reset() override { marker_ = 0; }
     virtual void add(const PaperPoint& xy) override {
-        if (!marker_)
-             {
-                marker_ = new Symbol();
-                marker_->setMarker(marker_index_);
-                marker_->setColour(*marker_colour_);
-                marker_->setHeight(marker_height_);
-                this->push_back(marker_);
-            }
+        if (!marker_) {
+            marker_ = new Symbol();
+            marker_->setMarker(marker_index_);
+            marker_->setColour(*marker_colour_);
+            marker_->setHeight(marker_height_);
+            this->push_back(marker_);
+        }
         marker_->push_back(xy);
     }
     Symbol* marker_;

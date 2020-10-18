@@ -415,7 +415,7 @@ int BoxMatrixHandler::columnIndex(double c) const {
 
 const AbstractMatrix& GeoBoxMatrixHandler::original() const {
     if (!original_)
-        original_ = new GeoBoxMatrixHandler(matrix_.original(), transformation_) ;
+        original_ = new GeoBoxMatrixHandler(matrix_.original(), transformation_);
     return *original_;
 }
 
@@ -480,7 +480,7 @@ int GeoBoxMatrixHandler::lowerColumn(double c) const {
 }
 
 void GeoBoxMatrixHandler::boundRow(double r, double& row1, int& index1, double& row2, int& index2) const {
-    index1 = lowerRow(r) ;
+    index1 = lowerRow(r);
     if (index1 < 0) {
         index2 = -1;
         return;
@@ -497,7 +497,7 @@ void GeoBoxMatrixHandler::boundRow(double r, double& row1, int& index1, double& 
 }
 
 void GeoBoxMatrixHandler::boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const {
-    index1 = lowerColumn(r) ;
+    index1 = lowerColumn(r);
     if (index1 < 0) {
         index2 = -1;
         return;

@@ -93,7 +93,7 @@ public:
     virtual void vertical(BottomAxisVisitor&) const {}
     virtual void vertical(LeftAxisVisitor&) const {}
     virtual void vertical(RightAxisVisitor&) const override {}
-} override;
+};
 
 
 template <>

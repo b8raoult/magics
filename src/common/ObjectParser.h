@@ -23,26 +23,26 @@ namespace magics {
 
 class ObjectParser : public StreamParser {
 public:  // methods
-    virtual ~ObjectParser() ;
+    virtual ~ObjectParser();
 
-    virtual Value parse() ;
+    virtual Value parse();
 
 protected:
     ObjectParser(std::istream& in, bool comments);
 
 protected:  // methods
-    virtual Value parseTrue() ;
-    virtual Value parseFalse() ;
-    virtual Value parseNull() ;
+    virtual Value parseTrue();
+    virtual Value parseFalse();
+    virtual Value parseNull();
     virtual Value parseValue() = 0;
-    virtual Value parseObject() ;
-    virtual Value parseArray() ;
-    virtual Value parseString(char quote = '"') ;
-    virtual Value parseNumber() ;
+    virtual Value parseObject();
+    virtual Value parseArray();
+    virtual Value parseString(char quote = '"');
+    virtual Value parseNumber();
 
-    virtual Value parseJSON() ;
+    virtual Value parseJSON();
 
-    virtual void parseKeyValue(ValueMap&, ValueList&) ;
+    virtual void parseKeyValue(ValueMap&, ValueList&);
 
     virtual std::string parserName() const = 0;
 

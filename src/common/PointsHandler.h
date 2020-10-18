@@ -42,7 +42,7 @@ public:
     virtual const UserPoint& current() override { return handler_.current(); }
     //! Method to advance
     virtual void advance() override { handler_.advance(); }
-    virtual bool empty()  {
+    virtual bool empty() {
         handler_.setToFirst();
         return handler_.more() == false;
     }

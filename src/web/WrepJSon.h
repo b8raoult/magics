@@ -157,10 +157,10 @@ public:
     void api(const Value&);
     void x_min_value(const Value&);
 
-    virtual void parameter(const Value&) ;
-    virtual void eps(const Value&) ;
-    virtual void clim(const Value&) ;
-    virtual void efi(const Value&) ;
+    virtual void parameter(const Value&);
+    virtual void eps(const Value&);
+    virtual void clim(const Value&);
+    virtual void efi(const Value&);
     void dig(const Value&);
     void ignore(const Value&) {}
     void missing(const Value&);
@@ -189,7 +189,7 @@ public:
     virtual void visit(TextVisitor&) override;
     void visit(const XmlNode& node);
 
-    virtual void decode() ;
+    virtual void decode();
 
     double correctDetz(double);
     double correctEpsz(double);

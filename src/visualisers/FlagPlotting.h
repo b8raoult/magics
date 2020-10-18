@@ -35,11 +35,11 @@ public:
     FlagPlotting() {}
     virtual ~FlagPlotting() {}
     virtual void set(const map<string, string>& map) override {
-        WindPlottingAttributes::set(map) ;
+        WindPlottingAttributes::set(map);
         FlagPlottingAttributes::set(map);
     }
     virtual void set(const XmlNode& node) override {
-        WindPlottingAttributes::set(node) ;
+        WindPlottingAttributes::set(node);
         FlagPlottingAttributes::set(node);
     }
     bool accept(const string& node) override {
@@ -51,7 +51,7 @@ public:
         FlagPlottingAttributes::copy(other);
     }
     virtual WindPlotting* clone() override {
-        FlagPlotting* object = new FlagPlotting() ;
+        FlagPlotting* object = new FlagPlotting();
         object->copy(*this);
         return object;
     }

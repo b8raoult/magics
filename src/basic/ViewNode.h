@@ -62,7 +62,7 @@ protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     void print(ostream&) const;
     void prepareLayout(SceneLayer&);
-    virtual void updateLayout()  {}
+    virtual void updateLayout() {}
 
     void getReady() override;
 
@@ -71,7 +71,7 @@ protected:
     void visit(PreviewVisitor&);
     void visit(HistoVisitor&);
 
-    virtual void copy(const ViewNode&) ;
+    virtual void copy(const ViewNode&);
 
     Transformation& transformation() const {
         ASSERT(viewTransformation_);

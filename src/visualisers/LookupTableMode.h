@@ -47,13 +47,13 @@ public:
     {
         LookupTableModeAttributes::set(node);
     }
-    virtual LookupTableMode* clone() const  {
+    virtual LookupTableMode* clone() const {
         LookupTableMode* object = new LookupTableMode();
         object->copy(*this);
         return object;
     }
 
-    virtual void operator()(Image&, Raster&)  {}
+    virtual void operator()(Image&, Raster&) {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

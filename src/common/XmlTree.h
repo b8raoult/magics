@@ -28,7 +28,7 @@ namespace magics {
 class XmlTree {
 public:
     MAGICS_EXPORT XmlTree();
-    MAGICS_EXPORT virtual ~XmlTree() ;
+    MAGICS_EXPORT virtual ~XmlTree();
     XmlNode* getParent(const string&);
     void endElement(const string&);
     XmlNode* newNode(const string&, const map<string, string>& def) const;
@@ -40,7 +40,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
     mutable map<string, XmlNode*> ids_;
     XmlNode root_;
     XmlNode definitions_;

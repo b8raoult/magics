@@ -49,7 +49,7 @@ public:
 
     PointsHandler& points() { throw MethodNotYetImplemented("TileDecoder::points()"); }
     virtual MatrixHandler& matrix() override {
-        decode() override;
+        decode();
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         matrixHandlers_.back()->setTile();
         return *(matrixHandlers_.back());

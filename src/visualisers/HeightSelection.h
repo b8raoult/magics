@@ -39,8 +39,8 @@ public:
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void toxml(ostream&, int) const {}
-    virtual HeightSelection* clone() const override {
-        HeightSelection* object = new HeightSelection() override;
+    virtual HeightSelection* clone() const {
+        HeightSelection* object = new HeightSelection();
         return object;
     }
 

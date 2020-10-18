@@ -37,14 +37,14 @@ class ObsPlotting;
 class ObsItem {
 public:
     ObsItem() : owner_(0) {}
-    virtual ~ObsItem() override {}
+    virtual ~ObsItem() {}
 
     virtual void set(const map<string, string>&) {}
     virtual void operator()(CustomisedPoint&, ComplexSymbol&) const {}
     virtual void visit(std::set<string>&) {}
 
-    string find(const map<string, string>& def, const string& keyword, const string& defaut = "") override {
-        map<string, string>::const_iterator val = def.find(keyword) override;
+    string find(const map<string, string>& def, const string& keyword, const string& defaut = "") {
+        map<string, string>::const_iterator val = def.find(keyword);
         return (val != def.end()) ? val->second : defaut;
     }
 
@@ -52,7 +52,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const override { out << "obsItem"; }
+    virtual void print(ostream& out) const { out << "obsItem"; }
     mutable const ObsPlotting* owner_;
 
 

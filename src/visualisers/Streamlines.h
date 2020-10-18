@@ -35,11 +35,11 @@ public:
     Streamlines() {}
     virtual ~Streamlines() {}
     virtual void set(const map<string, string>& map) override {
-        WindPlottingAttributes::set(map) ;
+        WindPlottingAttributes::set(map);
         StreamlinesAttributes::set(map);
     }
     virtual void set(const XmlNode& node) override {
-        WindPlottingAttributes::set(node) ;
+        WindPlottingAttributes::set(node);
         StreamlinesAttributes::set(node);
     }
     bool accept(const string& node) override {
@@ -51,7 +51,7 @@ public:
         StreamlinesAttributes::copy(other);
     }
     virtual WindPlotting* clone() override {
-        Streamlines* object = new Streamlines() ;
+        Streamlines* object = new Streamlines();
         object->copy(*this);
         return object;
     }

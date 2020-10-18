@@ -49,7 +49,7 @@ public:
         NetcdfInterpretor::set(netcdf);
     }
     virtual NetcdfInterpretor* clone() const override {
-        NetcdfGeopointsInterpretor* object = new NetcdfGeopointsInterpretor() ;
+        NetcdfGeopointsInterpretor* object = new NetcdfGeopointsInterpretor();
         object->clone(*this);
         return object;
     }
@@ -97,7 +97,7 @@ public:
         NetcdfInterpretor::set(netcdf);
     }
     virtual NetcdfInterpretor* clone() const override {
-        NetcdfXYpointsInterpretor* object = new NetcdfXYpointsInterpretor() ;
+        NetcdfXYpointsInterpretor* object = new NetcdfXYpointsInterpretor();
         object->clone(*this);
         return object;
     }

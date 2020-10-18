@@ -34,7 +34,7 @@ class ValueMap;
 class MagJSon : public WebFormat {
 public:
     MagJSon();
-    ~MagJSon()  {}
+    ~MagJSon() {}
 
     void execute(const string&, const map<string, string>&);
 
@@ -58,7 +58,7 @@ protected:
 class ParamJSon : public map<string, string> {
 public:
     ParamJSon(const string&);
-    ~ParamJSon()  {}
+    ~ParamJSon() {}
     string get(const string&, const string&);
     bool hasKey(const string&);
 

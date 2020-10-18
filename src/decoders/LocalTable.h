@@ -41,7 +41,7 @@ public:
         derivedUnit_("unknown units"),
         scaling_(1),
         offset_(0) {}
-    virtual ~ParamDef() override {}
+    virtual ~ParamDef() {}
     int code() const { return code_; }
     string longTitle() const { return longTitle_; }
     string shortTitle() const { return shortTitle_; }
@@ -52,7 +52,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const override;
+    virtual void print(ostream&) const;
 
     int code_;
     string longTitle_;

@@ -40,7 +40,7 @@ public:
     int DimensionY() const { return nrows_; }
 
     //!  Start the processing of the filters
-    virtual bool Process()  { return true; }
+    virtual bool Process() { return true; }
 
 protected:
     /*!

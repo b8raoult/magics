@@ -420,7 +420,7 @@ public:
 
 
 protected:
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
     map<string, NetVariable> variables_;
     map<string, NetDimension> dimensions_;
     map<string, NetVariable> dataset_;

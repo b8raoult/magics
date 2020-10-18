@@ -73,28 +73,26 @@ private:
 class NoBoxPlotBoxBorder {
 public:
     NoBoxPlotBoxBorder() {}
-    virtual ~NoBoxPlotBoxBorder()  {}
+    virtual ~NoBoxPlotBoxBorder() {}
 
     void cm(double cm) { cm_ = cm; }
 
-    virtual void set(const XmlNode&)  { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
-    virtual void set(const map<string, string>&)  {
+    virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
+    virtual void set(const map<string, string>&) {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
     }
-    virtual bool accept(const string&)  { return false; }
-    virtual NoBoxPlotBoxBorder* clone() const  {
+    virtual bool accept(const string&) { return false; }
+    virtual NoBoxPlotBoxBorder* clone() const {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new NoBoxPlotBoxBorder();
     }
-    virtual void toxml(ostream&) const  {
-        MagLog::dev() << "toxml(ostream& out, int tab)---> to be checked!...\n";
-    }
+    virtual void toxml(ostream&) const { MagLog::dev() << "toxml(ostream& out, int tab)---> to be checked!...\n"; }
 
-    virtual void operator()(Polyline& poly) const  { poly.setStroke(false); }
+    virtual void operator()(Polyline& poly) const { poly.setStroke(false); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const  { s << "NoBoxPlotBoxBorder[]"; }
+    virtual void print(ostream& s) const { s << "NoBoxPlotBoxBorder[]"; }
     double cm_;
 
 private:
@@ -141,20 +139,20 @@ public:
 class NoBoxPlotMedian {
 public:
     NoBoxPlotMedian() {}
-    virtual ~NoBoxPlotMedian()  {}
-    virtual bool accept(const string&)  { return false; }
+    virtual ~NoBoxPlotMedian() {}
+    virtual bool accept(const string&) { return false; }
     void cm(double cm) { cm_ = cm; }
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
-    virtual NoBoxPlotMedian* clone() const  { return new NoBoxPlotMedian(); }
+    virtual NoBoxPlotMedian* clone() const { return new NoBoxPlotMedian(); }
     virtual void toxml(ostream&) const {}
 
     virtual void operator()(BasicGraphicsObjectContainer&, Polyline*) const {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const  { s << "NoBoxPlotMedian[]"; }
+    virtual void print(ostream& s) const { s << "NoBoxPlotMedian[]"; }
     double cm_;
 
 private:
@@ -187,29 +185,27 @@ public:
 class NoBoxPlotWhisker {
 public:
     NoBoxPlotWhisker() {}
-    virtual ~NoBoxPlotWhisker()  {}
-    virtual bool accept(const string&)  { return false; }
+    virtual ~NoBoxPlotWhisker() {}
+    virtual bool accept(const string&) { return false; }
 
     void cm(double cm) { cm_ = cm; }
 
-    virtual void set(const XmlNode&)  { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
-    virtual void set(const map<string, string>&)  {
+    virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
+    virtual void set(const map<string, string>&) {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
     }
-    virtual NoBoxPlotWhisker* clone() const  {
+    virtual NoBoxPlotWhisker* clone() const {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new NoBoxPlotWhisker();
     }
-    virtual void toxml(ostream&) const  {
-        MagLog::dev() << "toxml(ostream& out, int tab)---> to be checked!...\n";
-    }
+    virtual void toxml(ostream&) const { MagLog::dev() << "toxml(ostream& out, int tab)---> to be checked!...\n"; }
 
     virtual void top(BasicGraphicsObjectContainer&, const CustomisedPoint&) const {}
     virtual void bottom(BasicGraphicsObjectContainer&, const CustomisedPoint&) const {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const  { s << "NoBoxPlotWhisker[]"; }
+    virtual void print(ostream& s) const { s << "NoBoxPlotWhisker[]"; }
     double cm_;
 
 private:
@@ -242,26 +238,24 @@ public:
 class NoBoxPlotWhiskerBorder {
 public:
     NoBoxPlotWhiskerBorder() {}
-    virtual ~NoBoxPlotWhiskerBorder()  {}
-    virtual bool accept(const string&)  { return false; }
+    virtual ~NoBoxPlotWhiskerBorder() {}
+    virtual bool accept(const string&) { return false; }
 
-    virtual void set(const XmlNode&)  { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
-    virtual void set(const map<string, string>&)  {
+    virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
+    virtual void set(const map<string, string>&) {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
     }
-    virtual NoBoxPlotWhiskerBorder* clone() const  {
+    virtual NoBoxPlotWhiskerBorder* clone() const {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new NoBoxPlotWhiskerBorder();
     }
-    virtual void toxml(ostream&) const  {
-        MagLog::dev() << "toxml(ostream& out, int tab)---> to be checked!...\n";
-    }
+    virtual void toxml(ostream&) const { MagLog::dev() << "toxml(ostream& out, int tab)---> to be checked!...\n"; }
 
     virtual void operator()(Polyline&) const {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const  { s << "NoBoxPlotWhiskerBorder[]"; }
+    virtual void print(ostream& s) const { s << "NoBoxPlotWhiskerBorder[]"; }
 
 private:
     //! Copy constructor - No copy allowed

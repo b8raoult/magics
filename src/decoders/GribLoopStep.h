@@ -36,16 +36,16 @@ class LayerNode;
 class GribLoopStep {
 public:
     GribLoopStep() {}
-    virtual ~GribLoopStep()  {}
+    virtual ~GribLoopStep() {}
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
-    virtual bool accept(const string&)  { return false; }
+    virtual bool accept(const string&) { return false; }
     // virtual void operator()(GribDecoder&) {}
-    virtual GribLoopStep* clone()  { return new GribLoopStep(); }
-    virtual void toxml(ostream&, int = 0) const  { MagLog::dev() << " const ---> to be checked!...\n"; }
+    virtual GribLoopStep* clone() { return new GribLoopStep(); }
+    virtual void toxml(ostream&, int = 0) const { MagLog::dev() << " const ---> to be checked!...\n"; }
 
 protected:
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
 
 private:
     //! Copy constructor - No copy allowed

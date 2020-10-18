@@ -116,12 +116,12 @@ public:
 
     virtual void set(const XmlNode& node) override { Akima760MethodAttributes::set(node); }
     virtual bool accept(const string& node) override {
-        return Akima760MethodAttributes::accept(node) ;
+        return Akima760MethodAttributes::accept(node);
         ;
     }
 
     virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer&) override {
-        return new Akima760(matrix, *this) ;
+        return new Akima760(matrix, *this);
     }
 
 protected:

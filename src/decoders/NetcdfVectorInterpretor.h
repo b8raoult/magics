@@ -56,7 +56,7 @@ public:
     }
 
     virtual NetcdfInterpretor* clone() const override {
-        NetcdfVectorInterpretor* object = new NetcdfVectorInterpretor() ;
+        NetcdfVectorInterpretor* object = new NetcdfVectorInterpretor();
         object->clone(*this);
         return object;
     }
@@ -96,7 +96,7 @@ public:
     }
     static NetcdfInterpretor* guess(const NetcdfInterpretor& from);
     virtual NetcdfInterpretor* clone() const override {
-        NetcdfGeoVectorInterpretor* object = new NetcdfGeoVectorInterpretor() ;
+        NetcdfGeoVectorInterpretor* object = new NetcdfGeoVectorInterpretor();
         object->clone(*this);
         return object;
     }
@@ -139,7 +139,7 @@ public:
     }
 
     virtual NetcdfInterpretor* clone() const override {
-        NetcdfGeoPolarMatrixInterpretor* object = new NetcdfGeoPolarMatrixInterpretor() ;
+        NetcdfGeoPolarMatrixInterpretor* object = new NetcdfGeoPolarMatrixInterpretor();
         object->clone(*this);
         return object;
     }
@@ -149,7 +149,7 @@ public:
     {
         NetcdfInterpretor::copy(*this);
     }
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&) ;
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

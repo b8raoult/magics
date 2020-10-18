@@ -87,9 +87,7 @@ public:
     InputMatrixRegularInterpretor();
     virtual ~InputMatrixRegularInterpretor();
 
-    virtual void set(const map<string, string>& map) override {
-        InputMatrixRegularInterpretorAttributes::set(map) ;
-    }
+    virtual void set(const map<string, string>& map) override { InputMatrixRegularInterpretorAttributes::set(map); }
     virtual void set(const XmlNode& node) override { InputMatrixRegularInterpretorAttributes::set(node); }
 
     virtual Matrix* xyInterpret(Matrix*, const InputMatrix&) override;
@@ -128,9 +126,7 @@ public:
     InputMatrixIrregularInterpretor();
     virtual ~InputMatrixIrregularInterpretor();
 
-    virtual void set(const map<string, string>& map) override {
-        InputMatrixIrregularInterpretorAttributes::set(map) ;
-    }
+    virtual void set(const map<string, string>& map) override { InputMatrixIrregularInterpretorAttributes::set(map); }
     virtual void set(const XmlNode& node) override { InputMatrixIrregularInterpretorAttributes::set(node); }
 
     virtual Matrix* geoInterpret(Matrix*, const InputMatrix&) override;

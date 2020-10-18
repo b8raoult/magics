@@ -37,14 +37,14 @@ public:
     virtual ~NetcdfConvention();
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
-    virtual bool accept(const string&)  { return false; }
-    virtual NetcdfConvention* clone()  { return new NetcdfConvention(); }
+    virtual bool accept(const string&) { return false; }
+    virtual NetcdfConvention* clone() { return new NetcdfConvention(); }
     void toxml(ostream&, int) const {}
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
 
 private:
     //! Copy constructor - No copy allowed

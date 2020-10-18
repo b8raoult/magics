@@ -320,7 +320,7 @@ public:
     virtual ~MagnifierLayout();
     void redisplay(const BaseDriver& driver) const override;
     virtual void redisplay(const BaseDriver&, vector<PaperPoint>&, float, float) const {}
-} override;
+};
 
 class RootLayout : public Layout {
 public:

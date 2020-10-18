@@ -31,7 +31,7 @@ void magics::IsoHighlight::visit(magics::Polyline*& line) {
 }
 
 void IsoHighlight::prepare(LevelSelection& levels) {
-    vector<double> todo override;
+    vector<double> todo;
     clear();
     levels.thinLevels(frequency_, todo);
     for (LevelSelection::const_iterator level = todo.begin(); level != todo.end(); ++level) {

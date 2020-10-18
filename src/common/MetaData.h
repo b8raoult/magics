@@ -36,7 +36,7 @@ public:
 
 protected:
     string data_;
-    virtual void print(ostream& s) const  { s << data_; }
+    virtual void print(ostream& s) const { s << data_; }
 
     // -- Friends
     //! Overloaded << operator to call print().
@@ -59,7 +59,7 @@ public:
     string default_;
     vector<string> styles_;
 
-    virtual void print(ostream& s) const ;
+    virtual void print(ostream& s) const;
 
     // -- Friends
     //! Overloaded << operator to call print().
@@ -78,7 +78,7 @@ public:
 
     virtual void set(const XmlNode& node) override { MetaDataAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { MetaDataAttributes::set(map); }
-    virtual MetaDataVisitor* clone() const  {
+    virtual MetaDataVisitor* clone() const {
         MetaDataVisitor* object = new MetaDataVisitor();
         object->copy(*this);
         return object;

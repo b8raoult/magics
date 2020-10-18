@@ -24,7 +24,7 @@ public:
 
 protected:
     MvBufrElementTable(MvBufrEdition* edition);
-    ~MvBufrElementTable() override;
+    ~MvBufrElementTable();
 
     // static MvBufrCodeTable* make(int element,MvEccBufrMessage* msg);
     // void load(const std::string& path);

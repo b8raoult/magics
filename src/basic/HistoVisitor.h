@@ -36,7 +36,7 @@ public:
     virtual ~HistoVisitor() override;
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
-    virtual bool accept(const string&)  { return false; }
+    virtual bool accept(const string&) { return false; }
     virtual void toxml(ostream&, int = 0) const {}
     virtual HistoVisitor* clone() const override { return new HistoVisitor(); }
     void visit(BasicGraphicsObjectContainer&) override;
