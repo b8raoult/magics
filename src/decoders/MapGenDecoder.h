@@ -37,7 +37,7 @@ class XmlNode;
 class MapGenDecoder : public MapGenDecoderAttributes, public Data, public Decoder, public vector<PointsList*> {
 public:
     MapGenDecoder();
-    virtual ~MapGenDecoder();
+    virtual ~MapGenDecoder() override;
     //! Method to access the data as a list of points : Used by psymb.
 
     virtual void decode() override;

@@ -42,13 +42,13 @@ public:
 class OdaGeoDecoder : public OdaGeoDecoderAttributes, public Decoder, public Data, public PointsList {
 public:
     OdaGeoDecoder();
-    virtual ~OdaGeoDecoder();
+    virtual ~OdaGeoDecoder() override;
 
     //! Decoder interface
-    virtual void decode(const Transformation&);
-    virtual void decode();
-    virtual void set(const map<string, string>& map) { OdaGeoDecoderAttributes::set(map); }
-    virtual void set(const XmlNode& node) { OdaGeoDecoderAttributes::set(node); }
+    virtual void decode(const Transformation&) override;
+    virtual void decode() override;
+    virtual void set(const map<string, string>& map) override { OdaGeoDecoderAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { OdaGeoDecoderAttributes::set(node); }
 
     PointsHandler& points(const Transformation& transformation) {
         decode(transformation);
@@ -98,13 +98,13 @@ private:
 class OdaXYDecoder : public OdaXYDecoderAttributes, public Decoder, public Data, public PointsList {
 public:
     OdaXYDecoder();
-    virtual ~OdaXYDecoder();
+    virtual ~OdaXYDecoder() override;
 
     //! Decoder interface
-    virtual void decode(const Transformation&);
-    virtual void decode();
-    virtual void set(const map<string, string>& map) { OdaXYDecoderAttributes::set(map); }
-    virtual void set(const XmlNode& node) { OdaXYDecoderAttributes::set(node); }
+    virtual void decode(const Transformation&) override;
+    virtual void decode() override;
+    virtual void set(const map<string, string>& map) override { OdaXYDecoderAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { OdaXYDecoderAttributes::set(node); }
     void visit(Transformation&);
     MatrixHandler& matrix();
 

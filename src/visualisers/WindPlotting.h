@@ -35,7 +35,7 @@ namespace magics {
 class WindPlotting : public WindPlottingAttributes, public LevelSelectionInterface, public ColourTechniqueInterface {
 public:
     WindPlotting();
-    virtual ~WindPlotting() {}
+    virtual ~WindPlotting() override {}
     virtual void set(const map<string, string>& map) override { WindPlottingAttributes::set(map); };
     virtual void set(const XmlNode& node) override { WindPlottingAttributes::set(node); }
     virtual bool accept(const string& key) override { return WindPlottingAttributes::accept(key); }
@@ -47,7 +47,7 @@ public:
     virtual void prepare(BasicGraphicsObjectContainer&) {}
     virtual void finish(BasicGraphicsObjectContainer&) {}
     virtual void visit(LegendVisitor&);
-    virtual void visit(Data&, PointsHandler&, HistoVisitor&){};
+    virtual void visit(Data&, PointsHandler&, HistoVisitor&) {}
     virtual void adjust(CustomisedPointsList&, const Transformation&);
     bool needLegend() { return legend_; }
     void legendOnly(bool legend) {
@@ -94,11 +94,11 @@ protected:
     void setNormal(double&, double&) {}
 
     IntervalMap<Colour> map_;
-    virtual double minSpeed() {
+    virtual double minSpeed()  {
         NOTIMP;
         return 0;
     }
-    virtual double maxSpeed() {
+    virtual double maxSpeed()  {
         NOTIMP;
         return 0;
     }

@@ -40,25 +40,13 @@ public:
     BasicGraphicsObject();
     virtual ~BasicGraphicsObject();
 
-    virtual bool reproject(BasicGraphicsObjectContainer&) const {
-        MagLog::error() << "BasicGraphicsObject::reproject(...)--->Need to be implemented!\n";
-        ASSERT(0);
-        return false;
-    }
+    virtual bool reproject(BasicGraphicsObjectContainer&) const;
 
-    virtual void redisplay(const BaseDriver&) const {
-        MagLog::dev() << "BasicGraphicsObject::redisplay(...)--->Not yet implemented\n";
-    }
+    virtual void redisplay(const BaseDriver&) const;
 
-    void parent(BasicGraphicsObjectContainer* parent) {
-        // ASSERT(parent_ == 0);
-        parent_ = parent;
-    }
+    void parent(BasicGraphicsObjectContainer* parent);
     void check();
-    BasicGraphicsObjectContainer& parent() {
-        ASSERT(parent_);
-        return *parent_;
-    }
+    BasicGraphicsObjectContainer& parent();
 
     void makeBrother(const BasicGraphicsObject& brother) { parent_ = brother.parent_; }
 
@@ -108,73 +96,30 @@ public:
     BasicGraphicsObjectContainer() {}
     virtual ~BasicGraphicsObjectContainer();
 
-    void push_back(BasicGraphicsObject* object) {
-        object->check();  // here we make sure that the object is not in 2 containres!
-        objects_.push_back(object);
-        object->parent(this);
-    }
-    void push_last(BasicGraphicsObject* object) {
-        object->check();  // here we make sure that the object is not in 2 containres!
-        last_.push_back(object);
-        object->parent(this);
-    }
+    void push_back(BasicGraphicsObject* object);
+    void push_last(BasicGraphicsObject* object);
 
     void clear();
     bool buildTree(const Layout&, unsigned int, const BaseDriver&) const override;
     void release() override;
-    void remove(BasicGraphicsObject* object) {
-        objects_.erase(std::remove(objects_.begin(), objects_.end(), object), objects_.end());
-    }
+    void remove(BasicGraphicsObject* object);
 
     void visit(const BaseDriver&) const;
 
-    virtual void getDriverInfo(double& x, double& y, double& width, double& height) {
-        if (parent_)
-            parent_->getDriverInfo(x, y, width, height);
-    }
+    virtual void getDriverInfo(double& x, double& y, double& width, double& height);
 
-    virtual double absoluteY() const  // absolute position from the root
-    {
-        ASSERT(parent_);
-        return parent_->absoluteY();
-    }
+    virtual double absoluteY() const;
 
-    virtual double absoluteWidth() const  // absolute position from the root
-    {
-        ASSERT(parent_);
-        return parent_->absoluteWidth();
-    }
+    virtual double absoluteWidth() const;
 
-    virtual double absoluteHeight() const  // absolute position from the root
-    {
-        ASSERT(parent_);
-        return parent_->absoluteHeight();
-    }
+    virtual double absoluteHeight() const;
 
-    virtual double absoluteWidth(double width)  // absolute position from the root
-    {
-        ASSERT(parent_);
-        return parent_->absoluteWidth(width);
-    }
+    virtual double absoluteWidth(double width);
 
-    virtual double absoluteHeight(double height)  // absolute position from the root
-    {
-        ASSERT(parent_);
-        return parent_->absoluteHeight(height);
-    }
+    virtual double absoluteHeight(double height);
 
-    virtual const Transformation& transformation() const  // returns the Transformation
-    {
-        ASSERT(parent_);
-        return parent_->transformation();
-    }
-    const vector<BasicGraphicsObject*>& objects() {  //
-        // first we add
-        for (vector<BasicGraphicsObject*>::iterator l = last_.begin(); l != last_.end(); ++l)
-            objects_.push_back(*l);
-        last_.clear();
-        return objects_;
-    }
+    virtual const Transformation& transformation() const;
+    const vector<BasicGraphicsObject*>& objects();
 
 protected:
     virtual void print(ostream&) const override;

@@ -77,7 +77,7 @@ public:
 class Boundaries : public NoBoundaries, public BoundariesAttributes {
 public:
     Boundaries();
-    virtual ~Boundaries();
+    virtual ~Boundaries() override;
 
     virtual void set(const XmlNode& node) override { BoundariesAttributes::set(node); }
 

@@ -64,7 +64,7 @@ private:
 class LogoPlotting : public NoLogoPlotting, public LogoPlottingAttributes {
 public:
     LogoPlotting();
-    virtual ~LogoPlotting();
+    virtual ~LogoPlotting() override;
     virtual void set(const map<string, string>&) override {}
     virtual void set(const XmlNode&) override {}
     void toxml(ostream&, int) const override {}
@@ -100,7 +100,7 @@ private:
 class UserLogoPlotting : public NoLogoPlotting, public UserLogoPlottingAttributes {
 public:
     UserLogoPlotting();
-    virtual ~UserLogoPlotting();
+    virtual ~UserLogoPlotting() override;
     virtual void set(const map<string, string>& map) override { UserLogoPlottingAttributes::set(map); }
     virtual void set(const XmlNode& node) override { UserLogoPlottingAttributes::set(node); }
     bool accept(const string& node) override { return UserLogoPlottingAttributes::accept(node); }

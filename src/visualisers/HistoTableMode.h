@@ -32,7 +32,7 @@ namespace magics {
 class HistoTableMode : public HistoMode, public HistoTableModeAttributes {
 public:
     HistoTableMode();
-    virtual ~HistoTableMode();
+    virtual ~HistoTableMode() override;
     void set(const map<string, string>& map) { HistoTableModeAttributes::set(map); }
     void set(const XmlNode& node) { HistoTableModeAttributes::set(node); }
     HistoMode* clone() const override {

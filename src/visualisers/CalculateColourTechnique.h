@@ -32,7 +32,7 @@ namespace magics {
 class CalculateColourTechnique : public ColourTechnique, public CalculateColourTechniqueAttributes {
 public:
     CalculateColourTechnique();
-    virtual ~CalculateColourTechnique();
+    virtual ~CalculateColourTechnique() override;
     void set(const map<string, string>& map) override { CalculateColourTechniqueAttributes::set(map); }
     void set(const XmlNode& node) override { CalculateColourTechniqueAttributes::set(node); }
     bool accept(const string& node) override { return CalculateColourTechniqueAttributes::accept(node); }

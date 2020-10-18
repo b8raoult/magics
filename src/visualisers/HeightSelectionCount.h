@@ -33,7 +33,7 @@ class HeightSelectionCount : public HeightSelection, public HeightSelectionCount
 public:
     HeightSelectionCount();
     virtual ~HeightSelectionCount();
-    virtual void set(map<string, string> map) { HeightSelectionCountAttributes::set(map); }
+    virtual void set(map<string, string> map) override { HeightSelectionCountAttributes::set(map); }
     void prepare();
 
 protected:

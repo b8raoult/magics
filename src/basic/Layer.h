@@ -43,10 +43,10 @@ public:
     Layer();
     Layer(BasicSceneObject*);
     virtual ~Layer();
-    void print(ostream& out) const;
+    void print(ostream& out) const override;
     void parent(SceneLayer* layer) { parent_ = layer; }
     SceneLayer* parent() const { return parent_; }
-    virtual void redisplay(const BaseDriver& driver) const;
+    virtual void redisplay(const BaseDriver& driver) const override;
     virtual void execute(const BaseDriver&) const;
     virtual void execute(int, const BaseDriver&, const Layout&) const;
     virtual void getInfo(int, const BaseDriver&) const {}
@@ -128,11 +128,11 @@ public:
     }
 
     // void setInfo(const string& name, const string& value) { information_[name]=value; }
-    // virtual const map<string, string>& getInfos(bool =false) const { return information_; }
+    // virtual const map<string, string>& getInfos(bool =false) const  override { return information_ ; }
 
     LayerState state() { return state_; }
     void state(LayerState state) { state_ = state; }
-    virtual void release();
+    virtual void release() override;
 
 protected:
     bool visibility_;
@@ -168,22 +168,22 @@ public:
     SingleLayer(StepLayer*, BasicSceneObject*);
     ~SingleLayer();
 
-    void print(ostream& out) const;
-    void redisplay(const BaseDriver& driver) const;
-    void execute(const BaseDriver&) const;
-    void getReady() const;
+    void print(ostream& out) const override;
+    void redisplay(const BaseDriver& driver) const override;
+    void execute(const BaseDriver&) const override;
+    void getReady() const override;
     void set(LayoutVisitor*) const;
-    void collect(MetaDataCollector&);
-    void collect(ValuesCollector&);
-    void collect(DataIndexCollector&);
+    void collect(MetaDataCollector&) override;
+    void collect(ValuesCollector&) override;
+    void collect(DataIndexCollector&) override;
     // const map<string, string>& getInfos(bool collect=false) const;
-    void magnify(const BaseDriver&, float xres, float yres);
-    void histogram(const BaseDriver&, const string&, const string&);
-    void update(const Layout&);
-    Layer* baseLayer();
+    void magnify(const BaseDriver&, float xres, float yres) override;
+    void histogram(const BaseDriver&, const string&, const string&) override;
+    void update(const Layout&) override;
+    Layer* baseLayer() override;
     LevelDescription& dataLevel() const;
     DateDescription& timeStamp() const;
-    void release();
+    void release() override;
 
 
 protected:
@@ -198,14 +198,14 @@ class StepLayer : public Layer {
 public:
     StepLayer();
     ~StepLayer();
-    void print(ostream& out) const;
-    int size();
-    void redisplay(const BaseDriver& driver) const;
-    void newLayer(const BaseDriver& driver);
-    void closeLayer(const BaseDriver& driver);
-    void execute(int, const BaseDriver&, const Layout&) const;
-    void getReady(int) const;
-    Layer* get(int);
+    void print(ostream& out) const override;
+    int size() override;
+    void redisplay(const BaseDriver& driver) const override;
+    void newLayer(const BaseDriver& driver) override;
+    void closeLayer(const BaseDriver& driver) override;
+    void execute(int, const BaseDriver&, const Layout&) const override;
+    void getReady(int) const override;
+    Layer* get(int) override;
 
     void addStep(BasicSceneObject*);
     vector<SingleLayer*>::iterator firstStep() { return steps_.begin(); }
@@ -230,24 +230,24 @@ public:
     StaticLayer(BasicSceneObject*);
     StaticLayer(const Layout&);
     ~StaticLayer();
-    void print(ostream& out) const;
+    void print(ostream& out) const override;
 
-    void redisplay(const BaseDriver& driver) const;
-    void newLayer(const BaseDriver& driver);
-    void closeLayer(const BaseDriver& driver);
+    void redisplay(const BaseDriver& driver) const override;
+    void newLayer(const BaseDriver& driver) override;
+    void closeLayer(const BaseDriver& driver) override;
 
-    void histogram(const BaseDriver& driver, const string&, const string&);
-    void update(const Layout&);
+    void histogram(const BaseDriver& driver, const string&, const string&) override;
+    void update(const Layout&) override;
 
-    void execute(const BaseDriver&) const;
-    void getReady() const;
-    Layer* get() { return this; }
+    void execute(const BaseDriver&) const override;
+    void getReady() const override;
+    Layer* get() override { return this; }
     void clean();
     void set(LayoutVisitor*);
     void add(BasicGraphicsObject*);
-    void collect(MetaDataCollector&);
-    void collect(ValuesCollector&);
-    void collect(DataIndexCollector&);
+    void collect(MetaDataCollector&) override;
+    void collect(ValuesCollector&) override;
+    void collect(DataIndexCollector&) override;
 
 
 protected:
@@ -267,6 +267,7 @@ public:
 
     void redisplay(const BaseDriver&) const;
     void getReady() const {}
+    void print(ostream& s) const override { s << "NoDataLayer"; }
 };
 
 
@@ -280,6 +281,7 @@ public:
     void execute(int, const BaseDriver&) const;
     void getInfo(int, const BaseDriver&) const;
     void collectText(vector<TextVisitor*>&, LegendVisitor*);  // update the text informations!
+    void print(ostream& s) const override { s << "TextLayer"; }
 };
 
 class LegendLayer : public StepLayer {
@@ -290,6 +292,7 @@ public:
     void execute(const BaseDriver&) const;
     void execute(int, const BaseDriver&) const;
     void getInfo(int, const BaseDriver&) const;
+    void print(ostream& s) const override { s << "LegendLayer"; }
 };
 /*
  * A SceneLayer is attach to a SceneNode...
@@ -300,7 +303,7 @@ class SceneLayer : public BasicGraphicsObjectContainer {
 public:
     SceneLayer();
     ~SceneLayer();
-    void print(ostream& out) const;
+    void print(ostream& out) const override;
     // Number of frames in the serie!
     int numberOfSteps() const;
     void rules(AnimationRules* rules) { rules_ = rules; }
@@ -327,7 +330,7 @@ public:
     vector<Layer*>::iterator endLayer(int) const;
 
     vector<Layer*>& prepare(int) const;
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
     void redisplayAll(const BaseDriver& driver) const;
     void add(Layer*);
     Layout* layoutPtr() {

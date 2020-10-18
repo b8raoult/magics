@@ -33,7 +33,7 @@ class ImageCalculateColourTechnique : public ImageCalculateColourTechniqueAttrib
                                       public ColourTableDefinitionCompute {
 public:
     ImageCalculateColourTechnique() {}
-    virtual ~ImageCalculateColourTechnique() {}
+    virtual ~ImageCalculateColourTechnique() override {}
 
     void prepare() { ColourTableDefinitionCompute::set(*this); }
 

@@ -22,7 +22,7 @@ public:
 
     void reason(const std::string& what) { what_ = what; }
 
-    virtual const char* what() const throw() { return what_.c_str(); }
+    virtual const char* what() const throw() override { return what_.c_str(); }
     virtual ~MagicsException() throw() {}
 
 private:

@@ -36,7 +36,7 @@ namespace magics {
 class TableDecoder : public Data, public TableDecoderAttributes, public PointsList {
 public:
     TableDecoder();
-    virtual ~TableDecoder() {}
+    virtual ~TableDecoder() override {}
 
     void prepareXY();
     void prepareGeo();

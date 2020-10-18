@@ -33,7 +33,7 @@ namespace magics {
 class ImageProperties : public BasicGraphicsObject {
 public:
     ImageProperties() : transparency_(1), originReference_(centre) {}
-    virtual ~ImageProperties() {}
+    virtual ~ImageProperties() override {}
 
     enum OriginReference
     {
@@ -70,7 +70,7 @@ public:
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream& out) const override {
-        out << "ImageProperties[x=" << origin_.x();
+        out << "ImageProperties[x=" << origin_.x() ;
         out << ", y=" << origin_.y();
         out << ", width=" << width_;
         out << ", height=" << height_;

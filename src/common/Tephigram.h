@@ -36,7 +36,7 @@ namespace magics {
 class Tephigram : public Transformation, public TephigramAttributes {
 public:
     Tephigram();
-    ~Tephigram();
+    ~Tephigram() override;
 
     /*!
       \brief sets  from an XML node

@@ -41,7 +41,7 @@ class MultiVisdef;
 class MagPlus : public stack<BasicSceneObject*> {
 public:
     MagPlus();
-    ~MagPlus() {}
+    ~MagPlus() override {}
 
     void execute(MagRequest&);
 

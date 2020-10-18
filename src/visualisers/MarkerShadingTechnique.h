@@ -42,7 +42,7 @@ public:
     virtual void set(const map<string, string>& map) override { MarkerShadingTechniqueAttributes::set(map); }
     virtual void set(const XmlNode& node) override { MarkerShadingTechniqueAttributes::set(node); }
     virtual ShadingTechnique* clone() const override {
-        MarkerShadingTechnique* object = new MarkerShadingTechnique();
+        MarkerShadingTechnique* object = new MarkerShadingTechnique() ;
         object->copy(*this);
         return object;
     }
@@ -53,7 +53,7 @@ public:
 
     Symbol* operator()(double);
     virtual void operator()(const PaperPoint&);
-    // virtual void operator()(MatrixHandler&, BasicGraphicsObjectContainer&);
+    // virtual void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) override;
     virtual bool prepare(LevelSelection&, const ColourTechnique&) override;
     virtual void visit(LegendVisitor&, const ColourTechnique&) override;
     bool hasLegend() override { return true; }  // Isolien legend is not needed!

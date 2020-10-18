@@ -82,7 +82,7 @@ public:
 class Cities : public NoCities, public CitiesAttributes {
 public:
     Cities();
-    virtual ~Cities();
+    virtual ~Cities() override;
 
     virtual void set(const XmlNode& node) override { CitiesAttributes::set(node); }
 

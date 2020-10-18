@@ -37,7 +37,7 @@ class Layout;
 class HistoMode {
 public:
     HistoMode();
-    virtual ~HistoMode();
+    virtual ~HistoMode() override;
 
     virtual void set(const map<string, string>&) = 0;
     virtual void set(const XmlNode&)             = 0;
@@ -45,8 +45,8 @@ public:
     virtual void toxml(ostream&, int) const {}
     virtual void count(double, double) {}
     virtual void setToFirst(Layout&) {}
-    virtual BasicGraphicsObject* next() { return (*(current_++)).get(); }
-    virtual bool more() { return current_ != objects_.end(); }
+    virtual BasicGraphicsObject* next() override { return (*(current_++)).get(); }
+    virtual bool more() override { return current_ != objects_.end(); }
     string button(int);
 
 protected:

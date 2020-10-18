@@ -63,7 +63,7 @@ protected:
 class IsoLabel : public NoIsoLabel, public map<double, double>, public IsoLabelAttributes {
 public:
     IsoLabel();
-    virtual ~IsoLabel();
+    virtual ~IsoLabel() override;
 
     virtual IsoLabel* clone() const override {
         IsoLabel* object = new IsoLabel();

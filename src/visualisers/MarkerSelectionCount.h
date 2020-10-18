@@ -32,8 +32,8 @@ namespace magics {
 class MarkerSelectionCount : public MarkerSelection, public MarkerSelectionCountAttributes {
 public:
     MarkerSelectionCount();
-    virtual ~MarkerSelectionCount();
-    virtual void set(map<string, string> map) { MarkerSelectionCountAttributes::set(map); }
+    virtual ~MarkerSelectionCount() override;
+    virtual void set(map<string, string> map) override { MarkerSelectionCountAttributes::set(map); }
     void prepare();
 
 protected:

@@ -36,7 +36,7 @@ namespace magics {
 class SVGDriver : public BaseDriver, public SVGDriverAttributes {
 public:
     SVGDriver();
-    ~SVGDriver();
+    ~SVGDriver() override;
     void open();
     void close();
 

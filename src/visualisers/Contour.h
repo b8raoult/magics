@@ -39,7 +39,7 @@ public:
     Contour();
     virtual ~Contour();
 
-    virtual Contour* clone() const;
+    virtual Contour* clone() const ;
     bool needLegend() override { return legend_; }
     // Implements the set method ...
     void set(const XmlNode& node) override;

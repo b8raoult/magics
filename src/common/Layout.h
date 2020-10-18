@@ -90,7 +90,7 @@ class StartPage : public BasicGraphicsObject {
 public:
     StartPage() {}
     virtual ~StartPage() {}
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 };
 
 
@@ -98,7 +98,7 @@ class EndPage : public BasicGraphicsObject {
 public:
     EndPage() {}
     virtual ~EndPage() {}
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 };
 
 
@@ -291,26 +291,26 @@ class PreviewLayout : public Layout {
 public:
     PreviewLayout();
     virtual ~PreviewLayout();
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 };
 class LegendLayout : public Layout {
 public:
     LegendLayout();
     virtual ~LegendLayout();
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 };
 class HistoLayout : public Layout {
 public:
     HistoLayout();
     virtual ~HistoLayout();
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 };
 
 class SceneLayout : public Layout {
 public:
     SceneLayout();
     virtual ~SceneLayout();
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 };
 
 
@@ -318,20 +318,20 @@ class MagnifierLayout : public Layout {
 public:
     MagnifierLayout();
     virtual ~MagnifierLayout();
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
     virtual void redisplay(const BaseDriver&, vector<PaperPoint>&, float, float) const {}
-};
+} override;
 
 class RootLayout : public Layout {
 public:
     RootLayout(double width, double height);
     virtual ~RootLayout();
-    double absoluteWidth() const { return absoluteWidth_; }
-    double absoluteHeight() const { return absoluteHeight_; }
-    bool childOfRoot() const { return false; }
-    void redisplay(const BaseDriver& driver) const;
+    double absoluteWidth() const override { return absoluteWidth_; }
+    double absoluteHeight() const override { return absoluteHeight_; }
+    bool childOfRoot() const override { return false; }
+    void redisplay(const BaseDriver& driver) const override;
 
-    virtual void resize(double width, double height) {
+    virtual void resize(double width, double height) override {
         absoluteWidth_  = width;
         absoluteHeight_ = height;
     }
@@ -344,7 +344,7 @@ class BasicLayout : public Layout {
 public:
     BasicLayout();
     virtual ~BasicLayout();
-    bool buildTree(const Layout&, unsigned int, const BaseDriver&) const;
+    bool buildTree(const Layout&, unsigned int, const BaseDriver&) const override;
 };
 class LayoutVisitor;
 

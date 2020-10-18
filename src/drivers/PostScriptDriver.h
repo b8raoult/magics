@@ -38,7 +38,7 @@ namespace magics {
 class PostScriptDriver : public BaseDriver, public PostScriptDriverAttributes {
 public:
     PostScriptDriver();
-    ~PostScriptDriver();
+    ~PostScriptDriver() override;
     void open();
     void close();
 

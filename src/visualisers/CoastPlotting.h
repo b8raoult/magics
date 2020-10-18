@@ -83,7 +83,7 @@ class PreviewVisitor;
 class NoCoastPlotting : public NoCoastPlottingAttributes {
 public:
     NoCoastPlotting();
-    virtual ~NoCoastPlotting() {}
+    virtual ~NoCoastPlotting() override {}
 
     void set(const XmlNode& node) override { NoCoastPlottingAttributes::set(node); }
 
@@ -130,7 +130,7 @@ private:
 class CoastPlotting : public NoCoastPlotting, public CoastPlottingAttributes {
 public:
     CoastPlotting();
-    virtual ~CoastPlotting();
+    virtual ~CoastPlotting() override;
     void set(const XmlNode& node) override {
         CoastPlottingAttributes::set(node);
         NoCoastPlottingAttributes::set(node);

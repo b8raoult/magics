@@ -31,7 +31,7 @@ class TempFile {
 public:
     TempFile();
 
-    ~TempFile();
+    ~TempFile() ;
 
     ofstream& operator()() { return ofs; }
     string name() { return filename; }
@@ -45,7 +45,7 @@ private:
 class WebFormat {
 public:
     WebFormat() {}
-    ~WebFormat() {}
+    ~WebFormat()  {}
 
 
     void prepare(const string&, const map<string, string>&, TempFile& file);
@@ -54,11 +54,11 @@ public:
 
 
 protected:
-    void print(ostream&) const {}
+    void print(ostream&) const  {}
 
 private:
     //! Copy constructor - No copy allowed
-    WebFormat(const WebFormat&);
+    WebFormat(const WebFormat&) ;
     //! Overloaded << operator to copy - No copy allowed
     WebFormat& operator=(const WebFormat&);
 
@@ -73,7 +73,7 @@ private:
 class MagML : public WebFormat {
 public:
     MagML() {}
-    ~MagML() {}
+    ~MagML()  {}
 
     void execute(const string&, const map<string, string>&);
 
@@ -85,7 +85,7 @@ protected:
 class WebInterpretor : public map<string, string> {
 public:
     WebInterpretor();
-    ~WebInterpretor();
+    ~WebInterpretor() ;
 
     MAGICS_EXPORT static void magml(const string&);
     MAGICS_EXPORT static void json(const string&);

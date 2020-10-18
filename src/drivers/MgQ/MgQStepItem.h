@@ -33,7 +33,7 @@ public:
     };
 
     MgQStepItem(MgQLayoutItem*);
-    ~MgQStepItem();
+    ~MgQStepItem() override;
 
     int id() { return id_; }
     void id(int i) { id_ = i; }

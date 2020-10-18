@@ -39,8 +39,8 @@ public:
     MgQLayoutItem(const Layout&);
     MgQLayoutItem(const MgQLayoutItem&);
 
-    virtual int type() const { return Type; }
-    virtual QRectF boundingRect() const;
+    virtual int type() const override { return Type; }
+    virtual QRectF boundingRect() const override;
     void paint(QPainter*, const QStyleOptionGraphicsItem*, QWidget*);
 
     const Layout& layout() { return layout_; };

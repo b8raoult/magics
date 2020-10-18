@@ -33,7 +33,7 @@ namespace magics {
 class PointsHandler : public AbstractPoints {
 public:
     PointsHandler(AbstractPoints& handler) : handler_(handler) {}
-    virtual ~PointsHandler() {}
+    virtual ~PointsHandler() override {}
     //! Method to set the current position to the first point.(abstract)
     virtual void setToFirst() override { handler_.setToFirst(); }
     //! Method to test the end of collection.
@@ -42,7 +42,7 @@ public:
     virtual const UserPoint& current() override { return handler_.current(); }
     //! Method to advance
     virtual void advance() override { handler_.advance(); }
-    virtual bool empty() {
+    virtual bool empty()  {
         handler_.setToFirst();
         return handler_.more() == false;
     }
@@ -70,7 +70,7 @@ class BatchPointsHandler : public PointsHandler {
 public:
     BatchPointsHandler(AbstractPoints& handler, int count) :
         PointsHandler(handler), count_(count), more_(0), last_(false) {}
-    virtual ~BatchPointsHandler() {}
+    virtual ~BatchPointsHandler() override {}
     //! Method to set the current position to the first point.(abstract)
     virtual void setToFirst() override {}
     //! Method to test the end of collection.
@@ -120,7 +120,7 @@ class BoxPointsHandler : public PointsHandler {
 public:
     BoxPointsHandler(AbstractPoints& handler, const Transformation& transformation, bool filter) :
         PointsHandler(handler), transformation_(transformation), filter_(filter) {}
-    virtual ~BoxPointsHandler() {}
+    virtual ~BoxPointsHandler() override {}
 
     //! Method to set the current position to the first point.(abstract)
     virtual void setToFirst() override;
@@ -150,7 +150,7 @@ class ThinningPointsHandler : public PointsHandler {
 public:
     ThinningPointsHandler(AbstractPoints& handler, int xfreq, int yfreq) :
         PointsHandler(handler), xfreq_(xfreq), yfreq_(yfreq) {}
-    virtual ~ThinningPointsHandler() {}
+    virtual ~ThinningPointsHandler() override {}
 
     //! Method to set the current position to the first point.(abstract)
     virtual void setToFirst() override;

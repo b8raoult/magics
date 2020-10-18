@@ -37,9 +37,7 @@ public:
 };
 
 
-class MagConfigHandler
-
-{
+class MagConfigHandler {
 public:
     MagConfigHandler(const string& config, MagConfig& object);
     virtual ~MagConfigHandler();

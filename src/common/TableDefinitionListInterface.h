@@ -31,7 +31,7 @@ template <class T>
 class TableDefinitionListInterface {
 public:
     TableDefinitionListInterface() {}
-    virtual ~TableDefinitionListInterface() {}
+    virtual ~TableDefinitionListInterface() override {}
     virtual vector<T> getValues() const = 0;
 
 protected:

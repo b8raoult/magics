@@ -39,7 +39,7 @@ namespace magics {
 class EpsBufr : public Decoder, public Data, public PointsList, public EpsBufrAttributes {
 public:
     EpsBufr();
-    virtual ~EpsBufr();
+    virtual ~EpsBufr() override;
 
     virtual void set(const map<string, string>& map) override { EpsBufrAttributes::set(map); }
     virtual void set(const XmlNode& node) override { EpsBufrAttributes::set(node); }
@@ -50,7 +50,7 @@ public:
     virtual void decode() override;
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    virtual PointsHandler& points();
+    virtual PointsHandler& points() ;
     virtual void visit(TextVisitor&) override;
     virtual void visit(MetaDataVisitor&) override;
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,

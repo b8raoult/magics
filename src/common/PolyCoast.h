@@ -31,14 +31,14 @@ namespace magics {
 class PolyCoast : public Polyline {
 public:
     PolyCoast();
-    ~PolyCoast();
+    ~PolyCoast() override;
 
     virtual PolyCoast* clone() const override;
 
-    virtual Polyline* getNew() const;
+    virtual Polyline* getNew() const override;
 
-    virtual Polyline* getShade() const;
-    virtual Polyline* getContour() const;
+    virtual Polyline* getShade() const override;
+    virtual Polyline* getContour() const override;
 
     int level() const { return level_; }
     void level(int level) { level_ = level; }

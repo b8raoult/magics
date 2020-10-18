@@ -100,12 +100,12 @@ class NoCalmIndicator : public CalmIndicator {
 public:
     NoCalmIndicator() {}
     ~NoCalmIndicator() {}
-    virtual CalmIndicator* clone() { return new NoCalmIndicator(); }
-    virtual bool accept(const string& node) { return magCompare(node, "nocalm"); }
+    virtual CalmIndicator* clone() override { return new NoCalmIndicator(); }
+    virtual bool accept(const string& node) override { return magCompare(node, "nocalm"); }
 
 
     void prepare(BasicGraphicsObjectContainer&) {}
-    virtual bool operator()(const PaperPoint&, double x, double y) {
+    virtual bool operator()(const PaperPoint&, double x, double y) override {
         return (((x * x) + (y * y)) < this->below_) ? true : false;
     }
 };

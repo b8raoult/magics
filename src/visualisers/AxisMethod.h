@@ -41,7 +41,7 @@ class Axis;
 class AxisMethod : public AxisMethodAttributes {
 public:
     AxisMethod();
-    virtual ~AxisMethod();
+    virtual ~AxisMethod() override;
 
     AxisMethod* clone() {
         NOTIMP;
@@ -86,7 +86,7 @@ private:
 class LogarithmicAxisMethod : public AxisMethod {
 public:
     LogarithmicAxisMethod() {}
-    virtual ~LogarithmicAxisMethod() {}
+    virtual ~LogarithmicAxisMethod() override {}
     void prepare(const Axis&, AxisItems&);
 
     double value(double val) const { return ::pow(10., val); }
@@ -94,7 +94,7 @@ public:
 class HyperAxisMethod : public AxisMethod {
 public:
     HyperAxisMethod() {}
-    virtual ~HyperAxisMethod() {}
+    virtual ~HyperAxisMethod() override {}
     void prepare(const Axis&, AxisItems&);
 
 
@@ -108,7 +108,7 @@ protected:
 class PositionListAxisMethod : public AxisMethod {
 public:
     PositionListAxisMethod() {}
-    virtual ~PositionListAxisMethod() {}
+    virtual ~PositionListAxisMethod() override {}
     void prepare(const Axis&, AxisItems&);
 };
 

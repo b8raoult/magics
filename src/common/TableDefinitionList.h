@@ -34,7 +34,7 @@ template <class T>
 class TableDefinitionList : public TableDefinition<T> {
 public:
     TableDefinitionList() {}
-    virtual ~TableDefinitionList() {}
+    virtual ~TableDefinitionList() override {}
     void set(const TableDefinitionListInterface<T>&);
     void set(const XmlNode&);
 

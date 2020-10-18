@@ -30,7 +30,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~MapContent();
+    virtual ~MapContent() override;
 
     // -- Overridden methods
 

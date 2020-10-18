@@ -35,7 +35,7 @@ namespace magics {
 class NetcdfMatrixInterpretor : public NetcdfInterpretor {
 public:
     NetcdfMatrixInterpretor();
-    virtual ~NetcdfMatrixInterpretor();
+    virtual ~NetcdfMatrixInterpretor() override;
 
 
     void set(const XmlNode& node) override {
@@ -56,7 +56,7 @@ public:
     }
 
     virtual NetcdfInterpretor* clone() const override {
-        NetcdfMatrixInterpretor* object = new NetcdfMatrixInterpretor();
+        NetcdfMatrixInterpretor* object = new NetcdfMatrixInterpretor() ;
         object->clone(*this);
         return object;
     }
@@ -74,8 +74,8 @@ public:
     virtual void visit(ValuesCollector&, PointsList&) override;
 
     virtual void statsData(map<string, vector<double> >&) override;
-    virtual bool x();
-    virtual bool y();
+    virtual bool x() ;
+    virtual bool y() ;
     void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int thinning) override;
 
 protected:

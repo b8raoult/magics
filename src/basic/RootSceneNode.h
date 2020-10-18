@@ -38,10 +38,12 @@ class RootScenePage : public BasicSceneNode {
 public:
     RootScenePage();
     RootScenePage(double, double);
-    ~RootScenePage();
+    ~RootScenePage() override;
 
     BasicSceneNode* clone() { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
-    virtual RootScenePage* newPage() { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
+    virtual RootScenePage* newPage()  {
+        return (width_) ? new RootScenePage(width_, height_) : new RootScenePage() ;
+    }
     void visit(BasicGraphicsObjectContainer& tree) {
         tree.push_back(new StartPage());
         BasicSceneNode::visit(tree);
@@ -61,7 +63,7 @@ protected:
 class MvRootScenePage : public RootScenePage {
 public:
     MvRootScenePage();
-    ~MvRootScenePage();
+    ~MvRootScenePage() override;
 
     RootScenePage* newPage() { return new MvRootScenePage(); }
     void visit(BasicGraphicsObjectContainer& tree) {
@@ -74,14 +76,14 @@ class RootSceneNode : public BasicSceneNode {
 public:
     RootSceneNode();
 
-    virtual ~RootSceneNode();
-    virtual void setPage(RootScenePage* node);
+    virtual ~RootSceneNode() override;
+    virtual void setPage(RootScenePage* node) ;
 
 
     double absoluteWidth() const override { return absoluteWidth_; }
     double absoluteHeight() const override { return absoluteHeight_; }
     virtual void absoluteRootWidth(double width) override {
-        scale_ = width / absoluteWidth_;
+        scale_ = width / absoluteWidth_ ;
         if (scale_ < 1)
             scale_ = 1;
         absoluteWidth_ = width;
@@ -146,10 +148,10 @@ private:
 class FortranRootSceneNode : public RootSceneNode, public FortranRootSceneNodeAttributes {
 public:
     FortranRootSceneNode();
-    ~FortranRootSceneNode();
+    ~FortranRootSceneNode() override;
     void getReady();
     BasicSceneNode* clone();
-    virtual void setPage(RootScenePage* node);
+    virtual void setPage(RootScenePage* node) override;
     string theme() const { return theme_; }
 
 
@@ -160,7 +162,7 @@ protected:
 class MvRootSceneNode : public RootSceneNode, public FortranRootSceneNodeAttributes {
 public:
     MvRootSceneNode();
-    ~MvRootSceneNode();
+    ~MvRootSceneNode() override;
     void getReady();
 
 protected:
@@ -170,7 +172,7 @@ protected:
 class XmlRootSceneNode : public RootSceneNode, public XmlRootNodeAttributes {
 public:
     XmlRootSceneNode();
-    ~XmlRootSceneNode();
+    ~XmlRootSceneNode() override;
 
     void set(const map<string, string>& map) { XmlRootNodeAttributes::set(map); }
 
@@ -185,7 +187,7 @@ protected:
 class WrepRootSceneNode : public XmlRootSceneNode, public WrepRootNodeAttributes {
 public:
     WrepRootSceneNode();
-    ~WrepRootSceneNode();
+    ~WrepRootSceneNode() override;
 
     void set(const map<string, string>& map) { WrepRootNodeAttributes::set(map); }
 
@@ -200,7 +202,7 @@ protected:
 class LegacyRootSceneNode : public WrepRootSceneNode {
 public:
     LegacyRootSceneNode();
-    ~LegacyRootSceneNode();
+    ~LegacyRootSceneNode() override;
     void absoluteRootWidth(double width);
     void getReady();
 

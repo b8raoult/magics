@@ -63,9 +63,9 @@ public:
 
     void addToTags(const string&, const string&) override;
 
-    virtual void titles(vector<string>&);
-    virtual Layout& layout() const override { return LayoutVisitor::layout(); }
-    virtual Layout* layoutPtr() const { return LayoutVisitor::layoutPtr(); }
+    virtual void titles(vector<string>&) ;
+    virtual Layout& layout() const  { return LayoutVisitor::layout(); }
+    virtual Layout* layoutPtr() const  { return LayoutVisitor::layoutPtr(); }
 
 
     map<string, vector<Text*> > texts() { return currentTexts_; }
@@ -86,9 +86,9 @@ protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream&) const override;
 
-    virtual void decode() {}
+    virtual void decode()  {}
 
-    bool positional_;
+    bool positional_ ;
     double font_size_;
 
     static map<string, string> tags_;

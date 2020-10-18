@@ -109,13 +109,13 @@ class CurveArea : public Curve, public CurveAreaAttributes {
 public:
     CurveArea() {}
     virtual ~CurveArea() {}
-    void set(const map<string, string>& map) {
+    void set(const map<string, string>& map) override {
         CurveAttributes::set(map);
         CurveAreaAttributes::set(map);
     }
 
-    void operator()(Data&, BasicGraphicsObjectContainer&);
-    void legend(Polyline&);
+    void operator()(Data&, BasicGraphicsObjectContainer&) override;
+    void legend(Polyline&) override;
 
 
 protected:

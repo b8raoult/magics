@@ -44,7 +44,7 @@ class EpsXmlInput : public Decoder,
                     public XmlNodeVisitor {
 public:
     EpsXmlInput();
-    virtual ~EpsXmlInput();
+    virtual ~EpsXmlInput() override;
 
     virtual void set(const map<string, string>& map) override { EpsXmlInputAttributes::set(map); }
     virtual void set(const XmlNode& node) override { EpsXmlInputAttributes::set(node); }

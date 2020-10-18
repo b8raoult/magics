@@ -35,7 +35,7 @@ namespace magics {
 class PolarStereographicProjection : public Transformation, public PolarStereographicProjectionAttributes {
 public:
     PolarStereographicProjection();
-    ~PolarStereographicProjection();
+    ~PolarStereographicProjection() override;
 
     /*!
       \brief sets  from an XML node
@@ -90,7 +90,7 @@ public:
     */
     virtual bool needShiftedCoastlines() const override;
 
-    // virtual bool concatenate(vector<Polyline* >& lines, Polyline* poly) const;
+    // virtual bool concatenate(vector<Polyline* >& lines, Polyline* poly) const override;
     Polyline& getPCBoundingBox() const override;
     Polyline& getUserBoundingBox() const override;
     /*!

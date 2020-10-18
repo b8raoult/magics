@@ -84,8 +84,8 @@ class ListHeightTechnique : public HeightTechnique {
 public:
     ListHeightTechnique();
     virtual ~ListHeightTechnique();
-    virtual void prepare(LevelSelection&);
-    virtual void set(const HeightTechniqueInterface&);
+    virtual void prepare(LevelSelection&) override;
+    virtual void set(const HeightTechniqueInterface&) override;
 
 protected:
     vector<double> list_;
@@ -96,8 +96,8 @@ class CalculateHeightTechnique : public HeightTechnique {
 public:
     CalculateHeightTechnique();
     virtual ~CalculateHeightTechnique();
-    virtual void prepare(LevelSelection&);
-    virtual void set(const HeightTechniqueInterface&);
+    virtual void prepare(LevelSelection&) override;
+    virtual void set(const HeightTechniqueInterface&) override;
 
 protected:
     double min_;

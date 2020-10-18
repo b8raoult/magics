@@ -31,7 +31,7 @@ namespace magics {
 class TitleStringField : public TitleField {
 public:
     TitleStringField(const string& text);
-    virtual ~TitleStringField();
+    virtual ~TitleStringField() override;
     virtual string name() override { return "text"; }
 
     virtual void operator()(vector<string>&) const override;

@@ -37,12 +37,12 @@ class Transformation;
 class BothValuePlotMethod : public ValuePlotMethod, public BothValuePlotMethodAttributes {
 public:
     BothValuePlotMethod();
-    virtual ~BothValuePlotMethod();
+    virtual ~BothValuePlotMethod() override;
     virtual void set(const map<string, string>& map) override;
     virtual void set(const XmlNode& node) override;
     virtual ValuePlotMethod* clone() const override;
 
-    virtual void clone(const BothValuePlotMethod& from);
+    virtual void clone(const BothValuePlotMethod& from) ;
 
 
 protected:

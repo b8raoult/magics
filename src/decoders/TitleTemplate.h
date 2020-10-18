@@ -63,8 +63,10 @@ protected:
 class TitleFieldHandler {
 public:
     TitleFieldHandler() {}
-    virtual ~TitleFieldHandler(){};
-    virtual void operator()(TitleField& field, vector<string>& lines, const GribDecoder&) { ASSERT(false); }
+    virtual ~TitleFieldHandler() override{};
+    virtual void operator()(TitleField& field, vector<string>& lines, const GribDecoder&) override {
+        ASSERT(false) ;
+    }
 };
 
 
@@ -74,7 +76,7 @@ class TitleTemplate : public AutoVector<TitleTemplate>,
 public:
     TitleTemplate(map<string, string> criteria) : criteria_(criteria) {}
     TitleTemplate();
-    virtual ~TitleTemplate();
+    virtual ~TitleTemplate() override;
 
     void add(TitleField* field) { template_.push_back(field); }
 

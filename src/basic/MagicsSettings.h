@@ -36,11 +36,11 @@ public:
 
 protected:
     MagicsSettings(){};
-    ~MagicsSettings(){};
+    ~MagicsSettings() override{};
 
     static MagicsSettings& instance();
 
-    void print(ostream& s) const { MagicsSettingsAttributes::print(s); }
+    void print(ostream& s) const override { MagicsSettingsAttributes::print(s); }
 
 private:
     //! Copy constructor - No copy allowed

@@ -63,7 +63,8 @@ foreach( file ${_decoders_srcs} )
 endforeach()
 
 if (HAVE_GRIB)
-     list( APPEND decoders_srcs 
+	 list( APPEND decoders_srcs
+	 decoders/GribAddressMode.cc
 decoders/GribAddressMode.h
 decoders/GribDecoder.cc
 decoders/GribDecoder.h
@@ -78,8 +79,8 @@ decoders/GribSatelliteInterpretor.h
 endif()
 
 
-if (HAVE_NETCDF) 
-     list( APPEND decoders_srcs 
+if (HAVE_NETCDF)
+     list( APPEND decoders_srcs
 #Netcdf--->
 decoders/NetcdfOrcaInterpretor.cc
 decoders/NetcdfData.cc
@@ -106,7 +107,7 @@ decoders/NetcdfVectorInterpretor.h
 endif()
 
 if (HAVE_BUFR)
-     list( APPEND decoders_srcs 
+     list( APPEND decoders_srcs
 # Bufr --->
 decoders/EpsBufr.cc
 decoders/EpsBufr.h
@@ -119,31 +120,30 @@ endif()
 
 
 if (HAVE_SPOT)
-     list( APPEND decoders_srcs 
-#Spot ---> 
+     list( APPEND decoders_srcs
+#Spot --->
 decoders/ClassicMtgDecoder.cc
 decoders/ClassicMtgDecoder.h
 decoders/EpsgramDecoder.cc
 decoders/EpsgramDecoder.h
-#<--- Spot  
+#<--- Spot
 )
 endif()
 
 set( decoders_srcs ${decoders_srcs} PARENT_SCOPE )
 
 if ( metview )
-	list (APPEND metview_include 
-			decoders/MagDateTime.h 
-			decoders/GribDecoder.h 
-			decoders/ThinningMethod.h 
-			decoders/BinningObject.h  
-			decoders/WindMode.h  
-			decoders/GribAddressMode.h  
-			decoders/GribLoopStep.h  
+	list (APPEND metview_include
+			decoders/MagDateTime.h
+			decoders/GribDecoder.h
+			decoders/ThinningMethod.h
+			decoders/BinningObject.h
+			decoders/WindMode.h
+			decoders/GribAddressMode.h
+			decoders/GribLoopStep.h
 			decoders/GribInterpretor.h
 			decoders/GribSatelliteInterpretor.h
-			
+
 			)
 	set( metview_include ${metview_include} PARENT_SCOPE )
 endif()
-

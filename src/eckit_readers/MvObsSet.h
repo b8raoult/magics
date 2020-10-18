@@ -61,7 +61,7 @@ public:
 #endif
 
     //! Destructor
-    ~MvObsSet();
+    ~MvObsSet() ;
 
     // I think ecCodes does not need this function (_maxNrSubsets).
     //               If this is the case delete it later.
@@ -208,7 +208,7 @@ public:
     MvObsSetIterator(MvObsSet&);
 
     //! Destructor
-    ~MvObsSetIterator();
+    ~MvObsSetIterator() ;
 
     //! Operator that returns the next available valid observation report
     /*! Subset structure is hidden from the calling application.

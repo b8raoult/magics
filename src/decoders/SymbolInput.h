@@ -36,15 +36,15 @@ namespace magics {
 class SymbolInput : public Data, public SymbolInputAttributes {
 public:
     SymbolInput() {}
-    virtual ~SymbolInput() {}
+    virtual ~SymbolInput() override {}
 
     // Implements the set method ...
     void set(const map<string, string>& map) override { SymbolInputAttributes::set(map); }
 
 
-    virtual void decodePoints() {
+    virtual void decodePoints()  {
         if (value_.empty())
-            for (doublearray::iterator x = x_.begin(); x != x_.end(); x++)
+            for (doublearray::iterator x = x_.begin() ; x != x_.end(); x++)
                 value_.push_back(0);
 
         doublearray::iterator x = x_.begin();
@@ -59,9 +59,9 @@ public:
         }
     }
 
-    virtual void decodePoints(const Transformation& projection) {
+    virtual void decodePoints(const Transformation& projection) override {
         if (value_.empty())
-            for (doublearray::iterator x = x_.begin(); x != x_.end(); x++)
+            for (doublearray::iterator x = x_.begin() ; x != x_.end(); x++)
                 value_.push_back(0);
 
         doublearray::iterator x = x_.begin();

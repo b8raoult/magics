@@ -35,7 +35,7 @@ namespace magics {
 class GeoRectangularProjection : public Transformation, public GeoRectangularProjectionAttributes {
 public:
     GeoRectangularProjection();
-    ~GeoRectangularProjection();
+    ~GeoRectangularProjection() override;
 
     /*!
       \brief sets  from an XML node
@@ -196,7 +196,7 @@ private:
 class MercatorProjection : public GeoRectangularProjection {
 public:
     MercatorProjection();
-    ~MercatorProjection();
+    ~MercatorProjection() override;
     bool fast_reproject(double& x, double& y) const override;
     double patchDistance(double) const override;
 

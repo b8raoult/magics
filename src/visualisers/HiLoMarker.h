@@ -35,7 +35,7 @@ namespace magics {
 class HiLoMarker : public HiLoMarkerBase, public HiLoMarkerAttributes {
 public:
     HiLoMarker() : marker_(0) {}
-    virtual ~HiLoMarker() {}
+    virtual ~HiLoMarker() override {}
     void set(const map<string, string>& map) override { HiLoMarkerAttributes::set(map); }
     void set(const XmlNode& node) override { HiLoMarkerAttributes::set(node); }
     virtual bool accept(const string& node) override { return HiLoMarkerAttributes::accept(node); }
@@ -88,7 +88,7 @@ private:
 class NoHiLoMarker : public HiLoMarkerBase {
 public:
     NoHiLoMarker() {}
-    virtual ~NoHiLoMarker() {}
+    virtual ~NoHiLoMarker() override {}
     virtual HiLoMarkerBase* clone() const override {
         HiLoMarkerBase* object = new NoHiLoMarker();
         return object;

@@ -33,7 +33,7 @@ namespace magics {
 class SceneNode : public BasicSceneNode {
 public:
     SceneNode();
-    virtual ~SceneNode();
+    virtual ~SceneNode() override;
 
     BasicSceneNode* clone() override { return new SceneNode(); }
 
@@ -64,7 +64,7 @@ private:
 class FortranSceneNode : public SceneNode, public FortranSceneNodeAttributes {
 public:
     FortranSceneNode();
-    ~FortranSceneNode();
+    ~FortranSceneNode() override;
     void getReady();
     void resize();
     void visit(BasicGraphicsObjectContainer& tree);
@@ -84,7 +84,7 @@ protected:
 class XmlSceneNode : public SceneNode, public XmlSceneNodeAttributes {
 public:
     XmlSceneNode();
-    ~XmlSceneNode();
+    ~XmlSceneNode() override;
     void set(const map<string, string>& map) { XmlSceneNodeAttributes::set(map); }
     void set(const XmlNode& node) { XmlSceneNodeAttributes::set(node); }
     void getReady();

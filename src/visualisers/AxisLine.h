@@ -41,12 +41,12 @@ class Polyline;
 class AxisLine : public AxisLineAttributes {
 public:
     AxisLine();
-    virtual ~AxisLine();
+    virtual ~AxisLine() override;
 
-    virtual void set(const XmlNode& node) { AxisLineAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { AxisLineAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { AxisLineAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { AxisLineAttributes::set(map); }
     virtual AxisLine* clone() const override {
-        AxisLine* line = new AxisLine();
+        AxisLine* line = new AxisLine() override;
         line->copy(*this);
         return line;
     }
@@ -55,12 +55,12 @@ public:
 
     Polyline* line() const;
 
-    virtual void horizontal(TopAxisVisitor& out) const;
-    virtual void horizontal(BottomAxisVisitor& out) const;
+    virtual void horizontal(TopAxisVisitor& out) const override;
+    virtual void horizontal(BottomAxisVisitor& out) const override;
 
 
-    virtual void vertical(LeftAxisVisitor& out) const;
-    virtual void vertical(RightAxisVisitor& out) const;
+    virtual void vertical(LeftAxisVisitor& out) const override;
+    virtual void vertical(RightAxisVisitor& out) const override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -83,7 +83,7 @@ private:
 class NoAxisLine : public AxisLine {
 public:
     NoAxisLine() {}
-    ~NoAxisLine() {}
+    ~NoAxisLine() override {}
     AxisLine* clone() const override { return new NoAxisLine(); }
     virtual void horizontal(TopAxisVisitor&) const {}
     virtual void horizontal(BottomAxisVisitor&) const {}
@@ -92,8 +92,8 @@ public:
     virtual void vertical(TopAxisVisitor&) const {}
     virtual void vertical(BottomAxisVisitor&) const {}
     virtual void vertical(LeftAxisVisitor&) const {}
-    virtual void vertical(RightAxisVisitor&) const {}
-};
+    virtual void vertical(RightAxisVisitor&) const override {}
+} override;
 
 
 template <>

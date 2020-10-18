@@ -47,8 +47,8 @@ public:
 
     virtual void operator()(IsoPlot*, MatrixHandler&,
                             BasicGraphicsObjectContainer&) {  // Should return
-                                                              // CellArray* array = technique_->array(matrix, range,
-                                                              // transformation, width, height, resolution, technique);
+        // CellArray* array = technique_->array(matrix, range,
+        // transformation, width, height, resolution, technique) ;
 
         // return array;
     }
@@ -72,7 +72,7 @@ public:
     virtual bool operator()(LevelSelection&) { return false; }
     virtual void visit(LegendVisitor&) {}
     virtual void operator()(Polyline*) const {}
-    virtual void colour(double, Colour&){};
+    virtual void colour(double, Colour&) {}
     virtual bool needClipping() { return false; }
     virtual bool method(ContourMethod*) { return false; }
     virtual void reset() {}

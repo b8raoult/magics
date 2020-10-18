@@ -20,9 +20,9 @@
 class ObsItemBox : public ObsItem {
 public:
     ObsItemBox() {}
-    ~ObsItemBox() {}
+    ~ObsItemBox() override {}
 
-    virtual void set(const map<string, string>& def);
+    virtual void set(const map<string, string>& def) override;
 
 protected:
     int row_;
@@ -36,7 +36,7 @@ protected:
 class ObsStationRing : public ObsItemBox {
 public:
     ObsStationRing() {}
-    ~ObsStationRing() {}
+    ~ObsStationRing() override {}
     void visit(std::set<string>& tokens) {
         if (!owner_->station_ring_visible_)
             return;
@@ -63,7 +63,7 @@ protected:
 class ObsStationTriangle : public ObsItemBox {
 public:
     ObsStationTriangle() {}
-    ~ObsStationTriangle() {}
+    ~ObsStationTriangle() override {}
     void visit(std::set<string>& tokens) {
         if (!owner_->station_ring_visible_)
             return;
@@ -88,7 +88,7 @@ protected:
 class ObsTimePlot : public ObsItemBox {
 public:
     ObsTimePlot() {}
-    ~ObsTimePlot() {}
+    ~ObsTimePlot() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -100,12 +100,12 @@ protected:
 class ObsWind : public ObsItemBox {
 public:
     ObsWind() { setOrigins(); }
-    ~ObsWind() {}
+    ~ObsWind() override {}
     void visit(std::set<string>& tokens);
 
-    virtual void operator()(CustomisedPoint&, ComplexSymbol&) const;
-    virtual void set(const map<string, string>& def) {
-        row_       = atoi(find(def, "row").c_str());
+    virtual void operator()(CustomisedPoint&, ComplexSymbol&) const override;
+    virtual void set(const map<string, string>& def) override {
+        row_       = atoi(find(def, "row").c_str()) override;
         column_    = atoi(find(def, "column").c_str());
         colour_    = find(def, "colour");
         speed_     = find(def, "wind_speed", "wind_speed");
@@ -122,7 +122,7 @@ protected:
 class ObsCloudAndWind : public ObsItemBox {
 public:
     ObsCloudAndWind() { setOrigins(); }
-    ~ObsCloudAndWind() {}
+    ~ObsCloudAndWind() override {}
     void visit(std::set<string>& tokens) {
         if (!owner_->wind_visible_)
             return;
@@ -134,7 +134,7 @@ public:
         tokens.insert("high_cloud");
     }
 
-    virtual void operator()(CustomisedPoint&, ComplexSymbol&) const;
+    virtual void operator()(CustomisedPoint&, ComplexSymbol&) const override;
 
 protected:
     void setOrigins();
@@ -147,7 +147,7 @@ protected:
 class ObsTemperature : public ObsItemBox {
 public:
     ObsTemperature() {}
-    ~ObsTemperature() {}
+    ~ObsTemperature() override {}
     void visit(std::set<string>& tokens) {
         if (!owner_->temperature_visible_)
             return;
@@ -162,7 +162,7 @@ protected:
 class ObsSeaTemperature : public ObsItemBox {
 public:
     ObsSeaTemperature() {}
-    ~ObsSeaTemperature() {}
+    ~ObsSeaTemperature() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol& symbol) const;
 
@@ -172,7 +172,7 @@ protected:
 class ObsWave : public ObsItemBox {
 public:
     ObsWave() {}
-    ~ObsWave() {}
+    ~ObsWave() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol& symbol) const;
 
@@ -182,7 +182,7 @@ protected:
 class ObsPressure : public ObsItemBox {
 public:
     ObsPressure() {}
-    ~ObsPressure() {}
+    ~ObsPressure() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -194,7 +194,7 @@ protected:
 class ObsPressureLevel : public ObsItemBox {
 public:
     ObsPressureLevel() {}
-    ~ObsPressureLevel() {}
+    ~ObsPressureLevel() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -206,7 +206,7 @@ protected:
 class ObsPressureTendency : public ObsItemBox {
 public:
     ObsPressureTendency() {}
-    ~ObsPressureTendency() {}
+    ~ObsPressureTendency() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -218,7 +218,7 @@ protected:
 class ObsThickness : public ObsItemBox {
 public:
     ObsThickness() {}
-    ~ObsThickness() {}
+    ~ObsThickness() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -229,7 +229,7 @@ protected:
 class ObsDewPoint : public ObsItemBox {
 public:
     ObsDewPoint() {}
-    ~ObsDewPoint() {}
+    ~ObsDewPoint() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -241,7 +241,7 @@ protected:
 class ObsHeight : public ObsItemBox {
 public:
     ObsHeight() {}
-    ~ObsHeight() {}
+    ~ObsHeight() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -253,7 +253,7 @@ protected:
 class ObsVisibility : public ObsItemBox {
 public:
     ObsVisibility() {}
-    ~ObsVisibility() {}
+    ~ObsVisibility() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -265,7 +265,7 @@ protected:
 class ObsPresentWeather : public ObsItemBox {
 public:
     ObsPresentWeather() {}
-    ~ObsPresentWeather() {}
+    ~ObsPresentWeather() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -277,7 +277,7 @@ protected:
 class ObsIdentifier : public ObsItemBox {
 public:
     ObsIdentifier() {}
-    ~ObsIdentifier() {}
+    ~ObsIdentifier() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -289,7 +289,7 @@ protected:
 class ObsPastWeather : public ObsItemBox {
 public:
     ObsPastWeather() {}
-    ~ObsPastWeather() {}
+    ~ObsPastWeather() override {}
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
 
@@ -301,7 +301,7 @@ protected:
 class ObsCloud : public ObsItemBox {
 public:
     ObsCloud() {}
-    ~ObsCloud() {}
+    ~ObsCloud() override {}
     void set(const map<string, string>& def);
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
@@ -319,7 +319,7 @@ protected:
 class ObsDemoItem1 : public ObsItemBox {
 public:
     ObsDemoItem1() {}
-    ~ObsDemoItem1() {}
+    ~ObsDemoItem1() override {}
 
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
@@ -330,7 +330,7 @@ protected:
 class ObsDemoItem2 : public ObsItemBox {
 public:
     ObsDemoItem2() {}
-    ~ObsDemoItem2() {}
+    ~ObsDemoItem2() override {}
 
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
@@ -342,7 +342,7 @@ protected:
 class ObsEra : public ObsItemBox {
 public:
     ObsEra() {}
-    ~ObsEra() {}
+    ~ObsEra() override {}
 
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
@@ -353,7 +353,7 @@ protected:
 class ObsString : public ObsItemBox {
 public:
     ObsString() {}
-    ~ObsString() {}
+    ~ObsString() override {}
 
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;
@@ -365,7 +365,7 @@ protected:
 class ObsNumber : public ObsItemBox {
 public:
     ObsNumber() {}
-    ~ObsNumber() {}
+    ~ObsNumber() override {}
 
     void visit(std::set<string>& tokens);
     void operator()(CustomisedPoint&, ComplexSymbol&) const;

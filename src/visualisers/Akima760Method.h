@@ -34,7 +34,7 @@ class Akima760 : public MatrixHandler {
 public:
     Akima760(const AbstractMatrix& matrix, const Akima760MethodAttributes&);
 
-    ~Akima760();
+    ~Akima760() override;
 
     double operator()(int i, int j) const;
     int rowIndex(double r) const;
@@ -104,7 +104,7 @@ private:
 class Akima760Method : public ContourMethod, public Akima760MethodAttributes {
 public:
     Akima760Method() { MagLog::dev() << "Akima760Method::Akima760Method-->" << *this << "\n"; }
-    virtual ~Akima760Method() {}
+    virtual ~Akima760Method() override {}
 
     ContourMethod* clone() const override {
         Akima760Method* method = new Akima760Method();
@@ -116,12 +116,12 @@ public:
 
     virtual void set(const XmlNode& node) override { Akima760MethodAttributes::set(node); }
     virtual bool accept(const string& node) override {
-        return Akima760MethodAttributes::accept(node);
+        return Akima760MethodAttributes::accept(node) ;
         ;
     }
 
     virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer&) override {
-        return new Akima760(matrix, *this);
+        return new Akima760(matrix, *this) ;
     }
 
 protected:

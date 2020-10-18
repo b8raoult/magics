@@ -66,7 +66,7 @@ public:
     void parent(SymbolPlotting* parent) { parent_ = parent; }
 
 
-    virtual void visit(LegendVisitor&){};
+    virtual void visit(LegendVisitor&) {}
     virtual void visit(Data&, LegendVisitor& legend) { visit(legend); }
     virtual void visit(Data&, HistoVisitor&);
 
@@ -178,7 +178,7 @@ public:
     }
 
     virtual void set(const XmlNode& node) override {
-        SymbolMode::set(node);
+        SymbolMode::set(node) ;
         SymbolTableModeAttributes::set(node);
         prepare();
     }

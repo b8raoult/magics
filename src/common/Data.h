@@ -82,7 +82,8 @@ public:
     virtual string path();
 
     //! Methods to access the data as a RasterData used by pimage action routine.
-    // virtual RasterData& raster(const Transformation&) { throw MethodNotYetImplemented("Data<P>::raster"); }
+    // virtual RasterData& raster(const Transformation&)   { throw MethodNotYetImplemented("Data<P>::raster")
+    // ; }
 
     virtual void getInfo(const std::set<string>&, multimap<string, string>&);
 
@@ -107,13 +108,13 @@ public:
     virtual void visit(AnimationRules&);
     virtual void visit(AnimationStep&);
     virtual void visit(MetaDataVisitor&);
-    virtual void visit(Layer& layer);
+    virtual void visit(Layer& layer) override;
     bool valid();
-    virtual void visit(MetaDataCollector& collector);
+    virtual void visit(MetaDataCollector& collector) override;
     virtual void visit(ValuesCollector&) {}
     virtual void visit(DataIndexCollector& dc);
     virtual void visit(MagnifierCollector& magnifier);
-    virtual void initInfo();
+    virtual void initInfo() override;
     string legend();
 
     // Information needed fron layer management!
@@ -147,7 +148,7 @@ protected:
     LevelDescription dataLevel_;
 
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const;
+    virtual void print(ostream& out) const override;
     virtual void computeStats();
 
     AutoVector<PointsHandler> pointsHandlers_;
@@ -197,7 +198,7 @@ public:
     virtual string layerId();
     virtual string name();
     virtual void visit(Transformation&);
-    void visit(Layer& layer);
+    void visit(Layer& layer) override;
 };
 
 class DataList : public DataLoop {

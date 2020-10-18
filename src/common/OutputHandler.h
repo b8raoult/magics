@@ -39,12 +39,12 @@ class DriverManager;
 class OutputHandler : public OutputHandlerAttributes {
 public:
     OutputHandler() {}
-    virtual ~OutputHandler();
+    virtual ~OutputHandler() override;
 
     virtual void set(const XmlNode& node) override { OutputHandlerAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { OutputHandlerAttributes::set(map); }
-    virtual OutputHandler* clone() const { return new OutputHandler(); }
-    virtual void toxml(ostream&, int = 0) const {
+    virtual OutputHandler* clone() const  { return new OutputHandler(); }
+    virtual void toxml(ostream&, int = 0) const  {
         MagLog::dev() << "OutputHandler::toxml(ostream&, int = 0)---> to be checked!...\n";
     }
     void set(DriverManager&);

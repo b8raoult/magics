@@ -31,7 +31,7 @@ namespace magics {
 class MultiVisdef : public Visdef {
 public:
     MultiVisdef();
-    virtual ~MultiVisdef();
+    virtual ~MultiVisdef() override;
     vector<Visdef*>* oneDimension() { return &one_d_; }
     vector<Visdef*>* twoDimension() { return &two_d_; }
 

@@ -32,8 +32,8 @@ namespace magics {
 class HeightSelectionList : public HeightSelection, public HeightSelectionListAttributes {
 public:
     HeightSelectionList();
-    virtual ~HeightSelectionList();
-    virtual void set(map<string, string> map) { HeightSelectionListAttributes::set(map); }
+    virtual ~HeightSelectionList() override;
+    virtual void set(map<string, string> map) override { HeightSelectionListAttributes::set(map); }
     void prepare();
 
 protected:

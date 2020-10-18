@@ -35,7 +35,7 @@ class GeoObject;
 class GeoJSon : public Data, public PointsList, public GeoJSonAttributes {
 public:
     GeoJSon();
-    virtual ~GeoJSon();
+    virtual ~GeoJSon() override;
 
     typedef void (GeoJSon::*Method)(const Value&);
 

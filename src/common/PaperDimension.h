@@ -31,7 +31,7 @@ namespace magics {
 class PaperDimension {
 public:
     PaperDimension() {}
-    virtual ~PaperDimension() {}
+    virtual ~PaperDimension()  {}
     void setOrientation(string orientation) { landscape_ = magCompare(orientation, "landscape"); }
 
 
@@ -70,7 +70,7 @@ public:
         smallDimension_ = 10.5;
         largeDimension_ = 14.8;
     }
-    ~A6() {}
+    ~A6() override {}
 
 protected:
     virtual void print(ostream& out) const override { out << "format=a6[10.5,29.7]"; }
@@ -82,7 +82,7 @@ public:
         smallDimension_ = 14.8;
         largeDimension_ = 21.;
     }
-    ~A5() {}
+    ~A5() override {}
 
 protected:
     virtual void print(ostream& out) const override { out << "format=a5[14.8,21.]"; }
@@ -94,7 +94,7 @@ public:
         smallDimension_ = 21.;
         largeDimension_ = 29.7;
     }
-    ~A4() {}
+    ~A4() override {}
 
 protected:
     virtual void print(ostream& out) const override { out << "format=a4[21.,29.7]"; }
@@ -106,7 +106,7 @@ public:
         smallDimension_ = 29.7;
         largeDimension_ = 42.;
     }
-    ~A3() {}
+    ~A3() override {}
 
 protected:
     virtual void print(ostream& out) const override { out << "format=a3[29.7,42.]"; }

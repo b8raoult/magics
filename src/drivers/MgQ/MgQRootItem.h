@@ -28,7 +28,7 @@
 class MgQRootItem : public QGraphicsItem {
 public:
     MgQRootItem(QGraphicsItem* parent = 0) : QGraphicsItem(parent){};
-    virtual ~MgQRootItem(){};
+    virtual ~MgQRootItem() override{};
 
     int type() const { return Type; }
     QRectF boundingRect() const { return QRectF(); }

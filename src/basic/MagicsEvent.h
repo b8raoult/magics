@@ -309,6 +309,8 @@ public:
     const string& id() const { return idLayer_; }
     const string& name() const { return nameLayer_; }
 
+    virtual void print(std::ostream& s) const { s << "MetviewIcon[]"; }
+
 protected:
     string iconName_;
     string iconClass_;
@@ -320,6 +322,12 @@ protected:
     string nameLayer_;
 
     map<string, string> information_;
+
+private:
+    friend ostream& operator<<(ostream& s, const MetviewIcon& p) {
+        p.print(s);
+        return s;
+    }
 };
 
 }  // namespace magics

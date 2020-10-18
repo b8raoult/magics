@@ -34,7 +34,7 @@ class HiLo;
 class HiLoTechnique : public HiLoTechniqueAttributes {
 public:
     HiLoTechnique() {}
-    virtual ~HiLoTechnique() {}
+    virtual ~HiLoTechnique() override {}
     virtual HiLoTechnique* clone() {
         HiLoTechnique* object = new HiLoTechnique();
         object->copy(*this);

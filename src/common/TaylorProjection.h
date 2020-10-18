@@ -35,7 +35,7 @@ namespace magics {
 class TaylorProjection : public Transformation, public TaylorProjectionAttributes {
 public:
     TaylorProjection();
-    ~TaylorProjection();
+    ~TaylorProjection() override;
 
     /*!
       \brief sets  from an XML node

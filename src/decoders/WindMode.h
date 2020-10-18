@@ -78,7 +78,7 @@ private:
 class UVWindMode : public WindMode {
 public:
     UVWindMode() {}
-    virtual ~UVWindMode() {}
+    virtual ~UVWindMode() override {}
     WindMode* clone() const override { return new UVWindMode(); }
     virtual void x(Matrix&, Matrix&) override;
     virtual pair<double, double> operator()(double x, double y) override { return std::make_pair(x, y); }
@@ -98,7 +98,7 @@ private:
 class SDWindMode : public WindMode {
 public:
     SDWindMode() {}
-    virtual ~SDWindMode() {}
+    virtual ~SDWindMode() override {}
     WindMode* clone() const override { return new SDWindMode(); }
     virtual void x(Matrix&, Matrix&) override;
     virtual pair<double, double> operator()(double x, double y) override;
@@ -117,7 +117,7 @@ private:
 class VDWindMode : public WindMode {
 public:
     VDWindMode() {}
-    virtual ~VDWindMode() {}
+    virtual ~VDWindMode() override {}
     WindMode* clone() const override { return new VDWindMode(); }
     virtual void x(Matrix&, Matrix&) override;
     virtual void y(Matrix&, Matrix&);

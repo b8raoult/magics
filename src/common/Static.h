@@ -18,7 +18,7 @@ namespace magics {
 class Static {
 public:
     Static();
-    virtual ~Static();
+    virtual ~Static() ;
 };
 
 }  // namespace magics

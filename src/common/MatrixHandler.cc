@@ -259,3 +259,360 @@ bool MatrixHandler::hasMissingValues() const {
 void MatrixHandler::applyScaling(double scaling, double offset) {
     // matrix_.applyScaling(scaling, offset);
 }
+
+void TransformMatrixHandler::set() {
+    for (int i = 0; i < rows(); i++) {
+        double row = matrix_.regular_row(minrow_ + i);
+        rowsMap_.insert(make_pair(row, i));
+        fastRows_.push_back(row);
+    }
+    for (int i = 0; i < columns(); i++) {
+        double column = matrix_.regular_column(mincolumn_ + i);
+        columnsMap_.insert(make_pair(column, i));
+        fastColumns_.push_back(column);
+    }
+    minx_ = std::min(fastColumns_.front(), fastColumns_.back());
+    maxx_ = std::max(fastColumns_.front(), fastColumns_.back());
+    miny_ = std::min(fastRows_.front(), fastRows_.back());
+    maxy_ = std::max(fastRows_.front(), fastRows_.back());
+}
+
+int TransformMatrixHandler::lowerRow(double r) const {
+    int last = -1;
+    for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
+        if (i->first > r) {
+            return last;
+        }
+        last = i->second;
+    }
+    return -1;
+}
+
+int TransformMatrixHandler::lowerColumn(double c) const {
+    int last = -1;
+    for (map<double, int>::const_iterator i = columnsMap_.begin(); i != columnsMap_.end(); ++i) {
+        if (i->first > c)
+            return last;
+        last = i->second;
+    }
+    return -1;
+}
+
+int TransformMatrixHandler::upperRow(double r) const {
+    for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
+        if (i->first > r) {
+            return i->second;
+        }
+    }
+    return -1;
+}
+
+int TransformMatrixHandler::upperColumn(double c) const {
+    for (map<double, int>::const_iterator i = columnsMap_.begin(); i != columnsMap_.end(); ++i) {
+        if (i->first > c)
+            return i->second;
+    }
+    return -1;
+}
+
+BoxMatrixHandler::BoxMatrixHandler(const AbstractMatrix& matrix, const Transformation& transformation) :
+    TransformMatrixHandler(matrix), transformation_(transformation), original_(0) {
+    double minx = std::min(transformation.getMinX(), transformation.getMaxX());
+    double maxx = std::max(transformation.getMinX(), transformation.getMaxX());
+    double miny = std::min(transformation.getMinY(), transformation.getMaxY());
+    double maxy = std::max(transformation.getMinY(), transformation.getMaxY());
+
+    int rows    = matrix_.rows();
+    int columns = matrix_.columns();
+
+    mincolumn_ = columns - 1;
+    maxcolumn_ = 0;
+    minrow_    = rows - 1;
+    maxrow_    = 0;
+
+    for (int row = 0; row < rows; row++) {
+        for (int column = 0; column < columns; column++) {
+            double x = matrix_.column(row, column);
+            double y = matrix_.row(row, column);
+            if (minx <= x && x < maxx && miny <= y && y <= maxy) {
+                mincolumn_ = std::min(mincolumn_, column);
+                maxcolumn_ = std::max(maxcolumn_, column);
+                minrow_    = std::min(minrow_, row);
+                maxrow_    = std::max(maxrow_, row);
+            }
+        }
+    }
+
+    if (mincolumn_ > maxcolumn_) {
+        mincolumn_ = maxcolumn_;
+        MagLog::warning() << "No data to plot in the requested area" << endl;
+    }
+    if (minrow_ > maxrow_) {
+        minrow_ = maxrow_;
+        MagLog::warning() << "No data to plot in the requested area" << endl;
+    }
+    // MagLog::broadcast();
+
+    mincolumn_ = std::max(mincolumn_ - 1, 0);
+    maxcolumn_ = std::min(maxcolumn_ + 1, columns - 1);
+
+    columnrevert_ = matrix_.column(0, maxcolumn_) < matrix_.column(0, mincolumn_);
+
+    minrow_ = std::max(minrow_ - 1, 0);
+    maxrow_ = std::min(maxrow_ + 1, rows - 1);
+
+    rowrevert_ = matrix_.row(maxrow_, 0) < matrix_.row(minrow_, 0);
+    set();
+}
+
+const AbstractMatrix& BoxMatrixHandler::original() const {
+    if (!original_)
+        original_ = new BoxMatrixHandler(matrix_.original(), transformation_);
+    return *original_;
+}
+
+void BoxMatrixHandler::boundRow(double r, double& row1, int& index1, double& row2, int& index2) const {
+    index1 = lowerRow(r);
+    row1   = regular_row(index1);
+    index2 = upperRow(r);
+    row2   = regular_row(index2);
+}
+
+void BoxMatrixHandler::boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const {
+    index1  = lowerColumn(r);
+    column1 = regular_column(index1);
+    index2  = upperColumn(r);
+    column2 = regular_column(index2);
+}
+
+int BoxMatrixHandler::rowIndex(double r) const {
+    map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
+    if (i != rowsMap_.end()) {
+        if (same(i->first, r))
+            return i->second;
+    }
+    else {  // Utilité ? A confirmer
+        map<double, int>::const_reverse_iterator i = rowsMap_.rbegin();
+        if (same(i->first, r))
+            return i->second;
+    }
+    return -1;
+}
+
+int BoxMatrixHandler::columnIndex(double c) const {
+    map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
+    if (i != columnsMap_.end()) {
+        if (same(i->first, c))
+            return i->second;
+    }
+    else {  // Utilité ? A confirmer
+        map<double, int>::const_reverse_iterator i = columnsMap_.rbegin();
+        if (same(i->first, c))
+            return i->second;
+    }
+    return -1;
+}
+
+const AbstractMatrix& GeoBoxMatrixHandler::original() const {
+    if (!original_)
+        original_ = new GeoBoxMatrixHandler(matrix_.original(), transformation_) ;
+    return *original_;
+}
+
+int GeoBoxMatrixHandler::rowIndex(double r) const {
+    map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
+    if (i != rowsMap_.end()) {
+        if (same(i->first, r))
+            return i->second;
+    }
+    else {  // Utilité ? A confirmer
+        map<double, int>::const_reverse_iterator i = rowsMap_.rbegin();
+        if (same(i->first, r))
+            return i->second;
+    }
+    return -1;
+}
+
+int GeoBoxMatrixHandler::columnIndex(double c) const {
+    map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
+    if (i != columnsMap_.end()) {
+        if (same(i->first, c))
+            return i->second;
+    }
+    else {  // Utilité ? A confirmer
+        map<double, int>::const_reverse_iterator i = columnsMap_.rbegin();
+        if (same(i->first, c))
+            return i->second;
+    }
+    return -1;
+}
+
+double GeoBoxMatrixHandler::operator()(int row, int column) const {
+    if (columns_[column] == -1)
+        return matrix_.missing();
+    return matrix_(rows_[row], columns_[column]);
+}
+
+int GeoBoxMatrixHandler::lowerRow(double r) const {
+    map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
+    if (i != rowsMap_.end()) {
+        if (same(i->first, r))
+            return i->second;
+        if (i != rowsMap_.begin()) {
+            i--;
+            return i->second;
+        }
+    }
+    return -1;
+}
+
+int GeoBoxMatrixHandler::lowerColumn(double c) const {
+    map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
+    if (i != columnsMap_.end()) {
+        if (same(i->first, c))
+            return i->second;
+        if (i != columnsMap_.begin()) {
+            i--;
+            return i->second;
+        }
+    }
+    return -1;
+}
+
+void GeoBoxMatrixHandler::boundRow(double r, double& row1, int& index1, double& row2, int& index2) const {
+    index1 = lowerRow(r) ;
+    if (index1 < 0) {
+        index2 = -1;
+        return;
+    }
+
+    row1 = regular_latitudes_[index1];
+    if (index1 >= regular_latitudes_.size() - 1) {
+        index2 = -1;
+        return;
+    }
+
+    index2 = index1 + 1;
+    row2   = regular_latitudes_[index2];
+}
+
+void GeoBoxMatrixHandler::boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const {
+    index1 = lowerColumn(r) ;
+    if (index1 < 0) {
+        index2 = -1;
+        return;
+    }
+
+    column1 = regular_longitudes_[index1];
+    if (index1 >= regular_longitudes_.size() - 1) {
+        index2 = -1;
+        return;
+    }
+
+    index2  = index1 + 1;
+    column2 = regular_longitudes_[index2];
+}
+
+MonotonicIncreasingMatrixHandler::MonotonicIncreasingMatrixHandler(const AbstractMatrix& matrix) :
+    MatrixHandler(matrix) {
+    // Check RowAxis...
+    int row = matrix_.rows();
+    if (matrix_.regular_row(1) - matrix_.regular_row(0) >= 0)  // Increasing Axis...
+        for (int i = 0; i < row; i++) {
+            rows_[i]                           = i;
+            newRowsMap_[matrix.regular_row(i)] = i;
+        }
+    else  // Decreasing axis...
+        for (int i = 0; i < row; i++) {
+            rows_[i]                                       = (row - 1) - i;
+            newRowsMap_[matrix.regular_row((row - 1) - i)] = i;
+        }
+    // Check ColumnAxis
+    int column = matrix_.columns();
+    if (matrix_.regular_column(1) - matrix_.regular_column(0) >= 0)  // Increasing Axis...
+        for (int j = 0; j < column; j++) {
+            columns_[j]                              = j;
+            newColumnsMap_[matrix.regular_column(j)] = j;
+        }
+    else  // Decreasing axis...
+        for (int j = 0; j < column; j++) {
+            columns_[j]                                             = (column - 1) - j;
+            newColumnsMap_[matrix.regular_column((column - 1) - j)] = j;
+        }
+}
+
+double MonotonicIncreasingMatrixHandler::operator()(int i, int j) const {
+    int x = const_cast<MonotonicIncreasingMatrixHandler*>(this)->rows_[i];
+    int y = const_cast<MonotonicIncreasingMatrixHandler*>(this)->columns_[j];
+
+    return matrix_(x, y);
+}
+
+void MonotonicIncreasingMatrixHandler::print() {
+    MagLog::debug() << "MonotonicIncreasingMatrixHandler->\n";
+    for (int j = 0; j < rows(); j++) {
+        for (int i = 0; i < columns(); i++) {
+            MagLog::dev() << (*this)(j, i) << " ";
+        }
+        MagLog::dev() << "\n";
+    }
+    MagLog::debug() << "<--" << endl;
+}
+
+int MonotonicIncreasingMatrixHandler::lowerRow(double r) const {
+    map<double, int>::const_iterator bound = newRowsMap_.find(r);
+    if (bound != newRowsMap_.end())
+        return (*bound).second;
+
+    bound = newRowsMap_.lower_bound(r);
+    if (bound == newRowsMap_.end())
+        return -1;
+    return (*bound).second - 1;
+}
+
+int MonotonicIncreasingMatrixHandler::lowerColumn(double c) const {
+    map<double, int>::const_iterator bound = newColumnsMap_.find(c);
+    if (bound != newColumnsMap_.end())
+        return (*bound).second;
+
+    bound = newColumnsMap_.lower_bound(c);
+    if (bound == newColumnsMap_.end())
+        return -1;
+    return (*bound).second - 1;
+}
+
+ThinningMatrixHandler::ThinningMatrixHandler(const AbstractMatrix& matrix, int fr, int fc) :
+    MatrixHandler(matrix), frequencyRow_(fr), frequencyColumn_(fc) {
+    int rows    = matrix_.rows();
+    int columns = matrix_.columns();
+
+    int row = 0;
+    for (int i = 0; i < rows; i += frequencyRow_) {
+        rowIndex_.insert(make_pair(row, i));
+        row++;
+    }
+    int column = 0;
+    for (int i = 0; i < columns; i += frequencyColumn_) {
+        // MagLog::dev()<< "Sample --> " << column << "=" << i << endl;
+        columnIndex_.insert(make_pair(column, i));
+        // MagLog::dev()<< "Sample --> " << column << "=" << i << "[" <<
+        // regular_column(column) << "]" << endl;
+
+        column++;
+    }
+    columnIndex_.insert(make_pair(column, columns - 1));
+    // MagLog::dev()<< "Sample --> " << column << "=" << columns-1 << "[" <<
+    // regular_column(column) << "]"<< endl;
+}
+
+int ThinningMatrixHandler::columnIndex(int column) const {
+    map<int, int>::const_iterator index = columnIndex_.find(column);
+    ASSERT(index != columnIndex_.end());
+    return index->second;
+}
+
+int ThinningMatrixHandler::rowIndex(int row) const {
+    map<int, int>::const_iterator index = rowIndex_.find(row);
+    ASSERT(index != rowIndex_.end());
+    return index->second;
+}

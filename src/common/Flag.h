@@ -32,7 +32,7 @@ namespace magics {
 class Flag : public Arrow {
 public:
     Flag();
-    ~Flag();
+    ~Flag() override;
 
     void redisplay(const BaseDriver& driver) const { driver.redisplay(*this); }
 

@@ -31,19 +31,23 @@ namespace magics {
 class DataConverter : public Data {
 public:
     DataConverter(Data*);
-    virtual ~DataConverter();
-    virtual MatrixHandler& matrix() { throw MethodNotYetImplemented("DataConverter::matrix"); }
+    virtual ~DataConverter() override;
+    virtual MatrixHandler& matrix() override { throw MethodNotYetImplemented("DataConverter::matrix"); }
 
     //! Methods to access the data as a 2Dmatrix Used by pwind action routine
-    virtual MatrixHandler& xComponent() { throw MethodNotYetImplemented("DataConverter::yComponent"); }
-    virtual MatrixHandler& yComponent() { throw MethodNotYetImplemented("DataConverter::yComponent"); }
+    virtual MatrixHandler& xComponent() override {
+        throw MethodNotYetImplemented("DataConverter::yComponent") override;
+    }
+    virtual MatrixHandler& yComponent() override {
+        throw MethodNotYetImplemented("DataConverter::yComponent") override;
+    }
 
     //! Method to access the data as a list of points : Used by psymb.
-    virtual PointsHandler& points();
+    virtual PointsHandler& points() override;
 
 
     virtual void getReady(const Transformation&) {}
-    virtual void visit(Transformation&) {}
+    virtual void visit(Transformation&) override {}
 
 
 protected:

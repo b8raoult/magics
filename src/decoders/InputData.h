@@ -36,7 +36,7 @@ namespace magics {
 class InputData : public Data, public InputDataAttributes, public PointsList {
 public:
     InputData() : matrix_(0) {}
-    virtual ~InputData() {}
+    virtual ~InputData() override {}
 
     void prepare();
 

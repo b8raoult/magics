@@ -31,7 +31,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~BoolContent();
+    virtual ~BoolContent() override;
 
     // -- Overridden methods
 

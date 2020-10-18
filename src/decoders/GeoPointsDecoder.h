@@ -39,10 +39,10 @@ class XmlNode;
 class GeoPointsDecoder : public GeoPointsDecoderAttributes, public Data, public Decoder, public PointsList {
 public:
     GeoPointsDecoder();
-    virtual ~GeoPointsDecoder();
+    virtual ~GeoPointsDecoder() override;
     //! Method to access the data as a list of points : Used by psymb.
 
-    virtual void decode(const Transformation&);
+    virtual void decode(const Transformation&) ;
     virtual void decode() override;
     void set(const map<string, string>& map) override { GeoPointsDecoderAttributes::set(map); }
     void set(const XmlNode& node) override { GeoPointsDecoderAttributes::set(node); }

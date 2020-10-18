@@ -27,7 +27,7 @@ public:
 
     void set(const string& name) { compatibility_[name] = this; }
 
-    virtual ~CompatibilityHelper() {}
+    virtual ~CompatibilityHelper()  {}
     template <class P>
     static bool check(const string& param, P value) {
         map<string, CompatibilityHelper*>::const_iterator tool = compatibility_.find(lowerCase(param));
@@ -49,13 +49,13 @@ public:
             return (*(tool->second))(string(value));
     }
     virtual void reset() {}
-    virtual bool operator()(int) { return false; }
-    virtual bool operator()(const string&) { return false; }
-    virtual bool operator()(double) { return false; }
-    virtual bool operator()(const doublearray&) { return false; }
-    virtual bool operator()(const stringarray&) { return false; }
-    virtual bool operator()(const intarray&) { return false; }
-    virtual bool operator()(bool) { return false; }
+    virtual bool operator()(int)  { return false; }
+    virtual bool operator()(const string&)  { return false; }
+    virtual bool operator()(double)  { return false; }
+    virtual bool operator()(const doublearray&)  { return false; }
+    virtual bool operator()(const stringarray&)  { return false; }
+    virtual bool operator()(const intarray&)  { return false; }
+    virtual bool operator()(bool)  { return false; }
 
     static void resetAll();
 

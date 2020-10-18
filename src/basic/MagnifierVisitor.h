@@ -37,7 +37,7 @@ namespace magics {
 class NoMagnifierVisitor : public SceneVisitor, public MagnifierLayout {
 public:
     NoMagnifierVisitor();
-    virtual ~NoMagnifierVisitor();
+    virtual ~NoMagnifierVisitor() override;
 
     virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
     virtual bool accept(const string&) { return false; }
@@ -77,7 +77,7 @@ class MagnifierVisitor : public NoMagnifierVisitor, public MagnifierVisitorAttri
 public:
     MagnifierVisitor();
 
-    virtual ~MagnifierVisitor();
+    virtual ~MagnifierVisitor() override;
     void visit(BasicGraphicsObjectContainer&) override;
     virtual NoMagnifierVisitor* clone() const override {
         MagnifierVisitor* visitor = new MagnifierVisitor();

@@ -247,9 +247,9 @@ public:
 
 
 #ifdef MAGICS_QT
-    virtual MAGICS_NO_EXPORT void redisplay(const PreviewLayout&) const {};
-    virtual MAGICS_NO_EXPORT void redisplay(const HistoLayout&) const {};
-    virtual MAGICS_NO_EXPORT void redisplay(const MagnifierLayout&) const {};
+    virtual MAGICS_NO_EXPORT void redisplay(const PreviewLayout&) const {}
+    virtual MAGICS_NO_EXPORT void redisplay(const HistoLayout&) const {}
+    virtual MAGICS_NO_EXPORT void redisplay(const MagnifierLayout&) const {}
 #endif
     typedef void (BaseDriver::*ModeFunction)(const SelectionMode&);
     typedef void (BaseDriver::*ControlFunction)(bool);
@@ -332,9 +332,10 @@ protected:
 
     //! Method to print string about this class on to a stream of type ostream (virtual).
     virtual void print(ostream&) const override;
-    virtual void startPage() const {};
-    virtual void endPage() const {};
-    virtual void setNewColour(const Colour&) const {};
+    virtual void startPage() const {}
+    virtual void endPage() const {}
+
+    virtual void setNewColour(const Colour&) const {}
     virtual void printLine(const Polyline& line) const;
 
     virtual void renderText(const Text&) const {}
@@ -390,14 +391,16 @@ protected:
     virtual void renderFlagItem(const FlagItem&, const ComplexSymbol& symbol) const;
     virtual void renderSymbolItem(const SymbolItem&, const ComplexSymbol& symbol) const;
     virtual void renderSymbols(const Symbol& symbol) const;
-    virtual void renderPolyline(const int, MFloat*, MFloat*) const {};
-    virtual void renderPolyline2(const int, MFloat*, MFloat*) const {};
+    virtual void renderPolyline(const int, MFloat*, MFloat*) const {}
+    virtual void renderPolyline2(const int, MFloat*, MFloat*) const {}
     void renderPolyline(vector<PaperPoint>& vP) const;
     void renderPolyline2(vector<PaperPoint>& vP) const;
 
 #ifdef MAGICS_ON_WINDOWS
-    virtual MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const {};
-    virtual MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const {};
+    virtual MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const override {}
+    override;
+    virtual MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const override {}
+    override;
 #else
     virtual MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const = 0;
     virtual MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const        = 0;

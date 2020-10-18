@@ -40,7 +40,7 @@ public:
 
     virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) override {
         // Here we work on projection coordinates!
-        ImportObject* object = new ImportObject();
+        ImportObject* object = new ImportObject() override;
         object->setPath(data.path());
         object->setOrigin(PaperPoint(x_, y_));
         object->setWidth(width_);
@@ -89,7 +89,7 @@ public:
     void set(const map<string, string>& map) override { ImportPlotAttributes::set(map); }
 
     virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) override {
-        ImportObject* object = new ImportObject();
+        ImportObject* object = new ImportObject() override;
         object->setPath(data.path());
         object->setOrigin(PaperPoint(x_, y_));
         object->setWidth(width_);

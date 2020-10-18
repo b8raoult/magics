@@ -32,7 +32,7 @@ namespace magics {
 class IntervalSelectionType : public IntervalSelectionTypeAttributes, public LevelSelection {
 public:
     IntervalSelectionType();
-    virtual ~IntervalSelectionType();
+    virtual ~IntervalSelectionType() override;
     void set(const map<string, string>& params) override {
         IntervalSelectionTypeAttributes::set(params);
         LevelSelection::set(params);

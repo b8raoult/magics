@@ -220,8 +220,8 @@ public:
     static void skinnyMode() { skinny_ = true; }
 
     void reproject(const Transformation&);
-    bool reproject(BasicGraphicsObjectContainer& out) const;
-    void redisplay(const BaseDriver& driver) const;
+    bool reproject(BasicGraphicsObjectContainer& out) const override;
+    void redisplay(const BaseDriver& driver) const override;
 
     Colour cellColour_;
     double cellValue_;

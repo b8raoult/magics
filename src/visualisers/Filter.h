@@ -40,7 +40,7 @@ public:
     int DimensionY() const { return nrows_; }
 
     //!  Start the processing of the filters
-    virtual bool Process() { return true; }
+    virtual bool Process()  { return true; }
 
 protected:
     /*!
@@ -99,7 +99,7 @@ public:
          true  if the operantion was successfull
          false otherwise
     */
-    virtual bool Process();
+    virtual bool Process() override;
 
     //! Set min/max flag
     void SetMinMaxFlag(int flag) { mflag_ = flag; }

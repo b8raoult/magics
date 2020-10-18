@@ -125,7 +125,7 @@ public:
     TextSymbol() : position_(M_BELOW), blanking_(false) {}
     ~TextSymbol() {}
 
-    void push_back(const PaperPoint& point, const string& text) {
+    void push_back(const PaperPoint& point, const string& text) override {
         Symbol::push_back(point);
         if (text == "_FORCE_EMPTY_TEXT_") {
             texts_.push_back("");
@@ -136,7 +136,7 @@ public:
     }
 
     void text(const vector<string>& text) { texts_ = text; }
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 
     vector<string>::const_iterator textBegin() const { return texts_.begin(); }
     vector<string>::const_iterator textEnd() const { return texts_.end(); }
@@ -162,7 +162,7 @@ class ImageSymbol : public Symbol {
 public:
     ImageSymbol(const string& path, const string& format) : path_(path), format_(format) {}
     ~ImageSymbol() {}
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 
     void set(double width, double height) {
         width_  = width;

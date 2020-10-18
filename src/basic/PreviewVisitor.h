@@ -33,7 +33,7 @@ namespace magics {
 class NoPreviewVisitor : public SceneVisitor, public PreviewLayout {
 public:
     NoPreviewVisitor() {}
-    virtual ~NoPreviewVisitor() {}
+    virtual ~NoPreviewVisitor() override {}
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
     virtual bool accept(const string&) { return false; }
@@ -55,7 +55,7 @@ protected:
 class PreviewVisitor : public NoPreviewVisitor {
 public:
     PreviewVisitor();
-    ~PreviewVisitor();
+    ~PreviewVisitor() override;
     NoPreviewVisitor* clone() const override { return new PreviewVisitor(); }
     void visit(BasicGraphicsObjectContainer&) override;
     void redisplay(const BaseDriver& driver) const override;

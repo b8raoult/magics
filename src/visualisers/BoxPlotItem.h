@@ -40,7 +40,7 @@ namespace magics {
 class BoxPlotBox : public NoBoxPlotBox, public BoxPlotBoxAttributes {
 public:
     BoxPlotBox() {}
-    virtual ~BoxPlotBox() {}
+    virtual ~BoxPlotBox() override {}
 
 
     void set(const XmlNode& node) override { BoxPlotBoxAttributes::set(node); }
@@ -68,7 +68,7 @@ private:
 class BoxPlotBoxBorder : public NoBoxPlotBoxBorder, public BoxPlotBoxBorderAttributes {
 public:
     BoxPlotBoxBorder() {}
-    virtual ~BoxPlotBoxBorder() {}
+    virtual ~BoxPlotBoxBorder() override {}
 
     virtual void set(const XmlNode& node) override { BoxPlotBoxBorderAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { BoxPlotBoxBorderAttributes::set(map); }
@@ -90,7 +90,7 @@ protected:
 class BoxPlotMedian : public NoBoxPlotMedian, public BoxPlotMedianAttributes {
 public:
     BoxPlotMedian() {}
-    virtual ~BoxPlotMedian() {}
+    virtual ~BoxPlotMedian() override {}
 
     virtual void set(const XmlNode& node) override { BoxPlotMedianAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { BoxPlotMedianAttributes::set(map); }
@@ -113,7 +113,7 @@ protected:
 class BoxPlotWhiskerBorder : public NoBoxPlotWhiskerBorder, public BoxPlotWhiskerBorderAttributes {
 public:
     BoxPlotWhiskerBorder() {}
-    virtual ~BoxPlotWhiskerBorder() {}
+    virtual ~BoxPlotWhiskerBorder() override {}
 
     virtual void set(const XmlNode& node) override { BoxPlotWhiskerBorderAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { BoxPlotWhiskerBorderAttributes::set(map); }
@@ -135,7 +135,7 @@ protected:
 class BoxPlotWhiskerBox : public NoBoxPlotWhisker, public BoxPlotWhiskerBoxAttributes {
 public:
     BoxPlotWhiskerBox() {}
-    virtual ~BoxPlotWhiskerBox() {}
+    virtual ~BoxPlotWhiskerBox() override {}
 
     virtual void set(const XmlNode& node) override { BoxPlotWhiskerBoxAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { BoxPlotWhiskerBoxAttributes::set(map); }
@@ -157,7 +157,7 @@ protected:
 class BoxPlotWhiskerLine : public NoBoxPlotWhisker, public BoxPlotWhiskerLineAttributes {
 public:
     BoxPlotWhiskerLine() {}
-    virtual ~BoxPlotWhiskerLine() {}
+    virtual ~BoxPlotWhiskerLine() override {}
 
     virtual void set(const XmlNode& node) override { BoxPlotWhiskerLineAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { BoxPlotWhiskerLineAttributes::set(map); }

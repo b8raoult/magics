@@ -40,18 +40,18 @@ class VerticalAxisVisitor;
 class AxisTick : public AxisTickAttributes {
 public:
     AxisTick();
-    virtual ~AxisTick();
+    virtual ~AxisTick() override;
 
-    virtual void set(const XmlNode& node) { AxisTickAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { AxisTickAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { AxisTickAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { AxisTickAttributes::set(map); }
     virtual AxisTick* clone() const override {
-        AxisTick* tick = new AxisTick();
+        AxisTick* tick = new AxisTick() override;
         tick->copy(*this);
         return tick;
     }
 
-    virtual void vertical(const AxisItems&, const Colour&, VerticalAxisVisitor&);
-    virtual void horizontal(const AxisItems&, const Colour&, HorizontalAxisVisitor&);
+    virtual void vertical(const AxisItems&, const Colour&, VerticalAxisVisitor&) override;
+    virtual void horizontal(const AxisItems&, const Colour&, HorizontalAxisVisitor&) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -74,7 +74,7 @@ private:
 class NoAxisTick : public AxisTick {
 public:
     NoAxisTick() {}
-    ~NoAxisTick(){};
+    ~NoAxisTick() override{};
 
 protected:
     virtual void vertical(const AxisItems&, const Colour&, VerticalAxisVisitor&) {}

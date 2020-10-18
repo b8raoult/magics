@@ -37,8 +37,8 @@ public:
     virtual double XResolution(const GribDecoder& grib) const override { return longitudeIncrement(grib); }
     void interpretAsMatrix(GribDecoder&, const Transformation&) const override;
     virtual void interpretAsRaster(const GribDecoder&, RasterData&, const Transformation&) const override;
-    virtual void latitudes(const GribDecoder&, vector<double>&) const;
-    virtual double longitudeIncrement(const GribDecoder&) const;
+    virtual void latitudes(const GribDecoder&, vector<double>&) const ;
+    virtual double longitudeIncrement(const GribDecoder&) const ;
     void index(const GribDecoder& grib) override;
 
 protected:

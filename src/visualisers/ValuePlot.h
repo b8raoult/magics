@@ -35,7 +35,7 @@ namespace magics {
 class ValuePlot : public ValuePlotBase, public ValuePlotAttributes {
 public:
     ValuePlot();
-    virtual ~ValuePlot();
+    virtual ~ValuePlot() override;
 
     virtual ValuePlotBase* clone() const override {
         ValuePlot* plot = new ValuePlot();
@@ -79,7 +79,7 @@ private:
 class NoValuePlot : public ValuePlotBase {
 public:
     NoValuePlot(){};
-    ~NoValuePlot(){};
+    ~NoValuePlot() override{};
     ValuePlotBase* clone() const override { return new NoValuePlot(); }
     bool accept(const string& node) override { return magCompare(node, "nogridvalues"); }
 

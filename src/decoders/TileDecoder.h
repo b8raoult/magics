@@ -36,7 +36,7 @@ namespace magics {
 class TileDecoder : public Decoder, public Data, public TileDecoderAttributes {
 public:
     TileDecoder();
-    virtual ~TileDecoder();
+    virtual ~TileDecoder() override;
     // implements Decoder interface
     void decode() override;
     virtual void set(const XmlNode& node) override { TileDecoderAttributes::set(node); }
@@ -49,7 +49,7 @@ public:
 
     PointsHandler& points() { throw MethodNotYetImplemented("TileDecoder::points()"); }
     virtual MatrixHandler& matrix() override {
-        decode();
+        decode() override;
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         matrixHandlers_.back()->setTile();
         return *(matrixHandlers_.back());

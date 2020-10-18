@@ -90,7 +90,7 @@ public:
         return text;
     }
 
-    virtual ~Text();
+    virtual ~Text() override;
 
     void addText(const string& text, const Colour& colour, double height) {
         nice_.push_back(NiceText());

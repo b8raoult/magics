@@ -31,19 +31,21 @@ class MagicsParameter : public BaseParameter {
 public:
     MagicsParameter(const string& name, const T& def) : BaseParameter(name), default_(def), value_(def) {}
 
-    ~MagicsParameter() {}
+    ~MagicsParameter() override {}
 
-    void get(T& value) const { value = value_; }
+    void get(T& value) const override { value = value_; }
     void reset() { value_ = default_; }
 
-    BaseParameter* clone() { return new MagicsParameter<T>(this->name_, this->default_); }  // FIXME: default or value?
+    BaseParameter* clone() override {
+        return new MagicsParameter<T>(this->name_, this->default_);
+    }  // FIXME: default or value?
 
-    string type() const { return getType(default_); }
+    string type() const override { return getType(default_); }
 
-    void set(const T& value) { value_ = value; }
+    void set(const T& value) override { value_ = value; }
 
 protected:
-    void print(ostream& out) const { out << name_ << "[" << value_ << ", " << default_ << "]"; }
+    void print(ostream& out) const override { out << name_ << "[" << value_ << ", " << default_ << "]"; }
 
     T default_;
     T value_;

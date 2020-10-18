@@ -35,7 +35,7 @@ namespace magics {
 class KMLDriver : public BaseDriver, public KMLDriverAttributes {
 public:
     KMLDriver();
-    ~KMLDriver();
+    ~KMLDriver() override;
     void open();
     void close();
 

@@ -60,7 +60,7 @@ class QtDriver : public BaseDriver, public QtDriverAttributes {
 
 public:
     QtDriver();
-    ~QtDriver();
+    ~QtDriver() override;
     void open();
     void close();
 

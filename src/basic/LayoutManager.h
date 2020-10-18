@@ -35,28 +35,28 @@ class BasicPositionalObject;
 class LayoutManager {
 public:
     LayoutManager();
-    virtual ~LayoutManager();
+    virtual ~LayoutManager() ;
 
-    virtual LayoutManager* clone() { return new LayoutManager(); }
+    virtual LayoutManager* clone()  { return new LayoutManager(); }
 
-    virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
-    virtual void set(const map<string, string>&) {
+    virtual void set(const XmlNode&)  { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
+    virtual void set(const map<string, string>&)  {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
     }
-    virtual LayoutManager* clone() const {
+    virtual LayoutManager* clone() const  {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new LayoutManager();
     }
 
     void newpage() { newpage_ = true; }
 
-    virtual BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
+    virtual BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node) ;
 
     static LayoutManager* manager(const string& type, const string& start, const string& direction);
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
     bool newpage_;
 
 private:
@@ -76,7 +76,7 @@ private:
 class AutomaticLayout : public LayoutManager {
 public:
     AutomaticLayout() : x_(0), y_(0), gapx_(0), gapy_(0) {}
-    ~AutomaticLayout() {}
+    ~AutomaticLayout() override {}
 
     void gapx(double gapx) { gapx_ = gapx; }
     void gapy(double gapy) { gapx_ = gapy; }
@@ -91,10 +91,10 @@ protected:
 class MagMLLayoutManager : public AutomaticLayout {
 public:
     MagMLLayoutManager();
-    ~MagMLLayoutManager() {}
+    ~MagMLLayoutManager() override {}
     BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
-    virtual LayoutManager* clone() {
-        MagMLLayoutManager* layout = new MagMLLayoutManager();
+    virtual LayoutManager* clone() override {
+        MagMLLayoutManager* layout = new MagMLLayoutManager() ;
 
         return layout;
     }
@@ -113,10 +113,10 @@ protected:
 class BottomVerticalLayoutManager : public AutomaticLayout {
 public:
     BottomVerticalLayoutManager();
-    ~BottomVerticalLayoutManager();
+    ~BottomVerticalLayoutManager() override;
     BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
-    virtual LayoutManager* clone() {
-        BottomVerticalLayoutManager* layout = new BottomVerticalLayoutManager();
+    virtual LayoutManager* clone() override {
+        BottomVerticalLayoutManager* layout = new BottomVerticalLayoutManager() ;
         layout->gapx_                       = gapx_;
         layout->gapy_                       = gapy_;
         return layout;
@@ -126,10 +126,10 @@ public:
 class BottomHorizontalLayoutManager : public AutomaticLayout {
 public:
     BottomHorizontalLayoutManager();
-    ~BottomHorizontalLayoutManager();
+    ~BottomHorizontalLayoutManager() override;
     BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
-    virtual LayoutManager* clone() {
-        BottomHorizontalLayoutManager* layout = new BottomHorizontalLayoutManager();
+    virtual LayoutManager* clone() override {
+        BottomHorizontalLayoutManager* layout = new BottomHorizontalLayoutManager() ;
         layout->gapx_                         = gapx_;
         layout->gapy_                         = gapy_;
         return layout;
@@ -139,10 +139,10 @@ public:
 class TopHorizontalLayoutManager : public AutomaticLayout {
 public:
     TopHorizontalLayoutManager();
-    ~TopHorizontalLayoutManager();
+    ~TopHorizontalLayoutManager() override;
     BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
-    virtual LayoutManager* clone() {
-        TopHorizontalLayoutManager* layout = new TopHorizontalLayoutManager();
+    virtual LayoutManager* clone() override {
+        TopHorizontalLayoutManager* layout = new TopHorizontalLayoutManager() ;
         layout->gapx_                      = gapx_;
         layout->gapy_                      = gapy_;
         return layout;
@@ -152,10 +152,10 @@ public:
 class TopVerticalLayoutManager : public AutomaticLayout {
 public:
     TopVerticalLayoutManager();
-    ~TopVerticalLayoutManager();
+    ~TopVerticalLayoutManager() override;
     BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
-    virtual LayoutManager* clone() {
-        TopVerticalLayoutManager* layout = new TopVerticalLayoutManager();
+    virtual LayoutManager* clone() override {
+        TopVerticalLayoutManager* layout = new TopVerticalLayoutManager() ;
         layout->gapx_                    = gapx_;
         layout->gapy_                    = gapy_;
         return layout;

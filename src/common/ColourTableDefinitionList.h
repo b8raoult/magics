@@ -35,7 +35,7 @@ class LevelSelection;
 class ColourTableDefinitionList : public ColourTableDefinition {
 public:
     ColourTableDefinitionList();
-    virtual ~ColourTableDefinitionList();
+    virtual ~ColourTableDefinitionList() override;
     void set(const ColourTableDefinitionListInterface&);
     void set(const XmlNode&) override;
     void set(ColourTable&, int) override;

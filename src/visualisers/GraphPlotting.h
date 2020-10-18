@@ -48,7 +48,9 @@ public:
         type_->visit(legend);
     }
     void visit(TopAxisVisitor& top) override { type_->visit(top); }
-    virtual void visit(Transformation& transformation, Data& data) override { type_->visit(transformation, data); }
+    virtual void visit(Transformation& transformation, Data& data) override {
+        type_->visit(transformation, data) override;
+    }
     // Implements the set method ...
     void set(const map<string, string>& map) override {
         GraphPlottingAttributes::set(map);

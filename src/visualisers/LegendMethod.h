@@ -78,7 +78,7 @@ private:
 class ContinuousLegendMethod : public LegendMethod, public ContinuousLegendMethodAttributes {
 public:
     ContinuousLegendMethod() : labelCount_(0) {}
-    ~ContinuousLegendMethod() {}
+    ~ContinuousLegendMethod() override {}
     virtual void set(const XmlNode& node) override { ContinuousLegendMethodAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { ContinuousLegendMethodAttributes::set(map); }
     virtual bool accept(const string& node) override { return magCompare(node, "continuous"); }
@@ -94,7 +94,7 @@ protected:
 class HistogramLegendMethod : public LegendMethod, public HistogramLegendMethodAttributes {
 public:
     HistogramLegendMethod() : labelCount_(0) {}
-    ~HistogramLegendMethod() {}
+    ~HistogramLegendMethod() override {}
     virtual void set(const XmlNode& node) override { HistogramLegendMethodAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { HistogramLegendMethodAttributes::set(map); }
     virtual bool accept(const string& node) override { return magCompare(node, "histogram"); }

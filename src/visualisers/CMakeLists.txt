@@ -115,6 +115,7 @@ IntervalSelectionType.h
 Intervals.h
 IsoHelper.cc
 IsoHelper.h
+IsoHighlight.cc
 IsoHighlight.h
 IsoLabel.cc
 IsoLabel.h

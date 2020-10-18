@@ -31,7 +31,7 @@ class PaperPoint {
 public:
     PaperPoint(double x, double y, double value = 0, bool missing = false, bool border = false, int range = 0,
                const string& name = "");
-    //~PaperPoint() {}
+    //~PaperPoint () override {}
     PaperPoint();
 
     void y(double y) { y_ = y; }

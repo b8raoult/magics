@@ -34,7 +34,7 @@ public:
     ColourTableDefinitionCompute();
 
     ColourTableDefinitionCompute(const string& min, const string& max, const string& method, const string& direction);
-    virtual ~ColourTableDefinitionCompute();
+    virtual ~ColourTableDefinitionCompute() override;
     void set(const ColourTableDefinitionComputeInterface&);
     void set(const XmlNode&) override;
     ColourTableDefinition* clone() const override {

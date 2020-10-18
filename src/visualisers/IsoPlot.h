@@ -201,10 +201,10 @@ public:
     bool missing(int i) { return (same(missing_, this->parent_.value(this->indexes_[i]))); }
 
 
-    virtual double value(int i) const { return value_; }
+    virtual double value(int i) const override { return value_; }
 
-    virtual double row(int i) const { return rows_[i]; }
-    virtual double column(int i) const { return columns_[i]; }
+    virtual double row(int i) const override { return rows_[i]; }
+    virtual double column(int i) const override { return columns_[i]; }
     const pair<int, int>& index(int i) {
         ASSERT(i < 4);
         return indexes_[i];

@@ -63,7 +63,7 @@ private:
 class SymbolItem : public GraphicsItem {
 public:
     SymbolItem() {}
-    ~SymbolItem() {}
+    ~SymbolItem() override {}
 
     void redisplay(const ComplexSymbol&, const BaseDriver&) override;
 
@@ -85,7 +85,7 @@ protected:
 class TextItem : public GraphicsItem {
 public:
     TextItem() {}
-    ~TextItem() {}
+    ~TextItem() override {}
 
     void redisplay(const ComplexSymbol&, const BaseDriver&) override;
 
@@ -107,7 +107,7 @@ protected:
 class FlagItem : public GraphicsItem, public ArrowProperties {
 public:
     FlagItem() {}
-    ~FlagItem() {}
+    ~FlagItem() override {}
 
     void redisplay(const ComplexSymbol&, const BaseDriver&) override;
 

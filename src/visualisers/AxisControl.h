@@ -41,19 +41,19 @@ public:
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
-    virtual bool accept(const string&) { return false; }
-    virtual AxisControl* clone() const {
+    virtual bool accept(const string&)  { return false; }
+    virtual AxisControl* clone() const  {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new AxisControl();
     }
-    virtual void toxml(ostream&) const {}
+    virtual void toxml(ostream&) const  {}
 
-    virtual void vertical(Layout&, Transformation&, AxisMethod&);
-    virtual void horizontal(Layout&, Transformation&, AxisMethod&);
+    virtual void vertical(Layout&, Transformation&, AxisMethod&) ;
+    virtual void horizontal(Layout&, Transformation&, AxisMethod&) ;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
 
 private:
     //! Copy constructor - No copy allowed

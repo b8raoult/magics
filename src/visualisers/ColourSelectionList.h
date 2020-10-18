@@ -32,8 +32,8 @@ namespace magics {
 class ColourSelectionList : public ColourSelection, public ColourSelectionListAttributes {
 public:
     ColourSelectionList();
-    virtual ~ColourSelectionList();
-    virtual void set(map<string, string> map) { ColourSelectionListAttributes::set(map); }
+    virtual ~ColourSelectionList() override;
+    virtual void set(map<string, string> map) override { ColourSelectionListAttributes::set(map); }
     void prepare();
 
 protected:

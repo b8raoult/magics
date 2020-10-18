@@ -29,8 +29,8 @@ namespace magics {
 class AutomaticPlotManager : public PlotManager, public AutomaticPlotManagerAttributes {
 public:
     AutomaticPlotManager();
-    virtual ~AutomaticPlotManager();
-    virtual void set(const map<string, string>& map) { AutomaticPlotManagerAttributes::set(map); }
+    virtual ~AutomaticPlotManager() override;
+    virtual void set(const map<string, string>& map) override { AutomaticPlotManagerAttributes::set(map); }
 
     void page(MagicsManager&);
     void subpage(MagicsManager&);

@@ -65,7 +65,8 @@ public:
     virtual bool accept(const string&) { return false; }
     virtual ColourTechnique* clone() const { return new ColourTechnique(); }
     void toxml(ostream&) const {}
-    virtual void set(const ColourTechniqueInterface&){};
+    virtual void set(const ColourTechniqueInterface&) {}
+
 
     Colour operator()(double) const;
     Colour left(double) const;
@@ -111,7 +112,7 @@ private:
 class PaletteColourTechnique : public ColourTechnique, public PaletteColourTechniqueAttributes {
 public:
     PaletteColourTechnique();
-    virtual ~PaletteColourTechnique();
+    virtual ~PaletteColourTechnique() override;
     void set(const map<string, string>& map) override { PaletteColourTechniqueAttributes::set(map); }
     void set(const XmlNode& node) override { PaletteColourTechniqueAttributes::set(node); }
     bool accept(const string& node) override { return PaletteColourTechniqueAttributes::accept(node); }

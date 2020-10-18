@@ -33,8 +33,8 @@ namespace magics {
 class SimplePolylineInput : public SimplePolylineInputAttributes, public Data, public PointsList {
 public:
     SimplePolylineInput();
-    virtual ~SimplePolylineInput();
-    virtual void decode();
+    virtual ~SimplePolylineInput() override;
+    virtual void decode() ;
     void set(const map<string, string>& map) override { SimplePolylineInputAttributes::set(map); }
     void set(const XmlNode& node) override { SimplePolylineInputAttributes::set(node); }
 

@@ -35,23 +35,25 @@ class Task;
 class PageIDBase {
 public:
     PageIDBase() {}
-    virtual ~PageIDBase() {}
+    virtual ~PageIDBase() override {}
 
-    virtual void set(const XmlNode&) { MagLog::dev() << "PageIDBase::set(const XmlNode&)---> to be checked!...\n"; }
-    virtual void set(const map<string, string>&) {
+    virtual void set(const XmlNode&) override {
+        MagLog::dev() << "PageIDBase::set(const XmlNode&)---> to be checked!...\n";
+    }
+    virtual void set(const map<string, string>&) override {
         MagLog::dev() << "PageIDBase::set(const map<string, string&)---> to be checked!...\n";
     }
     virtual PageIDBase* clone() const override {
         MagLog::dev() << "PageIDBase::set(const map<string, string&)---> to be checked!...\n";
         return new PageIDBase();
     }
-    virtual void toxml(ostream&, int = 0) const {
+    virtual void toxml(ostream&, int = 0) const override {
         MagLog::dev() << "PageIDBase::virtual void toxml(ostream&, int = 0) const ---> to be checked!...\n";
     }
 
-    virtual void operator()(const ErrorReporter&, Task&) const {
-        MagLog::dev()
-            << "PageIDBase::operator()(const ErrorReporter&, vector<BaseGraphicsObject*>&)---> to be checked!...\n";
+    virtual void operator()(const ErrorReporter&, Task&) const override {
+        MagLog::dev() << "PageIDBase::operator()(const ErrorReporter&, vector<BaseGraphicsObject*>&)---> to be "
+                         "checked!...\n";
     }
 
 protected:

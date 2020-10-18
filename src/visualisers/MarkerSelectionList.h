@@ -32,8 +32,8 @@ namespace magics {
 class MarkerSelectionList : public MarkerSelection, public MarkerSelectionListAttributes {
 public:
     MarkerSelectionList();
-    virtual ~MarkerSelectionList();
-    virtual void set(map<string, string> map) { MarkerSelectionListAttributes::set(map); }
+    virtual ~MarkerSelectionList() override;
+    virtual void set(map<string, string> map) override { MarkerSelectionListAttributes::set(map); }
     void prepare();
 
 protected:

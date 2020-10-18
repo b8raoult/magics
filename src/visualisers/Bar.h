@@ -38,7 +38,7 @@ class XmlNode;
 class Bar : public BarAttributes, public Graph {
 public:
     Bar();
-    virtual ~Bar();
+    virtual ~Bar() override;
     // Implements the set method ...
     void set(const XmlNode& node) override;
     void set(const map<string, string>& map) override {
@@ -88,7 +88,7 @@ private:
 class GraphFlag : public GraphFlagAttributes, public Graph {
 public:
     GraphFlag();
-    virtual ~GraphFlag();
+    virtual ~GraphFlag() override;
 
     void set(const XmlNode& node) override {
         GraphFlagAttributes::set(node);
@@ -124,7 +124,7 @@ private:
 class GraphArrow : public GraphArrowAttributes, public Graph {
 public:
     GraphArrow();
-    virtual ~GraphArrow();
+    virtual ~GraphArrow() override;
 
     void set(const XmlNode& node) override {
         GraphArrowAttributes::set(node);

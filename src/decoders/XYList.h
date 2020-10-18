@@ -36,7 +36,7 @@ namespace magics {
 class XYList : public Data, public XYListAttributes, public PointsList {
 public:
     XYList() {}
-    virtual ~XYList() {}
+    virtual ~XYList() override {}
 
     void prepare();
     void set(const map<string, string>& map) override { XYListAttributes::set(map); }
@@ -56,10 +56,10 @@ public:
         return *(this->pointsHandlers_.back());
     }
 
-    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);
+    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&) override;
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&) override;
     void getReady(const Transformation&) override;
-    virtual void points(const Transformation&, vector<UserPoint>&);
+    virtual void points(const Transformation&, vector<UserPoint>&) override;
 
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
                           bool all) override {

@@ -31,7 +31,7 @@ namespace magics {
 class SelectionMode : public SelectionModeAttributes {
 public:
     SelectionMode();
-    virtual ~SelectionMode();
+    virtual ~SelectionMode() override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

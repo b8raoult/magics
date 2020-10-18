@@ -34,7 +34,7 @@ class Akima474 : public MatrixHandler {
 public:
     Akima474(const AbstractMatrix& matrix, const Akima474MethodAttributes&);
 
-    ~Akima474(){};
+    ~Akima474() override{};
 
 
     double operator()(int i, int j) const;
@@ -95,7 +95,7 @@ class Akima474Method : public ContourMethod, public Akima474MethodAttributes {
 public:
     Akima474Method() { MagLog::dev() << "Akima474Method::Akima474Method-->" << *this << "\n"; }
 
-    virtual ~Akima474Method() {}
+    virtual ~Akima474Method() override {}
 
     ContourMethod* clone() const override {
         Akima474Method* method = new Akima474Method();

@@ -28,7 +28,7 @@ namespace magics {
 class Emagram : public Transformation, public TephigramAttributes {
 public:
     Emagram();
-    ~Emagram();
+    ~Emagram() override;
 
     /*!
       \brief sets  from an XML node

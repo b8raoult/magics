@@ -37,7 +37,7 @@ namespace magics {
 class ValuePlotMethod : public ValuePlotMethodAttributes, public vector<BasicGraphicsObject*> {
 public:
     ValuePlotMethod() {}
-    virtual ~ValuePlotMethod() {}
+    virtual ~ValuePlotMethod() override {}
     virtual void set(const map<string, string>& map) override { ValuePlotMethodAttributes::set(map); }
     virtual void set(const XmlNode& node) override { ValuePlotMethodAttributes::set(node); }
 

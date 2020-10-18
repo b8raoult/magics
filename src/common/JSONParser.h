@@ -28,8 +28,8 @@ public:  // methods
     static Value decodeString(const std::string& str);
 
 private:
-    virtual Value parseValue();
-    virtual std::string parserName() const;
+    virtual Value parseValue() override;
+    virtual std::string parserName() const override;
 };
 
 

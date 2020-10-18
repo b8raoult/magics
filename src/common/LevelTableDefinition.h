@@ -37,8 +37,8 @@ class LevelTableDefinition : public TableDefinitionInterface<double> {
 public:
     LevelTableDefinition() {}
     LevelTableDefinition* clone() const override { return new LevelTableDefinition(); }
-    virtual void toxml(ostream&, int) const {}
-};
+    virtual void toxml(ostream&, int) const override {}
+} override;
 
 class LevelTableDefinitionList : public LevelTableDefinition {
 public:

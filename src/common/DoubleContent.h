@@ -31,7 +31,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~DoubleContent();
+    virtual ~DoubleContent() override;
 
     // -- Overridden methods
 

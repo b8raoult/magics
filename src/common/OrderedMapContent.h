@@ -31,7 +31,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~OrderedMapContent();
+    virtual ~OrderedMapContent() override;
 
     // -- Overridden methods
 

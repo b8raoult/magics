@@ -45,7 +45,7 @@ struct Interval {
 class Intervals : public vector<Interval> {
 public:
     Intervals(const doublearray&);
-    virtual ~Intervals();
+    virtual ~Intervals() override;
     double find(double val) const;
     void set(const doublearray&);
 

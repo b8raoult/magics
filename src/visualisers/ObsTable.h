@@ -44,7 +44,7 @@ public:
     void operator()(CustomisedPoint&, BasicGraphicsObjectContainer&) const;
 
 protected:
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "ObsTemplate:[\n";
         for (const_iterator item = begin(); item != end(); ++item)
             out << "\t" << *(*item) << "\n";
@@ -66,7 +66,7 @@ protected:
 class ObsTable : public map<string, ObsTemplate*>, public ObsTableAttributes {
 public:
     ObsTable();
-    virtual ~ObsTable();
+    virtual ~ObsTable() override;
 
     void add(const string&, const map<string, string>&);
 

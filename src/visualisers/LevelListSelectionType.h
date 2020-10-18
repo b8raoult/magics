@@ -32,7 +32,7 @@ namespace magics {
 class LevelListSelectionType : public LevelListSelectionTypeAttributes, public LevelSelection {
 public:
     LevelListSelectionType();
-    virtual ~LevelListSelectionType();
+    virtual ~LevelListSelectionType() override;
 
 
     void calculate(double min, double max, bool) override;

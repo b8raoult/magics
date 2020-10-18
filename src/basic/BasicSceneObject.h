@@ -144,7 +144,7 @@ public:
     virtual void visit(Transformation& transformation) { dispatch(transformation); }
     virtual void visit(AnimationRules& rules) { dispatch(rules); }
 
-    virtual void visit(MetaDataCollector& infos) { dispatch(infos); }
+    virtual void visit(MetaDataCollector& infos) override { dispatch(infos); }
     virtual void visit(MagnifierCollector& infos) { dispatch(infos); }
     virtual void visit(ValuesCollector& infos) { dispatch(infos); }
     virtual void visit(DataIndexCollector& infos) { dispatch(infos); }
@@ -241,7 +241,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     typedef void (BasicSceneObject::*Function)();
 
 
@@ -298,26 +298,26 @@ public:
     virtual ~BasicSceneNode();
 
     virtual BasicSceneNode* insert(
-        BasicPositionalObject*);  // Return the node tinto which the object has been inserted!
-    Layout& layout() const {
+        BasicPositionalObject*) override;  // Return the node tinto which the object has been inserted!
+    Layout& layout() const override {
         {
             ASSERT(layout_);
             return *layout_;
         }
     }
-    virtual void getReady();
+    virtual void getReady() override;
     virtual BasicSceneNode* clone();
     virtual BasicSceneNode* newNode(BasicPositionalObject*);
 
-    virtual void visit(BasicGraphicsObjectContainer& tree) {
+    virtual void visit(BasicGraphicsObjectContainer& tree) override {
         tree.push_back(layout_);
         layout_->blankIt();
         dispatch(*layout_);
         layout_->frameIt();
     }
     void newpage();
-    double absoluteWidth() const;
-    double absoluteHeight() const;
+    double absoluteWidth() const override;
+    double absoluteHeight() const override;
 
 
     void manager(LayoutManager* manager) { manager_ = manager; }

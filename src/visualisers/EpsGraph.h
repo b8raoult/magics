@@ -295,12 +295,12 @@ public:
     void set(const XmlNode& node) { EfiGraphAttributes::set(node); }
     void set(const map<string, string>& map) { EfiGraphAttributes::set(map); }
 
-    virtual void operator()(Data&, BasicGraphicsObjectContainer&);
-    virtual void visit(LegendVisitor&);
+    virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
+    virtual void visit(LegendVisitor&) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const { /*EfiGraphAttributes::print(out);*/
+    virtual void print(ostream&) const override { /*EfiGraphAttributes::print(out) override;*/
     }
 
 
@@ -326,13 +326,13 @@ public:
     void set(const XmlNode& node) { CdfGraphAttributes::set(node); }
     void set(const map<string, string>& map) { CdfGraphAttributes::set(map); }
 
-    virtual void operator()(Data&, BasicGraphicsObjectContainer&);
-    virtual void visit(LegendVisitor&);
+    virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
+    virtual void visit(LegendVisitor&) override;
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const { /*EfiGraphAttributes::print(out);*/
+    virtual void print(ostream&) const override { /*EfiGraphAttributes::print(out) override;*/
     }
     vector<string> legends_;
     vector<string> usedColours_;
@@ -368,13 +368,13 @@ public:
     void set(const XmlNode& node) { EpsShadeAttributes::set(node); }
     void set(const map<string, string>& map) { EpsShadeAttributes::set(map); }
 
-    virtual void operator()(Data&, BasicGraphicsObjectContainer&);
-    virtual void visit(LegendVisitor&);
+    virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
+    virtual void visit(LegendVisitor&) override;
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const { /*EfiGraphAttributes::print(out);*/
+    virtual void print(ostream&) const override { /*EfiGraphAttributes::print(out) override;*/
     }
 
 

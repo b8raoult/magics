@@ -33,7 +33,7 @@ namespace magics {
 class ImportAction : public ImportActionAttributes, public Data {
 public:
     ImportAction() {}
-    virtual ~ImportAction() {}
+    virtual ~ImportAction() override {}
     void set(const map<string, string>& map) override { ImportActionAttributes::set(map); }
 
 
@@ -106,15 +106,15 @@ private:
 class ImportLoop : public DataLoop, public vector<Data*> {
 public:
     ImportLoop() {}
-    virtual ~ImportLoop() {}
+    virtual ~ImportLoop() override {}
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void set(LayerNode&) {}
 
-    virtual void setToFirst() { current_ = this->begin(); }
-    virtual Data* current() { return *current_; }
-    virtual bool hasMore() { return current_ != this->end(); }
-    virtual void next() { ++current_; }
+    virtual void setToFirst() override { current_ = this->begin(); }
+    virtual Data* current() override { return *current_; }
+    virtual bool hasMore() override { return current_ != this->end(); }
+    virtual void next() override { ++current_; }
     void add(Data* data) { push_back(data); }
 
 protected:

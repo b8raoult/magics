@@ -30,7 +30,7 @@ protected:
 
     // -- Destructors
 
-    virtual ~NilContent();
+    virtual ~NilContent() override;
 
     // -- Overridden Methods
 

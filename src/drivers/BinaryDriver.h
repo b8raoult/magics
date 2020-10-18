@@ -34,7 +34,7 @@ namespace magics {
 class BinaryDriver : public BaseDriver, public BinaryDriverAttributes {
 public:
     BinaryDriver();
-    ~BinaryDriver();
+    ~BinaryDriver() override;
     void open();
     void close();
 

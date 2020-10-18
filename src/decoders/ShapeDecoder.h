@@ -37,15 +37,15 @@ class XmlNode;
 class ShapeDecoder : public ShapeDecoderAttributes, public Data, public Decoder, public vector<PointsList*> {
 public:
     ShapeDecoder();
-    virtual ~ShapeDecoder();
+    virtual ~ShapeDecoder() override;
     //! Method to access the data as a list of points : Used by psymb.
 
-    virtual void decode(const Transformation&);
+    virtual void decode(const Transformation&) ;
 
-    virtual void decode(vector<Polyline*>&, const Transformation&);
+    virtual void decode(vector<Polyline*>&, const Transformation&) ;
     void clip(const Transformation&, const vector<Polyline>&, vector<Polyline*>&) const;
     void clipAndClose(const Transformation&, const vector<Polyline>&, vector<Polyline*>&) const;
-    virtual void decode(const Transformation&, const string&, const vector<string>&);
+    virtual void decode(const Transformation&, const string&, const vector<string>&) ;
     void set(const map<string, string>& map) override { ShapeDecoderAttributes::set(map); }
     void set(const XmlNode& node) override { ShapeDecoderAttributes::set(node); }
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);

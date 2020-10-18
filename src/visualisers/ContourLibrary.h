@@ -40,18 +40,20 @@ public:
     virtual ~ContourLibrary();
 
     // set the meta data to be collected
-    virtual void askId(MetaDataCollector&);
+    virtual void askId(MetaDataCollector&) ;
 
-    virtual bool checkId(MetaDataCollector&, MetaDataCollector&);
+    virtual bool checkId(MetaDataCollector&, MetaDataCollector&) ;
 
 
     // se the map to set the contour!
-    virtual void getStyle(MetaDataCollector&, MagDef&, StyleEntry&);
+    virtual void getStyle(MetaDataCollector&, MagDef&, StyleEntry&) ;
     virtual void getStyle(const string&, MagDef&) {}
 
 
     // All in one
-    virtual StyleEntry* getStyle(Data& data, const std::string& library_path, MagDef& visdef) { return nullptr; }
+    virtual StyleEntry* getStyle(Data& data, const std::string& library_path, MagDef& visdef)  {
+        return nullptr;
+    }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

@@ -78,7 +78,7 @@ private:
 class RasterData : public Raster {
 public:
     RasterData() {}
-    virtual ~RasterData() {}
+    virtual ~RasterData() override {}
 
     TeProjection& getProjection() { return *projection_; }
 

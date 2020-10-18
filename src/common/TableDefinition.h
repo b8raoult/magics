@@ -37,7 +37,7 @@ class TableDefinition : public vector<T> {
 public:
     typedef vector<double>::const_iterator TableIterator;
     TableDefinition() {}
-    virtual ~TableDefinition() {}
+    virtual ~TableDefinition() override {}
     virtual TableDefinition* clone() const override = 0;
     virtual void set(const XmlNode&)                = 0;
     virtual void prepare() {}
@@ -67,8 +67,8 @@ template <class T>
 class TableDefinitionInterface {
 public:
     TableDefinitionInterface() : helper_(0) {}
-    virtual void set(const XmlNode& node) {
-        ASSERT(helper_);
+    virtual void set(const XmlNode& node) override {
+        ASSERT(helper_) override;
         helper_->set(node);
     }
     int size() {

@@ -41,7 +41,7 @@ public:
         derivedUnit_("unknown units"),
         scaling_(1),
         offset_(0) {}
-    virtual ~ParamDef() {}
+    virtual ~ParamDef() override {}
     int code() const { return code_; }
     string longTitle() const { return longTitle_; }
     string shortTitle() const { return shortTitle_; }
@@ -52,7 +52,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     int code_;
     string longTitle_;
@@ -74,7 +74,7 @@ protected:
 class LocalTable : public DefinitionTable<ParamDef> {
 public:
     LocalTable(const string&);
-    virtual ~LocalTable();
+    virtual ~LocalTable() override;
     static const DefinitionTable<ParamDef>& localTable(long table, long center = -1);
     static const ParamDef& localInfo(long code, long table, long center = -1);
 

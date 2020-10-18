@@ -47,7 +47,7 @@ public:
 
     PointsHandler& points() { throw MethodNotYetImplemented("LandgramDecoder::points()"); }
     virtual MatrixHandler& matrix() override {
-        decode();
+        decode() override;
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         return *(matrixHandlers_.back());
     }

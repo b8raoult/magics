@@ -33,7 +33,7 @@ namespace magics {
 class BufrIdentifiers : public map<string, string> {
 public:
     BufrIdentifiers(int centre);
-    ~BufrIdentifiers() {}
+    ~BufrIdentifiers() override {}
     void set(const map<string, string>&);
     int ident(const string&) const;  // Return -1 if ident does not exist.
 protected:
@@ -58,7 +58,7 @@ class TitleNode;
 class ObsDecoder : public ObsDecoderAttributes, public Decoder, public Data, public PointsList {
 public:
     ObsDecoder();
-    virtual ~ObsDecoder();
+    virtual ~ObsDecoder() override;
     virtual void set(const map<string, string>& map) override { ObsDecoderAttributes::set(map); }
 
     virtual void decode() override;
@@ -70,7 +70,7 @@ public:
                           bool) override {
         customisedPoints(t, n, out);
     }
-    virtual PointsHandler& points();
+    virtual PointsHandler& points() override;
     PointsHandler& points(const Transformation&, bool) override { return points(); }
     void visit(TitleNode&);
 

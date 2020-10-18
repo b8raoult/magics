@@ -47,7 +47,7 @@ public:
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new GraphShadeStyle();
     }
-    // virtual void operator()(Polyline*, BasicGraphicsObjectContainer&);
+    // virtual void operator()(Polyline*, BasicGraphicsObjectContainer&) ;
     virtual void operator()(Polyline&);
 
 protected:

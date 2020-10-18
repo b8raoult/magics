@@ -52,7 +52,7 @@ public:
     };
 
     MgQSceneLayerItem(const SceneLayer& sc) : sceneLayer_(sc){};
-    ~MgQSceneLayerItem(){};
+    ~MgQSceneLayerItem() override{};
 
     const SceneLayer& sceneLayer() { return sceneLayer_; };
     void addProjectorItem(MgQLayoutItem* n) { projectorItems_ << n; }
@@ -81,7 +81,7 @@ public:
     };
 
     MgQLayerItem(Layer&, MgQLayoutItem*, int);
-    ~MgQLayerItem();
+    ~MgQLayerItem() override;
 
     QString name() const { return QString::fromStdString(layer_.name()); }
     Layer& layer() { return layer_; };

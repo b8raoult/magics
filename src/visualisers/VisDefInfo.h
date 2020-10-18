@@ -51,16 +51,17 @@ public:
         GribType
     };
 
-    virtual ~VisDefInfoBase();
+    virtual ~VisDefInfoBase() override;
 
     VisDefInfoItem* addItem(string);
     const vector<string>& keys() { return keys_; }
     string type() { return type_; }
 
-    // virtual vector<string> visDefFile(MvKeyProfile*,int) {return QStringList();}
-    // virtual MvRequest visDefRequest(MvKeyProfile*,int) {return MvRequest();}
+    // virtual vector<string> visDefFile(MvKeyProfile*,int)  override {return QStringList() override;}
+    // virtual MvRequest visDefRequest(MvKeyProfile*,int)  override {return MvRequest() override;}
 
-    virtual void getAttributes(MetaDataCollector&, map<string, string>&){};
+    virtual void getAttributes(MetaDataCollector&, map<string, string>&) override {}
+    override;
 
     bool isLoaded() { return loaded_; }
     void clear();
@@ -88,7 +89,7 @@ protected:
 {
 public:
     MvQVisDefInfo(string,DataType);
-    ~MvQVisDefInfo() {};
+    ~MvQVisDefInfo () override {};
 
     QStringList visDefFile(MvKeyProfile*,int);
     void loadItems();
@@ -98,7 +99,7 @@ public:
 class ObstatVisDefInfo : public VisDefInfoBase {
 public:
     ObstatVisDefInfo(string, DataType);
-    ~ObstatVisDefInfo(){};
+    ~ObstatVisDefInfo() override{};
 
     void getAttributes(MetaDataCollector&, map<string, string>&);
     void loadItems();

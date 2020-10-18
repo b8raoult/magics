@@ -37,7 +37,7 @@ namespace magics {
 class GDDriver : public BaseDriver, public GDDriverAttributes {
 public:
     GDDriver();
-    ~GDDriver();
+    ~GDDriver() override;
     void open();
     void close();
 

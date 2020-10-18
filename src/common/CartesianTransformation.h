@@ -33,7 +33,7 @@ class XmlNode;
 class CartesianTransformation : public Transformation, public CartesianTransformationAttributes {
 public:
     CartesianTransformation();
-    virtual ~CartesianTransformation();
+    virtual ~CartesianTransformation() override;
     virtual void operator()(Layout&) const;
     void init() override {
         x_->set();

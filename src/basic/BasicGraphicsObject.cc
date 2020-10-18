@@ -19,6 +19,21 @@ BasicGraphicsObject::BasicGraphicsObject() : parent_(0) {}
 
 BasicGraphicsObject::~BasicGraphicsObject() {}
 
+bool BasicGraphicsObject::reproject(BasicGraphicsObjectContainer&) const {
+    MagLog::error() << "BasicGraphicsObject::reproject(...)--->Need to be implemented!\n";
+    ASSERT(0);
+    return false;
+}
+
+void BasicGraphicsObject::redisplay(const BaseDriver&) const {
+    MagLog::dev() << "BasicGraphicsObject::redisplay(...)--->Not yet implemented\n";
+}
+
+void BasicGraphicsObject::parent(BasicGraphicsObjectContainer* parent) {
+    // ASSERT(parent_ == 0);
+    parent_ = parent;
+}
+
 void BasicGraphicsObject::print(ostream& out) const {
     out << "BasicGraphicsObject[";
     out << "]";
@@ -48,6 +63,55 @@ void BasicGraphicsObjectContainer::visit(const BaseDriver& driver) const {
         (*object)->redisplay(driver);
 }
 
+void BasicGraphicsObjectContainer::getDriverInfo(double& x, double& y, double& width, double& height) {
+    if (parent_)
+        parent_->getDriverInfo(x, y, width, height);
+}
+
+double BasicGraphicsObjectContainer::absoluteY() const  // absolute position from the root
+{
+    ASSERT(parent_);
+    return parent_->absoluteY();
+}
+
+double BasicGraphicsObjectContainer::absoluteWidth() const  // absolute position from the root
+{
+    ASSERT(parent_);
+    return parent_->absoluteWidth();
+}
+
+double BasicGraphicsObjectContainer::absoluteHeight() const  // absolute position from the root
+{
+    ASSERT(parent_);
+    return parent_->absoluteHeight();
+}
+
+double BasicGraphicsObjectContainer::absoluteWidth(double width)  // absolute position from the root
+{
+    ASSERT(parent_);
+    return parent_->absoluteWidth(width);
+}
+
+double BasicGraphicsObjectContainer::absoluteHeight(double height)  // absolute position from the root
+{
+    ASSERT(parent_);
+    return parent_->absoluteHeight(height);
+}
+
+const Transformation& BasicGraphicsObjectContainer::transformation() const  // returns the Transformation
+{
+    ASSERT(parent_);
+    return parent_->transformation();
+}
+
+const vector<BasicGraphicsObject*>& BasicGraphicsObjectContainer::objects() {  //
+    // first we add
+    for (vector<BasicGraphicsObject*>::iterator l = last_.begin(); l != last_.end(); ++l)
+        objects_.push_back(*l);
+    last_.clear();
+    return objects_;
+}
+
 BasicGraphicsObjectContainer::~BasicGraphicsObjectContainer() {
     for (vector<BasicGraphicsObject*>::iterator object = objects_.begin(); object != objects_.end(); ++object) {
         if (*object)
@@ -55,6 +119,18 @@ BasicGraphicsObjectContainer::~BasicGraphicsObjectContainer() {
         *object = 0;
     }
     objects_.clear();
+}
+
+void BasicGraphicsObjectContainer::push_back(BasicGraphicsObject* object) {
+    object->check();  // here we make sure that the object is not in 2 containres!
+    objects_.push_back(object);
+    object->parent(this);
+}
+
+void BasicGraphicsObjectContainer::push_last(BasicGraphicsObject* object) {
+    object->check();  // here we make sure that the object is not in 2 containres!
+    last_.push_back(object);
+    object->parent(this);
 }
 
 void BasicGraphicsObjectContainer::clear() {
@@ -67,7 +143,16 @@ void BasicGraphicsObjectContainer::release() {
     }
     objects_.clear();
 }
+
+void BasicGraphicsObjectContainer::remove(BasicGraphicsObject* object) {
+    objects_.erase(std::remove(objects_.begin(), objects_.end(), object), objects_.end());
+}
 void BasicGraphicsObject::check() {
     if (parent_)
         parent_->remove(this);
+}
+
+BasicGraphicsObjectContainer& BasicGraphicsObject::parent() {
+    ASSERT(parent_);
+    return *parent_;
 }

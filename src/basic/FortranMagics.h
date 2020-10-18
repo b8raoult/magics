@@ -154,7 +154,7 @@ protected:
 
 private:
     FortranMagics();
-    ~FortranMagics();
+    ~FortranMagics() ;
 
     //! Copy constructor - No copy allowed
     FortranMagics(const FortranMagics&);

@@ -35,7 +35,7 @@ namespace magics {
 class GeoJsonDriver : public BaseDriver, public GeoJsonDriverAttributes {
 public:
     GeoJsonDriver();
-    ~GeoJsonDriver();
+    ~GeoJsonDriver() override;
     void open();
     void close();
 

@@ -45,7 +45,7 @@ class XmlNode;
 */
 struct BadRgbFormat : public MagicsException {
     BadRgbFormat(const std::string& value) : MagicsException("BadRgbFormat: [" + value + "]") {}
-    ~BadRgbFormat() {}
+    ~BadRgbFormat() override {}
 };
 
 
@@ -71,7 +71,7 @@ struct Rgb {
 
 struct BadHslFormat : public MagicsException {
     BadHslFormat(const std::string& value) : MagicsException("BadHslFormat: [" + value + "]") {}
-    ~BadHslFormat() {}
+    ~BadHslFormat() override {}
 };
 
 struct Hsl {

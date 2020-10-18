@@ -33,7 +33,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~StringContent();
+    virtual ~StringContent() override;
 
     // -- Overridden methods
 

@@ -49,7 +49,7 @@ class MatrixHandler;
 class HiLo : public HiLoBase, public HiLoAttributes, public vector<BasicGraphicsObject*> {
 public:
     HiLo();
-    virtual ~HiLo();
+    virtual ~HiLo() override;
     virtual void set(const map<string, string>&) override;
     virtual void set(const XmlNode& node) override { HiLoAttributes::set(node); }
     virtual bool accept(const string& node) override {
@@ -91,7 +91,7 @@ private:
 class NoHiLo : public HiLoBase {
 public:
     NoHiLo() {}
-    virtual ~NoHiLo() {}
+    virtual ~NoHiLo() override {}
     HiLoBase* clone() const override { return new NoHiLo(); }
     virtual void set(const map<string, string>&) override {}
     virtual BasicGraphicsObject* next() override { return 0; }
@@ -104,7 +104,7 @@ public:
 class HighHiLo : public HiLo {
 public:
     HighHiLo() {}
-    virtual ~HighHiLo() {}
+    virtual ~HighHiLo() override {}
     HiLoBase* clone() const override {
         HiLo* hilo = new HighHiLo();
         // hilo->copy(*this);
@@ -121,7 +121,7 @@ public:
 class LowHiLo : public HiLo {
 public:
     LowHiLo() {}
-    virtual ~LowHiLo() {}
+    virtual ~LowHiLo() override {}
     HiLoBase* clone() const override {
         HiLoBase* hilo = new LowHiLo();
         // hilo->copy(*this);

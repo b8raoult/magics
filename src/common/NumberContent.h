@@ -31,7 +31,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~NumberContent();
+    virtual ~NumberContent() override;
 
     // -- Overridden methods
 

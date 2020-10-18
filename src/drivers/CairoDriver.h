@@ -37,7 +37,7 @@ namespace magics {
 class CairoDriver : public BaseDriver, public CairoDriverAttributes {
 public:
     CairoDriver();
-    ~CairoDriver();
+    ~CairoDriver() override;
     void open();
     void close();
 

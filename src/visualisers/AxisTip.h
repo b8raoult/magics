@@ -38,7 +38,7 @@ class BottomAxisVisitor;
 class NoAxisTip {
 public:
     NoAxisTip();
-    virtual ~NoAxisTip();
+    virtual ~NoAxisTip() override;
     bool accept(const string&) { return false; }
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
@@ -52,7 +52,7 @@ public:
     virtual void vertical(const Colour&, TopAxisVisitor&) const {}
     virtual void vertical(const Colour&, BottomAxisVisitor&) const {}
     virtual void vertical(const Colour&, RightAxisVisitor&) const {}
-    virtual void vertical(const Colour&, LeftAxisVisitor&) const {}
+    virtual void vertical(const Colour&, LeftAxisVisitor&) const override {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -76,10 +76,10 @@ private:
 class AxisTip : public NoAxisTip, public AxisTipAttributes {
 public:
     AxisTip();
-    virtual ~AxisTip();
+    virtual ~AxisTip() override;
 
-    virtual void set(const XmlNode& node) { AxisTipAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { AxisTipAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { AxisTipAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { AxisTipAttributes::set(map); }
 
     bool accept(const string& node) { return AxisTipAttributes::accept(node); }
 

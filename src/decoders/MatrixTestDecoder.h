@@ -34,7 +34,7 @@ namespace magics {
 class MatrixTestDecoder : public Decoder, public Data {
 public:
     MatrixTestDecoder();
-    virtual ~MatrixTestDecoder();
+    virtual ~MatrixTestDecoder() override;
     // implements Decoder interface
     void decode() override {}
 
@@ -50,7 +50,7 @@ public:
 
     PointsHandler& points() { throw MethodNotYetImplemented("MatrixTestDecoder::points()"); }
     virtual MatrixHandler& matrix() override {
-        decode();
+        decode() override;
         matrixHandlers_.push_back(new MatrixHandler(matrix_));
         return *(matrixHandlers_.back());
     }

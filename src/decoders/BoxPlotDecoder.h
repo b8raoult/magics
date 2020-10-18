@@ -34,7 +34,7 @@ namespace magics {
 class BoxPlotDecoder : public BoxPlotDecoderAttributes, public Data, public PointsList {
 public:
     BoxPlotDecoder();
-    virtual ~BoxPlotDecoder();
+    virtual ~BoxPlotDecoder() override;
 
     virtual void set(const map<string, string>& map) override { BoxPlotDecoderAttributes::set(map); }
 

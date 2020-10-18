@@ -33,7 +33,7 @@ namespace magics {
 class InputMatrix : public Data, public InputMatrixAttributes {
 public:
     InputMatrix();
-    virtual ~InputMatrix();
+    virtual ~InputMatrix() override;
 
     virtual void set(const map<string, string>& map) override { InputMatrixAttributes::set(map); }
     virtual void set(const XmlNode& node) override { InputMatrixAttributes::set(node); }
@@ -41,11 +41,11 @@ public:
     void getReady(const Transformation& transformation) override;
 
     virtual MatrixHandler& matrix() override;
-    virtual MatrixHandler& xComponent();
-    virtual MatrixHandler& yComponent();
+    virtual MatrixHandler& xComponent() ;
+    virtual MatrixHandler& yComponent() ;
     void prepareComponents();
     std::pair<double, double> sd2uv(double s, double d);
-    virtual PointsHandler& points(const Transformation&);
+    virtual PointsHandler& points(const Transformation&) ;
 
     void customisedPoints(const BasicThinningMethod&, const Transformation&, const std::set<string>&,
                           CustomisedPointsList&) override;

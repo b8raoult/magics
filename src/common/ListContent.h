@@ -33,7 +33,7 @@ protected:
 
     // -- Destructor
 
-    virtual ~ListContent();
+    virtual ~ListContent() override;
 
     // -- Overridden methods
 

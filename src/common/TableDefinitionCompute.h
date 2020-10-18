@@ -33,7 +33,7 @@ template <class T>
 class TableDefinitionCompute : public TableDefinition<T> {
 public:
     TableDefinitionCompute() {}
-    virtual ~TableDefinitionCompute() {}
+    virtual ~TableDefinitionCompute() override {}
     void set(const TableDefinitionComputeInterface<T>&);
     void set(const XmlNode&);
     void adjust(T min, T max);

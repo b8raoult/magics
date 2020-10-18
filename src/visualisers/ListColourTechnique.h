@@ -31,7 +31,7 @@ namespace magics {
 class ListColourTechnique : public ColourTechnique, public ListColourTechniqueAttributes {
 public:
     ListColourTechnique();
-    virtual ~ListColourTechnique();
+    virtual ~ListColourTechnique() override;
     void set(const map<string, string>& map) override { ListColourTechniqueAttributes::set(map); }
     void set(const XmlNode& node) override { ListColourTechniqueAttributes::set(node); }
     bool accept(const string& node) override { return ListColourTechniqueAttributes::accept(node); }

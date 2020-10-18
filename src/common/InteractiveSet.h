@@ -29,7 +29,7 @@ namespace magics {
 class InteractiveAction {
 public:
     InteractiveAction() {}
-    virtual ~InteractiveAction() {}
+    virtual ~InteractiveAction() override {}
 
     virtual void execute() {}  // protype to be confirmed!
 protected:
@@ -43,11 +43,11 @@ protected:
 class InteractiveBegin : public BasicGraphicsObject, public map<string, InteractiveAction*> {
 public:
     InteractiveBegin(Layer* layer = 0, const string& box = "");
-    ~InteractiveBegin() {}
+    ~InteractiveBegin() override {}
 
     bool reproject(const Transformation& transformation, BasicGraphicsObjectContainer& out) const;
 
-    virtual void redisplay(const BaseDriver&) const;
+    virtual void redisplay(const BaseDriver&) const override;
 
 protected:
     virtual void print(ostream&) const override;
@@ -56,9 +56,9 @@ protected:
 class InteractiveEnd : public BasicGraphicsObject {
 public:
     InteractiveEnd(Layer* layer = 0, const string& box = "");
-    ~InteractiveEnd() {}
+    ~InteractiveEnd() override {}
 
-    virtual void redisplay(const BaseDriver&) const;
+    virtual void redisplay(const BaseDriver&) const override;
     bool reproject(const Transformation& transformation, BasicGraphicsObjectContainer& out) const;
 
 protected:
@@ -69,10 +69,10 @@ protected:
 class InteractiveSet : public BasicGraphicsObject, public vector<BasicGraphicsObject*> {
 public:
     InteractiveSet(Layer* layer = 0, const string& box = "");
-    virtual ~InteractiveSet() {}
+    virtual ~InteractiveSet() override {}
 
-    virtual bool reproject(const Transformation&, BasicGraphicsObjectContainer&) const;
-    virtual void redisplay(const BaseDriver&) const;
+    virtual bool reproject(const Transformation&, BasicGraphicsObjectContainer&) const override;
+    virtual void redisplay(const BaseDriver&) const override;
     void addAction(const string& name, InteractiveAction* action) { begin_->insert(make_pair(name, action)); }
 
 protected:
@@ -100,7 +100,7 @@ private:
 class InteractiveLink : public InteractiveAction {
 public:
     InteractiveLink(const string& url = "http://www.ecmwf.int") : url_(url) {}
-    ~InteractiveLink() {}
+    ~InteractiveLink() override {}
     void url(const string& url) { url_ = url; }
     const string& url() const { return url_; }
 
@@ -112,7 +112,7 @@ protected:
 class InteractiveMagnify : public InteractiveAction {
 public:
     InteractiveMagnify(float factor = 2) : factor_(factor) {}
-    ~InteractiveMagnify() {}
+    ~InteractiveMagnify() override {}
     void factor(float factor) { factor_ = factor; }
     float factor() const { return factor_; }
 

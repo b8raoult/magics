@@ -39,7 +39,7 @@ class AnimationRules;
 class ViewNode : public BasicSceneNode {
 public:
     ViewNode();
-    virtual ~ViewNode();
+    virtual ~ViewNode() override;
     void setInteractiveInfo(const string& id, int levels, int level) {
         name(id);
         ASSERT(layout_);
@@ -51,8 +51,8 @@ public:
         layout_->zoomCurrentLevel(level);
     }
 
-    virtual void text(TextVisitor* text);
-    virtual void legend(LegendVisitor* legend);
+    virtual void text(TextVisitor* text) override;
+    virtual void legend(LegendVisitor* legend) override;
 
 
     void visit(MetaDataCollector&);
@@ -62,16 +62,16 @@ protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
     void print(ostream&) const;
     void prepareLayout(SceneLayer&);
-    virtual void updateLayout() {}
+    virtual void updateLayout()  {}
 
-    void getReady();
+    void getReady() override;
 
     void visit(SceneLayer&);
     void visit(MetaDataVisitor&);
     void visit(PreviewVisitor&);
     void visit(HistoVisitor&);
 
-    virtual void copy(const ViewNode&);
+    virtual void copy(const ViewNode&) ;
 
     Transformation& transformation() const {
         ASSERT(viewTransformation_);
@@ -133,7 +133,7 @@ private:
 class FortranViewNode : public ViewNode, public FortranViewNodeAttributes {
 public:
     FortranViewNode();
-    ~FortranViewNode();
+    ~FortranViewNode() override;
 
     BasicSceneNode* clone();
 
@@ -147,7 +147,7 @@ protected:
 class XmlViewNode : public ViewNode, public XmlBasicNodeAttributes, public XmlViewNodeAttributes {
 public:
     XmlViewNode();
-    ~XmlViewNode();
+    ~XmlViewNode() override;
     void set(const XmlNode& node) {
         if (magCompare(node.name(), "map")) {
             XmlNode view = node;

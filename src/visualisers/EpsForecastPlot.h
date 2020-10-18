@@ -32,14 +32,14 @@ namespace magics {
 class EpsForecastPlot {
 public:
     EpsForecastPlot() {}
-    virtual ~EpsForecastPlot() {}
+    virtual ~EpsForecastPlot() override {}
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
     virtual EpsForecastPlot* clone() const override { return new EpsForecastPlot(); }
 
-    virtual bool forecast() { return true; }
-    virtual bool control() { return true; }
+    virtual bool forecast() override { return true; }
+    virtual bool control() override { return true; }
 
     virtual void toxml(ostream&, int) const {}
 
@@ -64,34 +64,34 @@ private:
 class EpsForecastOnly : public EpsForecastPlot {
 public:
     EpsForecastOnly() {}
-    virtual ~EpsForecastOnly() {}
+    virtual ~EpsForecastOnly() override {}
 
     virtual EpsForecastPlot* clone() const override { return new EpsForecastOnly(); }
 
-    virtual bool forecast() { return true; }
-    virtual bool control() { return false; }
+    virtual bool forecast() override { return true; }
+    virtual bool control() override { return false; }
 };
 
 class EpsControlOnly : public EpsForecastPlot {
 public:
     EpsControlOnly() {}
-    virtual ~EpsControlOnly() {}
+    virtual ~EpsControlOnly() override {}
 
     virtual EpsForecastPlot* clone() const override { return new EpsControlOnly(); }
 
-    virtual bool forecast() { return false; }
-    virtual bool control() { return true; }
+    virtual bool forecast() override { return false; }
+    virtual bool control() override { return true; }
 };
 
 class EpsNoForecast : public EpsForecastPlot {
 public:
     EpsNoForecast() {}
-    virtual ~EpsNoForecast() {}
+    virtual ~EpsNoForecast() override {}
 
     virtual EpsForecastPlot* clone() const override { return new EpsNoForecast(); }
 
-    virtual bool forecast() { return false; }
-    virtual bool control() { return false; }
+    virtual bool forecast() override { return false; }
+    virtual bool control() override { return false; }
 };
 
 template <>

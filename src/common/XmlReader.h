@@ -29,7 +29,7 @@ namespace magics {
 class XmlReader : private std::stack<XmlNode*> {
 public:
     MAGICS_EXPORT XmlReader(bool tag = false);
-    MAGICS_EXPORT virtual ~XmlReader();
+    MAGICS_EXPORT virtual ~XmlReader() ;
     MAGICS_EXPORT void interpret(const string&, XmlTree*);
     int decode(const string&, XmlTree*);
     void newElement(const string&, const map<string, string>&);
@@ -40,7 +40,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const ;
     XmlTree* tree_;
     bool dataAsTag_;
 

@@ -35,12 +35,12 @@ class XmlNode;
 class HeightSelection : public FloatSelection {
 public:
     HeightSelection();
-    virtual ~HeightSelection();
+    virtual ~HeightSelection() override;
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void toxml(ostream&, int) const {}
-    virtual HeightSelection* clone() const {
-        HeightSelection* object = new HeightSelection();
+    virtual HeightSelection* clone() const override {
+        HeightSelection* object = new HeightSelection() override;
         return object;
     }
 

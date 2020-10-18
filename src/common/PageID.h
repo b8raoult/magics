@@ -33,7 +33,7 @@ namespace magics {
 class NoPageID : public BasicSceneObject {
 public:
     NoPageID() {}
-    virtual ~NoPageID() {}
+    virtual ~NoPageID() override {}
 
     virtual void set(const XmlNode&) override {
         MagLog::dev() << "PageIDBase::set(const XmlNode&)---> to be checked!...\n";
@@ -73,7 +73,7 @@ private:
 class PageID : public NoPageID, public PageIDAttributes {
 public:
     PageID();
-    virtual ~PageID();
+    virtual ~PageID() override;
     virtual void set(const map<string, string>& map) override { PageIDAttributes::set(map); }
     virtual void set(const XmlNode& node) override { PageIDAttributes::set(node); }
     virtual bool accept(const string& node) override { return PageIDAttributes::accept(node); }

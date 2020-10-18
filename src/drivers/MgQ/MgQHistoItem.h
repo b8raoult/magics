@@ -31,7 +31,7 @@ public:
     };
 
     MgQHistoItem();
-    ~MgQHistoItem();
+    ~MgQHistoItem() override;
     QPixmap pixmap() { return pixmap_; }
     void setPixmap(QPixmap p, QSize s) {
         pixmap_              = p;

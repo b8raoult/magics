@@ -59,13 +59,13 @@ private:
 class LayoutVisitor : public SceneVisitor {
 public:
     LayoutVisitor() : layout_(0), current_(0) {}
-    ~LayoutVisitor() {
+    ~LayoutVisitor() override {
         if (layout_)
             delete layout_;
     }
     void redisplay(const BaseDriver& driver) const;
 
-    virtual void reset(){};
+    virtual void reset() {}
     virtual void set(MagnifierCollector&) {}
     virtual void newLayout() const;
 
@@ -162,20 +162,22 @@ public:
     }
 
 protected:
-    void print(ostream&) const;
     mutable Layout* layout_;
     mutable Layout* current_;
+
+    virtual void print(std::ostream& s) const override { s << "LayoutVisitor[]"; };
 };
 
 class DrawingVisitor : public LayoutVisitor {
 public:
     DrawingVisitor();
     ~DrawingVisitor();
-    void visit(BasicSceneObject& object) { object.visit(*this); }
-    void set(MagnifierCollector&);
+    void visit(BasicSceneObject& object) override { object.visit(*this); }
+    void set(MagnifierCollector&) override;
     // Layout* execute(AnimationStep&, const Layout* visitor);
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "DrawingVisitor[]"; };
 };
 class FrameVisitor : public LayoutVisitor {
 public:
@@ -184,7 +186,7 @@ public:
 
     void backgroundColour(const string& colour) { background_ = colour; }
 
-    void visit(BasicSceneObject& object) { object.visit(*this); }
+    void visit(BasicSceneObject& object) override { object.visit(*this); }
     void frameIt() {
         if (current_)
             current_->frameIt();
@@ -196,6 +198,7 @@ public:
 
 protected:
     string background_;
+    virtual void print(std::ostream& s) const override { s << "FrameVisitor[]"; };
 };
 
 class HorizontalAxisVisitor : public LayoutVisitor {
@@ -217,6 +220,7 @@ public:
 
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "HorizontalAxisVisitor[]"; };
 };
 class VerticalAxisVisitor : public LayoutVisitor {
 public:
@@ -238,27 +242,29 @@ public:
     virtual double percentY(double) { return 0; }
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "VerticalAxisVisitor[]"; };
 };
 class LeftAxisVisitor : public VerticalAxisVisitor {
 public:
     LeftAxisVisitor(const DrawingVisitor&);
     ~LeftAxisVisitor();
-    void visit(BasicSceneObject& object) { object.visit(*this); }
-    virtual Justification justificationTickLabel(const string&);
-    virtual void tick(double&, double&, bool);
-    virtual void minortick(double&, double&, bool);
-    virtual double offsetTickLabel(double, double);
-    virtual double angleTickLabel();
-    virtual double angleTitle();
-    virtual double shiftTitle(double x);
-    virtual double offsetTitle(int);
-    virtual double angleTip();
-    virtual double offsetTip();
-    virtual VerticalAlign textAlignment(const string&);
-    virtual double percentX(double);
-    virtual double percentY(double);
+    void visit(BasicSceneObject& object) override { object.visit(*this); }
+    virtual Justification justificationTickLabel(const string&) override;
+    virtual void tick(double&, double&, bool) override;
+    virtual void minortick(double&, double&, bool) override;
+    virtual double offsetTickLabel(double, double) override;
+    virtual double angleTickLabel() override;
+    virtual double angleTitle() override;
+    virtual double shiftTitle(double x) override;
+    virtual double offsetTitle(int) override;
+    virtual double angleTip() override;
+    virtual double offsetTip() override;
+    virtual VerticalAlign textAlignment(const string&) override;
+    virtual double percentX(double) override;
+    virtual double percentY(double) override;
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "LeftAxisVisitor[]"; };
 };
 
 class RightAxisVisitor : public VerticalAxisVisitor {
@@ -266,21 +272,22 @@ public:
     RightAxisVisitor(const DrawingVisitor&);
     ~RightAxisVisitor();
     void visit(BasicSceneObject& object) { object.visit(*this); }
-    virtual Justification justificationTickLabel(const string&);
-    virtual void tick(double&, double&, bool);
-    virtual void minortick(double&, double&, bool);
-    virtual double offsetTickLabel(double, double);
-    virtual double angleTickLabel();
-    virtual double angleTitle();
-    virtual double offsetTitle(int);
-    virtual double shiftTitle(double);
-    virtual double angleTip();
-    virtual double offsetTip();
-    virtual VerticalAlign textAlignment(const string&);
-    virtual double percentX(double);
-    virtual double percentY(double);
+    virtual Justification justificationTickLabel(const string&) override;
+    virtual void tick(double&, double&, bool) override;
+    virtual void minortick(double&, double&, bool) override;
+    virtual double offsetTickLabel(double, double) override;
+    virtual double angleTickLabel() override;
+    virtual double angleTitle() override;
+    virtual double offsetTitle(int) override;
+    virtual double shiftTitle(double) override;
+    virtual double angleTip() override;
+    virtual double offsetTip() override;
+    virtual VerticalAlign textAlignment(const string&) override;
+    virtual double percentX(double) override;
+    virtual double percentY(double) override;
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "RightAxisVisitor[]"; };
 };
 
 class TopAxisVisitor : public HorizontalAxisVisitor {
@@ -288,20 +295,21 @@ public:
     TopAxisVisitor(const DrawingVisitor&);
     ~TopAxisVisitor();
     void visit(BasicSceneObject& object) { object.visit(*this); }
-    virtual Justification justificationTickLabel(const string&);
-    virtual void tick(double&, double&, bool);
-    virtual void minortick(double&, double&, bool);
-    virtual double offsetTickLabel(double, double);
-    virtual double angleTickLabel();
-    virtual double angleTitle();
-    virtual double offsetTitle(int);
-    virtual double angleTip();
-    virtual double offsetTip();
-    virtual VerticalAlign textAlignment(const string&);
-    virtual double percentX(double);
-    virtual double percentY(double);
+    virtual Justification justificationTickLabel(const string&) override;
+    virtual void tick(double&, double&, bool) override;
+    virtual void minortick(double&, double&, bool) override;
+    virtual double offsetTickLabel(double, double) override;
+    virtual double angleTickLabel() override;
+    virtual double angleTitle() override;
+    virtual double offsetTitle(int) override;
+    virtual double angleTip() override;
+    virtual double offsetTip() override;
+    virtual VerticalAlign textAlignment(const string&) override;
+    virtual double percentX(double) override;
+    virtual double percentY(double) override;
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "TopAxisVisitor[]"; };
 };
 
 class BottomAxisVisitor : public HorizontalAxisVisitor {
@@ -309,20 +317,21 @@ public:
     BottomAxisVisitor(const DrawingVisitor&);
     ~BottomAxisVisitor();
     void visit(BasicSceneObject& object) { object.visit(*this); }
-    virtual void tick(double&, double&, bool);
-    virtual void minortick(double&, double&, bool);
-    virtual Justification justificationTickLabel(const string&);
-    virtual double offsetTickLabel(double, double);
-    virtual double angleTickLabel();
-    virtual double angleTitle();
-    virtual double offsetTitle(int);
-    virtual double angleTip();
-    virtual double offsetTip();
-    virtual VerticalAlign textAlignment(const string&);
-    virtual double percentX(double);
-    virtual double percentY(double);
+    virtual void tick(double&, double&, bool) override;
+    virtual void minortick(double&, double&, bool) override;
+    virtual Justification justificationTickLabel(const string&) override;
+    virtual double offsetTickLabel(double, double) override;
+    virtual double angleTickLabel() override;
+    virtual double angleTitle() override;
+    virtual double offsetTitle(int) override;
+    virtual double angleTip() override;
+    virtual double offsetTip() override;
+    virtual VerticalAlign textAlignment(const string&) override;
+    virtual double percentX(double) override;
+    virtual double percentY(double) override;
 
 protected:
+    virtual void print(std::ostream& s) const override { s << "BottomAxisVisitor[]"; };
 };
 
 }  // namespace magics
