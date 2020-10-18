@@ -59,7 +59,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
 
 private:
     //! Copy constructor - No copy allowed
@@ -97,7 +97,7 @@ public:
     MetgramCurve() {}
     virtual ~MetgramCurve() {}
 
-    virtual void set(const XmlNode& node)  override{ MetgramCurveAttributes::set(node); }
+    virtual void set(const XmlNode& node) override { MetgramCurveAttributes::set(node); }
     virtual void set(const map<string, string>& map) { MetgramCurveAttributes::set(map); }
     virtual MetgramStyle* clone() const override { return new MetgramCurve(); }
     virtual bool accept(const string& node) { return magCompare(node, "curve"); }

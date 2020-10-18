@@ -85,11 +85,11 @@ public:
     NoCoastPlotting();
     virtual ~NoCoastPlotting() {}
 
-    void set(const XmlNode& node)  override{ NoCoastPlottingAttributes::set(node); }
+    void set(const XmlNode& node) override { NoCoastPlottingAttributes::set(node); }
 
-    virtual void set(const map<string, string>& map)  override{ NoCoastPlottingAttributes::set(map); }
-    bool accept(const string& node)  override{ return NoCoastPlottingAttributes::accept(node); }
-    virtual NoCoastPlotting* clone() const  { return new NoCoastPlotting(); }
+    virtual void set(const map<string, string>& map) override { NoCoastPlottingAttributes::set(map); }
+    bool accept(const string& node) override { return NoCoastPlottingAttributes::accept(node); }
+    virtual NoCoastPlotting* clone() const { return new NoCoastPlotting(); }
     virtual void operator()(DrawingVisitor& parent);
     virtual void operator()(PreviewVisitor&) {}
     virtual void layer(BasicGraphicsObjectContainer*) {}

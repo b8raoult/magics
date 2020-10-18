@@ -79,7 +79,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const  { out << "No Shading"; }
+    virtual void print(ostream& out) const { out << "No Shading"; }
 
 private:
     //! Copy constructor - No copy allowed

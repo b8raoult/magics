@@ -42,7 +42,7 @@ public:
     virtual const UserPoint& current() override { return handler_.current(); }
     //! Method to advance
     virtual void advance() override { handler_.advance(); }
-    virtual bool empty()  {
+    virtual bool empty() {
         handler_.setToFirst();
         return handler_.more() == false;
     }
@@ -72,9 +72,9 @@ public:
         PointsHandler(handler), count_(count), more_(0), last_(false) {}
     virtual ~BatchPointsHandler() {}
     //! Method to set the current position to the first point.(abstract)
-    virtual void setToFirst()  override{}
+    virtual void setToFirst() override {}
     //! Method to test the end of collection.
-    virtual bool more()  override{
+    virtual bool more() override {
         if (last_) {
             last_ = false;
             return false;
@@ -89,7 +89,7 @@ public:
     //! Method to return the current value
     virtual const UserPoint& current() override { return this->handler_.current(); }
     //! Method to advance
-    virtual void advance()  override{ this->handler_.advance(); }
+    virtual void advance() override { this->handler_.advance(); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -126,10 +126,10 @@ public:
     virtual void setToFirst() override;
 
     //! Method to test the end of collection.
-    virtual bool more()  override{ return more_; }
+    virtual bool more() override { return more_; }
 
     //! Method to return the current value
-    virtual UserPoint& current()  override{ return current_; }
+    virtual UserPoint& current() override { return current_; }
 
     //! Method to advance
     virtual void advance() override;
@@ -156,10 +156,10 @@ public:
     virtual void setToFirst() override;
 
     //! Method to test the end of collection.
-    virtual bool more()  override{ return more_; }
+    virtual bool more() override { return more_; }
 
     //! Method to return the current value
-    virtual const UserPoint& current()  override{ return current_; }
+    virtual const UserPoint& current() override { return current_; }
 
     //! Method to advance
     virtual void advance() override;

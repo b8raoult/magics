@@ -50,8 +50,8 @@ public:
     virtual ~LevelSelection();
 
     virtual LevelSelection* clone() const { return 0; }
-    virtual void set(const XmlNode& node)  override{ LevelSelectionAttributes::set(node); }
-    virtual void set(const map<string, string>& map)  override{ LevelSelectionAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { LevelSelectionAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { LevelSelectionAttributes::set(map); }
     virtual void set(const LevelSelectionInterface&) {}
 
     virtual void calculate(double, double, bool){};

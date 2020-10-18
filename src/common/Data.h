@@ -147,7 +147,7 @@ protected:
     LevelDescription dataLevel_;
 
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const ;
+    virtual void print(ostream& out) const;
     virtual void computeStats();
 
     AutoVector<PointsHandler> pointsHandlers_;

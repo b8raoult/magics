@@ -432,7 +432,7 @@ public:
     ValuesCollectorUVData(double x, double y, double u, double v, double distance, int index = -1) :
         ValuesCollectorData(x, y, 0, distance, index), xComponent_(u), yComponent_(v) {}
 
-    virtual void visit(ValuesCollectorVisitor& visitor)  override{ visitor.visit(*this); }
+    virtual void visit(ValuesCollectorVisitor& visitor) override { visitor.visit(*this); }
 
     double xComponent() const { return xComponent_; }
     double yComponent() const { return yComponent_; }
@@ -451,7 +451,7 @@ class ValuesCollectorSDData : public ValuesCollectorData {
 public:
     ValuesCollectorSDData(double x, double y, double s, double d, double distance, int index = -1) :
         ValuesCollectorData(x, y, 0, distance, index), speed_(s), direction_(d) {}
-    virtual void visit(ValuesCollectorVisitor& visitor)  override{ visitor.visit(*this); }
+    virtual void visit(ValuesCollectorVisitor& visitor) override { visitor.visit(*this); }
     double speed() const { return speed_; }
     double direction() const { return direction_; }
     double scaledSpeed() const { return scaledSpeed_; }

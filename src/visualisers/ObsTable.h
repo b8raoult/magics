@@ -44,7 +44,7 @@ public:
     void operator()(CustomisedPoint&, BasicGraphicsObjectContainer&) const;
 
 protected:
-    virtual void print(ostream& out) const  {
+    virtual void print(ostream& out) const {
         out << "ObsTemplate:[\n";
         for (const_iterator item = begin(); item != end(); ++item)
             out << "\t" << *(*item) << "\n";

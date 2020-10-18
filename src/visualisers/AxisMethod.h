@@ -47,8 +47,8 @@ public:
         NOTIMP;
         return 0;
     }
-    virtual void set(const map<string, string>& map)  override{ AxisMethodAttributes::set(map); }
-    virtual void set(const XmlNode& node)  override{ AxisMethodAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { AxisMethodAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { AxisMethodAttributes::set(node); }
     virtual void updateX(const Transformation&);
     virtual void updateY(const Transformation&);
     virtual void prepare(const Axis&, AxisItems&);

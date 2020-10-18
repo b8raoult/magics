@@ -380,19 +380,19 @@ public:
         NOTIMP;
         return 0;
     }
-    virtual Layout& layout() const  override{
+    virtual Layout& layout() const override {
         ASSERT(layout_);
         return *layout_;
     }
-    virtual Layout* layoutPtr() const  {
+    virtual Layout* layoutPtr() const {
         ASSERT(layout_);
         return layout_;
     }
     // virtual Layout* legend()  { ASSERT( layout_); return this; }
 
-    void set(const XmlNode& node)  override{ LegendVisitorAttributes::set(node); }
-    void set(const std::map<string, string>& map)  override{ LegendVisitorAttributes::set(map); }
-    void add(LegendEntry* entry)  { AutoVector<LegendEntry>::push_back(entry); }
+    void set(const XmlNode& node) override { LegendVisitorAttributes::set(node); }
+    void set(const std::map<string, string>& map) override { LegendVisitorAttributes::set(map); }
+    void add(LegendEntry* entry) { AutoVector<LegendEntry>::push_back(entry); }
     void newLegend() {
         if (!AutoVector<LegendEntry>::empty())
             add(new EmptyEntry());

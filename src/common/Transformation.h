@@ -302,7 +302,7 @@ public:
     double distance(UserPoint&, UserPoint&) const;
 
 protected:
-    virtual void print(ostream&) const ;
+    virtual void print(ostream&) const;
 
     CoordinateType coordinateType_;
 

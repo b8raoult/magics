@@ -51,7 +51,7 @@ public:
     inline void setRows(int rows) { rows_ = rows; }
 
 protected:
-    virtual void print(ostream& out) const  {
+    virtual void print(ostream& out) const {
         out << "Raster[";
         out << size() << " points, ";
         out << min() << ", " << max() << "]";

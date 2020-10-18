@@ -47,7 +47,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const override ;
+    virtual void print(ostream& out) const override;
     void reset() override;
 
     virtual void add(const PaperPoint& xy) override;

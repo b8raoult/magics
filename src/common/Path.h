@@ -45,7 +45,7 @@ public:
 
 
 protected:
-    virtual void print(ostream& out) const  { out << "Path = " << path_; }
+    virtual void print(ostream& out) const { out << "Path = " << path_; }
 
 private:
     string path_;

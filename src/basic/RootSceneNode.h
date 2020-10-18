@@ -78,19 +78,19 @@ public:
     virtual void setPage(RootScenePage* node);
 
 
-    double absoluteWidth() const  override{ return absoluteWidth_; }
-    double absoluteHeight() const  override{ return absoluteHeight_; }
-    virtual void absoluteRootWidth(double width)  override{
+    double absoluteWidth() const override { return absoluteWidth_; }
+    double absoluteHeight() const override { return absoluteHeight_; }
+    virtual void absoluteRootWidth(double width) override {
         scale_ = width / absoluteWidth_;
         if (scale_ < 1)
             scale_ = 1;
         absoluteWidth_ = width;
     }
-    void absoluteRootHeight(double height)  override{ absoluteHeight_ = height; }
+    void absoluteRootHeight(double height) override { absoluteHeight_ = height; }
     double scalingFactor() const { return scale_; }  // For Magml and wrep ...
     virtual BasicSceneNode* clone() override;
     BasicGraphicsObject* root();
-    virtual void getReady()  override{}
+    virtual void getReady() override {}
     void execute() override;
     BasicGraphicsObject* visualise() override;
     BasicGraphicsObject* close();
@@ -99,13 +99,13 @@ public:
     void newpage() { current_->newpage(); }
     BasicSceneNode* insert(BasicPositionalObject*) override;
 
-    virtual int rootWidthResolution() const  override{ return widthResolution_; }
-    virtual int rootHeightResolution() const  override{ return heightResolution_; }
+    virtual int rootWidthResolution() const override { return widthResolution_; }
+    virtual int rootHeightResolution() const override { return heightResolution_; }
     // void push_back(BasicSceneObject* item);
 
     virtual void text(TextVisitor*) override {}
     virtual void legend(LegendVisitor*) override {}
-    virtual MagicsMode mode()  override{ return mode_; }
+    virtual MagicsMode mode() override { return mode_; }
     void mode(MagicsMode mode) { mode_ = mode; }
     BasicSceneObject* current() { return current_; }
     bool needStartPage();

@@ -33,14 +33,14 @@ public:
     /*!
       \brief sets  from an XML node
     */
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         Transformation::set(node);
         TephigramAttributes::set(node);
     }
     /*!
       \brief sets  from a map
     */
-    void set(const map<string, string>& map)  override{
+    void set(const map<string, string>& map) override {
         Transformation::set(map);
         TephigramAttributes::set(map);
     }

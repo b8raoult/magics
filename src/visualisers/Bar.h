@@ -90,7 +90,7 @@ public:
     GraphFlag();
     virtual ~GraphFlag();
 
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         GraphFlagAttributes::set(node);
         Graph::set(node);
     }
@@ -100,7 +100,7 @@ public:
 
 
     // Implements the set method ...
-    void set(const map<string, string>& map)  override{ GraphFlagAttributes::set(map); }
+    void set(const map<string, string>& map) override { GraphFlagAttributes::set(map); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -126,7 +126,7 @@ public:
     GraphArrow();
     virtual ~GraphArrow();
 
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         GraphArrowAttributes::set(node);
         Graph::set(node);
     }

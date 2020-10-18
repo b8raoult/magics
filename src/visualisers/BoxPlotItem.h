@@ -92,9 +92,9 @@ public:
     BoxPlotMedian() {}
     virtual ~BoxPlotMedian() {}
 
-    virtual void set(const XmlNode& node)  override{ BoxPlotMedianAttributes::set(node); }
-    virtual void set(const map<string, string>& map)  override{ BoxPlotMedianAttributes::set(map); }
-    bool accept(const string& node)  override{ return BoxPlotMedianAttributes::accept(node); }
+    virtual void set(const XmlNode& node) override { BoxPlotMedianAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { BoxPlotMedianAttributes::set(map); }
+    bool accept(const string& node) override { return BoxPlotMedianAttributes::accept(node); }
 
     virtual BoxPlotMedian* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
@@ -116,7 +116,7 @@ public:
     virtual ~BoxPlotWhiskerBorder() {}
 
     virtual void set(const XmlNode& node) override { BoxPlotWhiskerBorderAttributes::set(node); }
-    virtual void set(const map<string, string>& map)  override{ BoxPlotWhiskerBorderAttributes::set(map); }
+    virtual void set(const map<string, string>& map) override { BoxPlotWhiskerBorderAttributes::set(map); }
     bool accept(const string& node) override { return BoxPlotWhiskerBorderAttributes::accept(node); }
 
     virtual NoBoxPlotWhiskerBorder* clone() const override {
@@ -137,13 +137,13 @@ public:
     BoxPlotWhiskerBox() {}
     virtual ~BoxPlotWhiskerBox() {}
 
-    virtual void set(const XmlNode& node)  override{ BoxPlotWhiskerBoxAttributes::set(node); }
-    virtual void set(const map<string, string>& map)  override{ BoxPlotWhiskerBoxAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { BoxPlotWhiskerBoxAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { BoxPlotWhiskerBoxAttributes::set(map); }
     virtual BoxPlotWhiskerBox* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotWhiskerBox();
     }
-    bool accept(const string& node)  override{ return BoxPlotWhiskerBoxAttributes::accept(node); }
+    bool accept(const string& node) override { return BoxPlotWhiskerBoxAttributes::accept(node); }
 
 
     void top(BasicGraphicsObjectContainer&, const CustomisedPoint&) const override;
@@ -159,9 +159,9 @@ public:
     BoxPlotWhiskerLine() {}
     virtual ~BoxPlotWhiskerLine() {}
 
-    virtual void set(const XmlNode& node)  override{ BoxPlotWhiskerLineAttributes::set(node); }
-    virtual void set(const map<string, string>& map)  override{ BoxPlotWhiskerLineAttributes::set(map); }
-    bool accept(const string& node)  override{ return BoxPlotWhiskerLineAttributes::accept(node); }
+    virtual void set(const XmlNode& node) override { BoxPlotWhiskerLineAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { BoxPlotWhiskerLineAttributes::set(map); }
+    bool accept(const string& node) override { return BoxPlotWhiskerLineAttributes::accept(node); }
     virtual BoxPlotWhiskerLine* clone() const override {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new BoxPlotWhiskerLine();

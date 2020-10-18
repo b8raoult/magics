@@ -48,7 +48,7 @@ public:
     };
 
 
-    void set(const XmlNode& node)  override{
+    void set(const XmlNode& node) override {
         Graph::set(node);
         CurveAttributes::set(node);
     }

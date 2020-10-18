@@ -120,7 +120,7 @@ class MagicsMagnifierEvent : public MagicsEvent {
 public:
     MagicsMagnifierEvent(bool set) : set_(set) {}
     virtual ~MagicsMagnifierEvent() {}
-    void notify(MagicsObserver& observer)  override{ observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
 protected:
@@ -137,7 +137,7 @@ class MagicsRestoreFbEvent : public MagicsEvent {
 public:
     MagicsRestoreFbEvent() {}
     virtual ~MagicsRestoreFbEvent() {}
-    void notify(MagicsObserver& observer)  override{ observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -166,7 +166,7 @@ class MagicsAnimationCurrentStepEvent : public MagicsEvent {
 public:
     MagicsAnimationCurrentStepEvent(int step) : step_(step) {}
     virtual ~MagicsAnimationCurrentStepEvent() {}
-    void notify(MagicsObserver& observer)  override{ observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     int step() const { return step_; }
 
 protected:
@@ -180,7 +180,7 @@ class MagicsAnimationStepsEvent : public MagicsEvent {
 public:
     MagicsAnimationStepsEvent(vector<MagicsAnimationStepData> steps) : steps_(steps) {}
     virtual ~MagicsAnimationStepsEvent() {}
-    void notify(MagicsObserver& observer)  override{ observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     const vector<MagicsAnimationStepData>& steps() const { return steps_; }
 
 protected:
@@ -198,7 +198,7 @@ class MagicsLayerUpdateEvent : public MagicsEvent {
 public:
     MagicsLayerUpdateEvent() {}
     virtual ~MagicsLayerUpdateEvent() {}
-    void notify(MagicsObserver& observer)  override{ observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
