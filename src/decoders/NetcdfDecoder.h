@@ -135,20 +135,20 @@ class NetcdfLoop : public DataLoop {
 public:
     NetcdfLoop(NetcdfDecoder* netcdf) : netcdf_(netcdf) {}
     virtual ~NetcdfLoop() {}
-    void set(const map<string, string>& map) {}  // NetcdfLoopAttributes::set(map); }
-    void set(const XmlNode& node) {}             // NetcdfLoopAttributes::set(node); }
+    void set(const map<string, string>& map) override {}  // NetcdfLoopAttributes::set(map); }
+    void set(const XmlNode& node) override {}             // NetcdfLoopAttributes::set(node); }
 
     void set(NetcdfDecoder* netcdf) { netcdf_ = netcdf; }
 
-    Data* current() {
+    Data* current() override {
         NetcdfDecoder* current = netcdf_;
         netcdf_                = 0;
         return current;
     }
-    bool hasMore() { return (netcdf_ != 0); }
-    void next() { netcdf_ = 0; }
+    bool hasMore() override { return (netcdf_ != 0); }
+    void next() override { netcdf_ = 0; }
 
-    void visit(Transformation& transformation) {
+    void visit(Transformation& transformation) override {
         if (netcdf_)
             netcdf_->visit(transformation);
     }

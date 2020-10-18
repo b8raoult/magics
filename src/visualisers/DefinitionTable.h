@@ -48,7 +48,7 @@ protected:
     virtual void print(ostream&) const;
     string definition_;
 
-    void add(const map<string, string>& def) {
+    void add(const map<string, string>& def) override {
         D* param               = new D(def);
         (*this)[param->code()] = param;
     }
