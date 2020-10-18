@@ -58,7 +58,7 @@ public:
     }
 
 protected:
-    void print(ostream& out) const { out << "ObsStationRing"; }
+    void print(ostream& out) const  override { out << "ObsStationRing"; }
 };
 class ObsStationTriangle : public ObsItemBox {
 public:
