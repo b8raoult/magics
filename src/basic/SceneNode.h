@@ -65,18 +65,18 @@ class FortranSceneNode : public SceneNode, public FortranSceneNodeAttributes {
 public:
     FortranSceneNode();
     ~FortranSceneNode() override;
-    void getReady();
+    void getReady() override;
     void resize();
-    void visit(BasicGraphicsObjectContainer& tree);
-    BasicSceneNode* clone() {
+    void visit(BasicGraphicsObjectContainer& tree) override;
+    BasicSceneNode* clone() override {
         FortranSceneNode* node = new FortranSceneNode();
         node->copy(*this);
         return node;
     }
-    string theme() const;
+    string theme() const override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
     SceneLayer* sceneLayer_;
 };
 
@@ -85,12 +85,12 @@ class XmlSceneNode : public SceneNode, public XmlSceneNodeAttributes {
 public:
     XmlSceneNode();
     ~XmlSceneNode() override;
-    void set(const map<string, string>& map) { XmlSceneNodeAttributes::set(map); }
-    void set(const XmlNode& node) { XmlSceneNodeAttributes::set(node); }
-    void getReady();
+    void set(const map<string, string>& map) override { XmlSceneNodeAttributes::set(map); }
+    void set(const XmlNode& node) override { XmlSceneNodeAttributes::set(node); }
+    void getReady() override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 }  // namespace magics

@@ -292,8 +292,8 @@ public:
     EfiGraph();
     virtual ~EfiGraph();
 
-    void set(const XmlNode& node) { EfiGraphAttributes::set(node); }
-    void set(const map<string, string>& map) { EfiGraphAttributes::set(map); }
+    void set(const XmlNode& node) override { EfiGraphAttributes::set(node); }
+    void set(const map<string, string>& map) override { EfiGraphAttributes::set(map); }
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
     virtual void visit(LegendVisitor&) override;
@@ -323,8 +323,8 @@ public:
     CdfGraph();
     virtual ~CdfGraph();
 
-    void set(const XmlNode& node) { CdfGraphAttributes::set(node); }
-    void set(const map<string, string>& map) { CdfGraphAttributes::set(map); }
+    void set(const XmlNode& node) override { CdfGraphAttributes::set(node); }
+    void set(const map<string, string>& map) override { CdfGraphAttributes::set(map); }
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
     virtual void visit(LegendVisitor&) override;
@@ -365,8 +365,8 @@ public:
     EpsShade();
     virtual ~EpsShade();
 
-    void set(const XmlNode& node) { EpsShadeAttributes::set(node); }
-    void set(const map<string, string>& map) { EpsShadeAttributes::set(map); }
+    void set(const XmlNode& node) override { EpsShadeAttributes::set(node); }
+    void set(const map<string, string>& map) override { EpsShadeAttributes::set(map); }
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
     virtual void visit(LegendVisitor&) override;

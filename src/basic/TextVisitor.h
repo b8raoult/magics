@@ -64,7 +64,7 @@ public:
     void addToTags(const string&, const string&) override;
 
     virtual void titles(vector<string>&);
-    virtual Layout& layout() const { return LayoutVisitor::layout(); }
+    virtual Layout& layout() const override { return LayoutVisitor::layout(); }
     virtual Layout* layoutPtr() const { return LayoutVisitor::layoutPtr(); }
 
 

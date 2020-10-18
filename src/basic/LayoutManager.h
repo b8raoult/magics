@@ -92,7 +92,7 @@ class MagMLLayoutManager : public AutomaticLayout {
 public:
     MagMLLayoutManager();
     ~MagMLLayoutManager() override {}
-    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
+    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node) override;
     virtual LayoutManager* clone() override {
         MagMLLayoutManager* layout = new MagMLLayoutManager();
 
@@ -114,7 +114,7 @@ class BottomVerticalLayoutManager : public AutomaticLayout {
 public:
     BottomVerticalLayoutManager();
     ~BottomVerticalLayoutManager() override;
-    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
+    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node) override;
     virtual LayoutManager* clone() override {
         BottomVerticalLayoutManager* layout = new BottomVerticalLayoutManager();
         layout->gapx_                       = gapx_;
@@ -127,7 +127,7 @@ class BottomHorizontalLayoutManager : public AutomaticLayout {
 public:
     BottomHorizontalLayoutManager();
     ~BottomHorizontalLayoutManager() override;
-    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
+    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node) override;
     virtual LayoutManager* clone() override {
         BottomHorizontalLayoutManager* layout = new BottomHorizontalLayoutManager();
         layout->gapx_                         = gapx_;
@@ -140,7 +140,7 @@ class TopHorizontalLayoutManager : public AutomaticLayout {
 public:
     TopHorizontalLayoutManager();
     ~TopHorizontalLayoutManager() override;
-    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
+    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node) override;
     virtual LayoutManager* clone() override {
         TopHorizontalLayoutManager* layout = new TopHorizontalLayoutManager();
         layout->gapx_                      = gapx_;
@@ -153,7 +153,7 @@ class TopVerticalLayoutManager : public AutomaticLayout {
 public:
     TopVerticalLayoutManager();
     ~TopVerticalLayoutManager() override;
-    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node);
+    BasicSceneNode* operator()(BasicSceneNode* parent, BasicPositionalObject* node) override;
     virtual LayoutManager* clone() override {
         TopVerticalLayoutManager* layout = new TopVerticalLayoutManager();
         layout->gapx_                    = gapx_;

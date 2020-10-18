@@ -87,19 +87,19 @@ class LogarithmicAxisMethod : public AxisMethod {
 public:
     LogarithmicAxisMethod() {}
     virtual ~LogarithmicAxisMethod() override {}
-    void prepare(const Axis&, AxisItems&);
+    void prepare(const Axis&, AxisItems&) override;
 
-    double value(double val) const { return ::pow(10., val); }
+    double value(double val) const override { return ::pow(10., val); }
 };
 class HyperAxisMethod : public AxisMethod {
 public:
     HyperAxisMethod() {}
     virtual ~HyperAxisMethod() override {}
-    void prepare(const Axis&, AxisItems&);
+    void prepare(const Axis&, AxisItems&) override;
 
 
-    void updateX(const Transformation&);
-    void updateY(const Transformation&);
+    void updateX(const Transformation&) override;
+    void updateY(const Transformation&) override;
 
 protected:
     vector<double> hyperMin_;
@@ -109,7 +109,7 @@ class PositionListAxisMethod : public AxisMethod {
 public:
     PositionListAxisMethod() {}
     virtual ~PositionListAxisMethod() override {}
-    void prepare(const Axis&, AxisItems&);
+    void prepare(const Axis&, AxisItems&) override;
 };
 
 

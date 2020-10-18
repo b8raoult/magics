@@ -66,7 +66,7 @@ class TagConverter : public XmlNodeVisitor, public stack<NiceText> {
 public:
     TagConverter(TagHandler& owner);
     ~TagConverter() override;
-    void visit(const XmlNode&);
+    void visit(const XmlNode&) override;
     void ignore(const XmlNode&);
     void encoding(const string& encoding);
     void text(const XmlNode&);

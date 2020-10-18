@@ -40,18 +40,18 @@ public:
     RootScenePage(double, double);
     ~RootScenePage() override;
 
-    BasicSceneNode* clone() { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
+    BasicSceneNode* clone() override { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
     virtual RootScenePage* newPage() { return (width_) ? new RootScenePage(width_, height_) : new RootScenePage(); }
-    void visit(BasicGraphicsObjectContainer& tree) {
+    void visit(BasicGraphicsObjectContainer& tree) override {
         tree.push_back(new StartPage());
         BasicSceneNode::visit(tree);
         tree.push_back(new EndPage());
     }
-    BasicSceneNode* newNode(BasicPositionalObject*);
+    BasicSceneNode* newNode(BasicPositionalObject*) override;
     void root(RootSceneNode* root) { root_ = root; }
-    BasicGraphicsObject* visualise();
+    BasicGraphicsObject* visualise() override;
     void resize(double width, double height);
-    void release();
+    void release() override;
 
 protected:
     RootSceneNode* root_;
@@ -63,12 +63,12 @@ public:
     MvRootScenePage();
     ~MvRootScenePage() override;
 
-    RootScenePage* newPage() { return new MvRootScenePage(); }
-    void visit(BasicGraphicsObjectContainer& tree) {
+    RootScenePage* newPage() override { return new MvRootScenePage(); }
+    void visit(BasicGraphicsObjectContainer& tree) override {
         MagLog::dev() << "visit(BasicGraphicsObjectContainer::MvRootScenePage" << endl;
         BasicSceneNode::visit(tree);
     }
-    void getReady();
+    void getReady() override;
 };
 class RootSceneNode : public BasicSceneNode {
 public:
@@ -147,24 +147,24 @@ class FortranRootSceneNode : public RootSceneNode, public FortranRootSceneNodeAt
 public:
     FortranRootSceneNode();
     ~FortranRootSceneNode() override;
-    void getReady();
-    BasicSceneNode* clone();
+    void getReady() override;
+    BasicSceneNode* clone() override;
     virtual void setPage(RootScenePage* node) override;
-    string theme() const { return theme_; }
+    string theme() const override { return theme_; }
 
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 class MvRootSceneNode : public RootSceneNode, public FortranRootSceneNodeAttributes {
 public:
     MvRootSceneNode();
     ~MvRootSceneNode() override;
-    void getReady();
+    void getReady() override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 class XmlRootSceneNode : public RootSceneNode, public XmlRootNodeAttributes {
@@ -172,14 +172,14 @@ public:
     XmlRootSceneNode();
     ~XmlRootSceneNode() override;
 
-    void set(const map<string, string>& map) { XmlRootNodeAttributes::set(map); }
+    void set(const map<string, string>& map) override { XmlRootNodeAttributes::set(map); }
 
-    void set(const XmlNode& node) { XmlRootNodeAttributes::set(node); }
+    void set(const XmlNode& node) override { XmlRootNodeAttributes::set(node); }
 
-    void getReady();
+    void getReady() override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 class WrepRootSceneNode : public XmlRootSceneNode, public WrepRootNodeAttributes {
@@ -187,25 +187,25 @@ public:
     WrepRootSceneNode();
     ~WrepRootSceneNode() override;
 
-    void set(const map<string, string>& map) { WrepRootNodeAttributes::set(map); }
+    void set(const map<string, string>& map) override { WrepRootNodeAttributes::set(map); }
 
-    void set(const XmlNode& node) { WrepRootNodeAttributes::set(node); }
+    void set(const XmlNode& node) override { WrepRootNodeAttributes::set(node); }
 
-    void absoluteRootWidth(double width);
-    void getReady();
+    void absoluteRootWidth(double width) override;
+    void getReady() override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 class LegacyRootSceneNode : public WrepRootSceneNode {
 public:
     LegacyRootSceneNode();
     ~LegacyRootSceneNode() override;
-    void absoluteRootWidth(double width);
-    void getReady();
+    void absoluteRootWidth(double width) override;
+    void getReady() override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 }  // namespace magics

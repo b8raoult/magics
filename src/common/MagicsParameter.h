@@ -34,7 +34,7 @@ public:
     ~MagicsParameter() override {}
 
     void get(T& value) const override { value = value_; }
-    void reset() { value_ = default_; }
+    void reset() override { value_ = default_; }
 
     BaseParameter* clone() override {
         return new MagicsParameter<T>(this->name_, this->default_);

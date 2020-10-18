@@ -101,9 +101,9 @@ public:
     ObstatVisDefInfo(string, DataType);
     ~ObstatVisDefInfo() override{};
 
-    void getAttributes(MetaDataCollector&, map<string, string>&);
-    void loadItems();
-    void saveItems(){};
+    void getAttributes(MetaDataCollector&, map<string, string>&) override;
+    void loadItems() override;
+    void saveItems() override{};
 
 protected:
     string removeZerosFromNumber(string);

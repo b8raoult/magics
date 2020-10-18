@@ -340,7 +340,7 @@ public:
     Holes& holes();
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 
 
 public:

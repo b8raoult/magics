@@ -310,7 +310,7 @@ public:
     }
 
     //! Returns the size of the composite
-    unsigned int size() const { return ((unsigned int)pImpl_->size()); }
+    unsigned int size() const override { return ((unsigned int)pImpl_->size()); }
 
     //! Reserves space for a given number of elements (reserve is available for vectors)
     void reserve(int nelem) { pImpl_->reserve(nelem); }

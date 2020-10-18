@@ -104,7 +104,7 @@ public:
     virtual bool accept(const string& node) override { return magCompare(node, "nocalm"); }
 
 
-    void prepare(BasicGraphicsObjectContainer&) {}
+    void prepare(BasicGraphicsObjectContainer&) override {}
     virtual bool operator()(const PaperPoint&, double x, double y) override {
         return (((x * x) + (y * y)) < this->below_) ? true : false;
     }

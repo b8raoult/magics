@@ -37,22 +37,22 @@ public:
     ~Akima474() override{};
 
 
-    double operator()(int i, int j) const;
+    double operator()(int i, int j) const override;
     /*
         double interpolate(double  i, double  j) const {
             return   mono_.interpolate(i,j);
        }
     */
-    int rows() const { return nrows_; }
-    int columns() const { return ncols_; }
+    int rows() const override { return nrows_; }
+    int columns() const override { return ncols_; }
 
-    double regular_row(int i) const;
-    double regular_column(int j) const;
+    double regular_row(int i) const override;
+    double regular_column(int j) const override;
 
-    double row(int, int) const;
-    double column(int, int) const;
+    double row(int, int) const override;
+    double column(int, int) const override;
 
-    double missing() const { return mono_.missing(); }
+    double missing() const override { return mono_.missing(); }
 
 #if 0
      //Code from Spring. Does not work for non-regular spaced

@@ -55,25 +55,25 @@ public:
     virtual void legend(LegendVisitor* legend) override;
 
 
-    void visit(MetaDataCollector&);
+    void visit(MetaDataCollector&) override;
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    void print(ostream&) const;
+    void print(ostream&) const override;
     void prepareLayout(SceneLayer&);
     virtual void updateLayout() {}
 
     void getReady() override;
 
-    void visit(SceneLayer&);
-    void visit(MetaDataVisitor&);
-    void visit(PreviewVisitor&);
-    void visit(HistoVisitor&);
+    void visit(SceneLayer&) override;
+    void visit(MetaDataVisitor&) override;
+    void visit(PreviewVisitor&) override;
+    void visit(HistoVisitor&) override;
 
     virtual void copy(const ViewNode&);
 
-    Transformation& transformation() const {
+    Transformation& transformation() const override {
         ASSERT(viewTransformation_);
         return *viewTransformation_;
     }
@@ -135,20 +135,20 @@ public:
     FortranViewNode();
     ~FortranViewNode() override;
 
-    BasicSceneNode* clone();
+    BasicSceneNode* clone() override;
 
-    void getReady();
+    void getReady() override;
 
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 class XmlViewNode : public ViewNode, public XmlBasicNodeAttributes, public XmlViewNodeAttributes {
 public:
     XmlViewNode();
     ~XmlViewNode() override;
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         if (magCompare(node.name(), "map")) {
             XmlNode view = node;
             view.name("view");
@@ -158,11 +158,11 @@ public:
     }
 
 
-    void updateLayout();
-    void getReady();
+    void updateLayout() override;
+    void getReady() override;
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 };
 
 

@@ -46,10 +46,10 @@ public:
     virtual double getMax() const;
 
 
-    void prepare(const Axis&, AxisItems&);
+    void prepare(const Axis&, AxisItems&) override;
 
-    void updateX(const Transformation&);
-    void updateY(const Transformation&);
+    void updateX(const Transformation&) override;
+    void updateY(const Transformation&) override;
 
 
 protected:

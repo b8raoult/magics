@@ -124,13 +124,13 @@ public:
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new XCoordinate();
     }
-    virtual void toxml(ostream& out) const {}
-    void set(const XmlNode& node) {}
-    void set(const map<string, string>& map) {}
-    void set() {}
-    void print(ostream& out) const {}
+    virtual void toxml(ostream& out) const override {}
+    void set(const XmlNode& node) override {}
+    void set(const map<string, string>& map) override {}
+    void set() override {}
+    void print(ostream& s) const override { s << "XCoordinate[]"; }
     virtual AxisAutomaticSetting automatic() override { return AxisAutomaticSetting::OFF; }
-    virtual void automatic(bool val) {}
+    virtual void automatic(bool val) override {}
     bool accept(const string& tag) override { return false; }
     //! Overloaded << operator to call print().
     friend ostream& operator<<(ostream& s, const XCoordinate& p) {
@@ -151,16 +151,16 @@ class YCoordinate : public Coordinate {
 public:
     YCoordinate() {}
     virtual ~YCoordinate() {}
-    virtual void toxml(ostream& out) const {}
+    virtual void toxml(ostream& s) const override { s << "YCoordinate[]"; }
     virtual YCoordinate* clone() const {
         MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
         return new YCoordinate();
     }
-    virtual void automatic(bool val) {}
-    void set(const XmlNode& node) {}
-    void set(const map<string, string>& map) {}
-    void set() {}
-    void print(ostream& out) const {}
+    virtual void automatic(bool val) override {}
+    void set(const XmlNode& node) override {}
+    void set(const map<string, string>& map) override {}
+    void set() override {}
+    void print(ostream& out) const override {}
     bool accept(const string& tag) override { return false; }
     virtual AxisAutomaticSetting automatic() override { return AxisAutomaticSetting::OFF; }
     //! Overloaded << operator to call print().

@@ -90,7 +90,7 @@ public:
 
     void operator()(const PaperPoint&) {}
     virtual bool accept(const string& node) override { return magCompare(node, "nomarker"); }
-    double height() { return 0.; }
+    double height() override { return 0.; }
 };
 
 

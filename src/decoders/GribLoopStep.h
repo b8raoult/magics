@@ -66,12 +66,12 @@ class DateGribLoopStep : public GribLoopStep, public DateGribLoopStepAttributes 
 public:
     DateGribLoopStep() {}
     ~DateGribLoopStep() override {}
-    void set(const XmlNode& node) { DateGribLoopStepAttributes::set(node); }
-    bool accept(const string& node) {
+    void set(const XmlNode& node) override { DateGribLoopStepAttributes::set(node); }
+    bool accept(const string& node) override {
         return DateGribLoopStepAttributes::accept(node);
         ;
     }
-    GribLoopStep* clone() { return new DateGribLoopStep(); }
+    GribLoopStep* clone() override { return new DateGribLoopStep(); }
     // virtual void operator()(GribDecoder&, LayerNode&) override;
 };
 
@@ -80,7 +80,7 @@ public:
     ParamGribLoopStep() {}
     ~ParamGribLoopStep() override {}
     // virtual void operator()(GribDecoder&, LayerNode&) override;
-    GribLoopStep* clone() { return new ParamGribLoopStep(); }
+    GribLoopStep* clone() override { return new ParamGribLoopStep(); }
 };
 
 

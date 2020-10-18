@@ -191,7 +191,7 @@ public:
     double rows_[4];
     int range_;
 
-    RangeType range() { return (range_ == -1) ? outOfRange : singleRange; }
+    RangeType range() override { return (range_ == -1) ? outOfRange : singleRange; }
 
 
     double missing_;

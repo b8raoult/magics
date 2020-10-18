@@ -144,30 +144,30 @@ class TransformMatrixHandler : public MatrixHandler {
 public:
     TransformMatrixHandler(const AbstractMatrix& matrix) : MatrixHandler(matrix) {}
 
-    double operator()(int i, int j) const { return matrix_(i + minrow_, j + mincolumn_); }
+    double operator()(int i, int j) const override { return matrix_(i + minrow_, j + mincolumn_); }
 
-    double left() const { return minx_; }
-    double right() const { return maxx_; }
-    double bottom() const { return miny_; }
-    double top() const { return maxy_; }
+    double left() const override { return minx_; }
+    double right() const override { return maxx_; }
+    double bottom() const override { return miny_; }
+    double top() const override { return maxy_; }
 
     void set();
 
-    int rows() const { return maxrow_ - minrow_ + 1; }
-    int columns() const { return maxcolumn_ - mincolumn_ + 1; }
-    double regular_row(int index) const { return fastRows_[index]; }
-    double regular_column(int index) const { return fastColumns_[index]; }
+    int rows() const override { return maxrow_ - minrow_ + 1; }
+    int columns() const override { return maxcolumn_ - mincolumn_ + 1; }
+    double regular_row(int index) const override { return fastRows_[index]; }
+    double regular_column(int index) const override { return fastColumns_[index]; }
     double real_row(int index) const { return fastRows_[index]; }
     double real_column(int index) const { return fastColumns_[index]; }
-    inline double column(int, int j) const { return fastColumns_[j]; }
+    inline double column(int, int j) const override { return fastColumns_[j]; }
     virtual double real_row(double row, double) const { return row; }
     virtual double real_column(double, double column) const { return column; }
-    inline double row(int i, int) const { return fastRows_[i]; }
+    inline double row(int i, int) const override { return fastRows_[i]; }
     virtual bool hasMissingValues() const override { return matrix_.hasMissingValues(); }
-    double interpolate(double i, double j) const { return matrix_.interpolate(i, j); }
-    double missing() const { return matrix_.missing(); }
-    int lowerRow(double r) const;
-    int lowerColumn(double c) const;
+    double interpolate(double i, double j) const override { return matrix_.interpolate(i, j); }
+    double missing() const override { return matrix_.missing(); }
+    int lowerRow(double r) const override;
+    int lowerColumn(double c) const override;
     int upperRow(double r) const;
     int upperColumn(double c) const;
 
@@ -210,13 +210,13 @@ class Proj4MatrixHandler : public MatrixHandler {
 public:
     Proj4MatrixHandler(const AbstractMatrix& matrix, const string&);
 
-    double interpolate(double row, double column) const;
-    double nearest(double row, double column) const;
+    double interpolate(double row, double column) const override;
+    double nearest(double row, double column) const override;
 
-    double column(int, int) const;
-    double row(int, int) const;
+    double column(int, int) const override;
+    double row(int, int) const override;
 
-    bool delegate() const { return true; }
+    bool delegate() const override { return true; }
 
 protected:
     double minx_;
@@ -341,9 +341,9 @@ public:
     MonotonicIncreasingMatrixHandler(const AbstractMatrix& matrix);
     virtual ~MonotonicIncreasingMatrixHandler() override {}
 
-    double operator()(int i, int j) const;
+    double operator()(int i, int j) const override;
 
-    int rows() const { return matrix_.rows(); }
+    int rows() const override { return matrix_.rows(); }
     virtual int columns() const override { return matrix_.columns(); }
     virtual double regular_column(int i) const override {
         return matrix_.regular_column(const_cast<MonotonicIncreasingMatrixHandler*>(this)->columns_[i]);
@@ -355,9 +355,9 @@ public:
     virtual double missing() const override { return matrix_.missing(); }
     void print();
 
-    int lowerRow(double r) const;
+    int lowerRow(double r) const override;
 
-    int lowerColumn(double c) const;
+    int lowerColumn(double c) const override;
 
 protected:
     map<int, int> rows_;

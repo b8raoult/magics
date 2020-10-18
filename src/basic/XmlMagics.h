@@ -48,7 +48,7 @@ public:
     }
     MAGICS_EXPORT void execute(XmlTree& magml);
 
-    void visit(const XmlNode& node);
+    void visit(const XmlNode& node) override;
 
     void magics(const XmlNode&);
 

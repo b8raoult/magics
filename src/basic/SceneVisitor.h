@@ -271,7 +271,7 @@ class RightAxisVisitor : public VerticalAxisVisitor {
 public:
     RightAxisVisitor(const DrawingVisitor&);
     ~RightAxisVisitor();
-    void visit(BasicSceneObject& object) { object.visit(*this); }
+    void visit(BasicSceneObject& object) override { object.visit(*this); }
     virtual Justification justificationTickLabel(const string&) override;
     virtual void tick(double&, double&, bool) override;
     virtual void minortick(double&, double&, bool) override;
@@ -294,7 +294,7 @@ class TopAxisVisitor : public HorizontalAxisVisitor {
 public:
     TopAxisVisitor(const DrawingVisitor&);
     ~TopAxisVisitor();
-    void visit(BasicSceneObject& object) { object.visit(*this); }
+    void visit(BasicSceneObject& object) override { object.visit(*this); }
     virtual Justification justificationTickLabel(const string&) override;
     virtual void tick(double&, double&, bool) override;
     virtual void minortick(double&, double&, bool) override;
@@ -316,7 +316,7 @@ class BottomAxisVisitor : public HorizontalAxisVisitor {
 public:
     BottomAxisVisitor(const DrawingVisitor&);
     ~BottomAxisVisitor();
-    void visit(BasicSceneObject& object) { object.visit(*this); }
+    void visit(BasicSceneObject& object) override { object.visit(*this); }
     virtual void tick(double&, double&, bool) override;
     virtual void minortick(double&, double&, bool) override;
     virtual Justification justificationTickLabel(const string&) override;

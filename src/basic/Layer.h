@@ -265,8 +265,8 @@ public:
     NoDataLayer(BasicSceneObject*);
     ~NoDataLayer();
 
-    void redisplay(const BaseDriver&) const;
-    void getReady() const {}
+    void redisplay(const BaseDriver&) const override;
+    void getReady() const override {}
     void print(ostream& s) const override { s << "NoDataLayer"; }
 };
 
@@ -275,11 +275,11 @@ class TextLayer : public StepLayer {
 public:
     TextLayer() {}
     ~TextLayer() {}
-    void getReady() const;
-    void getReady(int i) const { Layer::getReady(i); }
-    void execute(const BaseDriver&) const;
+    void getReady() const override;
+    void getReady(int i) const override { Layer::getReady(i); }
+    void execute(const BaseDriver&) const override;
     void execute(int, const BaseDriver&) const;
-    void getInfo(int, const BaseDriver&) const;
+    void getInfo(int, const BaseDriver&) const override;
     void collectText(vector<TextVisitor*>&, LegendVisitor*);  // update the text informations!
     void print(ostream& s) const override { s << "TextLayer"; }
 };
@@ -288,10 +288,10 @@ class LegendLayer : public StepLayer {
 public:
     LegendLayer() {}
     ~LegendLayer() {}
-    void getReady() const;
-    void execute(const BaseDriver&) const;
+    void getReady() const override;
+    void execute(const BaseDriver&) const override;
     void execute(int, const BaseDriver&) const;
-    void getInfo(int, const BaseDriver&) const;
+    void getInfo(int, const BaseDriver&) const override;
     void print(ostream& s) const override { s << "LegendLayer"; }
 };
 /*
@@ -321,7 +321,7 @@ public:
 
     void getReady(int) const;
 
-    bool buildTree(const Layout&, unsigned int, const BaseDriver&) const;
+    bool buildTree(const Layout&, unsigned int, const BaseDriver&) const override;
 
     vector<Layer*>::iterator beginLayer() const;
     vector<Layer*>::iterator endLayer() const;
