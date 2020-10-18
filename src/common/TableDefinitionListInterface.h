@@ -36,7 +36,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "TableDefinitionListInterface<T>[]"; }
+    virtual void print(ostream& s) const override { s << "TableDefinitionListInterface<T>[]"; }
 
 private:
     //! Copy constructor - No copy allowed

@@ -85,7 +85,7 @@ public:
 
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     FrameNode* frameNode_;
     double width_;
     double height_;

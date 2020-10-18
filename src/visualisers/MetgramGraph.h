@@ -43,18 +43,18 @@ public:
     virtual ~MetgramGraph();
 
 
-    virtual void operator()(Data&, BasicGraphicsObjectContainer&);
-    void visit(LegendVisitor&);
+    virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
+    void visit(LegendVisitor&) override;
 
 
     // Implements the set method ...
-    void set(const map<string, string>& map) { MetgramGraphAttributes::set(map); }
-    void set(const XmlNode& node) { MetgramGraphAttributes::set(node); }
+    void set(const map<string, string>& map) override { MetgramGraphAttributes::set(map); }
+    void set(const XmlNode& node) override { MetgramGraphAttributes::set(node); }
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     double resolution_;
 
 

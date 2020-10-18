@@ -78,34 +78,34 @@ public:
     virtual void setPage(RootScenePage* node);
 
 
-    double absoluteWidth() const { return absoluteWidth_; }
-    double absoluteHeight() const { return absoluteHeight_; }
-    virtual void absoluteRootWidth(double width) {
+    double absoluteWidth() const override { return absoluteWidth_; }
+    double absoluteHeight() const override { return absoluteHeight_; }
+    virtual void absoluteRootWidth(double width) override {
         scale_ = width / absoluteWidth_;
         if (scale_ < 1)
             scale_ = 1;
         absoluteWidth_ = width;
     }
-    void absoluteRootHeight(double height) { absoluteHeight_ = height; }
+    void absoluteRootHeight(double height) override { absoluteHeight_ = height; }
     double scalingFactor() const { return scale_; }  // For Magml and wrep ...
-    virtual BasicSceneNode* clone();
+    virtual BasicSceneNode* clone() override;
     BasicGraphicsObject* root();
-    virtual void getReady() {}
-    void execute();
-    BasicGraphicsObject* visualise();
+    virtual void getReady() override {}
+    void execute() override;
+    BasicGraphicsObject* visualise() override;
     BasicGraphicsObject* close();
     void setPage(Layout&);
-    void release();
+    void release() override;
     void newpage() { current_->newpage(); }
-    BasicSceneNode* insert(BasicPositionalObject*);
+    BasicSceneNode* insert(BasicPositionalObject*) override;
 
-    virtual int rootWidthResolution() const { return widthResolution_; }
-    virtual int rootHeightResolution() const { return heightResolution_; }
+    virtual int rootWidthResolution() const override { return widthResolution_; }
+    virtual int rootHeightResolution() const override { return heightResolution_; }
     // void push_back(BasicSceneObject* item);
 
-    virtual void text(TextVisitor*) {}
-    virtual void legend(LegendVisitor*) {}
-    virtual MagicsMode mode() { return mode_; }
+    virtual void text(TextVisitor*) override {}
+    virtual void legend(LegendVisitor*) override {}
+    virtual MagicsMode mode() override { return mode_; }
     void mode(MagicsMode mode) { mode_ = mode; }
     BasicSceneObject* current() { return current_; }
     bool needStartPage();
@@ -113,7 +113,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     double absoluteWidth_;
     double absoluteHeight_;
 

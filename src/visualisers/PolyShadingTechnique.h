@@ -42,33 +42,35 @@ public:
     PolyShadingTechnique() {}
     virtual ~PolyShadingTechnique() {}
 
-    void set(const map<string, string>& map) { PolyShadingTechniqueAttributes::set(map); }
-    void set(const XmlNode& node) { PolyShadingTechniqueAttributes::set(node); }
-    bool accept(const string& node) { return PolyShadingTechniqueAttributes::accept(node); }
+    void set(const map<string, string>& map) override { PolyShadingTechniqueAttributes::set(map); }
+    void set(const XmlNode& node) override { PolyShadingTechniqueAttributes::set(node); }
+    bool accept(const string& node) override { return PolyShadingTechniqueAttributes::accept(node); }
 
     virtual ShadingTechnique* clone() const override { return new PolyShadingTechnique(); }
 
-    bool shadingMode() { return true; }
-    bool hasLegend() { return true; }  // Isolien legend is not needed!
-    void operator()(Polyline* poly) const { (*this->method_)(*poly); }
+    bool shadingMode() override { return true; }
+    bool hasLegend() override { return true; }  // Isolien legend is not needed!
+    void operator()(Polyline* poly) const override { (*this->method_)(*poly); }
 
-    void visit(LegendVisitor& legend, const ColourTechnique& colour) { (*this->method_).visit(legend, colour); }
+    void visit(LegendVisitor& legend, const ColourTechnique& colour) override {
+        (*this->method_).visit(legend, colour);
+    }
 
-    int index(double value) { return method_->index(value); }
-    int rightIndex(double value) { return method_->rightIndex(value); }
-    int leftIndex(double value) { return method_->leftIndex(value); }
+    int index(double value) override { return method_->index(value); }
+    int rightIndex(double value) override { return method_->rightIndex(value); }
+    int leftIndex(double value) override { return method_->leftIndex(value); }
 
-    virtual bool prepare(LevelSelection& levels, const ColourTechnique& colours) {
+    virtual bool prepare(LevelSelection& levels, const ColourTechnique& colours) override {
         method_->prepare(levels, colours);
         // True if the shading technique needs the isolines to be calculated...
         return true;
     }
     virtual CellArray* array(MatrixHandler& matrix, IntervalMap<int>& range, const Transformation& transformation,
-                             int width, int height, float resolution, const string& technique);
+                             int width, int height, float resolution, const string& technique) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "PolyShadingTechnique[]"; }
+    virtual void print(ostream& s) const override { s << "PolyShadingTechnique[]"; }
 
 
 private:
@@ -83,9 +85,9 @@ public:
     GridShading() {}
     virtual ~GridShading() {}
 
-    void set(const map<string, string>& map) { GridShadingAttributes::set(map); }
-    void set(const XmlNode& node) { GridShadingAttributes::set(node); }
-    bool accept(const string& node) { return GridShadingAttributes::accept(node); }
+    void set(const map<string, string>& map) override { GridShadingAttributes::set(map); }
+    void set(const XmlNode& node) override { GridShadingAttributes::set(node); }
+    bool accept(const string& node) override { return GridShadingAttributes::accept(node); }
 
     ShadingTechnique* clone() const override { return new GridShading(); }
     void operator()(Polyline* poly, const ColourTechnique& technique) const {
@@ -94,12 +96,12 @@ public:
         FillShadingProperties* shading = new FillShadingProperties();
         poly->setShading(shading);
     }
-    void operator()(Polyline* poly) const;
-    void visit(LegendVisitor& legend, const ColourTechnique& colour);
+    void operator()(Polyline* poly) const override;
+    void visit(LegendVisitor& legend, const ColourTechnique& colour) override;
     CellArray* array(MatrixHandler& matrix, IntervalMap<int>& range, const Transformation& transformation, int width,
-                     int height, float resolution, const string& technique);
-    virtual bool needClipping() { return true; }
-    bool method(ContourMethod* method) {
+                     int height, float resolution, const string& technique) override;
+    virtual bool needClipping() override { return true; }
+    bool method(ContourMethod* method) override {
         // FIXME: memory leak
         method = new ContourMethod();
         return true;
@@ -107,7 +109,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    void print(ostream&s) const  override {s<<"GridShading[]";}
+    void print(ostream& s) const override { s << "GridShading[]"; }
 
 
 private:

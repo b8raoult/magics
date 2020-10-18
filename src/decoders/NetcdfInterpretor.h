@@ -51,9 +51,9 @@ public:
     virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int thinning);
 
     virtual bool interpretAsPoints(PointsList& points, const Transformation&) { return interpretAsPoints(points); }
-    virtual void set(const map<string, string>& params) { NetcdfInterpretorAttributes::set(params); }
-    virtual void set(const XmlNode& node) { NetcdfInterpretorAttributes::set(node); }
-    virtual bool accept(const string& node) { return NetcdfInterpretorAttributes::accept(node); }
+    virtual void set(const map<string, string>& params) override { NetcdfInterpretorAttributes::set(params); }
+    virtual void set(const XmlNode& node) override { NetcdfInterpretorAttributes::set(node); }
+    virtual bool accept(const string& node) override { return NetcdfInterpretorAttributes::accept(node); }
     virtual NetcdfInterpretor* clone() const;
 
     virtual void statsData(map<string, vector<double> >&) {}
@@ -74,7 +74,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     void setDimensions(const stringarray&, map<string, string>& first, map<string, string>& last);
     void getAttributes(Netcdf&, const string&, string&, string&);
 

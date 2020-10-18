@@ -54,9 +54,9 @@ public:
         return object;
     }
 
-    virtual void set(const map<string, string>&) {}
-    virtual void set(const XmlNode&) {}
-    virtual bool accept(const string&) { return false; }
+    virtual void set(const map<string, string>&) override {}
+    virtual void set(const XmlNode&) override {}
+    virtual bool accept(const string&) override { return false; }
     virtual void toxml(ostream&, int = 0) const {}
 
     virtual bool accept(double) { return true; }
@@ -76,7 +76,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     SymbolPlotting* parent_;
     string type_;
 
@@ -104,13 +104,13 @@ public:
         SymbolIndividualModeAttributes::set(map);
         update();
     }
-    virtual void set(const XmlNode& node)  override {
+    virtual void set(const XmlNode& node) override {
         SymbolMode::set(node);
         SymbolIndividualModeAttributes::set(node);
         update();
     }
 
-    virtual bool accept(const string& node)  override { return SymbolIndividualModeAttributes::accept(node); }
+    virtual bool accept(const string& node) override { return SymbolIndividualModeAttributes::accept(node); }
 
     virtual SymbolMode* clone() const override {
         SymbolIndividualMode* object = new SymbolIndividualMode();
@@ -118,20 +118,20 @@ public:
         return object;
     }
 
-    void adjust(double, double, bool, const Transformation&, double) override ;
-    virtual void visit(LegendVisitor&) override ;
-    void prepare()  override {
+    void adjust(double, double, bool, const Transformation&, double) override;
+    virtual void visit(LegendVisitor&) override;
+    void prepare() override {
         update();
         properties();
     }
     void update();
     void properties() const;
-    SymbolProperties operator()(double) const  override { return properties_; }
-    void visit(Data&, LegendVisitor&) override ;
+    SymbolProperties operator()(double) const override { return properties_; }
+    void visit(Data&, LegendVisitor&) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const override ;
+    virtual void print(ostream&) const override;
     mutable SymbolProperties properties_;
     mutable vector<string>::const_iterator current_;
 
@@ -167,33 +167,33 @@ class SymbolTableMode : public SymbolMode, public SymbolTableModeAttributes {
 public:
     SymbolTableMode();
     virtual ~SymbolTableMode();
-    virtual void prepare();
-    virtual bool accept(double);
-    SymbolProperties operator()(double) const;
+    virtual void prepare() override;
+    virtual bool accept(double) override;
+    SymbolProperties operator()(double) const override;
 
-    void set(const map<string, string>& map) {
+    void set(const map<string, string>& map) override {
         SymbolTableModeAttributes::set(map);
         SymbolMode::set(map);
         prepare();
     }
 
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         SymbolMode::set(node);
         SymbolTableModeAttributes::set(node);
         prepare();
     }
-    virtual bool accept(const string& node) { return SymbolTableModeAttributes::accept(node); }
+    virtual bool accept(const string& node) override { return SymbolTableModeAttributes::accept(node); }
 
-    void adjust(double, double, bool, const Transformation&, double);
+    void adjust(double, double, bool, const Transformation&, double) override;
 
-    void visit(LegendVisitor&);
-    void visit(Data&, LegendVisitor&);
-    void visit(Data&, HistoVisitor&);
+    void visit(LegendVisitor&) override;
+    void visit(Data&, LegendVisitor&) override;
+    void visit(Data&, HistoVisitor&) override;
     void buildBins(const IntervalMap<SymbolProperties>&, IntervalMap<Colour>&);
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     IntervalMap<SymbolProperties> map_;
 
 private:

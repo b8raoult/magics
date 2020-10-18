@@ -231,21 +231,21 @@ public:
     virtual void operator()(MatrixHandler&, BasicGraphicsObjectContainer&);
     virtual void visit(Data&, LegendVisitor&);
 
-    void set(const map<string, string>& map) { IsoPlotAttributes::set(map); }
+    void set(const map<string, string>& map) override { IsoPlotAttributes::set(map); }
 
-    void set(const XmlNode& node) { IsoPlotAttributes::set(node); }
+    void set(const XmlNode& node) override { IsoPlotAttributes::set(node); }
 
-    void toxml(ostream& out) const { IsoPlotAttributes::toxml(out); }
+    void toxml(ostream& out) const override { IsoPlotAttributes::toxml(out); }
 
     void setTag(const string&) {
         // IsoPlotAttributes::setTag(tag);
     }
     // implemts colourtechnique interface for the rainbow method ...
-    const Colour& getMinColour() const { return *rainbowMinColour_; }
-    const Colour& getMaxColour() const { return *rainbowMaxColour_; }
-    const string& getDirection() const { return rainbowDirection_; }
-    stringarray getColours() const { return rainbowColours_; }
-    ListPolicy getPolicy() const { return rainbowColourPolicy_; }
+    const Colour& getMinColour() const override { return *rainbowMinColour_; }
+    const Colour& getMaxColour() const override { return *rainbowMaxColour_; }
+    const string& getDirection() const override { return rainbowDirection_; }
+    stringarray getColours() const override { return rainbowColours_; }
+    ListPolicy getPolicy() const override { return rainbowColourPolicy_; }
 
     const Colour& rainbow(double value);
 
@@ -272,7 +272,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 
     bool prepare(MatrixHandler&);

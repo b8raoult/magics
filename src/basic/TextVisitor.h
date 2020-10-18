@@ -61,30 +61,30 @@ public:
     void addAutomaticTitle(const string&);
 
 
-    void addToTags(const string&, const string&);
+    void addToTags(const string&, const string&) override;
 
     virtual void titles(vector<string>&);
-    virtual Layout& layout() const { return LayoutVisitor::layout(); }
+    virtual Layout& layout() const override { return LayoutVisitor::layout(); }
     virtual Layout* layoutPtr() const { return LayoutVisitor::layoutPtr(); }
 
 
     map<string, vector<Text*> > texts() { return currentTexts_; }
     void visit();
-    void visit(BasicSceneObject&);
+    void visit(BasicSceneObject&) override;
     void finish(BasicGraphicsObjectContainer&);
     void update(vector<Text*>&);
     void start();
 
-    void visit(MetaDataVisitor&);
+    void visit(MetaDataVisitor&) override;
     bool positional() const { return positional_; }
-    virtual void getReady();
+    virtual void getReady() override;
     void update(const string& family, const string& definition, const string& value) {
         TagHandler::update(family, definition, value);
     }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     virtual void decode() {}
 
@@ -95,8 +95,8 @@ protected:
     void extract(const string&, vector<KeyInfo>&);
 
 
-    void set(const map<string, string>& map) { TextVisitorAttributes::set(map); }
-    void set(const XmlNode& node) { TextVisitorAttributes::set(node); }
+    void set(const map<string, string>& map) override { TextVisitorAttributes::set(map); }
+    void set(const XmlNode& node) override { TextVisitorAttributes::set(node); }
     string label_;
     mutable vector<Text*> texts_;
     mutable map<string, vector<Text*> > currentTexts_;

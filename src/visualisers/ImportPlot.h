@@ -36,9 +36,9 @@ class OverlayPlot : public ImportPlotAttributes, public Visdef {
 public:
     OverlayPlot() {}
     virtual ~OverlayPlot() {}
-    void set(const map<string, string>& map) { ImportPlotAttributes::set(map); }
+    void set(const map<string, string>& map) override { ImportPlotAttributes::set(map); }
 
-    virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) {
+    virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) override {
         // Here we work on projection coordinates!
         ImportObject* object = new ImportObject();
         object->setPath(data.path());
@@ -61,7 +61,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "OverlayPlot[";
         ImportPlotAttributes::print(out);
         out << "]";
@@ -86,9 +86,9 @@ class ImportPlot : public ImportPlotAttributes, public Visdef {
 public:
     ImportPlot() {}
     virtual ~ImportPlot() {}
-    void set(const map<string, string>& map) { ImportPlotAttributes::set(map); }
+    void set(const map<string, string>& map) override { ImportPlotAttributes::set(map); }
 
-    virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) {
+    virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) override {
         ImportObject* object = new ImportObject();
         object->setPath(data.path());
         object->setOrigin(PaperPoint(x_, y_));
@@ -113,11 +113,11 @@ public:
         object->setHeight(crs_maxy_ - crs_miny_);
         visitor.push_back(object);
     }
-    void visit(LegendVisitor& legend) { legend.add(new EmptyEntry()); }
+    void visit(LegendVisitor& legend) override { legend.add(new EmptyEntry()); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "ImportPlot[";
         ImportPlotAttributes::print(out);
         out << "]";

@@ -33,14 +33,14 @@ public:
     /*!
       \brief sets  from an XML node
     */
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         Transformation::set(node);
         TephigramAttributes::set(node);
     }
     /*!
       \brief sets  from a map
     */
-    void set(const map<string, string>& map) {
+    void set(const map<string, string>& map) override {
         Transformation::set(map);
         TephigramAttributes::set(map);
     }
@@ -53,56 +53,56 @@ public:
     /*!
     \\brief Initialise the projection
     */
-    virtual void init();
+    virtual void init() override;
     /*!
     \\brief
     */
-    virtual PaperPoint operator()(const UserPoint&) const;
+    virtual PaperPoint operator()(const UserPoint&) const override;
     /*!
     \\brief
     */
-    virtual bool getAutomaticX() const { return x_automatic_; }
-    virtual bool getAutomaticY() const { return y_automatic_; }
-    virtual void setMinMaxX(double, double);
-    virtual void setMinMaxY(double, double);
-    virtual PaperPoint operator()(const PaperPoint&) const;
+    virtual bool getAutomaticX() const override { return x_automatic_; }
+    virtual bool getAutomaticY() const override { return y_automatic_; }
+    virtual void setMinMaxX(double, double) override;
+    virtual void setMinMaxY(double, double) override;
+    virtual PaperPoint operator()(const PaperPoint&) const override;
     /*!
     \\brief
     */
-    virtual void revert(const PaperPoint&, UserPoint&) const;
+    virtual void revert(const PaperPoint&, UserPoint&) const override;
 
-    void revert(const vector<std::pair<double, double> >&, vector<std::pair<double, double> >&) const;
+    void revert(const vector<std::pair<double, double> >&, vector<std::pair<double, double> >&) const override;
 
 
     /*!
     \\brief Does the projection needs the coastalines to be shifted!
     */
-    virtual bool needShiftedCoastlines() const;
+    virtual bool needShiftedCoastlines() const override;
     /*!
     \\brief set the aspect ratio!
     */
-    virtual void aspectRatio(double&, double&);
+    virtual void aspectRatio(double&, double&) override;
     /*!
     \\brief set the bounding box!
     */
-    virtual void boundingBox(double&, double&, double&, double&) const;
+    virtual void boundingBox(double&, double&, double&, double&) const override;
 
     /*!
     \\brief return the xmin in user coordinates!
     */
-    virtual double getMinX() const;
+    virtual double getMinX() const override;
     /*!
     \\brief return the ymin in user coordinates!
     */
-    virtual double getMinY() const;
+    virtual double getMinY() const override;
     /*!
     \\brief return the xmax in user coordinates!
     */
-    virtual double getMaxX() const;
+    virtual double getMaxX() const override;
     /*!
     \\brief return the ymax in user coordinates!
     */
-    virtual double getMaxY() const;
+    virtual double getMaxY() const override;
     /*!
     \\brief set the xmin in user coordinates!
     */

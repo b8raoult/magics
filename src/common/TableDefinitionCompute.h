@@ -47,7 +47,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "TableDefinitionCompute<T>[]"; }
+    virtual void print(ostream& s) const override { s << "TableDefinitionCompute<T>[]"; }
     int count_;
 
 private:

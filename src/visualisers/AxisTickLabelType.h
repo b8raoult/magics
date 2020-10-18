@@ -44,7 +44,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     //! Copy constructor - No copy allowed
@@ -73,7 +73,7 @@ public:
         return label;
     }
     virtual string label(const string& label);
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     virtual void toxml(ostream&, int) const;
 };
 
@@ -93,7 +93,7 @@ public:
         return label;
     }
     virtual string label(const string& label);
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     virtual void toxml(ostream&, int) const;
     map<string, string> cache_;
 

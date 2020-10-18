@@ -175,7 +175,7 @@ public:
     }
 
 protected:
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "UserPoint[";
         out << x_ << "(lon), ";
         out << y_ << "(lat), ";

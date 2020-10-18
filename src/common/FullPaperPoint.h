@@ -57,7 +57,7 @@ public:
     double y_;
 
 protected:
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "FullPaperPoint[";
         out << x_ << "(x), ";
         out << y_ << "(y), ";

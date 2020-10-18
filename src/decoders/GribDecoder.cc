@@ -381,21 +381,19 @@ void GribDecoder::read(const Transformation& transformation) {
 }
 
 void GribDecoder::applyScaling(double scaling, double offset) {
-
-
     Matrix* matrix_u = u();
     Matrix* matrix_v = v();
 
-    if(matrix_u) {
+    if (matrix_u) {
         size_t cnt = matrix_u->size();
-        for(size_t i = 0; i < cnt; i++) {
+        for (size_t i = 0; i < cnt; i++) {
             (*matrix_u)[i] = (*matrix_u)[i] * scaling + offset;
         }
     }
 
-    if(matrix_v) {
+    if (matrix_v) {
         size_t cnt = matrix_v->size();
-        for(size_t i = 0; i < cnt; i++) {
+        for (size_t i = 0; i < cnt; i++) {
             (*matrix_v)[i] = (*matrix_v)[i] * scaling + offset;
         }
     }
@@ -403,7 +401,7 @@ void GribDecoder::applyScaling(double scaling, double offset) {
 
 void GribDecoder::defaultScaling(double& scaling, double& offset) {
     scaling = scaling_factor_;
-    offset = scaling_offset_;
+    offset  = scaling_offset_;
 }
 
 /*!

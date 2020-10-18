@@ -76,8 +76,8 @@ public:
 
 protected:
     virtual AxisControl* clone() const override { return new AutomaticAxisControl(); }
-    virtual void vertical(Layout&, Transformation&, AxisMethod&);
-    virtual void horizontal(Layout&, Transformation&, AxisMethod&);
+    virtual void vertical(Layout&, Transformation&, AxisMethod&) override;
+    virtual void horizontal(Layout&, Transformation&, AxisMethod&) override;
 };
 
 template <>

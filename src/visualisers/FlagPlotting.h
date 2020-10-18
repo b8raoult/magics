@@ -34,11 +34,11 @@ class FlagPlotting : public WindPlotting, public FlagPlottingAttributes {
 public:
     FlagPlotting() {}
     virtual ~FlagPlotting() {}
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         WindPlottingAttributes::set(map);
         FlagPlottingAttributes::set(map);
     }
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         WindPlottingAttributes::set(node);
         FlagPlottingAttributes::set(node);
     }
@@ -68,7 +68,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "FlagPlotting<P>"; }
+    virtual void print(ostream& out) const override { out << "FlagPlotting<P>"; }
     map<Colour, Flag*> northFlags_;
     map<Colour, Flag*> southFlags_;
 

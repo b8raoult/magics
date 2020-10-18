@@ -38,13 +38,13 @@ public:
     AutomaticContourMethod();
     virtual ~AutomaticContourMethod();
     ContourMethod* clone();
-    virtual bool accept(const string& node);
+    virtual bool accept(const string& node) override;
 
-    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer& owner);
+    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer& owner) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const;
+    virtual void print(ostream& out) const override;
 
 private:
     //! Copy constructor - No copy allowed

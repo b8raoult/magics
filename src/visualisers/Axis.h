@@ -41,11 +41,11 @@ public:
     Axis();
     virtual ~Axis();
 
-    void set(const XmlNode& node) { AxisAttributes::set(node); }
-    void set(const map<string, string>& map) { AxisAttributes::set(map); }
+    void set(const XmlNode& node) override { AxisAttributes::set(node); }
+    void set(const map<string, string>& map) override { AxisAttributes::set(map); }
 
-    void visit(SceneLayer& layer, vector<LayoutVisitor*>& visitors);
-    void visit(TextVisitor&);
+    void visit(SceneLayer& layer, vector<LayoutVisitor*>& visitors) override;
+    void visit(TextVisitor&) override;
 
     virtual void tick(VerticalAxisVisitor&) {}
     virtual void tick(HorizontalAxisVisitor&) {}
@@ -79,7 +79,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     void ticks(double, double, vector<double>&);
     AxisItems items_;
 

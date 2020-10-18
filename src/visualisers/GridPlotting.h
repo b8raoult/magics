@@ -39,9 +39,9 @@ public:
     NoGridPlotting() {}
     virtual ~NoGridPlotting() {}
 
-    virtual void set(const XmlNode&) {}
-    virtual void set(const map<string, string>&) {}
-    virtual bool accept(const string&) { return false; }
+    virtual void set(const XmlNode&) override {}
+    virtual void set(const map<string, string>&) override {}
+    virtual bool accept(const string&) override { return false; }
     virtual void toxml(ostream&, int = 0) const {}
     virtual NoGridPlotting* clone() const { return new NoGridPlotting(); }
     virtual void operator()(DrawingVisitor&);
@@ -59,7 +59,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "NoGridPlotting\n"; }
+    virtual void print(ostream& out) const override { out << "NoGridPlotting\n"; }
     mutable vector<double> latitudes_;
     mutable vector<double> longitudes_;
 

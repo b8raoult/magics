@@ -127,7 +127,7 @@ public:
     void clear() { nice_.clear(); }
 
 
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 
 
     void setJustification(Justification justification) { justification_ = justification; }
@@ -161,7 +161,7 @@ public:
     void setAngle(double angle) { angle_ = angle; }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
     Justification justification_;
     bool blanking_;

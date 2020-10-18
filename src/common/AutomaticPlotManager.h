@@ -54,7 +54,7 @@ protected:
         HORIZONTAL
     };
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     double x_;
     double y_;
     double pageX_;

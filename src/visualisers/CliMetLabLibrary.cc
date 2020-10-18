@@ -143,6 +143,10 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
         }
     }
 
+    if (score == -1) {
+        return nullptr;
+    }
+
     std::cout << best << std::endl;
 
     std::string style_name = std::string(best["styles"][0]);

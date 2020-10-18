@@ -52,7 +52,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 
 private:
     // -- Friends
@@ -71,7 +71,7 @@ public:
     FrameBase* clone() const override { return new NoFrame(); }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 
 

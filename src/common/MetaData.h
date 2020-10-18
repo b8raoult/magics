@@ -76,8 +76,8 @@ public:
     MetaDataVisitor();
     virtual ~MetaDataVisitor();
 
-    virtual void set(const XmlNode& node) { MetaDataAttributes::set(node); }
-    virtual void set(const map<string, string>& map) { MetaDataAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { MetaDataAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { MetaDataAttributes::set(map); }
     virtual MetaDataVisitor* clone() const {
         MetaDataVisitor* object = new MetaDataVisitor();
         object->copy(*this);
@@ -98,7 +98,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     map<string, string> web_;
     AutoVector<StyleEntry> styles_;
 

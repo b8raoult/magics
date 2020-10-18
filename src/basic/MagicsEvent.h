@@ -61,24 +61,24 @@ class MagicsCursorEvent : public MagicsEvent {
 public:
     MagicsCursorEvent(const string& cursor = "") : cursor_(cursor) {}
     virtual ~MagicsCursorEvent() {}
-    virtual void notify(MagicsObserver& observer) { observer.notify(*this); }
+    virtual void notify(MagicsObserver& observer) override { observer.notify(*this); }
     const string& cursor() { return cursor_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "MagicsCursorEvent[cursor : " << cursor_ << "]"; }
+    virtual void print(ostream& out) const override { out << "MagicsCursorEvent[cursor : " << cursor_ << "]"; }
     string cursor_;
 };
 class MagicsSwapBufferEvent : public MagicsEvent {
 public:
     MagicsSwapBufferEvent() {}
     virtual ~MagicsSwapBufferEvent() {}
-    virtual void notify(MagicsObserver& observer) { observer.notify(*this); }
+    virtual void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "MagicsSwapBufferEvent[]"; }
+    virtual void print(ostream& out) const override { out << "MagicsSwapBufferEvent[]"; }
 };
 
 class MagicsAntialiasingEvent : public MagicsEvent {
@@ -86,12 +86,12 @@ class MagicsAntialiasingEvent : public MagicsEvent {
 public:
     MagicsAntialiasingEvent(bool set) : set_(set) {}
     virtual ~MagicsAntialiasingEvent() {}
-    virtual void notify(MagicsObserver& observer) { observer.notify(*this); }
+    virtual void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         string set = (set_) ? "on" : "false";
         out << "MagicsAntialiasingEvent[" << set << "]";
     }
@@ -103,12 +103,12 @@ class MagicsZoomEvent : public MagicsEvent {
 public:
     MagicsZoomEvent(bool set) : set_(set) {}
     virtual ~MagicsZoomEvent() {}
-    void notify(MagicsObserver& observer) { observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         string set = (set_) ? "on" : "false";
         out << "MagicsZoomEvent[" << set << "]";
     }
@@ -120,12 +120,12 @@ class MagicsMagnifierEvent : public MagicsEvent {
 public:
     MagicsMagnifierEvent(bool set) : set_(set) {}
     virtual ~MagicsMagnifierEvent() {}
-    void notify(MagicsObserver& observer) { observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         string set = (set_) ? "on" : "false";
         out << "MagicsMagnifierEvent[" << set << "]";
     }
@@ -137,11 +137,11 @@ class MagicsRestoreFbEvent : public MagicsEvent {
 public:
     MagicsRestoreFbEvent() {}
     virtual ~MagicsRestoreFbEvent() {}
-    void notify(MagicsObserver& observer) { observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "MagicsRestoreFbEvent["
             << "]";
     }
@@ -166,12 +166,12 @@ class MagicsAnimationCurrentStepEvent : public MagicsEvent {
 public:
     MagicsAnimationCurrentStepEvent(int step) : step_(step) {}
     virtual ~MagicsAnimationCurrentStepEvent() {}
-    void notify(MagicsObserver& observer) { observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     int step() const { return step_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "MagicsAnimationCurrentStepEvent[" << step_ << "]"; }
+    virtual void print(ostream& out) const override { out << "MagicsAnimationCurrentStepEvent[" << step_ << "]"; }
     int step_;
 };
 
@@ -180,12 +180,12 @@ class MagicsAnimationStepsEvent : public MagicsEvent {
 public:
     MagicsAnimationStepsEvent(vector<MagicsAnimationStepData> steps) : steps_(steps) {}
     virtual ~MagicsAnimationStepsEvent() {}
-    void notify(MagicsObserver& observer) { observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
     const vector<MagicsAnimationStepData>& steps() const { return steps_; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "MagicsAnimationFramseEvent["
             << "]";
     }
@@ -198,11 +198,11 @@ class MagicsLayerUpdateEvent : public MagicsEvent {
 public:
     MagicsLayerUpdateEvent() {}
     virtual ~MagicsLayerUpdateEvent() {}
-    void notify(MagicsObserver& observer) { observer.notify(*this); }
+    void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "MagicsLayerUpdateEvent["
             << "]";
     }

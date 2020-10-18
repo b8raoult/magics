@@ -36,32 +36,32 @@ public:
     ArrowPlotting() {}
     virtual ~ArrowPlotting() {}
 
-    virtual void set(const map<string, string>& map);
+    virtual void set(const map<string, string>& map) override;
 
-    virtual void set(const XmlNode& node);
+    virtual void set(const XmlNode& node) override;
 
     void copy(const ArrowPlotting& other);
-    bool accept(const string& node) { return ArrowPlottingAttributes::accept(node); }
+    bool accept(const string& node) override { return ArrowPlottingAttributes::accept(node); }
 
-    virtual WindPlotting* clone();
+    virtual WindPlotting* clone() override;
 
     Arrow* southArrow(const Colour&);
     Arrow* northArrow(const Colour&);
-    double minSpeed() { return min_speed_; }
-    double maxSpeed() { return max_speed_; }
+    double minSpeed() override { return min_speed_; }
+    double maxSpeed() override { return max_speed_; }
 
 
-    virtual void operator()(bool, const PaperPoint& point, double x, double y, double val);
+    virtual void operator()(bool, const PaperPoint& point, double x, double y, double val) override;
 
-    virtual void prepare(BasicGraphicsObjectContainer& out, double res);
-    virtual void prepare(BasicGraphicsObjectContainer&);
-    virtual void finish(BasicGraphicsObjectContainer&);
-    void visit(LegendVisitor& legend);
-    void visit(Data&, PointsHandler&, HistoVisitor&);
+    virtual void prepare(BasicGraphicsObjectContainer& out, double res) override;
+    virtual void prepare(BasicGraphicsObjectContainer&) override;
+    virtual void finish(BasicGraphicsObjectContainer&) override;
+    void visit(LegendVisitor& legend) override;
+    void visit(Data&, PointsHandler&, HistoVisitor&) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "ArrowPlotting<P>"; }
+    virtual void print(ostream& out) const override { out << "ArrowPlotting<P>"; }
     map<Colour, Arrow*> southArrows_;
     map<Colour, Arrow*> northArrows_;
     double maxVelocity_;

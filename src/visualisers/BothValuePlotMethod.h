@@ -39,7 +39,7 @@ public:
     BothValuePlotMethod();
     virtual ~BothValuePlotMethod();
     virtual void set(const map<string, string>& map) override;
-    virtual void set(const XmlNode& node)  override;
+    virtual void set(const XmlNode& node) override;
     virtual ValuePlotMethod* clone() const override;
 
     virtual void clone(const BothValuePlotMethod& from);
@@ -47,10 +47,10 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const  override;
-    void reset() override ;
+    virtual void print(ostream& out) const override;
+    void reset() override;
 
-    virtual void add(const PaperPoint& xy) override ;
+    virtual void add(const PaperPoint& xy) override;
 
     TextSymbol* marker_;
 

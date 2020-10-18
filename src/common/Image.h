@@ -34,7 +34,7 @@ public:
     virtual ~Image() {}
 
     // Implement the BaseGraphics Interface
-    virtual void redisplay(const BaseDriver& driver) const { driver.redisplay(*this); }
+    virtual void redisplay(const BaseDriver& driver) const override { driver.redisplay(*this); }
 
     void set(int rows, int columns) {
         rows_    = rows;
@@ -47,7 +47,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "Image[]"; }
+    virtual void print(ostream& s) const override { s << "Image[]"; }
     int rows_;
     int columns_;
 

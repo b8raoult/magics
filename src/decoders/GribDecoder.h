@@ -328,18 +328,18 @@ public:
     virtual ~GribLoop();
 
 
-    void set(const map<string, string>& map) { GribLoopAttributes::set(map); }
-    void set(const XmlNode& node) { GribLoopAttributes::set(node); }
+    void set(const map<string, string>& map) override { GribLoopAttributes::set(map); }
+    void set(const XmlNode& node) override { GribLoopAttributes::set(node); }
 
 
-    Data* current();
-    bool hasMore();
-    void next();
-    void setToFirst();
+    Data* current() override;
+    bool hasMore() override;
+    void next() override;
+    void setToFirst() override;
 
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     vector<GribDecoder*> gribs_;
     GribDecoder* currentgrib_;
     friend class GribDecoder;

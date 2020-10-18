@@ -38,8 +38,8 @@ class ValuePlotMethod : public ValuePlotMethodAttributes, public vector<BasicGra
 public:
     ValuePlotMethod() {}
     virtual ~ValuePlotMethod() {}
-    virtual void set(const map<string, string>& map) { ValuePlotMethodAttributes::set(map); }
-    virtual void set(const XmlNode& node) { ValuePlotMethodAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { ValuePlotMethodAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { ValuePlotMethodAttributes::set(node); }
 
     virtual ValuePlotMethod* clone() const;
     virtual void operator()(MatrixHandler& data, const Transformation& transformation);
@@ -48,7 +48,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const {
+    virtual void print(ostream& out) const override {
         out << "ValuePlotMethod[";
         ValuePlotMethodAttributes::print(out);
         out << "]";

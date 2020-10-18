@@ -78,13 +78,13 @@ public:
     */
     void fill(double&, double&) override;
 
-    virtual PaperPoint operator()(const UserPoint&) const;
+    virtual PaperPoint operator()(const UserPoint&) const override;
     /*!
     \\brief
     */
     virtual bool fast_reproject(double& x, double& y) const override;
 
-    virtual PaperPoint operator()(const PaperPoint&) const;
+    virtual PaperPoint operator()(const PaperPoint&) const override;
     /*!
     \\brief
     */

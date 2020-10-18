@@ -39,13 +39,13 @@ class HiLoBoth : public HiLoTechnique, public HiLoTextAttributes, public HiLoMar
 public:
     HiLoBoth() : high_(0), low_(0) {}
     virtual ~HiLoBoth() {}
-    void set(const map<string, string>& map) {
+    void set(const map<string, string>& map) override {
         HiLoTechnique::set(map);
 
         HiLoTextAttributes::set(map);
         HiLoMarkerAttributes::set(map);
     }
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         HiLoTechnique::set(node);
 
         HiLoTextAttributes::set(node);
@@ -62,15 +62,15 @@ public:
         HiLoTextAttributes::copy(from);
         HiLoMarkerAttributes::copy(from);
     }
-    void clear() {
+    void clear() override {
         high_ = 0;
         low_  = 0;
     }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "HiLoBoth"; }
-    virtual void operator()(const PaperPoint& point, HiLo& hilo) {
+    virtual void print(ostream& out) const override { out << "HiLoBoth"; }
+    virtual void operator()(const PaperPoint& point, HiLo& hilo) override {
         if (!high_) {
             // Create Text List containing the position of the High
             high_ = new TextSymbol();

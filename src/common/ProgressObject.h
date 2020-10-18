@@ -31,12 +31,12 @@ public:
         out.push_back(const_cast<ProgressObject*>(this));
         return true;  // remove thee obect from tthe in list!
     }
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 
     string getText() const { return progress_; }
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
     string progress_;
 
 private:
@@ -55,10 +55,10 @@ public:
     ClearObject() {}
     virtual ~ClearObject() {}
 
-    void redisplay(const BaseDriver& driver) const;
+    void redisplay(const BaseDriver& driver) const override;
 
 protected:
-    virtual void print(ostream&) const;
+    virtual void print(ostream&) const override;
 };
 }  // namespace magics
 #endif

@@ -47,7 +47,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const { out << "ImageCalculateColourTechnique[]"; }
+    virtual void print(ostream& out) const override { out << "ImageCalculateColourTechnique[]"; }
 
 private:
     //! Copy constructor - No copy allowed
