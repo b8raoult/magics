@@ -17,9 +17,10 @@
 
 #include "PaperPoint.h"
 
+using namespace magics;
 
-magics::PaperPoint::PaperPoint(double x, double y, double value, bool missing, bool border, int range,
-                               const std::__1::string& name) :
+PaperPoint::PaperPoint(double x, double y, double value, bool missing, bool border, int range,
+                               const string& name) :
     x_(x),
     y_(y),
     value_(value),

@@ -1150,7 +1150,6 @@ void IsoPlot::isoline(Cell& cell, CellBox* parent) const {
             }  // end of levels...
 
             if (box) {
-                ASSERT(box);
                 box->reshape(parent);
                 delete box;
             }
@@ -1171,9 +1170,13 @@ inline bool getEnv(const string& name, bool def) {
 }
 
 template <class T>
-void run(T* p) {
-    // TODO: Try/catch
+void run(T* p, std::exception_ptr* eptr) {
+    try {
     p->run();
+    }
+    catch(...) {
+        *eptr = current_exception();
+    }
 }
 
 void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent) {
@@ -1253,18 +1256,22 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
 
     {
         Timer timer("Threading", "Threading");
+
+        std::vector<std::exception_ptr> exceptions(threads_ + view.size(), nullptr);
         AutoVector<std::thread> consumers;
         AutoVector<std::thread> producers;
         segments_.clear();
         colourShapes_.clear();
         lines_.clear();
 
+        int e = 0;
+
         for (int c = 0; c < threads_; c++) {
             vector<Polyline*>* lines = new vector<Polyline*>();
             lines_.push_back(lines);
             segments_.push_back(new IsoData());
             consumers_.push_back(new IsoHelper(c, *lines, *(segments_.back())));
-            consumers.push_back(new std::thread(run<IsoHelper>, consumers_.back()));
+            consumers.push_back(new std::thread(run<IsoHelper>,consumers_.back(), &exceptions[e++]));
         }
 
         view.split(threads_);
@@ -1278,7 +1285,8 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             IsoProducerData* data = new IsoProducerData(shading_->shadingMode(), *this, *(view[i]));
             datas.push_back(data);
             producers_.push_back(new IsoProducer(c, *data));
-            producers.push_back(new std::thread(run<IsoProducer>, producers_.back()));
+            exceptions.push_back(nullptr);
+            producers.push_back(new std::thread(run<IsoProducer>, producers_.back(),&exceptions[e++]));
             c++;
         }
 
@@ -1297,6 +1305,13 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
 
         for (auto& consumer : consumers) {
             consumer->join();
+        }
+
+        // Check for exceptions
+        for (int i = 0; i < exceptions.size(); i++) {
+            if(exceptions[i]) {
+                rethrow_exception(exceptions[i]);
+            }
         }
     }
 
