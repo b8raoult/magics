@@ -1,13 +1,7 @@
 // from https://www.linuxjournal.com/article/5574
 #include "windux.h"
+#include <string>
 
-#define WIN32_LEAN_AND_MEAN  // otherwise windows.h includes winsock.h which clashes with winsock2.h
-#define NOMINMAX             // otherwise min/max macros in windows.h clash
-#include <sys/timeb.h>
-#include <sys/types.h>
-#include <time.h>
-#include <windows.h>
-#include <winsock2.h>
 
 int gettimeofday(struct timeval* t, void* timezone) {
     struct _timeb timebuffer;
@@ -20,9 +14,7 @@ int gettimeofday(struct timeval* t, void* timezone) {
 #include <direct.h>
 #include <io.h>
 
-struct dirent {
-    const char* d_name;
-};
+
 struct DIR {
     dirent e_;
     struct _finddata_t fileinfo_;

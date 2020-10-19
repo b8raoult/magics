@@ -1,11 +1,19 @@
-#ifndef _WINDUX_H
-#define _WINDUX_H
+#ifndef MAG_WINDUX
+#define MAG_WINDUX
 
-#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN  // otherwise windows.h includes winsock.h which clashes with winsock2.h
+#define NOMINMAX             // otherwise min/max macros in windows.h clash
+#include <sys/timeb.h>
+#include <sys/types.h>
+#include <time.h>
+#include <windows.h>
+#include <winsock2.h>
 
-struct timeval;
-struct dirent;
 struct DIR;
+
+struct dirent {
+    const char* d_name;
+};
 
 int gettimeofday(struct timeval* t, void* timezone);
 
@@ -13,5 +21,4 @@ DIR* opendir(const char* path);
 struct dirent* readdir(DIR* dir);
 void closedir(DIR* dir);
 
-#endif
 #endif

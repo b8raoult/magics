@@ -9,7 +9,7 @@
  */
 
 /*! \file MetaData.h
-    \brief Implementation of the Template class MetaData.
+    \brief Implementation of the Template class MetaData.windu
 
     Magics Team - ECMWF 2006
 
@@ -22,7 +22,9 @@
 #include "MetaData.h"
 #include "Timer.h"
 
-#ifndef MAGICS_ON_WINDOWS
+#ifdef MAGICS_ON_WINDOWS
+#include "windux.h"
+#else
 #include <sys/resource.h>
 #include <sys/time.h>
 #endif
