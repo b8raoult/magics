@@ -44,7 +44,7 @@ TextVisitor.h
 ViewNode.cc
 ViewNode.h
 Visdef.h
-VisDef.cc
+Visdef.cc
 VisualAction.cc
 VisualAction.h
 WebFormat.cc
