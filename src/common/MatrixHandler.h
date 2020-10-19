@@ -67,13 +67,6 @@ public:
     virtual double nearest(double row, double column) const override;
 
     virtual double interpolate(double i, double j) const override;
-    virtual double nearest(double row, double column, double& rowOut, double& columnOut) const {
-        rowOut    = -1;
-        columnOut = -1;
-        return nearest(row, column);
-    }
-    virtual double nearest(double row, double column) const;
-    virtual double interpolate(double i, double j) const;
 
     void setTile() { tile_ = true; }
 
