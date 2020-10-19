@@ -3,11 +3,11 @@
 
 #ifdef _WIN32
 
+struct timeval;
 struct dirent;
-struct DIR
+struct DIR;
 
-    int
-    gettimeofday(struct timeval* t, void* timezone);
+int gettimeofday(struct timeval* t, void* timezone);
 
 DIR* opendir(const char* path);
 struct dirent* readdir(DIR* dir);
