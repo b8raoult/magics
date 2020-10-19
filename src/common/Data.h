@@ -133,8 +133,8 @@ public:
     virtual std::string getUnits() const;
 
     virtual void applyScaling(const std::string& target_units);
-    virtual void defaultScaling(double&, double&);
     virtual void applyScaling(double, double);
+    virtual void defaultScaling(double& scaling, double& offset, std::string& dataUnits, std::string& plotUnits);
 
 protected:
     int dimension_;

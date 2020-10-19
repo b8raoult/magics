@@ -391,6 +391,7 @@ void GribDecoder::applyScaling(double scaling, double offset) {
         }
     }
 
+    ASSERT(!matrix_v);  // Not supported for winds
     if (matrix_v) {
         size_t cnt = matrix_v->size();
         for (size_t i = 0; i < cnt; i++) {
@@ -399,9 +400,20 @@ void GribDecoder::applyScaling(double scaling, double offset) {
     }
 }
 
-void GribDecoder::defaultScaling(double& scaling, double& offset) {
-    scaling = scaling_factor_;
-    offset  = scaling_offset_;
+void GribDecoder::defaultScaling(double& scaling, double& offset, string& dataUnits, string& plotUnits) {
+    // First check that they are not derived fields!
+
+    long derived = getLong("generatingProcessIdentifier");
+    bool scale   = (derived == 254) ? derived_scaling_ : scaling_;
+
+    if (scale) {
+        Data::defaultScaling(scaling, offset, dataUnits, plotUnits);
+        return;
+    }
+
+    scaling   = scaling_factor_;
+    offset    = scaling_offset_;
+    dataUnits = plotUnits = getUnits();
 }
 
 /*!

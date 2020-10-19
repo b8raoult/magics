@@ -278,7 +278,9 @@ void Data::computeStats() {
 }
 
 std::string Data::getUnits() const {
-    NOTIMP;
+    std::ostringstream oss;
+    oss << "Data::getUnits() not implemented for " << *this;
+    throw NotImplemented(oss.str());
 }
 
 
@@ -289,10 +291,11 @@ void Data::applyScaling(const std::string& target_units) {
     double scaling = 1;
     double offset  = 0;
     // FIXEM: temp thing
-    defaultScaling(scaling, offset);
+
     if (target_units.empty()) {
         // Not asked by user or contour
-        defaultScaling(scaling, offset);
+        std::string dataUnits, plotUnits;
+        defaultScaling(scaling, offset, dataUnits, plotUnits);
         if (scaling != 1 || offset != 0) {
             applyScaling(scaling, offset);
         }
@@ -310,9 +313,12 @@ void Data::applyScaling(const std::string& target_units) {
 }
 
 
-void Data::defaultScaling(double& scaling, double& offset) {
+void Data::defaultScaling(double& scaling, double& offset, std::string& dataUnits, std::string& plotUnits) {
     scaling = 1;
     offset  = 0;
+
+    plotUnits = dataUnits = getUnits();
+    Units::defaultScaling(scaling, offset, plotUnits, dataUnits);
 }
 
 

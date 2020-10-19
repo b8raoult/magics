@@ -47,6 +47,12 @@ public:
     NotSupported(const string& msg) : MagicsException(msg) {}
 };
 
+
+class NotImplemented : public MagicsException {
+public:
+    NotImplemented(const string& msg);
+};
+
 class NotYetImplemented : public MagicsException {
 public:
     NotYetImplemented(const string& type, const string& method);

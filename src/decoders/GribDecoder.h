@@ -120,7 +120,8 @@ public:
 
     virtual std::string getUnits() const override;
     virtual void applyScaling(double, double) override;
-    virtual void defaultScaling(double&, double&) override;
+    virtual void defaultScaling(double& scaling, double& offset, std::string& dataUnits,
+                                std::string& plotUnits) override;
 
 
     const DateDescription& timeStamp() override;

@@ -114,7 +114,6 @@ public:
     void visit(TextVisitor&) override;
 
     virtual std::string getUnits() const override;
-    virtual void defaultScaling(double&, double&) override {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream

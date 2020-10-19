@@ -268,25 +268,7 @@ Index GribInterpretor::nearest(double ulat, double ulon) {
 
 void GribInterpretor::scaling(GribDecoder& grib, double& scaling, double& offset, string& originalUnits,
                               string& derivedUnits) const {
-    scaling = 1;
-    offset  = 0;
-
-    // First check that they are not derived fields!
-
-    long derived = grib.getLong("generatingProcessIdentifier");
-    bool scale   = (derived == 254) ? grib.derived_scaling_ : grib.scaling_;
-
-    if (scale) {
-        // FIXME: scaling
-        // grib.getScaling(scaling, offset);
-    }
-    else {
-        scaling = grib.scaling_factor_;
-        offset  = grib.scaling_offset_;
-    }
-    // Add a sanity check : the factor can not be 0..
-    if (scaling == 0)
-        scaling = 1;
+    return grib.defaultScaling(scaling, offset, originalUnits, derivedUnits);
 }
 
 void GribInterpretor::scaling(GribDecoder& grib, Matrix& matrix) const {

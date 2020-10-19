@@ -397,7 +397,7 @@ protected:
     void renderPolyline2(vector<PaperPoint>& vP) const;
 
 #ifdef MAGICS_ON_WINDOWS
-    virtual MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const  {}
+    virtual MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const {}
     virtual MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const {}
 #else
     virtual MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const = 0;

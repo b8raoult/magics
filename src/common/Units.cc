@@ -38,6 +38,8 @@ static std::map<std::pair<std::string, std::string>, Scaling> conversions;
 
 static void init() {
     if (conversions.empty()) {
+        std::set<std::string> seen;
+
         std::string path = buildConfigPath("units-rules.json");
         ValueMap values  = MagParser::decodeFile(path);
         for (auto j = values.begin(); j != values.end(); ++j) {
@@ -47,6 +49,11 @@ static void init() {
                 std::string to   = e["to"];
                 double scaling   = e["scaling"];
                 double offset    = e["offset"];
+
+                if (seen.find(from) != seen.end()) {
+                    throw MagicsException("Unit " + from + " already defined");
+                }
+                seen.insert(from);
 
                 conversions[std::make_pair(from, to)] = Scaling(scaling, offset);
             }
@@ -106,4 +113,16 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     }
     MagLog::warning() << "Cannot convert data from [" << from << "] to [" << to << "]" << std::endl;
     return false;
+}
+
+void Units::defaultScaling(double& scaling, double& offset, std::string& dataUnits, std::string& plotUnits) {
+    init();
+
+    for (auto j = conversions.begin(); j != conversions.end(); ++j) {
+        if ((*j).first.first == dataUnits) {
+            plotUnits = (*j).first.first;
+            scaling   = (*j).second.scaling_;
+            offset    = (*j).second.offset_;
+        }
+    }
 }

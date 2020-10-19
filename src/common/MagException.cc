@@ -48,3 +48,5 @@ MethodNotYetImplemented::MethodNotYetImplemented(const std::string& method) : No
 
 ParameterNotYetImplemented::ParameterNotYetImplemented(const std::string& param) :
     NotYetImplemented("Parameter", param) {}
+
+NotImplemented::NotImplemented(const std::string& msg) : MagicsException("Not implemented: " + msg) {}
