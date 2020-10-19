@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import json
 import yaml
 import os
@@ -192,7 +192,6 @@ for path in os.listdir(ecmwf):
             except Exception as e:
                 print(e)
 
-used = {}
 for k, v in matches.items():
     v.pop("eccharts_layer", None)
     units = v.pop("prefered_units", None)
@@ -200,13 +199,20 @@ for k, v in matches.items():
     for n in v["styles"]:
         if n in styles:
             if units:
-                styles[n].setdefault("contour_units", UNITS.get(units, units))
-            used[n] = styles[n]
+                if "contour_units" in styles[n]:
+                    print("WARNING: more than one units for style", n)
+                    styles[n]["contour_units"] = None
+                else:
+                    styles[n]["contour_units"] = UNITS.get(units, units)
         else:
-            print(k, "no style named", n)
+            print("ERROR", k, "no style named", n)
 
 
-for k, v in used.items():
+for k, v in styles.items():
+
+    if "contour_units" in v:
+        if v["contour_units"] is None:
+            del v["contour_units"]
 
     y = dict(magics=dict(mcont=v))
     with open(os.path.join(here, "styles", k + ".yaml"), "w") as f:

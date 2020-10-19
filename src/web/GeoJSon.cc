@@ -506,8 +506,7 @@ void GeoJSon::decode() {
         }
         else {
             try {
-                ifstream is(path_.c_str());
-                value = MagParser::decodeString(path_);
+                value = MagParser::decodeFile(path_);
             }
             catch (std::exception& e) {
                 if (MagicsSettings::strict()) {

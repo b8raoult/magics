@@ -12,5 +12,4 @@ magics:
     contour_line_colour: black
     contour_line_thickness: 1
     contour_title: Contour with no labels (interval 5, black)
-    contour_units: dam
 

@@ -1172,9 +1172,9 @@ inline bool getEnv(const string& name, bool def) {
 template <class T>
 void run(T* p, std::exception_ptr* eptr) {
     try {
-    p->run();
+        p->run();
     }
-    catch(...) {
+    catch (...) {
         *eptr = current_exception();
     }
 }
@@ -1271,7 +1271,7 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             lines_.push_back(lines);
             segments_.push_back(new IsoData());
             consumers_.push_back(new IsoHelper(c, *lines, *(segments_.back())));
-            consumers.push_back(new std::thread(run<IsoHelper>,consumers_.back(), &exceptions[e++]));
+            consumers.push_back(new std::thread(run<IsoHelper>, consumers_.back(), &exceptions[e++]));
         }
 
         view.split(threads_);
@@ -1286,7 +1286,7 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
             datas.push_back(data);
             producers_.push_back(new IsoProducer(c, *data));
             exceptions.push_back(nullptr);
-            producers.push_back(new std::thread(run<IsoProducer>, producers_.back(),&exceptions[e++]));
+            producers.push_back(new std::thread(run<IsoProducer>, producers_.back(), &exceptions[e++]));
             c++;
         }
 
@@ -1309,7 +1309,7 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
 
         // Check for exceptions
         for (int i = 0; i < exceptions.size(); i++) {
-            if(exceptions[i]) {
+            if (exceptions[i]) {
                 rethrow_exception(exceptions[i]);
             }
         }

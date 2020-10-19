@@ -34,5 +34,4 @@ magics:
     contour_shade_colour_method: list
     contour_shade_method: area_fill
     contour_title: 'Contour shade (Range: 0.0 / 1.0 & 1.5 / 20)'
-    contour_units: pv units
 

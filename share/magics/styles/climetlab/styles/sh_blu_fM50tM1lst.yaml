@@ -44,5 +44,4 @@ magics:
     contour_shade_max_level: -1
     contour_shade_method: area_fill
     contour_title: 'Contour shade (Range: -200 / -1)'
-    contour_units: 10**5/sec
 

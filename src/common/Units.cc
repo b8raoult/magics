@@ -38,15 +38,18 @@ static std::map<std::pair<std::string, std::string>, Scaling> conversions;
 
 static void init() {
     if (conversions.empty()) {
-        std::string path  = buildConfigPath("units.yaml");
-        ValueList entries = MagParser::decodeFile(path);
-        for (ValueList e : entries) {
-            std::string from = e[0];
-            std::string to   = e[1];
-            double scaling   = e[2];
-            double offset    = e[3];
+        std::string path = buildConfigPath("units-rules.json");
+        ValueMap values  = MagParser::decodeFile(path);
+        for (auto j = values.begin(); j != values.end(); ++j) {
+            ValueList entries = (*j).second;
+            for (auto& e : entries) {
+                std::string from = e["from"];
+                std::string to   = e["to"];
+                double scaling   = e["scaling"];
+                double offset    = e["offset"];
 
-            conversions[std::make_pair(from, to)] = Scaling(scaling, offset);
+                conversions[std::make_pair(from, to)] = Scaling(scaling, offset);
+            }
         }
     }
 }
@@ -80,8 +83,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = (*j).second.scaling_;
         offset  = (*j).second.offset_;
-        MagLog::error() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
-                        << std::endl;
+        MagLog::info() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+                       << std::endl;
         return true;
     }
 
@@ -92,8 +95,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = 1.0 / (*j).second.scaling_;
         offset  = -(*j).second.offset_ / (*j).second.scaling_;
-        MagLog::error() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
-                        << std::endl;
+        MagLog::info() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+                       << std::endl;
 
         return true;
     }

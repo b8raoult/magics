@@ -17,5 +17,4 @@ magics:
     contour_max_level: 100
     contour_min_level: -100
     contour_title: Contour (Interval 2, red, dash)
-    contour_units: degC
 

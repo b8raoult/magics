@@ -22,5 +22,4 @@ magics:
     contour_line_thickness: 2
     contour_min_level: -5
     contour_title: 'Contour (Range: -5 / 50, thickness 2, blue-red)'
-    contour_units: 10**5/sec
 

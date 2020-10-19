@@ -29,5 +29,4 @@ magics:
     contour_shade_method: area_fill
     contour_shade_min_level: 2
     contour_title: 'Contour shade (Range: 2 / 30)'
-    contour_units: pv units
 

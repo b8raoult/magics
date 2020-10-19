@@ -32,14 +32,14 @@ CustomisedPoint* ObsJSon::decode(ValueMap& point) {
     CustomisedPoint* current = new CustomisedPoint();
     for (auto key = point.begin(); key != point.end(); ++key) {
         map<string, ObsJSon::Method>::iterator method = methods_.find(key->first);
+
         if (method != methods_.end()) {
             (this->*method->second)(key->second, *current);
         }
         else {
-            if (key->second.isDouble())
+            if (key->second.isDouble()) {
                 (*current)[key->first] = key->second.get_value<double>();
-            if (key->second.isNumber())
-                (*current)[key->first] = long(key->second);
+            }
         }
     }
 
@@ -60,6 +60,7 @@ void ObsJSon::decode() {
 
     try {
         Value value = MagParser::decodeFile(path_);
+
 
         ValueMap object = value.get_value<ValueMap>();
 
