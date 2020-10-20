@@ -340,7 +340,6 @@ void GribDecoder::read() {
             MagLog::error() << msg.str() << std::endl;
             throw MagicsException(msg.str());
         }
-        interpretor_->scaling(*this, *matrix);
     }
     catch (NoFactoryException&) {
         if (MagicsSettings::strict()) {
@@ -901,22 +900,22 @@ void GribDecoder::decodePoints() {
     int error;
 
     if (Data::dimension_ == 1) {
-        double scaling;
-        double offset;
+        double scaling    = 1;
+        double offset     = 0;
         const string grid = representation();
         double missing    = getDouble("missingValue");
+        string originalUnits, derivedUnits;
         try {
             if (!interpretor_) {
                 interpretor_ = SimpleObjectMaker<GribInterpretor>::create(grid);
             }
-            interpretor_->scaling(*this, scaling, offset);
+            defaultScaling(scaling, offset, originalUnits, derivedUnits);
         }
         catch (NoFactoryException&) {
             if (MagicsSettings::strict()) {
                 throw;
             }
             MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n" << std::endl;
-            ;
             scaling = 1;
             offset  = 0;
         }
@@ -1455,7 +1454,7 @@ void GribDecoder::visit(ValuesCollector& points) {
     double* y         = new double[nb];
     double* distances = new double[nb];
 
-    double scaling, offset;
+    double scaling=1, offset=0;
     string oriUnits, derivedUnits;
     string grid = representation();
 
@@ -1465,14 +1464,13 @@ void GribDecoder::visit(ValuesCollector& points) {
         if (!interpretor_) {
             interpretor_ = SimpleObjectMaker<GribInterpretor>::create(grid);
         }
-        interpretor_->scaling(*this, scaling, offset, oriUnits, derivedUnits);
+        defaultScaling(scaling, offset, oriUnits, derivedUnits);
     }
     catch (NoFactoryException&) {
         if (MagicsSettings::strict()) {
             throw;
         }
         MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n" << std::endl;
-        ;
         scaling = 1;
         offset  = 0;
     }
@@ -1663,12 +1661,13 @@ void GribDecoder::visit(MetaDataCollector& step) {
                     }
                 }
                 else if (key->first == "scaling_formula" || key->first == "scaled_units") {
-                    double scaling, offset;
+                    double scaling=1, offset=0;
                     string oriUnits, derivedUnits;
                     string grid = representation();
                     try {
                         unique_ptr<GribInterpretor> interpretor_(SimpleObjectMaker<GribInterpretor>::create(grid));
-                        interpretor_->scaling(*this, scaling, offset, oriUnits, derivedUnits);
+                        defaultScaling(scaling, offset, oriUnits, derivedUnits);
+
                         if (scaling == 1 && offset == 0) {
                             information_["scaling_formula"] = "";
                             information_["scaled_units"]    = "";
@@ -1686,7 +1685,7 @@ void GribDecoder::visit(MetaDataCollector& step) {
                         }
                         MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n"
                                           << std::endl;
-                        ;
+                        
                         information_[key->first] = "N/A";
                     }
                 }
