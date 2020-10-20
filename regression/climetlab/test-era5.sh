@@ -66,6 +66,7 @@ plot:
             - png
         output_name: climetlab
         output_name_first_page_number: false
+        page_id_line: false
     - mgrib:
         grib_field_position: $p
         grib_input_file_name: era5.grib
@@ -76,13 +77,24 @@ EOF
 
 ~/build/magics-b8raoult/bin/magics tmp.yaml
 
-
-
 mv climetlab.png $climetlab
 mv original.png $original
 mv ecmwf.png $ecmwf
 
-perceptualdiff $ecmwf $original || (mv $ecmwf $original $climetlab diff1/)
-perceptualdiff $ecmwf $climetlab || (mv $ecmwf $original $climetlab diff2/)
+perceptualdiff $ecmwf $original
+if [[ $? -ne 0 ]]
+then
+    mv $ecmwf $original $climetlab diff1/
+    continue
+fi
+
+perceptualdiff $ecmwf $climetlab
+if [[ $? -ne 0 ]]
+then
+    mv $ecmwf $original $climetlab diff2/
+    continue
+fi
+
+
 
 done
