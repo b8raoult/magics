@@ -8,14 +8,15 @@
  * does it submit to any jurisdiction.
  */
 
+#include <unistd.h>
 #include "MagYaml.h"
 #include "MagicsSettings.h"
-
 using namespace magics;
 
 int main(int argc, char** argv) {
     MagicsSettings::strict(true);
 
+    alarm(120);
 
     try {
         for (int i = 1; i < argc; i++) {

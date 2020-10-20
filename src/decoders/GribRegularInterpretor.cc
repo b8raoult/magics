@@ -1562,7 +1562,7 @@ void GribRotatedInterpretor::raw(GribDecoder& grib, const Transformation& transf
     southPoleLat_ = grib.getDouble("latitudeOfSouthernPoleInDegrees");
     southPoleLon_ = grib.getDouble("longitudeOfSouthernPoleInDegrees");
     angle_        = grib.getDouble("angleOfRotationInDegrees") * 180.0 / M_PI;
-    
+
     grib_iterator* iter = grib_iterator_new(grib.handle(), 0, &err);
     double missing      = grib.getDouble("missingValue");
 

@@ -1454,7 +1454,7 @@ void GribDecoder::visit(ValuesCollector& points) {
     double* y         = new double[nb];
     double* distances = new double[nb];
 
-    double scaling=1, offset=0;
+    double scaling = 1, offset = 0;
     string oriUnits, derivedUnits;
     string grid = representation();
 
@@ -1661,7 +1661,7 @@ void GribDecoder::visit(MetaDataCollector& step) {
                     }
                 }
                 else if (key->first == "scaling_formula" || key->first == "scaled_units") {
-                    double scaling=1, offset=0;
+                    double scaling = 1, offset = 0;
                     string oriUnits, derivedUnits;
                     string grid = representation();
                     try {
@@ -1685,7 +1685,7 @@ void GribDecoder::visit(MetaDataCollector& step) {
                         }
                         MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n"
                                           << std::endl;
-                        
+
                         information_[key->first] = "N/A";
                     }
                 }

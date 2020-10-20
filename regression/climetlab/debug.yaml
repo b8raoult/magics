@@ -1,0 +1,14 @@
+plot:
+    - output:
+        output_formats:
+            - png
+        output_name: debug
+        output_name_first_page_number: false
+        page_id_line: false
+    - mgrib:
+        # grib_input_file_name: ci.grib
+        grib_input_file_name: era5.grib
+        grib_field_position: 52
+    - mcont:
+        contour_automatic_setting: ecmwf
+        legend: false

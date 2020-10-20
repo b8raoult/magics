@@ -70,11 +70,6 @@ bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
     }
     *matrix = matrix_.get();
 
-    if (automatic_scaling_) {
-        // FIXME: come back
-        // NOTIMP;
-        // getScaling(scaling_, offset_);
-    }
 
     // get the data ...
     try {
@@ -124,8 +119,7 @@ bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
                 i++;
             }
         }
-        matrix_->multiply(scaling_);
-        matrix_->plus(offset_);
+
         matrix_->setMapsAxis();
     }
     catch (MagicsException& e) {
