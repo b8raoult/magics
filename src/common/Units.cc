@@ -72,6 +72,12 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
         return false;
     }
 
+    if(from == "~") {
+        // FIXME:
+        MagLog::warning() << "Cannot convert data to " << to << ", data units not known" << std::endl;
+        return false;
+    }
+
     if (from.empty()) {
         if (MagicsSettings::strict()) {
             throw MagicsException("Cannot convert data to " + to + ", data units not known");

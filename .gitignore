@@ -35,3 +35,4 @@ Vagrantfile
 *.autosave
 ?.*
 tmp.*
+*.ppm

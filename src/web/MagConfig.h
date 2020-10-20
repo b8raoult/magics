@@ -105,6 +105,8 @@ public:
             definition = def->second;
             // cout << "FOUND " << name << endl;
             // cout << def->second << endl;
+            // FIXME
+            {ofstream out("style"); out << name  << std::endl; }
             return true;
         }
         MagLog::warning() << " Can not find the preset " << name << " for " << name_ << endl;

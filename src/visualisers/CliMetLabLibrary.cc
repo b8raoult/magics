@@ -144,13 +144,16 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
     }
 
     if (score == -1) {
+         // FIXME
+            {ofstream out("style"); out << "default"  << std::endl; }
         return nullptr;
     }
 
     std::cout << best << std::endl;
 
     std::string style_name = std::string(best["styles"][0]);
-    std::cout << "NAME: " << style_name << std::endl;
+    // FIXME
+            {ofstream out("style"); out << style_name  << std::endl; }
 
     path        = buildConfigPath("styles", "climetlab") + "/styles/" + style_name + ".yaml";
     Value style = MagParser::decodeFile(path);

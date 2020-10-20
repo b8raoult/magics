@@ -9,6 +9,7 @@ plot:
         # grib_input_file_name: ci.grib
         grib_input_file_name: era5.grib
         grib_field_position: 52
+        grib_field_position: 67
     - mcont:
-        contour_automatic_setting: ecmwf
+        contour_automatic_setting: climetlab
         legend: false
