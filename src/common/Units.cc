@@ -51,7 +51,8 @@ static void init() {
                 double offset    = e["offset"];
 
                 if (seen.find(from) != seen.end()) {
-                    throw MagicsException("Unit " + from + " already defined");
+                    MagLog::error() << "Unit [" + from + "] detected more than once" << std::endl;
+                    // throw MagicsException("Unit " + from + " already defined");
                 }
                 seen.insert(from);
 
@@ -64,9 +65,6 @@ static void init() {
 bool Units::convert(const std::string& from, const std::string& to, double& scaling, double& offset) {
     scaling = 1;
     offset  = 0;
-
-    // MagLog::error() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset <<
-    // std::endl;
 
     init();
 
@@ -83,6 +81,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     }
 
     if (from == to) {
+        std::cout << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+                  << std::endl;
         return false;
     }
 
@@ -90,8 +90,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = (*j).second.scaling_;
         offset  = (*j).second.offset_;
-        MagLog::info() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
-                       << std::endl;
+        std::cout << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+                  << std::endl;
         return true;
     }
 
@@ -102,8 +102,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = 1.0 / (*j).second.scaling_;
         offset  = -(*j).second.offset_ / (*j).second.scaling_;
-        MagLog::info() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
-                       << std::endl;
+        std::cout << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
+                  << offset << std::endl;
 
         return true;
     }

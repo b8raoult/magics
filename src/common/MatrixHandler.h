@@ -122,8 +122,6 @@ public:
     virtual double missing() const override { return matrix_.missing(); }
     virtual bool hasMissingValues() const override;
 
-    virtual void applyScaling(double scaling, double offset) override;
-
     const AbstractMatrix& matrix() { return matrix_; }
 
     MatrixHandler* getReady(const Transformation& transformation) { return matrix_.getReady(transformation); }

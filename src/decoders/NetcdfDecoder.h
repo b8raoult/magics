@@ -62,29 +62,9 @@ public:
 
     void getInfo(map<string, string>&) override;
 
-    void applyScaling(double scaling, double offset) override {
-        if (!data_)
-            valid_ = (*interpretor_).interpretAsMatrix(&data_);
-        if (!valid_)
-            throw MagicsException("Unable to use data");
+    void applyScaling(double scaling, double offset) override;
 
-        size_t cnt = data_->size();
-        for (size_t i = 0; i < cnt; i++) {
-            (*data_)[i] = (*data_)[i] * scaling + offset;
-        }
-    }
-
-    MatrixHandler& matrix() override {
-        MagLog::dev() << "NetcdfDecoder::matrix! "
-                      << "\n";
-        if (!data_)
-            valid_ = (*interpretor_).interpretAsMatrix(&data_);
-        if (!valid_)
-            throw MagicsException("Unable to use data");
-        this->matrixHandlers_.push_back(new MatrixHandler(*data_));
-
-        return *(this->matrixHandlers_.back());
-    }
+    MatrixHandler& matrix() override;
 
     void customisedPoints(const std::set<string>& request, CustomisedPointsList& out) {
         (*interpretor_).customisedPoints(request, out);
@@ -94,21 +74,7 @@ public:
         (*interpretor_).customisedPoints(transformation, request, out, thinningFactor_);
     }
 
-    void visit(AnimationStep& step) override {
-        try {
-            MatrixHandler& data = matrix();
-            // Information about contains...
-            MagLog::dev() << "Netcdf::visit(AnimationRules&) --> " << endl;
-
-            step.xResolution(abs(data.XResolution()));
-            step.yResolution(abs(data.YResolution()));
-        }
-        catch (...) {
-            if (MagicsSettings::strict()) {
-                throw;
-            }
-        }
-    }
+    void visit(AnimationStep& step) override;
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
     void visit(TextVisitor&) override;

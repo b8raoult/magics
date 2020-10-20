@@ -91,10 +91,6 @@ bool MatrixHandler::hasMissingValues() const {
     return false;
 }
 
-void MatrixHandler::applyScaling(double scaling, double offset) {
-    // matrix_.applyScaling(scaling, offset);
-}
-
 void TransformMatrixHandler::set() {
     for (int i = 0; i < rows(); i++) {
         double row = matrix_.regular_row(minrow_ + i);
@@ -454,9 +450,9 @@ int ThinningMatrixHandler::rowIndex(int row) const {
 
 
 double MatrixHandler::nearest(double row, double column) const {
-    cout << "HERE:" << row << " " << column << endl;
+    // cout << "HERE:" << row << " " << column << endl;
 
-    cout << bottom() << "===> " << top() << endl;
+    // cout << bottom() << "===> " << top() << endl;
     if (columns() == 0 || rows() == 0)
         return matrix_.missing();
 
@@ -518,7 +514,7 @@ double MatrixHandler::nearest(double row, double column) const {
          coord != coordinates.end(); ++coord) {
         double distance = (row - coord->first.first) * (row - coord->first.first) +
                           (column - coord->first.second) * (column - coord->first.second);
-        cout << distance << " [ " << coord->first.first << ", " << coord->first.second << "]" << endl;
+        // cout << distance << " [ " << coord->first.first << ", " << coord->first.second << "]" << endl;
         distances.push_back(distance);
         helper.insert(make_pair(distance, *coord));
     }

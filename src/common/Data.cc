@@ -283,7 +283,6 @@ std::string Data::getUnits() const {
     throw NotImplemented(oss.str());
 }
 
-
 void Data::applyScaling(const std::string& target_units) {
     ASSERT(!scaled_);
     scaled_ = true;

@@ -491,12 +491,6 @@ int Matrix::lowerColumn(double c) const {
     return last;
 }
 
-void Matrix::applyScaling(double scaling, double offset) {
-    size_t cnt = (*this).size();
-    for (size_t i = 0; i < cnt; i++) {
-        (*this)[i] = (*this)[i] * scaling + offset;
-    }
-}
 
 void Matrix::print(ostream& out) const {
     out << "Matrix<P>[";
@@ -801,8 +795,4 @@ pair<double, double> RotatedMatrixHandler::unrotate(double lat_y, double lon_x) 
 MatrixHandler* AbstractMatrix::getReady(const Transformation&) const {
     NOTIMP;
     return 0;
-}
-
-void AbstractMatrix::applyScaling(double scaling, double offset) {
-    NOTIMP;
 }

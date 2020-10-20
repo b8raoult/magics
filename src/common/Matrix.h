@@ -105,8 +105,6 @@ public:
 
     virtual bool hasMissingValues() const { return false; }
 
-    virtual void applyScaling(double scaling, double offset);
-
     virtual vector<double>& columnsAxis() const = 0;
     virtual void print(ostream& out) const      = 0;
 
@@ -331,8 +329,6 @@ public:
         }
         return -1;
     }
-
-    virtual void applyScaling(double scaling, double offset) override;
 
 
     map<double, map<double, pair<double, double> > > index_;

@@ -382,22 +382,12 @@ void GribDecoder::read(const Transformation& transformation) {
 
 void GribDecoder::applyScaling(double scaling, double offset) {
     Matrix* matrix_u = u();
+    ASSERT(matrix_u);
     Matrix* matrix_v = v();
-
-    if (matrix_u) {
-        size_t cnt = matrix_u->size();
-        for (size_t i = 0; i < cnt; i++) {
-            (*matrix_u)[i] = (*matrix_u)[i] * scaling + offset;
-        }
-    }
-
     ASSERT(!matrix_v);  // Not supported for winds
-    if (matrix_v) {
-        size_t cnt = matrix_v->size();
-        for (size_t i = 0; i < cnt; i++) {
-            (*matrix_v)[i] = (*matrix_v)[i] * scaling + offset;
-        }
-    }
+
+    matrix_u->multiply(scaling);
+    matrix_u->plus(offset);
 }
 
 void GribDecoder::defaultScaling(double& scaling, double& offset, string& dataUnits, string& plotUnits) {
