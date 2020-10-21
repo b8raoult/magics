@@ -30,7 +30,6 @@ notebook/.ipynb_checkpoints
 compile_commands.json
 .vagrant/
 ?
-Vagrantfile
 *.png
 *.autosave
 ?.*
