@@ -1,0 +1,9 @@
+match:
+- paramId: '172'
+  shortName: lsm
+# - long_name: 2 metre temperature
+
+styles:
+- mark_brn_f05t1lst
+- symbols_lsm
+- zero_one_grid
