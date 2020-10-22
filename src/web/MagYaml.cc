@@ -13,11 +13,11 @@
 
 #include "MagYaml.h"
 
+#include "JSON.h"
 #include "MagException.h"
 #include "MagParser.h"
 #include "MagicsCalls.h"
 #include "MagicsSettings.h"
-#include "JSON.h"
 
 using namespace magics;
 
@@ -161,7 +161,7 @@ static void execute(const std::string& action, const Value& p) {
                     else {
                         ASSERT(dim == row.size());
                     }
-                    for(double d: row) {
+                    for (double d : row) {
                         values.push_back(d);
                     }
                 }
