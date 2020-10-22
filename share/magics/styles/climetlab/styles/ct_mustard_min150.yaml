@@ -12,4 +12,4 @@ magics:
     contour_min_level: 1
     contour_reference_level: 0
     contour_title: Contour (min:150, mustard for orography)
-
+    contour_units: dam

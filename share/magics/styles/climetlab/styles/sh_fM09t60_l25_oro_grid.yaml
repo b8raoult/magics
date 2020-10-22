@@ -71,4 +71,4 @@ magics:
     contour_shade_colour_method: list
     contour_shade_technique: grid_shading
     contour_title: Orography shading with 28 levels (grid shading)
-
+    contour_units: dam

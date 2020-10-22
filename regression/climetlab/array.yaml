@@ -69,12 +69,13 @@ plot:
       input_field_latitude_step: -0.5
       input_field_initial_longitude: -15
       input_field_longitude_step: 0.5
+      input_field_units: K
       input_metadata:
         paramId: "167"
         shortName: "2t"
-        units: "K"
+        # units: "K"
   - mcont:
-      contour_automatic_setting: ecmwf
+      contour_automatic_setting: climetlab
       legend: false
   - mcoast:
       map_grid: false

@@ -2,6 +2,12 @@ match:
 - levtype: sfc
   paramId: '129'
   shortName: z
+- levtype: sfc
+  paramId: 3008
+  shortName: h
 styles:
-- ct_blk_i8_t2
-- ct_blk_i10_t2
+  - sh_fM09t60_l25_oro
+  - ct_mustard_min150
+  - sh_f50t6000_oro
+  - sh_brn_fM09t60_oro
+  - sh_fM09t60_l25_oro_grid
