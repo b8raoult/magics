@@ -74,7 +74,7 @@ plot:
         shortName: "2t"
         units: "K"
   - mcont:
-      contour_automatic_setting: ecmwf
+      contour_automatic_setting: climetlab
       legend: false
   - mcoast:
       map_grid: false
