@@ -341,6 +341,24 @@ void MagicsCalls::set2r(const std::string& name, const double* data, const int d
     MagLog::dev() << "Parameter " << name << " set to " << matrix << "\n";
 }
 
+void MagicsCalls::set2r(const std::string& name, const std::vector<double>& data, const int dim1, const int dim2) {
+    ASSERT(data.size() == dim2 * dim1);
+
+    Matrix matrix;
+    for (int i = 0; i < dim2 * dim1; i++) {
+        matrix.push_back(data[i]);
+    }
+
+    matrix.set(dim2, dim1);
+
+    if (CompatibilityHelper::check(name, matrix))
+        return;
+
+    ParameterManager::set(name, matrix);
+
+    MagLog::dev() << "Parameter " << name << " set to " << matrix << "\n";
+}
+
 void MagicsCalls::set3r(const std::string& name, const double* data, const int dim1, const int dim2, const int dim3) {
     NOTIMP;
 }

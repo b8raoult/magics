@@ -17,6 +17,7 @@
 #include "MagParser.h"
 #include "MagicsCalls.h"
 #include "MagicsSettings.h"
+#include "JSON.h"
 
 using namespace magics;
 
@@ -102,6 +103,14 @@ static void execute(const std::string& action, const Value& p) {
             continue;
         }
 
+        if (value.isMap()) {
+            ostringstream oss;
+            JSON json(oss);
+            json << value;
+            MagicsCalls::setc(name, oss.str());
+            continue;
+        }
+
         if (value.isNumber() || value.isDouble()) {
             double d = value;
             if (long(d) == d) {
@@ -118,7 +127,12 @@ static void execute(const std::string& action, const Value& p) {
             size_t s    = 0;
             size_t i    = 0;
             size_t d    = 0;
+            size_t a    = 0;
             for (auto e : l) {
+                if (e.isList()) {
+                    a++;
+                    continue;
+                }
                 if (e.isString()) {
                     s++;
                     continue;
@@ -137,7 +151,23 @@ static void execute(const std::string& action, const Value& p) {
                 oss << "Value type not supported in list: " << name << " = " << value << " e=" << e;
                 throw MagicsException(oss.str());
             }
-            if (s) {
+            if (a) {
+                int dim = -1;
+                vector<double> values;
+                for (ValueList row : l) {
+                    if (dim == -1) {
+                        dim = row.size();
+                    }
+                    else {
+                        ASSERT(dim == row.size());
+                    }
+                    for(double d: row) {
+                        values.push_back(d);
+                    }
+                }
+                MagicsCalls::set2r(name, values, dim, l.size());
+            }
+            else if (s) {
                 std::vector<std::string> values(l.begin(), l.end());
                 MagicsCalls::set1c(name, values);
             }

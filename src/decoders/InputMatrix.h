@@ -62,6 +62,7 @@ public:
     void visit(MetaDataCollector&) override;
     void metadata(MetaDataCollector&) const;
 
+    virtual std::string getUnits() const override { return "K"; }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

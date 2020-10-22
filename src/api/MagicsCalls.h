@@ -89,6 +89,7 @@ public:
     static void set1r(const std::string& name, const double* data, const int dim1);
     static void set1r(const std::string& name, const std::vector<double>& data);
     static void set2r(const std::string& name, const double* data, const int dim1, const int dim2);
+    static void set2r(const std::string& name, const std::vector<double>& data, const int dim1, const int dim2);
     static void set3r(const std::string& name, const double* data, const int dim1, const int dim2, const int dim3);
 
     static void enqr(const std::string& name, double* value);
