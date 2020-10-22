@@ -82,7 +82,7 @@
             "from" : "m",
             "offset" : 0.0,
             "to" : "dam",
-            "scaling" : 10.0
+            "scaling" : 0.1
         },
         {
             "from" : "gpm",
