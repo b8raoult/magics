@@ -38,13 +38,16 @@ struct DIR {
     bool ok() { return ok_; }
 
     struct dirent* next() {
+        ASSERT(ok_);
         if (first_) {
+            first_ = false;
             return &e_;
         }
-        first_ = false;
+
         if (_findnext(handle_, &fileinfo_)) {
             return &e_;
         }
+        ok_ = false;
         return nullptr;
     }
 };

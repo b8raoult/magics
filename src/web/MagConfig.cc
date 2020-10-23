@@ -191,9 +191,11 @@ void StyleLibrary::init() {
 
 
         struct dirent* entry = nullptr;
-
+        std::string prev;
         while ((entry = readdir(dir)) != nullptr) {
-            std::cout << " -> " << entry->d_name[0] << std::endl;
+            std::cout << " -> " << entry->d_name << std::endl;
+
+            ASSERT(entry->d_name != prev);
             try {
                 if (entry->d_name[0] != '.') {
                     current_ = entry->d_name;
@@ -207,6 +209,7 @@ void StyleLibrary::init() {
                 MagLog::error() << "Error processing " << path << "/" << entry->d_name[0] << ": " << e.what()
                                 << ", ignored." << std::endl;
             }
+            prev = entry->d_name;
         }
 
         std::cout << "DONE " << path << std::endl;
