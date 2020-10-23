@@ -1,7 +1,7 @@
 // from https://www.linuxjournal.com/article/5574
 #include "windux.h"
 #include <string>
-#include "MagException.h"
+// #include "MagException.h"
 
 
 int gettimeofday(struct timeval* t, void* timezone) {
@@ -39,7 +39,9 @@ struct DIR {
     bool ok() { return ok_; }
 
     struct dirent* next() {
-        ASSERT(ok_);
+        if(!ok_) {
+            return nullptr;
+        }
         if (first_) {
             first_ = false;
             return &e_;
