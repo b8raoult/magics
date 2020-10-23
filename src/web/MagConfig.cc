@@ -190,9 +190,9 @@ void StyleLibrary::init() {
         std::cout << "SCAN " << path << std::endl;
 
 
-        struct dirent* entry = nullpt;
+        struct dirent* entry = nullptr;
 
-         while ( (entry = readdir(dir) != nullptr){
+        while ((entry = readdir(dir)) != nullptr) {
             std::cout << " -> " << entry->d_name[0] << std::endl;
             try {
                 if (entry->d_name[0] != '.') {
@@ -207,7 +207,6 @@ void StyleLibrary::init() {
                 MagLog::error() << "Error processing " << path << "/" << entry->d_name[0] << ": " << e.what()
                                 << ", ignored." << std::endl;
             }
-
         }
 
         std::cout << "DONE " << path << std::endl;

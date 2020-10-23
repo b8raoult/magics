@@ -52,7 +52,7 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
     ValueList rules;
 
     struct dirent* entry = nullptr;
-    while ( (entry = readdir(dir) != nullptr){
+    while ((entry = readdir(dir)) != nullptr) {
         std::string name(entry->d_name);
         std::string ext = name.size() > 6 ? name.substr(name.size() - 5) : std::string();
 
@@ -77,11 +77,9 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
                 MagLog::error() << "Error processing " << full << ": " << e.what() << ", ignored." << std::endl;
             }
         }
-
-
     }
 
-        std::cout << "DONE " << path << std::endl;
+    std::cout << "DONE " << path << std::endl;
 
 
     closedir(dir);

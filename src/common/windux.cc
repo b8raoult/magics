@@ -41,6 +41,7 @@ struct DIR {
         if (first_) {
             return &e_;
         }
+        first_ = false;
         if (_findnext(handle_, &fileinfo_)) {
             return &e_;
         }
