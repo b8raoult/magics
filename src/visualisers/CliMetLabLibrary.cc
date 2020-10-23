@@ -47,13 +47,16 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
         throw CannotOpenFile(path);
     }
 
+    std::cout << "SCAN " << path << std::endl;
+
     ValueList rules;
 
-    struct dirent* entry = readdir(dir);
-    while (entry) {
+    struct dirent* entry = nullptr;
+    while ( (entry = readdir(dir) != nullptr){
         std::string name(entry->d_name);
         std::string ext = name.size() > 6 ? name.substr(name.size() - 5) : std::string();
 
+        std::cout << " -> " << name << std::endl;
         if (ext == ".yaml" || ext == ".json") {
             std::string full = path + "/" + name;
             try {
@@ -75,8 +78,12 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
             }
         }
 
-        entry = readdir(dir);
+
     }
+
+        std::cout << "DONE " << path << std::endl;
+
+
     closedir(dir);
 
     MetaDataCollector collect;

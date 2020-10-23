@@ -239,7 +239,7 @@ void InputMatrix::customisedPoints(const BasicThinningMethod& thinning, const Tr
 std::string InputMatrix::getUnits() const {
     ParamJSon data = ParamJSon(metadata_);
     auto j         = data.find("units");
-     if (j != data.end()) {
+    if (j != data.end()) {
         if (units_ != "") {
             ASSERT(units_ == (*j).second);
         }

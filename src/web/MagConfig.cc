@@ -187,19 +187,31 @@ void StyleLibrary::init() {
             error << "Trying to open directory " << library << ": " << strerror(errno);
             throw MagicsException(error.str());
         }
-        struct dirent* entry = readdir(dir);
-        while (entry) {
-            if (entry->d_name[0] != '.') {
-                current_ = entry->d_name;
-                if (current_ == "styles.json")
-                    allStyles_.init(path, "styles.json");
-                else
-                    MagConfigHandler(path + "/" + current_, *this);
+        std::cout << "SCAN " << path << std::endl;
+
+
+        struct dirent* entry = nullpt;
+
+         while ( (entry = readdir(dir) != nullptr){
+            std::cout << " -> " << entry->d_name[0] << std::endl;
+            try {
+                if (entry->d_name[0] != '.') {
+                    current_ = entry->d_name;
+                    if (current_ == "styles.json")
+                        allStyles_.init(path, "styles.json");
+                    else
+                        MagConfigHandler(path + "/" + current_, *this);
+                }
+            }
+            catch (std::exception& e) {
+                MagLog::error() << "Error processing " << path << "/" << entry->d_name[0] << ": " << e.what()
+                                << ", ignored." << std::endl;
             }
 
-
-            entry = readdir(dir);
         }
+
+        std::cout << "DONE " << path << std::endl;
+
         closedir(dir);
     }
 }
