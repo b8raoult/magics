@@ -1,6 +1,7 @@
 // from https://www.linuxjournal.com/article/5574
 #include "windux.h"
 #include <string>
+#include "MagException.h"
 
 
 int gettimeofday(struct timeval* t, void* timezone) {
