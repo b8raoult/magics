@@ -50,7 +50,7 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
     ValueList rules;
 
     for (auto& p : fs::recursive_directory_iterator(path)) {
-        std::string full = p.path();
+        std::string full = p.path().string();
 
         std::string ext = full.size() > 6 ? full.substr(full.size() - 5) : std::string();
 

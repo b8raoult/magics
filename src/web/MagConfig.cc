@@ -187,7 +187,7 @@ void StyleLibrary::init() {
         string path = magCompare(*token, "ecmwf") ? ecmwf : *token;
 
         for (auto& p : fs::directory_iterator(path)) {
-            std::string full = p.path();
+            std::string full = p.path().string();
 
             std::string ext = full.size() > 6 ? full.substr(full.size() - 5) : std::string();
             if (ext == ".json") {
