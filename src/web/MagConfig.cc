@@ -17,11 +17,15 @@
 #include "MetaData.h"
 #include "Value.h"
 
-#ifdef MAGICS_ON_WINDOWS
-#include "windux.h"
+
+#if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
+#include <filesystem>
+namespace fs = std::filesystem;
 #else
-#include <dirent.h>
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 #endif
+
 
 #include <cstring>
 #include "Tokenizer.h"
@@ -181,35 +185,22 @@ void StyleLibrary::init() {
     for (auto token = paths.begin(); token != paths.end(); ++token) {
         string path = magCompare(*token, "ecmwf") ? ecmwf : *token;
 
-        DIR* dir = opendir(path.c_str());
-        if (!dir) {
-            ostringstream error;
-            error << "Trying to open directory " << library << ": " << strerror(errno);
-            throw MagicsException(error.str());
-        }
+        for (auto& p : fs::directory_iterator(path)) {
+            std::string full = p.path();
 
-        struct dirent* entry = nullptr;
-        std::string prev;
-        while ((entry = readdir(dir)) != nullptr) {
-
-            ASSERT(entry->d_name != prev);
-            try {
-                if (entry->d_name[0] != '.') {
-                    current_ = entry->d_name;
-                    if (current_ == "styles.json")
+            std::string ext = full.size() > 6 ? full.substr(full.size() - 5) : std::string();
+            if (ext == ".json") {
+                try {
+                    if (full.size() > 11 && full.substr(full.size() - 11) == "styles.json")
                         allStyles_.init(path, "styles.json");
                     else
-                        MagConfigHandler(path + "/" + current_, *this);
+                        MagConfigHandler(full, *this);
+                }
+                catch (std::exception& e) {
+                    MagLog::error() << "Error processing " << full << ": " << e.what() << ", ignored." << std::endl;
                 }
             }
-            catch (std::exception& e) {
-                MagLog::error() << "Error processing " << path << "/" << entry->d_name[0] << ": " << e.what()
-                                << ", ignored." << std::endl;
-            }
-            prev = entry->d_name;
         }
-
-        closedir(dir);
     }
 }
 
