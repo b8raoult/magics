@@ -39,7 +39,7 @@ struct DIR {
     bool ok() { return ok_; }
 
     struct dirent* next() {
-        if(!ok_) {
+        if (!ok_) {
             return nullptr;
         }
         if (first_) {

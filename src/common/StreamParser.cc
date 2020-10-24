@@ -32,10 +32,10 @@ char StreamParser::_get() {
     char c = 0;
     in_.get(c);
     pos_++;
-    if (c == '\r' || c == '\n') {
+    if (c == '\n' || c == '\r') {
         line_++;
         pos_ = 0;
-        if(c == '\r' && in_.peek() == '\n') {
+        if (c == '\r' && in_.peek() == '\n') {
             in_.get(c);
         }
     }
@@ -45,7 +45,7 @@ char StreamParser::_get() {
 
 char StreamParser::_peek() {
     char c = in_.peek();
-    if(c == '\r') {
+    if (c == '\r') {
         c = '\n';
     }
     return c;

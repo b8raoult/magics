@@ -163,7 +163,7 @@ public:
     string theme_;
     string family_;
     string path_;
-    string current_;
+    // string current_;
     MagDefLibrary allStyles_;
 
     bool findStyle(const MetaDataCollector& data, MagDef& visdef, StyleEntry&);

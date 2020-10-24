@@ -160,7 +160,7 @@ long magics::MagTime::hhmmss() const {
 }
 
 void magics::MagTime::print(ostream& s) const {
-    if(missing_) {
+    if (missing_) {
         s << "missing";
         return;
     }

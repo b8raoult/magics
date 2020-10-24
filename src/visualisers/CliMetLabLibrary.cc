@@ -25,10 +25,14 @@
 #include "MagParser.h"
 #include "MetaData.h"
 
-#ifdef MAGICS_ON_WINDOWS
-#include "windux.h"
+
+#if ((defined(_MSVC_LANG) && _MSVC_LANG >= 201703L) || __cplusplus >= 201703L)
+#include <filesystem>
+namespace fs = std::filesystem;
 #else
-#include <dirent.h>
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem;
 #endif
 
 
@@ -42,20 +46,15 @@ CliMetLabLibrary::~CliMetLabLibrary() {}
 StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_path, MagDef& visdef) {
     std::string path = buildConfigPath("styles", "climetlab") + "/rules";
 
-    DIR* dir = opendir(path.c_str());
-    if (!dir) {
-        throw CannotOpenFile(path);
-    }
 
     ValueList rules;
 
-    struct dirent* entry = nullptr;
-    while ((entry = readdir(dir)) != nullptr) {
-        std::string name(entry->d_name);
-        std::string ext = name.size() > 6 ? name.substr(name.size() - 5) : std::string();
+    for (auto& p : fs::recursive_directory_iterator(path)) {
+        std::string full = p.path();
+
+        std::string ext = full.size() > 6 ? full.substr(full.size() - 5) : std::string();
 
         if (ext == ".yaml" || ext == ".json") {
-            std::string full = path + "/" + name;
             try {
                 Value m = MagParser::decodeFile(full);
                 if (m.isList()) {
@@ -76,7 +75,6 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
         }
     }
 
-    closedir(dir);
 
     MetaDataCollector collect;
 

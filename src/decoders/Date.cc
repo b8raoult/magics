@@ -269,8 +269,7 @@ long MagDate::dateToJulian(long ddate) {
 
 
 void MagDate::print(ostream& s) const {
-
-    if(missing_) {
+    if (missing_) {
         s << "missing";
         return;
     }
