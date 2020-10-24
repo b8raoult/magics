@@ -125,6 +125,7 @@ protected:
 private:
     // -- Members
 
+    bool missing_ = false;
     long julian_;
 
     // -- Methods
@@ -231,6 +232,7 @@ protected:
 private:
     // -- Members
 
+    bool missing_ = false;
     Second seconds_;
 
     friend ostream& operator<<(ostream& s, const MagTime& t) {

@@ -6,12 +6,6 @@
     "configurations": [
 
 
-
-
-
-
-
-
         {
             "name": "Python: Current File",
             "type": "python",
@@ -38,5 +32,6 @@
             "env": {
                 "MAGPLUS_HOME": "${workspaceFolder}"
             }
-        ]
-    }
+        }
+    ]
+}

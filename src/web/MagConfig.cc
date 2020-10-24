@@ -187,13 +187,10 @@ void StyleLibrary::init() {
             error << "Trying to open directory " << library << ": " << strerror(errno);
             throw MagicsException(error.str());
         }
-        std::cout << "SCAN " << path << std::endl;
-
 
         struct dirent* entry = nullptr;
         std::string prev;
         while ((entry = readdir(dir)) != nullptr) {
-            std::cout << " -> " << entry->d_name << std::endl;
 
             ASSERT(entry->d_name != prev);
             try {
@@ -211,8 +208,6 @@ void StyleLibrary::init() {
             }
             prev = entry->d_name;
         }
-
-        std::cout << "DONE " << path << std::endl;
 
         closedir(dir);
     }
