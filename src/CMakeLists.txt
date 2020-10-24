@@ -82,6 +82,13 @@ if( HAVE_ODB )
   list( APPEND MAGICS_PRIVATE_INCLUDE_DIRS $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/oda> )
 endif()
 
+
+if( EC_OS_NAME MATCHES "linux" )
+  # Not sure if linux or g++
+  set( EXTRA_CXX_LIBRARIES stdc++fs)
+endif()
+
+
 ecbuild_add_library( TARGET    MagPlus
                      SOURCES
                         magics.h
@@ -105,6 +112,7 @@ ecbuild_add_library( TARGET    MagPlus
                      PUBLIC_LIBS
                         ${MAGICS_EXTRA_LIBRARIES}
                         eccodes
+                        ${EXTRA_CXX_LIBRARIES}
                      PRIVATE_INCLUDES $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/clipper>
                                       ${MAGICS_PRIVATE_INCLUDE_DIRS}
 

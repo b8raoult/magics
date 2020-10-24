@@ -25,10 +25,9 @@ set(INSTALL_INCLUDE_DIR include/magics CACHE PATH "Magics installation directory
 
 include(ecbuild_system NO_POLICY_SCOPE)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_C_STANDARD 99)
-
 
 ###############################################################################
 # some build options for this project
@@ -263,6 +262,7 @@ ecbuild_add_resources( TARGET old_resources
 		regression
 		toolsjs
 		notebook)
+
 
 
 ############################################################################################
