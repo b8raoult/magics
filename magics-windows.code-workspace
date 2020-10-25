@@ -22,7 +22,9 @@
 			"-DENABLE_INSTALL_ECCODES_DEFINITIONS=0",
 			"-DENABLE_INSTALL_ECCODES_SAMPLES=0",
 			"-DCMAKE_INSTALL_PREFIX=C:/Users/mab/Documents/install",
-			"-DPKG_CONFIG_EXECUTABLE=C:/vcpkg/downloads/tools/pkg-config/0.29.2-1/mingw32/bin/pkg-config.exe"
+			"-DPKG_CONFIG_EXECUTABLE=C:/vcpkg/downloads/tools/pkg-config/0.29.2-1/mingw32/bin/pkg-config.exe",
+			"-DBASH_EXE=C:/Windows/System32/bash.exe",
+			"-DIEEE_LE=1"
 		],
 		"cmake.preferredGenerators": [
 
