@@ -38,19 +38,82 @@ namespace fs = std::experimental::filesystem;
 
 namespace magics {
 
-static std::map<std::string, ValueMap> styles_;
-static std::vector<ValueMap> rules_;
+class Library {
+    size_t counter_ = 0;
+    std::string path_;
 
-static std::string library_path_ = "<none>";
+    std::set<std::string> keys_;
+    std::map<std::string, ValueMap> styles_;
+    std::vector<ValueMap> rules_;
 
-static size_t counter_ = 0;
+    void process(const std::string& path, const ValueMap& entry, int n);
 
-static void process(const std::string& path, const ValueMap& entry, int n) {
+public:
+    Library(const std::string& path);
+    StyleEntry* getStyle(Data& data, MagDef& visdef) const;
+
+    void reset();
+};
+
+
+Library::Library(const std::string& path) : path_(path) {
+    size_t n = 0;
+    std::vector<std::string> entries;
+
+    if (path_ == "default") {
+        path_ = buildConfigPath("styles", "climetlab");
+    }
+    std::cout << "SCANNING " << path_ << std::endl;
+    for (auto& p : fs::recursive_directory_iterator(path_)) {
+        std::string ext  = p.path().extension();
+        std::string full = p.path().string();
+
+        if (ext == ".yaml" || ext == ".json") {
+            entries.push_back(full);
+        }
+    }
+    std::cout << "DONE " << path_ << std::endl;
+    n++;
+
+    std::sort(entries.begin(), entries.end());
+
+    for (const auto& path : entries) {
+        try {
+            Value m = MagParser::decodeFile(path);
+            if (m.isList()) {
+                ValueList l = m;
+                int n       = 0;
+                for (auto& v : l) {
+                    process(path, v, n++);
+                }
+            }
+            else {
+                process(path, m, 0);
+            }
+        }
+        catch (std::exception& e) {
+            MagLog::error() << "Error processing " << path << ": " << e.what() << ", ignored." << std::endl;
+        }
+    }
+
+    // Collected which values are needed by the rukes
+
+    for (ValueMap rule : rules_) {
+        ValueList matches = rule["match"];
+        for (ValueMap match : matches) {
+            for (auto j = match.begin(); j != match.end(); ++j) {
+                keys_.insert((*j).first);
+            }
+        }
+    }
+
+}  // namespace magics
+
+void Library::process(const std::string& path, const ValueMap& entry, int n) {
     bool style = (entry.find("magics") != entry.end());
     bool rule  = (entry.find("match") != entry.end());
 
     if (rule && style) {
-
         std::ostringstream oss;
         oss << fs::path(path).stem() << "/" << (counter_++) << "/" << n;
         std::string name = oss.str();
@@ -59,10 +122,10 @@ static void process(const std::string& path, const ValueMap& entry, int n) {
         ValueList styles;
         styles.push_back(name);
 
-        ValueMap e = entry;
+        ValueMap e  = entry;
         e["styles"] = styles;
 
-        styles_[name]    = e;
+        styles_[name] = e;
         rules_.push_back(e);
 
 
@@ -81,109 +144,23 @@ static void process(const std::string& path, const ValueMap& entry, int n) {
     }
 }
 
-
-struct Entry {
-    size_t rank_;
-    std::string path_;
-    Entry(size_t rank, const std::string& path) : rank_(rank), path_(path) {}
-    bool operator<(const Entry& other) const {
-        if (rank_ == other.rank_) {
-            return path_ < other.path_;
-        }
-        return rank_ < other.rank_;
-    }
-};
-
-static void init(const std::string& library_path) {
-    if (library_path_ == library_path) {
-        return;
+StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
+    MetaDataCollector collector;
+    for (const auto& criteria : keys_) {
+        collector[criteria] = "";
+        MetaDataAttribute attribute;
+        attribute.setSource(MetaDataAttribute::GribApiSource);
+        collector.setAttribute(criteria, attribute);
     }
 
 
-    Tokenizer tokenizer(":");
-    vector<string> paths;
-    tokenizer(library_path, paths);
+    data.visit(collector);
 
-    if (paths.size() == 0) {
-        paths.push_back("default");  // Or
-    }
-
-    std::vector<Entry> entries;
-
-    size_t n = 0;
-    for (auto path : paths) {
-        if (path == "default") {
-            path = buildConfigPath("styles", "climetlab");
-        }
-        std::cout << "SCANNING " << path << std::endl;
-        for (auto& p : fs::recursive_directory_iterator(path)) {
-            std::string ext  = p.path().extension();
-            std::string full = p.path().string();
-
-            if (ext == ".yaml" || ext == ".json") {
-                entries.push_back(Entry(n, full));
-            }
-        }
-        std::cout << "DONE " << path << std::endl;
-        n++;
-    }
-
-    std::sort(entries.begin(), entries.end());
-
-    for (const auto& entry : entries) {
-        const std::string& full = entry.path_;
-        try {
-            Value m = MagParser::decodeFile(full);
-            if (m.isList()) {
-                ValueList l = m;
-                int n = 0;
-                for (auto& v : l) {
-                    process(full, v, n++);
-                }
-            }
-            else {
-                process(full, m, 0);
-            }
-        }
-        catch (std::exception& e) {
-            MagLog::error() << "Error processing " << full << ": " << e.what() << ", ignored." << std::endl;
-        }
-    }
-
-    library_path_ = library_path;
-}
-
-CliMetLabLibrary::CliMetLabLibrary() {}
-
-CliMetLabLibrary::~CliMetLabLibrary() {}
-
-StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_path, MagDef& visdef) {
-    init(library_path);
-    std::string path = buildConfigPath("styles", "climetlab") + "/rules";
-
-
-    MetaDataCollector collect;
-
-    // Collected which values are needed by the rukes
-    std::set<std::string> keys;
-    for (ValueMap rule : rules_) {
-        ValueList matches = rule["match"];
-        for (ValueMap match : matches) {
-            for (auto j = match.begin(); j != match.end(); ++j) {
-                keys.insert((*j).first);
-            }
-        }
-    }
-
-    for (auto j = keys.begin(); j != keys.end(); ++j) {
-        setCriteria(collect, *j);
-    }
 
     // Get values from the grib or necdf
-    data.visit(collect);
 
     std::cout << "=== DATA" << std::endl;
-    for (auto j = collect.begin(); j != collect.end(); ++j) {
+    for (auto j = collector.begin(); j != collector.end(); ++j) {
         if ((*j).second.size()) {
             std::cout << "--- " << (*j).first << " = " << (*j).second << std::endl;
         }
@@ -202,7 +179,7 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
                 if ((*j).second.isList()) {
                     ValueList vals = (*j).second;
                     for (std::string val : vals) {
-                        if (collect[key] == val) {
+                        if (collector[key] == val) {
                             same++;
                             break;
                         }
@@ -211,7 +188,7 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
                 else {
                     std::string val = (*j).second;
 
-                    if (collect[key] == val) {
+                    if (collector[key] == val) {
                         same++;
                     }
                 }
@@ -237,14 +214,28 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
 
     std::cout << best << std::endl;
 
-    std::string style_name = std::string(best["styles"][0]);
+    std::string style_name;
+
+    if (best.contains("style")) {
+        style_name = std::string(best["style"]);
+    }
+    else {
+        style_name = std::string(best["styles"][0]);
+    }
     // FIXME
     {
         ofstream out("style");
         out << style_name << std::endl;
     }
 
-    ValueMap contour = styles_[style_name]["magics"]["mcont"];
+    auto j = styles_.find(style_name);
+    if (j == styles_.end()) {
+        MagLog::error() << "Error style: " << style_name << " not found." << std::endl;
+        return nullptr;
+    }
+
+    ValueMap style   = (*j).second;
+    ValueMap contour = style["magics"]["mcont"];
 
     MagDef result;
     for (auto j = contour.begin(); j != contour.end(); ++j) {
@@ -292,7 +283,51 @@ StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_pa
 
     // TODO: fill the entry
     return s;
-}  // namespace magics
+}
+
+void Library::reset() {
+    // Placeholder to reload if needed
+}
+
+
+static std::map<std::string, Library*> cache_;
+static std::vector<const Library*> libraries_;
+
+static void init(const std::string& library_path) {
+    Tokenizer tokenizer(":");
+    vector<string> paths;
+    tokenizer(library_path, paths);
+
+    libraries_.clear();
+    for (const auto& path : paths) {
+        auto j = cache_.find(path);
+        if (j == cache_.end()) {
+            cache_[path] = new Library(path);
+            j            = cache_.find(path);
+        }
+        else {
+            (*j).second->reset();
+        }
+        libraries_.push_back((*j).second);
+    }
+}
+
+CliMetLabLibrary::CliMetLabLibrary() {}
+
+CliMetLabLibrary::~CliMetLabLibrary() {}
+
+StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_path, MagDef& visdef) {
+    init(library_path);
+
+    for (auto library : libraries_) {
+        StyleEntry* e = library->getStyle(data, visdef);
+        if (e != nullptr) {
+            return e;
+        }
+    }
+
+    return nullptr;
+}
 
 void CliMetLabLibrary::print(ostream& out) const {
     out << "CliMetLabLibrary[]";

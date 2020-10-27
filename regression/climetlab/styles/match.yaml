@@ -1,6 +1,4 @@
 match:
-- paramId: '167'
 - shortName: 2t
 
-styles:
-- test
+style: test

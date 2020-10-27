@@ -4,5 +4,4 @@ magics:
     contour_highlight_colour: black
 
 match:
-  paramId:  '151'
   shortName: msl
