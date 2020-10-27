@@ -282,10 +282,9 @@ void WebLibrary::getStyle(MetaDataCollector& data, MagDef& contour, StyleEntry& 
 
     else {
         styles_->findStyle("default", contour);
-        NOTIMP;
     }
-    for (auto s = contour.begin(); s != contour.end(); ++s)
-        cout << s->first << "--->" << s->second << endl;
+    // for (auto s = contour.begin(); s != contour.end(); ++s)
+    //     cout << s->first << "--->" << s->second << endl;
 }
 
 void WebLibrary::getStyle(const string& name, MagDef& info) {

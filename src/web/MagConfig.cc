@@ -189,10 +189,9 @@ void StyleLibrary::init() {
         for (auto& p : fs::directory_iterator(path)) {
             std::string full = p.path().string();
 
-            std::string ext = full.size() > 6 ? full.substr(full.size() - 5) : std::string();
-            if (ext == ".json") {
+            if (p.path().extension() == ".json") {
                 try {
-                    if (full.size() > 11 && full.substr(full.size() - 11) == "styles.json")
+                    if (p.path().filename() == "styles.json")
                         allStyles_.init(path, "styles.json");
                     else
                         MagConfigHandler(full, *this);
