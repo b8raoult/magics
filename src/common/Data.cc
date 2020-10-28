@@ -317,7 +317,7 @@ void Data::defaultScaling(double& scaling, double& offset, std::string& dataUnit
     offset  = 0;
 
     plotUnits = dataUnits = getUnits();
-    Units::defaultScaling(scaling, offset, plotUnits, dataUnits);
+    Units::defaultScaling(scaling, offset, dataUnits, plotUnits);
 }
 
 

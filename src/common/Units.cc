@@ -126,7 +126,7 @@ void Units::defaultScaling(double& scaling, double& offset, std::string& dataUni
 
     for (auto j = conversions.begin(); j != conversions.end(); ++j) {
         if ((*j).first.first == dataUnits) {
-            plotUnits = (*j).first.first;
+            plotUnits = (*j).first.second;
             scaling   = (*j).second.scaling_;
             offset    = (*j).second.offset_;
         }
