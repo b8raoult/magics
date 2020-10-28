@@ -63,7 +63,7 @@ Library::Library(const std::string& path) : path_(path) {
     if (path_ == "default") {
         path_ = buildConfigPath("styles", "climetlab");
     }
-    std::cout << "SCANNING " << path_ << std::endl;
+    std::cerr << "SCANNING " << path_ << std::endl;
     for (auto& p : fs::recursive_directory_iterator(path_)) {
         std::string ext  = p.path().extension();
         std::string full = p.path().string();
@@ -72,7 +72,7 @@ Library::Library(const std::string& path) : path_(path) {
             entries.push_back(full);
         }
     }
-    std::cout << "DONE " << path_ << std::endl;
+    std::cerr << "DONE " << path_ << std::endl;
     n++;
 
     std::sort(entries.begin(), entries.end());
@@ -159,10 +159,10 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
     // Get values from the grib or necdf
 
-    std::cout << "=== DATA" << std::endl;
+    std::cerr << "=== DATA" << std::endl;
     for (auto j = collector.begin(); j != collector.end(); ++j) {
         if ((*j).second.size()) {
-            std::cout << "--- " << (*j).first << " = " << (*j).second << std::endl;
+            std::cerr << "--- " << (*j).first << " = " << (*j).second << std::endl;
         }
     }
 
@@ -205,14 +205,14 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
     if (score == -1) {
         // FIXME
-        {
-            ofstream out("style");
-            out << "default" << std::endl;
-        }
+        // {
+        //     ofstream out("style");
+        //     out << "default" << std::endl;
+        // }
         return nullptr;
     }
 
-    std::cout << best << std::endl;
+    std::cerr << best << std::endl;
 
     std::vector<std::string> styles;
 
@@ -221,7 +221,7 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
     }
     else {
         ValueList v = best["styles"];
-        for(auto s : v ){
+        for (auto s : v) {
             styles.push_back(std::string(s));
         }
     }
@@ -276,9 +276,9 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
     visdef = result;
 
-    std::cout << "=== VISDEF" << std::endl;
+    std::cerr << "=== VISDEF" << std::endl;
     for (auto j = visdef.begin(); j != visdef.end(); ++j) {
-        std::cout << "--- " << (*j).first << " = " << (*j).second << std::endl;
+        std::cerr << "--- " << (*j).first << " = " << (*j).second << std::endl;
     }
 
     StyleEntry* s = new StyleEntry();
@@ -321,7 +321,12 @@ CliMetLabLibrary::CliMetLabLibrary() {}
 CliMetLabLibrary::~CliMetLabLibrary() {}
 
 StyleEntry* CliMetLabLibrary::getStyle(Data& data, const std::string& library_path, MagDef& visdef) {
-    init(library_path);
+    if (library_path.empty()) {
+        init("default");
+    }
+    else {
+        init(library_path);
+    }
 
     for (auto library : libraries_) {
         StyleEntry* e = library->getStyle(data, visdef);

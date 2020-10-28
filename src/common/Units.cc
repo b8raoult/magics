@@ -43,7 +43,7 @@ static void init() {
         ValueList entries = MagParser::decodeFile(path);
 
         for (auto& e : entries) {
-            // std::cout << e << std::endl;
+            // std::cerr << e << std::endl;
             std::string from = e["from"];
             std::string to   = e["to"];
             double scaling   = e["scaling"];
@@ -101,7 +101,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     }
 
     if (from == to) {
-        std::cout << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+        std::cerr << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
                   << std::endl;
         return false;
     }
@@ -110,7 +110,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = (*j).second.scaling_;
         offset  = (*j).second.offset_;
-        std::cout << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+        std::cerr << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
                   << std::endl;
         return true;
     }
@@ -122,7 +122,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = 1.0 / (*j).second.scaling_;
         offset  = -(*j).second.offset_ / (*j).second.scaling_;
-        std::cout << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
+        std::cerr << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
                   << offset << std::endl;
 
         return true;

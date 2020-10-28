@@ -1,7 +1,6 @@
 plot:
 - output:
-    output_formats:
-    - png
+    output_formats: png
     output_name: styles
     output_name_first_page_number: false
     output_width: 680
