@@ -214,19 +214,24 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
     std::cout << best << std::endl;
 
-    std::string style_name;
+    std::vector<std::string> styles;
 
     if (best.contains("style")) {
-        style_name = std::string(best["style"]);
+        styles.push_back(std::string(best["style"]));
     }
     else {
-        style_name = std::string(best["styles"][0]);
+        ValueList v = best["styles"];
+        for(auto s : v ){
+            styles.push_back(std::string(s));
+        }
     }
-    // FIXME
-    {
-        ofstream out("style");
-        out << style_name << std::endl;
-    }
+
+    std::string style_name = styles[0];
+
+    // {
+    //     ofstream out("style");
+    //     out << style_name << std::endl;
+    // }
 
     auto j = styles_.find(style_name);
     if (j == styles_.end()) {
@@ -277,9 +282,8 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
     }
 
     StyleEntry* s = new StyleEntry();
-    vector<string> empty;
-    empty.push_back(style_name);
-    s->set("default", empty);
+    styles.push_back(style_name);
+    s->set(style_name, styles);
 
     // TODO: fill the entry
     return s;

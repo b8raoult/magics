@@ -137,6 +137,20 @@ void BaseParameter::get(magvector<long>& value) const {
 }
 
 void BaseParameter::set(const string& value) {
+    magvector<string> values;
+    if (type() == getType(values)) {
+        for (auto v : values) {
+            values.push_back(v);
+        }
+
+        try {
+            set(values);
+            return;
+        }
+        catch (MistmatchType&) {
+            // Throw the original mismatch error
+        }
+    }
     throw MistmatchType(name_, getType(value), type());
 }
 
@@ -149,12 +163,12 @@ void BaseParameter::get(string& value) const {
 }
 
 void BaseParameter::set(const magvector<string>& value) {
-    throw MistmatchType(name_, "stringarray", type());
+    throw MistmatchType(name_, getType(value), type());
 }
 
 
 void BaseParameter::get(magvector<string>& value) const {
-    throw MistmatchType(name_, "stringarray", type());
+    throw MistmatchType(name_, getType(value), type());
 }
 
 void BaseParameter::set(const LineStyle& value) {
