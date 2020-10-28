@@ -35,29 +35,43 @@ struct Scaling {
 
 
 static std::map<std::pair<std::string, std::string>, Scaling> conversions;
+static std::map<std::string, std::string> preferred;
 
 static void init() {
     if (conversions.empty()) {
-        std::set<std::string> seen;
+        std::string path  = buildConfigPath("units-conversions.yaml");
+        ValueList entries = MagParser::decodeFile(path);
 
-        std::string path = buildConfigPath("units-rules.json");
-        ValueMap values  = MagParser::decodeFile(path);
-        for (auto j = values.begin(); j != values.end(); ++j) {
-            ValueList entries = (*j).second;
-            for (auto& e : entries) {
-                std::string from = e["from"];
-                std::string to   = e["to"];
-                double scaling   = e["scaling"];
-                double offset    = e["offset"];
+        for (auto& e : entries) {
+            // std::cout << e << std::endl;
+            std::string from = e["from"];
+            std::string to   = e["to"];
+            double scaling   = e["scaling"];
+            double offset    = e["offset"];
 
-                if (seen.find(from) != seen.end()) {
-                    MagLog::error() << "Unit [" + from + "] detected more than once" << std::endl;
-                    // throw MagicsException("Unit " + from + " already defined");
-                }
-                seen.insert(from);
-
-                conversions[std::make_pair(from, to)] = Scaling(scaling, offset);
+            auto p = std::make_pair(from, to);
+            if (conversions.find(p) != conversions.end()) {
+                MagLog::error() << "Unit mapping [" << from << "] => [" << to << "] detected more than once"
+                                << std::endl;
+                // throw MagicsException("Unit " + from + " already defined");
             }
+
+            conversions[p] = Scaling(scaling, offset);
+        }
+    }
+    if (preferred.empty()) {
+        std::string path  = buildConfigPath("units-plotting.yaml");
+        ValueList entries = MagParser::decodeFile(path);
+
+        for (auto& e : entries) {
+            std::string data = e["data"];
+            std::string plot = e["plot"];
+
+            if (preferred.find(data) != preferred.end()) {
+                MagLog::error() << "Unit [" + data + "] detected more than once" << std::endl;
+            }
+
+            preferred[data] = plot;
         }
     }
 }
@@ -124,11 +138,13 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
 void Units::defaultScaling(double& scaling, double& offset, std::string& dataUnits, std::string& plotUnits) {
     init();
 
-    for (auto j = conversions.begin(); j != conversions.end(); ++j) {
-        if ((*j).first.first == dataUnits) {
-            plotUnits = (*j).first.second;
-            scaling   = (*j).second.scaling_;
-            offset    = (*j).second.offset_;
-        }
+    scaling   = 1;
+    offset    = 1;
+    plotUnits = dataUnits;
+
+    auto j = preferred.find(dataUnits);
+    if (j != preferred.end()) {
+        plotUnits = (*j).second;
+        ASSERT(convert(dataUnits, plotUnits, scaling, offset));
     }
 }
