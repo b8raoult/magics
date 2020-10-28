@@ -65,7 +65,7 @@ Library::Library(const std::string& path) : path_(path) {
     }
     std::cerr << "SCANNING " << path_ << std::endl;
     for (auto& p : fs::recursive_directory_iterator(path_)) {
-        std::string ext  = p.path().extension();
+        std::string ext  = p.path().extension().string();
         std::string full = p.path().string();
 
         if (ext == ".yaml" || ext == ".json") {
@@ -138,7 +138,7 @@ void Library::process(const std::string& path, const ValueMap& entry, int n) {
     }
 
     if (style) {
-        std::string name = fs::path(path).stem();
+        std::string name = fs::path(path).stem().string();
         styles_[name]    = entry;
         return;
     }
