@@ -43,7 +43,7 @@ static void init() {
         ValueList entries = MagParser::decodeFile(path);
 
         for (auto& e : entries) {
-            // std::cerr << e << std::endl;
+            // MagLog::warning()  << e << std::endl;
             std::string from = e["from"];
             std::string to   = e["to"];
             double scaling   = e["scaling"];
@@ -83,6 +83,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     init();
 
     if (to.empty()) {
+                MagLog::dev() << "No unit conversion needed: " << from << std::endl;
+
         return false;
     }
 
@@ -101,7 +103,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     }
 
     if (from == to) {
-        std::cerr << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+        MagLog::dev()  << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
                   << std::endl;
         return false;
     }
@@ -110,7 +112,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = (*j).second.scaling_;
         offset  = (*j).second.offset_;
-        std::cerr << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+        MagLog::dev()  << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
                   << std::endl;
         return true;
     }
@@ -122,7 +124,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = 1.0 / (*j).second.scaling_;
         offset  = -(*j).second.offset_ / (*j).second.scaling_;
-        std::cerr << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
+        MagLog::warning()  << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
                   << offset << std::endl;
 
         return true;
@@ -139,7 +141,7 @@ void Units::defaultScaling(double& scaling, double& offset, std::string& dataUni
     init();
 
     scaling   = 1;
-    offset    = 1;
+    offset    = 0;
     plotUnits = dataUnits;
 
     auto j = preferred.find(dataUnits);

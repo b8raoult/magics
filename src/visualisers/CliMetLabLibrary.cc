@@ -53,17 +53,22 @@ public:
     StyleEntry* getStyle(Data& data, MagDef& visdef) const;
 
     void reset();
+    void build();
 };
 
 
 Library::Library(const std::string& path) : path_(path) {
+    build();
+}
+
+void Library::build() {
     size_t n = 0;
     std::vector<std::string> entries;
 
     if (path_ == "default") {
         path_ = buildConfigPath("styles", "climetlab");
     }
-    std::cerr << "SCANNING " << path_ << std::endl;
+    MagLog::dev() << "SCANNING " << path_ << std::endl;
     for (auto& p : fs::recursive_directory_iterator(path_)) {
         std::string ext  = p.path().extension().string();
         std::string full = p.path().string();
@@ -72,7 +77,7 @@ Library::Library(const std::string& path) : path_(path) {
             entries.push_back(full);
         }
     }
-    std::cerr << "DONE " << path_ << std::endl;
+    MagLog::dev() << "DONE " << path_ << std::endl;
     n++;
 
     std::sort(entries.begin(), entries.end());
@@ -159,10 +164,10 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
     // Get values from the grib or necdf
 
-    std::cerr << "=== DATA" << std::endl;
+    MagLog::dev() << "=== DATA" << std::endl;
     for (auto j = collector.begin(); j != collector.end(); ++j) {
         if ((*j).second.size()) {
-            std::cerr << "--- " << (*j).first << " = " << (*j).second << std::endl;
+            MagLog::dev() << "--- " << (*j).first << " = " << (*j).second << std::endl;
         }
     }
 
@@ -212,7 +217,7 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
         return nullptr;
     }
 
-    std::cerr << best << std::endl;
+    MagLog::dev() << best << std::endl;
 
     std::vector<std::string> styles;
 
@@ -276,9 +281,9 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
     visdef = result;
 
-    std::cerr << "=== VISDEF" << std::endl;
+    MagLog::dev() << "=== VISDEF" << std::endl;
     for (auto j = visdef.begin(); j != visdef.end(); ++j) {
-        std::cerr << "--- " << (*j).first << " = " << (*j).second << std::endl;
+        MagLog::dev() << "--- " << (*j).first << " = " << (*j).second << std::endl;
     }
 
     StyleEntry* s = new StyleEntry();
@@ -291,6 +296,12 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
 void Library::reset() {
     // Placeholder to reload if needed
+    if (true) {
+        keys_.clear();
+        styles_.clear();
+        rules_.clear();
+        build();
+    }
 }
 
 

@@ -513,7 +513,8 @@ const char* MagicsCalls::detect(const std::string& data, const std::string& dime
 
 void MagicsCalls::strict(bool on) {
     // TODO: Come back
-    MagicsSettings::compatibility(on);
+    MagicsSettings::compatibility(!on);
+    MagicsSettings::strict(on);
 }
 
 }  // namespace magics
