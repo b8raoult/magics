@@ -60,7 +60,10 @@ public:
     virtual bool akimaEnable() const { return false; }
     virtual bool delegate() const { return false; }
 
-    virtual MatrixHandler* getReady(const Transformation&) const;
+    virtual MatrixHandler* getReady(const Transformation&) const {
+        NOTIMP;
+        return 0;
+    }
 
     virtual const AbstractMatrix& original() const { return *this; }
 
@@ -285,9 +288,22 @@ public:
 
     double operator()(int row, int column) const override;
 
-    double YResolution() const override;
-    double XResolution() const override;
-
+    double YResolution() const override {
+        magvector<double> diff;
+        diff.reserve(rowsAxis_.size());
+        std::adjacent_difference(rowsAxis_.begin(), rowsAxis_.end(), back_inserter(diff));
+        double resol = std::accumulate(diff.begin() + 1, diff.end(), 0.) / (diff.size() - 1);
+        // MagLog::dev() << "Matrix::YResolution()--->" << resol << "\n";
+        return resol;
+    }
+    double XResolution() const override {
+        magvector<double> diff;
+        diff.reserve(columnsAxis_.size());
+        std::adjacent_difference(columnsAxis_.begin(), columnsAxis_.end(), back_inserter(diff));
+        double resol = std::accumulate(diff.begin() + 1, diff.end(), 0.) / (diff.size() - 1);
+        // MagLog::dev() << "Matrix::XResolution()--->" << resol << "\n";
+        return resol;
+    }
     vector<double>& rowsAxis() const override { return rowsAxis_; }
     vector<double>& columnsAxis() const override { return columnsAxis_; }
 
@@ -308,12 +324,41 @@ public:
     virtual bool akimaEnable() const override { return akima_; }
     void akimaEnabled() { akima_ = true; }
     void akimaDisabled() { akima_ = false; }
-    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override;
 
-    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override;
+    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override {
+        index1 = this->lowerRow(r);
+        row1   = this->regular_row(index1);
+        index2 = this->upperRow(r);
+        row2   = this->regular_row(index2);
+    }
 
-    int lowerRow(double r) const override;
-    int lowerColumn(double c) const override;
+    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override {
+        index1  = this->lowerColumn(r);
+        column1 = this->regular_column(index1);
+        index2  = this->upperColumn(r);
+        column2 = this->regular_column(index2);
+    }
+
+    int lowerRow(double r) const override {
+        int last = -1;
+        for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
+            if (i->first > r) {
+                return last;
+            }
+            last = i->second;
+        }
+        return last;
+    }
+    int lowerColumn(double c) const override {
+        int last = -1;
+        for (map<double, int>::const_iterator i = columnsMap_.begin(); i != columnsMap_.end(); ++i) {
+            if (i->first > c)
+                return last;
+            last = i->second;
+        }
+        return last;
+    }
+
     int upperRow(double r) const {
         for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
             if (i->first >= r) {
@@ -339,7 +384,9 @@ public:
 protected:
     //! Method to print string about this class on to a stream of type ostream
     //! (virtual).
-    virtual void print(ostream& out) const override;
+    virtual void print(ostream& out) const override {
+        out << "Matrix";
+    }
 
     map<double, int> rowsMap_;
     mutable magvector<double> rowsAxis_;
@@ -352,8 +399,29 @@ protected:
     double missing_;
     bool akima_;
 
-    int row_ind(double row) const;
-    int column_ind(double column) const;
+        int row_ind(double row) const {
+        map<double, int>::const_iterator i = rowsMap_.lower_bound(row);
+        if (same(i->first, row))
+            return i->second;
+        if (i == rowsMap_.end()) {
+            map<double, int>::const_reverse_iterator i = rowsMap_.rbegin();
+            if (same(i->first, row))
+                return i->second;
+        }
+        return -1;
+    }
+    int column_ind(double column) const {
+        map<double, int>::const_iterator i = columnsMap_.lower_bound(column);
+
+        if (same(i->first, column))
+            return i->second;
+        if (i == columnsMap_.end()) {
+            map<double, int>::const_reverse_iterator i = columnsMap_.rbegin();
+            if (same(i->first, column))
+                return i->second;
+        }
+        return -1;
+    }
 
 private:
     mutable double min_;

@@ -34,10 +34,10 @@ namespace magics {
 
 class MatrixHandler : public AbstractMatrix, public AbstractPoints {
 public:
-    MatrixHandler(const AbstractMatrix& matrix);
-    MatrixHandler(const MatrixHandler& matrix);
+    MatrixHandler(const AbstractMatrix& matrix) :
+        AbstractMatrix(), AbstractPoints(), matrix_(matrix), min_(INT_MAX), max_(-INT_MAX), tile_(false) {}
 
-    virtual ~MatrixHandler() override {}
+    virtual ~MatrixHandler() {}
 
     virtual bool tile() { return tile_; }
 
@@ -63,10 +63,175 @@ public:
     double x(double x, double y) const override { return matrix_.x(x, y); }
     double y(double x, double y) const override { return matrix_.y(x, y); }
 
-    virtual double nearest(double row, double column, double& rowOut, double& columnOut) const override;
-    virtual double nearest(double row, double column) const override;
+    virtual double nearest(double row, double column, double& rowOut, double& columnOut) const override {
+        rowOut    = -1;
+        columnOut = -1;
+        return nearest(row, column);
+    }
+    virtual double nearest(double row, double column) const override {
+        if (columns() == 0 || rows() == 0)
+            return matrix_.missing();
 
-    virtual double interpolate(double i, double j) const override;
+        if (column < left() && !same(column, left()))
+            return matrix_.missing();
+        if (column > right() && !same(column, right()))
+            return matrix_.missing();
+        if (row < bottom() && !same(row, bottom()))
+            return matrix_.missing();
+        if (row > top() && !same(row, top()))
+            return matrix_.missing();
+
+        int ri = rowIndex(row);
+        int ci = columnIndex(column);
+        if (ri != -1 && ci != -1)
+            return (*this)(ri, ci);
+        double x1, x2;
+        double y1, y2;
+        int r1, r2, c1, c2;
+        vector<double> distances;
+        map<double, pair<std::pair<double, double>, pair<int, int> > > helper;
+        vector<std::pair<std::pair<double, double>, pair<int, int> > > coordinates;
+        if (ri != -1) {
+            boundColumn(column, x1, c1, x2, c2);
+            if (x1 != -1)
+                coordinates.push_back(make_pair(make_pair(row, x1), std::make_pair(ri, c1)));
+            if (x2 != -1)
+                coordinates.push_back(make_pair(make_pair(row, x2), std::make_pair(ri, c2)));
+        }
+        else if (ci != -1) {
+            boundRow(row, y1, r1, y2, r2);
+            if (y1 != -1)
+                coordinates.push_back(make_pair(make_pair(y1, column), std::make_pair(r1, ci)));
+            if (y2 != -1)
+                coordinates.push_back(make_pair(make_pair(y2, column), std::make_pair(r2, ci)));
+        }
+        else {
+            boundColumn(column, x1, c1, x2, c2);
+            boundRow(row, y1, r1, y2, r2);
+
+            // 4 points ...
+            // x1, y1 - x2, y1 -  x1, y2 - x2, y2
+            // find the nearest...
+            if (y1 != -1) {
+                if (x1 != -1)
+                    coordinates.push_back(make_pair(make_pair(y1, x1), std::make_pair(r1, c1)));
+                if (x2 != -1)
+                    coordinates.push_back(make_pair(make_pair(y1, x2), std::make_pair(r1, c2)));
+            }
+            if (y2 != -1) {
+                if (x1 != -1)
+                    coordinates.push_back(make_pair(make_pair(y2, x1), std::make_pair(r2, c1)));
+                if (x2 != -1)
+                    coordinates.push_back(make_pair(make_pair(y2, x2), std::make_pair(r2, c2)));
+            }
+        }
+
+        for (vector<pair<std::pair<double, double>, pair<int, int> > >::iterator coord = coordinates.begin();
+             coord != coordinates.end(); ++coord) {
+            double distance = (row - coord->first.first) * (row - coord->first.first) +
+                              (column - coord->first.second) * (column - coord->first.second);
+            // cout << distance << " [ " << coord->first.first << ", " <<
+            // coord->first.second << "]" << endl;
+            distances.push_back(distance);
+            helper.insert(make_pair(distance, *coord));
+        }
+
+        if (distances.empty())
+            return matrix_.missing();
+
+        double min = *std::min_element(distances.begin(), distances.end());
+
+        map<double, pair<std::pair<double, double>, pair<int, int> > >::iterator n = helper.find(min);
+
+        if (n == helper.end())
+            return matrix_.missing();
+
+        return (*this)(n->second.second.first, n->second.second.second);
+    }
+
+    virtual double interpolate(double i, double j) const override {
+        if (columns() == 0 || rows() == 0)
+            return matrix_.missing();
+
+        if (j < left()) {
+            if (!same(j, left()))
+                return matrix_.missing();
+            j = left();  // not really necessary but now there will be no more obscur
+                         // rounding problems!
+        }
+        if (j > right()) {
+            if (!same(j, right()))
+                return matrix_.missing();
+            j = right();  // id left
+        }
+        if (i < bottom()) {
+            if (!same(i, bottom()))
+                return matrix_.missing();
+            i = bottom();  // id left
+        }
+        if (i > top()) {
+            if (!same(i, top()))
+                return matrix_.missing();
+            i = top();  // id left
+        }
+
+        int ii = rowIndex(i);
+        if (ii == -1) {
+            // interpolate between 2 rows.
+            double v1, v2;
+            int i1, i2;
+            boundRow(i, v1, i1, v2, i2);
+
+            if (i1 == -1 || i2 == -1)
+                return missing();
+            internal_ = true;
+            double a  = (*this).interpolate(v1, j);
+            internal_ = false;
+
+            if (same(a, missing()))
+                return missing();
+            if (i1 == i2 || v1 == v2)
+                return a;  // already seen with Akima760 (da,db ---> zero divide !)
+
+            internal_ = true;
+            double b  = (*this).interpolate(v2, j);
+            internal_ = false;
+            if (same(b, missing()))
+                return missing();
+
+            double da  = (v2 - i) / (v2 - v1);
+            double db  = (i - v1) / (v2 - v1);
+            double val = (a * da) + (b * db);
+            return val;
+        }
+        int jj = columnIndex(j);
+        if (jj == -1) {
+            double v1, v2;
+            int i1, i2;
+            boundColumn(j, v1, i1, v2, i2);
+            if (i1 == -1 || i2 == -1)
+                return missing();
+
+            double a = (*this)(ii, i1);
+            if (same(a, missing()))
+                return missing();
+
+            if (i1 == i2 || v1 == v2)
+                return a;  // Id rows
+
+            double b = (*this)(ii, i2);
+
+            if (same(b, missing()))
+                return missing();
+
+            double da  = (v2 - j) / (v2 - v1);
+            double db  = (j - v1) / (v2 - v1);
+            double val = (a * da) + (b * db);
+            return val;
+        }
+
+        return (*this)(ii, jj);
+    }
 
     void setTile() { tile_ = true; }
 
@@ -85,11 +250,39 @@ public:
     virtual int firstColumn() const override { return matrix_.firstColumn(); }
     virtual int nextColumn(int j, int f) const override { return matrix_.nextColumn(j, f); }
 
-    virtual void setMinMax() const;
+    virtual void setMinMax() const {
+        int nb_rows    = rows();
+        int nb_columns = columns();
+        double missing = matrix_.missing();
 
-    double min() const override;
+        for (int r = 0; r < nb_rows; r++) {
+            for (int c = 0; c < nb_columns; c++) {
+                double val = (*this)(r, c);
+                if (val == missing)
+                    continue;
+                if (val < min_)
+                    min_ = val;
+                if (val > max_)
+                    max_ = val;
+            }
+        }
+    }
 
-    double max() const override;
+    double min() const override {
+        if (min_ != INT_MAX)
+            return min_;
+
+        setMinMax();
+        return min_;
+    }
+
+    double max() const override {
+        if (max_ != -INT_MAX)
+            return max_;
+
+        setMinMax();
+        return max_;
+    }
 
     virtual double minX() const override { return matrix_.minX(); }
     virtual double maxX() const override { return matrix_.maxX(); }
@@ -97,7 +290,23 @@ public:
     virtual double maxY() const override { return matrix_.maxY(); }
 
     // Implements the AbstractPoints interface
-    virtual void setToFirst() override;
+    virtual void setToFirst() override {
+        if (points_.empty()) {
+            int nb_rows    = rows();
+            int nb_columns = columns();
+
+            points_.reserve(nb_rows * nb_columns);
+
+            for (int r = 0; r < nb_rows; r++) {
+                for (int c = 0; c < nb_columns; c++) {
+                    if (matrix_.accept(column(r, c), row(r, c)))
+                        if (!same((*this)(r, c), matrix_.missing()))
+                            points_.push_back(new UserPoint(column(r, c), row(r, c), (*this)(r, c)));
+                }
+            }
+        }
+        current_ = points_.begin();
+    }
 
     //! Method to test the end of collection.
     virtual bool more() override { return current_ != points_.end(); }
@@ -109,9 +318,7 @@ public:
     virtual void advance() override { current_++; }
 
     virtual vector<double>& rowsAxis() const override { return const_cast<MatrixHandler*>(this)->matrix_.rowsAxis(); }
-    virtual vector<double>& columnsAxis() const override {
-        return const_cast<MatrixHandler*>(this)->matrix_.columnsAxis();
-    }
+    virtual vector<double>& columnsAxis() const override { return const_cast<MatrixHandler*>(this)->matrix_.columnsAxis(); }
 
     virtual double row(int i, int j) const override { return matrix_.row(i, j); }
     virtual double column(int i, int j) const override { return matrix_.column(i, j); }
@@ -120,7 +327,15 @@ public:
     virtual double regular_column(int i) const override { return matrix_.regular_column(i); }
 
     virtual double missing() const override { return matrix_.missing(); }
-    virtual bool hasMissingValues() const override;
+    virtual bool hasMissingValues() const override {
+        for (int r = 0; r < rows(); r++) {
+            for (int c = 0; c < columns(); c++) {
+                if (operator()(r, c) == matrix_.missing())
+                    return true;
+            }
+        }
+        return false;
+    }
 
     const AbstractMatrix& matrix() { return matrix_; }
 
@@ -135,7 +350,8 @@ protected:
     mutable bool internal_;
     mutable bool tile_;
 
-    virtual void print(ostream& s) const override { s << "MatrixHandler[" << matrix_ << "]"; }
+    virtual void print(ostream& out) const override { out << "MatrixHandler"; }
+
 };
 
 class TransformMatrixHandler : public MatrixHandler {
@@ -149,7 +365,22 @@ public:
     double bottom() const override { return miny_; }
     double top() const override { return maxy_; }
 
-    void set();
+    void set() {
+        for (int i = 0; i < rows(); i++) {
+            double row = matrix_.regular_row(minrow_ + i);
+            rowsMap_.insert(make_pair(row, i));
+            fastRows_.push_back(row);
+        }
+        for (int i = 0; i < columns(); i++) {
+            double column = matrix_.regular_column(mincolumn_ + i);
+            columnsMap_.insert(make_pair(column, i));
+            fastColumns_.push_back(column);
+        }
+        minx_ = std::min(fastColumns_.front(), fastColumns_.back());
+        maxx_ = std::max(fastColumns_.front(), fastColumns_.back());
+        miny_ = std::min(fastRows_.front(), fastRows_.back());
+        maxy_ = std::max(fastRows_.front(), fastRows_.back());
+    }
 
     int rows() const override { return maxrow_ - minrow_ + 1; }
     int columns() const override { return maxcolumn_ - mincolumn_ + 1; }
@@ -164,10 +395,40 @@ public:
     virtual bool hasMissingValues() const override { return matrix_.hasMissingValues(); }
     double interpolate(double i, double j) const override { return matrix_.interpolate(i, j); }
     double missing() const override { return matrix_.missing(); }
-    int lowerRow(double r) const override;
-    int lowerColumn(double c) const override;
-    int upperRow(double r) const;
-    int upperColumn(double c) const;
+    int lowerRow(double r) const override {
+        int last = -1;
+        for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
+            if (i->first > r) {
+                return last;
+            }
+            last = i->second;
+        }
+        return -1;
+    }
+    int lowerColumn(double c) const override {
+        int last = -1;
+        for (map<double, int>::const_iterator i = columnsMap_.begin(); i != columnsMap_.end(); ++i) {
+            if (i->first > c)
+                return last;
+            last = i->second;
+        }
+        return -1;
+    }
+    int upperRow(double r) const {
+        for (map<double, int>::const_iterator i = rowsMap_.begin(); i != rowsMap_.end(); ++i) {
+            if (i->first > r) {
+                return i->second;
+            }
+        }
+        return -1;
+    }
+    int upperColumn(double c) const {
+        for (map<double, int>::const_iterator i = columnsMap_.begin(); i != columnsMap_.end(); ++i) {
+            if (i->first > c)
+                return i->second;
+        }
+        return -1;
+    }
 
 protected:
     int minrow_;
@@ -204,17 +465,20 @@ public:
 protected:
 };
 
+
+#include <ProjP.h>
+
 class Proj4MatrixHandler : public MatrixHandler {
 public:
     Proj4MatrixHandler(const AbstractMatrix& matrix, const string&);
 
-    double interpolate(double row, double column) const override;
-    double nearest(double row, double column) const override;
+    double interpolate(double row, double column) const;
+    double nearest(double row, double column) const;
 
-    double column(int, int) const override;
-    double row(int, int) const override;
+    double column(int, int) const;
+    double row(int, int) const;
 
-    bool delegate() const override { return true; }
+    bool delegate() const { return true; }
 
 protected:
     double minx_;
@@ -223,8 +487,6 @@ protected:
     double maxy_;
 
     LatLonProjP projHelper_;
-
-    virtual void print(ostream& s) const override { s << "Proj4MatrixHandler[]"; }
 };
 
 class RotatedMatrixHandler : public MatrixHandler {
@@ -252,18 +514,104 @@ protected:
 
 class BoxMatrixHandler : public TransformMatrixHandler {
 public:
-    BoxMatrixHandler(const AbstractMatrix& matrix, const Transformation& transformation);
+    BoxMatrixHandler(const AbstractMatrix& matrix, const Transformation& transformation) :
+        TransformMatrixHandler(matrix), transformation_(transformation), original_(0) {
+        double minx = std::min(transformation.getMinX(), transformation.getMaxX());
+        double maxx = std::max(transformation.getMinX(), transformation.getMaxX());
+        double miny = std::min(transformation.getMinY(), transformation.getMaxY());
+        double maxy = std::max(transformation.getMinY(), transformation.getMaxY());
 
-    virtual const AbstractMatrix& original() const override;
+        int rows    = matrix_.rows();
+        int columns = matrix_.columns();
 
-    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override;
+        mincolumn_ = columns - 1;
+        maxcolumn_ = 0;
+        minrow_    = rows - 1;
+        maxrow_    = 0;
 
-    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override;
-    int rowIndex(double r) const override;
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
+                double x = matrix_.column(row, column);
+                double y = matrix_.row(row, column);
+                if (minx <= x && x < maxx && miny <= y && y <= maxy) {
+                    mincolumn_ = std::min(mincolumn_, column);
+                    maxcolumn_ = std::max(maxcolumn_, column);
+                    minrow_    = std::min(minrow_, row);
+                    maxrow_    = std::max(maxrow_, row);
+                }
+            }
+        }
 
-    int columnIndex(double c) const override;
+        if (mincolumn_ > maxcolumn_) {
+            mincolumn_ = maxcolumn_;
+            MagLog::warning() << "No data to plot in the requested area" << endl;
+        }
+        if (minrow_ > maxrow_) {
+            minrow_ = maxrow_;
+            MagLog::warning() << "No data to plot in the requested area" << endl;
+        }
+        // MagLog::broadcast();
 
-    virtual ~BoxMatrixHandler() override { delete original_; }
+        mincolumn_ = std::max(mincolumn_ - 1, 0);
+        maxcolumn_ = std::min(maxcolumn_ + 1, columns - 1);
+
+        columnrevert_ = matrix_.column(0, maxcolumn_) < matrix_.column(0, mincolumn_);
+
+        minrow_ = std::max(minrow_ - 1, 0);
+        maxrow_ = std::min(maxrow_ + 1, rows - 1);
+
+        rowrevert_ = matrix_.row(maxrow_, 0) < matrix_.row(minrow_, 0);
+        set();
+    }
+
+    virtual const AbstractMatrix& original() const override {
+        if (!original_)
+            original_ = new BoxMatrixHandler(matrix_.original(), transformation_);
+        return *original_;
+    }
+
+    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override {
+        index1 = lowerRow(r);
+        row1   = regular_row(index1);
+        index2 = upperRow(r);
+        row2   = regular_row(index2);
+    }
+
+    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override {
+        index1  = lowerColumn(r);
+        column1 = regular_column(index1);
+        index2  = upperColumn(r);
+        column2 = regular_column(index2);
+    }
+    int rowIndex(double r) const override {
+        map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
+        if (i != rowsMap_.end()) {
+            if (same(i->first, r))
+                return i->second;
+        }
+        else {  // Utilité ? A confirmer
+            map<double, int>::const_reverse_iterator i = rowsMap_.rbegin();
+            if (same(i->first, r))
+                return i->second;
+        }
+        return -1;
+    }
+
+    int columnIndex(double c) const override {
+        map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
+        if (i != columnsMap_.end()) {
+            if (same(i->first, c))
+                return i->second;
+        }
+        else {  // Utilité ? A confirmer
+            map<double, int>::const_reverse_iterator i = columnsMap_.rbegin();
+            if (same(i->first, c))
+                return i->second;
+        }
+        return -1;
+    }
+
+    virtual ~BoxMatrixHandler() { delete original_; }
 
     // Implements the AbstractPoints interface
     virtual bool accept(double x, double y) const override { return transformation_.in(x, y); }
@@ -277,34 +625,89 @@ protected:
     const Transformation& transformation_;
     mutable BoxMatrixHandler* original_;
 
-    virtual void print(ostream& s) const override { s << "BoxMatrixHandler[]"; }
+    virtual void print(ostream& out) const override { out << "BoxMatrixHandler"; }
+
 };
 
 class GeoBoxMatrixHandler : public TransformMatrixHandler {
 public:
     GeoBoxMatrixHandler(const AbstractMatrix& matrix, const Transformation& transformation);
 
-    virtual const AbstractMatrix& original() const override;
+    virtual const AbstractMatrix& original() const override {
+        if (!original_)
+            original_ = new GeoBoxMatrixHandler(matrix_.original(), transformation_);
+        return *original_;
+    }
 
     int columns() const override { return columnsMap_.size(); }
     int rows() const override { return rowsMap_.size(); }
 
-    int rowIndex(double r) const override;
+    int rowIndex(double r) const override {
+        map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
+        if (i != rowsMap_.end()) {
+            if (same(i->first, r))
+                return i->second;
+        }
+        else {  // Utilité ? A confirmer
+            map<double, int>::const_reverse_iterator i = rowsMap_.rbegin();
+            if (same(i->first, r))
+                return i->second;
+        }
+        return -1;
+    }
 
-    int columnIndex(double c) const override;
+    int columnIndex(double c) const override {
+        map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
+        if (i != columnsMap_.end()) {
+            if (same(i->first, c))
+                return i->second;
+        }
+        else {  // Utilité ? A confirmer
+            map<double, int>::const_reverse_iterator i = columnsMap_.rbegin();
+            if (same(i->first, c))
+                return i->second;
+        }
+        return -1;
+    }
 
     inline double column(int, int column) const override { return regular_longitudes_[column]; }
     inline double row(int row, int) const override { return regular_latitudes_[row]; }
-    double operator()(int row, int column) const override;
+    double operator()(int row, int column) const override {
+        if (columns_[column] == -1)
+            return matrix_.missing();
+        return matrix_(rows_[row], columns_[column]);
+    }
 
-    int lowerRow(double r) const override;
+    int lowerRow(double r) const override {
+        map<double, int>::const_iterator i = rowsMap_.lower_bound(r);
+        if (i != rowsMap_.end()) {
+            if (same(i->first, r))
+                return i->second;
+            if (i != rowsMap_.begin()) {
+                i--;
+                return i->second;
+            }
+        }
+        return -1;
+    }
 
-    int lowerColumn(double c) const override;
+    int lowerColumn(double c) const override {
+        map<double, int>::const_iterator i = columnsMap_.lower_bound(c);
+        if (i != columnsMap_.end()) {
+            if (same(i->first, c))
+                return i->second;
+            if (i != columnsMap_.begin()) {
+                i--;
+                return i->second;
+            }
+        }
+        return -1;
+    }
 
     double regular_row(int i) const override { return regular_latitudes_[i]; }
     double regular_column(int i) const override { return regular_longitudes_[i]; }
 
-    virtual ~GeoBoxMatrixHandler() override { delete original_; }
+    virtual ~GeoBoxMatrixHandler() { delete original_; }
 
     // Implements the AbstractPoints interface
     virtual bool accept(double x, double y) const override { return transformation_.in(x, y); }
@@ -319,11 +722,39 @@ public:
     double right() const override { return regular_longitudes_.back(); }
     double top() const override { return regular_latitudes_.back(); }
 
-    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override;
+    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override{
+        index1 = lowerRow(r);
+        if (index1 < 0) {
+            index2 = -1;
+            return;
+        }
 
-    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override;
+        row1 = regular_latitudes_[index1];
+        if (index1 >= regular_latitudes_.size() - 1) {
+            index2 = -1;
+            return;
+        }
 
-    virtual void print(ostream& s) const override { s << "GeoBoxMatrixHandler[]"; }
+        index2 = index1 + 1;
+        row2   = regular_latitudes_[index2];
+    }
+
+    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override{
+        index1 = lowerColumn(r);
+        if (index1 < 0) {
+            index2 = -1;
+            return;
+        }
+
+        column1 = regular_longitudes_[index1];
+        if (index1 >= regular_longitudes_.size() - 1) {
+            index2 = -1;
+            return;
+        }
+
+        index2  = index1 + 1;
+        column2 = regular_longitudes_[index2];
+    }
 
 protected:
     const Transformation& transformation_;
@@ -332,14 +763,46 @@ protected:
     mutable map<int, int> columns_;
     vector<double> regular_latitudes_;
     vector<double> regular_longitudes_;
+
+    virtual void print(ostream& out) const override { out << "GeoBoxMatrixHandler"; }
 };
 
 class MonotonicIncreasingMatrixHandler : public MatrixHandler {
 public:
-    MonotonicIncreasingMatrixHandler(const AbstractMatrix& matrix);
-    virtual ~MonotonicIncreasingMatrixHandler() override {}
+    MonotonicIncreasingMatrixHandler(const AbstractMatrix& matrix) : MatrixHandler(matrix) {
+        // Check RowAxis...
+        int row = matrix_.rows();
+        if (matrix_.regular_row(1) - matrix_.regular_row(0) >= 0)  // Increasing Axis...
+            for (int i = 0; i < row; i++) {
+                rows_[i]                           = i;
+                newRowsMap_[matrix.regular_row(i)] = i;
+            }
+        else  // Decreasing axis...
+            for (int i = 0; i < row; i++) {
+                rows_[i]                                       = (row - 1) - i;
+                newRowsMap_[matrix.regular_row((row - 1) - i)] = i;
+            }
+        // Check ColumnAxis
+        int column = matrix_.columns();
+        if (matrix_.regular_column(1) - matrix_.regular_column(0) >= 0)  // Increasing Axis...
+            for (int j = 0; j < column; j++) {
+                columns_[j]                              = j;
+                newColumnsMap_[matrix.regular_column(j)] = j;
+            }
+        else  // Decreasing axis...
+            for (int j = 0; j < column; j++) {
+                columns_[j]                                             = (column - 1) - j;
+                newColumnsMap_[matrix.regular_column((column - 1) - j)] = j;
+            }
+    }
+    virtual ~MonotonicIncreasingMatrixHandler() {}
 
-    double operator()(int i, int j) const override;
+    double operator()(int i, int j) const override {
+        int x = const_cast<MonotonicIncreasingMatrixHandler*>(this)->rows_[i];
+        int y = const_cast<MonotonicIncreasingMatrixHandler*>(this)->columns_[j];
+
+        return matrix_(x, y);
+    }
 
     int rows() const override { return matrix_.rows(); }
     virtual int columns() const override { return matrix_.columns(); }
@@ -351,44 +814,108 @@ public:
     }
     virtual double interpolate(double i, double j) const override { return matrix_.interpolate(i, j); }
     virtual double missing() const override { return matrix_.missing(); }
-    void print();
+    void print() {
+        MagLog::debug() << "MonotonicIncreasingMatrixHandler->\n";
+        for (int j = 0; j < rows(); j++) {
+            for (int i = 0; i < columns(); i++) {
+                MagLog::dev() << (*this)(j, i) << " ";
+            }
+            MagLog::dev() << "\n";
+        }
+        MagLog::debug() << "<--" << endl;
+    }
 
-    int lowerRow(double r) const override;
+    int lowerRow(double r) const override {
+        map<double, int>::const_iterator bound = newRowsMap_.find(r);
+        if (bound != newRowsMap_.end())
+            return (*bound).second;
 
-    int lowerColumn(double c) const override;
+        bound = newRowsMap_.lower_bound(r);
+        if (bound == newRowsMap_.end())
+            return -1;
+        return (*bound).second - 1;
+    }
+
+    int lowerColumn(double c) const override {
+        map<double, int>::const_iterator bound = newColumnsMap_.find(c);
+        if (bound != newColumnsMap_.end())
+            return (*bound).second;
+
+        bound = newColumnsMap_.lower_bound(c);
+        if (bound == newColumnsMap_.end())
+            return -1;
+        return (*bound).second - 1;
+    }
 
 protected:
     map<int, int> rows_;
     map<int, int> columns_;
     map<double, int> newRowsMap_;
     map<double, int> newColumnsMap_;
+
+    virtual void print(ostream& out) const override { out << "MonotonicIncreasingMatrixHandler"; }
+
 };
 
 class OriginalMatrixHandler : public MatrixHandler {
+    virtual void print(ostream& out) const override { out << "OriginalMatrixHandler"; }
 public:
     OriginalMatrixHandler(AbstractMatrix& matrix) : MatrixHandler(matrix.original()) {}
 };
 
 class ThinningMatrixHandler : public MatrixHandler {
 public:
-    ThinningMatrixHandler(const AbstractMatrix& matrix, int fr, int fc);
+    ThinningMatrixHandler(const AbstractMatrix& matrix, int fr, int fc) :
+        MatrixHandler(matrix), frequencyRow_(fr), frequencyColumn_(fc) {
+        int rows    = matrix_.rows();
+        int columns = matrix_.columns();
 
-    int rows() const { return rowIndex_.size(); }
-    int columns() const { return columnIndex_.size(); }
+        int row = 0;
+        for (int i = 0; i < rows; i += frequencyRow_) {
+            rowIndex_.insert(make_pair(row, i));
+            row++;
+        }
+        int column = 0;
+        for (int i = 0; i < columns; i += frequencyColumn_) {
+            // MagLog::dev()<< "Sample --> " << column << "=" << i << endl;
+            columnIndex_.insert(make_pair(column, i));
+            // MagLog::dev()<< "Sample --> " << column << "=" << i << "[" <<
+            // regular_column(column) << "]" << endl;
 
-    double operator()(int row, int column) const { return matrix_(rowIndex(row), columnIndex(column)); }
-    double column(int row, int column) const { return matrix_.column(rowIndex(row), columnIndex(column)); }
-    double row(int row, int column) const { return matrix_.row(rowIndex(row), columnIndex(column)); }
-    double regular_row(int row) const { return matrix_.regular_row(rowIndex(row)); }
-    double regular_column(int column) const { return matrix_.regular_column(columnIndex(column)); }
+            column++;
+        }
+        columnIndex_.insert(make_pair(column, columns - 1));
+        // MagLog::dev()<< "Sample --> " << column << "=" << columns-1 << "[" <<
+        // regular_column(column) << "]"<< endl;
+    }
+
+    int rows() const override { return rowIndex_.size(); }
+    int columns() const override { return columnIndex_.size(); }
+
+    double operator()(int row, int column) const override { return matrix_(rowIndex(row), columnIndex(column)); }
+    double column(int row, int column) const override { return matrix_.column(rowIndex(row), columnIndex(column)); }
+    double row(int row, int column) const override { return matrix_.row(rowIndex(row), columnIndex(column)); }
+    double regular_row(int row) const override { return matrix_.regular_row(rowIndex(row)); }
+    double regular_column(int column) const override { return matrix_.regular_column(columnIndex(column)); }
 
 protected:
-    int columnIndex(int column) const;
-    int rowIndex(int row) const;
+    int columnIndex(int column) const {
+        map<int, int>::const_iterator index = columnIndex_.find(column);
+        ASSERT(index != columnIndex_.end());
+        return index->second;
+    }
+    int rowIndex(int row) const {
+        map<int, int>::const_iterator index = rowIndex_.find(row);
+        ASSERT(index != rowIndex_.end());
+        return index->second;
+    }
     int frequencyRow_;
     int frequencyColumn_;
     map<int, int> rowIndex_;
     map<int, int> columnIndex_;
+
+    virtual void print(ostream& out) const override { out << "ThinningMatrixHandler"; }
+
 };
 
 }  // namespace magics

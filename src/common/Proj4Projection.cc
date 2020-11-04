@@ -543,19 +543,30 @@ void Proj4Projection::projectionSimple() {
     max_pcx_ = max_longitude_;
     max_pcy_ = max_latitude_;
 
-    double minlon = min_longitude_;
-    double minlat = min_latitude_;
-    double maxlon = max_longitude_;
-    double maxlat = max_latitude_;
-    helper_->revert(minlon, minlat);
-    helper_->revert(maxlon, maxlat);
+    cout << definition_ << endl;
 
-    min_longitude_ = std::min(minlon, maxlon);
-    min_latitude_  = std::min(minlat, maxlat);
-    max_longitude_ = std::max(minlon, maxlon);
-    max_latitude_  = std::max(minlat, maxlat);
+    int error;
+    
+    helper_->revert(min_longitude_, min_latitude_);
+    error = helper_->revert(max_longitude_, max_latitude_);
+    double x = max_longitude_;
+    double y = max_latitude_;
+
+    helper_->convert(x, y);
+
+    // cout << "[" << min_pcx_ << " " << min_pcy_ << "]-->[" << max_pcx_ << " " << max_pcy_ << "]" << endl;
+    // cout << "[" << min_longitude_ << " " << min_latitude_ << "]-->[" << max_longitude_ << " " << max_latitude_ << "]" << endl;
+    // cout << "[" << max_longitude_ << " " << max_latitude_ << "]-->[" << x << " " << y << "] --> " << error <<  endl;
+
+    if (max_longitude_ < 0) {
+        max_longitude_ += 360.;
+    }
+    
+
+   
 
 
+    
     magics::Polyline box;
     box.box(PaperPoint(min_pcx_, min_pcy_), PaperPoint(max_pcx_, max_pcy_));
 
