@@ -53,14 +53,14 @@ void TypedAccessor<F, T>::operator()(vector<T>& to, vector<size_t>& start, vecto
     std::transform(from.begin(), from.begin() + to.size(), to.begin(), Convertor<F, T>(var));
     // for (auto x = start.begin(); x != start.end(); ++x) {   cout << "start " << *x << endl; }
     // for (auto x = edges.begin(); x != edges.end(); ++x) {   cout << "edges " << *x << endl; }
-    
+
 }
 
 template <class F, class T>
 void TypedAccessor<F, T>::get(vector<F>& from, vector<size_t>& start, vector<size_t>& edges, NetVariable& var) const {
     var.get(&from.front(), start, edges);
-    
-   
+
+
 }
 
 Netcdf::Netcdf(const string& path, const string& method) : file_(-1) {
@@ -157,11 +157,11 @@ int NetDimension::index(const string& val) {
 }
 
 int NetDimension::value(const string& val) {
-    
+
     if (variable_ != -1) {
         // int index = Index::get(variable_->type(), val, variable_->values(), variable_->num_vals());
         NetVariable var(name_, variable_, parent_, "index");
-    
+
         return var.find(val);
     }
 
@@ -297,15 +297,15 @@ int NetVariable::find(const string& value) {
     // First , is the variable a time variable:
 
     string val = value;
-   
+
     try {
         val = interpretTime(value);
     }
     catch (...) {
         val = value;
     }
-    
-   
+
+
 
     nc_type t = type();
     if (t == NC_DOUBLE) {
@@ -350,7 +350,7 @@ int NetVariable::find(const string& value) {
         for ( int i = 0; i < dims[0]; i++ ) {
             char text[256];
             nc_get_var_text(netcdf_, id_, text);
-            if (string(text) ==  val)       
+            if (string(text) ==  val)
                 return i;
 
         }
@@ -358,16 +358,17 @@ int NetVariable::find(const string& value) {
 
     if (t == NC_STRING) {
         int x = getSize();
-        char *values[x];
+        char *values[1024];
+        ASSERT(x < sizeof(values));
         nc_get_var_string(netcdf_, id_, values);
         for (int i = 0; i < x; i++) {
-           
-            if (string(values[i]) == val) 
-                return i; 
+
+            if (string(values[i]) == val)
+                return i;
         }
-        
+
     }
-    
+
     return 0;
 }
 
@@ -435,4 +436,3 @@ static TypedAccessor<unsigned short, double> short_double_accessor(NC_USHORT);
 static TypedAccessor<int, double> int_double_accessor(NC_INT);
 static TypedAccessor<float, double> float_double_accessor(NC_FLOAT);
 static TypedAccessor<double, double> double_double_accessor(NC_DOUBLE);
-
