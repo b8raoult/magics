@@ -31,7 +31,8 @@
             "MIMode": "lldb",
             "env": {
                 "MAGPLUS_HOME": "${workspaceFolder}"
-            }
+            },
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
