@@ -38,15 +38,15 @@ class BothValuePlotMethod : public ValuePlotMethod, public BothValuePlotMethodAt
 public:
     BothValuePlotMethod() : marker_(0) {}
     virtual ~BothValuePlotMethod() override {}
-    virtual void set(const map<string, string>& map) {
+    virtual void set(const map<string, string>& map) override {
         BothValuePlotMethodAttributes::set(map);
         ValuePlotMethodAttributes::set(map);
     }
-    virtual void set(const XmlNode& node) {
+    virtual void set(const XmlNode& node) override {
         BothValuePlotMethodAttributes::set(node);
         ValuePlotMethodAttributes::set(node);
     }
-    virtual ValuePlotMethod* clone() const {
+    virtual ValuePlotMethod* clone() const override {
         BothValuePlotMethod* object = new BothValuePlotMethod();
         object->clone(*this);
         return object;
@@ -66,9 +66,9 @@ protected:
         ValuePlotMethodAttributes::print(out);
         out << "]";
     }
-    void reset() { marker_ = 0; }
+    void reset() override { marker_ = 0; }
 
-    virtual void add(const PaperPoint& xy) {
+    virtual void add(const PaperPoint& xy) override {
         static map<string, TextPosition> poshandlers;
         if (poshandlers.empty()) {
             poshandlers["none"]   = TextPosition::NONE;

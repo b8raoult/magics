@@ -114,9 +114,9 @@ class XmlTextVisitor : public TextVisitor, public XmlBasicNodeAttributes {
 public:
     XmlTextVisitor();
     ~XmlTextVisitor() override {}
-    void set(const XmlNode&);
-    void getReady();
-    void decode();
+    void set(const XmlNode&) override;
+    void getReady() override;
+    void decode() override;
 };
 
 class FortranTextVisitor : public TextVisitor {
@@ -125,7 +125,7 @@ public:
     ~FortranTextVisitor() override {}
 
 protected:
-    void decode();
+    void decode() override;
     void interpret(string&, stringarray&);
 };
 
@@ -133,7 +133,7 @@ class FortranAutomaticTextVisitor : public FortranTextVisitor {
 public:
     FortranAutomaticTextVisitor();
     ~FortranAutomaticTextVisitor() override {}
-    void getReady();
+    void getReady() override;
 };
 
 
@@ -141,7 +141,7 @@ class FortranPositionalTextVisitor : public FortranTextVisitor {
 public:
     FortranPositionalTextVisitor();
     ~FortranPositionalTextVisitor() override {}
-    void getReady();
+    void getReady() override;
 };
 /*
 class MvTextVisitor :

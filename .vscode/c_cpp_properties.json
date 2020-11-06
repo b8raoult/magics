@@ -1,0 +1,37 @@
+{
+    "configurations": [
+        {
+            "name": "XXXX",
+            "includePath": [
+                // "additional/paths",
+                "${default}"
+            ],
+            "defines": [
+                "${default}"
+            ],
+            "macFrameworkPath": [
+                "${default}"
+                // "additional/paths"
+            ],
+            "forcedInclude": [
+                "${default}"
+                // "additional/paths"
+            ],
+            "compileCommands": "${default}",
+            // "browse": {
+            //     "limitSymbolsToIncludedHeaders": true,
+            //     "databaseFilename": "${default}",
+            //     "path": [
+            //         "${default}",
+            //         "${workspaceFolder}",
+            //         "${env.HOME}/build/eccodes"
+            //     ]
+            // },
+            "intelliSenseMode": "${default}",
+            "cStandard": "${default}",
+            "cppStandard": "${default}",
+            "compilerPath": "${default}"
+        }
+    ],
+    "version": 4
+}

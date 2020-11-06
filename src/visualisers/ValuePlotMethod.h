@@ -38,8 +38,8 @@ class ValuePlotMethod : public ValuePlotMethodAttributes, public vector<BasicGra
 public:
     ValuePlotMethod() {}
     virtual ~ValuePlotMethod() override {}
-    virtual void set(const map<string, string>& map) { ValuePlotMethodAttributes::set(map); }
-    virtual void set(const XmlNode& node) { ValuePlotMethodAttributes::set(node); }
+    virtual void set(const map<string, string>& map) override { ValuePlotMethodAttributes::set(map); }
+    virtual void set(const XmlNode& node) override { ValuePlotMethodAttributes::set(node); }
 
     virtual ValuePlotMethod* clone() const {
         ValuePlotMethod* object = new ValuePlotMethod();

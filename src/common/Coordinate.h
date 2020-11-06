@@ -375,7 +375,7 @@ class LogarithmicCoordinate : public Coordinate {
 public:
     LogarithmicCoordinate() {}
     virtual ~LogarithmicCoordinate() override {}
-    string type() const { return "logarithmic"; }
+    string type() const override { return "logarithmic"; }
 };
 
 class XLogarithmicCoordinate : public LogarithmicCoordinate,
@@ -402,7 +402,7 @@ public:
         XLogarithmicCoordinateAttributes::set(map);
         set();
     }
-    void set() {
+    void set() override {
         switch (automatic_) {
             case AxisAutomaticSetting::BOTH:
                 if (reverse_) {
@@ -532,13 +532,13 @@ public:
                 break;
         }
     }
-    double min() { return min_; }
-    double max() { return max_; }
-    double minpc() { return (*this)(min_); }
-    double maxpc() { return (*this)(max_); }
-    virtual void dataMinMax(double min, double max) { NOTIMP; }
-    virtual void dataMinMax(double min, double max, const string&) { NOTIMP; }
-    void minmax(double min, double max) {
+    double min() override { return min_; }
+    double max() override { return max_; }
+    double minpc() override { return (*this)(min_); }
+    double maxpc() override { return (*this)(max_); }
+    virtual void dataMinMax(double min, double max) override { NOTIMP; }
+    virtual void dataMinMax(double min, double max, const string&) override { NOTIMP; }
+    void minmax(double min, double max) override {
         switch (automatic_) {
             case AxisAutomaticSetting::BOTH:
                 // set the
@@ -700,14 +700,14 @@ public:
     }
 
 
-    double operator()(double c) { return c; }
+    double operator()(double c) override { return c; }
 
-    double operator()(const string& val) const {
+    double operator()(const string& val) const override {
         DateTime date(val);
         return date - DateTime(date_min_);
     }
 
-    void getNewDefinition(const UserPoint& ll, const UserPoint& ur, map<string, string>& def) const {
+    void getNewDefinition(const UserPoint& ll, const UserPoint& ur, map<string, string>& def) const override {
         DateTime min       = DateTime(date_min_) + Second(ll.x_);
         DateTime max       = DateTime(date_min_) + Second(ur.x_);
         def["x_axis_type"] = "date";

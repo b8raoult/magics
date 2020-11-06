@@ -117,10 +117,10 @@ public:
     }
 
 protected:
-    void visit(MetaDataVisitor&);
-    void visit(Transformation&);
-    void visit(AnimationRules&);
-    void visit(SceneLayer&, vector<LayoutVisitor*>&);
+    void visit(MetaDataVisitor&) override;
+    void visit(Transformation&) override;
+    void visit(AnimationRules&) override;
+    void visit(SceneLayer&, vector<LayoutVisitor*>&) override;
 
     void prepare();
 

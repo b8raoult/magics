@@ -48,12 +48,12 @@ struct ShadingProperties {
 struct FillShadingProperties : public ShadingProperties {
     FillShadingProperties() {}
     ~FillShadingProperties() override {}
-    ShadingProperties* clone() {
+    ShadingProperties* clone() override {
         FillShadingProperties* shading = new FillShadingProperties();
         return shading;
     }
-    void draw(const BaseDriver& driver) const { driver.shade(*this); }
-    void print(ostream& out) const {
+    void draw(const BaseDriver& driver) const override { driver.shade(*this); }
+    void print(ostream& out) const override {
         out << "FillShadingProperties[";
         out << "]";
     }
@@ -63,11 +63,11 @@ struct FillShadingProperties : public ShadingProperties {
 struct DotShadingProperties : public ShadingProperties {
     DotShadingProperties() : angle_(45), size_(0.02), density_(25) {}
     ~DotShadingProperties() override {}
-    void draw(const BaseDriver& driver) const { driver.shade(*this); }
+    void draw(const BaseDriver& driver) const override { driver.shade(*this); }
     double angle_;
     double size_;
     double density_;
-    ShadingProperties* clone() {
+    ShadingProperties* clone() override {
         DotShadingProperties* shading = new DotShadingProperties();
 
         shading->size_    = size_;
@@ -75,7 +75,7 @@ struct DotShadingProperties : public ShadingProperties {
         return shading;
     }
 
-    void print(ostream& out) const {
+    void print(ostream& out) const override {
         out << "DotShadingProperties["
             << ", angle=" << angle_ << ", size=" << size_ << ", density=" << density_ << "]";
     }
@@ -220,8 +220,8 @@ public:
     static void skinnyMode() { skinny_ = true; }
 
     void reproject(const Transformation&);
-    bool reproject(BasicGraphicsObjectContainer& out) const;
-    void redisplay(const BaseDriver& driver) const;
+    bool reproject(BasicGraphicsObjectContainer& out) const override;
+    void redisplay(const BaseDriver& driver) const override;
 
     Colour cellColour_;
     double cellValue_;
@@ -340,7 +340,7 @@ public:
     Holes& holes();
 
 protected:
-    void print(ostream&) const;
+    void print(ostream&) const override;
 
 
 public:

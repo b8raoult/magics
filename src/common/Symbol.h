@@ -195,7 +195,7 @@ public:
     ~SimpleTextSymbol() override {}
 
     void push_back(const PaperPoint& point) { TextSymbol::push_back(point, text_); }
-    void push_back(const PaperPoint& point, const string&) { TextSymbol::push_back(point, text_); }
+    void push_back(const PaperPoint& point, const string&) override { TextSymbol::push_back(point, text_); }
 
 protected:
     string text_;

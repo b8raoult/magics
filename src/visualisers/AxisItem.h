@@ -116,7 +116,7 @@ class AxisTickItem : public AxisItem {
 public:
     AxisTickItem(double pos, const string& format) : AxisItem(pos, format) { label_ = ""; }
     ~AxisTickItem() override {}
-    bool isLabel() const { return false; }
+    bool isLabel() const override { return false; }
 };
 
 class AxisDateItem : public AxisItem {
@@ -152,10 +152,10 @@ class AxisMinorTickItem : public AxisItem {
 public:
     AxisMinorTickItem(double pos) : AxisItem(pos, "") { label_ = ""; }
     ~AxisMinorTickItem() override {}
-    bool isTick() const { return false; }
-    bool isLabel() const { return false; }
-    bool isGrid() const { return false; }
-    bool isMinorTick() const { return true; }
+    bool isTick() const override { return false; }
+    bool isLabel() const override { return false; }
+    bool isGrid() const override { return false; }
+    bool isMinorTick() const override { return true; }
 };
 
 

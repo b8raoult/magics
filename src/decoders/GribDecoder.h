@@ -33,7 +33,7 @@
 
 #include "GribLoopAttributes.h"
 
-#include "grib_api.h"
+#include <eccodes.h>
 
 #include "GribInterpretor.h"
 

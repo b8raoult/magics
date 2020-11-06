@@ -38,9 +38,9 @@ public:
     AutomaticContourMethod() {}
     virtual ~AutomaticContourMethod() override {}
     ContourMethod* clone() { return new AutomaticContourMethod(); }
-    virtual bool accept(const string& node) { return magCompare(node, "automatic"); }
+    virtual bool accept(const string& node) override { return magCompare(node, "automatic"); }
 
-    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer& owner) {
+    virtual MatrixHandler* handler(const AbstractMatrix& matrix, const BasicGraphicsObjectContainer& owner) override {
         // this is the ideal number of points per cm on the paper
         const double fDesiredPointsPerCm = 5.0;
 

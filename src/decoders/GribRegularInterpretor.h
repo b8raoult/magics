@@ -203,7 +203,7 @@ public:
     GribRegularGaussianInterpretor() {}
     virtual ~GribRegularGaussianInterpretor() override {}
 
-    void latitudes(const GribDecoder&, vector<double>&) const;
+    void latitudes(const GribDecoder&, vector<double>&) const override;
 
 protected:
 };
