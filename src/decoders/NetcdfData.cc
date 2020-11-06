@@ -284,7 +284,7 @@ string NetVariable::interpretTime(const string& val) {
 
         return tostring(diff);
     }
-    catch (exception) {
+    catch (...) {
         return val;
     }
 }
