@@ -37,7 +37,7 @@ class ObsPlotting;
 class ObsItem {
 public:
     ObsItem() : owner_(0) {}
-    virtual ~ObsItem() {}
+    virtual ~ObsItem() override {}
 
     virtual void set(const map<string, string>&) {}
     virtual void operator()(CustomisedPoint&, ComplexSymbol&) const {}

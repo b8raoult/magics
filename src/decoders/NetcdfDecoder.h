@@ -41,7 +41,7 @@ class Transformation;
 class NetcdfDecoder : public Decoder, public Data, public NetcdfDecoderAttributes {
 public:
     NetcdfDecoder();
-    virtual ~NetcdfDecoder();
+    virtual ~NetcdfDecoder() override;
 
     void decode() override {}
     // implements BaseSceneObject interface
@@ -126,7 +126,7 @@ private:
 class NetcdfLoop : public DataLoop {
 public:
     NetcdfLoop(NetcdfDecoder* netcdf) : netcdf_(netcdf) {}
-    virtual ~NetcdfLoop() {}
+    virtual ~NetcdfLoop() override {}
     void set(const map<string, string>& map) override {}  // NetcdfLoopAttributes::set(map); }
     void set(const XmlNode& node) override {}             // NetcdfLoopAttributes::set(node); }
 

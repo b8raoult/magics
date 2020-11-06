@@ -32,7 +32,7 @@ namespace magics {
 class HeightSelectionCount : public HeightSelection, public HeightSelectionCountAttributes {
 public:
     HeightSelectionCount();
-    virtual ~HeightSelectionCount();
+    virtual ~HeightSelectionCount() override;
     virtual void set(map<string, string> map) override { HeightSelectionCountAttributes::set(map); }
     void prepare();
 

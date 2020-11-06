@@ -35,7 +35,7 @@ namespace magics {
 class Histogram : public Visdef, public HistogramAttributes, public LevelSelectionInterface {
 public:
     Histogram();
-    virtual ~Histogram();
+    virtual ~Histogram() override;
 
     void operator()(Data&, BasicGraphicsObjectContainer&) override { NOTIMP; }
     void visit(LegendVisitor& legend) override;

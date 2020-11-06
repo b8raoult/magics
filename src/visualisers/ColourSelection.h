@@ -35,7 +35,7 @@ class XmlNode;
 class ColourSelection : public FloatSelection {
 public:
     ColourSelection();
-    virtual ~ColourSelection();
+    virtual ~ColourSelection() override;
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void toxml(ostream&, int) const {}

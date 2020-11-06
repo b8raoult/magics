@@ -33,7 +33,7 @@ namespace magics {
 class NetcdfGeoMatrixInterpretor : public NetcdfInterpretor {
 public:
     NetcdfGeoMatrixInterpretor();
-    virtual ~NetcdfGeoMatrixInterpretor();
+    virtual ~NetcdfGeoMatrixInterpretor() override;
 
     static NetcdfInterpretor* guess(const NetcdfInterpretor&);
     void visit(Transformation& transformation) override;

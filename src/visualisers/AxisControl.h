@@ -37,7 +37,7 @@ class AxisMethod;
 class AxisControl {
 public:
     AxisControl();
-    virtual ~AxisControl();
+    virtual ~AxisControl() override;
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}
@@ -72,7 +72,7 @@ private:
 class AutomaticAxisControl : public AxisControl {
 public:
     AutomaticAxisControl() {}
-    ~AutomaticAxisControl() {}
+    ~AutomaticAxisControl() override {}
 
 protected:
     virtual AxisControl* clone() const override { return new AutomaticAxisControl(); }

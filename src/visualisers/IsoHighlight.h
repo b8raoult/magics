@@ -71,7 +71,7 @@ private:
 class IsoHighlight : public NoIsoHighlight, public map<double, double>, public IsoHighlightAttributes {
 public:
     IsoHighlight() {}
-    virtual ~IsoHighlight() {}
+    virtual ~IsoHighlight() override {}
     virtual NoIsoHighlight* clone() const override {
         IsoHighlight* plot = new IsoHighlight();
         plot->copy(*this);

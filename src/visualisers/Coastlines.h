@@ -37,7 +37,7 @@ class StaticLayer;
 class Coastlines : public CoastlinesAttributes, public BasicSceneObject {
 public:
     Coastlines();
-    virtual ~Coastlines();
+    virtual ~Coastlines() override;
 
 
     // New Interface!

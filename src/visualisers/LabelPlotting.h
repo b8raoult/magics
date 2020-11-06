@@ -91,7 +91,7 @@ public:
 class LabelPlotting : public NoLabelPlotting, public LabelPlottingAttributes {
 public:
     LabelPlotting();
-    virtual ~LabelPlotting();
+    virtual ~LabelPlotting() override;
     void prepare(NoGridPlotting& grid) override;
 
     virtual LabelPlotting* clone() const override {

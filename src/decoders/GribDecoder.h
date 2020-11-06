@@ -42,7 +42,7 @@ namespace magics {
 class GribDecoder;
 struct MatchCriteria {
     MatchCriteria() {}
-    virtual ~MatchCriteria() {}
+    virtual ~MatchCriteria() override {}
     virtual bool verify(const GribDecoder&, const string&, const string&) { return false; }
 };
 
@@ -66,7 +66,7 @@ class GribEntryDecoder;
 class GribDecoder : public Decoder, public Data, public GribDecoderAttributes {
 public:
     GribDecoder();
-    virtual ~GribDecoder();
+    virtual ~GribDecoder() override;
 
     enum InterpolateMethod
     {

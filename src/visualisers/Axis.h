@@ -39,7 +39,7 @@ class AxisItem;
 class Axis : public BasicSceneObject, public AxisAttributes {
 public:
     Axis();
-    virtual ~Axis();
+    virtual ~Axis() override;
 
     void set(const XmlNode& node) override { AxisAttributes::set(node); }
     void set(const map<string, string>& map) override { AxisAttributes::set(map); }
@@ -114,7 +114,7 @@ private:
 class HorizontalAxis : public Axis {
 public:
     HorizontalAxis();
-    ~HorizontalAxis() {}
+    ~HorizontalAxis() override {}
 
     template <class V>
     void build(V& visitor) {
@@ -172,7 +172,7 @@ public:
 class VerticalAxis : public Axis {
 public:
     VerticalAxis();
-    ~VerticalAxis() {}
+    ~VerticalAxis() override {}
     template <class V>
     void build(V& visitor) {
         if (items_.empty()) {

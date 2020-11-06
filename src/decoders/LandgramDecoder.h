@@ -35,7 +35,7 @@ namespace magics {
 class LandgramDecoder : public LandgramDecoderAttributes, public Decoder, public Data, public XmlNodeVisitor {
 public:
     LandgramDecoder();
-    virtual ~LandgramDecoder();
+    virtual ~LandgramDecoder() override;
     // implements Decoder interface
     void decode() override;
 

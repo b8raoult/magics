@@ -61,7 +61,7 @@ private:
 class Arrow : public BasicGraphicsObject, public ArrowProperties, public vector<ArrowPoint> {
 public:
     Arrow() {}
-    virtual ~Arrow() {}
+    virtual ~Arrow() override {}
 
     virtual void redisplay(const BaseDriver& driver) const override { driver.redisplay(*this); }
 

@@ -47,7 +47,7 @@ struct ShadingProperties {
 
 struct FillShadingProperties : public ShadingProperties {
     FillShadingProperties() {}
-    ~FillShadingProperties() {}
+    ~FillShadingProperties() override {}
     ShadingProperties* clone() {
         FillShadingProperties* shading = new FillShadingProperties();
         return shading;
@@ -62,7 +62,7 @@ struct FillShadingProperties : public ShadingProperties {
 
 struct DotShadingProperties : public ShadingProperties {
     DotShadingProperties() : angle_(45), size_(0.02), density_(25) {}
-    ~DotShadingProperties() {}
+    ~DotShadingProperties() override {}
     void draw(const BaseDriver& driver) const { driver.shade(*this); }
     double angle_;
     double size_;
@@ -83,12 +83,12 @@ struct DotShadingProperties : public ShadingProperties {
 
 struct HatchShadingProperties : public ShadingProperties {
     HatchShadingProperties() : index_(0), thickness_(1), density_(18) {}
-    ~HatchShadingProperties() {}
-    void draw(const BaseDriver& driver) const { driver.shade(*this); }
+    ~HatchShadingProperties() override {}
+    void draw(const BaseDriver& driver) const override { driver.shade(*this); }
     int index_;
     int thickness_;
     double density_;
-    ShadingProperties* clone() {
+    ShadingProperties* clone() override {
         HatchShadingProperties* shading = new HatchShadingProperties();
 
         shading->index_     = index_;
@@ -96,7 +96,7 @@ struct HatchShadingProperties : public ShadingProperties {
         shading->density_   = density_;
         return shading;
     }
-    void print(ostream& out) const {
+    void print(ostream& out) const override {
         out << "HatchShadingProperties[";
         out << ", thickness=" << thickness_;
         out << ", index=" << index_;
@@ -117,7 +117,7 @@ public:
         arrow_(0),
         stroke_(true),
         antialiasing_(true) {}
-    virtual ~PolylineProperties() {
+    virtual ~PolylineProperties() override {
         if (shading_)
             delete shading_;
         if (arrow_)
@@ -213,7 +213,7 @@ public:
 
 
     Polyline();
-    ~Polyline();
+    ~Polyline() override;
 
     static bool skinny_;
 

@@ -31,7 +31,7 @@ namespace magics {
 class GribRegularInterpretor : public GribInterpretor {
 public:
     GribRegularInterpretor();
-    virtual ~GribRegularInterpretor();
+    virtual ~GribRegularInterpretor() override;
 
     void interpretAsMatrix(GribDecoder&) const override;
     virtual double XResolution(const GribDecoder& grib) const override { return longitudeIncrement(grib); }
@@ -63,7 +63,7 @@ private:
 class GribReducedGaussianInterpretor : public GribInterpretor {
 public:
     GribReducedGaussianInterpretor() {}
-    virtual ~GribReducedGaussianInterpretor() {}
+    virtual ~GribReducedGaussianInterpretor() override {}
 
     virtual double XResolution(const GribDecoder& grib) const override;
     void interpretAsMatrix(GribDecoder&) const override;
@@ -92,7 +92,7 @@ private:
 class GribReducedLatLonInterpretor : public GribInterpretor {
 public:
     GribReducedLatLonInterpretor() {}
-    virtual ~GribReducedLatLonInterpretor() {}
+    virtual ~GribReducedLatLonInterpretor() override {}
 
     void interpretAsMatrix(GribDecoder&) const override;
     virtual double XResolution(const GribDecoder& grib) const override;
@@ -118,7 +118,7 @@ private:
 class GribRotatedInterpretor : public GribRegularInterpretor {
 public:
     GribRotatedInterpretor() : original_(false) {}
-    virtual ~GribRotatedInterpretor() {}
+    virtual ~GribRotatedInterpretor() override {}
 
     std::pair<double, double> unrotate(double lat, double lon) const;
     std::pair<double, double> rotate(double lat, double lon) const;
@@ -143,7 +143,7 @@ protected:
 class GribLambertAzimutalInterpretor : public GribRegularInterpretor {
 public:
     GribLambertAzimutalInterpretor() {}
-    virtual ~GribLambertAzimutalInterpretor() {}
+    virtual ~GribLambertAzimutalInterpretor() override {}
 
     UserPoint unrotate(double lat, double lon) const;
     void interpretAsMatrix(GribDecoder&) const override;
@@ -160,7 +160,7 @@ protected:
 class GribLambertInterpretor : public GribLambertAzimutalInterpretor {
 public:
     GribLambertInterpretor() {}
-    virtual ~GribLambertInterpretor() {}
+    virtual ~GribLambertInterpretor() override {}
 
 
     void interpretAsMatrix(GribDecoder&) const override;
@@ -174,7 +174,7 @@ protected:
 class GribPolarStereoInterpretor : public GribRegularInterpretor {
 public:
     GribPolarStereoInterpretor() {}
-    virtual ~GribPolarStereoInterpretor() {}
+    virtual ~GribPolarStereoInterpretor() override {}
 
 
     void interpretAsMatrix(GribDecoder&) const override;
@@ -187,7 +187,7 @@ protected:
 class GribProjInterpretor : public GribRegularInterpretor {
 public:
     GribProjInterpretor() {}
-    virtual ~GribProjInterpretor() {}
+    virtual ~GribProjInterpretor() override {}
 
 
     void interpretAsMatrix(GribDecoder&) const override;
@@ -201,7 +201,7 @@ protected:
 class GribRegularGaussianInterpretor : public GribRegularInterpretor {
 public:
     GribRegularGaussianInterpretor() {}
-    virtual ~GribRegularGaussianInterpretor() {}
+    virtual ~GribRegularGaussianInterpretor() override {}
 
     void latitudes(const GribDecoder&, vector<double>&) const;
 

@@ -31,7 +31,7 @@ namespace magics {
 class Filter : public vector<UserPoint> {
 public:
     Filter(MatrixHandler& matrix, int nrows, int ncols);
-    virtual ~Filter();
+    virtual ~Filter() override;
 
     //!  Get number of columns of the Mask
     int DimensionX() const { return ncols_; }
@@ -91,7 +91,7 @@ public:
     //	MinMaxFilter (const BaseMatrixHandler& matrix, int nrows, int ncols);
     MinMaxFilter(MatrixHandler& matrix, int nrows, int ncols, int flag = 3);
 
-    virtual ~MinMaxFilter();
+    virtual ~MinMaxFilter() override;
 
     /*!
       Convolutes the filter over the input matrix

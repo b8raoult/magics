@@ -42,7 +42,7 @@ class Layer : public BasicGraphicsObjectContainer {
 public:
     Layer();
     Layer(BasicSceneObject*);
-    virtual ~Layer();
+    virtual ~Layer() override;
     void print(ostream& out) const override;
     void parent(SceneLayer* layer) { parent_ = layer; }
     SceneLayer* parent() const { return parent_; }
@@ -166,7 +166,7 @@ class StepLayer;
 class SingleLayer : public Layer {
 public:
     SingleLayer(StepLayer*, BasicSceneObject*);
-    ~SingleLayer();
+    ~SingleLayer() override;
 
     void print(ostream& out) const override;
     void redisplay(const BaseDriver& driver) const override;
@@ -197,7 +197,7 @@ protected:
 class StepLayer : public Layer {
 public:
     StepLayer();
-    ~StepLayer();
+    ~StepLayer() override;
     void print(ostream& out) const override;
     int size() override;
     void redisplay(const BaseDriver& driver) const override;
@@ -229,7 +229,7 @@ public:
     StaticLayer();
     StaticLayer(BasicSceneObject*);
     StaticLayer(const Layout&);
-    ~StaticLayer();
+    ~StaticLayer() override;
     void print(ostream& out) const override;
 
     void redisplay(const BaseDriver& driver) const override;
@@ -263,7 +263,7 @@ class NoDataLayer : public StaticLayer {
 public:
     NoDataLayer() {}
     NoDataLayer(BasicSceneObject*);
-    ~NoDataLayer();
+    ~NoDataLayer() override;
 
     void redisplay(const BaseDriver&) const override;
     void getReady() const override {}
@@ -274,7 +274,7 @@ public:
 class TextLayer : public StepLayer {
 public:
     TextLayer() {}
-    ~TextLayer() {}
+    ~TextLayer() override {}
     void getReady() const override;
     void getReady(int i) const override { Layer::getReady(i); }
     void execute(const BaseDriver&) const override;
@@ -287,7 +287,7 @@ public:
 class LegendLayer : public StepLayer {
 public:
     LegendLayer() {}
-    ~LegendLayer() {}
+    ~LegendLayer() override {}
     void getReady() const override;
     void execute(const BaseDriver&) const override;
     void execute(int, const BaseDriver&) const;
@@ -302,7 +302,7 @@ public:
 class SceneLayer : public BasicGraphicsObjectContainer {
 public:
     SceneLayer();
-    ~SceneLayer();
+    ~SceneLayer() override;
     void print(ostream& out) const override;
     // Number of frames in the serie!
     int numberOfSteps() const;

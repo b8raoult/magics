@@ -37,7 +37,7 @@ class StyleEntry;
 class ContourLibrary : public ContourLibraryAttributes {
 public:
     ContourLibrary();
-    virtual ~ContourLibrary();
+    virtual ~ContourLibrary() override;
 
     // set the meta data to be collected
     virtual void askId(MetaDataCollector&);
@@ -85,7 +85,7 @@ public:
         MagConfigHandler(path_, *this);
     }
 
-    ~EcChartData() {}
+    ~EcChartData() override {}
 
     void callback(const string&, const Value&);
     map<string, string> getMap(const int);
@@ -112,7 +112,7 @@ public:
         path_ = getEnvVariable("MAGPLUS_HOME") + MAGPLUS_PATH_TO_SHARE_ + "/" + name + ".json";
         MagConfigHandler(path_, *this);
     }
-    ~EcChartSetData() {}
+    ~EcChartSetData() override {}
 
     void callback(const string&, const Value&);
     bool hasKey(const string&);
@@ -138,7 +138,7 @@ public:
 class EcChartLibrary : public ContourLibrary {
 public:
     EcChartLibrary();
-    virtual ~EcChartLibrary();
+    virtual ~EcChartLibrary() override;
 
     // set the meta data to be collected
     void askId(MetaDataCollector&) override;
@@ -161,7 +161,7 @@ protected:
 class WebLibrary : public ContourLibrary {
 public:
     WebLibrary();
-    virtual ~WebLibrary();
+    virtual ~WebLibrary() override;
 
     // set the meta data to be collected
     void askId(MetaDataCollector&) override;
@@ -187,7 +187,7 @@ protected:
 class NoContourLibrary : public ContourLibrary {
 public:
     NoContourLibrary() {}
-    virtual ~NoContourLibrary() {}
+    virtual ~NoContourLibrary() override {}
 
     // sete the meata dat to be collected
     void askId(MetaDataCollector&) override {}

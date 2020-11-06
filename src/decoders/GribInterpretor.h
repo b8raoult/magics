@@ -50,7 +50,7 @@ struct Index {
 class GribInterpretor {
 public:
     GribInterpretor() {}
-    virtual ~GribInterpretor() {}
+    virtual ~GribInterpretor() override {}
     virtual double XResolution(const GribDecoder&) const { return 0; }
     virtual void raw(GribDecoder&, const Transformation&, const string&,
                      map<double, map<double, CustomisedPoint*> >&) const;

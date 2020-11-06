@@ -34,7 +34,7 @@ class XmlNode;
 class NetcdfConvention {
 public:
     NetcdfConvention();
-    virtual ~NetcdfConvention();
+    virtual ~NetcdfConvention() override;
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual bool accept(const string&) { return false; }

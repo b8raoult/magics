@@ -80,7 +80,7 @@ private:
 class GribAddressRecordMode : public GribAddressMode {
 public:
     GribAddressRecordMode() {}
-    ~GribAddressRecordMode() {}
+    ~GribAddressRecordMode() override {}
 
     virtual GribAddressMode* clone() const override {
         GribAddressMode* mode = new GribAddressRecordMode();
@@ -113,7 +113,7 @@ protected:
 class GribAddressByteMode : public GribAddressMode {
 public:
     GribAddressByteMode() {}
-    ~GribAddressByteMode() {}
+    ~GribAddressByteMode() override {}
     virtual GribAddressMode* clone() const override {
         GribAddressMode* mode = new GribAddressByteMode();
         return mode;

@@ -36,7 +36,7 @@ namespace magics {
 class StatItem {
 public:
     StatItem(const string&, ifstream&);
-    virtual ~StatItem() {}
+    virtual ~StatItem() override {}
     map<string, int> columns_;
     vector<vector<double> > rows_;
     map<string, vector<string> > definitions_;
@@ -51,7 +51,7 @@ public:
 class StatDef {
 public:
     StatDef(const string&, ifstream&);
-    virtual ~StatDef() {}
+    virtual ~StatDef() override {}
     map<string, vector<string> > definitions_;
     vector<StatItem> data_;
     string name_;
@@ -65,7 +65,7 @@ public:
 class ObsStatDecoder : public ObsStatDecoderAttributes, public Data, public PointsList {
 public:
     ObsStatDecoder();
-    virtual ~ObsStatDecoder();
+    virtual ~ObsStatDecoder() override;
 
     void set(const map<string, string>& map) override { ObsStatDecoderAttributes::set(map); }
     void set(const XmlNode& node) override { ObsStatDecoderAttributes::set(node); }

@@ -37,7 +37,7 @@ class StyleEntry;
 class Contour : public ContourAttributes, public Visdef {
 public:
     Contour();
-    virtual ~Contour();
+    virtual ~Contour() override;
 
     virtual Contour* clone() const {
         Contour* contour = new Contour();

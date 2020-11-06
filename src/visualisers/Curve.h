@@ -38,7 +38,7 @@ class LegendEntry;
 class Curve : public CurveAttributes, public Graph {
 public:
     Curve();
-    virtual ~Curve();
+    virtual ~Curve() override;
     enum PointPosition
     {
         in,
@@ -108,7 +108,7 @@ private:
 class CurveArea : public Curve, public CurveAreaAttributes {
 public:
     CurveArea() {}
-    virtual ~CurveArea() {}
+    virtual ~CurveArea() override {}
     void set(const map<string, string>& map) override {
         CurveAttributes::set(map);
         CurveAreaAttributes::set(map);

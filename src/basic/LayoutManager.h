@@ -35,7 +35,7 @@ class BasicPositionalObject;
 class LayoutManager {
 public:
     LayoutManager();
-    virtual ~LayoutManager();
+    virtual ~LayoutManager() override;
 
     virtual LayoutManager* clone() { return new LayoutManager(); }
 

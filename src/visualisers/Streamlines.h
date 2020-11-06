@@ -33,7 +33,7 @@ namespace magics {
 class Streamlines : public WindPlotting, public StreamlinesAttributes {
 public:
     Streamlines() {}
-    virtual ~Streamlines() {}
+    virtual ~Streamlines() override {}
     virtual void set(const map<string, string>& map) override {
         WindPlottingAttributes::set(map);
         StreamlinesAttributes::set(map);

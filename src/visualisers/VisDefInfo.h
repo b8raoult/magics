@@ -51,7 +51,7 @@ public:
         GribType
     };
 
-    virtual ~VisDefInfoBase();
+    virtual ~VisDefInfoBase() override;
 
     VisDefInfoItem* addItem(string);
     const vector<string>& keys() { return keys_; }

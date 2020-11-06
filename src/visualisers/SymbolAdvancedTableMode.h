@@ -39,7 +39,7 @@ class SymbolAdvancedTableMode : public SymbolMode,
                                 public OutLayerTechniqueInterface {
 public:
     SymbolAdvancedTableMode();
-    virtual ~SymbolAdvancedTableMode();
+    virtual ~SymbolAdvancedTableMode() override;
     virtual void prepare() override;
 
     bool accept(double) const;

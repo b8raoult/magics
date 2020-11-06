@@ -37,7 +37,7 @@ class Transformation;
 class BothValuePlotMethod : public ValuePlotMethod, public BothValuePlotMethodAttributes {
 public:
     BothValuePlotMethod() : marker_(0) {}
-    virtual ~BothValuePlotMethod() {}
+    virtual ~BothValuePlotMethod() override {}
     virtual void set(const map<string, string>& map) {
         BothValuePlotMethodAttributes::set(map);
         ValuePlotMethodAttributes::set(map);

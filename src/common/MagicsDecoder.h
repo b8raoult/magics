@@ -30,7 +30,7 @@ namespace magics {
 class Decoder {
 public:
     Decoder(){};
-    virtual ~Decoder(){};
+    virtual ~Decoder() override{};
     //! Method to decode : abstract
     virtual void decode() = 0;
 

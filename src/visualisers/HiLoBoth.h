@@ -38,7 +38,7 @@ namespace magics {
 class HiLoBoth : public HiLoTechnique, public HiLoTextAttributes, public HiLoMarkerAttributes {
 public:
     HiLoBoth() : high_(0), low_(0) {}
-    virtual ~HiLoBoth() {}
+    virtual ~HiLoBoth() override {}
     void set(const map<string, string>& map) override {
         HiLoTechnique::set(map);
 

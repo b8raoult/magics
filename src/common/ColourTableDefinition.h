@@ -34,7 +34,7 @@ class XmlNode;
 class ColourTableDefinition {
 public:
     ColourTableDefinition() {}
-    virtual ~ColourTableDefinition() {}
+    virtual ~ColourTableDefinition() override {}
     virtual void set(ColourTable&, int = 0) {}
 
     virtual ColourTableDefinition* clone() const { return new ColourTableDefinition(); }

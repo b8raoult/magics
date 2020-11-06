@@ -33,7 +33,7 @@ namespace magics {
 class FlagPlotting : public WindPlotting, public FlagPlottingAttributes {
 public:
     FlagPlotting() {}
-    virtual ~FlagPlotting() {}
+    virtual ~FlagPlotting() override {}
     virtual void set(const map<string, string>& map) override {
         WindPlottingAttributes::set(map);
         FlagPlottingAttributes::set(map);

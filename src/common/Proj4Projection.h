@@ -41,7 +41,7 @@ class Proj4Projection : public Transformation, public Proj4ProjectionAttributes 
 public:
     Proj4Projection();
     Proj4Projection(const string& definition);
-    ~Proj4Projection();
+    ~Proj4Projection() override;
 
     /*!
       \brief sets  from an XML node

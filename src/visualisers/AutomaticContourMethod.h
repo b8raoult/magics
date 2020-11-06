@@ -36,7 +36,7 @@ namespace magics {
 class AutomaticContourMethod : public ContourMethod {
 public:
     AutomaticContourMethod() {}
-    virtual ~AutomaticContourMethod() {}
+    virtual ~AutomaticContourMethod() override {}
     ContourMethod* clone() { return new AutomaticContourMethod(); }
     virtual bool accept(const string& node) { return magCompare(node, "automatic"); }
 

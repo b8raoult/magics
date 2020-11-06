@@ -99,7 +99,7 @@ private:
 class NoCalmIndicator : public CalmIndicator {
 public:
     NoCalmIndicator() {}
-    ~NoCalmIndicator() {}
+    ~NoCalmIndicator() override {}
     virtual CalmIndicator* clone() override { return new NoCalmIndicator(); }
     virtual bool accept(const string& node) override { return magCompare(node, "nocalm"); }
 

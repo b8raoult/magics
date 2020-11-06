@@ -30,7 +30,7 @@ namespace magics {
 class BasicSceneVisitor {
 public:
     BasicSceneVisitor();
-    virtual ~BasicSceneVisitor();
+    virtual ~BasicSceneVisitor() override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

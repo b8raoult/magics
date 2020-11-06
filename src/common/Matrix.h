@@ -202,7 +202,7 @@ public:
     void min(double m) { min_ = m; }
     void max(double m) { max_ = m; }
 
-    virtual ~Matrix() {}
+    virtual ~Matrix() override {}
 
     double width() const override { return regular_column(columns_ - 1) - regular_column(0); }
     double height() const override { return regular_row(rows_ - 1) - regular_row(0); }

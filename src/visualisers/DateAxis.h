@@ -32,7 +32,7 @@ namespace magics {
 class DateAxisMethod : public AxisMethod, public DateAxisMethodAttributes {
 public:
     DateAxisMethod();
-    virtual ~DateAxisMethod();
+    virtual ~DateAxisMethod() override;
 
     virtual void set(const map<string, string>& map) override {
         AxisMethod::set(map);
@@ -96,7 +96,7 @@ private:
 class HyperAxis : public AxisMethod {
 public:
     HyperAxis();
-    virtual ~HyperAxis();
+    virtual ~HyperAxis() override;
 
     void set(const map<string, string>& map) override {}
     void set(const XmlNode& node) override {}

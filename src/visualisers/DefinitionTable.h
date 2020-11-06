@@ -19,7 +19,7 @@ namespace magics {
 class BaseTable {
 public:
     BaseTable(const string& definition) : definition_(definition) {}
-    virtual ~BaseTable() {}
+    virtual ~BaseTable() override {}
     const string& info() const { return definition_; }
     string definition_;
     virtual void add(const map<string, string>&) = 0;
@@ -146,7 +146,7 @@ const D& DefinitionTable<D>::definitionInfo(const string& file, const string& ke
 }
 
 template <class D>
-DefinitionTable<D>::~DefinitionTable() {}
+DefinitionTable<D>::~DefinitionTable() override {}
 
 /*!
  Class information are given to the output-stream.

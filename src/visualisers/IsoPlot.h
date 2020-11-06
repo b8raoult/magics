@@ -65,7 +65,7 @@ public:
     double column(int row, int column) const { return points_.column(row, column); }
     double range(const pair<int, int>& pos) const { return rangeFinder_.find(points_(pos.first, pos.second), -1); }
 
-    ~CellArray() {}
+    ~CellArray() override {}
 };
 
 class GridArray : public CellArray {
@@ -184,7 +184,7 @@ class GridCell : public Cell {
 public:
     GridCell(const CellArray&, int row, int column, const Transformation& transformation, const string&);
 
-    ~GridCell() {}
+    ~GridCell() override {}
 
     const Transformation& transformation_;
     double columns_[4];
@@ -225,7 +225,7 @@ class CellBox;
 class IsoPlot : public IsoPlotAttributes, public ColourTechniqueInterface {
 public:
     IsoPlot();
-    virtual ~IsoPlot();
+    virtual ~IsoPlot() override;
 
     // Implements the Visdef Interface...
     virtual void operator()(MatrixHandler&, BasicGraphicsObjectContainer&);
@@ -318,7 +318,7 @@ private:
 class NoIsoPlot : public IsoPlot {
 public:
     NoIsoPlot() { this->setTag("noisoline"); };
-    ~NoIsoPlot(){};
+    ~NoIsoPlot() override{};
 
     // Implements the Visualiser Interface...
     void operator()(MatrixHandler&, BasicGraphicsObjectContainer&) override;

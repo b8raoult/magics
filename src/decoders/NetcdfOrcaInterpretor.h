@@ -34,7 +34,7 @@ namespace magics {
 class NetcdfOrcaInterpretor : public NetcdfInterpretor {
 public:
     NetcdfOrcaInterpretor();
-    virtual ~NetcdfOrcaInterpretor();
+    virtual ~NetcdfOrcaInterpretor() override;
 
 
     static NetcdfInterpretor* guess(const NetcdfInterpretor&);

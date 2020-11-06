@@ -40,7 +40,7 @@ class XmlNode;
 class SimplePolylineVisualiser : public SimplePolylineAttributes, public Visdef {
 public:
     SimplePolylineVisualiser();
-    virtual ~SimplePolylineVisualiser();
+    virtual ~SimplePolylineVisualiser() override;
 
 
     void operator()(Data&, BasicGraphicsObjectContainer&) override;

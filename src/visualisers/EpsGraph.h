@@ -49,7 +49,7 @@ class XmlNode;
 class EpsGraph : public EpsGraphAttributes, public Visdef {
 public:
     EpsGraph();
-    virtual ~EpsGraph();
+    virtual ~EpsGraph() override;
 
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&);
@@ -93,7 +93,7 @@ private:
 class EpsLight : public Visdef {
 public:
     EpsLight() {}
-    virtual ~EpsLight() {}
+    virtual ~EpsLight() override {}
     // Implements the set method ...
     void set(const map<string, string>& map) {}
     void set(const XmlNode&) {}
@@ -126,7 +126,7 @@ private:
 class CapeBox : public CapeBoxAttributes, public Visdef {
 public:
     CapeBox() {}
-    virtual ~CapeBox() {}
+    virtual ~CapeBox() override {}
     // Implements the set method ...
     void set(const map<string, string>& map) { CapeBoxAttributes::set(map); }
     void set(const XmlNode& node) { CapeBoxAttributes::set(node); }
@@ -161,7 +161,7 @@ private:
 class EpsWind : public Visdef, public EpsWindAttributes {
 public:
     EpsWind() {}
-    virtual ~EpsWind() {}
+    virtual ~EpsWind() override {}
     // Implements the set method ...
     void set(const map<string, string>& map) { EpsWindAttributes::set(map); }
     void set(const XmlNode& node) { EpsWindAttributes::set(node); }
@@ -195,7 +195,7 @@ private:
 class EpsCloud : public Visdef, public EpsCloudAttributes {
 public:
     EpsCloud() {}
-    virtual ~EpsCloud() {}
+    virtual ~EpsCloud() override {}
     // Implements the set method ...
     void set(const map<string, string>& map) { EpsCloudAttributes::set(map); }
     void set(const XmlNode& node) { EpsCloudAttributes::set(node); }
@@ -228,7 +228,7 @@ private:
 class EpsBar : public Visdef, public EpsCloudAttributes {
 public:
     EpsBar() {}
-    virtual ~EpsBar() {}
+    virtual ~EpsBar() override {}
     // Implements the set method ...
     void set(const map<string, string>& map) { EpsCloudAttributes::set(map); }
     void set(const XmlNode& node) { EpsCloudAttributes::set(node); }
@@ -260,7 +260,7 @@ private:
 class EpsWave : public Visdef {
 public:
     EpsWave() {}
-    virtual ~EpsWave() {}
+    virtual ~EpsWave() override {}
     // Implements the set method ...
     void set(const map<string, string>&) {}  // EpsWindAttributes::set(map); }
     void set(const XmlNode&) {}              // EpsWindAttributes::set(node); }
@@ -290,7 +290,7 @@ private:
 class EfiGraph : public Visdef, public EfiGraphAttributes {
 public:
     EfiGraph();
-    virtual ~EfiGraph();
+    virtual ~EfiGraph() override;
 
     void set(const XmlNode& node) { EfiGraphAttributes::set(node); }
     void set(const map<string, string>& map) { EfiGraphAttributes::set(map); }
@@ -321,7 +321,7 @@ private:
 class CdfGraph : public Visdef, public CdfGraphAttributes {
 public:
     CdfGraph();
-    virtual ~CdfGraph();
+    virtual ~CdfGraph() override;
 
     void set(const XmlNode& node) { CdfGraphAttributes::set(node); }
     void set(const map<string, string>& map) { CdfGraphAttributes::set(map); }
@@ -363,7 +363,7 @@ private:
 class EpsShade : public Visdef, public EpsShadeAttributes {
 public:
     EpsShade();
-    virtual ~EpsShade();
+    virtual ~EpsShade() override;
 
     void set(const XmlNode& node) { EpsShadeAttributes::set(node); }
     void set(const map<string, string>& map) { EpsShadeAttributes::set(map); }
@@ -395,7 +395,7 @@ private:
 class EpsDirection : public Visdef, public EpsDirectionAttributes {
 public:
     EpsDirection() {}
-    virtual ~EpsDirection() {}
+    virtual ~EpsDirection() override {}
 
     void set(const XmlNode& node) { EpsDirectionAttributes::set(node); }
     void set(const map<string, string>& map) { EpsDirectionAttributes::set(map); }
@@ -418,7 +418,7 @@ private:
 class EpsPlume : public Visdef, public EpsPlumeAttributes {
 public:
     EpsPlume();
-    virtual ~EpsPlume() {}
+    virtual ~EpsPlume() override {}
 
     void set(const XmlNode& node) { EpsPlumeAttributes::set(node); }
     void set(const map<string, string>& map) { EpsPlumeAttributes::set(map); }

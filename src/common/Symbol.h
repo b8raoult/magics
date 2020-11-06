@@ -43,7 +43,7 @@ enum class TextPosition
 class Symbol : public BasicGraphicsObject, public vector<PaperPoint> {
 public:
     Symbol();
-    virtual ~Symbol();
+    virtual ~Symbol() override;
 
     void redisplay(const BaseDriver& driver) const override;
 
@@ -137,7 +137,7 @@ private:
 class TextSymbol : public Symbol {
 public:
     TextSymbol() : position_(TextPosition::BELOW), blanking_(false) {}
-    ~TextSymbol() {}
+    ~TextSymbol() override {}
 
     void push_back(const PaperPoint& point, const string& text) override {
         Symbol::push_back(point);
@@ -175,7 +175,7 @@ protected:
 class ImageSymbol : public Symbol {
 public:
     ImageSymbol(const string& path, const string& format) : path_(path), format_(format) {}
-    ~ImageSymbol() {}
+    ~ImageSymbol() override {}
     void redisplay(const BaseDriver& driver) const override;
 
     void set(double width, double height) {
@@ -192,7 +192,7 @@ protected:
 class SimpleTextSymbol : public TextSymbol {
 public:
     SimpleTextSymbol(const string& text) : text_(text) {}
-    ~SimpleTextSymbol() {}
+    ~SimpleTextSymbol() override {}
 
     void push_back(const PaperPoint& point) { TextSymbol::push_back(point, text_); }
     void push_back(const PaperPoint& point, const string&) { TextSymbol::push_back(point, text_); }
@@ -206,7 +206,7 @@ class ComplexSymbol : public Symbol {
 public:
     ComplexSymbol() : rows_(1), columns_(1) {}
     ComplexSymbol(int rows, int columns) : rows_(rows), columns_(columns) {}
-    ~ComplexSymbol() {}
+    ~ComplexSymbol() override {}
 
     void redisplay(const BaseDriver& driver) const override {
         MagLog::dev() << "Redisplay -->" << *this << endl;

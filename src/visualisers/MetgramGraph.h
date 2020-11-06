@@ -40,7 +40,7 @@ class XmlNode;
 class MetgramGraph : public MetgramGraphAttributes, public Visdef {
 public:
     MetgramGraph();
-    virtual ~MetgramGraph();
+    virtual ~MetgramGraph() override;
 
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;

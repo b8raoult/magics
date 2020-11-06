@@ -35,7 +35,7 @@ namespace magics {
 class CellShading : public ShadingTechnique, public CellShadingAttributes {
 public:
     CellShading();
-    virtual ~CellShading();
+    virtual ~CellShading() override;
     void set(const map<string, string>& map) override { CellShadingAttributes::set(map); }
     void set(const XmlNode& node) override { CellShadingAttributes::set(node); }
     bool accept(const string& node) override { return CellShadingAttributes::accept(node); }
@@ -86,7 +86,7 @@ private:
 class DumpShading : public CellShading {
 public:
     DumpShading();
-    virtual ~DumpShading();
+    virtual ~DumpShading() override;
 
     virtual ShadingTechnique* clone() const override {
         DumpShading* object = new DumpShading();

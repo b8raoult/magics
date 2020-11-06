@@ -57,7 +57,7 @@ public:
 class Data : public MetviewIcon {
 public:
     Data() : dimension_(1), valid_(true), scaled_(false), thinningFactor_(1), name_("no_name"), binning_(0) {}
-    virtual ~Data() {
+    virtual ~Data() override {
         if (binning_)
             delete binning_;
     }

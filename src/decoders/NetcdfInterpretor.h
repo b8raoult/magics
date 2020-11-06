@@ -40,7 +40,7 @@ class Netcdf;
 class NetcdfInterpretor : public NetcdfInterpretorAttributes {
 public:
     NetcdfInterpretor();
-    virtual ~NetcdfInterpretor();
+    virtual ~NetcdfInterpretor() override;
     virtual void visit(Transformation&) {}
     virtual void getReady(const Transformation&) {}
     virtual bool interpretAsMatrix(Matrix**) {
@@ -120,7 +120,7 @@ private:
 class NetcdfGuessInterpretor : public NetcdfInterpretor {
 public:
     NetcdfGuessInterpretor();
-    virtual ~NetcdfGuessInterpretor();
+    virtual ~NetcdfGuessInterpretor() override;
     virtual void visit(Transformation&) {}  // delegate_->visit(transformation); }
     virtual void getReady(const Transformation&) {}
     virtual bool interpretAsMatrix(Matrix** matrix) { return guess()->interpretAsMatrix(matrix); }
@@ -196,7 +196,7 @@ class NetcdfTag : public XmlNodeVisitor {
 public:
     NetcdfTag(NetcdfInterpretor& netcdf, TagHandler& title) : netcdf_(netcdf), title_(title) {}
 
-    ~NetcdfTag() {}
+    ~NetcdfTag() override {}
 
     void visit(const XmlNode& node);
 

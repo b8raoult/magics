@@ -109,13 +109,13 @@ private:
 class AxisHyperItem : public AxisItem {
 public:
     AxisHyperItem(double, vector<double>&);
-    ~AxisHyperItem();
+    ~AxisHyperItem() override;
 };
 
 class AxisTickItem : public AxisItem {
 public:
     AxisTickItem(double pos, const string& format) : AxisItem(pos, format) { label_ = ""; }
-    ~AxisTickItem() {}
+    ~AxisTickItem() override {}
     bool isLabel() const { return false; }
 };
 
@@ -123,7 +123,7 @@ class AxisDateItem : public AxisItem {
 public:
     AxisDateItem(double position, const DateTime& date, int level = 0, const string& colour = "undef",
                  double height = 0.3);
-    ~AxisDateItem() {}
+    ~AxisDateItem() override {}
     AxisItem* clone() const override {
         AxisDateItem* item = new AxisDateItem(position_, date_, level_, colour_, height_);
         return item;
@@ -151,7 +151,7 @@ protected:
 class AxisMinorTickItem : public AxisItem {
 public:
     AxisMinorTickItem(double pos) : AxisItem(pos, "") { label_ = ""; }
-    ~AxisMinorTickItem() {}
+    ~AxisMinorTickItem() override {}
     bool isTick() const { return false; }
     bool isLabel() const { return false; }
     bool isGrid() const { return false; }

@@ -78,7 +78,7 @@ private:
 class MetgramBar : public MetgramStyle, public MetgramBarAttributes {
 public:
     MetgramBar() {}
-    virtual ~MetgramBar() {}
+    virtual ~MetgramBar() override {}
 
     virtual void set(const XmlNode& node) override { MetgramBarAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { MetgramBarAttributes::set(map); }
@@ -95,7 +95,7 @@ protected:
 class MetgramCurve : public MetgramStyle, public MetgramCurveAttributes {
 public:
     MetgramCurve() {}
-    virtual ~MetgramCurve() {}
+    virtual ~MetgramCurve() override {}
 
     virtual void set(const XmlNode& node) override { MetgramCurveAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { MetgramCurveAttributes::set(map); }
@@ -114,7 +114,7 @@ protected:
 class MetgramFlags : public MetgramStyle, public MetgramFlagsAttributes {
 public:
     MetgramFlags() {}
-    virtual ~MetgramFlags() {}
+    virtual ~MetgramFlags() override {}
 
     virtual void set(const XmlNode& node) override { MetgramFlagsAttributes::set(node); }
     virtual void set(const map<string, string>& node) override { MetgramFlagsAttributes::set(node); }

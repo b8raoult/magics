@@ -106,7 +106,7 @@ private:
 class BasicGraphicsObjectContainer : public BasicGraphicsObject {
 public:
     BasicGraphicsObjectContainer() {}
-    virtual ~BasicGraphicsObjectContainer();
+    virtual ~BasicGraphicsObjectContainer() override;
 
     void push_back(BasicGraphicsObject* object) {
         object->check();  // here we make sure that the object is not in 2 containres!

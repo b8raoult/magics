@@ -35,7 +35,7 @@ namespace magics {
 class OverlayPlot : public ImportPlotAttributes, public Visdef {
 public:
     OverlayPlot() {}
-    virtual ~OverlayPlot() {}
+    virtual ~OverlayPlot() override {}
     void set(const map<string, string>& map) override { ImportPlotAttributes::set(map); }
 
     virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) override {
@@ -85,7 +85,7 @@ private:
 class ImportPlot : public ImportPlotAttributes, public Visdef {
 public:
     ImportPlot() {}
-    virtual ~ImportPlot() {}
+    virtual ~ImportPlot() override {}
     void set(const map<string, string>& map) override { ImportPlotAttributes::set(map); }
 
     virtual void operator()(Data& data, BasicGraphicsObjectContainer& visitor) override {

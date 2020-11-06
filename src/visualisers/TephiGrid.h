@@ -32,7 +32,7 @@ namespace magics {
 class TephiGrid : public BasicSceneObject, public TephiGridAttributes {
 public:
     TephiGrid();
-    virtual ~TephiGrid();
+    virtual ~TephiGrid() override;
 
     // New Interface!
     void visit(DrawingVisitor&) override;

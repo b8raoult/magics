@@ -38,7 +38,7 @@ class ValueMap;
 class ObsJSon : public ObsJSonAttributes, public Decoder, public Data, public PointsList {
 public:
     ObsJSon();
-    virtual ~ObsJSon();
+    virtual ~ObsJSon() override;
 
     void customisedPoints(const std::set<string>&, CustomisedPointsList&);
     void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&);

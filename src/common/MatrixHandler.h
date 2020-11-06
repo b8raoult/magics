@@ -37,7 +37,7 @@ public:
     MatrixHandler(const AbstractMatrix& matrix) :
         AbstractMatrix(), AbstractPoints(), matrix_(matrix), min_(INT_MAX), max_(-INT_MAX), tile_(false) {}
 
-    virtual ~MatrixHandler() {}
+    virtual ~MatrixHandler() override {}
 
     virtual bool tile() { return tile_; }
 
@@ -612,7 +612,7 @@ public:
         return -1;
     }
 
-    virtual ~BoxMatrixHandler() { delete original_; }
+    virtual ~BoxMatrixHandler() override { delete original_; }
 
     // Implements the AbstractPoints interface
     virtual bool accept(double x, double y) const override { return transformation_.in(x, y); }
@@ -707,7 +707,7 @@ public:
     double regular_row(int i) const override { return regular_latitudes_[i]; }
     double regular_column(int i) const override { return regular_longitudes_[i]; }
 
-    virtual ~GeoBoxMatrixHandler() { delete original_; }
+    virtual ~GeoBoxMatrixHandler() override { delete original_; }
 
     // Implements the AbstractPoints interface
     virtual bool accept(double x, double y) const override { return transformation_.in(x, y); }
@@ -795,7 +795,7 @@ public:
                 newColumnsMap_[matrix.regular_column((column - 1) - j)] = j;
             }
     }
-    virtual ~MonotonicIncreasingMatrixHandler() {}
+    virtual ~MonotonicIncreasingMatrixHandler() override {}
 
     double operator()(int i, int j) const override {
         int x = const_cast<MonotonicIncreasingMatrixHandler*>(this)->rows_[i];

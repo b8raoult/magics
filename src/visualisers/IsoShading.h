@@ -98,7 +98,7 @@ private:
 class IsoShading : public NoIsoShading, public IsoShadingAttributes {
 public:
     IsoShading();
-    ~IsoShading();
+    ~IsoShading() override;
     void set(const map<string, string>& map) override { IsoShadingAttributes::set(map); }
     void set(const XmlNode& node) override { IsoShadingAttributes::set(node); }
     virtual void operator()(Polyline*) const override;

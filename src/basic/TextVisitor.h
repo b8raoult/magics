@@ -53,7 +53,7 @@ class TextVisitor : public TextVisitorAttributes,
                     public map<string, vector<TextEntry*> > {
 public:
     TextVisitor();
-    virtual ~TextVisitor();
+    virtual ~TextVisitor() override;
 
     TextVisitor* clone();
     void add(const string& line, TextEntry* entry);
@@ -113,7 +113,7 @@ private:
 class XmlTextVisitor : public TextVisitor, public XmlBasicNodeAttributes {
 public:
     XmlTextVisitor();
-    ~XmlTextVisitor() {}
+    ~XmlTextVisitor() override {}
     void set(const XmlNode&);
     void getReady();
     void decode();
@@ -122,7 +122,7 @@ public:
 class FortranTextVisitor : public TextVisitor {
 public:
     FortranTextVisitor();
-    ~FortranTextVisitor() {}
+    ~FortranTextVisitor() override {}
 
 protected:
     void decode();
@@ -132,7 +132,7 @@ protected:
 class FortranAutomaticTextVisitor : public FortranTextVisitor {
 public:
     FortranAutomaticTextVisitor();
-    ~FortranAutomaticTextVisitor() {}
+    ~FortranAutomaticTextVisitor() override {}
     void getReady();
 };
 
@@ -140,14 +140,14 @@ public:
 class FortranPositionalTextVisitor : public FortranTextVisitor {
 public:
     FortranPositionalTextVisitor();
-    ~FortranPositionalTextVisitor() {}
+    ~FortranPositionalTextVisitor() override {}
     void getReady();
 };
 /*
 class MvTextVisitor :
 {
     MvTextVisitor();
-    ~MvTextVisitor()
+    ~MvTextVisitor() override
 
 }
 */

@@ -70,7 +70,7 @@ public:
     OneLineClass();
 
     // Destructor
-    ~OneLineClass();
+    ~OneLineClass() override;
 
     // Allocate memory for breakpoints
     void Alloc(int len);

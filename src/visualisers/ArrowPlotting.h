@@ -34,7 +34,7 @@ namespace magics {
 class ArrowPlotting : public WindPlotting, public ArrowPlottingAttributes {
 public:
     ArrowPlotting() {}
-    virtual ~ArrowPlotting() {}
+    virtual ~ArrowPlotting() override {}
 
     virtual void set(const map<string, string>& map) {
         WindPlottingAttributes::set(map);

@@ -27,7 +27,7 @@ public:
 
     void set(const string& name) { compatibility_[name] = this; }
 
-    virtual ~CompatibilityHelper() {}
+    virtual ~CompatibilityHelper() override {}
     template <class P>
     static bool check(const string& param, P value) {
         map<string, CompatibilityHelper*>::const_iterator tool = compatibility_.find(lowerCase(param));

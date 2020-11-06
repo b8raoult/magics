@@ -37,7 +37,7 @@ class DateTime;
 class GraphPlotting : public GraphPlottingAttributes, public Visdef {
 public:
     GraphPlotting();
-    virtual ~GraphPlotting();
+    virtual ~GraphPlotting() override;
 
     // Implements the Visualiser interface  ...
 

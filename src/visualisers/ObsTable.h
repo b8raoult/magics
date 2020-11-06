@@ -29,7 +29,7 @@ public:
         val                                     = def.find("rows");
         rows_                                   = (val != def.end()) ? atoi(val->second.c_str()) : 3;
     }
-    virtual ~ObsTemplate() {}
+    virtual ~ObsTemplate() override {}
     void visit(std::set<string>& tokens) const {
         for (const_iterator item = begin(); item != end(); ++item)
             (*item)->visit(tokens);
