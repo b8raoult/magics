@@ -37,7 +37,7 @@ class AxisMethod;
 class AxisControl {
 public:
     AxisControl();
-    virtual ~AxisControl() override;
+    virtual ~AxisControl();
 
     virtual void set(const XmlNode&) {}
     virtual void set(const map<string, string>&) {}

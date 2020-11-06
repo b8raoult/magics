@@ -34,7 +34,7 @@ class XmlNode;
 class AxisType {
 public:
     AxisType();
-    virtual ~AxisType() override;
+    virtual ~AxisType();
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual AxisType* clone() const { return new AxisType(); }

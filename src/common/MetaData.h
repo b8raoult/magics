@@ -32,7 +32,7 @@ namespace magics {
 class MetaDataEntry {
 public:
     MetaDataEntry(const string& data) : data_(data) {}
-    virtual ~MetaDataEntry() override {}
+    virtual ~MetaDataEntry() {}
 
 protected:
     string data_;
@@ -54,7 +54,7 @@ public:
         styles_  = styles;
     }
 
-    virtual ~StyleEntry() override {}
+    virtual ~StyleEntry() {}
 
     string default_;
     vector<string> styles_;

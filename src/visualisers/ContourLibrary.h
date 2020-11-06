@@ -85,7 +85,7 @@ public:
         MagConfigHandler(path_, *this);
     }
 
-    ~EcChartData() override {}
+    ~EcChartData() {}
 
     void callback(const string&, const Value&);
     map<string, string> getMap(const int);
@@ -112,7 +112,7 @@ public:
         path_ = getEnvVariable("MAGPLUS_HOME") + MAGPLUS_PATH_TO_SHARE_ + "/" + name + ".json";
         MagConfigHandler(path_, *this);
     }
-    ~EcChartSetData() override {}
+    ~EcChartSetData() {}
 
     void callback(const string&, const Value&);
     bool hasKey(const string&);

@@ -42,7 +42,7 @@ namespace magics {
 class GribDecoder;
 struct MatchCriteria {
     MatchCriteria() {}
-    virtual ~MatchCriteria() override {}
+    virtual ~MatchCriteria() {}
     virtual bool verify(const GribDecoder&, const string&, const string&) { return false; }
 };
 

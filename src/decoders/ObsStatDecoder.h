@@ -36,7 +36,7 @@ namespace magics {
 class StatItem {
 public:
     StatItem(const string&, ifstream&);
-    virtual ~StatItem() override {}
+    virtual ~StatItem() {}
     map<string, int> columns_;
     vector<vector<double> > rows_;
     map<string, vector<string> > definitions_;
@@ -51,7 +51,7 @@ public:
 class StatDef {
 public:
     StatDef(const string&, ifstream&);
-    virtual ~StatDef() override {}
+    virtual ~StatDef() {}
     map<string, vector<string> > definitions_;
     vector<StatItem> data_;
     string name_;

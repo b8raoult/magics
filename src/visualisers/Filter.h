@@ -31,7 +31,7 @@ namespace magics {
 class Filter : public vector<UserPoint> {
 public:
     Filter(MatrixHandler& matrix, int nrows, int ncols);
-    virtual ~Filter() override;
+    virtual ~Filter();
 
     //!  Get number of columns of the Mask
     int DimensionX() const { return ncols_; }

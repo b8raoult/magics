@@ -77,7 +77,7 @@ private:
 class AnimationRules : public vector<AnimationStep*> {
 public:
     AnimationRules();
-    virtual ~AnimationRules() override;
+    virtual ~AnimationRules();
     virtual void add(StepLayer&);
     virtual void rules(vector<string>&) const;
 

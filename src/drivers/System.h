@@ -41,7 +41,7 @@ namespace magics {
 class SystemInfo {
 public:
     SystemInfo(){};
-    ~SystemInfo() override{};  // not virtual - so do not inherit!
+    ~SystemInfo(){};  // not virtual - so do not inherit!
 
     MAGICS_NO_EXPORT string getHostName() const {
         char host[256];

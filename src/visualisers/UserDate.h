@@ -33,7 +33,7 @@ class UserDate {
 public:
     UserDate();
     UserDate(const string&);
-    virtual ~UserDate() override;
+    virtual ~UserDate();
 
     virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
     virtual void set(const map<string, string>&) {

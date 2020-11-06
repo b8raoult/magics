@@ -30,7 +30,7 @@ namespace magics {
 class FloatSelection : public vector<double> {
 public:
     FloatSelection();
-    virtual ~FloatSelection() override;
+    virtual ~FloatSelection();
     virtual void prepare() {}
 
 

@@ -29,7 +29,7 @@ namespace magics {
 class XmlReader : private std::stack<XmlNode*> {
 public:
     MAGICS_EXPORT XmlReader(bool tag = false);
-    MAGICS_EXPORT virtual ~XmlReader() override;
+    MAGICS_EXPORT virtual ~XmlReader();
     MAGICS_EXPORT void interpret(const string&, XmlTree*);
     int decode(const string&, XmlTree*);
     void newElement(const string&, const map<string, string>&);

@@ -41,7 +41,7 @@ public:
         derivedUnit_("unknown units"),
         scaling_(1),
         offset_(0) {}
-    virtual ~ParamDef() override {}
+    virtual ~ParamDef() {}
     int code() const { return code_; }
     string longTitle() const { return longTitle_; }
     string shortTitle() const { return shortTitle_; }

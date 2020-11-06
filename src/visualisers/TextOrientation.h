@@ -32,7 +32,7 @@ namespace magics {
 class TextOrientation {
 public:
     TextOrientation();
-    virtual ~TextOrientation() override;
+    virtual ~TextOrientation();
 
     virtual void set(const XmlNode&) { MagLog::dev() << "(const XmlNode&)---> to be checked!...\n"; }
     virtual void set(const map<string, string>&) {

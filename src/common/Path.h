@@ -37,7 +37,7 @@ public:
     void toxml(ostream&, int) const {}
     Path* clone() const { return new Path(path_); }
     // -- Destructor
-    virtual ~Path() override {}
+    virtual ~Path() {}
 
     // -- Convertors
     operator const string&() const { return path_; }

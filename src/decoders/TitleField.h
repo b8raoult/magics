@@ -30,7 +30,7 @@ namespace magics {
 class TitleField : public map<string, string> {
 public:
     TitleField();
-    virtual ~TitleField() override;
+    virtual ~TitleField();
 
     string attribute(const string& param, const string& def = "") {
         map<string, string>::const_iterator attribute = find(param);

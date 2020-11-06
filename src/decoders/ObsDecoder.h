@@ -33,7 +33,7 @@ namespace magics {
 class BufrIdentifiers : public map<string, string> {
 public:
     BufrIdentifiers(int centre);
-    ~BufrIdentifiers() override {}
+    ~BufrIdentifiers() {}
     void set(const map<string, string>&);
     int ident(const string&) const;  // Return -1 if ident does not exist.
 protected:

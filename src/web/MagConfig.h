@@ -28,7 +28,7 @@ class ValueList;
 class MagConfig {
 public:
     MagConfig();
-    ~MagConfig() override;
+    ~MagConfig();
 
     static string convert(const Value& value);
 
@@ -40,7 +40,7 @@ public:
 class MagConfigHandler {
 public:
     MagConfigHandler(const string& config, MagConfig& object);
-    virtual ~MagConfigHandler() override;
+    virtual ~MagConfigHandler();
 
     void dig(const Value&);
     void ignore(const Value&) {}
@@ -88,7 +88,7 @@ public:
     MagDefLibrary(const string& theme, const string& name) : name_(name) {
         init("/styles/" + theme + "/" + name + ".json");
     }
-    ~MagDefLibrary() override {}
+    ~MagDefLibrary() {}
 
     void callback(const string& name, const Value& value);
 
@@ -150,7 +150,7 @@ class StyleLibrary : public MagConfig {
 public:
     StyleLibrary() {}
     StyleLibrary(const string& path) : path_(path) { init(); }
-    ~StyleLibrary() override {}
+    ~StyleLibrary() {}
 
     void callback(const string& name, const Value& value);
     void callback(const ValueList& values);
@@ -202,7 +202,7 @@ class PaletteLibrary : public MagConfig {
 public:
     PaletteLibrary() { init(); }
     PaletteLibrary(const string& family) { init(); }
-    ~PaletteLibrary() override {}
+    ~PaletteLibrary() {}
 
     void callback(const string& name, const Value& value);
 
@@ -225,7 +225,7 @@ class NetcdfGuess : public MagConfig {
 public:
     NetcdfGuess(const string& name) : name_(name) { init(); }
     NetcdfGuess() : name_("netcdf-convention") { init(); }
-    ~NetcdfGuess() override {}
+    ~NetcdfGuess() {}
 
     void callback(const string& name, const Value& value);
     void init();
@@ -240,7 +240,7 @@ class DimensionGuess : public MagConfig {
 public:
     DimensionGuess(const string& def) : definitions_(def) { init(); }
 
-    ~DimensionGuess() override {}
+    ~DimensionGuess() {}
 
     void callback(const string& name, const Value& value) {}
     void init();
@@ -278,7 +278,7 @@ class UnitsLibrary : public MagConfig {
 public:
     UnitsLibrary() { init(); }
     UnitsLibrary(const string& family) { init(); }
-    ~UnitsLibrary() override {}
+    ~UnitsLibrary() {}
 
     void callback(const string& name, const Value& value);
 
