@@ -1166,16 +1166,21 @@ public:
         const long day  = grib_.getLong("date");
         const long hour = grib_.getLong("hour");
         const long mn   = grib_.getLong("minute");
-        MagDate part1   = MagDate(day);
-        MagTime part2   = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
 
-        const long type = grib_.getLong("significanceOfReferenceTime", false);
-        if (type == 2) {  //     Verifying time of forecast
-            const long step = computeStep(grib_, "stepRange");
-            full            = full + (step * -1);
+            const long type = grib_.getLong("significanceOfReferenceTime", false);
+            if (type == 2) {  //     Verifying time of forecast
+                const long step = computeStep(grib_, "stepRange");
+                full            = full + (step * -1);
+            }
+            return full.tostring(format);
         }
-        return full.tostring(format);
+        catch (MagicsException&) {
+            return "<invalid date>";
+        }
     }
 
     string startDate(const XmlNode& node) {
@@ -1187,12 +1192,16 @@ public:
         const long mn   = grib_.getLong("minute");
         const long step = computeStep(grib_, "startStep");
 
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
-        full = full + step;
-
-        return full.tostring(format);
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
+            full = full + step;
+            return full.tostring(format);
+        }
+        catch (MagicsException&) {
+            return "<invalid date>";
+        }
     }
 
     string validDate(const XmlNode& node) {
@@ -1203,16 +1212,19 @@ public:
         const long hour = grib_.getLong("hour");
         const long mn   = grib_.getLong("minute");
         const long step = computeStep(grib_, "stepRange");  // default is in hours. Set 'stepUnits' to change.
-
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
-        const long type = grib_.getLong("significanceOfReferenceTime", false);
-        if (type != 2) {  //     Verifying time of forecast
-            full = full + step;
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
+            const long type = grib_.getLong("significanceOfReferenceTime", false);
+            if (type != 2) {  //     Verifying time of forecast
+                full = full + step;
+            }
+            return full.tostring(format);
         }
-
-        return full.tostring(format);
+        catch (MagicsException&) {
+            return "<invalid date>";
+        }
     }
 
     string dataDate(const XmlNode& node) {
@@ -1220,13 +1232,17 @@ public:
         string format  = node.getAttribute("format");
         if (format.empty())
             return tostring(day);
+        try {
+            // Otherwise format the date
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(0, 0, 0);
 
-        // Otherwise format the date
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(0, 0, 0);
-
-        DateTime full(part1, part2);
-        return full.tostring(format);
+            DateTime full(part1, part2);
+            return full.tostring(format);
+        }
+        catch (MagicsException&) {
+            return "<invalid date>";
+        }
     }
 
     string endDate(const XmlNode& node) {
@@ -1237,13 +1253,17 @@ public:
         const long hour = grib_.getLong("hour");
         const long mn   = grib_.getLong("minute");
         const long step = computeStep(grib_, "endStep");
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
+            full = full + step;
 
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
-        full = full + step;
-
-        return full.tostring(format);
+            return full.tostring(format);
+        }
+        catch (MagicsException&) {
+            return "<invalid date>";
+        }
     }
 
     void visit(const XmlNode& node) {
@@ -1705,9 +1725,13 @@ void GribDecoder::visit(MetaDataCollector& step) {
 
             if (members) {
                 name_ = helper.get("grib", "shortName") + " " + helper.get("grib", "level");
-
-                from_ = DateTime(helper.get("grib", "start-date"));
-                to_   = DateTime(helper.get("grib", "end-date"));
+                try {
+                    from_ = DateTime(helper.get("grib", "start-date"));
+                    to_   = DateTime(helper.get("grib", "end-date"));
+                }
+                catch (MagicsException& e) {
+                    MagLog::warning() << e.what() << std::endl;
+                }
             }
 
             for (map<string, string>::iterator key = step.begin(); key != step.end(); ++key) {
@@ -1822,8 +1846,13 @@ void GribDecoder::decode() {
     name_    = helper.get("grib" + id_, "shortName") + "-" + helper.get("grib" + id_, "level");
     name_    = iconName_;
     layerId_ = name_ + file_name_;
-    from_    = DateTime(helper.get("grib" + id_, "start-date"));
-    to_      = DateTime(helper.get("grib" + id_, "end-date"));
+    try {
+        from_ = DateTime(helper.get("grib" + id_, "start-date"));
+        to_   = DateTime(helper.get("grib" + id_, "end-date"));
+    }
+    catch (MagicsException& e) {
+        MagLog::warning() << e.what() << std::endl;
+    }
 }
 
 void GribDecoder::visit(TextVisitor& title) {

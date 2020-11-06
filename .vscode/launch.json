@@ -25,7 +25,7 @@
             "name": "Debug magics on mac",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/../../build/${workspaceFolderBasename}/bin/magics",
+            "program": "${workspaceFolder}/build/bin/magics",
             "args": ["debug.yaml"],
             "cwd": "${workspaceFolder}/regression/climetlab",
             "MIMode": "lldb",

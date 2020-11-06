@@ -28,7 +28,7 @@ public:
 private:
     virtual void print(ostream& out) const { out << what_; }
     string what_;
-    // -- Friends
+    // -- Friends         
     friend ostream& operator<<(ostream& s, const MagicsException& p) {
         p.print(s);
         return s;
