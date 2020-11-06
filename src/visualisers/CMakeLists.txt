@@ -6,7 +6,6 @@ Akima474Method.h
 ArrowPlotting.cc
 ArrowPlotting.h
 AutomaticContourMethod.h
-AutomaticContourMethod.cc
 Axis.cc
 Axis.h
 AxisControl.cc
@@ -20,7 +19,6 @@ AxisType.cc
 AxisType.h
 Bar.cc
 Bar.h
-BothValuePlotMethod.cc
 BothValuePlotMethod.h
 Boundaries.cc
 Boundaries.h
@@ -33,7 +31,7 @@ CalculateColourTechnique.cc
 CalculateColourTechnique.h
 GradientsColourTechnique.cc
 GradientsColourTechnique.h
-CalcStreamlines.cc
+CalcStreamlines.cc  
 CalcStreamlines.h
 CalmIndicator.h
 CellShading.cc
@@ -62,6 +60,7 @@ Curve.h
 DateAxis.cc
 DateAxis.h
 DefinitionTable.h
+DefinitionTable.hcc
 DotPolyShadingMethod.h
 EmagramGrid.cc
 EmagramGrid.h
@@ -115,7 +114,6 @@ IntervalSelectionType.h
 Intervals.h
 IsoHelper.cc
 IsoHelper.h
-IsoHighlight.cc
 IsoHighlight.h
 IsoLabel.cc
 IsoLabel.h
@@ -181,7 +179,7 @@ SymbolPlotting.cc
 SymbolPlotting.h
 TaylorGrid.cc
 TaylorGrid.h
-TephiGrid.cc
+TephiGrid.cc  
 TephiGrid.h
 TextOrientation.cc
 TextOrientation.h
@@ -190,7 +188,6 @@ UserDate.h
 ValuePlot.cc
 ValuePlot.h
 ValuePlotBase.h
-ValuePlotMethod.cc
 ValuePlotMethod.h
 VisDefInfo.cc
 VisDefInfo.h
@@ -207,8 +204,8 @@ endforeach()
 set( visualisers_srcs ${visualisers_srcs} PARENT_SCOPE )
 
 if ( metview )
-    list (APPEND metview_include
-            visualisers/LegendMethod.h
+    list (APPEND metview_include 
+            visualisers/LegendMethod.h      
             visualisers/LookupTableMode.h
             )
     set( metview_include ${metview_include} PARENT_SCOPE )

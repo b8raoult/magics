@@ -87,34 +87,6 @@ void NetcdfDecoder::applyScaling(double scaling, double offset) {
     data_->plus(offset);
 }
 
-MatrixHandler& NetcdfDecoder::matrix() {
-    MagLog::dev() << "NetcdfDecoder::matrix! "
-                  << "\n";
-    if (!data_)
-        valid_ = (*interpretor_).interpretAsMatrix(&data_);
-    if (!valid_)
-        throw MagicsException("Unable to use data");
-    this->matrixHandlers_.push_back(new MatrixHandler(*data_));
-
-    return *(this->matrixHandlers_.back());
-}
-
-void NetcdfDecoder::visit(AnimationStep& step) {
-    try {
-        MatrixHandler& data = matrix();
-        // Information about contains...
-        MagLog::dev() << "Netcdf::visit(AnimationRules&) --> " << endl;
-
-        step.xResolution(abs(data.XResolution()));
-        step.yResolution(abs(data.YResolution()));
-    }
-    catch (...) {
-        if (MagicsSettings::strict()) {
-            throw;
-        }
-    }
-}
-
 void NetcdfDecoder::visit(MetaDataCollector& mdc) {
     bool interpretorCalled = false;
     for (map<string, string>::iterator key = mdc.begin(); key != mdc.end(); ++key) {

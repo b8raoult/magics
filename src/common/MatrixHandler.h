@@ -318,7 +318,9 @@ public:
     virtual void advance() override { current_++; }
 
     virtual vector<double>& rowsAxis() const override { return const_cast<MatrixHandler*>(this)->matrix_.rowsAxis(); }
-    virtual vector<double>& columnsAxis() const override { return const_cast<MatrixHandler*>(this)->matrix_.columnsAxis(); }
+    virtual vector<double>& columnsAxis() const override {
+        return const_cast<MatrixHandler*>(this)->matrix_.columnsAxis();
+    }
 
     virtual double row(int i, int j) const override { return matrix_.row(i, j); }
     virtual double column(int i, int j) const override { return matrix_.column(i, j); }
@@ -351,7 +353,6 @@ protected:
     mutable bool tile_;
 
     virtual void print(ostream& out) const override { out << "MatrixHandler"; }
-
 };
 
 class TransformMatrixHandler : public MatrixHandler {
@@ -626,7 +627,6 @@ protected:
     mutable BoxMatrixHandler* original_;
 
     virtual void print(ostream& out) const override { out << "BoxMatrixHandler"; }
-
 };
 
 class GeoBoxMatrixHandler : public TransformMatrixHandler {
@@ -722,7 +722,7 @@ public:
     double right() const override { return regular_longitudes_.back(); }
     double top() const override { return regular_latitudes_.back(); }
 
-    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override{
+    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override {
         index1 = lowerRow(r);
         if (index1 < 0) {
             index2 = -1;
@@ -739,7 +739,7 @@ public:
         row2   = regular_latitudes_[index2];
     }
 
-    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override{
+    virtual void boundColumn(double r, double& column1, int& index1, double& column2, int& index2) const override {
         index1 = lowerColumn(r);
         if (index1 < 0) {
             index2 = -1;
@@ -854,11 +854,11 @@ protected:
     map<double, int> newColumnsMap_;
 
     virtual void print(ostream& out) const override { out << "MonotonicIncreasingMatrixHandler"; }
-
 };
 
 class OriginalMatrixHandler : public MatrixHandler {
     virtual void print(ostream& out) const override { out << "OriginalMatrixHandler"; }
+
 public:
     OriginalMatrixHandler(AbstractMatrix& matrix) : MatrixHandler(matrix.original()) {}
 };
@@ -915,7 +915,6 @@ protected:
     map<int, int> columnIndex_;
 
     virtual void print(ostream& out) const override { out << "ThinningMatrixHandler"; }
-
 };
 
 }  // namespace magics

@@ -406,7 +406,7 @@ void LegendVisitor::rightTitle() {
     float factor = column ? 0.25 : 0.15;
     // Special adjustement for the web ( PDF creation)
     // titlePosition_ = Paperoint(maxx+ (newmaxx-maxx)*factor, (maxy - miny)/2);
-    // titleJustification_ = ( column ) ?  MCENTRE : MRIGHT;
+    // titleJustification_ = ( column ) ?  Justification::CENTRE : Justification::RIGHT;
     titlePosition_      = PaperPoint(maxx + (newmaxx - maxx) * factor, (maxy + 3 * miny) / 4);
     titleJustification_ = Justification::LEFT;
 

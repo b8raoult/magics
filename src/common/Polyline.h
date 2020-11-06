@@ -30,8 +30,8 @@
 namespace magics {
 
 struct ShadingProperties {
-    ShadingProperties();
-    virtual ~ShadingProperties();
+    ShadingProperties() {}
+    virtual ~ShadingProperties() {}
     virtual ShadingProperties* clone()                = 0;
     virtual void draw(const BaseDriver& driver) const = 0;
 
@@ -220,8 +220,8 @@ public:
     static void skinnyMode() { skinny_ = true; }
 
     void reproject(const Transformation&);
-    bool reproject(BasicGraphicsObjectContainer& out) const override;
-    void redisplay(const BaseDriver& driver) const override;
+    bool reproject(BasicGraphicsObjectContainer& out) const;
+    void redisplay(const BaseDriver& driver) const;
 
     Colour cellColour_;
     double cellValue_;
@@ -340,7 +340,7 @@ public:
     Holes& holes();
 
 protected:
-    void print(ostream&) const override;
+    void print(ostream&) const;
 
 
 public:

@@ -125,7 +125,6 @@ protected:
 private:
     // -- Members
 
-    bool missing_ = false;
     long julian_;
 
     // -- Methods
@@ -232,7 +231,6 @@ protected:
 private:
     // -- Members
 
-    bool missing_ = false;
     Second seconds_;
 
     friend ostream& operator<<(ostream& s, const MagTime& t) {
@@ -251,7 +249,6 @@ public:
     DateTime(time_t = ::time(0));
     DateTime(const MagDate&, const MagTime&);
     DateTime(const string&);
-
     string tostring(const string&) const;
 
     DateTime* clone() const { return new DateTime(date(), time()); }
@@ -282,6 +279,7 @@ public:
 
     bool operator<=(const DateTime& other) const { return !(*this > other); }
 
+    DateTime& operator=(const DateTime&);
 
     Second operator-(const DateTime&) const;
     DateTime operator+(const Second&) const;

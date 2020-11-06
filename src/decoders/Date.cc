@@ -34,15 +34,8 @@ static void check(const MagDate& date, long value) {
 
 
 MagDate::MagDate(long date) : julian_(dateToJulian(date)) {
-    // Stecial case: missing data in GRIB1
-    // TODO: missing data in GRIB2
-    if (date == 128575755) {
-        missing_ = true;
-    }
-    else {
-        if (date)
-            check(*this, date);
-    }
+    if (date)
+        check(*this, date);
 }
 
 MagDate::MagDate(long year, long month, long day) : julian_(dateToJulian(year * 10000 + month * 100 + day)) {
@@ -160,12 +153,10 @@ MagDate::operator string() const {
 }
 
 MagDate::operator tm() const {
-    struct tm tm_date = {
-        0, 0, 0, 0, 0, 0,
-    };
-    tm_date.tm_mday = day();
-    tm_date.tm_mon  = month() - 1;
-    tm_date.tm_year = year() - 1900;
+    struct tm tm_date = {0, 0, 0, 0, 0, 0, 0, 0};
+    tm_date.tm_mday   = day();
+    tm_date.tm_mon    = month() - 1;
+    tm_date.tm_year   = year() - 1900;
 
     int mm = month();
     int yy = year();
@@ -269,12 +260,6 @@ long MagDate::dateToJulian(long ddate) {
 
 
 void MagDate::print(ostream& s) const {
-    if (missing_) {
-        s << "missing";
-        return;
-    }
-
-
     long ddate = julianToMagDate(julian_);
     long month, day, year;
 

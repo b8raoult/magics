@@ -242,7 +242,3 @@ void Polyline::box(const PaperPoint& ll, const PaperPoint& ur) {
 bool Polyline::within(const PaperPoint& point) const {
     return MagClipper::in(*this, point);
 }
-
-ShadingProperties::ShadingProperties() {}
-
-ShadingProperties::~ShadingProperties() {}

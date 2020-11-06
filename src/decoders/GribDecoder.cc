@@ -37,6 +37,7 @@
 #include "GribInterpretor.h"
 #include "MagDateTime.h"
 #include "MagJSon.h"
+#include "MagicsSettings.h"
 #include "MetaData.h"
 #include "TextVisitor.h"
 #include "Timer.h"
@@ -277,15 +278,6 @@ bool GribDecoder::isEarthOblate() const {
     return false;
 }
 
-GribDecoder::InterpolateMethod GribDecoder::interpolateMethod() const {
-    if (magCompare(interpolation_method_, "interpolate"))
-        return interpolate;
-    if (magCompare(interpolation_method_, "nearest"))
-        return nearest;
-    if (magCompare(interpolation_method_, "nearest_valid"))
-        return nearest_valid;
-    return interpolate;
-}
 
 Matrix* GribDecoder::colour(Matrix* matrix) {
     if (cHandle()) {
@@ -773,11 +765,6 @@ void GribDecoder::openThirdComponent() {
     colour_           = open(colour_, false);
 }
 
-grib_handle* GribDecoder::id() const {
-    if (!field_)
-        const_cast<GribDecoder*>(this)->decode();
-    return field_;
-}
 
 grib_handle* GribEntryDecoder::open(grib_handle* handle, bool) {
     return handle;
@@ -1771,10 +1758,7 @@ MatrixHandler& GribDecoder::direction() {
     return *(matrixHandlers_.back());
 }
 
-string GribDecoder::layerId() {
-    decode();
-    return layerId_;
-}
+
 void GribDecoder::decode(const Transformation& transformation) {
     if (xComponent_ || !valid_)
         return;
@@ -1854,43 +1838,6 @@ void GribDecoder::visit(TextVisitor& title) {
     for (vector<string>::const_iterator t = titles.begin(); t != titles.end(); ++t) {
         tag.decode(*t);
     }
-}
-
-PointsHandler& GribDecoder::points() {
-    decodePoints();
-    pointsHandlers_.push_back(new PointsHandler(points_));
-    return *(pointsHandlers_.back());
-}
-
-PointsHandler& GribDecoder::points(const Transformation& transformation) {
-    decodePoints();
-    pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, true));
-    return *(pointsHandlers_.back());
-}
-
-PointsHandler& GribDecoder::points(const Transformation& transformation, bool all) {
-    decodePoints();
-    pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, !all));
-    return *(pointsHandlers_.back());
-}
-
-MatrixHandler& GribDecoder::matrix() {
-    // RV MF
-    decode1D();
-    //		decode();
-    matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
-    return *(matrixHandlers_.back());
-}
-
-MatrixHandler& GribDecoder::matrix(const Transformation& transformation) {
-    decode(transformation);
-    matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
-    return *(matrixHandlers_.back());
-}
-
-RasterData& GribDecoder::raster(const Transformation& transformation) {
-    decodeRaster(transformation);
-    return raster_;
 }
 
 void GribDecoder::decodeRaster(const Transformation& transformation) {

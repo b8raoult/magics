@@ -116,7 +116,7 @@ void CountSelectionType::calculate(double min, double max, bool) {
     double epsilon = inc / 10000.0;
     while (same(epsilon, 0)) {
         epsilon *= 10;
-        EPSILON /= 10;  // FIXME: changing a global variable
+        EPSILON /= 10;
     }
 
 

@@ -92,7 +92,10 @@ public:
     bool verify(const string& where) const;
     MatrixHandler& direction() override;
     // Data Interface : info for the layer managment!
-    string layerId() override;
+    string layerId() override {
+        decode();
+        return layerId_;
+    }
     string name() const { return name_; }
     const DateTime& from() override { return from_; }
     const DateTime& to() override { return to_; }
@@ -103,7 +106,15 @@ public:
 
     bool isEarthOblate() const;
 
-    InterpolateMethod interpolateMethod() const;
+    InterpolateMethod interpolateMethod() const {
+        if (magCompare(interpolation_method_, "interpolate"))
+            return interpolate;
+        if (magCompare(interpolation_method_, "nearest"))
+            return nearest;
+        if (magCompare(interpolation_method_, "nearest_valid"))
+            return nearest_valid;
+        return interpolate;
+    }
     int missingFill() const { return missing_fill_count_; }
     bool getExpver() const { return expver_; }
     void version();
@@ -118,28 +129,47 @@ public:
     void visit(MetaDataVisitor&) override;
     void ask(MetaDataCollector&);
 
-    virtual std::string getUnits() const override;
-    virtual void applyScaling(double, double) override;
-    virtual void defaultScaling(double& scaling, double& offset, std::string& dataUnits,
-                                std::string& plotUnits) override;
-
-
     const DateDescription& timeStamp() override;
     const LevelDescription& level() override;
 
     // implements Decoder
     void visit(TextVisitor&) override;
 
-    PointsHandler& points();
-    PointsHandler& points(const Transformation& transformation);
-    PointsHandler& points(const Transformation& transformation, bool all) override;
+    PointsHandler& points() {
+        decodePoints();
+        pointsHandlers_.push_back(new PointsHandler(points_));
+        return *(pointsHandlers_.back());
+    }
+    PointsHandler& points(const Transformation& transformation) {
+        decodePoints();
+        pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, true));
+        return *(pointsHandlers_.back());
+    }
+    PointsHandler& points(const Transformation& transformation, bool all) override {
+        decodePoints();
+        pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, !all));
+        return *(pointsHandlers_.back());
+    }
 
-    MatrixHandler& matrix() override;
-    MatrixHandler& matrix(const Transformation& transformation) override;
+    MatrixHandler& matrix() override {
+        // RV MF
+        decode1D();
+        //		decode();
+        matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
+        return *(matrixHandlers_.back());
+    }
+    MatrixHandler& matrix(const Transformation& transformation) override {
+        decode(transformation);
+        matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
+        return *(matrixHandlers_.back());
+    }
 
     void setPath(const string& path) { file_name_ = path; }
 
-    RasterData& raster(const Transformation& transformation);
+    RasterData& raster(const Transformation& transformation) {
+        decodeRaster(transformation);
+        return raster_;
+    }
     void customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
                           bool all) override {}
 
@@ -157,7 +187,11 @@ public:
     virtual void openThirdComponent();
 
 
-    grib_handle* id() const;
+    grib_handle* id() const {
+        if (!field_)
+            const_cast<GribDecoder*>(this)->decode();
+        return field_;
+    }
 
     string representation();
 
@@ -202,6 +236,10 @@ public:
 
     grib_handle* handle() const { return field_; }
     void initInfo() override;
+
+    virtual string getUnits() const override;
+    virtual void defaultScaling(double& scaling, double& offset, string& dataUnits, string& plotUnits) override;
+    virtual void applyScaling(double scaling, double offset) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
@@ -296,21 +334,21 @@ public:
         ASSERT(handle2);
         ASSERT(handle3);
     }
-    ~GribEntryDecoder() {}
+    ~GribEntryDecoder() override {}
 
-    grib_handle* open(grib_handle*, bool sendMsg = true);
+    grib_handle* open(grib_handle*, bool sendMsg = true) override;
 
-    void openFirstComponent() { ASSERT(field_); }
-    void openField() {
+    void openFirstComponent() override { ASSERT(field_); }
+    void openField() override {
         ASSERT(field_);
         current_handle_ = field_;
     }
 
-    void openSecondComponent() {
+    void openSecondComponent() override {
         ASSERT(handle2_);
         component2_ = handle2_;
     }
-    void openThirdComponent() {
+    void openThirdComponent() override {
         // Can Be NULL
 
         colour_ = handle3_;
@@ -326,7 +364,7 @@ protected:
 class GribLoop : public GribLoopAttributes, public DataLoop {
 public:
     GribLoop();
-    virtual ~GribLoop();
+    virtual ~GribLoop() override;
 
 
     void set(const map<string, string>& map) override { GribLoopAttributes::set(map); }

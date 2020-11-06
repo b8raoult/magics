@@ -34,7 +34,7 @@ extern "C" {
 #define MAXFILENAME 256
 #define WRITEBUFFERSIZE 16384
 #include <fcntl.h>  // open
-#include <cstdio>   // BUFSIZ
+#include <cstdio>  // BUFSIZ
 
 #ifndef MAGICS_ON_WINDOWS
 #include <unistd.h>

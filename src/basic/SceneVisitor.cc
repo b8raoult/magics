@@ -57,6 +57,11 @@ DrawingVisitor::DrawingVisitor() {
 
 DrawingVisitor::~DrawingVisitor() {}
 
+void LayoutVisitor::print(ostream& out) const {
+    out << "LayoutVisitor[";
+    out << *layout_;
+    out << "]";
+}
 
 HorizontalAxisVisitor::HorizontalAxisVisitor(const DrawingVisitor&) {}
 

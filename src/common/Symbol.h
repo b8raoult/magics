@@ -30,18 +30,18 @@
 
 namespace magics {
 
+enum class TextPosition
+{
+    NONE,
+    BELOW,
+    ABOVE,
+    LEFT,
+    RIGHT,
+    CENTRE
+};
 
 class Symbol : public BasicGraphicsObject, public vector<PaperPoint> {
 public:
-    enum TextPosition
-    {
-        M_NONE,
-        M_BELOW,
-        M_ABOVE,
-        M_LEFT,
-        M_RIGHT,
-        M_CENTRE
-    };
     Symbol();
     virtual ~Symbol();
 
@@ -52,7 +52,11 @@ public:
         symbol_ = convert(m);
     }
 
-    static string convert(int m);
+    static string convert(int m) {
+        ostringstream symbol;
+        symbol << "magics_" << m;
+        return symbol.str();
+    }
 
     void boundingbox(const Polyline& boundingbox);
     virtual void push_back(const PaperPoint& point, const string& = "") { vector<PaperPoint>::push_back(point); }
@@ -79,9 +83,19 @@ public:
     int outlineThickness() const { return outlineThickness_; }
     LineStyle outlineLineStyle() const { return outlineStyle_; }
 
-    void outline(bool outline, const Colour& colour, int thickness, LineStyle style);
+    void outline(bool outline, const Colour& colour, int thickness, LineStyle style) {
+        outline_          = outline;
+        outlineColour_    = colour;
+        outlineThickness_ = thickness;
+        outlineStyle_     = style;
+    }
     void connectline(bool connect) { connectLine_ = connect; }
-    void connectline(bool connectline, const Colour& colour, int thickness, LineStyle style);
+    void connectline(bool connectline, const Colour& colour, int thickness, LineStyle style) {
+        connectLine_          = connectline;
+        connectLineColour_    = colour;
+        connectLineThickness_ = thickness;
+        connectLineStyle_     = style;
+    }
     int connectLineThickness() const { return connectLineThickness_; }
     LineStyle connectLineStyle() const { return connectLineStyle_; }
     const Colour& connectLineColour() const { return connectLineColour_; }
@@ -122,7 +136,7 @@ private:
 
 class TextSymbol : public Symbol {
 public:
-    TextSymbol() : position_(M_BELOW), blanking_(false) {}
+    TextSymbol() : position_(TextPosition::BELOW), blanking_(false) {}
     ~TextSymbol() {}
 
     void push_back(const PaperPoint& point, const string& text) override {
@@ -215,7 +229,7 @@ struct SymbolProperties {
     string label_;
     MagFont font_;
     bool blanking_;
-    Symbol::TextPosition position_;
+    TextPosition position_;
     vector<string> text_;
 
     bool outline_;
@@ -240,7 +254,7 @@ struct SymbolProperties {
     SymbolProperties();
 
     void setSymbol(const string& symbol, int marker);
-    void position(Symbol::TextPosition position) { position_ = position; }
+    void position(TextPosition position) { position_ = position; }
 
     virtual ~SymbolProperties() {}
     bool operator<(const SymbolProperties& other) const {

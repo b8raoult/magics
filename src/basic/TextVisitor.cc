@@ -231,7 +231,7 @@ void TextVisitor::finish(BasicGraphicsObjectContainer& parent) {
         if (orientation_ == "horizontal") {
             angle = 0;
             gap   = (*text)->noText() ? (font_size_ / absheight) * 100 * ratio
-                                    : (((*text)->getFontMax() / absheight) * 100) * ratio;
+                                      : (((*text)->getFontMax() / absheight) * 100) * ratio;
             (*text)->push_back(PaperPoint(x, last));  // approximate position to be improved
         }
         if (magCompare(orientation_, "bottom_top")) {
@@ -252,7 +252,7 @@ void TextVisitor::finish(BasicGraphicsObjectContainer& parent) {
                 x = 50.;
             angle = 3.14 / 2;
             gap   = (*text)->noText() ? (font_size_ / abswidth) * ratio
-                                    : (((*text)->getFontMax() / abswidth) * 100) * ratio;
+                                      : (((*text)->getFontMax() / abswidth) * 100) * ratio;
             (*text)->push_back(PaperPoint(last, x));  // approximate position to be improved
         }
 

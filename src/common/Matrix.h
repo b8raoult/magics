@@ -384,9 +384,7 @@ public:
 protected:
     //! Method to print string about this class on to a stream of type ostream
     //! (virtual).
-    virtual void print(ostream& out) const override {
-        out << "Matrix";
-    }
+    virtual void print(ostream& out) const override { out << "Matrix"; }
 
     map<double, int> rowsMap_;
     mutable magvector<double> rowsAxis_;
@@ -399,7 +397,7 @@ protected:
     double missing_;
     bool akima_;
 
-        int row_ind(double row) const {
+    int row_ind(double row) const {
         map<double, int>::const_iterator i = rowsMap_.lower_bound(row);
         if (same(i->first, row))
             return i->second;

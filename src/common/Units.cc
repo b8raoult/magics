@@ -83,7 +83,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     init();
 
     if (to.empty()) {
-                MagLog::dev() << "No unit conversion needed: " << from << std::endl;
+        MagLog::dev() << "No unit conversion needed: " << from << std::endl;
 
         return false;
     }
@@ -103,8 +103,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     }
 
     if (from == to) {
-        MagLog::dev()  << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
-                  << std::endl;
+        MagLog::dev() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+                      << std::endl;
         return false;
     }
 
@@ -112,8 +112,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = (*j).second.scaling_;
         offset  = (*j).second.offset_;
-        MagLog::dev()  << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
-                  << std::endl;
+        MagLog::dev() << "++++++ Units " << from << " to " << to << " scaling " << scaling << " offset " << offset
+                      << std::endl;
         return true;
     }
 
@@ -124,8 +124,8 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     if (j != conversions.end()) {
         scaling = 1.0 / (*j).second.scaling_;
         offset  = -(*j).second.offset_ / (*j).second.scaling_;
-        MagLog::warning()  << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
-                  << offset << std::endl;
+        MagLog::warning() << "++++++ Units (reversed) " << from << " to " << to << " scaling " << scaling << " offset "
+                          << offset << std::endl;
 
         return true;
     }

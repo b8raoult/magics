@@ -21,6 +21,7 @@
 #include "MagicsCalls.h"
 #include "CompatibilityHelper.h"
 #include "FortranMagics.h"
+#include "MagicsSettings.h"
 
 
 namespace magics {

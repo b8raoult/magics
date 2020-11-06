@@ -41,8 +41,8 @@ class LegendVisitor;
 
 class Visdef : public MetviewIcon {
 public:
-    Visdef();
-    virtual ~Visdef();
+    Visdef() {}
+    virtual ~Visdef() override {}
 
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) = 0;

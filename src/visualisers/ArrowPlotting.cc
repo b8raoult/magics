@@ -56,27 +56,6 @@ void ArrowPlotting::operator()(bool north, const PaperPoint& point, double x, do
 
 
 //! Setting for south Hemisphere wind
-void ArrowPlotting::set(const map<string, string>& map) {
-    WindPlottingAttributes::set(map);
-    ArrowPlottingAttributes::set(map);
-}
-
-void ArrowPlotting::set(const XmlNode& node) {
-    WindPlottingAttributes::set(node);
-    ArrowPlottingAttributes::set(node);
-}
-
-void ArrowPlotting::copy(const ArrowPlotting& other) {
-    WindPlottingAttributes::copy(other);
-    ArrowPlottingAttributes::copy(other);
-}
-
-WindPlotting* ArrowPlotting::clone() {
-    ArrowPlotting* object = new ArrowPlotting();
-    object->copy(*this);
-    return object;
-}
-
 Arrow* ArrowPlotting::southArrow(const Colour& colour) {
     map<Colour, Arrow*>::iterator arrow = southArrows_.find(colour);
     if (arrow != southArrows_.end())

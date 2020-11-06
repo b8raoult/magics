@@ -47,7 +47,7 @@ SymbolProperties::SymbolProperties(Colour colour, double height, const string& m
     height_(height),
     marker_(marker),
     label_(label),
-    position_(Symbol::M_NONE),
+    position_(TextPosition::NONE),
     outline_(false),
     connectLine_(false),
     image_(false) {
@@ -60,7 +60,7 @@ SymbolProperties::SymbolProperties(Colour colour, double height, int marker, con
     height_(height),
     marker_(Symbol::convert(marker)),
     label_(label),
-    position_(Symbol::M_NONE),
+    position_(TextPosition::NONE),
     outline_(false),
     connectLine_(false),
     image_(false) {
@@ -73,7 +73,7 @@ SymbolProperties::SymbolProperties() :
     height_(0),
     marker_(Symbol::convert(1)),
     label_(""),
-    position_(Symbol::M_NONE),
+    position_(TextPosition::NONE),
     outline_(false),
     connectLine_(false),
     image_(false) {
@@ -175,8 +175,6 @@ Symbol* SymbolProperties::symbol(const string& type) const {
         return symbol;
     }
 
-    ASSERT(symbol);
-
     symbol->setColour(colour_);
     symbol->setSymbol(marker_);
     symbol->setHeight(height_);
@@ -237,33 +235,13 @@ void Symbol::redisplay(const BaseDriver& driver) const {
     }
 }
 
-string Symbol::convert(int m) {
-    ostringstream symbol;
-    symbol << "magics_" << m;
-    return symbol.str();
-}
-
 void Symbol::boundingbox(const Polyline& boundingbox) {
     boundingbox_ = boundingbox;
 }
 
-void Symbol::outline(bool outline, const Colour& colour, int thickness, LineStyle style) {
-    outline_          = outline;
-    outlineColour_    = colour;
-    outlineThickness_ = thickness;
-    outlineStyle_     = style;
-}
-
-void Symbol::connectline(bool connectline, const Colour& colour, int thickness, LineStyle style) {
-    connectLine_          = connectline;
-    connectLineColour_    = colour;
-    connectLineThickness_ = thickness;
-    connectLineStyle_     = style;
-}
-
 void TextSymbol::redisplay(const BaseDriver& driver) const {
     if (!connectLine()) {
-        if (position_ == M_CENTRE) {
+        if (position_ == TextPosition::CENTRE) {
             // send text and symbol;
             Symbol::redisplay(driver);
             // Now we display the text

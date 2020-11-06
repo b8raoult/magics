@@ -32,12 +32,15 @@ enum class FlagConvention
     SI,
     KNOTS
 };
-
 class ArrowProperties {
 public:
     ArrowProperties();
     virtual ~ArrowProperties() {}
-    ArrowProperties* clone();
+    ArrowProperties* clone() {
+        ArrowProperties* arrow = new ArrowProperties();
+        arrow->copy(*this);
+        return arrow;
+    }
 
     // Accessors :
     double getScale() const { return scale_; }

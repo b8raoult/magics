@@ -39,24 +39,31 @@ public:
     Contour();
     virtual ~Contour();
 
-    virtual Contour* clone() const;
-    bool needLegend() override { return legend_; }
+    virtual Contour* clone() const {
+        Contour* contour = new Contour();
+        contour->copy(*this);
+        return contour;
+    }
+    bool needLegend() { return legend_; }
     // Implements the set method ...
-    void set(const XmlNode& node) override;
-    void set(const map<string, string>& map) override;
+    void set(const XmlNode& node) { ContourAttributes::set(node); }
+    void set(const map<string, string>& map) { ContourAttributes::set(map); }
 
     // Implements the VisDefinterface
-    virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
-    virtual void visit(Data&, LegendVisitor&) override;
+    virtual void operator()(Data&, BasicGraphicsObjectContainer&);
+    virtual void visit(Data&, LegendVisitor&);
 
-    void visit(Data&, HistoVisitor&) override;
-    void visit(MetaDataVisitor&) override;
-    void getReady(const LegendVisitor& legend) override;
+    void visit(Data&, HistoVisitor&);
+    void visit(MetaDataVisitor&);
+    void getReady(const LegendVisitor& legend) {
+        contour_->legend_only_ = legend.only_;
+        legendIsOn_            = true;
+    }
 
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream&) const override;
+    virtual void print(ostream&) const;
     MatrixHandler* matrix_;
     StyleEntry* styleInfo_;
     MagDef automaticAttributes_;

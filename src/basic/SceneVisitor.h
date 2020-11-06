@@ -165,7 +165,7 @@ protected:
     mutable Layout* layout_;
     mutable Layout* current_;
 
-    virtual void print(std::ostream& s) const override { s << "LayoutVisitor[]"; };
+    virtual void print(std::ostream& s) const override;
 };
 
 class DrawingVisitor : public LayoutVisitor {

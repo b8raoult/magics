@@ -22,6 +22,7 @@
 #include "Colour.h"
 #include "BaseParameter.h"
 #include "MagLog.h"
+#include "MagicsSettings.h"
 #include "XmlNode.h"
 
 /*! \defgroup colours Colours

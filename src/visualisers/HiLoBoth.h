@@ -74,7 +74,7 @@ protected:
         if (!high_) {
             // Create Text List containing the position of the High
             high_ = new TextSymbol();
-            high_->position(Symbol::M_ABOVE);
+            high_->position(TextPosition::ABOVE);
             MagFont font;
             font.name("sansserif");
             font.colour(*hi_colour_);
@@ -90,7 +90,7 @@ protected:
         if (!low_) {
             // Create Text List containing the position of the High
             low_ = new TextSymbol();
-            low_->position(Symbol::M_ABOVE);
+            low_->position(TextPosition::ABOVE);
             low_->setMarker(index_);
             MagFont font;
             font.name("sansserif");
