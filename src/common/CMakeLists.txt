@@ -174,4 +174,3 @@ if ( metview )
 
 	set( metview_include ${metview_include} PARENT_SCOPE )
 endif()
-install ( FILES magics_api.h  DESTINATION ${INSTALL_INCLUDE_DIR})
