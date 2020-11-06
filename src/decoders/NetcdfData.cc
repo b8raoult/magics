@@ -352,7 +352,8 @@ int NetVariable::find(const string& value) {
 
     if (t == NC_STRING) {
         int x = getSize();
-        char* values[x];
+        char* values[1024];
+        ASSERT(x < sizeof(values));
         nc_get_var_string(netcdf_, id_, values);
         for (int i = 0; i < x; i++) {
             if (string(values[i]) == val)
