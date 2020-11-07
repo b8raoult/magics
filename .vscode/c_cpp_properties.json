@@ -1,36 +1,39 @@
 {
     "configurations": [
         {
-            "name": "XXXX",
+            "name": "Mac",
             "includePath": [
                 // "additional/paths",
-                "${default}"
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/../../build/eccodes/**",
+                "${workspaceFolder}/../eccodes/**",
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
             ],
-            "defines": [
-                "${default}"
-            ],
-            "macFrameworkPath": [
-                "${default}"
-                // "additional/paths"
-            ],
-            "forcedInclude": [
-                "${default}"
-                // "additional/paths"
-            ],
-            "compileCommands": "${default}",
-            // "browse": {
+            // "defines": [
+            //     "${default}"
+            // ],
+            // "macFrameworkPath": [
+            //     "${default}"
+            //     // "additional/paths"
+            // ],
+            // "forcedInclude": [
+            //     "${default}"
+            //     // "additional/paths"
+            // ],
+            // "compileCommands": "${default}",
+            //  "browse": {
             //     "limitSymbolsToIncludedHeaders": true,
             //     "databaseFilename": "${default}",
             //     "path": [
-            //         "${default}",
-            //         "${workspaceFolder}",
-            //         "${env.HOME}/build/eccodes"
+            //         "${default}"
+            //         //  "${workspaceFolder}/src",
+            //         //  "${workspaceFolder}/src/common"
             //     ]
             // },
-            "intelliSenseMode": "${default}",
-            "cStandard": "${default}",
-            "cppStandard": "${default}",
-            "compilerPath": "${default}"
+            "intelliSenseMode": "clang-x64",
+            "cStandard": "c11",
+      "cppStandard": "c++17"
+            // "compilerPath": "${default}"
         }
     ],
     "version": 4

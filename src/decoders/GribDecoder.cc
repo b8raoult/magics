@@ -22,17 +22,13 @@
 
 #include <limits>
 
-#include "Factory.h"
-
-#include "magics.h"
-#ifndef MAGICS_ON_WINDOWS
-#include <unistd.h>
-#else
-#include <fcntl.h>
-#endif
-
 #include <cerrno>
 
+#include "Factory.h"
+#include "magics.h"
+
+
+#include <eccodes.h>
 #include "AnimationRules.h"
 #include "GribInterpretor.h"
 #include "MagDateTime.h"
@@ -45,7 +41,6 @@
 #include "Transformation.h"
 #include "VisualAction.h"
 #include "XmlReader.h"
-#include "eccodes.h"
 
 using namespace magics;
 
@@ -1179,7 +1174,7 @@ public:
             return full.tostring(format);
         }
         catch (MagicsException&) {
-            return "<invalid date>";
+            return "undef";
         }
     }
 
@@ -1200,7 +1195,7 @@ public:
             return full.tostring(format);
         }
         catch (MagicsException&) {
-            return "<invalid date>";
+            return "undef";
         }
     }
 
@@ -1223,7 +1218,7 @@ public:
             return full.tostring(format);
         }
         catch (MagicsException&) {
-            return "<invalid date>";
+            return "undef";
         }
     }
 
@@ -1241,7 +1236,7 @@ public:
             return full.tostring(format);
         }
         catch (MagicsException&) {
-            return "<invalid date>";
+            return "undef";
         }
     }
 
@@ -1262,7 +1257,7 @@ public:
             return full.tostring(format);
         }
         catch (MagicsException&) {
-            return "<invalid date>";
+            return "undef";
         }
     }
 
@@ -1847,6 +1842,7 @@ void GribDecoder::decode() {
     name_    = iconName_;
     layerId_ = name_ + file_name_;
     try {
+
         from_ = DateTime(helper.get("grib" + id_, "start-date"));
         to_   = DateTime(helper.get("grib" + id_, "end-date"));
     }
