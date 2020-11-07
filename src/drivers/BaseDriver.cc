@@ -178,8 +178,15 @@ void BaseDriver::readFonts() const {
 string BaseDriver::getFileName(const string& extension, const unsigned int no) const {
     // offsetting the current page number if the users has set so
     const unsigned int no2 = (firstvalue_ >= 0) ? (no + firstvalue_ - 1) : no;
+    string ext             = "." + extension;
 
-    string ext  = "." + extension;
+    if (!file_.empty()) {
+        ASSERT(no == 1);
+        ASSERT(file_.size() > ext.size() + 1);
+        ASSERT(file_.substr(ext.size() - 1) == ext);
+        return file_;
+    }
+
     bool full   = false;
     bool legacy = false;
 

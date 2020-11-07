@@ -49,6 +49,11 @@
   offset: 0
 
 - from: m
+  to: hm
+  scaling: 0.01
+  offset: 0
+
+- from: m
   to: mm
   scaling: 1000
   offset: 0
