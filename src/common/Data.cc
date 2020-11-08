@@ -158,6 +158,7 @@ void Data::applyScaling(const std::string& target_units) {
         if (scaling != 1 || offset != 0) {
             applyScaling(scaling, offset);
         }
+        return;
     }
 
     std::string data_units = getUnits();

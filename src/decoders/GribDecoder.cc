@@ -1842,7 +1842,6 @@ void GribDecoder::decode() {
     name_    = iconName_;
     layerId_ = name_ + file_name_;
     try {
-
         from_ = DateTime(helper.get("grib" + id_, "start-date"));
         to_   = DateTime(helper.get("grib" + id_, "end-date"));
     }
