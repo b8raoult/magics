@@ -73,6 +73,12 @@ DateTime::operator string() const {
     return os.str();
 }
 
+DateTime& DateTime::operator=(const DateTime& other) {
+    date_ = other.date_;
+    time_ = other.time_;
+    return *this;
+}
+
 Second DateTime::operator-(const DateTime& other) const {
     Second date = (date_ - other.date_) * 24 * 3600;
     Second time = time_ - other.time_;

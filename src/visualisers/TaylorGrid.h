@@ -32,7 +32,7 @@ namespace magics {
 class TaylorGrid : public BasicSceneObject, public TaylorGridAttributes {
 public:
     TaylorGrid();
-    virtual ~TaylorGrid();
+    virtual ~TaylorGrid() override;
 
     // New Interface!
     void visit(DrawingVisitor& list) override;

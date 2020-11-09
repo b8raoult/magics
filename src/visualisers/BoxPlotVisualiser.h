@@ -40,7 +40,7 @@ class LegendVisitor;
 class BoxPlotVisualiser : public BoxPlotVisualiserAttributes, public Visdef {
 public:
     BoxPlotVisualiser();
-    virtual ~BoxPlotVisualiser();
+    virtual ~BoxPlotVisualiser() override;
 
 
     void operator()(Data&, BasicGraphicsObjectContainer&) override;

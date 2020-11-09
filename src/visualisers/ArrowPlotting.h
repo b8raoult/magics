@@ -34,16 +34,29 @@ namespace magics {
 class ArrowPlotting : public WindPlotting, public ArrowPlottingAttributes {
 public:
     ArrowPlotting() {}
-    virtual ~ArrowPlotting() {}
+    virtual ~ArrowPlotting() override {}
 
-    virtual void set(const map<string, string>& map) override;
+    virtual void set(const map<string, string>& map) override {
+        WindPlottingAttributes::set(map);
+        ArrowPlottingAttributes::set(map);
+    }
 
-    virtual void set(const XmlNode& node) override;
+    virtual void set(const XmlNode& node) override {
+        WindPlottingAttributes::set(node);
+        ArrowPlottingAttributes::set(node);
+    }
 
-    void copy(const ArrowPlotting& other);
+    void copy(const ArrowPlotting& other) {
+        WindPlottingAttributes::copy(other);
+        ArrowPlottingAttributes::copy(other);
+    }
     bool accept(const string& node) override { return ArrowPlottingAttributes::accept(node); }
 
-    virtual WindPlotting* clone() override;
+    virtual WindPlotting* clone() override {
+        ArrowPlotting* object = new ArrowPlotting();
+        object->copy(*this);
+        return object;
+    }
 
     Arrow* southArrow(const Colour&);
     Arrow* northArrow(const Colour&);

@@ -53,7 +53,7 @@ namespace magics {
 class ObsPlotting : public Visdef, public ObsPlottingAttributes {
 public:
     ObsPlotting();
-    virtual ~ObsPlotting();
+    virtual ~ObsPlotting() override;
     virtual void set(const map<string, string>& map) override { ObsPlottingAttributes::set(map); }
 
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;

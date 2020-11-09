@@ -33,7 +33,7 @@ namespace magics {
 class NetcdfGeopointsInterpretor : public NetcdfInterpretor {
 public:
     NetcdfGeopointsInterpretor();
-    virtual ~NetcdfGeopointsInterpretor();
+    virtual ~NetcdfGeopointsInterpretor() override;
 
     void set(const map<string, string>& params) override {
         MagLog::debug() << "NetcdfGeopointsInterpretor::set(params)"
@@ -81,7 +81,7 @@ private:
 class NetcdfXYpointsInterpretor : public NetcdfInterpretor {
 public:
     NetcdfXYpointsInterpretor();
-    virtual ~NetcdfXYpointsInterpretor();
+    virtual ~NetcdfXYpointsInterpretor() override;
 
     void set(const map<string, string>& params) override {
         MagLog::debug() << "NetcdfGeopointsInterpretor::set(params)"

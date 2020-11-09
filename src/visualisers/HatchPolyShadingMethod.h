@@ -34,7 +34,7 @@ namespace magics {
 class HatchPolyShadingMethod : public PolyShadingMethod, public HatchPolyShadingMethodAttributes {
 public:
     HatchPolyShadingMethod() {}
-    virtual ~HatchPolyShadingMethod() {}
+    virtual ~HatchPolyShadingMethod() override {}
 
 
     virtual void set(const map<string, string>& map) override { HatchPolyShadingMethodAttributes::set(map); }

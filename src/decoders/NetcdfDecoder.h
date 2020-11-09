@@ -41,7 +41,7 @@ class Transformation;
 class NetcdfDecoder : public Decoder, public Data, public NetcdfDecoderAttributes {
 public:
     NetcdfDecoder();
-    virtual ~NetcdfDecoder();
+    virtual ~NetcdfDecoder() override;
 
     void decode() override {}
     // implements BaseSceneObject interface
@@ -62,9 +62,17 @@ public:
 
     void getInfo(map<string, string>&) override;
 
-    void applyScaling(double scaling, double offset) override;
+    MatrixHandler& matrix() override {
+        MagLog::dev() << "NetcdfDecoder::matrix! "
+                      << "\n";
+        if (!data_)
+            valid_ = (*interpretor_).interpretAsMatrix(&data_);
+        if (!valid_)
+            throw MagicsException("Unable to use data");
+        this->matrixHandlers_.push_back(new MatrixHandler(*data_));
 
-    MatrixHandler& matrix() override;
+        return *(this->matrixHandlers_.back());
+    }
 
     void customisedPoints(const std::set<string>& request, CustomisedPointsList& out) {
         (*interpretor_).customisedPoints(request, out);
@@ -74,12 +82,24 @@ public:
         (*interpretor_).customisedPoints(transformation, request, out, thinningFactor_);
     }
 
-    void visit(AnimationStep& step) override;
+    void visit(AnimationStep& step) override {
+        try {
+            MatrixHandler& data = matrix();
+            // Information about contains...
+            MagLog::dev() << "Netcdf::visit(AnimationRules&) --> " << endl;
+
+            step.xResolution(abs(data.XResolution()));
+            step.yResolution(abs(data.YResolution()));
+        }
+        catch (...) {
+        }
+    }
     void visit(MetaDataCollector&) override;
     void visit(ValuesCollector&) override;
     void visit(TextVisitor&) override;
 
-    virtual std::string getUnits() const override;
+    string getUnits() const override;
+    void applyScaling(double scaling, double offset) override;
 
 protected:
     //! Method to print string about this class on to a stream of type ostream
@@ -94,12 +114,19 @@ private:
     NetcdfDecoder(const NetcdfDecoder&);
     //! Overloaded << operator to copy - No copy allowed
     NetcdfDecoder& operator=(const NetcdfDecoder&);
+
+    // -- Friends
+    //! Overloaded << operator to call print().
+    friend ostream& operator<<(ostream& s, const NetcdfDecoder& p) {
+        p.print(s);
+        return s;
+    }
 };
 
 class NetcdfLoop : public DataLoop {
 public:
     NetcdfLoop(NetcdfDecoder* netcdf) : netcdf_(netcdf) {}
-    virtual ~NetcdfLoop() {}
+    virtual ~NetcdfLoop() override {}
     void set(const map<string, string>& map) override {}  // NetcdfLoopAttributes::set(map); }
     void set(const XmlNode& node) override {}             // NetcdfLoopAttributes::set(node); }
 

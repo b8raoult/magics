@@ -22,21 +22,18 @@
 
 #include <limits>
 
-#include "Factory.h"
-
-#include "magics.h"
-#ifndef MAGICS_ON_WINDOWS
-#include <unistd.h>
-#else
-#include <fcntl.h>
-#endif
-
 #include <cerrno>
 
+#include "Factory.h"
+#include "magics.h"
+
+
+#include <eccodes.h>
 #include "AnimationRules.h"
 #include "GribInterpretor.h"
 #include "MagDateTime.h"
 #include "MagJSon.h"
+#include "MagicsSettings.h"
 #include "MetaData.h"
 #include "TextVisitor.h"
 #include "Timer.h"
@@ -44,7 +41,6 @@
 #include "Transformation.h"
 #include "VisualAction.h"
 #include "XmlReader.h"
-#include "eccodes.h"
 
 using namespace magics;
 
@@ -277,15 +273,6 @@ bool GribDecoder::isEarthOblate() const {
     return false;
 }
 
-GribDecoder::InterpolateMethod GribDecoder::interpolateMethod() const {
-    if (magCompare(interpolation_method_, "interpolate"))
-        return interpolate;
-    if (magCompare(interpolation_method_, "nearest"))
-        return nearest;
-    if (magCompare(interpolation_method_, "nearest_valid"))
-        return nearest_valid;
-    return interpolate;
-}
 
 Matrix* GribDecoder::colour(Matrix* matrix) {
     if (cHandle()) {
@@ -773,11 +760,6 @@ void GribDecoder::openThirdComponent() {
     colour_           = open(colour_, false);
 }
 
-grib_handle* GribDecoder::id() const {
-    if (!field_)
-        const_cast<GribDecoder*>(this)->decode();
-    return field_;
-}
 
 grib_handle* GribEntryDecoder::open(grib_handle* handle, bool) {
     return handle;
@@ -1179,16 +1161,21 @@ public:
         const long day  = grib_.getLong("date");
         const long hour = grib_.getLong("hour");
         const long mn   = grib_.getLong("minute");
-        MagDate part1   = MagDate(day);
-        MagTime part2   = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
 
-        const long type = grib_.getLong("significanceOfReferenceTime", false);
-        if (type == 2) {  //     Verifying time of forecast
-            const long step = computeStep(grib_, "stepRange");
-            full            = full + (step * -1);
+            const long type = grib_.getLong("significanceOfReferenceTime", false);
+            if (type == 2) {  //     Verifying time of forecast
+                const long step = computeStep(grib_, "stepRange");
+                full            = full + (step * -1);
+            }
+            return full.tostring(format);
         }
-        return full.tostring(format);
+        catch (MagicsException&) {
+            return "undef";
+        }
     }
 
     string startDate(const XmlNode& node) {
@@ -1200,12 +1187,16 @@ public:
         const long mn   = grib_.getLong("minute");
         const long step = computeStep(grib_, "startStep");
 
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
-        full = full + step;
-
-        return full.tostring(format);
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
+            full = full + step;
+            return full.tostring(format);
+        }
+        catch (MagicsException&) {
+            return "undef";
+        }
     }
 
     string validDate(const XmlNode& node) {
@@ -1216,16 +1207,19 @@ public:
         const long hour = grib_.getLong("hour");
         const long mn   = grib_.getLong("minute");
         const long step = computeStep(grib_, "stepRange");  // default is in hours. Set 'stepUnits' to change.
-
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
-        const long type = grib_.getLong("significanceOfReferenceTime", false);
-        if (type != 2) {  //     Verifying time of forecast
-            full = full + step;
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
+            const long type = grib_.getLong("significanceOfReferenceTime", false);
+            if (type != 2) {  //     Verifying time of forecast
+                full = full + step;
+            }
+            return full.tostring(format);
         }
-
-        return full.tostring(format);
+        catch (MagicsException&) {
+            return "undef";
+        }
     }
 
     string dataDate(const XmlNode& node) {
@@ -1233,13 +1227,17 @@ public:
         string format  = node.getAttribute("format");
         if (format.empty())
             return tostring(day);
+        try {
+            // Otherwise format the date
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(0, 0, 0);
 
-        // Otherwise format the date
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(0, 0, 0);
-
-        DateTime full(part1, part2);
-        return full.tostring(format);
+            DateTime full(part1, part2);
+            return full.tostring(format);
+        }
+        catch (MagicsException&) {
+            return "undef";
+        }
     }
 
     string endDate(const XmlNode& node) {
@@ -1250,13 +1248,17 @@ public:
         const long hour = grib_.getLong("hour");
         const long mn   = grib_.getLong("minute");
         const long step = computeStep(grib_, "endStep");
+        try {
+            MagDate part1 = MagDate(day);
+            MagTime part2 = MagTime(hour, mn, 0);
+            DateTime full(part1, part2);
+            full = full + step;
 
-        MagDate part1 = MagDate(day);
-        MagTime part2 = MagTime(hour, mn, 0);
-        DateTime full(part1, part2);
-        full = full + step;
-
-        return full.tostring(format);
+            return full.tostring(format);
+        }
+        catch (MagicsException&) {
+            return "undef";
+        }
     }
 
     void visit(const XmlNode& node) {
@@ -1718,9 +1720,13 @@ void GribDecoder::visit(MetaDataCollector& step) {
 
             if (members) {
                 name_ = helper.get("grib", "shortName") + " " + helper.get("grib", "level");
-
-                from_ = DateTime(helper.get("grib", "start-date"));
-                to_   = DateTime(helper.get("grib", "end-date"));
+                try {
+                    from_ = DateTime(helper.get("grib", "start-date"));
+                    to_   = DateTime(helper.get("grib", "end-date"));
+                }
+                catch (MagicsException& e) {
+                    MagLog::warning() << e.what() << std::endl;
+                }
             }
 
             for (map<string, string>::iterator key = step.begin(); key != step.end(); ++key) {
@@ -1771,10 +1777,7 @@ MatrixHandler& GribDecoder::direction() {
     return *(matrixHandlers_.back());
 }
 
-string GribDecoder::layerId() {
-    decode();
-    return layerId_;
-}
+
 void GribDecoder::decode(const Transformation& transformation) {
     if (xComponent_ || !valid_)
         return;
@@ -1838,8 +1841,13 @@ void GribDecoder::decode() {
     name_    = helper.get("grib" + id_, "shortName") + "-" + helper.get("grib" + id_, "level");
     name_    = iconName_;
     layerId_ = name_ + file_name_;
-    from_    = DateTime(helper.get("grib" + id_, "start-date"));
-    to_      = DateTime(helper.get("grib" + id_, "end-date"));
+    try {
+        from_ = DateTime(helper.get("grib" + id_, "start-date"));
+        to_   = DateTime(helper.get("grib" + id_, "end-date"));
+    }
+    catch (MagicsException& e) {
+        MagLog::warning() << e.what() << std::endl;
+    }
 }
 
 void GribDecoder::visit(TextVisitor& title) {
@@ -1854,43 +1862,6 @@ void GribDecoder::visit(TextVisitor& title) {
     for (vector<string>::const_iterator t = titles.begin(); t != titles.end(); ++t) {
         tag.decode(*t);
     }
-}
-
-PointsHandler& GribDecoder::points() {
-    decodePoints();
-    pointsHandlers_.push_back(new PointsHandler(points_));
-    return *(pointsHandlers_.back());
-}
-
-PointsHandler& GribDecoder::points(const Transformation& transformation) {
-    decodePoints();
-    pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, true));
-    return *(pointsHandlers_.back());
-}
-
-PointsHandler& GribDecoder::points(const Transformation& transformation, bool all) {
-    decodePoints();
-    pointsHandlers_.push_back(new BoxPointsHandler(points_, transformation, !all));
-    return *(pointsHandlers_.back());
-}
-
-MatrixHandler& GribDecoder::matrix() {
-    // RV MF
-    decode1D();
-    //		decode();
-    matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
-    return *(matrixHandlers_.back());
-}
-
-MatrixHandler& GribDecoder::matrix(const Transformation& transformation) {
-    decode(transformation);
-    matrixHandlers_.push_back(new MatrixHandler(*xComponent_));
-    return *(matrixHandlers_.back());
-}
-
-RasterData& GribDecoder::raster(const Transformation& transformation) {
-    decodeRaster(transformation);
-    return raster_;
 }
 
 void GribDecoder::decodeRaster(const Transformation& transformation) {

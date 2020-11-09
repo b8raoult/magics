@@ -8,4 +8,3 @@ int gettimeofday(struct timeval* t, void* timezone) {
     t->tv_usec = 1000 * timebuffer.millitm;
     return 0;
 }
-7

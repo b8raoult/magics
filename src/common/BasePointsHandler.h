@@ -76,10 +76,11 @@ public:
 
 class AbstractPoints : public BasePointsHandler {
 public:
-    AbstractPoints();
-    ;
-    virtual ~AbstractPoints();
-    ;
+    AbstractPoints() : helper_(0){};
+    virtual ~AbstractPoints() override {
+        if (helper_)
+            delete helper_;
+    };
     //! Method to go through the collection. The Class 0 needs to define
     // void operator()(const P&)
     template <class O>
@@ -164,7 +165,7 @@ private:
 class PointsList : public vector<UserPoint*>, public AbstractPoints {
 public:
     PointsList() {}
-    ~PointsList() {}
+    ~PointsList() override {}
     // Implements the AbstractPoints interface
     virtual void setToFirst() override { current_ = this->begin(); }
     virtual bool more() override { return current_ != this->end(); }

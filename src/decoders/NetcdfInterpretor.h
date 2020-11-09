@@ -40,27 +40,46 @@ class Netcdf;
 class NetcdfInterpretor : public NetcdfInterpretorAttributes {
 public:
     NetcdfInterpretor();
-    virtual ~NetcdfInterpretor();
+    virtual ~NetcdfInterpretor() override;
     virtual void visit(Transformation&) {}
-    virtual void getReady(const Transformation&);
-    virtual bool interpretAsMatrix(Matrix**);
-    virtual bool interpretAsVectors(Matrix**, Matrix**);
-    virtual bool interpretAsRaster(RasterData&);
-    virtual bool interpretAsPoints(PointsList&);
-    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&);
-    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int thinning);
+    virtual void getReady(const Transformation&) {}
+    virtual bool interpretAsMatrix(Matrix**) {
+        MagLog::dev() << "Method  NetcdfInterpretor::interpretAsMatrix() --> Not yet implemented.\n";
+        return false;
+    }
+    virtual bool interpretAsVectors(Matrix**, Matrix**) {
+        MagLog::dev() << "Method  NetcdfInterpretor::interpretAsVectors() --> Not yet implemented.\n";
+        return false;
+    }
+    virtual bool interpretAsRaster(RasterData&) {
+        MagLog::dev() << "Method  NetcdfInterpretor::interpretAsRaster() --> Not yet implemented.\n";
+        return false;
+    }
+    virtual bool interpretAsPoints(PointsList&) {
+        MagLog::dev() << "Method  NetcdfInterpretor::interpretAsPoints() --> Not yet implemented.\n";
+        return false;
+    }
+    virtual void customisedPoints(const std::set<string>&, CustomisedPointsList&) {
+        MagLog::dev() << "Method  NetcdfInterpretor::customisedPoints() --> Not yet implemented.\n";
+    }
+    virtual void customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&, int thinning) {
+        MagLog::dev() << "Method  NetcdfInterpretor::customisedPoints() --> Not yet implemented.\n";
+    }
 
     virtual bool interpretAsPoints(PointsList& points, const Transformation&) { return interpretAsPoints(points); }
     virtual void set(const map<string, string>& params) override { NetcdfInterpretorAttributes::set(params); }
     virtual void set(const XmlNode& node) override { NetcdfInterpretorAttributes::set(node); }
     virtual bool accept(const string& node) override { return NetcdfInterpretorAttributes::accept(node); }
-    virtual NetcdfInterpretor* clone() const;
+    virtual NetcdfInterpretor* clone() const {
+        NetcdfInterpretor* object = new NetcdfInterpretor();
+        object->copy(*this);
+        return object;
+    }
 
     virtual void statsData(map<string, vector<double> >&) {}
     virtual void visit(MetaDataCollector&) {}
-    virtual void visit(ValuesCollector&, PointsList&) {}
+    virtual void visit(ValuesCollector&, PointsList&){};
     virtual void visit(TextVisitor&);
-
     double missing(Netcdf&) const;
     string getAttribute(const string&, const string&, const string&);
     bool cf_date(Netcdf& netcdf, const string&, const string&, string&, vector<double>&, vector<double>&);
@@ -101,16 +120,26 @@ private:
 class NetcdfGuessInterpretor : public NetcdfInterpretor {
 public:
     NetcdfGuessInterpretor();
-    virtual ~NetcdfGuessInterpretor();
-    virtual void visit(Transformation&) override {}  // delegate_->visit(transformation) ; }
+    virtual ~NetcdfGuessInterpretor() override;
+    virtual void visit(Transformation&) override {}  // delegate_->visit(transformation); }
     virtual void getReady(const Transformation&) override {}
-    virtual bool interpretAsMatrix(Matrix** matrix) override;
-    virtual bool interpretAsVectors(Matrix** u, Matrix** v) override;
-    virtual bool interpretAsRaster(RasterData&) override;
-    virtual bool interpretAsPoints(PointsList& out) override;
-    virtual void customisedPoints(const std::set<string>& needs, CustomisedPointsList& out) override;
+    virtual bool interpretAsMatrix(Matrix** matrix) override { return guess()->interpretAsMatrix(matrix); }
+    virtual bool interpretAsVectors(Matrix** u, Matrix** v) override { return guess()->interpretAsVectors(u, v); }
+    virtual bool interpretAsRaster(RasterData&) override {
+        ASSERT(false);
+        return false;
+    }
+    virtual bool interpretAsPoints(PointsList& out) override {
+        ASSERT(false);
+        return false;
+    }
+    virtual void customisedPoints(const std::set<string>& needs, CustomisedPointsList& out) override {
+        guess()->customisedPoints(needs, out);
+    }
     virtual void customisedPoints(const Transformation& transformation, const std::set<string>& needs,
-                                  CustomisedPointsList& out, int thinning) override;
+                                  CustomisedPointsList& out, int thinning) override {
+        guess()->customisedPoints(transformation, needs, out, thinning);
+    }
 
     virtual bool interpretAsPoints(PointsList& points, const Transformation&) override {
         return interpretAsPoints(points);
@@ -118,16 +147,21 @@ public:
     virtual void set(const map<string, string>& params) override { NetcdfInterpretorAttributes::set(params); }
     virtual void set(const XmlNode& node) override { NetcdfInterpretorAttributes::set(node); }
     virtual bool accept(const string& node) override { return NetcdfInterpretorAttributes::accept(node); }
-    virtual NetcdfInterpretor* clone() const override;
+    virtual NetcdfInterpretor* clone() const override {
+        NetcdfInterpretor* object = new NetcdfInterpretor();
+        object->copy(*this);
+        return object;
+    }
 
     virtual void statsData(map<string, vector<double> >&) override {}
     virtual void visit(MetaDataCollector& info) override;
-    virtual void visit(ValuesCollector&, PointsList&) override {}
-    virtual void visit(TextVisitor& text) override;
+    virtual void visit(ValuesCollector&, PointsList&) override{};
+    virtual void visit(TextVisitor& text) override { guess()->visit(text); }
+
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const override { s << "NetcdfGuessInterpretor[]"; }
+    virtual void print(ostream& s) const override {}
     void setDimensions(const stringarray&, map<string, string>& first, map<string, string>& last);
     void getAttributes(Netcdf&, const string&, string&, string&);
     NetcdfInterpretor* guess() const;
@@ -164,9 +198,9 @@ class NetcdfTag : public XmlNodeVisitor {
 public:
     NetcdfTag(NetcdfInterpretor& netcdf, TagHandler& title) : netcdf_(netcdf), title_(title) {}
 
-    ~NetcdfTag() {}
+    ~NetcdfTag() override {}
 
-    void visit(const XmlNode& node);
+    void visit(const XmlNode& node) override;
 
     void decode(const string& line);
     string str() const { return out.str(); }

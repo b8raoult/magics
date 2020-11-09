@@ -36,7 +36,7 @@ class HistoVisitor;
 class VisualAction : public BasicSceneObject {
 public:
     VisualAction();
-    virtual ~VisualAction();
+    virtual ~VisualAction() override;
 
     void data(Data* data) override { data_ = data; }
     void set2D() override {
@@ -109,7 +109,7 @@ private:
 class VisualAnimation : public VisualAction, public vector<BasicSceneObject*> {
 public:
     VisualAnimation();
-    virtual ~VisualAnimation();
+    virtual ~VisualAnimation() override;
     void loop(DataLoop* data) { loop_ = data; }
     DataLoop& loop() {
         ASSERT(loop_);
@@ -117,10 +117,10 @@ public:
     }
 
 protected:
-    void visit(MetaDataVisitor&);
-    void visit(Transformation&);
-    void visit(AnimationRules&);
-    void visit(SceneLayer&, vector<LayoutVisitor*>&);
+    void visit(MetaDataVisitor&) override;
+    void visit(Transformation&) override;
+    void visit(AnimationRules&) override;
+    void visit(SceneLayer&, vector<LayoutVisitor*>&) override;
 
     void prepare();
 

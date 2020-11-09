@@ -37,12 +37,6 @@ ArrowProperties::ArrowProperties() :
     headIndex_(0),
     headRatio_(0.3) {}
 
-ArrowProperties* ArrowProperties::clone() {
-    ArrowProperties* arrow = new ArrowProperties();
-    arrow->copy(*this);
-    return arrow;
-}
-
 void ArrowProperties::copy(const ArrowProperties& from) {
     scale_         = from.scale_;
     crossBoundary_ = from.crossBoundary_;

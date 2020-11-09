@@ -38,7 +38,7 @@ namespace magics {
 class LookupTableMode : public LookupTableModeAttributes {
 public:
     LookupTableMode();
-    virtual ~LookupTableMode();
+    virtual ~LookupTableMode() override;
     virtual void set(const map<string, string>& map) override  // for MagML
     {
         LookupTableModeAttributes::set(map);
@@ -77,7 +77,7 @@ private:
 class FixedTableMode : public LookupTableMode, public FixedTableModeAttributes {
 public:
     FixedTableMode();
-    virtual ~FixedTableMode();
+    virtual ~FixedTableMode() override;
     void set(const map<string, string>& map) override  // for MagML
     {
         LookupTableMode::set(map);

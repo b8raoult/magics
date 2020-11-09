@@ -74,7 +74,7 @@ typedef AutoVector<MetaDataEntry> MetaDataEntryList;
 class MetaDataVisitor : public MetaDataAttributes, public MetaDataEntryList, public BasicSceneObject {
 public:
     MetaDataVisitor();
-    virtual ~MetaDataVisitor();
+    virtual ~MetaDataVisitor() override;
 
     virtual void set(const XmlNode& node) override { MetaDataAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { MetaDataAttributes::set(map); }
@@ -122,14 +122,14 @@ private:
 class MetaData : public MetaDataVisitor {
 public:
     MetaData() {}
-    ~MetaData() {}
+    ~MetaData() override {}
     MetaDataVisitor* clone() const override { return new MetaData(); }
 };
 
 class NoMetaData : public MetaDataVisitor {
 public:
     NoMetaData() {}
-    ~NoMetaData() {}
+    ~NoMetaData() override {}
     MetaDataVisitor* clone() const override { return new NoMetaData(); }
     virtual void visit(BasicGraphicsObjectContainer&) override {}
 };

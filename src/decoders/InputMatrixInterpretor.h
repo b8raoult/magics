@@ -85,7 +85,7 @@ private:
 class InputMatrixRegularInterpretor : public InputMatrixRegularInterpretorAttributes, public InputMatrixInterpretor {
 public:
     InputMatrixRegularInterpretor();
-    virtual ~InputMatrixRegularInterpretor();
+    virtual ~InputMatrixRegularInterpretor() override;
 
     virtual void set(const map<string, string>& map) override { InputMatrixRegularInterpretorAttributes::set(map); }
     virtual void set(const XmlNode& node) override { InputMatrixRegularInterpretorAttributes::set(node); }
@@ -117,14 +117,14 @@ private:
 class InputMatrixGaussianInterpretor : public InputMatrixRegularInterpretor {
 public:
     InputMatrixGaussianInterpretor() {}
-    virtual ~InputMatrixGaussianInterpretor() {}
+    virtual ~InputMatrixGaussianInterpretor() override {}
 };
 
 class InputMatrixIrregularInterpretor : public InputMatrixIrregularInterpretorAttributes,
                                         public InputMatrixInterpretor {
 public:
     InputMatrixIrregularInterpretor();
-    virtual ~InputMatrixIrregularInterpretor();
+    virtual ~InputMatrixIrregularInterpretor() override;
 
     virtual void set(const map<string, string>& map) override { InputMatrixIrregularInterpretorAttributes::set(map); }
     virtual void set(const XmlNode& node) override { InputMatrixIrregularInterpretorAttributes::set(node); }

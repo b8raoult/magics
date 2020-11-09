@@ -35,7 +35,7 @@ namespace magics {
 class EquidistantTableMode : public LookupTableMode {
 public:
     EquidistantTableMode();
-    virtual ~EquidistantTableMode();
+    virtual ~EquidistantTableMode() override;
     void set(const map<string, string>&) override  // for MagML
     {
         // LookupTableMode::set(map);

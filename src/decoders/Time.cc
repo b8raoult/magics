@@ -126,15 +126,12 @@ magics::MagTime& magics::MagTime::operator=(const MagTime& other) {
 
 magics::MagTime::MagTime(long hh, long mm, long ss) : seconds_(hh * 3600 + mm * 60 + ss) {
     if (hh >= 24 || mm >= 60 || ss >= 60 || hh < 0 || mm < 0 || ss < 0) {
-        if (hh == 255 || mm == 255 || ss == 255) {
-            missing_ = true;
-        }
-        else {
-            std::ostringstream oss;
-            oss << "Invalid time: " << hh << ":" << mm << ":" << ss;
-
-            throw MagicsException(oss.str());
-        }
+        string msg = "Wrong input for time: ";
+        //        MagTranslator<long,string> t;
+        //        msg += t(hh); msg += " hours ";
+        //        msg += t(mm); msg += " minutes ";
+        //        msg += t(ss); msg += " seconds";
+        throw MagicsException(msg);
     }
 }
 
@@ -160,10 +157,6 @@ long magics::MagTime::hhmmss() const {
 }
 
 void magics::MagTime::print(ostream& s) const {
-    if (missing_) {
-        s << "missing";
-        return;
-    }
     printMagTime(s, hours());
     s << ':';
     printMagTime(s, minutes());

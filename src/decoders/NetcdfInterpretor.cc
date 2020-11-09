@@ -39,37 +39,6 @@ NetcdfGuessInterpretor::NetcdfGuessInterpretor() : delegate_(0) {}
 
 NetcdfGuessInterpretor::~NetcdfGuessInterpretor() {}
 
-bool NetcdfGuessInterpretor::interpretAsMatrix(Matrix** matrix) {
-    return guess()->interpretAsMatrix(matrix);
-}
-
-bool NetcdfGuessInterpretor::interpretAsVectors(Matrix** u, Matrix** v) {
-    return guess()->interpretAsVectors(u, v);
-}
-
-bool NetcdfGuessInterpretor::interpretAsRaster(RasterData&) {
-    NOTIMP;
-}
-
-bool NetcdfGuessInterpretor::interpretAsPoints(PointsList& out) {
-    NOTIMP;
-}
-
-void NetcdfGuessInterpretor::customisedPoints(const std::set<string>& needs, CustomisedPointsList& out) {
-    guess()->customisedPoints(needs, out);
-}
-
-void NetcdfGuessInterpretor::customisedPoints(const Transformation& transformation, const std::set<string>& needs,
-                                              CustomisedPointsList& out, int thinning) {
-    guess()->customisedPoints(transformation, needs, out, thinning);
-}
-
-NetcdfInterpretor* NetcdfGuessInterpretor::clone() const {
-    NetcdfInterpretor* object = new NetcdfInterpretor();
-    object->copy(*this);
-    return object;
-}
-
 NetcdfInterpretor* NetcdfGuessInterpretor::guess() const {
     if (delegate_)
         return delegate_;
@@ -149,43 +118,6 @@ void NetcdfInterpretor::setDimensions(const stringarray& value, map<string, stri
 
 NetcdfInterpretor::~NetcdfInterpretor() {}
 
-void NetcdfInterpretor::getReady(const Transformation&) {}
-
-bool NetcdfInterpretor::interpretAsMatrix(Matrix**) {
-    MagLog::warning() << "Method " << *this << "::interpretAsMatrix() --> Not yet implemented.\n";
-    return false;
-}
-
-bool NetcdfInterpretor::interpretAsVectors(Matrix**, Matrix**) {
-    MagLog::warning() << "Method " << *this << "::interpretAsVectors() --> Not yet implemented.\n";
-    return false;
-}
-
-bool NetcdfInterpretor::interpretAsRaster(RasterData&) {
-    MagLog::warning() << "Method " << *this << "::interpretAsRaster() --> Not yet implemented.\n";
-    return false;
-}
-
-bool NetcdfInterpretor::interpretAsPoints(PointsList&) {
-    MagLog::warning() << "Method " << *this << "::interpretAsPoints() --> Not yet implemented.\n";
-    return false;
-}
-
-void NetcdfInterpretor::customisedPoints(const std::set<string>&, CustomisedPointsList&) {
-    MagLog::warning() << "Method " << *this << "::customisedPoints() --> Not yet implemented.\n";
-}
-
-void NetcdfInterpretor::customisedPoints(const Transformation&, const std::set<string>&, CustomisedPointsList&,
-                                         int thinning) {
-    MagLog::warning() << "Method " << *this << "::customisedPoints() --> Not yet implemented.\n";
-}
-
-NetcdfInterpretor* NetcdfInterpretor::clone() const {
-    NetcdfInterpretor* object = new NetcdfInterpretor();
-    object->copy(*this);
-    return object;
-}
-
 /*!
  Class information are given to the output-stream.
 */
@@ -212,6 +144,7 @@ bool NetcdfInterpretor::reference_date(Netcdf& netcdf, const string& var, const 
 
     double missing_value = netcdf.getMissing(var, missing_attribute_);
     string date          = netcdf.getVariableAttribute(var, "reference_date", string(""));
+
     if (date.empty())
         return false;
     originals.reserve(coords.size());
@@ -232,6 +165,8 @@ bool NetcdfInterpretor::cf_date(Netcdf& netcdf, const string& var, const string&
                                 vector<double>& coords, vector<double>& originals) {
     // Step 1 : try to find a attribute long_name = time
     // Step 2 : Parse the attribute  units : days since date
+
+
     static map<string, double> factors;
     if (factors.empty()) {
         factors["hours"] = 3600;
@@ -239,12 +174,22 @@ bool NetcdfInterpretor::cf_date(Netcdf& netcdf, const string& var, const string&
     }
     double missing_value = netcdf.getMissing(var, missing_attribute_);
 
-    string date = netcdf.getVariableAttribute(var, "long_name", string(""));
+    vector<string> times = {"standard_name", "long_name"};
+
+    string date;
+    for (auto t = times.begin(); t != times.end(); ++t) {
+        date = netcdf.getVariableAttribute(var, *t, string(""));
+
+        if (date.size())
+            break;
+    }
+
 
     if (date.empty())
         return false;
     if (date != "time" && date != "date and time")
         return false;
+
 
     string units = netcdf.getVariableAttribute(var, "units", string(""));
     if (units.empty())
@@ -253,12 +198,15 @@ bool NetcdfInterpretor::cf_date(Netcdf& netcdf, const string& var, const string&
     for (vector<double>::iterator c = coords.begin(); c != coords.end(); ++c)
         originals.push_back(*c);
 
+
     // Now we parse the string !
     vector<string> tokens;
     Tokenizer tokenizer(" ");
     tokenizer(units, tokens);
 
+
     basedate = tokens[2];
+
     double diff;
     map<string, double>::const_iterator factor = factors.find(tokens[0]);
     if (refdate.empty()) {
@@ -300,7 +248,6 @@ void NetcdfInterpretor::visit(TextVisitor& title) {
 
     title.addAutomaticTitle(netcdf.getAttribute("title", name));
 }
-
 
 void NetcdfInterpretor::getAttributes(Netcdf& nc, const string& varName, string& keys, string& values) {
     try {
@@ -393,8 +340,4 @@ void NetcdfGuessInterpretor::visit(MetaDataCollector& info) {
         // endl;
     }
     guess()->visit(info);
-}
-
-void NetcdfGuessInterpretor::visit(TextVisitor& text) {
-    guess()->visit(text);
 }

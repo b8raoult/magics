@@ -21,7 +21,7 @@ namespace magics {
 class EmagramGrid : public TephiGrid {
 public:
     EmagramGrid();
-    virtual ~EmagramGrid();
+    virtual ~EmagramGrid() override;
 
     // New Interface!
     void visit(DrawingVisitor&) override;

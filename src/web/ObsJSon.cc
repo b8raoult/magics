@@ -12,6 +12,7 @@
 #include <locale>
 #include "CustomisedPoint.h"
 #include "MagParser.h"
+#include "MagicsSettings.h"
 #include "MetaData.h"
 #include "Value.h"
 

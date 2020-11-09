@@ -71,13 +71,13 @@ void SymbolAdvancedTableMode::prepare() {}
 
 void SymbolAdvancedTableMode::adjust(double min, double max, bool scale, const Transformation& transformation,
                                      double scaling) {
-    static map<string, TextSymbol::TextPosition> texthandlers;
+    static map<string, TextPosition> texthandlers;
     if (texthandlers.empty()) {
-        texthandlers["none"]   = TextSymbol::M_NONE;
-        texthandlers["left"]   = TextSymbol::M_LEFT;
-        texthandlers["top"]    = TextSymbol::M_ABOVE;
-        texthandlers["bottom"] = TextSymbol::M_BELOW;
-        texthandlers["right"]  = TextSymbol::M_RIGHT;
+        texthandlers["none"]   = TextPosition::NONE;
+        texthandlers["left"]   = TextPosition::LEFT;
+        texthandlers["top"]    = TextPosition::ABOVE;
+        texthandlers["bottom"] = TextPosition::BELOW;
+        texthandlers["right"]  = TextPosition::RIGHT;
     }
     map_.clear();
     MagLog::dev() << "Data going from " << min << " to " << max << endl;
@@ -100,17 +100,17 @@ void SymbolAdvancedTableMode::adjust(double min, double max, bool scale, const T
         markers_names_.push_back("ww_01");
     }
 
-    TextSymbol::TextPosition position;
+    TextPosition position;
 
 
     if (text_list_.empty()) {
-        position = TextSymbol::M_NONE;
+        position = TextPosition::NONE;
         text_list_.push_back("");
     }
     else {
-        string type                                         = lowerCase(text_display_type_);
-        map<string, TextSymbol::TextPosition>::iterator pos = texthandlers.find(type);
-        position = (pos != texthandlers.end()) ? pos->second : TextSymbol::M_NONE;
+        string type                             = lowerCase(text_display_type_);
+        map<string, TextPosition>::iterator pos = texthandlers.find(type);
+        position                                = (pos != texthandlers.end()) ? pos->second : TextPosition::NONE;
     }
 
     MagFont font(text_font_name_);

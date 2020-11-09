@@ -47,7 +47,7 @@ public:
 class LevelSelection : public LevelSelectionAttributes, public doublearray {
 public:
     LevelSelection();
-    virtual ~LevelSelection();
+    virtual ~LevelSelection() override;
 
     virtual LevelSelection* clone() const { return 0; }
     virtual void set(const XmlNode& node) override { LevelSelectionAttributes::set(node); }

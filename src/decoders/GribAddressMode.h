@@ -43,14 +43,25 @@ public:
 
     virtual bool accept(const string&) { return false; }
 
-    virtual GribAddressMode* clone() const;
-    virtual void toxml(ostream&, int = 0) const;
-    virtual grib_handle* operator()(grib_context*, FILE*, int) const;
-    virtual grib_handle* operator()(grib_context*, FILE*, long int) const;
+    virtual GribAddressMode* clone() const {
+        MagLog::dev() << "GribAddressMode::set(const map<string, string&)---> to be checked!...\n";
+        return new GribAddressMode();
+    }
+    virtual void toxml(ostream&, int = 0) const {
+        MagLog::dev() << "GribAddressMode::toxml(ostream&, int = 0)---> to be checked!...\n";
+    }
+    virtual grib_handle* operator()(grib_context*, FILE*, int) const {
+        MagLog::dev() << "GribAddressMode::toxml(ostream&, int = 0)---> to be checked!...\n";
+        return 0;
+    }
+    virtual grib_handle* operator()(grib_context*, FILE*, long int) const {
+        MagLog::dev() << "GribAddressMode::toxml(ostream&, int = 0)---> to be checked!...\n";
+        return 0;
+    }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const;
+    virtual void print(ostream& out) const { out << "GribAddressMode\n"; }
 
 private:
     //! Copy constructor - No copy allowed
@@ -69,27 +80,68 @@ private:
 class GribAddressRecordMode : public GribAddressMode {
 public:
     GribAddressRecordMode() {}
-    ~GribAddressRecordMode() {}
+    ~GribAddressRecordMode() override {}
 
-    virtual GribAddressMode* clone() const override;
+    virtual GribAddressMode* clone() const override {
+        GribAddressMode* mode = new GribAddressRecordMode();
+        return mode;
+    }
 
-    virtual grib_handle* operator()(grib_context*, FILE* file, int position) const override;
+    virtual grib_handle* operator()(grib_context*, FILE* file, int position) const override {
+        grib_handle* handle = 0;
+
+
+        grib_context* context = grib_context_get_default();
+        int error;
+        for (int i = 0; i < position - 1; i++) {
+            // grib_read_any_from_file_alloc (context, file,  &msg , &size);
+            // grib_context_free(context,msg);
+            // MagLog::debug() << "call to grib_handle_new_from_file for position " << i << "\n";
+            handle = grib_handle_new_from_file(context, file, &error);
+            grib_handle_delete(handle);
+        }
+
+        handle = grib_handle_new_from_file(0, file, &error);
+
+        return handle;
+    }
 
 protected:
-    void print(ostream& out) const override;
+    void print(ostream& out) const override { out << "GribAddressRecordMode\n"; }
 };
 
 class GribAddressByteMode : public GribAddressMode {
 public:
     GribAddressByteMode() {}
-    ~GribAddressByteMode() {}
-    virtual GribAddressMode* clone() const override;
+    ~GribAddressByteMode() override {}
+    virtual GribAddressMode* clone() const override {
+        GribAddressMode* mode = new GribAddressByteMode();
+        return mode;
+    }
 
-    virtual grib_handle* operator()(grib_context* context, FILE* file, int position) const override;
-    virtual grib_handle* operator()(grib_context* context, FILE* file, long int position) const override;
+    virtual grib_handle* operator()(grib_context* context, FILE* file, int position) const override {
+        long int offset = (long int)position;
+        // cout << "OFFSET-->" << offset << endl;
+        fseek(file, (long int)position, SEEK_SET);
+        grib_handle* handle = 0;
+
+        int error;
+        handle = grib_handle_new_from_file(0, file, &error);
+
+        return handle;
+    }
+    virtual grib_handle* operator()(grib_context* context, FILE* file, long int position) const override {
+        fseek(file, position, SEEK_SET);
+        grib_handle* handle = 0;
+
+        int error;
+        handle = grib_handle_new_from_file(0, file, &error);
+
+        return handle;
+    }
 
 protected:
-    void print(ostream& out) const override;
+    void print(ostream& out) const override { out << "GribAddressRecordMode\n"; }
 };
 
 

@@ -37,7 +37,7 @@ class DotPolyShadingMethod : public map<double, pair<double, double> >,
                              public DotPolyShadingMethodAttributes {
 public:
     DotPolyShadingMethod() {}
-    virtual ~DotPolyShadingMethod() {}
+    virtual ~DotPolyShadingMethod() override {}
 
     virtual void set(const map<string, string>& map) override { DotPolyShadingMethodAttributes::set(map); }
     virtual void set(const XmlNode& node) override { DotPolyShadingMethodAttributes::set(node); }

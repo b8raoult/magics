@@ -31,7 +31,7 @@ namespace magics {
 class LinearTableMode : public LookupTableMode {
 public:
     LinearTableMode();
-    virtual ~LinearTableMode();
+    virtual ~LinearTableMode() override;
     void set(const XmlNode& node) override  // for MagML
     {
         LookupTableModeAttributes::set(node);

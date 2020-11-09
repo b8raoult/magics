@@ -38,7 +38,7 @@ class MarkerShadingTechnique
       public MarkerShadingTechniqueAttributes {
 public:
     MarkerShadingTechnique();
-    virtual ~MarkerShadingTechnique();
+    virtual ~MarkerShadingTechnique() override;
     virtual void set(const map<string, string>& map) override { MarkerShadingTechniqueAttributes::set(map); }
     virtual void set(const XmlNode& node) override { MarkerShadingTechniqueAttributes::set(node); }
     virtual ShadingTechnique* clone() const override {

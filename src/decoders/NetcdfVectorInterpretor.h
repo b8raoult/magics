@@ -36,7 +36,7 @@ namespace magics {
 class NetcdfVectorInterpretor : public NetcdfInterpretor {
 public:
     NetcdfVectorInterpretor();
-    virtual ~NetcdfVectorInterpretor();
+    virtual ~NetcdfVectorInterpretor() override;
 
 
     void set(const XmlNode& node) override {
@@ -77,7 +77,7 @@ protected:
 class NetcdfGeoVectorInterpretor : public NetcdfInterpretor {
 public:
     NetcdfGeoVectorInterpretor();
-    virtual ~NetcdfGeoVectorInterpretor();
+    virtual ~NetcdfGeoVectorInterpretor() override;
 
 
     void set(const XmlNode& node) override {
@@ -120,7 +120,7 @@ protected:
 class NetcdfGeoPolarMatrixInterpretor : public NetcdfInterpretor {
 public:
     NetcdfGeoPolarMatrixInterpretor();
-    virtual ~NetcdfGeoPolarMatrixInterpretor();
+    virtual ~NetcdfGeoPolarMatrixInterpretor() override;
 
 
     void set(const XmlNode& node) override {

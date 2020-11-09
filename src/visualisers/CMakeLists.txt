@@ -6,7 +6,6 @@ Akima474Method.h
 ArrowPlotting.cc
 ArrowPlotting.h
 AutomaticContourMethod.h
-AutomaticContourMethod.cc
 Axis.cc
 Axis.h
 AxisControl.cc
@@ -20,7 +19,6 @@ AxisType.cc
 AxisType.h
 Bar.cc
 Bar.h
-BothValuePlotMethod.cc
 BothValuePlotMethod.h
 Boundaries.cc
 Boundaries.h
@@ -115,7 +113,6 @@ IntervalSelectionType.h
 Intervals.h
 IsoHelper.cc
 IsoHelper.h
-IsoHighlight.cc
 IsoHighlight.h
 IsoLabel.cc
 IsoLabel.h
@@ -190,7 +187,6 @@ UserDate.h
 ValuePlot.cc
 ValuePlot.h
 ValuePlotBase.h
-ValuePlotMethod.cc
 ValuePlotMethod.h
 VisDefInfo.cc
 VisDefInfo.h

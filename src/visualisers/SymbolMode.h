@@ -47,7 +47,7 @@ class SymbolPlotting;
 class SymbolMode : public SymbolModeAttributes {
 public:
     SymbolMode();
-    virtual ~SymbolMode();
+    virtual ~SymbolMode() override;
 
     virtual SymbolMode* clone() const {
         SymbolMode* object = new SymbolMode();
@@ -98,7 +98,7 @@ private:
 class SymbolIndividualMode : public SymbolMode, public SymbolIndividualModeAttributes {
 public:
     SymbolIndividualMode();
-    virtual ~SymbolIndividualMode();
+    virtual ~SymbolIndividualMode() override;
     virtual void set(const map<string, string>& map) override {
         SymbolMode::set(map);
         SymbolIndividualModeAttributes::set(map);
@@ -166,7 +166,7 @@ public:
 class SymbolTableMode : public SymbolMode, public SymbolTableModeAttributes {
 public:
     SymbolTableMode();
-    virtual ~SymbolTableMode();
+    virtual ~SymbolTableMode() override;
     virtual void prepare() override;
     virtual bool accept(double) override;
     SymbolProperties operator()(double) const override;

@@ -39,7 +39,7 @@ class UserPoint;
 class GraphShade : public GraphShadeAttributes {
 public:
     GraphShade();
-    virtual ~GraphShade();
+    virtual ~GraphShade() override;
 
     virtual void set(const XmlNode& node) override { GraphShadeAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { GraphShadeAttributes::set(map); }
@@ -74,7 +74,7 @@ private:
 class NoGraphShade : public GraphShade {
 public:
     NoGraphShade() {}
-    virtual ~NoGraphShade() {}
+    virtual ~NoGraphShade() override {}
 
     virtual void set(const XmlNode&) override {}
     virtual void set(const map<string, string>&) override {}

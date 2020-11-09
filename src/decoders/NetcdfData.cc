@@ -16,11 +16,11 @@
 
    Apr 06: update for GCC 4.0 (Stephan)
 */
-#include "NetcdfData.h"
+#include <MagConfig.h>
+#include <MagException.h>
+#include <MagLog.h>
+#include <NetcdfData.h>
 #include <algorithm>
-#include "MagConfig.h"
-#include "MagException.h"
-#include "MagLog.h"
 
 
 using namespace magics;
@@ -48,8 +48,11 @@ void TypedAccessor<F, T>::operator()(vector<T>& to, vector<size_t>& start, vecto
                                      NetVariable& var) const {
     vector<F> from(to.size());
     var.get(from, start, edges);
+
     // Convert the data....
     std::transform(from.begin(), from.begin() + to.size(), to.begin(), Convertor<F, T>(var));
+    // for (auto x = start.begin(); x != start.end(); ++x) {   cout << "start " << *x << endl; }
+    // for (auto x = edges.begin(); x != edges.end(); ++x) {   cout << "edges " << *x << endl; }
 }
 
 template <class F, class T>
@@ -281,14 +284,22 @@ string NetVariable::interpretTime(const string& val) {
 
         return tostring(diff);
     }
-    catch (exception&) {
+    catch (...) {
         return val;
     }
 }
 
 int NetVariable::find(const string& value) {
     // First , is the variable a time variable:
-    string val = interpretTime(value);
+
+    string val = value;
+
+    try {
+        val = interpretTime(value);
+    }
+    catch (...) {
+        val = value;
+    }
 
 
     nc_type t = type();
@@ -326,12 +337,31 @@ int NetVariable::find(const string& value) {
         values.resize(getSize());
         get(values);
         short dval = tonumber(val);
-        cout << "PRINT-->" << dval << endl;
         return ::find(dval, values);
     }
+    if (t == NC_CHAR) {
+        vector<size_t> dims;
+        getDimensions(dims);
+        for (int i = 0; i < dims[0]; i++) {
+            char text[256];
+            nc_get_var_text(netcdf_, id_, text);
+            if (string(text) == val)
+                return i;
+        }
+    }
 
+    if (t == NC_STRING) {
+        int x = getSize();
+        char* values[1024];
+        ASSERT(x < sizeof(values));
+        nc_get_var_string(netcdf_, id_, values);
+        for (int i = 0; i < x; i++) {
+            if (string(values[i]) == val)
+                return i;
+        }
+    }
 
-    return -1;
+    return 0;
 }
 
 

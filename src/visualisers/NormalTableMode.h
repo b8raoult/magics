@@ -31,7 +31,7 @@ namespace magics {
 class NormalTableMode : public LookupTableMode {
 public:
     NormalTableMode();
-    virtual ~NormalTableMode();
+    virtual ~NormalTableMode() override;
     void set(const map<string, string>& map) override  // for MagML
     {
         LookupTableModeAttributes::set(map);

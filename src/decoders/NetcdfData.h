@@ -68,6 +68,7 @@ struct NetDimension {
     Netcdf* parent_;
     int netcdf_;
 
+
     NetDimension() {}
     NetDimension(Netcdf* netcdf, const string& name, int index = 0, int variable = -1);
 
@@ -112,6 +113,11 @@ struct NetAttribute {
         val = string(tmp, len);
         delete[] tmp;
     }
+    void get(char*& val) {
+        size_t len;
+        nc_inq_attlen(netcdf_, id_, name_.c_str(), &len);
+        nc_get_att_text(netcdf_, id_, name_.c_str(), (char*)val);
+    }
 };
 
 struct NetVariable;
@@ -153,7 +159,6 @@ public:
 
     static void access(vector<T>& data, vector<size_t>& start, vector<size_t>& edges, NetVariable& var);
 };
-
 
 template <class F, class T>
 class TypedAccessor : public Accessor<T> {
@@ -275,12 +280,20 @@ struct NetVariable {
     double getMissing() { return missing_; }
 
     template <class T>
-    T getAttribute(const string& name, const T& def) {
+    T getAttribute(const string& name, T def) {
+        T val;
         map<string, NetAttribute>::iterator attr = attributes_.find(name);
         if (attr == attributes_.end())
             return def;
-
-        T val = def;
+        (*attr).second.get(val);
+        return val;
+    }
+    string getAttribute(const string& name, const char* def) { return getAttribute(name, string(def)); }
+    string getAttribute(const string& name, const string& def) {
+        map<string, NetAttribute>::iterator attr = attributes_.find(name);
+        if (attr == attributes_.end())
+            return def;
+        string val;
         (*attr).second.get(val);
         return val;
     }
@@ -315,6 +328,26 @@ struct NetVariable {
         for (map<string, NetDimension>::iterator dim = dimensions_.begin(); dim != dimensions_.end(); ++dim)
             dims.push_back(dim->first);
         return dims;
+    }
+
+    void default2D() {
+        int nb = dimensions_.size();
+        for (map<string, NetDimension>::iterator dim = dimensions_.begin(); dim != dimensions_.end(); ++dim)
+            if (dim->second.index_ < nb - 2)
+                dim->second.dim_ = 1;
+
+
+        auto dim = dimensions_.begin();
+        for (int i = 0; i < nb - 2; ++i) {
+            dim->second.dim_ = 1;
+            dim++;
+        }
+    }
+    void default1D() {
+        int nb = dimensions_.size();
+        for (map<string, NetDimension>::iterator dim = dimensions_.begin(); dim != dimensions_.end(); ++dim)
+            if (dim->second.index_ < nb - 1)
+                dim->second.dim_ = 1;
     }
 
 
@@ -405,7 +438,7 @@ public:
         string val;
         (*attr).second.get(val);
 
-        return val;
+        return strdup(val.c_str());
     }
 
 
@@ -414,6 +447,19 @@ public:
         if (var == variables_.end())
             throw NoSuchNetcdfVariable(name);
         return (*var).second;
+    }
+
+    void setDefault2D(const string& name) {
+        map<string, NetVariable>::iterator var = variables_.find(name);
+        if (var == variables_.end())
+            throw NoSuchNetcdfVariable(name);
+        var->second.default2D();
+    }
+    void setDefault1D(const string& name) {
+        map<string, NetVariable>::iterator var = variables_.find(name);
+        if (var == variables_.end())
+            throw NoSuchNetcdfVariable(name);
+        var->second.default1D();
     }
 
     map<string, NetAttribute> getAttributes() { return attributes_; }

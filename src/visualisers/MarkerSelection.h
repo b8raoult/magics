@@ -35,7 +35,7 @@ class XmlNode;
 class MarkerSelection : public FloatSelection {
 public:
     MarkerSelection();
-    virtual ~MarkerSelection();
+    virtual ~MarkerSelection() override;
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void toxml(ostream&, int) const {}

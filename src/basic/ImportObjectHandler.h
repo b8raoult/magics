@@ -33,7 +33,7 @@ namespace magics {
 class ImportObjectHandler : public BasicSceneNode, public Layout, public ImportObjectHandlerAttributes {
 public:
     ImportObjectHandler();
-    virtual ~ImportObjectHandler();
+    virtual ~ImportObjectHandler() override;
 
     void getReady() override;
     void visit(SceneLayer&, vector<LayoutVisitor*>&) override;

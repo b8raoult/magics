@@ -36,7 +36,7 @@ class SceneLayer;
 class BinaryObject : public BasicGraphicsObject, public BasicSceneObject, public BinaryObjectAttributes {
 public:
     BinaryObject();
-    virtual ~BinaryObject();
+    virtual ~BinaryObject() override;
     void redisplay(const BaseDriver&) const override;
 
     void visit(SceneLayer&) override;

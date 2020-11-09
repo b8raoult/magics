@@ -37,13 +37,17 @@ class StyleEntry;
 class Contour : public ContourAttributes, public Visdef {
 public:
     Contour();
-    virtual ~Contour();
+    virtual ~Contour() override;
 
-    virtual Contour* clone() const;
+    virtual Contour* clone() const {
+        Contour* contour = new Contour();
+        contour->copy(*this);
+        return contour;
+    }
     bool needLegend() override { return legend_; }
     // Implements the set method ...
-    void set(const XmlNode& node) override;
-    void set(const map<string, string>& map) override;
+    void set(const XmlNode& node) override { ContourAttributes::set(node); }
+    void set(const map<string, string>& map) override { ContourAttributes::set(map); }
 
     // Implements the VisDefinterface
     virtual void operator()(Data&, BasicGraphicsObjectContainer&) override;
@@ -51,7 +55,10 @@ public:
 
     void visit(Data&, HistoVisitor&) override;
     void visit(MetaDataVisitor&) override;
-    void getReady(const LegendVisitor& legend) override;
+    void getReady(const LegendVisitor& legend) override {
+        contour_->legend_only_ = legend.only_;
+        legendIsOn_            = true;
+    }
 
 
 protected:

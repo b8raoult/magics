@@ -32,7 +32,7 @@ namespace magics {
 class GradientsColourTechnique : public ColourTechnique, public GradientsColourTechniqueAttributes {
 public:
     GradientsColourTechnique();
-    virtual ~GradientsColourTechnique();
+    virtual ~GradientsColourTechnique() override;
     void set(const map<string, string>& map) override { GradientsColourTechniqueAttributes::set(map); }
     void set(const XmlNode& node) override { GradientsColourTechniqueAttributes::set(node); }
     bool accept(const string& node) override { return GradientsColourTechniqueAttributes::accept(node); }

@@ -35,7 +35,7 @@ namespace magics {
 class HiLoNumber : public HiLoTechnique, public HiLoNumberAttributes {
 public:
     HiLoNumber() {}
-    virtual ~HiLoNumber() {}
+    virtual ~HiLoNumber() override {}
     void set(const map<string, string>& map) override {
         HiLoTechnique::set(map);
         HiLoNumberAttributes::set(map);

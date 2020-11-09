@@ -28,9 +28,3 @@ MinMaxHelper::MinMaxHelper(AbstractPoints& points) :
     points.for_each(*this);
     points.setToFirst();
 }
-
-AbstractPoints::AbstractPoints() : helper_(0) {}
-
-AbstractPoints::~AbstractPoints() {
-    delete helper_;
-}

@@ -30,15 +30,79 @@ namespace magics {
 
 class PolyCoast : public Polyline {
 public:
-    PolyCoast();
-    ~PolyCoast() override;
+    PolyCoast() : level_(0), greenwich_(0), area_(0) { this->winding_ = -1; }
+    ~PolyCoast() override {}
 
-    virtual PolyCoast* clone() const override;
+    virtual PolyCoast* clone() const {
+        PolyCoast* poly = new PolyCoast();
 
-    virtual Polyline* getNew() const override;
+        poly->coastlines_ = coastlines_;
+        poly->setColour(this->getColour());
+        poly->setThickness(this->thickness_);
+        poly->setDashLength(this->dash_length_);
+        poly->setLineStyle(this->style_);
 
-    virtual Polyline* getShade() const override;
-    virtual Polyline* getContour() const override;
+        poly->level(this->level_);
+        poly->setFillColour(this->getFillColour());
+        poly->setFilled(this->fill_);
+        if (this->shading_)
+            poly->setShading(this->shading_->clone());
+        poly->insert(poly->begin(), this->begin(), this->end());
+        poly->setMinX(this->getMinX());  // copy the bounding box
+        poly->setMinY(this->getMinY());  // copy the bounding box
+        poly->setMaxX(this->getMaxX());  // copy the bounding box
+        poly->setMaxY(this->getMaxY());  // copy the bounding box
+        return poly;
+    }
+
+    virtual Polyline* getNew() const {
+        PolyCoast* poly = new PolyCoast();
+
+        poly->setColour(this->getColour());
+        poly->setThickness(this->thickness_);
+        poly->setDashLength(this->dash_length_);
+        poly->setLineStyle(this->style_);
+        poly->level(this->level_);
+        poly->setFillColour(this->getFillColour());
+        poly->setFilled(this->fill_);
+        if (this->shading_)
+            poly->setShading(this->shading_->clone());
+
+        return poly;
+    }
+
+    virtual Polyline* getShade() const {
+        if (!this->fill_)
+            return 0;
+
+        PolyCoast* poly = new PolyCoast();
+
+        poly->setColour(Colour("none"));
+        poly->setThickness(0);
+        poly->setDashLength(this->dash_length_);
+        poly->setLineStyle(this->style_);
+        poly->level(this->level_);
+        poly->setFillColour(this->getFillColour());
+        poly->setFilled(this->fill_);
+        if (this->shading_)
+            poly->setShading(this->shading_->clone());
+
+        return poly;
+    }
+    virtual Polyline* getContour() const {
+        PolyCoast* poly = new PolyCoast();
+
+        poly->setColour(this->getColour());
+        poly->setThickness(this->thickness_);
+        poly->setDashLength(this->dash_length_);
+        poly->setLineStyle(this->style_);
+        poly->level(this->level_);
+        poly->setFillColour(this->getFillColour());
+        poly->setFilled(false);
+        poly->setShading(0);
+
+        return poly;
+    }
 
     int level() const { return level_; }
     void level(int level) { level_ = level; }

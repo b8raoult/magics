@@ -135,7 +135,7 @@ void QtDriver::open() {
     const int qtDpiResolution = (!scList.isEmpty()) ? scList.at(0)->logicalDotsPerInchY() : 72;
 #elif defined(Q_WS_X11)  // Do we work with a X11 display?
     const int qtDpiResolution = QX11Info::appDpiY(0);
-#else                    // for MacOS X with Qt4
+#else  // for MacOS X with Qt4
     const int qtDpiResolution = 95;
 #endif
 

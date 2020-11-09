@@ -37,7 +37,7 @@ class StyleEntry;
 class ContourLibrary : public ContourLibraryAttributes {
 public:
     ContourLibrary();
-    virtual ~ContourLibrary();
+    virtual ~ContourLibrary() override;
 
     // set the meta data to be collected
     virtual void askId(MetaDataCollector&);
@@ -138,7 +138,7 @@ public:
 class EcChartLibrary : public ContourLibrary {
 public:
     EcChartLibrary();
-    virtual ~EcChartLibrary();
+    virtual ~EcChartLibrary() override;
 
     // set the meta data to be collected
     void askId(MetaDataCollector&) override;
@@ -161,7 +161,7 @@ protected:
 class WebLibrary : public ContourLibrary {
 public:
     WebLibrary();
-    virtual ~WebLibrary();
+    virtual ~WebLibrary() override;
 
     // set the meta data to be collected
     void askId(MetaDataCollector&) override;
@@ -187,7 +187,7 @@ protected:
 class NoContourLibrary : public ContourLibrary {
 public:
     NoContourLibrary() {}
-    virtual ~NoContourLibrary() {}
+    virtual ~NoContourLibrary() override {}
 
     // sete the meata dat to be collected
     void askId(MetaDataCollector&) override {}

@@ -34,7 +34,7 @@ namespace magics {
 class HiLoText : public HiLoTechnique, public HiLoTextAttributes {
 public:
     HiLoText() : high_(0), low_(0) {}
-    virtual ~HiLoText() {}
+    virtual ~HiLoText() override {}
     void operator()(const PaperPoint& point, HiLo& hilo) override {
         if (!high_) {
             // Create Text List containing the position of the High

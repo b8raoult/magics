@@ -1992,7 +1992,7 @@ void EpsShade::operator()(Data& data, BasicGraphicsObjectContainer& visitor) {
     magics::Polyline* medianmax = median->getNew();
 
     magics::Polyline* backtop = new magics::Polyline();
-    // backtop->setLineStyle(LineStyle::M_DASH);
+    // backtop->setLineStyle(LineStyle::DASH);
     backtop->setThickness(2);
     backtop->setColour(*colour_);
     magics::Polyline* backtopmin = backtop->getNew();
@@ -2001,7 +2001,7 @@ void EpsShade::operator()(Data& data, BasicGraphicsObjectContainer& visitor) {
     backtopmax->setColour(cmax);
 
     magics::Polyline* backbottom = new magics::Polyline();
-    // backbottom->setLineStyle(LineStyle::M_DOT);
+    // backbottom->setLineStyle(LineStyle::DOT);
     backbottom->setThickness(2);
     backbottom->setColour(*colour_);
 

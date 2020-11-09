@@ -119,23 +119,23 @@ MAGICS_NO_EXPORT void BaseDriver::renderTextSymbols(const TextSymbol& symbol) co
             MFloat shiftX = 0.;
             MFloat shiftY = 0.;
 
-            // default is M_NONE
-            if (symbol.position() == Symbol::M_NONE) {
-                //			std::cout<<"M_NONE"<< std::endl;
+            // default is NONE
+            if (symbol.position() == TextPosition::NONE) {
+                //			std::cout<<"NONE"<< std::endl;
             }
-            else if (symbol.position() == Symbol::M_RIGHT) {
+            else if (symbol.position() == TextPosition::RIGHT) {
                 shiftX = convertCM(symbol.getHeight() * .5) / coordRatioX_;
                 text.setJustification(Justification::LEFT);
             }
-            else if (symbol.position() == Symbol::M_LEFT) {
+            else if (symbol.position() == TextPosition::LEFT) {
                 shiftX = -convertCM(symbol.getHeight() * .5) / coordRatioX_;
                 text.setJustification(Justification::RIGHT);
             }
-            else if (symbol.position() == Symbol::M_BELOW) {
+            else if (symbol.position() == TextPosition::BELOW) {
                 shiftY = setY(-convertCM(symbol.getHeight() * .6) / coordRatioY_);
                 text.setVerticalAlign(VerticalAlign::TOP);
             }
-            else if (symbol.position() == Symbol::M_ABOVE) {
+            else if (symbol.position() == TextPosition::ABOVE) {
                 shiftY = setY(convertCM(symbol.getHeight() * 0.8) / coordRatioY_);
                 text.setVerticalAlign(VerticalAlign::BOTTOM);
             }

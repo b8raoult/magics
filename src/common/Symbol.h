@@ -30,20 +30,20 @@
 
 namespace magics {
 
+enum class TextPosition
+{
+    NONE,
+    BELOW,
+    ABOVE,
+    LEFT,
+    RIGHT,
+    CENTRE
+};
 
 class Symbol : public BasicGraphicsObject, public vector<PaperPoint> {
 public:
-    enum TextPosition
-    {
-        M_NONE,
-        M_BELOW,
-        M_ABOVE,
-        M_LEFT,
-        M_RIGHT,
-        M_CENTRE
-    };
     Symbol();
-    virtual ~Symbol();
+    virtual ~Symbol() override;
 
     void redisplay(const BaseDriver& driver) const override;
 
@@ -52,7 +52,11 @@ public:
         symbol_ = convert(m);
     }
 
-    static string convert(int m);
+    static string convert(int m) {
+        ostringstream symbol;
+        symbol << "magics_" << m;
+        return symbol.str();
+    }
 
     void boundingbox(const Polyline& boundingbox);
     virtual void push_back(const PaperPoint& point, const string& = "") { vector<PaperPoint>::push_back(point); }
@@ -79,9 +83,19 @@ public:
     int outlineThickness() const { return outlineThickness_; }
     LineStyle outlineLineStyle() const { return outlineStyle_; }
 
-    void outline(bool outline, const Colour& colour, int thickness, LineStyle style);
+    void outline(bool outline, const Colour& colour, int thickness, LineStyle style) {
+        outline_          = outline;
+        outlineColour_    = colour;
+        outlineThickness_ = thickness;
+        outlineStyle_     = style;
+    }
     void connectline(bool connect) { connectLine_ = connect; }
-    void connectline(bool connectline, const Colour& colour, int thickness, LineStyle style);
+    void connectline(bool connectline, const Colour& colour, int thickness, LineStyle style) {
+        connectLine_          = connectline;
+        connectLineColour_    = colour;
+        connectLineThickness_ = thickness;
+        connectLineStyle_     = style;
+    }
     int connectLineThickness() const { return connectLineThickness_; }
     LineStyle connectLineStyle() const { return connectLineStyle_; }
     const Colour& connectLineColour() const { return connectLineColour_; }
@@ -122,8 +136,8 @@ private:
 
 class TextSymbol : public Symbol {
 public:
-    TextSymbol() : position_(M_BELOW), blanking_(false) {}
-    ~TextSymbol() {}
+    TextSymbol() : position_(TextPosition::BELOW), blanking_(false) {}
+    ~TextSymbol() override {}
 
     void push_back(const PaperPoint& point, const string& text) override {
         Symbol::push_back(point);
@@ -161,7 +175,7 @@ protected:
 class ImageSymbol : public Symbol {
 public:
     ImageSymbol(const string& path, const string& format) : path_(path), format_(format) {}
-    ~ImageSymbol() {}
+    ~ImageSymbol() override {}
     void redisplay(const BaseDriver& driver) const override;
 
     void set(double width, double height) {
@@ -178,10 +192,10 @@ protected:
 class SimpleTextSymbol : public TextSymbol {
 public:
     SimpleTextSymbol(const string& text) : text_(text) {}
-    ~SimpleTextSymbol() {}
+    ~SimpleTextSymbol() override {}
 
     void push_back(const PaperPoint& point) { TextSymbol::push_back(point, text_); }
-    void push_back(const PaperPoint& point, const string&) { TextSymbol::push_back(point, text_); }
+    void push_back(const PaperPoint& point, const string&) override { TextSymbol::push_back(point, text_); }
 
 protected:
     string text_;
@@ -192,7 +206,7 @@ class ComplexSymbol : public Symbol {
 public:
     ComplexSymbol() : rows_(1), columns_(1) {}
     ComplexSymbol(int rows, int columns) : rows_(rows), columns_(columns) {}
-    ~ComplexSymbol() {}
+    ~ComplexSymbol() override {}
 
     void redisplay(const BaseDriver& driver) const override {
         MagLog::dev() << "Redisplay -->" << *this << endl;
@@ -215,7 +229,7 @@ struct SymbolProperties {
     string label_;
     MagFont font_;
     bool blanking_;
-    Symbol::TextPosition position_;
+    TextPosition position_;
     vector<string> text_;
 
     bool outline_;
@@ -240,7 +254,7 @@ struct SymbolProperties {
     SymbolProperties();
 
     void setSymbol(const string& symbol, int marker);
-    void position(Symbol::TextPosition position) { position_ = position; }
+    void position(TextPosition position) { position_ = position; }
 
     virtual ~SymbolProperties() {}
     bool operator<(const SymbolProperties& other) const {

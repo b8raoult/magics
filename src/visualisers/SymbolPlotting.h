@@ -37,7 +37,7 @@ class ProgressObject;
 class SymbolPlotting : public SymbolPlottingAttributes, public Visdef {
 public:
     SymbolPlotting();
-    virtual ~SymbolPlotting();
+    virtual ~SymbolPlotting() override;
 
 
     // Implements the Visualiser Interface...

@@ -42,7 +42,7 @@ class RightAxisVisitor;
 class AnimationStep : public map<Layer*, int>, public TagHandler {
 public:
     AnimationStep(AnimationRules&);
-    virtual ~AnimationStep();
+    virtual ~AnimationStep() override;
 
     void rules(vector<string>&);
     AnimationRules& rules_;
@@ -104,7 +104,7 @@ private:
 class AsIsAnimationRules : public AnimationRules {
 public:
     AsIsAnimationRules();
-    virtual ~AsIsAnimationRules();
+    virtual ~AsIsAnimationRules() override;
 
     void add(StepLayer&) override;
     void rules(vector<string>&) const override;
@@ -117,7 +117,7 @@ protected:
 class NoOverlayAnimationRules : public AnimationRules {
 public:
     NoOverlayAnimationRules();
-    virtual ~NoOverlayAnimationRules();
+    virtual ~NoOverlayAnimationRules() override;
 
     void add(StepLayer&) override;
     void rules(vector<string>&) const override;
@@ -131,7 +131,7 @@ protected:
 class DateAnimationRules : public AnimationRules {
 public:
     DateAnimationRules();
-    virtual ~DateAnimationRules();
+    virtual ~DateAnimationRules() override;
     void add(StepLayer&) override;
     void rules(vector<string>&) const override;
 
@@ -144,7 +144,7 @@ protected:
 class LevelAnimationRules : public AnimationRules {
 public:
     LevelAnimationRules();
-    virtual ~LevelAnimationRules();
+    virtual ~LevelAnimationRules() override;
     void add(StepLayer&) override;
     void rules(vector<string>&) const override;
 

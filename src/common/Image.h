@@ -31,7 +31,7 @@ namespace magics {
 class Image : public ImageProperties, public vector<short> {
 public:
     Image() {}
-    virtual ~Image() {}
+    virtual ~Image() override {}
 
     // Implement the BaseGraphics Interface
     virtual void redisplay(const BaseDriver& driver) const override { driver.redisplay(*this); }

@@ -32,7 +32,7 @@ namespace magics {
 class ImportObject : public ImageProperties {
 public:
     ImportObject() {}
-    virtual ~ImportObject() {}
+    virtual ~ImportObject() override {}
 
     // Implement the BaseGraphics Interface
     virtual void redisplay(const BaseDriver& driver) const override { driver.redisplay(*this); }

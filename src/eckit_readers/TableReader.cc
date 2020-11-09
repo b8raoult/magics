@@ -247,7 +247,7 @@ int TableReader::nextLineTokens(char* line, size_t sizeOfLine, vector<char*>& to
     if (f_.getline(line, sizeOfLine)) {
         // parse the line into tokens
 
-        // FIXME: Use getline(std::string) instead
+        // TODO: Use getline(std::string) instead
         ASSERT(!f_.fail());  // The line is longer than sizeOfLine
 
         streamsize numread = f_.gcount();

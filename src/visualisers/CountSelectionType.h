@@ -34,7 +34,7 @@ namespace magics {
 class CountSelectionType : public CountSelectionTypeAttributes, public LevelSelection {
 public:
     CountSelectionType();
-    virtual ~CountSelectionType();
+    virtual ~CountSelectionType() override;
 
 
     virtual void calculate(double min, double max, bool) override;

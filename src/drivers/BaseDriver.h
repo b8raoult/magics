@@ -206,7 +206,7 @@ struct magFont {
 class BaseDriver : public BaseDriverAttributes, public MagicsObserver {
 public:
     BaseDriver();
-    virtual ~BaseDriver();
+    virtual ~BaseDriver() override;
 
     virtual void set(const XmlNode& node) override { BaseDriverAttributes::set(node); }
     void setWidth(double width) { width_ = width; }

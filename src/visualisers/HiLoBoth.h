@@ -38,7 +38,7 @@ namespace magics {
 class HiLoBoth : public HiLoTechnique, public HiLoTextAttributes, public HiLoMarkerAttributes {
 public:
     HiLoBoth() : high_(0), low_(0) {}
-    virtual ~HiLoBoth() {}
+    virtual ~HiLoBoth() override {}
     void set(const map<string, string>& map) override {
         HiLoTechnique::set(map);
 
@@ -74,7 +74,7 @@ protected:
         if (!high_) {
             // Create Text List containing the position of the High
             high_ = new TextSymbol();
-            high_->position(Symbol::M_ABOVE);
+            high_->position(TextPosition::ABOVE);
             MagFont font;
             font.name("sansserif");
             font.colour(*hi_colour_);
@@ -90,7 +90,7 @@ protected:
         if (!low_) {
             // Create Text List containing the position of the High
             low_ = new TextSymbol();
-            low_->position(Symbol::M_ABOVE);
+            low_->position(TextPosition::ABOVE);
             low_->setMarker(index_);
             MagFont font;
             font.name("sansserif");

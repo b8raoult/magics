@@ -26,7 +26,9 @@
 #include "ContourLibrary.h"
 #include "Factory.h"
 #include "Layer.h"
+#include "MagicsSettings.h"
 #include "NetcdfData.h"
+
 using namespace magics;
 
 NetcdfGeoMatrixInterpretor::NetcdfGeoMatrixInterpretor() {}
@@ -161,27 +163,6 @@ void NetcdfGeoMatrixInterpretor::visit(Transformation& transformation) {
     if (transformation.getAutomaticY()) {
         transformation.setMinMaxY(matrix_->rowsAxis().front(), matrix_->rowsAxis().back());
     }
-}
-
-void NetcdfGeoMatrixInterpretor::set(const XmlNode& node) {
-    // FIXME: Infinite recursion
-    NOTIMP;
-    MagLog::debug() << "NetcdfGeoMatrixInterpretor::set(params)"
-                    << "\n";
-    set(node);
-    XmlNode netcdf = node;
-    netcdf.name("netcdf");
-    set(netcdf);
-}
-
-NetcdfInterpretor* NetcdfGeoMatrixInterpretor::clone() const {
-    NetcdfGeoMatrixInterpretor* object = new NetcdfGeoMatrixInterpretor();
-    object->clone(*this);
-    return object;
-}
-
-void NetcdfGeoMatrixInterpretor::clone(const NetcdfGeoMatrixInterpretor& other) {
-    copy(other);
 }
 
 bool NetcdfGeoMatrixInterpretor::interpretAsPoints(PointsList& list) {

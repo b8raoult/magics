@@ -31,7 +31,7 @@ namespace magics {
 class CliMetLabLibrary : public ContourLibrary {
 public:
     CliMetLabLibrary();
-    virtual ~CliMetLabLibrary();
+    virtual ~CliMetLabLibrary() override;
 
 
     virtual StyleEntry* getStyle(Data& data, const std::string& library_path, MagDef& visdef) override;

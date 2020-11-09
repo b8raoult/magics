@@ -37,7 +37,7 @@ namespace magics {
 class NoGridPlotting : public NoGridPlottingAttributes {
 public:
     NoGridPlotting() {}
-    virtual ~NoGridPlotting() {}
+    virtual ~NoGridPlotting() override {}
 
     virtual void set(const XmlNode&) override {}
     virtual void set(const map<string, string>&) override {}
@@ -97,7 +97,7 @@ public:
 class GridPlotting : public NoGridPlotting, public GridPlottingAttributes {
 public:
     GridPlotting();
-    virtual ~GridPlotting();
+    virtual ~GridPlotting() override;
 
     virtual NoGridPlotting* clone() const override {
         GridPlotting* object = new GridPlotting();

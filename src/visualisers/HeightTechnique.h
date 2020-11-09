@@ -83,7 +83,7 @@ private:
 class ListHeightTechnique : public HeightTechnique {
 public:
     ListHeightTechnique();
-    virtual ~ListHeightTechnique();
+    virtual ~ListHeightTechnique() override;
     virtual void prepare(LevelSelection&) override;
     virtual void set(const HeightTechniqueInterface&) override;
 
@@ -95,7 +95,7 @@ protected:
 class CalculateHeightTechnique : public HeightTechnique {
 public:
     CalculateHeightTechnique();
-    virtual ~CalculateHeightTechnique();
+    virtual ~CalculateHeightTechnique() override;
     virtual void prepare(LevelSelection&) override;
     virtual void set(const HeightTechniqueInterface&) override;
 

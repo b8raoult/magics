@@ -60,7 +60,7 @@ private:
 class MagicsCursorEvent : public MagicsEvent {
 public:
     MagicsCursorEvent(const string& cursor = "") : cursor_(cursor) {}
-    virtual ~MagicsCursorEvent() {}
+    virtual ~MagicsCursorEvent() override {}
     virtual void notify(MagicsObserver& observer) override { observer.notify(*this); }
     const string& cursor() { return cursor_; }
 
@@ -72,7 +72,7 @@ protected:
 class MagicsSwapBufferEvent : public MagicsEvent {
 public:
     MagicsSwapBufferEvent() {}
-    virtual ~MagicsSwapBufferEvent() {}
+    virtual ~MagicsSwapBufferEvent() override {}
     virtual void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 
@@ -85,7 +85,7 @@ class MagicsAntialiasingEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsAntialiasingEvent(bool set) : set_(set) {}
-    virtual ~MagicsAntialiasingEvent() {}
+    virtual ~MagicsAntialiasingEvent() override {}
     virtual void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
@@ -102,7 +102,7 @@ class MagicsZoomEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsZoomEvent(bool set) : set_(set) {}
-    virtual ~MagicsZoomEvent() {}
+    virtual ~MagicsZoomEvent() override {}
     void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
@@ -119,7 +119,7 @@ class MagicsMagnifierEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsMagnifierEvent(bool set) : set_(set) {}
-    virtual ~MagicsMagnifierEvent() {}
+    virtual ~MagicsMagnifierEvent() override {}
     void notify(MagicsObserver& observer) override { observer.notify(*this); }
     bool set() const { return set_; }
 
@@ -136,7 +136,7 @@ class MagicsRestoreFbEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsRestoreFbEvent() {}
-    virtual ~MagicsRestoreFbEvent() {}
+    virtual ~MagicsRestoreFbEvent() override {}
     void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 protected:
@@ -165,7 +165,7 @@ class MagicsAnimationCurrentStepEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsAnimationCurrentStepEvent(int step) : step_(step) {}
-    virtual ~MagicsAnimationCurrentStepEvent() {}
+    virtual ~MagicsAnimationCurrentStepEvent() override {}
     void notify(MagicsObserver& observer) override { observer.notify(*this); }
     int step() const { return step_; }
 
@@ -179,7 +179,7 @@ class MagicsAnimationStepsEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsAnimationStepsEvent(vector<MagicsAnimationStepData> steps) : steps_(steps) {}
-    virtual ~MagicsAnimationStepsEvent() {}
+    virtual ~MagicsAnimationStepsEvent() override {}
     void notify(MagicsObserver& observer) override { observer.notify(*this); }
     const vector<MagicsAnimationStepData>& steps() const { return steps_; }
 
@@ -197,7 +197,7 @@ class MagicsLayerUpdateEvent : public MagicsEvent {
     // From Uplot to driver!
 public:
     MagicsLayerUpdateEvent() {}
-    virtual ~MagicsLayerUpdateEvent() {}
+    virtual ~MagicsLayerUpdateEvent() override {}
     void notify(MagicsObserver& observer) override { observer.notify(*this); }
 
 protected:

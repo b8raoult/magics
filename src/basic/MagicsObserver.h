@@ -46,8 +46,8 @@ class MagicsRenderZoomPreviewEvent;
 
 class MagicsObserver {
 public:
-    MagicsObserver();
-    virtual ~MagicsObserver();
+    MagicsObserver() { MagLog::registerObserver(this); }
+    virtual ~MagicsObserver() { MagLog::unregisterObserver(this); }
 
 
     virtual void warningMessage(const string& msg) { cout << msg; }   // default behaviour

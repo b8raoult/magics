@@ -22,9 +22,6 @@
 #ifndef NetcdfGeoMatrixInterpretor_H
 #define NetcdfGeoMatrixInterpretor_H
 
-#include "magics.h"
-
-
 #include "ProjP.h"
 
 #include "Matrix.h"
@@ -41,9 +38,21 @@ public:
     static NetcdfInterpretor* guess(const NetcdfInterpretor&);
     void visit(Transformation& transformation) override;
 
-    void set(const XmlNode& node) override;
-    virtual NetcdfInterpretor* clone() const override;
-    void clone(const NetcdfGeoMatrixInterpretor& other);
+    void set(const XmlNode& node) override {
+        // FIXME: Infinit recursion
+        MagLog::debug() << "NetcdfGeoMatrixInterpretor::set(params)"
+                        << "\n";
+        set(node);
+        XmlNode netcdf = node;
+        netcdf.name("netcdf");
+        set(netcdf);
+    }
+    virtual NetcdfInterpretor* clone() const override {
+        NetcdfGeoMatrixInterpretor* object = new NetcdfGeoMatrixInterpretor();
+        object->clone(*this);
+        return object;
+    }
+    void clone(const NetcdfGeoMatrixInterpretor& other) { copy(other); }
     bool interpretAsMatrix(Matrix**) override;
     bool interpretAsPoints(PointsList&) override;
     UserPoint* newPoint(const string&, double, double, double);

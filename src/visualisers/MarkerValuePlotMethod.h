@@ -33,7 +33,7 @@ namespace magics {
 class MarkerValuePlotMethod : public ValuePlotMethod, public MarkerValuePlotMethodAttributes {
 public:
     MarkerValuePlotMethod() : marker_(0) {}
-    virtual ~MarkerValuePlotMethod() {}
+    virtual ~MarkerValuePlotMethod() override {}
     virtual void set(const map<string, string>& map) override {
         ValuePlotMethodAttributes::set(map);
         MarkerValuePlotMethodAttributes::set(map);

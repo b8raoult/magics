@@ -39,7 +39,7 @@ class PaperPoint;
 class GraphShadeStyle : public GraphShadeStyleAttributes {
 public:
     GraphShadeStyle();
-    virtual ~GraphShadeStyle();
+    virtual ~GraphShadeStyle() override;
 
     virtual void set(const XmlNode& node) override { GraphShadeStyleAttributes::set(node); }
     virtual void set(const map<string, string>& map) override { GraphShadeStyleAttributes::set(map); }
@@ -71,7 +71,7 @@ private:
 class DotGraphShadeStyle : public GraphShadeStyle, public DotGraphShadeStyleAttributes {
 public:
     DotGraphShadeStyle() {}
-    virtual ~DotGraphShadeStyle() {}
+    virtual ~DotGraphShadeStyle() override {}
 
     virtual void set(const XmlNode& node) override {
         GraphShadeStyle::set(node);
@@ -96,7 +96,7 @@ protected:
 class HatchGraphShadeStyle : public GraphShadeStyle, public HatchGraphShadeStyleAttributes {
 public:
     HatchGraphShadeStyle() {}
-    virtual ~HatchGraphShadeStyle() {}
+    virtual ~HatchGraphShadeStyle() override {}
 
     virtual void set(const XmlNode& node) override {
         GraphShadeStyle::set(node);

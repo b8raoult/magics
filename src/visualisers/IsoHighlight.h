@@ -36,7 +36,10 @@ class NoIsoHighlight {
 public:
     NoIsoHighlight() {}
     virtual ~NoIsoHighlight() {}
-    virtual NoIsoHighlight* clone() const;
+    virtual NoIsoHighlight* clone() const {
+        NoIsoHighlight* plot = new NoIsoHighlight();
+        return plot;
+    }
     virtual void set(const map<string, string>&) {}
     virtual void set(const XmlNode&) {}
     virtual void toxml(ostream&, int = 0) const {}
@@ -50,7 +53,7 @@ public:
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& s) const { s << "NoIsoHighlight[]"; }
+    virtual void print(ostream&) const {}
 
 private:
     //! Copy constructor - No copy allowed
@@ -69,15 +72,43 @@ class IsoHighlight : public NoIsoHighlight, public map<double, double>, public I
 public:
     IsoHighlight() {}
     virtual ~IsoHighlight() override {}
-    virtual NoIsoHighlight* clone() const override;
+    virtual NoIsoHighlight* clone() const override {
+        IsoHighlight* plot = new IsoHighlight();
+        plot->copy(*this);
+        return plot;
+    }
     virtual void set(const map<string, string>& map) override { IsoHighlightAttributes::set(map); }
     virtual void set(const XmlNode& node) override { IsoHighlightAttributes::set(node); }
 
     virtual bool accept(const string& tag) override { return IsoHighlightAttributes::accept(tag); }
-    virtual void visit(Polyline*& line) override;
-    virtual void prepare(LevelSelection& levels) override;
+    virtual void visit(Polyline*& line) override {
+        line = new Polyline();
+        line->setColour(*this->colour_);
+        line->setLineStyle(style_);
+        line->setThickness(this->thickness_);
+    }
+    virtual void prepare(LevelSelection& levels) override {
+        vector<double> todo;
+        clear();
+        levels.thinLevels(frequency_, todo);
+        for (LevelSelection::const_iterator level = todo.begin(); level != todo.end(); ++level) {
+            (*this)[*level] = *level;
+        }
+    }
 
-    virtual void operator()(Polyline& poly) override;
+    virtual void operator()(Polyline& poly) override {
+        if (poly.empty())
+            return;
+
+        // MagLog::dev() << "HIGHTLIGHT?--->" << point << "=" << point.value() << "\n";
+        const_iterator high = find(poly.back().value());
+        if (high == end())
+            return;
+        poly.setColour(*colour_);
+        poly.setLineStyle(style_);
+        // MagLog::dev() << "set--->" << thickness_ << "\n";
+        poly.setThickness(thickness_);
+    }
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).

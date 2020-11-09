@@ -40,7 +40,7 @@ class LevelSelection;
 class PolyShadingTechnique : public ShadingTechnique, public PolyShadingTechniqueAttributes {
 public:
     PolyShadingTechnique() {}
-    virtual ~PolyShadingTechnique() {}
+    virtual ~PolyShadingTechnique() override {}
 
     void set(const map<string, string>& map) override { PolyShadingTechniqueAttributes::set(map); }
     void set(const XmlNode& node) override { PolyShadingTechniqueAttributes::set(node); }
@@ -83,7 +83,7 @@ private:
 class GridShading : public PolyShadingTechnique, public GridShadingAttributes {
 public:
     GridShading() {}
-    virtual ~GridShading() {}
+    virtual ~GridShading() override {}
 
     void set(const map<string, string>& map) override { GridShadingAttributes::set(map); }
     void set(const XmlNode& node) override { GridShadingAttributes::set(node); }

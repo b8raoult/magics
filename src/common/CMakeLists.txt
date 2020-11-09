@@ -1,200 +1,113 @@
 list( APPEND _common_srcs
-	AnimationRules.cc
-	AnimationRules.h
-	Arrow.h
-	ArrowProperties.cc
-	ArrowProperties.h
-	BackgroundColour.h
-	BaseParameter.cc
-	BaseParameter.h
-	BasePointsHandler.cc
-	BasePointsHandler.h
-	BinaryObject.cc
-	BinaryObject.h
-	BoolContent.cc
-	BoolContent.h
-	CartesianTransformation.cc
-	CartesianTransformation.h
-	Clipper.h
-	Colour.cc
-	Colour.h
-	ColourTable.cc
-	ColourTable.h
-	ColourTableDefinition.h
-	ColourTableDefinitionCompute.cc
-	ColourTableDefinitionCompute.h
-	ColourTableDefinitionComputeInterface.h
-	ColourTableDefinitionList.cc
-	ColourTableDefinitionList.h
-	ColourTableDefinitionListInterface.h
-	Content.cc
-	Content.h
-	Coordinate.cc
-	Coordinate.h
-	Counted.cc
-	Counted.h
-	CustomisedPoint.h
-	Data.cc
-	Data.h
-	DataStats.cc
-	DataStats.h
-	Dimension.cc
-	Dimension.h
-	DoubleContent.cc
-	DoubleContent.h
-	DriverStatic.cc
-	DriverStatic.h
-	Emagram.cc
-	Emagram.h
-	Factory.cc
-	Factory.h
-	Flag.cc
-	Flag.h
-	Frame.h
-	FullPaperPoint.h
-	GeoPoint.h
-	GeoRectangularProjection.cc
-	GeoRectangularProjection.h
-	HeightTableDefinition.h
-	Image.h
-	ImageProperties.h
-	ImportObject.h
-	IntervalMap.h
-	JSON.cc
-	JSON.h
-	JSONParser.cc
-	JSONParser.h
-	Label.cc
-	Label.h
-	Layout.cc
-	Layout.h
-	LevelTableDefinition.h
-	ListContent.cc
-	ListContent.h
-	LogoPlotting.cc
-	LogoPlotting.h
-	LogoPlottingBase.h
-	MagClipper.cc
-	MagClipper.h
-	MagException.cc
-	MagException.h
-	MagFont.cc
-	MagFont.h
-	MagLog.cc
-	MagLog.h
-	MagParser.cc
-	MagParser.h
-	MagRegex.cc
-	MagRegex.h
-	MagTranslator.h
-	MagicsDecoder.h
-	MagicsFormat.cc
-	MagicsFormat.h
-	MagicsParameter.cc
-	MagicsParameter.h
-	MagicsSingleton.h
-	MapContent.cc
-	MapContent.h
-	Matrix.cc
-	Matrix.h
-	MatrixHandler.cc
-	MatrixHandler.h
-	MetaData.cc
+
+	OutputFactory.h MagLog.h
+	BaseParameter.h Colour.h MagException.h
+	Factory.cc Factory.h
+	ParameterManager.h Frame.h Layout.h
+	PaperPoint.h GeoPoint.h  Tokenizer.h Node.h MagTranslator.h
+	ImageProperties.h LogoPlotting.h
+	ImportObject.h ColourTable.h PageID.h
+	Transformation.h Dimension.h
+	XmlNode.h XmlTree.h XmlReader.h BackgroundColour.h
+	ColourTableDefinition.h ColourTableDefinitionCompute.h ColourTableDefinitionComputeInterface.h
+	ColourTableDefinitionList.h ColourTableDefinitionListInterface.h
+	TableDefinition.h TableDefinitionList.h TableDefinitionListInterface.h
+	TableDefinitionCompute.h TableDefinitionComputeInterface.h
+	HeightTableDefinition.h LevelTableDefinition.h IntervalMap.h PaperDimension.h
+	Matrix.h MatrixHandler.h Data.h MagicsDecoder.h
+	BasePointsHandler.h RasterData.h  Visualiser.h CustomisedPoint.h PointsHandler.h
 	MetaData.h
-	NilContent.cc
-	NilContent.h
-	Node.h
-	NumberContent.cc
-	NumberContent.h
-	ObjectParser.cc
-	ObjectParser.h
-	OrderedMapContent.cc
-	OrderedMapContent.h
-	OutputFactory.cc
-	OutputFactory.h
-	OutputHandler.cc
-	OutputHandler.h
-	PageID.cc
-	PageID.h
-	PaperDimension.h
-	PaperPoint.cc
-	PaperPoint.h
-	ParameterManager.cc
-	ParameterManager.h
-	Path.h
-	PlotManager.h
-	PointsHandler.cc
-	PointsHandler.h
-	PolarStereographicProjection.cc
-	PolarStereographicProjection.h
-	PolyCoast.h
-	Polyline.cc
 	Polyline.h
-	ProgressObject.cc
-	ProgressObject.h
-	ProgressTask.h
-	Proj4Projection.cc
-	Proj4Projection.h
-	ProjP.cc
-	ProjP.h
-	RasterData.h
-	SciMethods.cc
-	SciMethods.h
-	Seconds.cc
-	Seconds.h
-	Skewt.cc
-	Skewt.h
-	Static.cc
-	Static.h
-	StreamParser.cc
-	StreamParser.h
-	StringContent.cc
-	StringContent.h
-	Symbol.cc
-	Symbol.h
-	SymbolItem.cc
-	SymbolItem.h
-	TableDefinition.h
-	TableDefinitionCompute.cc
-	TableDefinitionCompute.h
-	TableDefinitionComputeInterface.h
-	TableDefinitionList.cc
-	TableDefinitionList.h
-	TableDefinitionListInterface.h
-	TaylorProjection.cc
-	TaylorProjection.h
-	Tephigram.cc
-	Tephigram.h
-	Text.cc
 	Text.h
-	Timer.cc
+	Symbol.h
+	BinaryObject.h
+	Arrow.h
+	Flag.h
+	Image.h
+	ArrowProperties.h
+	MagicsParameter.cc MagicsParameter.h Clipper.h LogoPlottingBase.h
+	TableDefinitionCompute.cc
+	TableDefinitionList.cc
+	Coordinate.h OutputHandler.h
+	MagFont.h
+	AnimationRules.h SymbolItem.h
+	UserPoint.h Label.h
 	Timer.h
-	Tokenizer.cc
-	Tokenizer.h
-	Transformation.cc
-	Transformation.h
-	Translator.cc
-	Translator.h
-	Units.cc
-	Units.h
-	UserPoint.h
-	Value.cc
-	Value.h
-	Visualiser.h
-	XCoordinate.h
-	XmlNode.cc
-	XmlNode.h
-	XmlReader.cc
-	XmlReader.h
-	XmlTree.cc
-	XmlTree.h
-	YAMLParser.cc
-	YAMLParser.h
-	YCoordinate.h
+	CustomisedPoint.h Static.h DriverStatic.h ProgressObject.h PolyCoast.h
+	ProgressTask.h FullPaperPoint.h
+	BasePointsHandler.h PointsHandler.h MagicsDecoder.h Data.h
+	Visualiser.h MatrixHandler.h
+	Seconds.h
+	Matrix.h Matrix.cc
+	Path.h
+	MagicsSingleton.h
+	PlotManager.h
+	Image.h
+	MagClipper.h
+	XmlReader.h XmlTree.h XmlNode.h
+	MagicsFormat.h
+	CartesianTransformation.h
+	Dimension.cc
+	XCoordinate.h YCoordinate.h
+	MagException.h
+	DataStats.h SciMethods.h Tephigram.cc  Tephigram.h Skewt.cc  Skewt.h Emagram.cc Emagram.h
+
+# sources
+	Data.cc Matrix.cc Static.cc DriverStatic.cc MagLog.cc Colour.cc Transformation.cc MagException.cc
+	BaseParameter.cc ParameterManager.cc
+	Tokenizer.cc Timer.cc Seconds.cc Label.cc MagClipper.cc
+	ArrowProperties.cc
+	XmlReader.cc XmlTree.cc XmlNode.cc Dimension.cc
+	MetaData.cc
+	MagicsFormat.cc
+	OutputHandler.cc  OutputFactory.cc
+	MagFont.cc
+	ColourTable.cc ColourTableDefinitionList.cc
+	ColourTableDefinitionCompute.cc CartesianTransformation.cc
+	BinaryObject.cc
+	Coordinate.cc
+	LogoPlotting.cc
+	PageID.cc AnimationRules.cc Layout.cc SymbolItem.cc Symbol.cc Polyline.cc
+	Text.cc Flag.cc
+	MagException.cc
+	DataStats.cc SciMethods.cc BasePointsHandler.cc PointsHandler.cc ProgressObject.cc
+
+# projection
+	GeoRectangularProjection.cc  PolarStereographicProjection.cc TaylorProjection.cc
+	GeoRectangularProjection.h   PolarStereographicProjection.h TaylorProjection.h
+	Proj4Projection.cc  Proj4Projection.h ProjP.cc ProjP.h
+
+# stuff from eckit
+
+	# Value.cc Value.h
+
+	JSONParser.cc JSONParser.h
+	ObjectParser.cc ObjectParser.h
+	Translator.cc Translator.h
+	StreamParser.cc StreamParser.h
+	JSON.cc JSON.h
+	Value.cc Value.h
+	MapContent.cc MapContent.h
+		OrderedMapContent.cc OrderedMapContent.h
+
+	NilContent.cc NilContent.h
+	StringContent.cc StringContent.h
+	BoolContent.cc BoolContent.h
+	ListContent.cc ListContent.h
+	DoubleContent.cc DoubleContent.h
+	NumberContent.cc NumberContent.h
+	Content.cc Content.h
+	Counted.cc Counted.h
+
+	Units.cc Units.h
+	MagParser.cc MagParser.h
+	YAMLParser.cc YAMLParser.h
+	MagRegex.cc MagRegex.h
  )
 
 if( EC_OS_NAME MATCHES "windows" )
-	list( APPEND _common_srcs windux.h windux.cc)
+#	list( APPEND _common_srcs win_time.h win_time.cc magics_windows.h magics_windows.cc )
+	list( APPEND _common_srcs win_time.h win_time.cc)
 endif()
 
 list( APPEND _common_templates

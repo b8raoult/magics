@@ -3,16 +3,37 @@
         {
             "name": "Mac",
             "includePath": [
+                // "additional/paths",
                 "${workspaceFolder}/**",
-                "${workspaceFolder}/../../build/${workspaceFolderBasename}/**"
+                "${workspaceFolder}/../../build/eccodes/**",
+                "${workspaceFolder}/../eccodes/**",
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
             ],
-            "defines": [],
-            "macFrameworkPath": [],
-            "compilerPath": "/usr/bin/clang",
-            "cStandard": "c11",
-            "cppStandard": "c++17",
+            // "defines": [
+            //     "${default}"
+            // ],
+            // "macFrameworkPath": [
+            //     "${default}"
+            //     // "additional/paths"
+            // ],
+            // "forcedInclude": [
+            //     "${default}"
+            //     // "additional/paths"
+            // ],
+            // "compileCommands": "${default}",
+            //  "browse": {
+            //     "limitSymbolsToIncludedHeaders": true,
+            //     "databaseFilename": "${default}",
+            //     "path": [
+            //         "${default}"
+            //         //  "${workspaceFolder}/src",
+            //         //  "${workspaceFolder}/src/common"
+            //     ]
+            // },
             "intelliSenseMode": "clang-x64",
-            "configurationProvider": "ms-vscode.cmake-tools"
+            "cStandard": "c11",
+      "cppStandard": "c++17"
+            // "compilerPath": "${default}"
         }
     ],
     "version": 4

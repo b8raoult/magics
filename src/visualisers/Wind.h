@@ -34,7 +34,7 @@ namespace magics {
 class Wind : public Visdef, public WindAttributes, public ThinningMethodUI {
 public:
     Wind();
-    virtual ~Wind();
+    virtual ~Wind() override;
 
     virtual void set(const map<string, string>& map) override { WindAttributes::set(map); }
     virtual void set(const XmlNode& node) override { WindAttributes::set(node); }

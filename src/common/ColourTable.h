@@ -66,7 +66,7 @@ class ColourTable : public magvector<ColourTableEntry> {
 public:
     typedef magvector<ColourTableEntry>::const_iterator ColourIterator;
     ColourTable();
-    virtual ~ColourTable();
+    virtual ~ColourTable() override;
     virtual void prepare();
 
     // void visit(LegendEntryList&) const;

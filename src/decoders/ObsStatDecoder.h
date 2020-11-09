@@ -65,7 +65,7 @@ public:
 class ObsStatDecoder : public ObsStatDecoderAttributes, public Data, public PointsList {
 public:
     ObsStatDecoder();
-    virtual ~ObsStatDecoder();
+    virtual ~ObsStatDecoder() override;
 
     void set(const map<string, string>& map) override { ObsStatDecoderAttributes::set(map); }
     void set(const XmlNode& node) override { ObsStatDecoderAttributes::set(node); }

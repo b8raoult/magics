@@ -1,13 +1,7 @@
 {
 	"folders": [
 		{
-			"path": "..\\eccodes"
-		},
-		{
 			"path": "."
-		},
-		{
-			"path": "..\\ecbuild"
 		}
 	],
 	"settings": {

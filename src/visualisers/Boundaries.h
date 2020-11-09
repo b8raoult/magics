@@ -36,9 +36,14 @@ public:
     virtual void set(const XmlNode&) {}
     virtual bool accept(const string&) { return false; }
     virtual void set(const map<string, string>&) {}
-    virtual NoBoundaries* clone() const;
+    virtual NoBoundaries* clone() const {
+        MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
+        return new NoBoundaries();
+    }
 
-    virtual void toxml(ostream&, int = 0) const;
+    virtual void toxml(ostream&, int = 0) const {
+        MagLog::dev() << "NoBoundaries::virtual void toxml(ostream&, int = 0) const ---> to be checked!...\n";
+    }
 
     virtual void operator()(const map<string, string>&, BasicGraphicsObjectContainer&) {}
 

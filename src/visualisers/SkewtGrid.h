@@ -21,7 +21,7 @@ namespace magics {
 class SkewtGrid : public TephiGrid {
 public:
     SkewtGrid();
-    virtual ~SkewtGrid();
+    virtual ~SkewtGrid() override;
 
     // New Interface!
     void visit(DrawingVisitor&) override;

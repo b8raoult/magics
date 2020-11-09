@@ -31,7 +31,7 @@ namespace magics {
 class TitleMetaField : public TitleField {
 public:
     TitleMetaField(const string&);
-    virtual ~TitleMetaField();
+    virtual ~TitleMetaField() override;
 
     virtual string name() override { return token_; }
 

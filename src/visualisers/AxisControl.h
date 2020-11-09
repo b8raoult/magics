@@ -72,7 +72,7 @@ private:
 class AutomaticAxisControl : public AxisControl {
 public:
     AutomaticAxisControl() {}
-    ~AutomaticAxisControl() {}
+    ~AutomaticAxisControl() override {}
 
 protected:
     virtual AxisControl* clone() const override { return new AutomaticAxisControl(); }

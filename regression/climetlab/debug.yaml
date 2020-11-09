@@ -2,7 +2,7 @@ plot:
 - output:
     output_formats:
     - png
-    output_name: grib
+    output_name: debug
     output_name_first_page_number: false
     output_width: 680
     page_frame: false
@@ -35,7 +35,7 @@ plot:
     grib_field_position: 1
     grib_input_file_name: NW_masks.grib
 - mcont:
-    contour_automatic_setting: ecmwf
+    contour_automatic_setting: climetlab
     legend: false
 - mcoast:
     map_grid: false

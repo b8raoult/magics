@@ -28,7 +28,7 @@ namespace magics {
 class Skewt : public Transformation, public TephigramAttributes {
 public:
     Skewt();
-    ~Skewt();
+    ~Skewt() override;
 
     /*!
       \brief sets  from an XML node

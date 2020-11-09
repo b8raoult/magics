@@ -31,7 +31,7 @@ namespace magics {
 class GribSatelliteInterpretor : public GribInterpretor {
 public:
     GribSatelliteInterpretor();
-    virtual ~GribSatelliteInterpretor();
+    virtual ~GribSatelliteInterpretor() override;
 
     //  virtual void interpretAsRaster(const GribDecoder&, RasterData&, const Transformation&) const override;
     virtual void interpretAsVectors(const GribDecoder&, Matrix&, Matrix&) const {

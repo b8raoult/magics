@@ -168,15 +168,6 @@ NoBoundaries::NoBoundaries() {}
 
 NoBoundaries::~NoBoundaries() {}
 
-NoBoundaries* NoBoundaries::clone() const {
-    MagLog::dev() << "(const map<string, string&)---> to be checked!...\n";
-    return new NoBoundaries();
-}
-
-void NoBoundaries::toxml(ostream&, int) const {
-    MagLog::dev() << "NoBoundaries::virtual void toxml(ostream&, int = 0) const ---> to be checked!...\n";
-}
-
 void NoBoundaries::print(ostream& out) const {
     out << "NoBoundaries[";
     out << "]";
