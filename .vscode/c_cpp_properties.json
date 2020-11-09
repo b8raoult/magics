@@ -3,37 +3,16 @@
         {
             "name": "Mac",
             "includePath": [
-                // "additional/paths",
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/../../build/eccodes/**",
-                "${workspaceFolder}/../eccodes/**",
-                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/"
+                "${workspaceFolder}/**"
             ],
-            // "defines": [
-            //     "${default}"
-            // ],
-            // "macFrameworkPath": [
-            //     "${default}"
-            //     // "additional/paths"
-            // ],
-            // "forcedInclude": [
-            //     "${default}"
-            //     // "additional/paths"
-            // ],
-            // "compileCommands": "${default}",
-            //  "browse": {
-            //     "limitSymbolsToIncludedHeaders": true,
-            //     "databaseFilename": "${default}",
-            //     "path": [
-            //         "${default}"
-            //         //  "${workspaceFolder}/src",
-            //         //  "${workspaceFolder}/src/common"
-            //     ]
-            // },
-            "intelliSenseMode": "clang-x64",
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
             "cStandard": "c11",
-      "cppStandard": "c++17"
-            // "compilerPath": "${default}"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
         }
     ],
     "version": 4
