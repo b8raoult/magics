@@ -99,6 +99,7 @@
 			"__functional_03": "cpp",
 			"__memory": "cpp",
 			"filesystem": "cpp"
-		}
+		},
+		"cmake.buildDirectory": "${workspaceFolder}/../../build/${workspaceFolderBasename}"
 	}
 }
