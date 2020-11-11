@@ -100,6 +100,9 @@
 			"__memory": "cpp",
 			"filesystem": "cpp"
 		},
-		"cmake.buildDirectory": "${workspaceFolder}/../../build/${workspaceFolderBasename}"
+		"cmake.buildDirectory": "${workspaceFolder}/../../build/${workspaceFolderBasename}",
+		"c-cpp-flylint.flexelint.enable": false,
+		"c-cpp-flylint.cppcheck.extraArgs": ["--suppress=noExplicitConstructor",
+			"--suppress=functionStatic"]
 	}
 }

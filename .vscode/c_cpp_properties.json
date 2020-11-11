@@ -11,7 +11,7 @@
                 "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/Library/Apple/System/Library/Frameworks"
             ],
             "compilerPath": "/usr/bin/clang++",
-            "cStandard": "c11",
+            "cStandard": "c17",
             "cppStandard": "c++17",
             "intelliSenseMode": "clang-x64"
         }
