@@ -437,7 +437,7 @@ class ProjectedMatrix : public Matrix {
 public:
     ProjectedMatrix(int rows, int columns);
 
-    MatrixHandler* getReady(const Transformation& transformation) const { return Matrix::getReady(transformation); }
+    MatrixHandler* getReady(const Transformation& transformation) const override { return Matrix::getReady(transformation); }
     void getReady();  // Prepare the matrix ...
 
     vector<double>& values() const { return values_; }
@@ -467,7 +467,7 @@ protected:
 class Proj4Matrix : public Matrix {
 public:
     Proj4Matrix(const string& proj) : Matrix(), projHelper_(proj), proj_(proj) {}
-    MatrixHandler* getReady(const Transformation&) const;
+    MatrixHandler* getReady(const Transformation&) const override;
 
 protected:
     LatLonProjP projHelper_;
@@ -478,12 +478,12 @@ class RotatedMatrix : public Matrix {
 public:
     RotatedMatrix() : Matrix(), helper_(0) {}
     RotatedMatrix(int rows, int columns, double lat, double lon);
-    MatrixHandler* getReady(const Transformation&) const;
+    MatrixHandler* getReady(const Transformation&) const override;
     void setSouthPole(double lat, double lon) {
         southPoleLat_ = lat;
         southPoleLon_ = lon;
     }
-    int nearest_index(double i, double j, double& iOut, double& jOut) const;
+    int nearest_index(double i, double j, double& iOut, double& jOut) const override;
 
 protected:
     RotatedMatrixHandler* helper_;

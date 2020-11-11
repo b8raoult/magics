@@ -75,7 +75,7 @@ public:
     MagML() {}
     ~MagML() {}
 
-    void execute(const string&, const map<string, string>&);
+    void execute(const string&, const map<string, string>&) override;
 
 protected:
     void print(ostream&) const {}

@@ -1261,7 +1261,7 @@ public:
         }
     }
 
-    void visit(const XmlNode& node) {
+    void visit(const XmlNode& node) override {
         if (magCompare(node.name(), "grib_info")) {
             string grib  = node.getAttribute("id");
             string where = node.getAttribute("where");
@@ -1914,7 +1914,7 @@ class GribParameter : public GribInfo {
 public:
     GribParameter() {}
     ~GribParameter() {}
-    void operator()(ostream& out, const GribDecoder& grib) {
+    void operator()(ostream& out, const GribDecoder& grib) override {
         string val = grib.getString("name");
         out << val;
     }
@@ -1924,7 +1924,7 @@ class GribParamCriter : public MatchCriteria {
 public:
     GribParamCriter() {}
     ~GribParamCriter() {}
-    bool verify(const GribDecoder& grib, const string&, const string& val) {
+    bool verify(const GribDecoder& grib, const string&, const string& val) override {
         long param = grib.getLong("paramId");
         return (tostring(param) == val);
     }
@@ -1934,7 +1934,7 @@ class GribLocalCriter : public MatchCriteria {
 public:
     GribLocalCriter() {}
     ~GribLocalCriter() {}
-    bool verify(const GribDecoder& grib, const string& param, const string& val) {
+    bool verify(const GribDecoder& grib, const string& param, const string& val) override {
         string key    = param;
         string criter = grib.getstring(key);
         MagLog::debug() << "I am verifing " << param << " for a GribDecoder : " << criter << " ==  " << val << "???"
@@ -1947,7 +1947,7 @@ class GribObsDiagCriter : public MatchCriteria {
 public:
     GribObsDiagCriter() {}
     ~GribObsDiagCriter() {}
-    bool verify(const GribDecoder& grib, const string&, const string&) {
+    bool verify(const GribDecoder& grib, const string&, const string&) override {
         string param = grib.getstring("observationDiagnostic",
                                       false);  // do not warn if the key is absent
         return (param != "");
@@ -1959,7 +1959,7 @@ public:
     GribLocalDefHandler() {}
     ~GribLocalDefHandler() {}
 
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
         string local = grib.getstring("localDefinitionNumber");
         out << "local definition =" << local << " ";
@@ -1972,7 +1972,7 @@ public:
     GribObsDiagHandler() {}
     ~GribObsDiagHandler() {}
 
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
         string local = grib.getstring("observationDiagnostic");
         out << "diagnostic =" << local << " ";
@@ -1985,7 +1985,7 @@ public:
     GribObstatHandler() {}
     ~GribObstatHandler() {}
 
-    void operator()(TitleField&, vector<string>& /*title*/, const GribDecoder& grib) {}
+    void operator()(TitleField&, vector<string>& /*title*/, const GribDecoder& grib) override {}
 };
 
 class GribLocalHandler : public TitleFieldHandler {
@@ -1993,7 +1993,7 @@ public:
     GribLocalHandler(const string& local) : local_(local) {}
     ~GribLocalHandler() {}
 
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
         string code = grib.getstring(local_);
         out << local_ << "=" << code << " ";
@@ -2026,7 +2026,7 @@ class GribParamHandler : public TitleFieldHandler {
 public:
     GribParamHandler() {}
     ~GribParamHandler() {}
-    virtual void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    virtual void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         string param = grib.getString("name");
         title.back() += param;
     }
@@ -2036,7 +2036,7 @@ class GribKeyHandler : public TitleFieldHandler {
 public:
     GribKeyHandler() {}
     ~GribKeyHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         char x[256];
 
         string key    = field.attribute("key", "");
@@ -2052,7 +2052,7 @@ class GribBaseDateHandler : public TitleFieldHandler {
 public:
     GribBaseDateHandler() {}
     ~GribBaseDateHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
 
         long date = grib.getLong("dataDate");
@@ -2080,7 +2080,7 @@ class GribValidDateHandler : public TitleFieldHandler {
 public:
     GribValidDateHandler() {}
     ~GribValidDateHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
         long date = grib.getLong("dataDate");
         long hour = grib.getLong("hour");
@@ -2106,7 +2106,7 @@ class GribStepHandler : public TitleFieldHandler {
 public:
     GribStepHandler() {}
     ~GribStepHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
         long startstep = grib.getLong("startStep");
         long endstep   = grib.getLong("endStep");
@@ -2142,7 +2142,7 @@ public:
     ~GribLevelHandler() {}
     typedef string (GribLevelHandler::*Builder)(const string& def, const GribDecoder& grib) const;
 
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         ostringstream out;
 
         string level = grib.getstring("typeOfLevel");
@@ -2197,14 +2197,14 @@ class GribTimeHandler : public TitleFieldHandler {
 public:
     GribTimeHandler() {}
     ~GribTimeHandler() {}
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) { title.back() += "Time? "; }
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override { title.back() += "Time? "; }
 };
 
 class GribCentreHandler : public TitleFieldHandler {
 public:
     GribCentreHandler() {}
     ~GribCentreHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         string format = field.attribute("format", "%s");
         string style  = field.attribute("style", "short");
         string centre = grib.getstring("centre");
@@ -2217,7 +2217,7 @@ class GribProductHandler : public TitleFieldHandler {
 public:
     GribProductHandler() {}
     ~GribProductHandler() {}
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         long type = grib.getLong("type");
 
         // GeneralDef def = TypeTable::definition(type);
@@ -2229,21 +2229,21 @@ class GribPlotTypeHandler : public TitleFieldHandler {
 public:
     GribPlotTypeHandler() {}
     ~GribPlotTypeHandler() {}
-    void operator()(TitleField&, vector<string>&, const GribDecoder&) {}
+    void operator()(TitleField&, vector<string>&, const GribDecoder&) override {}
 };
 
 class NewLineHandler : public TitleFieldHandler {
 public:
     NewLineHandler() {}
     ~NewLineHandler() {}
-    void operator()(TitleField&, vector<string>& title, const GribDecoder&) { title.push_back(""); }
+    void operator()(TitleField&, vector<string>& title, const GribDecoder&) override { title.push_back(""); }
 };
 
 class SatelliteHandler : public TitleFieldHandler {
 public:
     SatelliteHandler() {}
     ~SatelliteHandler() {}
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         static map<long, string> names;
         if (names.empty()) {
             names[54]  = "METEOSAT-7";
@@ -2269,7 +2269,7 @@ class ChannelHandler : public TitleFieldHandler {
 public:
     ChannelHandler() {}
     ~ChannelHandler() {}
-    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         map<long, map<long, string> > channels;
         if (channels.empty()) {
             map<long, string> l54;
@@ -2344,7 +2344,7 @@ class GribExpverHandler : public TitleFieldHandler {
 public:
     GribExpverHandler() {}
     ~GribExpverHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         if (!grib.getExpver())
             return;
         ostringstream out;
@@ -2359,14 +2359,14 @@ class GribEpsNumberInfoHandler : public TitleFieldHandler {
 public:
     GribEpsNumberInfoHandler() {}
     ~GribEpsNumberInfoHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) { title.back() += "epsnumber?"; }
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override { title.back() += "epsnumber?"; }
 };
 
 class GribUnitHandler : public TitleFieldHandler {
 public:
     GribUnitHandler() {}
     ~GribUnitHandler() {}
-    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) {}
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {}
 };
 
 double GribDecoder::uComponent(int index) {

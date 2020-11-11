@@ -53,7 +53,7 @@ public:
     /*!
       \brief sets a new XML node
     */
-    void set(const XmlNode& node) {
+    void set(const XmlNode& node) override {
         if (magCompare(node.name(), "gif") || magCompare(node.name(), "gif_animation") ||
             magCompare(node.name(), "gd_png") || magCompare(node.name(), "png") || magCompare(node.name(), "jpeg")) {
             XmlNode basic = node;
@@ -67,7 +67,7 @@ public:
     /*!
       \brief sets a new map
     */
-    void set(const map<string, string>& map) {
+    void set(const map<string, string>& map) override {
         BaseDriver::set(map);
         GDDriverAttributes::set(map);
     }

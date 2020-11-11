@@ -90,7 +90,7 @@ public:
     }
     ~MagDefLibrary() {}
 
-    void callback(const string& name, const Value& value);
+    void callback(const string& name, const Value& value) override;
 
     void init(const string&);
     void init(const string&, const string&);
@@ -152,8 +152,8 @@ public:
     StyleLibrary(const string& path) : path_(path) { init(); }
     ~StyleLibrary() {}
 
-    void callback(const string& name, const Value& value);
-    void callback(const ValueList& values);
+    void callback(const string& name, const Value& value) override;
+    void callback(const ValueList& values) override;
 
     void init();
 
@@ -204,7 +204,7 @@ public:
     PaletteLibrary(const string& family) { init(); }
     ~PaletteLibrary() {}
 
-    void callback(const string& name, const Value& value);
+    void callback(const string& name, const Value& value) override;
 
     void init();
 
@@ -227,7 +227,7 @@ public:
     NetcdfGuess() : name_("netcdf-convention") { init(); }
     ~NetcdfGuess() {}
 
-    void callback(const string& name, const Value& value);
+    void callback(const string& name, const Value& value) override;
     void init();
 
     string name_;
@@ -242,7 +242,7 @@ public:
 
     ~DimensionGuess() {}
 
-    void callback(const string& name, const Value& value) {}
+    void callback(const string& name, const Value& value) override {}
     void init();
 
     string definitions_;
@@ -280,7 +280,7 @@ public:
     UnitsLibrary(const string& family) { init(); }
     ~UnitsLibrary() {}
 
-    void callback(const string& name, const Value& value);
+    void callback(const string& name, const Value& value) override;
 
     void init();
 

@@ -49,7 +49,7 @@ protected:
 class StyleEntry {
 public:
     StyleEntry(){};
-    void set(const string& def, vector<string>& styles) {
+    void set(const string& def, const vector<string>& styles) {
         default_ = def;
         styles_  = styles;
     }

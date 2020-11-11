@@ -453,15 +453,15 @@ class DelegateMatrixHandler : public MatrixHandler {
 public:
     DelegateMatrixHandler(const AbstractMatrix& matrix) : MatrixHandler(matrix) {}
 
-    double interpolate(double row, double column) const { return matrix_.interpolate(row, column); }
-    double nearest(double row, double column) const { return matrix_.nearest(row, column); }
+    double interpolate(double row, double column) const override { return matrix_.interpolate(row, column); }
+    double nearest(double row, double column) const override { return matrix_.nearest(row, column); }
 
     double column(int i, int j) { return matrix_.column(i, j); }
     double row(int i, int j) { return matrix_.row(i, j); }
-    double left() const { return matrix_.left(); }
-    double bottom() const { return matrix_.bottom(); }
-    double right() const { return matrix_.right(); }
-    double top() const { return matrix_.top(); }
+    double left() const override { return matrix_.left(); }
+    double bottom() const override { return matrix_.bottom(); }
+    double right() const override { return matrix_.right(); }
+    double top() const override { return matrix_.top(); }
 
 protected:
 };
@@ -473,13 +473,13 @@ class Proj4MatrixHandler : public MatrixHandler {
 public:
     Proj4MatrixHandler(const AbstractMatrix& matrix, const string&);
 
-    double interpolate(double row, double column) const;
-    double nearest(double row, double column) const;
+    double interpolate(double row, double column) const override;
+    double nearest(double row, double column) const override;
 
-    double column(int, int) const;
-    double row(int, int) const;
+    double column(int, int) const override;
+    double row(int, int) const override;
 
-    bool delegate() const { return true; }
+    bool delegate() const override { return true; }
 
 protected:
     double minx_;
@@ -494,13 +494,13 @@ class RotatedMatrixHandler : public MatrixHandler {
 public:
     RotatedMatrixHandler(const AbstractMatrix& matrix, double lat, double lon);
 
-    double interpolate(double row, double column) const;
-    double nearest(double row, double column) const;
+    double interpolate(double row, double column) const override;
+    double nearest(double row, double column) const override;
 
-    double column(int, int) const;
-    double row(int, int) const;
+    double column(int, int) const override;
+    double row(int, int) const override;
 
-    bool delegate() const { return true; }
+    bool delegate() const override { return true; }
     pair<double, double> unrotate(double, double) const;
     pair<double, double> rotate(double, double) const;
 
