@@ -1,0 +1,15 @@
+name: Notify ecmwflibs
+
+on:
+  push:
+    branches: [ develop ]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    - uses: mvasigh/dispatch-action@main
+      with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repo: ecmwflibs
+          owner: ecmwf
+          event_type: magics-updated
