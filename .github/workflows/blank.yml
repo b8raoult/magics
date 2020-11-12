@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: mvasigh/dispatch-action@main
       with:
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          token: ${{ secrets.NOTIFY_ECMWFLIBS }}
           repo: ecmwflibs
           owner: ecmwf
           event_type: magics-updated
