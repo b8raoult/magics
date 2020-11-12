@@ -152,7 +152,7 @@ public:
     MagicsAnimationStepData(vector<string>& label, bool /*cached*/) : label_(label), cached_(false){};
     const vector<string>& label() const { return label_; }
     bool cached() const { return cached_; }
-    void setLabel(vector<string>& s) { label_ = s; }
+    void setLabel(const vector<string>& s) { label_ = s; }
     void setCached(bool b) { cached_ = b; }
 
 private:

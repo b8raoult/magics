@@ -408,7 +408,7 @@ public:
     double distance() const { return distance_; }
     void setScaledValue(double d) { scaledValue_ = d; }
     double scaledValue() const { return scaledValue_; }
-    bool missing() { return missing_; }
+    bool missing() const { return missing_; }
     void setMissing(bool b) { missing_ = b; }
     int index() const { return index_; }
     virtual void visit(ValuesCollectorVisitor& visitor) { visitor.visit(*this); }
