@@ -1,9 +1,7 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
+	"folders": [{
+		"path": "."
+	}],
 	"settings": {
 		"files.associations": {
 			"*.make": "makefile",
@@ -102,7 +100,12 @@
 		},
 		"cmake.buildDirectory": "${workspaceFolder}/../../build/${workspaceFolderBasename}",
 		"c-cpp-flylint.flexelint.enable": false,
-		"c-cpp-flylint.cppcheck.extraArgs": ["--suppress=noExplicitConstructor",
-			"--suppress=functionStatic"]
+		"c-cpp-flylint.cppcheck.extraArgs": [
+			"--suppress=noExplicitConstructor",
+			"--suppress=shadowFunction",
+			"--suppress=functionVariable",
+			"--suppress=functionConst",
+			"--suppress=functionStatic"
+		]
 	}
 }
