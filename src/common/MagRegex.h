@@ -15,6 +15,7 @@
 #define magics_Regex_h
 
 
+#include <regex>
 #include <string>
 
 
@@ -33,9 +34,10 @@ public:
 
     Regex& operator=(const Regex&);
 
-    bool match(const std::string& s) const;
 
-    operator const std::string&() const { return str_; }
+    bool match(const std::string& s) const { return std::regex_match(s, re_); }
+
+    operator const std::string &() const { return str_; }
 
 
 protected:  // methods
@@ -43,6 +45,7 @@ protected:  // methods
 
 private:  // members
     std::string str_;
+    std::regex re_;
 
 private:  // methods
     void compile(const char*);
@@ -51,7 +54,7 @@ private:  // methods
         p.print(s);
         return s;
     }
-};
+};  // namespace magics
 
 
 //--------------------------------------------------------------------------------------------------

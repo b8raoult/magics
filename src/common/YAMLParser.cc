@@ -414,11 +414,13 @@ static Value toValue(const std::string& s) {
 
     // std::cout << "TO VALUE " << s << std::endl;
 
-    if (octal.match(s)) {
+    size_t len = s.size();
+
+    if (len > 1 && s[0] == '0' && octal.match(s)) {
         return Value(strtol(s.c_str(), 0, 0));
     }
 
-    if (hex.match(s)) {
+    if (len > 2 && s[0] == '0' && s[1] == 'x' && hex.match(s)) {
         return Value(strtol(s.c_str(), 0, 0));
     }
 
