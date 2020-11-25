@@ -13,7 +13,7 @@
 using namespace magics;
 
 int main(int argc, char** argv) {
-    MagicsSettings::strict(true);
+    // MagicsSettings::strict(true);
 
     try {
         for (int i = 1; i < argc; i++) {

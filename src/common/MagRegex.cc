@@ -13,7 +13,6 @@
 #include "MagException.h"
 
 
-#include <regex>
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -76,15 +75,14 @@ Regex::Regex(const std::string& s, bool shell) : str_(s) {
         re[j] = 0;
         str_  = re;
     }
+
+    re_ = std::regex(str_);
 }
 
 void Regex::print(std::ostream& s) const {
     s << "/" << str_ << "/";
 }
 
-bool Regex::match(const std::string& s) const {
-    return std::regex_match(s, std::regex(str_));
-}
 
 
 //----------------------------------------------------------------------------------------------------------------------

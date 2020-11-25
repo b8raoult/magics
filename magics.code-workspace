@@ -1,7 +1,12 @@
 {
-	"folders": [{
-		"path": "."
-	}],
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../magics-test"
+		}
+	],
 	"settings": {
 		"files.associations": {
 			"*.make": "makefile",
