@@ -41,6 +41,7 @@ namespace magics {
 class Library {
     size_t counter_ = 0;
     std::string path_;
+    bool reset_;
 
     std::set<std::string> keys_;
     std::map<std::string, ValueMap> styles_;
@@ -49,7 +50,7 @@ class Library {
     void process(const std::string& path, const ValueMap& entry, int n);
 
 public:
-    Library(const std::string& path);
+    Library(const std::string& path, bool reset);
     StyleEntry* getStyle(Data& data, MagDef& visdef) const;
 
     void reset();
@@ -57,7 +58,7 @@ public:
 };
 
 
-Library::Library(const std::string& path) : path_(path) {
+Library::Library(const std::string& path, bool reset) : path_(path), reset_(reset) {
     build();
 }
 
@@ -296,7 +297,7 @@ StyleEntry* Library::getStyle(Data& data, MagDef& visdef) const {
 
 void Library::reset() {
     // Placeholder to reload if needed
-    if (true) {
+    if (reset_) {
         keys_.clear();
         styles_.clear();
         rules_.clear();
@@ -317,7 +318,7 @@ static void init(const std::string& library_path) {
     for (const auto& path : paths) {
         auto j = cache_.find(path);
         if (j == cache_.end()) {
-            cache_[path] = new Library(path);
+            cache_[path] = new Library(path, path != "default");
             j            = cache_.find(path);
         }
         else {
