@@ -181,7 +181,7 @@ string BaseDriver::getFileName(const string& extension, const unsigned int no) c
     string ext             = "." + extension;
 
     if (!file_.empty()) {
-        ASSERT(no == 1);
+        ASSERT(no <= 1);
         ASSERT(file_.size() > ext.size() + 1);
         ASSERT(file_.substr(file_.size() - ext.size()) == ext);
         return file_;
