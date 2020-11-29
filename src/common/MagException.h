@@ -25,6 +25,8 @@ public:
     virtual const char* what() const throw() override { return what_.c_str(); }
     virtual ~MagicsException() throw() {}
 
+    static std::string syserror();
+
 private:
     virtual void print(ostream& out) const { out << what_; }
     string what_;
