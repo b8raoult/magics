@@ -7,7 +7,6 @@ from datetime import date
 import sys
 import os
 
-
 class ObjectHandler(ContentHandler):
 
     name = ""
@@ -202,60 +201,40 @@ saxparser.parse(datasource)
 
 with open("%s/source_mv.template" % toolssource, "r") as source:
     template = jinja2.Template(source.read())
-
-path = "%s/%sWrapper.cc" % (destination, object.name)
-old = None
-
-if os.path.exists(path):
-    with open(path) as f:
-        old = f.read()
-
-new = template.render(
-    object=object.name,
-    string_parameters=object.parameters["basic"],
-    factory_parameters=object.parameters["factory"],
-    include=object.include,
-    include_options=object.include_options,
-    date=object.generated,
-    tag=object.tag,
-    top=object.top,
-    metview_default=object.metview_default,
-    abstract=object.abstract,
-    inherit=object.inherits,
-    prefix=object.prefix,
-)
-
-if old != new:
-    with open(path, "wt") as out:
-        print("CHANGED:", path)
-        out.write(new)
+with open("%s/%sWrapper.cc" % (destination, object.name), "wt") as out:
+    out.write(
+        template.render(
+            object=object.name,
+            string_parameters=object.parameters["basic"],
+            factory_parameters=object.parameters["factory"],
+            include=object.include,
+            include_options=object.include_options,
+            date=object.generated,
+            tag=object.tag,
+            top=object.top,
+            metview_default=object.metview_default,
+            abstract=object.abstract,
+            inherit=object.inherits,
+            prefix=object.prefix,
+        )
+    )
 
 with open("%s/header_mv.template" % (toolssource), "r") as source:
     template = jinja2.Template(source.read())
-
-path = "%s/%sWrapper.h" % (destination, object.name)
-old = None
-
-if os.path.exists(path):
-    with open(path) as f:
-        old = f.read()
-
-new = template.render(
-    object=object.name,
-    string_parameters=object.parameters["basic"],
-    factory_parameters=object.parameters["factory"],
-    include=object.include,
-    include_options=object.include_options,
-    implements=object.implements,
-    date=object.generated,
-    inherit=object.inherits,
-    tag=object.tag,
-    object_include=object.object_include,
-    wrapper=object.wrapper_include,
-    prefix=object.prefix,
-)
-
-if old != new:
-    with open(path, "wt") as out:
-        print("CHANGED:", path)
-        out.write(new)
+with open("%s/%sWrapper.h" % (destination, object.name), "wt") as out:
+    out.write(
+        template.render(
+            object=object.name,
+            string_parameters=object.parameters["basic"],
+            factory_parameters=object.parameters["factory"],
+            include=object.include,
+            include_options=object.include_options,
+            implements=object.implements,
+            date=object.generated,
+            inherit=object.inherits,
+            tag=object.tag,
+            object_include=object.object_include,
+            wrapper=object.wrapper_include,
+            prefix=object.prefix,
+        )
+    )

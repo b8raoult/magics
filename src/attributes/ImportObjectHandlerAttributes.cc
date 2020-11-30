@@ -31,9 +31,10 @@ ImportObjectHandlerAttributes::ImportObjectHandlerAttributes():
 	import_x_(ParameterManager::getDouble("import_x_position")),
 	import_y_(ParameterManager::getDouble("import_y_position")),
 	import_width_(ParameterManager::getDouble("import_width")),
-	import_height_(ParameterManager::getDouble("import_height"))
-	
-	
+	import_height_(ParameterManager::getDouble("import_height")),
+	coordinates_system_(ParameterManager::getString("import_coordinates_system"))
+
+
 {
 }
 
@@ -49,7 +50,7 @@ void ImportObjectHandlerAttributes::set(const std::map<string, string>& params)
 	vector<string> prefix(1);
 	int i = 0;
 	prefix[i++] = "";
-	
+
 	setAttribute(prefix, "import_file_name", path_, params);
 	setAttribute(prefix, "import_format", format_, params);
 	setAttribute(prefix, "import_overlay", overlay_, params);
@@ -57,8 +58,9 @@ void ImportObjectHandlerAttributes::set(const std::map<string, string>& params)
 	setAttribute(prefix, "import_y_position", import_y_, params);
 	setAttribute(prefix, "import_width", import_width_, params);
 	setAttribute(prefix, "import_height", import_height_, params);
-	
-	
+	setAttribute(prefix, "import_coordinates_system", coordinates_system_, params);
+
+
 }
 
 void ImportObjectHandlerAttributes::copy(const ImportObjectHandlerAttributes& other)
@@ -70,7 +72,8 @@ void ImportObjectHandlerAttributes::copy(const ImportObjectHandlerAttributes& ot
 	import_y_ = other.import_y_;
 	import_width_ = other.import_width_;
 	import_height_ = other.import_height_;
-	
+	coordinates_system_ = other.coordinates_system_;
+
 }
 
 
@@ -79,7 +82,7 @@ bool ImportObjectHandlerAttributes::accept(const string& node)
 
 	if ( magCompare(node, "import")  )
 		return true;
-	
+
 	return false;
 }
 
@@ -92,16 +95,16 @@ void ImportObjectHandlerAttributes::set(const XmlNode& node)
 
 	if ( magCompare(node.name(), "import")  )
 		apply = true;
-	
+
 
 	if ( apply )
 		set(node.attributes());
 	else {
-		
+
 	}
 	for (auto &elt : node.elements())
 	{
-		
+
 	}
 }
 
@@ -115,7 +118,8 @@ void ImportObjectHandlerAttributes::print(ostream& out)  const
 	out << " import_y = " <<  import_y_;
 	out << " import_width = " <<  import_width_;
 	out << " import_height = " <<  import_height_;
-	
+	out << " coordinates_system = " <<  coordinates_system_;
+
 	out << "]" << "\n";
 }
 
@@ -136,13 +140,16 @@ void ImportObjectHandlerAttributes::toxml(ostream& out)  const
 	niceprint(out,import_width_);
 	out << ", \"import_height\":";
 	niceprint(out,import_height_);
-	
+	out << ", \"import_coordinates_system\":";
+	niceprint(out,coordinates_system_);
+
 }
 
-static MagicsParameter<string> import_file_name("import_file_name", "");
-static MagicsParameter<string> import_format("import_format", "png");
-static MagicsParameter<string> import_overlay("import_overlay", "on");
-static MagicsParameter<double> import_x_position("import_x_position", 0);
-static MagicsParameter<double> import_y_position("import_y_position", 0);
-static MagicsParameter<double> import_width("import_width", -1);
-static MagicsParameter<double> import_height("import_height", -1);
+static MagicsParameter<string> import_file_name("import_file_name", "", "");
+static MagicsParameter<string> import_format("import_format", "png", "");
+static MagicsParameter<string> import_overlay("import_overlay", "on", "");
+static MagicsParameter<double> import_x_position("import_x_position", 0, "");
+static MagicsParameter<double> import_y_position("import_y_position", 0, "");
+static MagicsParameter<double> import_width("import_width", -1, "");
+static MagicsParameter<double> import_height("import_height", -1, "");
+static MagicsParameter<string> import_coordinates_system("import_coordinates_system", "paper", "");
