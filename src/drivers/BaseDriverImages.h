@@ -24,6 +24,7 @@
 #endif
 
 #include "magics.h"
+#include <cairo.h>
 
 using namespace magics;
 
@@ -304,7 +305,7 @@ MAGICS_NO_EXPORT bool BaseDriver::convertToPixmap(const string& fname, const Gra
         remove(s2.c_str());
     }
 #ifdef HAVE_CAIRO
-    else if (format == PNG) {
+    else if (format == GraphicsFormat::PNG) {
         cairo_surface_t* surface = cairo_image_surface_create_from_png(fname.c_str());
         if (cairo_surface_status(surface))
         {

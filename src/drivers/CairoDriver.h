@@ -93,12 +93,12 @@ private:
     MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const override;
     MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const override;
     MAGICS_NO_EXPORT void renderSimplePolygon() const;
-    MAGICS_NO_EXPORT void renderText(const Text& text) const;
-    MAGICS_NO_EXPORT void circle(const MFloat x, const MFloat y, const MFloat r, const int) const;
-    MAGICS_NO_EXPORT bool renderPixmap(MFloat, MFloat, MFloat, MFloat, int, int, unsigned char*, int, bool, bool) const;
-    MAGICS_NO_EXPORT bool renderCellArray(const Image& obj) const;
-    MAGICS_NO_EXPORT void renderImage(const ImportObject& obj) const;
-    MAGICS_NO_EXPORT void renderSymbols(const Symbol& symbol) const;
+    MAGICS_NO_EXPORT void renderText(const Text& text) const override;
+    MAGICS_NO_EXPORT void circle(const MFloat x, const MFloat y, const MFloat r, const int) const override;
+    MAGICS_NO_EXPORT bool renderPixmap(MFloat, MFloat, MFloat, MFloat, int, int, unsigned char*, int, bool, bool) const override;
+    MAGICS_NO_EXPORT bool renderCellArray(const Image& obj) const override;
+    MAGICS_NO_EXPORT void renderImage(const ImportObject& obj) const override;
+    MAGICS_NO_EXPORT void renderSymbols(const Symbol& symbol) const override;
     MAGICS_NO_EXPORT bool convertToPixmap(const string& fname, const GraphicsFormat format, const int reso,
                                           const MFloat wx0, const MFloat wy0, const MFloat wx1,
                                           const MFloat wy1) const override;
