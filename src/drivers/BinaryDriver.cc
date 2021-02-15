@@ -50,6 +50,7 @@ void BinaryDriver::open() {
     out_.open(getFileName("mgb").c_str(), ios::out | ios::binary);
     if (!out_) {
         MagLog::error() << "BinaryDriver: Error opening output stream." << endl;
+        throw CannotOpenFile(getFileName("mgb"));
     }
     else {
         const int version    = BINARY_VERSION;
