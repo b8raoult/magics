@@ -1155,7 +1155,7 @@ MAGICS_NO_EXPORT bool CairoDriver::renderPixmap(MFloat x0, MFloat y0, MFloat x1,
 /*!
   \brief Image render method for ALL drivers.
 
-  This method should be used by all Magics++ drivers to render image objects.
+  This method should be used by all Magics drivers to render image objects.
 */
 MAGICS_NO_EXPORT void CairoDriver::renderImage(const ImportObject& obj) const {
     std::string file = obj.getPath();
@@ -1180,8 +1180,8 @@ MAGICS_NO_EXPORT void CairoDriver::renderImage(const ImportObject& obj) const {
         int w = cairo_image_surface_get_width(image);
         int h = cairo_image_surface_get_height(image);
 
-        const MFloat oow = (obj.getWidth() < 0) ? 30. / coordRatioX_ : obj.getWidth();
-        const MFloat ooh = (obj.getHeight() < 0) ? 30. / coordRatioY_ : obj.getHeight();
+        const MFloat oow = (obj.getWidth()  < 0) ? w / coordRatioX_ : obj.getWidth();
+        const MFloat ooh = (obj.getHeight() < 0) ? h / coordRatioY_ : obj.getHeight();
         const MFloat x   = projectX(obj.getOrigin().x());
         const MFloat y   = projectY(obj.getOrigin().y());
         const MFloat oh  = fabs(projectY(obj.getOrigin().y() + ooh) - y);
