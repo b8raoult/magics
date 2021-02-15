@@ -591,7 +591,7 @@ MAGICS_NO_EXPORT bool BinaryDriver::renderPixmap(MFloat x0, MFloat y0, MFloat x1
     out_.write((char*)(&h), sizeof(int));
     out_.write((char*)(&landscape), sizeof(int));
     out_.write((char*)(pixmap), sizeof(unsigned char) * w * h * 4);
- 
+
     MagLog::debug() << "BinaryDriver::renderPixmap called: "<< w*h << std::endl;
     return true;
 }

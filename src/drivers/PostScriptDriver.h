@@ -79,17 +79,17 @@ private:
     MAGICS_NO_EXPORT void setNewLineWidth(const MFloat) const override;
     MAGICS_NO_EXPORT void setNewColour(const Colour& col) const override;
     MAGICS_NO_EXPORT void writeColour() const;
-    MAGICS_NO_EXPORT int setLineParameters(const LineStyle style, const MFloat w) const;
+    MAGICS_NO_EXPORT int setLineParameters(const LineStyle style, const MFloat w) const override;
 
-    MAGICS_NO_EXPORT void renderPolyline(const int, MFloat*, MFloat*) const;
-    MAGICS_NO_EXPORT void renderPolyline2(const int n, MFloat* x, MFloat* y) const;
-    MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const;
-    MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const;
-    MAGICS_NO_EXPORT void renderText(const Text& text) const;
-    MAGICS_NO_EXPORT void circle(const MFloat x, const MFloat y, const MFloat r, const int) const;
-    MAGICS_NO_EXPORT bool renderPixmap(MFloat, MFloat, MFloat, MFloat, int, int, unsigned char*, int, bool, bool) const;
-    MAGICS_NO_EXPORT bool renderCellArray(const Image& obj) const;
-    MAGICS_NO_EXPORT void renderSymbols(const Symbol&) const;
+    MAGICS_NO_EXPORT void renderPolyline(const int, MFloat*, MFloat*) const override;
+    MAGICS_NO_EXPORT void renderPolyline2(const int n, MFloat* x, MFloat* y) const override;
+    MAGICS_NO_EXPORT void renderSimplePolygon(const int, MFloat*, MFloat*) const override;
+    MAGICS_NO_EXPORT void renderSimplePolygon(const Polyline& line) const override;
+    MAGICS_NO_EXPORT void renderText(const Text& text) const override;
+    MAGICS_NO_EXPORT void circle(const MFloat x, const MFloat y, const MFloat r, const int) const override;
+    MAGICS_NO_EXPORT bool renderPixmap(MFloat, MFloat, MFloat, MFloat, int, int, unsigned char*, int, bool, bool) const override;
+    MAGICS_NO_EXPORT bool renderCellArray(const Image& obj) const override;
+    MAGICS_NO_EXPORT void renderSymbols(const Symbol&) const override;
 
     // P O S T S C I P T specific member functions BEGIN
 
