@@ -433,7 +433,7 @@ void NetcdfGuess::callback(const string& name, const Value& value) {
 
 void DimensionGuess::init() {
     try {
-        Value value = MagParser::decodeFile(definitions_);
+        Value value = MagParser::decodeString(definitions_);
 
         ValueMap object = value.get_value<ValueMap>();
 
@@ -452,7 +452,7 @@ void DimensionGuess::init() {
         if (MagicsSettings::strict()) {
             throw;
         }
-        MagLog::error() << "JSON error in" << definitions_ << ": " << e.what() << endl;
+        MagLog::error() << "JSON error in " << definitions_ << ": " << e.what() << endl;
     }
 }
 
