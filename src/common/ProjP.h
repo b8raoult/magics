@@ -11,12 +11,13 @@
 #ifndef ProjP_H
 #define ProjP_H
 
+#include <proj.h>
 
 #include "magics.h"
 
-typedef struct PJconsts PJ;
-typedef struct projCtx_t PJ_CONTEXT;
-
+// typedef struct PJconsts PJ;
+// // typedef struct projCtx_t PJ_CONTEXT;
+// typedef struct pj_ctx PJ_CONTEXT;
 
 namespace magics {
 
