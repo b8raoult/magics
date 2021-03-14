@@ -550,11 +550,14 @@ const char* FortranMagics::detect(const string& data, const string& dim) {
     DimensionGuess json(data);
 
     NetcdfGuess guesser;
-    static string empty, result;
+    static string empty;
+    static string result;
+
     auto checks = guesser.guess_.find(dim);
-    if (checks == guesser.guess_.end())
+    if (checks == guesser.guess_.end()) {
         return empty.c_str();
-    result = "";
+    }
+    result.clear();
 
     for (auto check = checks->second.begin(); check != checks->second.end(); ++check) {
         vector<string> values = check->second;
