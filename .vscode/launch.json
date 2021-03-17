@@ -27,7 +27,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/../../build/${workspaceFolderBasename}/bin/magics",
             "args": ["debug.yaml"],
-            "cwd": "${workspaceFolder}/regression/climetlab",
+            "cwd": "${workspaceFolder}/../magics-test/climetlab",
             "MIMode": "lldb",
             "env": {
                 "MAGPLUS_HOME": "${workspaceFolder}"

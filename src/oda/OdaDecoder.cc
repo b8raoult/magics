@@ -14,7 +14,6 @@
     Magics Team - ECMWF 2004
 
     Started: Fri 16-Jan-2004
-
     Changes:
 
 */

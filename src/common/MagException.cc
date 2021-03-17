@@ -50,3 +50,13 @@ ParameterNotYetImplemented::ParameterNotYetImplemented(const std::string& param)
     NotYetImplemented("Parameter", param) {}
 
 NotImplemented::NotImplemented(const std::string& msg) : MagicsException("Not implemented: " + msg) {}
+
+std::string MagicsException::syserror() {
+#ifdef MAGICS_ON_WINDOWS
+    return _strerror(NULL);
+#else
+    char estr[256];
+    strerror_r(errno, estr, sizeof(estr));
+    return estr;
+#endif
+}

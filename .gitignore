@@ -35,3 +35,5 @@ compile_commands.json
 ?.*
 tmp.*
 *.ppm
+.env
+regression/

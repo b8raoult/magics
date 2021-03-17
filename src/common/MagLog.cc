@@ -1,4 +1,4 @@
-/*
+ /*
  * (C) Copyright 1996-2016 ECMWF.
  *
  * This software is licensed under the terms of the Apache Licence Version 2.0
@@ -39,7 +39,7 @@ public:
         flush();
     }
     bool silent_;
-    void silent() { silent_ = true; }
+    void silent() { silent_ = false; }
     virtual void warning(const string& msg) {}
     virtual void error(const string& msg) {}
     virtual void info(const string& msg) {}
@@ -146,17 +146,17 @@ MagLog::MagLog() :
     fatal_(true),
     profiling_(true),
     warnings_(0) {
-    debug_     = setMsg("MAGPLUS_DEBUG", false);
-    dev_       = setMsg("MAGPLUS_DEV", false);
-    info_      = setMsg("MAGPLUS_INFO", false);
+    debug_     = true;
+    dev_       = true;
+    info_      = setMsg("MAGPLUS_INFO", true);
     profiling_ = setMsg("MAGPLUS_PROFILE", false);
-    if (setMsg("MAGPLUS_QUIET", false)) {
-        info_      = false;
-        dev_       = false;
-        profiling_ = false;
-        debug_     = false;
-        userInfo_  = false;
-    }
+    // if (setMsg("MAGPLUS_QUIET", false)) {
+    //     info_      = false;
+    //     dev_       = false;
+    //     profiling_ = false;
+    //     debug_     = false;
+    //     userInfo_  = false;
+    // }
 
 
     // Not listening to the errors anymore
@@ -266,6 +266,7 @@ ostream& MagLog::error() {
 ostream& MagLog::debug() {
     broadcast();
     log_.debugstream_ << "Magics-debug: ";
+    return cout;
     return log_.debugstream_;
 }
 
@@ -280,6 +281,7 @@ ostream& MagLog::profile() {
 
 ostream& MagLog::dev() {
     broadcast();
+     return cout;
     log_.debugstream_ << "Magics-dev: ";
     return log_.debugstream_;
 }
@@ -289,6 +291,7 @@ ostream& MagLog::info() {
     broadcast();
     if (log_.info_) {
         log_.infostream_ << "Magics-info: ";
+         return cout;
         return log_.infostream_;
     }
     return log_.devnull_;
