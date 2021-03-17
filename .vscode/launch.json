@@ -26,9 +26,8 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/../../build/${workspaceFolderBasename}/bin/magics",
-            "args": ["/tmp/x.yaml"],
-            // "cwd": "${workspaceFolder}/../magics-test/climetlab",
-            "cwd": "${workspaceFolder}",
+            "args": ["debug.yaml"],
+            "cwd": "${workspaceFolder}/regression/climetlab",
             "MIMode": "lldb",
             "env": {
                 "MAGPLUS_HOME": "${workspaceFolder}"

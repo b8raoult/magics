@@ -95,7 +95,7 @@ Symbol* SymbolProperties::symbol(const string& type) const {
     if (magCompare(type, "marker")) {
         if (image_) {
             ImageSymbol* img = new ImageSymbol(image_path_, image_format_);
-            img->set(image_width_, image_height_, image_by_reference_);
+            img->set(image_width_, image_height_);
             symbol = img;
         }
 
@@ -311,7 +311,6 @@ void ImageSymbol::redisplay(const BaseDriver& driver) const {
         object->setFormat(format_);
         object->setWidth(width_);
         object->setHeight(height_);
-        object->setByReference(by_reference_);
         driver.redisplay(*object);
     }
 }

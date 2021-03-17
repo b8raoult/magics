@@ -27,9 +27,18 @@ using namespace magics;
 OutputHandlerAttributes::OutputHandlerAttributes():
 	format_(ParameterManager::getString("output_format")),
 	formats_(ParameterManager::getStringArray("output_formats"))
-	
-	
+
+
 {
+	std::string user_file =ParameterManager::getString("output_file");
+	if(!user_file.empty()) {
+		Tokenizer parse(".");
+		vector<std::string> bits;
+		parse(user_file, bits);
+		format_ = bits[bits.size()-1];
+		formats_.clear();
+		formats_.push_back(format_);
+	}
 }
 
 
@@ -44,18 +53,18 @@ void OutputHandlerAttributes::set(const std::map<string, string>& params)
 	vector<string> prefix(1);
 	int i = 0;
 	prefix[i++] = "";
-	
+
 	setAttribute(prefix, "output_format", format_, params);
 	setAttribute(prefix, "output_formats", formats_, params);
-	
-	
+
+
 }
 
 void OutputHandlerAttributes::copy(const OutputHandlerAttributes& other)
 {
 	format_ = other.format_;
 	formats_ = other.formats_;
-	
+
 }
 
 
@@ -64,7 +73,7 @@ bool OutputHandlerAttributes::accept(const string& node)
 
 	if ( magCompare(node, "output")  )
 		return true;
-	
+
 	return false;
 }
 
@@ -77,16 +86,16 @@ void OutputHandlerAttributes::set(const XmlNode& node)
 
 	if ( magCompare(node.name(), "output")  )
 		apply = true;
-	
+
 
 	if ( apply )
 		set(node.attributes());
 	else {
-		
+
 	}
 	for (auto &elt : node.elements())
 	{
-		
+
 	}
 }
 
@@ -95,7 +104,7 @@ void OutputHandlerAttributes::print(ostream& out)  const
 	out << "Attributes[";
 	out << " format = " <<  format_;
 	out << " formats = " <<  formats_;
-	
+
 	out << "]" << "\n";
 }
 
@@ -106,7 +115,7 @@ void OutputHandlerAttributes::toxml(ostream& out)  const
 	niceprint(out,format_);
 	out << ", \"output_formats\":";
 	niceprint(out,formats_);
-	
+
 }
 
 static MagicsParameter<string> output_format("output_format", "ps");

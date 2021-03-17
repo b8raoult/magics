@@ -779,7 +779,7 @@ grib_handle* GribDecoder::open(grib_handle* grib, bool sendmsg) {
         }
 
         valid_ = false;
-        MagLog::error() << "ERROR: unable to open file '" << file_name_ << "': " << MagicsException::syserror() << endl;
+        MagLog::error() << "ERROR: unable to open file" << file_name_ << endl;
         return 0;
     }
 

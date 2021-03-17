@@ -68,12 +68,7 @@ public:
 
     CellBox() : parent_(0), row1_(0), row2_(0), column1_(0), column2_(0) {}
 
-    ~CellBox() {
-        for (map<int, SegmentJoiner*>::iterator index = helper_.begin(); index != helper_.end(); ++index) 
-            if ( index->second )
-                delete index->second;
-
-    }
+    ~CellBox() {}
 
     double value() { return (*parent_)(row1_, column1_)->value(0); }
 
@@ -171,42 +166,46 @@ public:
                 previous.push_back(PaperPoint(pt->x_, pt->y_));
             }
 
-            if (helper != helper_.end()) {
-                delete helper_[index];
-            }
             helper_[index] = new SegmentJoiner();
-
-            
 
 
             std::vector<Polyline*> output;
 
             clipper.clip(previous, pts, output);
 
+            /*
+                        if (output.size() == 1) {
+                            vector<PaperPoint> tmp;
+                            for ( auto pt = output.front()->begin();  pt != output.front()->end(); ++pt ) {
+                                    tmp.push_back(*pt);
+                                }
+
+                                push_back(index, tmp);
+
+
+                        }
+
+                        else
+                        {
+                            */
             MagClipper::add(pts, previous, output);
 
-            
+
             if (output.size() == 1) {
                 vector<PaperPoint> tmp;
                 for (auto pt = output.front()->begin(); pt != output.front()->end(); ++pt) {
                     tmp.push_back(*pt);
                 }
-                
-                
                 push_back(index, tmp);
             }
             else {
-
                 vector<PaperPoint> tmp;
                 for (auto pt = previous.begin(); pt != previous.end(); ++pt) {
                     tmp.push_back(*pt);
                 }
                 push_back(index, tmp);
             }
-
-            for (auto p = output.begin(); p != output.end(); ++p )
-                delete *p;
-           
+            //}
         }
     }
 
@@ -336,8 +335,6 @@ public:
                 continue;
             bool reverse = joiner.isHole(result.front());
 
-            // reverse = false;
-
             for (vector<vector<Point> >::iterator j = result.begin(); j != result.end(); ++j) {
                 if (reverse) {
                     if (!joiner.isHole((*j))) {
@@ -359,8 +356,6 @@ public:
                         std::swap((*j), polys.back());
                     }
                 }
-                
-
             }
 
             for (vector<vector<Point> >::iterator j = polys.begin(); j != polys.end(); ++j) {
@@ -389,7 +384,6 @@ public:
                 }
             }
             delete index->second;
-            index->second = 0;
         }
     }
 
@@ -1286,6 +1280,7 @@ void IsoPlot::isoline(MatrixHandler& data, BasicGraphicsObjectContainer& parent)
         int c = 0;
         AutoVector<IsoProducerData> datas;
         for (int i = 0; i < view.size(); i++)
+        // int i = 1;
         {
             IsoProducerData* data = new IsoProducerData(shading_->shadingMode(), *this, *(view[i]));
             datas.push_back(data);

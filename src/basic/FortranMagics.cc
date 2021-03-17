@@ -233,11 +233,6 @@ void FortranMagics::subpage() {
     top()->push_back(axisContainer_);
     axisContainer_->getReady();
     push(axisContainer_);
-
-    while (!axis_.empty()) {
-            axisContainer_->push_back(axis_.top());
-            axis_.pop();
-    }
 }
 
 void FortranMagics::page() {
@@ -555,11 +550,14 @@ const char* FortranMagics::detect(const string& data, const string& dim) {
     DimensionGuess json(data);
 
     NetcdfGuess guesser;
-    static string empty, result;
+    static string empty;
+    static string result;
+
     auto checks = guesser.guess_.find(dim);
-    if (checks == guesser.guess_.end())
+    if (checks == guesser.guess_.end()) {
         return empty.c_str();
-    result = "";
+    }
+    result.clear();
 
     for (auto check = checks->second.begin(); check != checks->second.end(); ++check) {
         vector<string> values = check->second;
@@ -988,20 +986,12 @@ void FortranMagics::paxis() {
         if (magCompare(orientation, "vertical")) {
             Axis* vaxis = new VerticalAxis();
             MagLog::dev() << *vaxis << "\n";
-            if (axisContainer_)
-                axisContainer_->push_back(vaxis);
-            else
-                axis_.push(vaxis);
-
+            top()->push_back(vaxis);
         }
         else {
             Axis* haxis = new HorizontalAxis();
             MagLog::dev() << *haxis << "\n";
-            if (axisContainer_)
-                axisContainer_->push_back(haxis);
-            else
-                axis_.push(haxis);
-
+            top()->push_back(haxis);
         }
     }
     catch (MagicsException& e) {

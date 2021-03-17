@@ -1,6 +1,6 @@
 [
   {
-    "preferred_units": "degC",
+    "prefered_units": "degC",
     "match": [
       {
         "paramId": "11",

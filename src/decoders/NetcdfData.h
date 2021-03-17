@@ -235,9 +235,6 @@ struct NetVariable {
     void get(vector<float>& data, vector<size_t>& start, vector<size_t>& edges) {
         nc_get_vara_float(netcdf_, id_, &start.front(), &edges.front(), &data.front());
     }
-    void get(vector<long>& data, vector<size_t>& start, vector<size_t>& edges) {
-        nc_get_vara_long(netcdf_, id_, &start.front(), &edges.front(), &data.front());
-    }
 
     void get(vector<int>& data, vector<size_t>& start, vector<size_t>& edges) {
         nc_get_vara_int(netcdf_, id_, &start.front(), &edges.front(), &data.front());
@@ -491,25 +488,14 @@ template <class T>
 map<nc_type, Accessor<T>*>* Accessor<T>::accessors_ = nullptr;
 #endif
 
-const char* nc_type_to_name(int);
-
-template<class T>
-const char* type_name(T*);
-
-inline const char* type_name(double*) { return "double"; }
-inline const char* type_name(float*)  { return "float"; }
-inline const char* type_name(long*)   { return "long"; }
-inline const char* type_name(int*)    { return "int"; }
-
 template <class T>
 void Accessor<T>::access(vector<T>& data, vector<size_t>& start, vector<size_t>& edges, NetVariable& var) {
     typename map<nc_type, Accessor<T>*>::const_iterator accessor = accessors_->find(var.type());
     if (accessor == accessors_->end()) {
-        std::ostringstream oss;
-        oss <<  "NetcdfDecoder : No accessor available for '" << nc_type_to_name(var.type()) << "' to '" << type_name((T*)0) << "'";
+        MagLog::error() << "NetcdfDecoder : No accessor available for " << var.type() << endl;
+        MagLog::error() << "Throwing excpetion for  " << var.type() << endl;
 
-
-        throw MagicsException(oss.str());
+        throw MagicsException("No accessor available");
     }
 
     (*(*accessor).second)(data, start, edges, var);
