@@ -183,7 +183,13 @@ string BaseDriver::getFileName(const string& extension, const unsigned int no) c
     if (!file_.empty()) {
         ASSERT(no <= 1);
         ASSERT(file_.size() > ext.size() + 1);
-        ASSERT(file_.substr(file_.size() - ext.size()) == ext);
+        std::cout << file_ << std::endl;
+        if(file_.substr(file_.size() - ext.size()) != ext) {
+            std::ostringstream oss;
+            oss << "file_=" << file_ << ", ext=" << ext << " x="
+            << file_.substr(file_.size() - ext.size());
+            throw MagicsException(oss.str());
+        }
         return file_;
     }
 
