@@ -230,7 +230,7 @@ C_VOID(clear_listeners)
 
 
 MAGICS_EXPORT void detect(const char* data, const char* dimension) {
-    c_char("detect", [data, dimension] { return MagicsCalls::detect(data, dimension); });
+    c_void("detect", [data, dimension] { MagicsCalls::detect(data, dimension); });
 }
 
 

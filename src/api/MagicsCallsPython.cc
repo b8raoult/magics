@@ -164,11 +164,6 @@ PYTHON_CHAR(metagrib)      // TODO: review name
 PYTHON_CHAR(metainput)     // TODO: review name
 PYTHON_CHAR(metanetcdf)    // TODO: review name
 
-
-MAGICS_EXPORT const char* py_detect(const char* json, const char* dim) {
-    return python_char("detect", [json, dim] { return MagicsCalls::detect(json, dim); });
-}
-
 MAGICS_EXPORT const char* py_new(const char* page) {
     return python_void("new", [page] { MagicsCalls::page(page); });
 }
