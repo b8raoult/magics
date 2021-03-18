@@ -155,7 +155,7 @@ class ObjectHandler(ContentHandler):
 
         param = self.parameters["factory"][-1]
         name = attrs.get("xml")
-        if name != None:
+        if name is not None:
             param["options"].append(
                 {
                     "key": attrs.get("xml"),
@@ -169,7 +169,7 @@ class ObjectHandler(ContentHandler):
 
         if attrs.get("fortran") != attrs.get("xml"):
             name = attrs.get("fortran")
-            if name != None:
+            if name is not None:
                 param["options"].append(
                     {
                         "key": attrs.get("fortran"),

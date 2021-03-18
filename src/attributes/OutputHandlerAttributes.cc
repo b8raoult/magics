@@ -64,7 +64,6 @@ void OutputHandlerAttributes::copy(const OutputHandlerAttributes& other)
 {
 	format_ = other.format_;
 	formats_ = other.formats_;
-
 }
 
 

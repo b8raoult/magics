@@ -758,7 +758,7 @@ MAGICS_NO_EXPORT void KMLDriver::renderText(const Text& text) const {}
 
 */
 MAGICS_NO_EXPORT bool KMLDriver::renderPixmap(MFloat x0, MFloat y0, MFloat x1, MFloat y1, int w, int h,
-                                              unsigned char* pixmap, int, bool) const {
+                                              unsigned char* pixmap, int, bool, bool) const {
     debugOutput("Start renderPixmap");
     if (render_) {
         if (kml_placemark_)

@@ -1111,7 +1111,7 @@ MAGICS_NO_EXPORT void CairoDriver::circle(const MFloat x, const MFloat y, const 
   \param alpha transparency
 */
 MAGICS_NO_EXPORT bool CairoDriver::renderPixmap(MFloat x0, MFloat y0, MFloat x1, MFloat y1, int w, int h,
-                                                unsigned char* pixmap, int, bool alpha) const {
+                                                unsigned char* pixmap, int, bool alpha, bool) const {
     MagLog::debug() << "CD:renderPixmap> " << w << "x" << h << endl;
     unsigned char* p = pixmap;
     const MFloat dx  = (x1 - x0) / w;
