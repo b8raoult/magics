@@ -420,7 +420,7 @@ static TypedAccessor<unsigned short, float> u_short_float_accessor(NC_USHORT);
 static TypedAccessor<int, float> int_float_accessor(NC_INT);
 static TypedAccessor<float, float> float_float_accessor(NC_FLOAT);
 static TypedAccessor<double, float> double_float_accessor(NC_FLOAT);
-
+static TypedAccessor<long, double> long_double_accessor(NC_INT64);
 static TypedAccessor<signed char, double> u_byte_double_accessor(NC_UBYTE);
 static TypedAccessor<signed char, double> byte_double_accessor(NC_BYTE);
 static TypedAccessor<short, double> u_short_double_accessor(NC_SHORT);
@@ -428,3 +428,24 @@ static TypedAccessor<unsigned short, double> short_double_accessor(NC_USHORT);
 static TypedAccessor<int, double> int_double_accessor(NC_INT);
 static TypedAccessor<float, double> float_double_accessor(NC_FLOAT);
 static TypedAccessor<double, double> double_double_accessor(NC_DOUBLE);
+
+namespace magics {
+
+const char* nc_type_to_name(int n) {
+
+    switch (n) {
+        case NC_UBYTE: return "NC_UBYTE"; break;
+        case NC_BYTE: return "NC_BYTE"; break;
+        case NC_SHORT: return "NC_SHORT"; break;
+        case NC_USHORT: return "NC_USHORT"; break;
+        case NC_INT: return "NC_INT"; break;
+        case NC_FLOAT: return "NC_FLOAT"; break;
+        case NC_DOUBLE: return "NC_DOUBLE"; break;
+        case NC_INT64: return "NC_INT64"; break;
+    }
+
+    static char unknown[20];
+    sprintf(unknown, "UNKNOWN(%d)", n);
+    return unknown;
+}
+}
