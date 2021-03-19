@@ -26,7 +26,7 @@
 #include <QColor>
 #include <QMap>
 
-//#include "Qt/qqwidget.h"
+//#include <Qt/qqwidget.h>
 
 class QGraphicsItem;
 class QGraphicsScene;

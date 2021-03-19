@@ -192,33 +192,21 @@ MAGICS_NO_EXPORT void BaseDriver::renderImage(const ImportObject& obj) const {
     MFloat width  = 0;
     MFloat height = 0;
 
-    if (obj.getWidth() == -1 &&
-        (magCompare(f, "gif") || magCompare(f, "png") || magCompare(f, "jpeg") || magCompare(f, "jpg"))) {
-#ifndef MAGICS_RASTER
+    if (obj.getWidth() == -1 && magCompare(f, "png") ) {
+#ifndef HAVE_CAIRO
         MagLog::error()
-            << "BaseDriverImages: Dimension is -1 and default size can not be determined (GD library required)!"
+            << "BaseDriverImages: image size can not be determined (Cairo library required)!"
             << endl;
         return;
 #else
-        FILE* in         = fopen(obj.getPath().c_str(), "rb");
-        gdImagePtr image = 0;
-        if (magCompare(f, "png"))
-            image = gdImageCreateFromPng(in);
-        else if (magCompare(f, "jpeg") || magCompare(f, "jpg"))
-            image = gdImageCreateFromJpeg(in);
-        else if (magCompare(f, "gif")) {
-#ifdef MAGICS_GIF
-            image = gdImageCreateFromGif(in);
-#else
-            MagLog::error() << "GIF import is not supported in this version! You need a GIF enabled GD library."
-                            << endl;
+        cairo_surface_t* surface = cairo_image_surface_create_from_png(obj.getPath().c_str());
+        if (cairo_surface_status(surface))
+        {
+            MagLog::error() << "BaseDriverImages: Can not read PNG to establish size - " <<obj.getPath().c_str()<< endl;
             return;
-#endif
         }
-        fclose(in);
-        width  = gdImageSX(image);
-        height = gdImageSY(image);
-        gdImageDestroy(image);
+        width  = cairo_image_surface_get_width(surface);
+        height = cairo_image_surface_get_height(surface);
 #endif
     }
     else {
@@ -246,8 +234,8 @@ MAGICS_NO_EXPORT void BaseDriver::renderImage(const ImportObject& obj) const {
 
 */
 MAGICS_NO_EXPORT bool BaseDriver::convertToPixmap(const string& fname, const GraphicsFormat format, const int reso,
-                                                  const MFloat wx0, const MFloat wy0, const MFloat wx1,
-                                                  const MFloat wy1) const {
+                                                  const MFloat x0, const MFloat y0, const MFloat x1,
+                                                  const MFloat y1) const {
 #ifdef MAGICS_ON_WINDOWS
     return false;
 #else
@@ -353,9 +341,9 @@ MAGICS_NO_EXPORT bool BaseDriver::convertToPixmap(const string& fname, const Gra
         const int  src_stride = cairo_image_surface_get_stride(surface);
         image                 = new unsigned char[row * col * bytes];
         unsigned char* p      = image;
-
+  
         for (int i = 0; i < row; i++) {
-            uint32_t *s = (uint32_t*)(src + i * src_stride);
+            uint32_t *s = (uint32_t*)(src + i * src_stride);        
             for (int j = 0; j < col; j++) {
                 uint32_t point = s[j];
                 const unsigned char a = (unsigned char) ((point >> 24) & 0xff);
@@ -370,7 +358,7 @@ MAGICS_NO_EXPORT bool BaseDriver::convertToPixmap(const string& fname, const Gra
         }
     }
 #endif
-
+/*
 #ifdef MAGICS_RASTER
     else if (format == GIF || format == PNG || format == JPG) {
         // convert png to ppm(raw) like image
@@ -444,18 +432,14 @@ MAGICS_NO_EXPORT bool BaseDriver::convertToPixmap(const string& fname, const Gra
         gdImageDestroy(imp);
     }
 #endif
+*/
     else {
         MagLog::warning() << "BaseDriverImages: graphics formats (" << format << ") is NOT supported!" << endl;
-        return 1;  // No PPM
+        return 1;
     }
 
-    MFloat x0 = wx0;  // Left
-    MFloat x1 = wx1;  // Right
-    MFloat y0 = wy0;
-    MFloat y1 = wy1;
-
     bool alpha = (pixmapFormat == "rgba");
-    status = renderPixmap(x0, y0, x1, y1, col, row, image, Landscape, alpha);
+    status = renderPixmap(x0, y0, x1, y1, col, row, image, Landscape, alpha, false);
 
     if (!status)
         MagLog::warning()

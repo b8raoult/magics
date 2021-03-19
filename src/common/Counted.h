@@ -28,6 +28,7 @@ public:  // methods
         if (--count_ == 0) {
             delete this;
         }
+
     }
 
     size_t count() const { return count_; }

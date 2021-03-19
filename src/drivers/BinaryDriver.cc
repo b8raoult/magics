@@ -20,6 +20,7 @@
 #include "Image.h"
 #include "Polyline.h"
 #include "Text.h"
+#include "ImportObject.h"
 
 
 using namespace magics;
@@ -564,6 +565,47 @@ MAGICS_NO_EXPORT void BinaryDriver::circle(const MFloat x, const MFloat y, const
 }
 
 /*!
+  \brief Image render method
+
+  Checks if the image is given by reference. If not, use BaseDriver version!
+*/
+MAGICS_NO_EXPORT void BinaryDriver::renderImage(const ImportObject& obj) const {
+    if(obj.getByReference()) {
+      char c = 'J';
+      out_.write(&c, 1);
+      const MFloat x = obj.getOrigin().x();
+      const MFloat y = obj.getOrigin().y();
+      const MFloat w = obj.getWidth();
+      const MFloat h = obj.getHeight();
+      const ImageProperties::OriginReference r = obj.getOriginReference();
+      const std::string format = obj.getFormat();
+      const std::string path = obj.getPath();
+
+      out_.write((char*)(&x), sizeof(MFloat));
+      out_.write((char*)(&y), sizeof(MFloat));
+      out_.write((char*)(&w), sizeof(MFloat));
+      out_.write((char*)(&h), sizeof(MFloat));
+      out_.write((char*)(&r), sizeof(ImageProperties::OriginReference));
+
+      const int lformat = format.length();
+      out_.write((char*)(&lformat), sizeof(int));
+      char* pp = new char[lformat];
+      strcpy(pp, format.c_str());
+      out_.write(pp, sizeof(char) * lformat);
+      delete[] pp;
+
+      const int lpath = path.length();
+      out_.write((char*)(&lpath), sizeof(int));
+      char* pp2 = new char[lpath];
+      strcpy(pp2, path.c_str());
+      out_.write(pp2, sizeof(char) * lpath);
+      delete[] pp2;
+    }
+    else BaseDriver::renderImage(obj);
+}
+
+
+/*!
   \brief render pixmaps
 
   This method renders pixmaps. These are used for cell shading and raster input (GIFs and PNGs).
@@ -631,7 +673,6 @@ MAGICS_NO_EXPORT bool BinaryDriver::renderCellArray(const Image& image) const {
         si++;
     }
     const int sii = si;
-
 
     out_.write((char*)(&sii), sizeof(int));
     for (int v = 0; v < sii; v++) {

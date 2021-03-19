@@ -151,7 +151,6 @@ std::string ObjectParser::unicode() {
     return utf8(code);
 }
 
-
 Value ObjectParser::parseString(char quote) {
     bool save = comments_;
     comments_ = false;

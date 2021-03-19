@@ -22,6 +22,7 @@
 
 #include "ColourTableDefinitionList.h"
 #include "XmlNode.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 

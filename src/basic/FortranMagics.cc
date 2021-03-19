@@ -72,13 +72,13 @@ FortranMagics::FortranMagics() :
     output_(0),
     action_(0),
     root_(0),
-    axisContainer_(0),
     empty_(true),
     gribindex_(0),
     legend_todo_(false),
     symbolinput_todo_(false),
     matrixinput_todo_(false),
-    polyinput_todo_(false)
+    polyinput_todo_(false),
+    axisContainer_(0)
 
 {
     reset();

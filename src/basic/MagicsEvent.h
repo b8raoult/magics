@@ -35,13 +35,13 @@ class DateTime;
 
 class MagicsEvent {
 public:
-    MagicsEvent();
-    virtual ~MagicsEvent();
-    virtual void notify(MagicsObserver&);
+    MagicsEvent() {}
+    virtual ~MagicsEvent() {}
+    virtual void notify(MagicsObserver&) {}
 
 protected:
     //! Method to print string about this class on to a stream of type ostream (virtual).
-    virtual void print(ostream& out) const;
+    virtual void print(ostream& out) const { out << "MagicsEvent[]"; }
 
 private:
     //! Copy constructor - No copy allowed

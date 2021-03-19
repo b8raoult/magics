@@ -668,6 +668,7 @@ void ObsDecoder::customisedPoints(const Transformation& transformation, const st
 
     map<string, BufrAccessor*> accessors;
     for (std::set<string>::const_iterator token = tokens.begin(); token != tokens.end(); ++token) {
+
         try {
             BufrAccessor* accessor = SimpleObjectMaker<BufrAccessor>::create(*token);
             accessors.insert(make_pair(*token, accessor));
@@ -676,6 +677,7 @@ void ObsDecoder::customisedPoints(const Transformation& transformation, const st
             BufrAccessor* accessor = new BufrAccessor(*token);
             accessors.insert(make_pair(*token, accessor));
         }
+
     }
 
     // Create the type accessor!

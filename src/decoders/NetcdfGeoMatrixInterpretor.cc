@@ -58,6 +58,7 @@ string NetcdfGeoMatrixInterpretor::proj4Detected(Netcdf& netcdf) {
 bool NetcdfGeoMatrixInterpretor::interpretAsMatrix(Matrix** matrix) {
     if (*matrix)
         return false;
+
     Netcdf netcdf(path_, dimension_method_);
 
     string proj4 = proj4Detected(netcdf);

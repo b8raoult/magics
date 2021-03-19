@@ -360,7 +360,7 @@ void GribDecoder::read(const Transformation& transformation) {
             throw;
         }
         MagLog::error() << "Grib Decoder - read: Representation [" << grid << "] not supported.\n" << std::endl;
-        ;
+        
         valid_ = false;
         throw MagicsException("Grib Decoder: Representation [] not supported.");
     }
@@ -518,7 +518,6 @@ void GribDecoder::customisedPoints(const AutomaticThinningMethod& thinning, cons
         }
         MagLog::error() << "Grib Decoder - customisedPoints: Representation [" << grid << "] not supported.\n"
                         << std::endl;
-        ;
         throw MagicsException("Grib Decoder: Representation [] not supported.");
     }
 }
@@ -1473,6 +1472,7 @@ void GribDecoder::visit(ValuesCollector& points) {
             throw;
         }
         MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n" << std::endl;
+
         scaling = 1;
         offset  = 0;
     }

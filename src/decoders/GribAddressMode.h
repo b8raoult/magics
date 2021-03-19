@@ -107,7 +107,7 @@ public:
     }
 
 protected:
-    void print(ostream& out) const override { out << "GribAddressRecordMode\n"; }
+    void print(ostream& out) const override { out << "GribAddressRecordMode[]"; }
 };
 
 class GribAddressByteMode : public GribAddressMode {

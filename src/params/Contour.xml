@@ -117,6 +117,7 @@ does it submit to any jurisdiction.
 		<parameter from="string"
 			name="contour_automatic_library_path"
 			visible="off"
+			python="off"
 			default=""
 			member="library_path"
 			to="string">

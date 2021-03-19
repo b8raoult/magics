@@ -74,6 +74,7 @@ protected:
 
 
 private:
+
     // -- No copy allowed
 
     StringContent(const StringContent&);

@@ -9,7 +9,7 @@
  */
 
 /*! \file MetaData.h
-    \brief Implementation of the Template class MetaData.windu
+    \brief Implementation of the Template class MetaData.
 
     Magics Team - ECMWF 2006
 

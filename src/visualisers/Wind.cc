@@ -24,6 +24,7 @@
 #include "HistoVisitor.h"
 #include "Layout.h"
 #include "MatrixHandler.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 

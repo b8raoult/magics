@@ -47,8 +47,8 @@ public:
 
     virtual void operator()(IsoPlot*, MatrixHandler&,
                             BasicGraphicsObjectContainer&) {  // Should return
-        // CellArray* array = technique_->array(matrix, range,
-        // transformation, width, height, resolution, technique) ;
+                                                              // CellArray* array = technique_->array(matrix, range,
+                                                              // transformation, width, height, resolution, technique);
 
         // return array;
     }

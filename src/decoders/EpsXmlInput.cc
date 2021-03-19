@@ -28,6 +28,7 @@
 #include "MetaData.h"
 #include "TextVisitor.h"
 #include "XmlReader.h"
+#include "MagicsSettings.h"
 
 #include <limits>
 #include <locale>

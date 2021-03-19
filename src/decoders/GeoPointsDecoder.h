@@ -89,6 +89,7 @@ protected:
         eGeoColLat,
         eGeoColLon,
         eGeoColLevel,
+        eGeoColElevation,
         eGeoColDate,
         eGeoColTime,
         eGeoColValue

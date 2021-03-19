@@ -36,6 +36,8 @@ class MatrixHandler : public AbstractMatrix, public AbstractPoints {
 public:
     MatrixHandler(const AbstractMatrix& matrix) :
         AbstractMatrix(), AbstractPoints(), matrix_(matrix), min_(INT_MAX), max_(-INT_MAX), tile_(false) {}
+    MatrixHandler(const MatrixHandler& matrix) :
+        AbstractMatrix(), AbstractPoints(), matrix_(matrix), min_(INT_MAX), max_(-INT_MAX), tile_(false) {}
 
     virtual ~MatrixHandler() override {}
 
@@ -466,8 +468,6 @@ public:
 protected:
 };
 
-
-#include <ProjP.h>
 
 class Proj4MatrixHandler : public MatrixHandler {
 public:

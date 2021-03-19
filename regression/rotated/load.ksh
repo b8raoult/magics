@@ -1,13 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/ksh
 
-versions="current++ new++"
+versions="current++ new++" 
 src="rotated.py"
-output="rotated.ps"
+output="rotated.ps" 
 dir=`pwd`
 name=`basename $dir`
 
 
-for sf in $src
+for sf in $src 
 do
 for v in $versions
 do

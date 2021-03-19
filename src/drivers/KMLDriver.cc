@@ -1262,9 +1262,9 @@ MAGICS_NO_EXPORT void KMLDriver::renderWindFlag(const Flag& flag) const {
 /*!
   \brief prints debug output
 
-  When Magics++ is compiled in debug mode these extra strings are printed.
+  When Magics is compiled in debug mode these extra strings are printed.
 
-  \note This can increase file and log file sizes if you run Magics++ in debug mode!
+  \note This can increase file and log file sizes if you run Magics in debug mode!
 
   \param s string to be printed
 */

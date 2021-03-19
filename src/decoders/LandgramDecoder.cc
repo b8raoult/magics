@@ -24,6 +24,8 @@
 #include <limits>
 #include "Factory.h"
 #include "TextVisitor.h"
+#include "MagicsSettings.h"
+
 using namespace magics;
 
 LandgramDecoder::LandgramDecoder() : first_(0) {

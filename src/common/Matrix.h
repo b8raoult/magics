@@ -316,6 +316,7 @@ public:
     double right() const override { return std::max(columnsAxis_.front(), columnsAxis_.back()); }
     double top() const override { return std::max(rowsAxis_.front(), rowsAxis_.back()); }
 
+
     double x(double x, double) const override { return x; }
     double y(double, double y) const override { return y; }
 
@@ -324,8 +325,7 @@ public:
     virtual bool akimaEnable() const override { return akima_; }
     void akimaEnabled() { akima_ = true; }
     void akimaDisabled() { akima_ = false; }
-
-    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override {
+    virtual void boundRow(double r, double& row1, int& index1, double& row2, int& index2) const override{
         index1 = this->lowerRow(r);
         row1   = this->regular_row(index1);
         index2 = this->upperRow(r);
@@ -384,7 +384,14 @@ public:
 protected:
     //! Method to print string about this class on to a stream of type ostream
     //! (virtual).
-    virtual void print(ostream& out) const override { out << "Matrix"; }
+    virtual void print(ostream& out) const override {
+        out << "Matrix<P>[";
+        out << "rowsAxis=" << rowsAxis_;
+        out << ", columnsAxis=" << columnsAxis_;
+        out << ", values=";
+        magvector<double>::print(out);
+        out << "]";
+    }
 
     map<double, int> rowsMap_;
     mutable magvector<double> rowsAxis_;

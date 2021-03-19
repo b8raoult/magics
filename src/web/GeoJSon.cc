@@ -194,8 +194,8 @@ public:
     }
     virtual void decode(const Value& value) {
         ValueList point = value.get_value<ValueList>();
-        lon_            = point[0].get_value<double>();
-        lat_            = point[1].get_value<double>();
+        lon_        = point[0].get_value<double>();
+        lat_        = point[1].get_value<double>();
     }
     void print() {}
     double lat_;
@@ -411,7 +411,7 @@ GeoJSon::GeoJSon() : current_(0), parent_(0), matrix_(0) {
 GeoJSon::~GeoJSon() {}
 
 string GeoObject::convert(const Value& value) {
-    if (value.isString() || value.isNumber() || value.isDouble()) {
+    if(value.isString() || value.isNumber() || value.isDouble()) {
         std::string s(value);
         return s;
     }

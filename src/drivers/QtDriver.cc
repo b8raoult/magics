@@ -71,7 +71,7 @@ QtDriver::QtDriver() : forceTextPen_(false) {
 
     currentPolylineSetItem_ = 0;
 
-    penStyle_[M_DASH]       = Qt::DashLine;
+    penStyle_[LineStyle::DASH]       = Qt::DashLine;
     penStyle_[M_DOT]        = Qt::DotLine;
     penStyle_[M_CHAIN_DASH] = Qt::DashDotLine;
     penStyle_[M_CHAIN_DOT]  = Qt::DashDotDotLine;
@@ -1555,15 +1555,14 @@ MAGICS_NO_EXPORT void QtDriver::renderImage(const ImportObject& obj) const {
 
     MgQPixmapItem* item = new MgQPixmapItem(QPixmap::fromImage(img.mirrored(false, true)));
 
-    MFloat x0 = 0., y0 = 0., x1 = 0., y1 = 0.;
+    MFloat x0 = 0., y0 = 0., x1 =0.,  y1=0.;
 
     if (obj.getOriginReference() == ImageProperties::centre) {
-        x0 = projectX(obj.getOrigin().x() - width / 2.);
-        y0 = projectY(obj.getOrigin().y() - height / 2.);
-        x1 = projectX(obj.getOrigin().x() + width / 2.);
-        y1 = projectY(obj.getOrigin().y() + height / 2.);
-    }
-    else {
+        x0 = projectX(obj.getOrigin().x() - width/2.);
+        y0 = projectY(obj.getOrigin().y() - height/2.);
+        x1 = projectX(obj.getOrigin().x() + width/2.);
+        y1 = projectY(obj.getOrigin().y() + height/2.);
+    } else {
         x0 = projectX(obj.getOrigin().x());
         y0 = projectY(obj.getOrigin().y());
         x1 = projectX(obj.getOrigin().x() + width);
@@ -1602,7 +1601,7 @@ MAGICS_NO_EXPORT void QtDriver::renderImage(const ImportObject& obj) const {
 
 */
 MAGICS_NO_EXPORT bool QtDriver::renderPixmap(MFloat x0, MFloat y0, MFloat x1, MFloat y1, int w, int h,
-                                             unsigned char* pixmap, int landscape, bool hasAlpha) const {
+                                             unsigned char* pixmap, int landscape, bool hasAlpha, bool) const {
     MagLog::debug() << "renderPixmap: " << x0 << " " << y0 << " " << x1 << " " << y1 << endl;
 
 

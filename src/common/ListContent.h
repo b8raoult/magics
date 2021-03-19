@@ -23,6 +23,7 @@ namespace magics {
 //----------------------------------------------------------------------------------------------------------------------
 
 class ListContent : public Content {
+
 protected:
     // -- Constructor
 

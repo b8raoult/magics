@@ -823,6 +823,7 @@ bool MagPlus::binning(magics::MagRequest& in) {
 }
 
 bool MagPlus::grib(magics::MagRequest& in) {
+
     MagLog::dev() << "add grib" << endl;
     in.print();
 
@@ -982,6 +983,7 @@ void MagPlus::setIconInfo(magics::MagRequest& mv, MetviewIcon& object) {
 }
 
 bool MagPlus::gribloop(magics::MagRequest& in) {
+
     MagLog::dev() << "add gribloop" << endl;
     in.print();
     string loop("loop");
@@ -1396,6 +1398,7 @@ bool MagPlus::geojson(magics::MagRequest& in) {
 }
 
 bool MagPlus::bufr(magics::MagRequest& in) {
+
     /*
     // Extract the path ..
     magics::MagRequest record = in("RECORD");
@@ -1458,6 +1461,7 @@ bool MagPlus::graph(magics::MagRequest& in) {
 }
 
 bool MagPlus::obs(magics::MagRequest& in) {
+
     ObsPlottingWrapper visdef;
 
     visdef.set(in);
@@ -1465,6 +1469,7 @@ bool MagPlus::obs(magics::MagRequest& in) {
     MagLog::dev() << "add obs" << *visdef.object() << endl;
     top()->visdef(visdef.object());
     pop();
+
 
 
     return false;  // do not exit

@@ -25,6 +25,7 @@
 #include "IntervalMap.h"
 #include "Layout.h"
 #include "PointsHandler.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
@@ -283,7 +284,7 @@ void Histogram::visit(const IntervalMap<Colour>& beans, Data& data, PointsHandle
         /*grid = new Polyline();
         grid->setColour(Colour("navy"));
         grid->setThickness(1);
-        grid->setLineStyle(M_DASH);
+        grid->setLineStyle(LineStyle::DASH);
         grid->push_back(PaperPoint(xmin_, count->second));
         grid->push_back(PaperPoint(count->first.min_, count->second));
         visitor.push_back(grid);*/

@@ -26,6 +26,7 @@
 #include "Histogram.h"
 #include "LegendVisitor.h"
 #include "SymbolPlotting.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
@@ -97,6 +98,7 @@ void SymbolIndividualMode::properties() const {
         properties_.image_width_  = image_width_;
         properties_.image_height_ = image_height_;
         properties_.image_format_ = image_format_;
+        properties_.image_by_reference_ = image_by_reference_;
     }
 
     properties_.outline_              = parent_->outline_;

@@ -1006,6 +1006,8 @@ void WrepJSon::data() {
 }
 
 void WrepJSon::basic() {
+
+
     try {
         Value value     = MagParser::decodeFile(file_);
         ValueMap object = value.get_value<ValueMap>();
@@ -1039,22 +1041,22 @@ void WrepJSon::metadata(const Value& value) {
 
 
 void WrepJSon::station(const Value& value) {
-    ValueMap location  = value.get_value<ValueMap>();
-    const Value lat    = location[binding(api_, "latitude")];
-    const Value lon    = location[binding(api_, "longitude")];
-    station_latitude_  = lat.get_value<double>();
-    station_longitude_ = lon.get_value<double>();
+    ValueMap location              = value.get_value<ValueMap>();
+    const Value lat = location[binding(api_, "latitude")];
+    const Value lon = location[binding(api_, "longitude")];
+    station_latitude_            = lat.get_value<double>();
+    station_longitude_           = lon.get_value<double>();
 
     MagLog::dev() << "found -> station_lat= " << station_latitude_ << endl;
     MagLog::dev() << "found -> station_lon= " << station_longitude_ << endl;
 }
 
 void WrepJSon::location(const Value& value) {
-    ValueMap location = value.get_value<ValueMap>();
-    const Value lat   = location[binding(api_, "latitude")];
-    const Value lon   = location[binding(api_, "longitude")];
-    latitude_         = lat.get_value<double>();
-    longitude_        = lon.get_value<double>();
+    ValueMap location              = value.get_value<ValueMap>();
+    const Value lat = location[binding(api_, "latitude")];
+    const Value lon = location[binding(api_, "longitude")];
+    latitude_                    = lat.get_value<double>();
+    longitude_                   = lon.get_value<double>();
     MagLog::dev() << "found -> lat= " << latitude_ << endl;
     MagLog::dev() << "found -> lon= " << longitude_ << endl;
 }
@@ -1070,7 +1072,7 @@ void WrepJSon::station_name(const Value& value) {
         //     station_name_ += s->second;
         // }
         // else
-        station_name_ += *c;
+            station_name_ += *c;
     }
 }
 void WrepJSon::epsz(const Value& value) {
@@ -1078,7 +1080,7 @@ void WrepJSon::epsz(const Value& value) {
     MagLog::dev() << "found -> epsz= " << epsz_ << endl;
 }
 void WrepJSon::height(const Value& value) {
-    try {
+    try{
         height_ = value.get_value<double>();
     }
     catch (...) {
@@ -1128,13 +1130,15 @@ void WrepJSon::clim_step(const Value& value) {
 }
 
 void WrepJSon::time(const Value& value) {
+    
     MagLog::dev() << "found -> time= " << value.get_value<string>() << endl;
     time_ = value.get_value<string>();
 }
 void WrepJSon::valid_time(const Value& value) {
+
     // intrepret datetime ...
 
-    if (value.isNil())
+    if ( value.isNil() )
         return;
     string info = value.get_value<string>();
 
@@ -1540,7 +1544,7 @@ void WrepJSon::clim(const Value& value) {
     // clim_.print();
 }
 void WrepJSon::efi(const Value& value) {
-    ValueMap param  = value.get_value<ValueMap>();
+    ValueMap param    = value.get_value<ValueMap>();
     scaling_factor_ = 100;
     offset_factor_  = 0;
 
@@ -1560,7 +1564,7 @@ void WrepJSon::efi(const Value& value) {
 void WrepJSon::eps(const Value& value) {
     scaling_factor_ = param_scaling_factor_;
     offset_factor_  = param_offset_factor_;
-    ValueMap param  = value.get_value<ValueMap>();
+    ValueMap param = value.get_value<ValueMap>();
 
     for (auto info = param.begin(); info != param.end(); ++info) {
         eps_.insert(make_pair(info->first, InputWrep()));
@@ -1610,7 +1614,7 @@ void WrepJSon::visit(MetaDataVisitor& visitor) {
     }
 
     ostringstream json;
-    JSON out(json);
+    JSON  out(json);
     out << metadata_;
 
     visitor.add("metadata", json.str());
@@ -1627,8 +1631,8 @@ Value WrepJSon::temperature_adjustment() {
         ValueMap correction;
 
         correction["deterministic_adjustement"] = -(height_ - detz_) * 0.0065;
-        correction["eps_adjustement"]           = -(height_ - epsz_) * 0.0065;
-        value                                   = correction;
+        correction["eps_adjustement"] = -(height_ - epsz_) * 0.0065;
+        value = correction;
     }
     return value;
 }
@@ -1640,8 +1644,8 @@ void WrepJSon::points_along_meridian(const Value& value) {
 }
 
 void WrepJSon::x_values(const Value& value) {
-    ValueList values = value.get_value<ValueList>();
-    bool newpoint    = points_.empty();
+    ValueList values  = value.get_value<ValueList>();
+    bool newpoint = points_.empty();
     vector<double> minmax;
 
     for (unsigned int i = 0; i < values.size(); i++) {
@@ -1664,8 +1668,8 @@ void WrepJSon::x_values(const Value& value) {
 
 
 void WrepJSon::values(const Value& value) {
-    ValueList values = value.get_value<ValueList>();
-    bool newpoint    = points_.empty();
+    ValueList values  = value.get_value<ValueList>();
+    bool newpoint = points_.empty();
 
 
     for (unsigned int i = 0; i < values.size(); i++) {
@@ -1683,8 +1687,8 @@ void WrepJSon::values(const Value& value) {
     }
 }
 void WrepJSon::y_values(const Value& value) {
-    ValueList values = value.get_value<ValueList>();
-    bool newpoint    = points_.empty();
+    ValueList values  = value.get_value<ValueList>();
+    bool newpoint = points_.empty();
     vector<double> minmax;
 
     for (unsigned int i = 0; i < values.size(); i++) {
@@ -1743,8 +1747,8 @@ void WrepJSon::x_date_values(const Value& value) {
 
 void WrepJSon::y_date_values(const Value& value) {
     ValueList values = value.get_value<ValueList>();
-    ydate_           = true;
-    yBase_           = DateTime(values[0].get_value<string>());
+    ydate_       = true;
+    yBase_       = DateTime(values[0].get_value<string>());
     DateTime current;
     bool newpoint = points_.empty();
     vector<double> minmax;

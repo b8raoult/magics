@@ -25,6 +25,7 @@
 #include "Symbol.h"
 #include "Transformation.h"
 #include "expat.h"
+#include "MagicsSettings.h"
 
 #include "ProgressObject.h"
 

@@ -9,6 +9,7 @@
 
 #include "TableReader.h"
 #include "MagException.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
@@ -383,7 +384,9 @@ bool TableReader::getMetaData(string& errorMessage) {
 
     if (f_.fail()) {
         errorMessage = "TableReader: Could not open table file: " + path();
-        throw CannotOpenFile(path());
+	if(MagicsSettings::strict()) {
+           throw CannotOpenFile(path());
+        }
         return false;
     }
 

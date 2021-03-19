@@ -144,6 +144,7 @@ public:
     void askId(MetaDataCollector&) override;
 
     bool checkId(MetaDataCollector&, MetaDataCollector&) override { return true; }
+    void setCriteria(MetaDataCollector&, const string&);
 
     // set the map to set the contour!
     void getStyle(MetaDataCollector&, MagDef&, StyleEntry&) override;
@@ -167,10 +168,13 @@ public:
     void askId(MetaDataCollector&) override;
 
     bool checkId(MetaDataCollector&, MetaDataCollector&) override { return false; }
+    void setCriteria(MetaDataCollector&, const string&);
 
     // set the map to set the contour!
     void getStyle(MetaDataCollector&, MagDef&, StyleEntry&) override;
     void getStyle(const string&, MagDef&) override;
+
+    void getScaling(MetaDataCollector&, double&, double&);
 
 
     static StyleLibrary* styles_;

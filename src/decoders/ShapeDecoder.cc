@@ -24,6 +24,7 @@
 #include "CustomisedPoint.h"
 #include "Polyline.h"
 #include "shapefil.h"
+#include "MagicsSettings.h"
 
 
 ShapeDecoder::ShapeDecoder() : holes_(false) {}

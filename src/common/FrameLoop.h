@@ -111,7 +111,6 @@ public:
     AnimationRules();
     virtual ~AnimationRules() override;
     virtual void callback(FrameEntry&) override {}
-    override;
 
     string labelFormat() const { return labelFormat_; }
 

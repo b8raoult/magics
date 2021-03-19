@@ -24,7 +24,9 @@ namespace magics {
 //----------------------------------------------------------------------------------------------------------------------
 
 class BoolContent : public Content {
+
 protected:
+
     // -- Constructor
 
     BoolContent(bool);
@@ -81,6 +83,7 @@ protected:
 
 
 private:
+
     BoolContent(const BoolContent&);
     BoolContent& operator=(const BoolContent&);
 

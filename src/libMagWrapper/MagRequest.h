@@ -37,22 +37,22 @@ public:
     virtual operator long int() const override { return lvalue_; }
 
     virtual MagParam& operator=(int i) override {
-        ivalue_ = i override;
+        ivalue_ = i;
         cout << "set int" << ivalue_ << endl;
         return *this;
     }
     virtual MagParam& operator=(string s) override {
-        svalue_ = s override;
+        svalue_ = s;
         cout << "set string" << svalue_ << endl;
         return *this;
     }
     virtual MagParam& operator=(double d) override {
-        dvalue_ = d override;
+        dvalue_ = d;
         cout << "set double" << dvalue_ << endl;
         return *this;
     }
     virtual MagParam& operator=(long int i) override {
-        ivalue_ = i override;
+        ivalue_ = i;
         cout << "set long int" << ivalue_ << endl;
         return *this;
     }

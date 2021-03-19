@@ -23,6 +23,7 @@ namespace magics {
 
 
 class OrderedMapContent : public Content {
+
 protected:
     // -- Constructor
 
@@ -89,6 +90,7 @@ private:
     ValueList keys_;
 
     friend class Value;
+
 };
 
 

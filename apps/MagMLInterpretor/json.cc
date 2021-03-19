@@ -120,7 +120,7 @@ int server_main(int argc, char** argv) {
 }
 
 int main(int argc, char* argv[], char* envp[]) {
-    std::cout << "Here" << std::endl;
+    
     if (getenv("MAGJSON_SERVER_MODE")) {
         server_main(argc, argv);
     }

@@ -1,13 +1,13 @@
-#!/usr/bin/env bash
+#!/bin/ksh
 
-versions="current++"
+versions="current++" 
 src=`ls *.py`
 
 dir=`pwd`
 name=`basename $dir`
 
 
-for sf in $src
+for sf in $src 
 do
     s=`basename $sf .py`
 
@@ -16,9 +16,9 @@ do
 	echo $v
     if [ $v = "current++" ];
     then
-       use magics++
+       use magics++ 
     else
-       use newmagics++
+       use newmagics++ 
     fi
 
 	version=`/usr/local/apps/Magics/$v/bin/magics-config --version`

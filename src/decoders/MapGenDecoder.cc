@@ -22,6 +22,7 @@
 
 #include "MapGenDecoder.h"
 #include "CustomisedPoint.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 

@@ -21,6 +21,7 @@
 
 
 #include "BoxPlotDecoder.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 

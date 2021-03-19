@@ -20,6 +20,7 @@
 */
 
 #include "XYList.h"
+#include "MagicsSettings.h"
 
 
 /*!

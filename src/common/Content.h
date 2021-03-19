@@ -170,6 +170,7 @@ protected:
     virtual size_t size() const;
 
 
+
 private:
     // -- No copy allowed
 

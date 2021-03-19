@@ -24,6 +24,9 @@
 #include "MetaData.h"
 #include "ObsTable.h"
 #include "ProgressObject.h"
+#include "MagicsSettings.h"
+
+
 using namespace magics;
 
 ObsPlotting::ObsPlotting() {

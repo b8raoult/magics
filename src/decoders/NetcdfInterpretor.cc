@@ -30,6 +30,7 @@
 #include "NetcdfOrcaInterpretor.h"
 #include "NetcdfVectorInterpretor.h"
 #include "XmlReader.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
@@ -177,18 +178,23 @@ bool NetcdfInterpretor::cf_date(Netcdf& netcdf, const string& var, const string&
     vector<string> times = {"standard_name", "long_name"};
 
     string date;
-    for (auto t = times.begin(); t != times.end(); ++t) {
-        date = netcdf.getVariableAttribute(var, *t, string(""));
+    for ( auto t = times.begin(); t != times.end(); ++t) {
 
-        if (date.size())
+        date = netcdf.getVariableAttribute(var, *t , string(""));
+
+        if ( date.size() )
             break;
     }
+        
+
+
 
 
     if (date.empty())
         return false;
     if (date != "time" && date != "date and time")
         return false;
+
 
 
     string units = netcdf.getVariableAttribute(var, "units", string(""));
@@ -203,7 +209,6 @@ bool NetcdfInterpretor::cf_date(Netcdf& netcdf, const string& var, const string&
     vector<string> tokens;
     Tokenizer tokenizer(" ");
     tokenizer(units, tokens);
-
 
     basedate = tokens[2];
 

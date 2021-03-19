@@ -24,6 +24,8 @@
 #include "MagException.h"
 #include "TitleMetaField.h"
 #include "TitleStringField.h"
+#include "MagicsSettings.h"
+
 #include "expat.h"
 using namespace magics;
 

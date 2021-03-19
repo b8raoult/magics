@@ -68,7 +68,8 @@ does it submit to any jurisdiction.
 			member="metadata"
 			to="string">
 			<documentation>Json Object that contains metadata to descrive the the input data: will be used by the automatic eccharts contouring</documentation>
-		</parameter>		<parameter xml="input_field_subpage_mapping"
+		</parameter>
+		<parameter xml="input_field_subpage_mapping"
 			from="string"
 			name="input_field_subpage_mapping"
 			default="upper_left"

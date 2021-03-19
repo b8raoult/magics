@@ -53,7 +53,9 @@ list( APPEND _common_srcs
 	DataStats.h SciMethods.h Tephigram.cc  Tephigram.h Skewt.cc  Skewt.h Emagram.cc Emagram.h
 
 # sources
-	Data.cc Matrix.cc Static.cc DriverStatic.cc MagLog.cc Colour.cc Transformation.cc MagException.cc
+	Data.cc Matrix.cc 
+	Static.cc DriverStatic.cc
+	MagLog.cc Colour.cc Transformation.cc MagException.cc
 	BaseParameter.cc ParameterManager.cc
 	Tokenizer.cc Timer.cc Seconds.cc Label.cc MagClipper.cc
 	ArrowProperties.cc

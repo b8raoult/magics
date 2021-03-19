@@ -25,6 +25,7 @@
 #include "Factory.h"
 #include "NetcdfData.h"
 #include "NetcdfVectorInterpretor.h"
+#include "MagicsSettings.h"
 
 
 using namespace magics;

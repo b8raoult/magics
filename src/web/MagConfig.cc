@@ -35,6 +35,9 @@ using namespace magics;
 
 
 MagConfigHandler::MagConfigHandler(const string& config, MagConfig& magics) {
+
+
+
     try {
         Value value = MagParser::decodeFile(config);
 
@@ -235,7 +238,7 @@ void Palette::set(const ValueMap& object) {
 }
 void PaletteLibrary::callback(const string& name, const Value& value) {
     Palette palette;
-    palette.name_   = name;
+    palette.name_              = name;
     ValueMap object = value.get_value<ValueMap>();
     palette.set(object);
     library_.insert(make_pair(name, palette));
@@ -432,6 +435,7 @@ void NetcdfGuess::callback(const string& name, const Value& value) {
 }
 
 void DimensionGuess::init() {
+
     try {
         Value value = MagParser::decodeString(definitions_);
 
@@ -481,7 +485,7 @@ void MagDef::set(const ValueMap& object) {
 
 void MagDefLibrary::callback(const string& name, const Value& value) {
     MagDef def;
-    def.name_       = name;
+    def.name_                  = name;
     ValueMap object = value.get_value<ValueMap>();
     def.set(object);
 

@@ -488,6 +488,7 @@ void XmlMagics::grib(const XmlNode& node) {
 }
 
 
+
 #include "GeoPointsDecoder.h"
 void XmlMagics::geopoints(const XmlNode& node) {
     GeoPointsDecoder* geo = new GeoPointsDecoder();
@@ -646,6 +647,7 @@ void XmlMagics::epsbufr(const XmlNode& node) {
     EpsBufr* eps = new EpsBufr();
     eps->set(node);
     top()->data(eps);
+
 }
 
 void XmlMagics::epsgraph(const XmlNode& node) {
@@ -791,4 +793,5 @@ void XmlMagics::wind(const XmlNode& node) {
 
     if (gribloop_)
         gribloop_->next();
+
 }

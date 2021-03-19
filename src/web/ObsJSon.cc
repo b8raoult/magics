@@ -30,15 +30,18 @@ ObsJSon::~ObsJSon() {}
 
 
 CustomisedPoint* ObsJSon::decode(ValueMap& point) {
+
     CustomisedPoint* current = new CustomisedPoint();
     for (auto key = point.begin(); key != point.end(); ++key) {
         map<string, ObsJSon::Method>::iterator method = methods_.find(key->first);
-
+        
         if (method != methods_.end()) {
             (this->*method->second)(key->second, *current);
         }
         else {
+            
             if (key->second.isDouble()) {
+               
                 (*current)[key->first] = key->second.get_value<double>();
             }
         }
@@ -49,6 +52,7 @@ CustomisedPoint* ObsJSon::decode(ValueMap& point) {
 
 
 void ObsJSon::decode() {
+     
     points_.clear();
     Value value;
     if (!values_.empty()) {
@@ -63,10 +67,12 @@ void ObsJSon::decode() {
     try {
         Value value = MagParser::decodeFile(path_);
 
+        
 
         ValueMap object = value.get_value<ValueMap>();
 
         for (auto entry = object.begin(); entry != object.end(); ++entry) {
+            
             ValueList points = entry->second.get_value<ValueList>();
 
             for (unsigned int i = 0; i < points.size(); i++) {
@@ -108,6 +114,7 @@ void ObsJSon::customisedPoints(const Transformation&, const std::set<string>& wh
     for (vector<CustomisedPoint*>::const_iterator point = points_.begin(); point != points_.end(); ++point) {
         out.push_back(*point);
     }
+
 }
 void ObsJSon::customisedPoints(const Transformation& t, const std::set<string>& n, CustomisedPointsList& out,
                                bool all) {

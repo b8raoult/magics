@@ -139,7 +139,10 @@ void TableDecoder::prepareGeo() {
     ok = reader.read(error);
     if (!ok) {
         MagLog::error() << error << endl;
-        throw MagicsException("TableDecoder reader error: " + error);
+        if(MagicsSettings::strict()) {
+            throw MagicsException("TableDecoder reader error: " + error);
+        }
+	return;
     }
 
     vector<double>::iterator x = this->x_values_.begin();
@@ -264,8 +267,10 @@ void TableDecoder::prepareXY() {
     ok = reader.read(error);
     if (!ok) {
         MagLog::error() << error << endl;
-        throw MagicsException("TableDecoder reader error: " + error);
-        // return;
+	if(MagicsSettings::strict()) {
+           throw MagicsException("TableDecoder reader error: " + error);
+	}
+        return;
     }
 
     // Now we interpret

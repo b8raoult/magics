@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/ksh
 
 set +x
 
@@ -12,7 +12,7 @@ dir=`pwd`
 name=`basename $dir`
 touch $img
 
-for sf in $src
+for sf in $src 
 do
     s=`basename $sf .$ext`
 

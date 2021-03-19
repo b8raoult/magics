@@ -295,6 +295,7 @@ void OdaGeoDecoder::customisedPoints(const std::set<string>&, CustomisedPointsLi
     }
 
     try {
+        
         odc::Reader oda(path_);
 
         odc::Reader::iterator it = oda.begin();
@@ -675,6 +676,7 @@ void OdaXYDecoder::print(ostream& out) const {
 void OdaXYDecoder::customisedPoints(const Transformation& transformation, const std::set<string>&,
                                     CustomisedPointsList& list) {
     try {
+        
         odc::Reader oda(path_);
 
         odc::Reader::iterator it = oda.begin();
@@ -749,6 +751,7 @@ void OdaXYDecoder::customisedPoints(const Transformation& transformation, const 
 
 void OdaXYDecoder::customisedPoints(const std::set<string>&, CustomisedPointsList& list) {
     try {
+        
         odc::Reader oda(path_);
 
         odc::Reader::iterator it = oda.begin();
@@ -904,6 +907,7 @@ void OdaXYDecoder::decode() {
         return;
 
     try {
+        
         odc::Reader oda(path_);
 
         odc::Reader::iterator it = oda.begin();

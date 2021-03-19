@@ -107,7 +107,6 @@ public:
     LOG callback_;
 };
 
-
 static MagLogObserver MYLOG;
 
 

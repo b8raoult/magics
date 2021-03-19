@@ -26,6 +26,7 @@
 #include "ProgressObject.h"
 
 #include "LegendVisitor.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 

@@ -32,6 +32,7 @@ enum class FlagConvention
     SI,
     KNOTS
 };
+
 class ArrowProperties {
 public:
     ArrowProperties();

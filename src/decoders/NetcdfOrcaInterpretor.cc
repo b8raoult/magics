@@ -27,6 +27,7 @@
 #include "Layer.h"
 #include "NetcdfData.h"
 #include "SciMethods.h"
+#include "MagicsSettings.h"
 
 using namespace magics;
 
