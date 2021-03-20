@@ -67,7 +67,7 @@ private:
 
     MAGICS_NO_EXPORT void setNewLineWidth(const MFloat) const override;
     MAGICS_NO_EXPORT void setNewColour(const Colour& col) const override;
-    MAGICS_NO_EXPORT int setLineParameters(const LineStyle style, const MFloat w) const override;
+    MAGICS_NO_EXPORT void setLineParameters(const LineStyle style, const MFloat w) const override;
 
     MAGICS_NO_EXPORT void renderPolyline(const int, MFloat*, MFloat*) const override;
     MAGICS_NO_EXPORT void renderPolyline2(const int n, MFloat* x, MFloat* y) const override;
@@ -77,7 +77,7 @@ private:
     MAGICS_NO_EXPORT void circle(const MFloat x, const MFloat y, const MFloat r, const int) const override;
     MAGICS_NO_EXPORT bool renderPixmap(MFloat, MFloat, MFloat, MFloat, int, int, unsigned char*, int, bool, bool) const override;
     MAGICS_NO_EXPORT bool renderCellArray(const Image& obj) const override;
-    MAGICS_NO_EXPORT void renderImage(const ImportObject& obj) const override;
+    MAGICS_NO_EXPORT void renderImage(const ImportObject& obj) const;
 
     // BinaryDriver specific member functions BEGIN
     MAGICS_NO_EXPORT void renderWindArrow(const Arrow& arrow) const override;

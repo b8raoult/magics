@@ -55,7 +55,6 @@ BaseDriver::BaseDriver() :
     currentLayer_(""),
     currentLineType_(LineStyle::SOLID),
     currentLineWidth_(-1),
-    currentLineStyle_(1),
     currentColour_(Colour("white")),
     coordRatioX_(1),
     coordRatioY_(1),
@@ -182,8 +181,12 @@ string BaseDriver::getFileName(const string& extension, const unsigned int no) c
 
     if (!file_.empty()) {
         ASSERT(no <= 1);
-        ASSERT(file_.size() > ext.size() + 1);
-        ASSERT(file_.substr(file_.size() - ext.size()) == ext);
+        ASSERT(file_.size() > ext.size());
+        if(file_.substr(file_.size() - ext.size()) != ext) {
+            std::stringstream oss;
+            oss << "BaseDriver::getFileName extension mismatch [" << ext << "] and [" << file_ << "]";
+            throw MagicsException(oss.str());
+        }
         return file_;
     }
 
@@ -421,7 +424,7 @@ void BaseDriver::printLine(const magics::Polyline& line) const {
     // render line - driver specific part
     if (line.getThickness() > 0 && !(line.getColour() == Colour("NONE"))) {
         setNewColour(line.getColour());
-        currentLineStyle_ = setLineParameters(line.getLineStyle(), line.getThickness());
+        setLineParameters(line.getLineStyle(), line.getThickness());
 
         renderPolyline(n, x, y);
 

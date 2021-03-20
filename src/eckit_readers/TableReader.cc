@@ -384,7 +384,7 @@ bool TableReader::getMetaData(string& errorMessage) {
 
     if (f_.fail()) {
         errorMessage = "TableReader: Could not open table file: " + path();
-	if(MagicsSettings::strict()) {
+        if(MagicsSettings::strict()) {
            throw CannotOpenFile(path());
         }
         return false;
