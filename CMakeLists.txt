@@ -15,7 +15,7 @@ cmake_minimum_required( VERSION 3.12 FATAL_ERROR )
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../ecbuild/cmake")
 find_package( ecbuild 3.4 REQUIRED )
 
-project( magics VERSION 4.5.1 LANGUAGES CXX )
+project( magics VERSION 4.7.0 LANGUAGES CXX )
 
 # make sure that the header files are installed into include/magics
 # note that this needs to be done before ecbuild_declare_project()
@@ -38,10 +38,15 @@ ecbuild_add_option( FEATURE CAIRO
                     DESCRIPTION "cairo support[png/jpeg]"
                     REQUIRED_PACKAGES PangoCairo)
 
+ecbuild_add_option( FEATURE DOCUMENTATION
+                    DEFAULT OFF
+                    DESCRIPTION "Adding support for automatic documentation"
+                  )
+
 
 string(STRIP "${PANGOCAIRO_LIBRARIES}" PANGOCAIRO_LIBRARIES)
 if(PANGOCAIRO_FOUND)
-  set(HAVE_CAIRO ON)
+ set(HAVE_CAIRO ON)
   ecbuild_enable_feature( CAIRO )
 endif()
 
@@ -123,7 +128,7 @@ ecbuild_find_package( NAME eccodes VERSION 2.19.0 REQUIRED
 set( HAVE_GRIB 1 )
 set( HAVE_BUFR 1 )
 
-# find_package( UDUNITS2 2.0)
+
 
 
 # adding NO_MODULE means that if we don't find it, CMake will not generate
@@ -146,8 +151,6 @@ list( APPEND MAGICS_PRIVATE_INCLUDE_DIRS ${PROJ_INCLUDE_DIR})
 
 
 find_package( EXPAT REQUIRED )   # for MagML
-message("EXPAT include: ${EXPAT_INCLUDE_DIR}")
-message("EXPAT library: ${EXPAT_LIBRARIES}")
 
 if(APPLE)
   find_package( zlib REQUIRED )  # dependency of minizip - KMZ support
@@ -248,6 +251,9 @@ add_subdirectory( src )
 add_subdirectory( share )
 add_subdirectory( apps )
 add_subdirectory( test )
+if( HAVE_DOCUMENTATION )
+  add_subdirectory( docs )
+endif()
 
 
 if(NOT HAVE_EFAS)
