@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 WindPlottingWrapper::WindPlottingWrapper(): windplotting_(new WindPlotting())
+
 
 {
 
@@ -55,11 +57,15 @@ void WindPlottingWrapper::set(const MagRequest& request)
 
 	if  (request.countValues("LEGEND") ) {
 		string legend_value = request("LEGEND");
+		
 		windplotting_->legend_ = MagTranslator<string, bool>()(legend_value);
+		
 		}
 	if  (request.countValues("WIND_LEGEND_ONLY") ) {
 		string legend_only_value = request("WIND_LEGEND_ONLY");
+		
 		windplotting_->legend_only_ = MagTranslator<string, bool>()(legend_only_value);
+		
 		}
 	if  (request.countValues("WIND_LEGEND_TEXT") ) {
 		string legend_text_value = request("WIND_LEGEND_TEXT");
@@ -121,7 +127,7 @@ void WindPlottingWrapper::set(const MagRequest& request)
 		levels_wrapper = SimpleFactory<LevelSelectionWrapper>::create(levels_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << levels_value << "] is not a valid value for levels: reset to default -> [count]" << endl;
@@ -139,7 +145,7 @@ void WindPlottingWrapper::set(const MagRequest& request)
 		colourMethod_wrapper = SimpleFactory<ColourTechniqueWrapper>::create(colourMethod_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << colourMethod_value << "] is not a valid value for colourMethod: reset to default -> [calculate]" << endl;

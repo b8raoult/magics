@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 PageIDWrapper::PageIDWrapper(): pageid_(new PageID())
+
 
 {
 
@@ -66,7 +68,9 @@ void PageIDWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("PAGE_ID_LINE_MAGICS") ) {
 		string magics_value = request("PAGE_ID_LINE_MAGICS");
+		
 		pageid_->magics_ = MagTranslator<string, bool>()(magics_value);
+		
 		}
 	if  (request.countValues("PAGE_ID_LINE_USER_TEXT") ) {
 		string user_text_value = request("PAGE_ID_LINE_USER_TEXT");
@@ -74,19 +78,27 @@ void PageIDWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("PAGE_ID_LINE_SYSTEM_PLOT") ) {
 		string system_value = request("PAGE_ID_LINE_SYSTEM_PLOT");
+		
 		pageid_->system_ = MagTranslator<string, bool>()(system_value);
+		
 		}
 	if  (request.countValues("PAGE_ID_LINE_DATE_PLOT") ) {
 		string date_value = request("PAGE_ID_LINE_DATE_PLOT");
+		
 		pageid_->date_ = MagTranslator<string, bool>()(date_value);
+		
 		}
 	if  (request.countValues("PAGE_ID_LINE_ERRORS_PLOT") ) {
 		string errors_value = request("PAGE_ID_LINE_ERRORS_PLOT");
+		
 		pageid_->errors_ = MagTranslator<string, bool>()(errors_value);
+		
 		}
 	if  (request.countValues("PAGE_ID_LINE_USER_TEXT_PLOT") ) {
 		string text_value = request("PAGE_ID_LINE_USER_TEXT_PLOT");
+		
 		pageid_->text_ = MagTranslator<string, bool>()(text_value);
+		
 		}
 	if  (request.countValues("PAGE_ID_LINE_FONT") ) {
 		string font_value = request("PAGE_ID_LINE_FONT");
@@ -111,7 +123,7 @@ void PageIDWrapper::set(const MagRequest& request)
 		logo_wrapper = SimpleFactory<NoLogoPlottingWrapper>::create(logo_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << logo_value << "] is not a valid value for logo: reset to default -> [on]" << endl;

@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 WindWrapper::WindWrapper(): wind_(new Wind())
+
 
 {
 
@@ -63,7 +65,9 @@ void WindWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("WIND_THINNING_DEBUG") ) {
 		string thinning_debug_value = request("WIND_THINNING_DEBUG");
+		
 		wind_->thinning_debug_ = MagTranslator<string, bool>()(thinning_debug_value);
+		
 		}
 	
 	
@@ -75,7 +79,7 @@ void WindWrapper::set(const MagRequest& request)
 		type_wrapper = SimpleFactory<WindPlottingWrapper>::create(type_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << type_value << "] is not a valid value for type: reset to default -> [arrows]" << endl;

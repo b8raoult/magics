@@ -53,7 +53,7 @@ MagConfigHandler::MagConfigHandler(const string& config, MagConfig& magics) {
         }
     }
     catch (std::exception& e) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::error() << "JSON error in file: " << config << ": " << e.what() << endl;
@@ -297,11 +297,19 @@ void UnitsLibrary::callback(const string& name, const Value& value) {
 int Style::score(const MetaDataCollector& data) {
     int bestscore = 0;
     map<string, string> criteria;
+    static bool debug;
+    static bool first = true;
+    if ( first ) {
+        first = false;
+        debug = (getEnvVariable("MAGICS_STYLES_DEBUG") != "");
+    }
+ 
     for (auto match = criteria_.begin(); match != criteria_.end(); ++match) {
         int score = 0;
         for (auto key = match->begin(); key != match->end(); ++key) {
             auto dkey = data.find(key->first);
 
+            
             if (dkey == data.end()) {
                 continue;
             }
@@ -319,9 +327,12 @@ int Style::score(const MetaDataCollector& data) {
                 if (*value == clean) {
                     tmpscore++;
                     criteria.insert(make_pair(key->first, *value));
+                    if ( debug) 
+                        cout << " Found match " << " --> " <<  key->first << " --> " << *value << " == " << dkey->second << " --> score -> " << score << ", " << criteria.size() << endl;
                     break;
                 }
             }
+
             if (!tmpscore) {
                 criteria.clear();
                 score = 0;
@@ -329,6 +340,7 @@ int Style::score(const MetaDataCollector& data) {
             }
             score++;
         }
+
         if (bestscore < score)
             bestscore = score;
     }
@@ -453,7 +465,7 @@ void DimensionGuess::init() {
         }
     }
     catch (std::exception& e) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::error() << "JSON error in " << definitions_ << ": " << e.what() << endl;

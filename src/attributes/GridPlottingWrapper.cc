@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 GridPlottingWrapper::GridPlottingWrapper(): gridplotting_(new GridPlotting())
+
 
 {
 
@@ -66,7 +68,9 @@ void GridPlottingWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("MAP_GRID_FRAME") ) {
 		string grid_frame_value = request("MAP_GRID_FRAME");
+		
 		gridplotting_->grid_frame_ = MagTranslator<string, bool>()(grid_frame_value);
+		
 		}
 	if  (request.countValues("MAP_GRID_FRAME_THICKNESS") ) {
 		int grid_frame_thickness_value = request("MAP_GRID_FRAME_THICKNESS");

@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 MetgramGraphWrapper::MetgramGraphWrapper(): metgramgraph_(new MetgramGraph())
+
 
 {
 
@@ -63,7 +65,7 @@ void MetgramGraphWrapper::set(const MagRequest& request)
 		style_wrapper = SimpleFactory<MetgramStyleWrapper>::create(style_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << style_value << "] is not a valid value for style: reset to default -> [curve]" << endl;

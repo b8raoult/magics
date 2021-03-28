@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 Proj4Meteosat145Wrapper::Proj4Meteosat145Wrapper(): proj4meteosat145_(new Proj4Meteosat145())
+
 
 {
 

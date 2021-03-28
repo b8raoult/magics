@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 TableDecoderWrapper::TableDecoderWrapper(): tabledecoder_(new TableDecoder())
+
 
 {
 
@@ -63,7 +65,9 @@ void TableDecoderWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("TABLE_COMBINE_DELIMITERS") ) {
 		string combine_delimiters_value = request("TABLE_COMBINE_DELIMITERS");
+		
 		tabledecoder_->combine_delimiters_ = MagTranslator<string, bool>()(combine_delimiters_value);
+		
 		}
 	if  (request.countValues("TABLE_HEADER_ROW") ) {
 		int header_row_value = request("TABLE_HEADER_ROW");
@@ -136,7 +140,7 @@ void TableDecoderWrapper::set(const MagRequest& request)
 		table_binning_wrapper = SimpleFactory<BinningObjectWrapper>::create(table_binning_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << table_binning_value << "] is not a valid value for table_binning: reset to default -> [on]" << endl;

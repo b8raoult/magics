@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 MvRootSceneNodeWrapper::MvRootSceneNodeWrapper(): mvrootscenenode_(new MvRootSceneNode())
+
 
 {
 
@@ -63,7 +65,9 @@ void MvRootSceneNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("SUPER_PAGE_FRAME") ) {
 		string frame_value = request("SUPER_PAGE_FRAME");
+		
 		mvrootscenenode_->frame_ = MagTranslator<string, bool>()(frame_value);
+		
 		}
 	if  (request.countValues("SUPER_PAGE_FRAME_THICKNESS") ) {
 		int thickness_value = request("SUPER_PAGE_FRAME_THICKNESS");
@@ -83,7 +87,9 @@ void MvRootSceneNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("LEGEND") ) {
 		string legend_value = request("LEGEND");
+		
 		mvrootscenenode_->legend_ = MagTranslator<string, bool>()(legend_value);
+		
 		}
 	
 	if  (request.countValues("SUPER_PAGE_FRAME_COLOUR") ) {

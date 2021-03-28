@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 Proj4GeoseWrapper::Proj4GeoseWrapper(): proj4geose_(new Proj4Geose())
+
 
 {
 

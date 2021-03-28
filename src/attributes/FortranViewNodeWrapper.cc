@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 FortranViewNodeWrapper::FortranViewNodeWrapper(): fortranviewnode_(new FortranViewNode())
+
 
 {
 
@@ -71,7 +73,9 @@ void FortranViewNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("SUBPAGE_MAP_LIBRARY_AREA") ) {
 		string predefined_value = request("SUBPAGE_MAP_LIBRARY_AREA");
+		
 		fortranviewnode_->predefined_ = MagTranslator<string, bool>()(predefined_value);
+		
 		}
 	if  (request.countValues("SUBPAGE_MAP_AREA_NAME") ) {
 		string predefined_name_value = request("SUBPAGE_MAP_AREA_NAME");
@@ -103,11 +107,15 @@ void FortranViewNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("SUBPAGE_CLIPPING") ) {
 		string clipping_value = request("SUBPAGE_CLIPPING");
+		
 		fortranviewnode_->clipping_ = MagTranslator<string, bool>()(clipping_value);
+		
 		}
 	if  (request.countValues("SUBPAGE_FRAME") ) {
 		string frame_value = request("SUBPAGE_FRAME");
+		
 		fortranviewnode_->frame_ = MagTranslator<string, bool>()(frame_value);
+		
 		}
 	if  (request.countValues("SUBPAGE_FRAME_THICKNESS") ) {
 		int frame_thickness_value = request("SUBPAGE_FRAME_THICKNESS");
@@ -139,7 +147,9 @@ void FortranViewNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("AUTOMATIC_TITLE") ) {
 		string title_value = request("AUTOMATIC_TITLE");
+		
 		fortranviewnode_->title_ = MagTranslator<string, bool>()(title_value);
+		
 		}
 	
 	
@@ -151,7 +161,7 @@ void FortranViewNodeWrapper::set(const MagRequest& request)
 		transformation_wrapper = SimpleFactory<TransformationWrapper>::create(transformation_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << transformation_value << "] is not a valid value for transformation: reset to default -> [cylindrical]" << endl;
@@ -185,7 +195,7 @@ void FortranViewNodeWrapper::set(const MagRequest& request)
 		preview_wrapper = SimpleFactory<NoPreviewVisitorWrapper>::create(preview_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << preview_value << "] is not a valid value for preview: reset to default -> [off]" << endl;
@@ -203,7 +213,7 @@ void FortranViewNodeWrapper::set(const MagRequest& request)
 		magnify_wrapper = SimpleFactory<NoMagnifierVisitorWrapper>::create(magnify_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << magnify_value << "] is not a valid value for magnify: reset to default -> [off]" << endl;

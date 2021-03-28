@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 XHyperCoordinateWrapper::XHyperCoordinateWrapper(): xhypercoordinate_(new XHyperCoordinate())
+
 
 {
 
@@ -78,7 +80,9 @@ void XHyperCoordinateWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("X_AUTOMATIC_REVERSE") ) {
 		string reverse_value = request("X_AUTOMATIC_REVERSE");
+		
 		xhypercoordinate_->reverse_ = MagTranslator<string, bool>()(reverse_value);
+		
 		}
 	
 	

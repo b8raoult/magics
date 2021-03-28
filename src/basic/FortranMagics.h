@@ -24,7 +24,7 @@
 
 #include "DisplayManager.h"
 #include "DriverManager.h"
-#include "MagicsSettingsAttributes.h"
+#include "MagicsGlobalAttributes.h"
 #include "OutputHandler.h"
 #include "magics.h"
 

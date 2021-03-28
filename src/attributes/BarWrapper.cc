@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 BarWrapper::BarWrapper(): bar_(new Bar())
+
 
 {
 
@@ -78,7 +80,9 @@ void BarWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("GRAPH_BAR_CLIPPING") ) {
 		string clipping_value = request("GRAPH_BAR_CLIPPING");
+		
 		bar_->clipping_ = MagTranslator<string, bool>()(clipping_value);
+		
 		}
 	stringarray  annotation_value;
 	for (int i = 0; i < request.countValues("GRAPH_BAR_ANNOTATION"); i++)
@@ -125,7 +129,7 @@ void BarWrapper::set(const MagRequest& request)
 		shade_wrapper = SimpleFactory<GraphShadeWrapper>::create(shade_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << shade_value << "] is not a valid value for shade: reset to default -> [on]" << endl;

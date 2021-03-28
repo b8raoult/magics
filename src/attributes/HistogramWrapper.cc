@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 HistogramWrapper::HistogramWrapper(): histogram_(new Histogram())
+
 
 {
 
@@ -96,7 +98,7 @@ void HistogramWrapper::set(const MagRequest& request)
 		levels_wrapper = SimpleFactory<LevelSelectionWrapper>::create(levels_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << levels_value << "] is not a valid value for levels: reset to default -> [count]" << endl;

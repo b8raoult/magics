@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 NetcdfDecoderWrapper::NetcdfDecoderWrapper(): netcdfdecoder_(new NetcdfDecoder())
+
 
 {
 
@@ -67,7 +69,7 @@ void NetcdfDecoderWrapper::set(const MagRequest& request)
 		interpretor_wrapper = SimpleFactory<NetcdfInterpretorWrapper>::create(interpretor_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << interpretor_value << "] is not a valid value for interpretor: reset to default -> [guess]" << endl;

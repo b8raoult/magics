@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 ImportObjectHandlerWrapper::ImportObjectHandlerWrapper(): importobjecthandler_(new ImportObjectHandler())
+
 
 {
 
@@ -63,7 +65,9 @@ void ImportObjectHandlerWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("IMPORT_OVERLAY") ) {
 		string overlay_value = request("IMPORT_OVERLAY");
+		
 		importobjecthandler_->overlay_ = MagTranslator<string, bool>()(overlay_value);
+		
 		}
 	if  (request.countValues("IMPORT_X_POSITION") ) {
 		double import_x_value = request("IMPORT_X_POSITION");

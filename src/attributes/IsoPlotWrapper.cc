@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 IsoPlotWrapper::IsoPlotWrapper(): isoplot_(new IsoPlot())
+
 
 {
 
@@ -79,7 +81,9 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("CONTOUR_LINE_COLOUR_RAINBOW") ) {
 		string rainbow_value = request("CONTOUR_LINE_COLOUR_RAINBOW");
+		
 		isoplot_->rainbow_ = MagTranslator<string, bool>()(rainbow_value);
+		
 		}
 	if  (request.countValues("CONTOUR_LINE_COLOUR_RAINBOW_DIRECTION") ) {
 		string rainbowDirection_value = request("CONTOUR_LINE_COLOUR_RAINBOW_DIRECTION");
@@ -102,7 +106,9 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		isoplot_->rainbowStyleList_ = rainbowStyleList_value;
 	if  (request.countValues("CONTOUR_LEGEND_ONLY") ) {
 		string legend_only_value = request("CONTOUR_LEGEND_ONLY");
+		
 		isoplot_->legend_only_ = MagTranslator<string, bool>()(legend_only_value);
+		
 		}
 	
 	
@@ -125,7 +131,7 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		rainbowMethod_wrapper = SimpleFactory<ColourTechniqueWrapper>::create(rainbowMethod_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << rainbowMethod_value << "] is not a valid value for rainbowMethod: reset to default -> [calculate]" << endl;
@@ -171,7 +177,7 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		highlight_wrapper = SimpleFactory<NoIsoHighlightWrapper>::create(highlight_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << highlight_value << "] is not a valid value for highlight: reset to default -> [on]" << endl;
@@ -189,7 +195,7 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		levelSelection_wrapper = SimpleFactory<LevelSelectionWrapper>::create(levelSelection_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << levelSelection_value << "] is not a valid value for levelSelection: reset to default -> [count]" << endl;
@@ -207,7 +213,7 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		label_wrapper = SimpleFactory<NoIsoLabelWrapper>::create(label_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << label_value << "] is not a valid value for label: reset to default -> [on]" << endl;
@@ -225,7 +231,7 @@ void IsoPlotWrapper::set(const MagRequest& request)
 		shading_wrapper = SimpleFactory<NoIsoShadingWrapper>::create(shading_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << shading_value << "] is not a valid value for shading: reset to default -> [off]" << endl;

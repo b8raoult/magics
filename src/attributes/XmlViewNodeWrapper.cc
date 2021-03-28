@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 XmlViewNodeWrapper::XmlViewNodeWrapper(): xmlviewnode_(new XmlViewNode())
+
 
 {
 
@@ -74,7 +76,7 @@ void XmlViewNodeWrapper::set(const MagRequest& request)
 		transformation_wrapper = SimpleFactory<TransformationWrapper>::create(transformation_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << transformation_value << "] is not a valid value for transformation: reset to default -> [cylindrical]" << endl;

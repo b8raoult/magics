@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 XmlSceneNodeWrapper::XmlSceneNodeWrapper(): xmlscenenode_(new XmlSceneNode())
+
 
 {
 
@@ -99,7 +101,9 @@ void XmlSceneNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("SCENE_NODE_BORDER") ) {
 		string border_value = request("SCENE_NODE_BORDER");
+		
 		xmlscenenode_->border_ = MagTranslator<string, bool>()(border_value);
+		
 		}
 	if  (request.countValues("SCENE_NODE_BORDER_TOP") ) {
 		string border_top_value = request("SCENE_NODE_BORDER_TOP");
@@ -162,7 +166,7 @@ void XmlSceneNodeWrapper::set(const MagRequest& request)
 		page_id_wrapper = SimpleFactory<NoPageIDWrapper>::create(page_id_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << page_id_value << "] is not a valid value for page_id: reset to default -> [on]" << endl;

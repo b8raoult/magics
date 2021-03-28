@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 Proj4EPSG3857Wrapper::Proj4EPSG3857Wrapper(): proj4epsg3857_(new Proj4EPSG3857())
+
 
 {
 

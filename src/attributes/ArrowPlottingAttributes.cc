@@ -31,7 +31,7 @@ ArrowPlottingAttributes::ArrowPlottingAttributes():
 	ratio_(ParameterManager::getDouble("wind_arrow_head_ratio")),
 	max_speed_(ParameterManager::getDouble("wind_arrow_max_speed")),
 	min_speed_(ParameterManager::getDouble("wind_arrow_min_speed")),
-	thickness_(ParameterManager::getDouble("wind_arrow_thickness")),
+	thickness_(ParameterManager::getInt("wind_arrow_thickness")),
 	unit_system_(ParameterManager::getString("wind_arrow_unit_system")),
 	unit_velocity_(ParameterManager::getDouble("wind_arrow_unit_velocity")),
 	legend_unit_(ParameterManager::getString("wind_arrow_legend_text")),
@@ -198,7 +198,7 @@ static MagicsParameter<int> wind_arrow_head_shape("wind_arrow_head_shape", 0);
 static MagicsParameter<double> wind_arrow_head_ratio("wind_arrow_head_ratio", 0.3);
 static MagicsParameter<double> wind_arrow_max_speed("wind_arrow_max_speed", 1.0e+21);
 static MagicsParameter<double> wind_arrow_min_speed("wind_arrow_min_speed", -1.0e+21);
-static MagicsParameter<double> wind_arrow_thickness("wind_arrow_thickness", 1);
+static MagicsParameter<int> wind_arrow_thickness("wind_arrow_thickness", 1);
 static MagicsParameter<string> wind_arrow_unit_system("wind_arrow_unit_system", "paper");
 static MagicsParameter<double> wind_arrow_unit_velocity("wind_arrow_unit_velocity", 25.0);
 static MagicsParameter<string> wind_arrow_legend_text("wind_arrow_legend_text", "m/s");

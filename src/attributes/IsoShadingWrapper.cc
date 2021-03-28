@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 IsoShadingWrapper::IsoShadingWrapper(): isoshading_(new IsoShading())
+
 
 {
 
@@ -78,7 +80,7 @@ void IsoShadingWrapper::set(const MagRequest& request)
 		technique_wrapper = SimpleFactory<ShadingTechniqueWrapper>::create(technique_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << technique_value << "] is not a valid value for technique: reset to default -> [polygon_shading]" << endl;
@@ -96,7 +98,7 @@ void IsoShadingWrapper::set(const MagRequest& request)
 		colourMethod_wrapper = SimpleFactory<ColourTechniqueWrapper>::create(colourMethod_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << colourMethod_value << "] is not a valid value for colourMethod: reset to default -> [calculate]" << endl;

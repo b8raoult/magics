@@ -24,7 +24,7 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
@@ -67,7 +67,9 @@ void BaseDriverWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("OUTPUT_NAME_FIRST_PAGE_NUMBER") ) {
 		string firstnumber_value = request("OUTPUT_NAME_FIRST_PAGE_NUMBER");
+		
 		basedriver_->firstnumber_ = MagTranslator<string, bool>()(firstnumber_value);
+		
 		}
 	if  (request.countValues("OUTPUT_NAME_FIRST_PAGE_NUMBER_VALUE") ) {
 		int firstvalue_value = request("OUTPUT_NAME_FIRST_PAGE_NUMBER_VALUE");
@@ -99,7 +101,9 @@ void BaseDriverWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("OUTPUT_DEBUG") ) {
 		string debug_value = request("OUTPUT_DEBUG");
+		
 		basedriver_->debug_ = MagTranslator<string, bool>()(debug_value);
+		
 		}
 	if  (request.countValues("OUTPUT_WIDTH") ) {
 		int width_value = request("OUTPUT_WIDTH");
@@ -107,7 +111,9 @@ void BaseDriverWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("OUTPUT_FILELIST") ) {
 		string filelist_value = request("OUTPUT_FILELIST");
+		
 		basedriver_->filelist_ = MagTranslator<string, bool>()(filelist_value);
+		
 		}
 	if  (request.countValues("OUTPUT_FILELIST_NAME") ) {
 		string filelist_name_value = request("OUTPUT_FILELIST_NAME");
@@ -115,7 +121,9 @@ void BaseDriverWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("OUTPUT_FILELIST_RESET") ) {
 		string filelist_reset_value = request("OUTPUT_FILELIST_RESET");
+		
 		basedriver_->filelist_reset_ = MagTranslator<string, bool>()(filelist_reset_value);
+		
 		}
 	intarray frame_list_value;
 	for (int i = 0; i < request.countValues("OUTPUT_FRAME_LIST"); i++)

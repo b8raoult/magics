@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 ValuePlotWrapper::ValuePlotWrapper(): valueplot_(new ValuePlot())
+
 
 {
 
@@ -74,7 +76,7 @@ void ValuePlotWrapper::set(const MagRequest& request)
 		method_wrapper = SimpleFactory<ValuePlotMethodWrapper>::create(method_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << method_value << "] is not a valid value for method: reset to default -> [value]" << endl;

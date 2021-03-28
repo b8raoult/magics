@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 GraphPlottingWrapper::GraphPlottingWrapper(): graphplotting_(new GraphPlotting())
+
 
 {
 
@@ -55,7 +57,9 @@ void GraphPlottingWrapper::set(const MagRequest& request)
 
 	if  (request.countValues("LEGEND") ) {
 		string legend_value = request("LEGEND");
+		
 		graphplotting_->legend_ = MagTranslator<string, bool>()(legend_value);
+		
 		}
 	if  (request.countValues("LEGEND_USER_TEXT") ) {
 		string legend_text_value = request("LEGEND_USER_TEXT");
@@ -71,7 +75,7 @@ void GraphPlottingWrapper::set(const MagRequest& request)
 		type_wrapper = SimpleFactory<GraphWrapper>::create(type_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << type_value << "] is not a valid value for type: reset to default -> [curve]" << endl;

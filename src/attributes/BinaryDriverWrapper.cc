@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 BinaryDriverWrapper::BinaryDriverWrapper(): binarydriver_(new BinaryDriver())
+
 
 {
 

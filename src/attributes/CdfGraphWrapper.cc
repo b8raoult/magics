@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 CdfGraphWrapper::CdfGraphWrapper(): cdfgraph_(new CdfGraph())
+
 
 {
 
@@ -78,7 +80,9 @@ void CdfGraphWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("LEGEND") ) {
 		string legend_value = request("LEGEND");
+		
 		cdfgraph_->legend_ = MagTranslator<string, bool>()(legend_value);
+		
 		}
 	
 	if  (request.countValues("CDF_CLIM_LINE_COLOUR") ) {

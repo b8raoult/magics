@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 InputMatrixWrapper::InputMatrixWrapper(): inputmatrix_(new InputMatrix())
+
 
 {
 
@@ -55,7 +57,9 @@ void InputMatrixWrapper::set(const MagRequest& request)
 
 	if  (request.countValues("INPUT_SIMPLE_FIELD") ) {
 		string simple_field_value = request("INPUT_SIMPLE_FIELD");
+		
 		inputmatrix_->simple_field_ = MagTranslator<string, bool>()(simple_field_value);
+		
 		}
 	if  (request.countValues("INPUT_FIELD_UNITS") ) {
 		string units_value = request("INPUT_FIELD_UNITS");
@@ -105,7 +109,7 @@ void InputMatrixWrapper::set(const MagRequest& request)
 		organization_wrapper = SimpleFactory<InputMatrixInterpretorWrapper>::create(organization_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << organization_value << "] is not a valid value for organization: reset to default -> [regular]" << endl;

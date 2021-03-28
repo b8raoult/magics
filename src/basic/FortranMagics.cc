@@ -35,7 +35,7 @@
 #include "ImportPlot.h"
 #include "InputMatrix.h"
 #include "LegendVisitor.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 #include "MapGenDecoder.h"
 #include "MetaData.h"
 #include "RootSceneNode.h"
@@ -53,6 +53,7 @@
 #include "VisualAction.h"
 #include "Wind.h"
 #include "XYList.h"
+#include "MagicsGlobal.h"
 
 #ifdef HAVE_NETCDF
 #include "NetcdfDecoder.h"
@@ -138,7 +139,7 @@ void FortranMagics::popen() {
     MagLog::info() << "popen()" << endl;
 
 
-    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsSettings::silent()) {
+    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
         MagLog::userInfo() << "----------------------------------------------------"
                               "--------------\n";
         MagLog::userInfo() << "\n";
@@ -204,7 +205,7 @@ void FortranMagics::pclose() {
     MagLog::info().flush();
 
 
-    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsSettings::silent()) {
+    if (getEnvVariable("MAGPLUS_QUIET").empty() && !MagicsGlobal::silent()) {
         MagLog::userInfo() << "----------------------------------------------------"
                               "--------------\n";
         MagLog::userInfo() << "    COMPLETED\n";
@@ -233,6 +234,11 @@ void FortranMagics::subpage() {
     top()->push_back(axisContainer_);
     axisContainer_->getReady();
     push(axisContainer_);
+
+    while (!axis_.empty()) {
+            axisContainer_->push_back(axis_.top());
+            axis_.pop();
+    }
 }
 
 void FortranMagics::page() {
@@ -382,8 +388,10 @@ void FortranMagics::actions() {
         Action action = actions_.top();
         (this->*action)();
         actions_.pop();
+
         empty_ = false;
     }
+
 }
 
 void FortranMagics::pcoast() {
@@ -437,10 +445,7 @@ void FortranMagics::ptest() {
 void FortranMagics::finish() {
     if (!empty_) {
         actions();  // The flag to force the generation of the plot has been set!
-        while (!axis_.empty()) {
-            axisContainer_->push_back(axis_.top());
-            axis_.pop();
-        }
+
     }
 
     if (!axisContainer_)
@@ -497,10 +502,12 @@ const char* FortranMagics::metagrib() {
     MagDef attributes;
 
     library->askId(request);
-    grib.visit(request);
+    grib.ask(request);
 
     StyleEntry style;
     library->getStyle(request, attributes, style);
+    
+     
 
     string print = getEnvVariable("MAGPLUS_DATA");
     if (print.size()) {
@@ -636,7 +643,7 @@ void FortranMagics::pgrib() {
     int index;
     ParameterManager::get("grib_field_position", index);
 
-    if (grib == gribfile && MagicsSettings::compatibility()) {
+    if (grib == gribfile && MagicsGlobal::compatibility()) {
         if (index == gribindex_) {
             gribindex_++;
         }
@@ -878,6 +885,7 @@ void FortranMagics::wrepjson() {
     action_->data(wrep);
 }
 void FortranMagics::metbufr() {
+
     actions();
     action_ = new VisualAction();
 
@@ -977,7 +985,8 @@ void FortranMagics::epsshading() {
 }
 
 void FortranMagics::paxis() {
-    actions();
+
+
     try {
         string orientation;
 
@@ -986,16 +995,24 @@ void FortranMagics::paxis() {
         if (magCompare(orientation, "vertical")) {
             Axis* vaxis = new VerticalAxis();
             MagLog::dev() << *vaxis << "\n";
-            top()->push_back(vaxis);
+            if (axisContainer_)
+                axisContainer_->push_back(vaxis);
+            else
+                axis_.push(vaxis);
+
         }
         else {
             Axis* haxis = new HorizontalAxis();
             MagLog::dev() << *haxis << "\n";
-            top()->push_back(haxis);
+            if (axisContainer_)
+                axisContainer_->push_back(haxis);
+            else
+                axis_.push(haxis);
+
         }
     }
     catch (MagicsException& e) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
 

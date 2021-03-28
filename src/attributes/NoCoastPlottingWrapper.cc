@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 NoCoastPlottingWrapper::NoCoastPlottingWrapper(): nocoastplotting_(new NoCoastPlotting())
+
 
 {
 
@@ -59,15 +61,21 @@ void NoCoastPlottingWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("MAP_COASTLINE_LAND_SHADE") ) {
 		string land_value = request("MAP_COASTLINE_LAND_SHADE");
+		
 		nocoastplotting_->land_ = MagTranslator<string, bool>()(land_value);
+		
 		}
 	if  (request.countValues("MAP_COASTLINE_SEA_SHADE") ) {
 		string sea_value = request("MAP_COASTLINE_SEA_SHADE");
+		
 		nocoastplotting_->sea_ = MagTranslator<string, bool>()(sea_value);
+		
 		}
 	if  (request.countValues("MAP_PREVIEW") ) {
 		string preview_value = request("MAP_PREVIEW");
+		
 		nocoastplotting_->preview_ = MagTranslator<string, bool>()(preview_value);
+		
 		}
 	if  (request.countValues("MAP_RIVERS") ) {
 		string rivers_value = request("MAP_RIVERS");
@@ -125,7 +133,7 @@ void NoCoastPlottingWrapper::set(const MagRequest& request)
 		boundaries_wrapper = SimpleFactory<NoBoundariesWrapper>::create(boundaries_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << boundaries_value << "] is not a valid value for boundaries: reset to default -> [off]" << endl;
@@ -143,7 +151,7 @@ void NoCoastPlottingWrapper::set(const MagRequest& request)
 		cities_wrapper = SimpleFactory<NoCitiesWrapper>::create(cities_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << cities_value << "] is not a valid value for cities: reset to default -> [off]" << endl;

@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 HiLoTextWrapper::HiLoTextWrapper(): hilotext_(new HiLoText())
+
 
 {
 
@@ -70,7 +72,9 @@ void HiLoTextWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("CONTOUR_HILO_BLANKING") ) {
 		string blanking_value = request("CONTOUR_HILO_BLANKING");
+		
 		hilotext_->blanking_ = MagTranslator<string, bool>()(blanking_value);
+		
 		}
 	
 	

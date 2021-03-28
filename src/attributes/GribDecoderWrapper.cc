@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 GribDecoderWrapper::GribDecoderWrapper(): gribdecoder_(new GribDecoder())
+
 
 {
 
@@ -63,15 +65,21 @@ void GribDecoderWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("GRIB_LOOP") ) {
 		string loop_value = request("GRIB_LOOP");
+		
 		gribdecoder_->loop_ = MagTranslator<string, bool>()(loop_value);
+		
 		}
 	if  (request.countValues("GRIB_AUTOMATIC_SCALING") ) {
 		string scaling_value = request("GRIB_AUTOMATIC_SCALING");
+		
 		gribdecoder_->scaling_ = MagTranslator<string, bool>()(scaling_value);
+		
 		}
 	if  (request.countValues("GRIB_AUTOMATIC_DERIVED_SCALING") ) {
 		string derived_scaling_value = request("GRIB_AUTOMATIC_DERIVED_SCALING");
+		
 		gribdecoder_->derived_scaling_ = MagTranslator<string, bool>()(derived_scaling_value);
+		
 		}
 	if  (request.countValues("GRIB_SCALING_FACTOR") ) {
 		double scaling_factor_value = request("GRIB_SCALING_FACTOR");
@@ -95,11 +103,15 @@ void GribDecoderWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("GRIB_TEXT_EXPERIMENT") ) {
 		string expver_value = request("GRIB_TEXT_EXPERIMENT");
+		
 		gribdecoder_->expver_ = MagTranslator<string, bool>()(expver_value);
+		
 		}
 	if  (request.countValues("GRIB_TEXT_UNITS") ) {
 		string units_value = request("GRIB_TEXT_UNITS");
+		
 		gribdecoder_->units_ = MagTranslator<string, bool>()(units_value);
+		
 		}
 	if  (request.countValues("GRIB_FIELD_POSITION") ) {
 		int field_position_value = request("GRIB_FIELD_POSITION");
@@ -131,7 +143,7 @@ void GribDecoderWrapper::set(const MagRequest& request)
 		address_mode_wrapper = SimpleFactory<GribAddressModeWrapper>::create(address_mode_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << address_mode_value << "] is not a valid value for address_mode: reset to default -> [record]" << endl;
@@ -149,7 +161,7 @@ void GribDecoderWrapper::set(const MagRequest& request)
 		wind_mode_wrapper = SimpleFactory<WindModeWrapper>::create(wind_mode_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << wind_mode_value << "] is not a valid value for wind_mode: reset to default -> [uv]" << endl;

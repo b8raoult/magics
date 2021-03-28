@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 InputDataWrapper::InputDataWrapper(): inputdata_(new InputData())
+
 
 {
 
@@ -140,7 +142,9 @@ void InputDataWrapper::set(const MagRequest& request)
 		inputdata_->y_component_ = y_component_value;
 	if  (request.countValues("INPUT_AUTOMATIC") ) {
 		string input_automatic_value = request("INPUT_AUTOMATIC");
+		
 		inputdata_->input_automatic_ = MagTranslator<string, bool>()(input_automatic_value);
+		
 		}
 	
 	
@@ -152,7 +156,7 @@ void InputDataWrapper::set(const MagRequest& request)
 		input_binning_wrapper = SimpleFactory<BinningObjectWrapper>::create(input_binning_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << input_binning_value << "] is not a valid value for input_binning: reset to default -> [on]" << endl;

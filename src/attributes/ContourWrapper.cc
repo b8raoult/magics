@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 ContourWrapper::ContourWrapper(): contour_(new Contour())
+
 
 {
 
@@ -55,7 +57,9 @@ void ContourWrapper::set(const MagRequest& request)
 
 	if  (request.countValues("LEGEND") ) {
 		string legend_value = request("LEGEND");
+		
 		contour_->legend_ = MagTranslator<string, bool>()(legend_value);
+		
 		}
 	if  (request.countValues("CONTOUR_DESCRIPTION") ) {
 		string description_value = request("CONTOUR_DESCRIPTION");
@@ -83,7 +87,9 @@ void ContourWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("CONTOUR_METADATA_ONLY") ) {
 		string metadata_only_value = request("CONTOUR_METADATA_ONLY");
+		
 		contour_->metadata_only_ = MagTranslator<string, bool>()(metadata_only_value);
+		
 		}
 	if  (request.countValues("CONTOUR_AUTOMATIC_LIBRARY_PATH") ) {
 		string library_path_value = request("CONTOUR_AUTOMATIC_LIBRARY_PATH");
@@ -103,7 +109,7 @@ void ContourWrapper::set(const MagRequest& request)
 		contour_wrapper = SimpleFactory<IsoPlotWrapper>::create(contour_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << contour_value << "] is not a valid value for contour: reset to default -> [on]" << endl;
@@ -121,7 +127,7 @@ void ContourWrapper::set(const MagRequest& request)
 		method_wrapper = SimpleFactory<ContourMethodWrapper>::create(method_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << method_value << "] is not a valid value for method: reset to default -> [automatic]" << endl;
@@ -139,7 +145,7 @@ void ContourWrapper::set(const MagRequest& request)
 		hilo_wrapper = SimpleFactory<HiLoBaseWrapper>::create(hilo_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << hilo_value << "] is not a valid value for hilo: reset to default -> [off]" << endl;
@@ -157,7 +163,7 @@ void ContourWrapper::set(const MagRequest& request)
 		grid_wrapper = SimpleFactory<ValuePlotBaseWrapper>::create(grid_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << grid_value << "] is not a valid value for grid: reset to default -> [off]" << endl;

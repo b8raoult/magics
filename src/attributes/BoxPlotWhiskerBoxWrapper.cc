@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 BoxPlotWhiskerBoxWrapper::BoxPlotWhiskerBoxWrapper(): boxplotwhiskerbox_(new BoxPlotWhiskerBox())
+
 
 {
 
@@ -72,7 +74,7 @@ void BoxPlotWhiskerBoxWrapper::set(const MagRequest& request)
 		border_wrapper = SimpleFactory<NoBoxPlotWhiskerBorderWrapper>::create(border_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << border_value << "] is not a valid value for border: reset to default -> [on]" << endl;

@@ -46,8 +46,8 @@ WebFormat.cc
 WebFormat.h
 XmlMagics.cc
 XmlMagics.h
-MagicsSettings.cc
-MagicsSettings.h
+MagicsGlobal.cc
+MagicsGlobal.h
 )
 if ( metview )
 	list (APPEND metview_include
@@ -58,6 +58,7 @@ if ( metview )
 			basic/BasicGraphicsObject.h
 			basic/DisplayManager.h
 			basic/Layer.h
+			basic/MagicsGlobal.h
 			basic/SceneVisitor.h
 			basic/XmlMagics.h
 			basic/LegendVisitor.h

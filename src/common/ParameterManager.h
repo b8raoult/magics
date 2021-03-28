@@ -23,7 +23,7 @@
 #include "Factory.h"
 #include "MagException.h"
 #include "MagLog.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 #include "magics.h"
 
 
@@ -51,7 +51,7 @@ public:
             param->set(value);
         }
         else {
-            if (MagicsSettings::strict()) {
+            if (MagicsGlobal::strict()) {
                 throw UnknownParameter(name);
             }
             MagLog::warning() << "The parameter '" << name << "' was not found.\n";
@@ -100,7 +100,7 @@ public:
 
         BaseParameter* param = (*table_).parameter(name);
         if (!param) {
-            if (MagicsSettings::strict()) {
+            if (MagicsGlobal::strict()) {
                 throw UnknownParameter(name);
             }
             MagLog::warning() << "parameter \"" << name << "\" not found " << endl;
@@ -113,7 +113,7 @@ public:
             object = SimpleObjectMaker<T>::create(val);
         }
         catch (NoFactoryException&) {
-            if (MagicsSettings::strict()) {
+            if (MagicsGlobal::strict()) {
                 throw;
             }
 

@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 Proj4LambertWrapper::Proj4LambertWrapper(): proj4lambert_(new Proj4Lambert())
+
 
 {
 

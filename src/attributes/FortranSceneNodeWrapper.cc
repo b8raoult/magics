@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 FortranSceneNodeWrapper::FortranSceneNodeWrapper(): fortranscenenode_(new FortranSceneNode())
+
 
 {
 
@@ -71,7 +73,9 @@ void FortranSceneNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("PAGE_FRAME") ) {
 		string frame_value = request("PAGE_FRAME");
+		
 		fortranscenenode_->frame_ = MagTranslator<string, bool>()(frame_value);
+		
 		}
 	if  (request.countValues("PAGE_FRAME_THICKNESS") ) {
 		int frame_thickness_value = request("PAGE_FRAME_THICKNESS");
@@ -95,7 +99,9 @@ void FortranSceneNodeWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("SKINNY_MODE") ) {
 		string skinny_value = request("SKINNY_MODE");
+		
 		fortranscenenode_->skinny_ = MagTranslator<string, bool>()(skinny_value);
+		
 		}
 	
 	if  (request.countValues("PAGE_FRAME_COLOUR") ) {
@@ -118,7 +124,7 @@ void FortranSceneNodeWrapper::set(const MagRequest& request)
 		page_id_wrapper = SimpleFactory<NoPageIDWrapper>::create(page_id_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << page_id_value << "] is not a valid value for page_id: reset to default -> [on]" << endl;

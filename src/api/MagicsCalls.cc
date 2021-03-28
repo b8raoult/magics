@@ -21,7 +21,7 @@
 #include "MagicsCalls.h"
 #include "CompatibilityHelper.h"
 #include "FortranMagics.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 
 namespace magics {
@@ -173,7 +173,7 @@ void MagicsCalls::metgraph() {
 }
 
 void MagicsCalls::mute() {
-    MagicsSettings::silent(true);
+    MagicsGlobal::silent(true);
 }
 
 void MagicsCalls::netcdf() {
@@ -188,7 +188,7 @@ void MagicsCalls::odb() {
 #ifdef HAVE_ODB
     FortranMagics::instance().podb();
 #else
-    if (MagicsSettings::strict()) {
+    if (MagicsGlobal::strict()) {
         throw NotSupported("ODB support is NOT enabled!");
     }
     MagLog::warning() << "ODB support is NOT enabled!\n";
@@ -216,7 +216,7 @@ void MagicsCalls::raw() {
 }
 
 void MagicsCalls::set_python() {
-    MagicsSettings::compatibility(false);
+    MagicsGlobal::compatibility(false);
 }
 
 void MagicsCalls::symb() {
@@ -244,7 +244,7 @@ void MagicsCalls::tile() {
 }
 
 void MagicsCalls::unmute() {
-    MagicsSettings::silent(false);
+    MagicsGlobal::silent(false);
 }
 
 void MagicsCalls::wind() {
@@ -515,7 +515,7 @@ const char* MagicsCalls::detect(const std::string& data, const std::string& dime
 void MagicsCalls::strict_mode() {
     // TODO: Come back
 
-    MagicsSettings::strict(true);
+    MagicsGlobal::strict(true);
 }
 
 }  // namespace magics

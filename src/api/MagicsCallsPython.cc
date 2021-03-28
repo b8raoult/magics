@@ -21,7 +21,7 @@
 #include "MagicsCalls.h"
 #include "magics.h"
 // #include "MagLog.h"
-// #include "MagicsSettings.h"
+// #include "MagicsGlobal.h"
 // #include "MagicsParameter.h"
 // #include "WebFormat.h"
 // #include "py_calls.h"

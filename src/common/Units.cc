@@ -22,7 +22,7 @@
 #include "MagException.h"
 #include "MagLog.h"
 #include "MagParser.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
@@ -95,7 +95,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
     }
 
     if (from.empty()) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw MagicsException("Cannot convert data to " + to + ", data units not known");
         }
         MagLog::warning() << "Cannot convert data to " << to << ", data units not known" << std::endl;
@@ -130,7 +130,7 @@ bool Units::convert(const std::string& from, const std::string& to, double& scal
         return true;
     }
 
-    if (MagicsSettings::strict()) {
+    if (MagicsGlobal::strict()) {
         throw MagicsException("Cannot convert data from [" + from + "] to [" + to + "]");
     }
     MagLog::warning() << "Cannot convert data from [" << from << "] to [" << to << "]" << std::endl;

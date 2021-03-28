@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 DateGribLoopStepWrapper::DateGribLoopStepWrapper(): dategribloopstep_(new DateGribLoopStep())
+
 
 {
 
@@ -74,7 +76,7 @@ void DateGribLoopStepWrapper::set(const MagRequest& request)
 		address_mode_wrapper = SimpleFactory<GribAddressModeWrapper>::create(address_mode_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << address_mode_value << "] is not a valid value for address_mode: reset to default -> [record]" << endl;

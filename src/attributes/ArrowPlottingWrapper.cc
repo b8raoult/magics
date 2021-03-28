@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 ArrowPlottingWrapper::ArrowPlottingWrapper(): arrowplotting_(new ArrowPlotting())
+
 
 {
 
@@ -85,7 +87,7 @@ void ArrowPlottingWrapper::set(const MagRequest& request)
 		arrowplotting_->min_speed_ = min_speed_value;
 		}
 	if  (request.countValues("WIND_ARROW_THICKNESS") ) {
-		double thickness_value = request("WIND_ARROW_THICKNESS");
+		int thickness_value = request("WIND_ARROW_THICKNESS");
 		arrowplotting_->thickness_ = thickness_value;
 		}
 	if  (request.countValues("WIND_ARROW_UNIT_SYSTEM") ) {
@@ -114,7 +116,7 @@ void ArrowPlottingWrapper::set(const MagRequest& request)
 		calm_wrapper = SimpleFactory<CalmIndicatorWrapper>::create(calm_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << calm_value << "] is not a valid value for calm: reset to default -> [off]" << endl;

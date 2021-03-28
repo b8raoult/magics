@@ -17,7 +17,7 @@
 #include "MagException.h"
 #include "MagParser.h"
 #include "MagicsCalls.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
@@ -217,7 +217,7 @@ static void plot(const std::string&, const Value& param) {
 static void styles(const std::string&, const Value& param) {
     ValueList actions = param;
 
-    MagicsSettings::silent(true);
+    MagicsGlobal::silent(true);
 
     MagicsCalls::open();
 

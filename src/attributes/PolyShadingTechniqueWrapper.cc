@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 PolyShadingTechniqueWrapper::PolyShadingTechniqueWrapper(): polyshadingtechnique_(new PolyShadingTechnique())
+
 
 {
 
@@ -70,7 +72,7 @@ void PolyShadingTechniqueWrapper::set(const MagRequest& request)
 		method_wrapper = SimpleFactory<PolyShadingMethodWrapper>::create(method_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << method_value << "] is not a valid value for method: reset to default -> [dot]" << endl;

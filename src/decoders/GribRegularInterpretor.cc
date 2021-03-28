@@ -452,7 +452,7 @@ void GribRegularInterpretor::index(const GribDecoder& grib) {
     }
 
     catch (...) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         throw MagicsException("GribRegularInterpretor - Not enough memory");
@@ -569,7 +569,7 @@ void GribRegularInterpretor::interpretAsMatrix(GribDecoder& grib) const {
         u->missing(missing);
     }
     catch (...) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         throw MagicsException("GribRegularInterpretor - Not enough memory");
@@ -1409,7 +1409,7 @@ void GribLambertAzimutalInterpretor::interpretAsMatrix(GribDecoder& grib) const 
         rotated->setMapsAxis();
     }
     catch (MagicsException& e) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::error() << e << "\n";
@@ -1529,7 +1529,7 @@ void GribRotatedInterpretor::interpretAsMatrix(GribDecoder& grib) const {
         u->missing(missing);
     }
     catch (...) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         throw MagicsException("GribRegularInterpretor - Not enough memory");
@@ -1789,7 +1789,7 @@ void GribLambertInterpretor::interpretAsMatrix(GribDecoder& grib) const {
     }
 
     catch (MagicsException& e) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::error() << e << "\n";
@@ -1991,7 +1991,7 @@ void GribProjInterpretor::interpretAsMatrix(GribDecoder& grib) const {
         matrix->setMapsAxis();
     }
     catch (...) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         throw MagicsException("GribRegularInterpretor - Not enough memory");

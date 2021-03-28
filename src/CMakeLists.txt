@@ -53,6 +53,9 @@ add_subdirectory( terralib )
 add_subdirectory( clipper )
 add_subdirectory( eckit_readers )
 
+list( APPEND MAGICS_DOCS common)
+list( APPEND MAGICS_DOCS basic)
+
 if( metview )
 	add_subdirectory( libMagWrapper )
 endif()
@@ -64,11 +67,15 @@ if( HAVE_ODB )
 endif()
 
 
-if( EC_OS_NAME MATCHES "linux" )
-  # Not sure if linux or g++
-  set( EXTRA_CXX_LIBRARIES stdc++fs)
+# we may need to add stdc++fs to the link libs
+set(STDFSLIB "")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    if (${CMAKE_CXX_COMPILER_VERSION} VERSION_LESS "9.0.0")
+        message(STATUS "GNU compiler < 9.0.0, so adding stdc++fs to link list")
+        set(STDFSLIB "stdc++fs")
+   endif()
 endif()
-
+    
 
 ecbuild_add_library( TARGET    MagPlus
                      SOURCES
@@ -93,7 +100,7 @@ ecbuild_add_library( TARGET    MagPlus
                      PUBLIC_LIBS
                         ${MAGICS_EXTRA_LIBRARIES}
                         eccodes
-                        ${EXTRA_CXX_LIBRARIES}
+                        ${STDFSLIB}
                      PRIVATE_INCLUDES $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/src/clipper>
                                       ${MAGICS_PRIVATE_INCLUDE_DIRS}
 
@@ -174,6 +181,7 @@ if( metview )
             XmlBasicNodeAttributes.h
             LookupTableModeAttributes.h
             FixedTableModeAttributes.h
+            MagicsGlobalAttributes.h
    )
    if(qt)
      list(APPEND attributes_include QtDriverAttributes.h)

@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 FlagPlottingWrapper::FlagPlottingWrapper(): flagplotting_(new FlagPlotting())
+
 
 {
 
@@ -70,7 +72,9 @@ void FlagPlottingWrapper::set(const MagRequest& request)
 		}
 	if  (request.countValues("WIND_FLAG_CROSS_BOUNDARY") ) {
 		string cross_boundary_value = request("WIND_FLAG_CROSS_BOUNDARY");
+		
 		flagplotting_->cross_boundary_ = MagTranslator<string, bool>()(cross_boundary_value);
+		
 		}
 	if  (request.countValues("WIND_FLAG_LENGTH") ) {
 		double length_value = request("WIND_FLAG_LENGTH");
@@ -102,7 +106,7 @@ void FlagPlottingWrapper::set(const MagRequest& request)
 		calm_wrapper = SimpleFactory<CalmIndicatorWrapper>::create(calm_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << calm_value << "] is not a valid value for calm: reset to default -> [on]" << endl;
@@ -131,7 +135,7 @@ void FlagPlottingWrapper::set(const MagRequest& request)
 		origin_wrapper = SimpleFactory<OriginMarkerWrapper>::create(origin_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << origin_value << "] is not a valid value for origin: reset to default -> [circle]" << endl;

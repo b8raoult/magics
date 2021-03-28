@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 Proj4GoodeWrapper::Proj4GoodeWrapper(): proj4goode_(new Proj4Goode())
+
 
 {
 

@@ -9,11 +9,11 @@
  */
 
 #include "MagYaml.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 using namespace magics;
 
 int main(int argc, char** argv) {
-    // MagicsSettings::strict(true);
+    // MagicsGlobal::strict(true);
 
     try {
         for (int i = 1; i < argc; i++) {

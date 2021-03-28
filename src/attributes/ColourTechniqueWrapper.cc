@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 ColourTechniqueWrapper::ColourTechniqueWrapper(): colourtechnique_(new ColourTechnique())
+
 
 {
 

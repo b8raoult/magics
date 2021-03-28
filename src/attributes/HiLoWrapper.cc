@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 HiLoWrapper::HiLoWrapper(): hilo_(new HiLo())
+
 
 {
 
@@ -98,7 +100,7 @@ void HiLoWrapper::set(const MagRequest& request)
 		type_wrapper = SimpleFactory<HiLoTechniqueWrapper>::create(type_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << type_value << "] is not a valid value for type: reset to default -> [text]" << endl;
@@ -116,7 +118,7 @@ void HiLoWrapper::set(const MagRequest& request)
 		marker_wrapper = SimpleFactory<HiLoMarkerBaseWrapper>::create(marker_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << marker_value << "] is not a valid value for marker: reset to default -> [off]" << endl;

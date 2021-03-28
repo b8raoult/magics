@@ -24,6 +24,12 @@
 
 #include <cerrno>
 
+#if defined(HAVE_METVIEW) && !defined(MAGICS_ON_WINDOWS)
+// for readlink()
+#include <unistd.h>
+#endif
+
+
 #include "Factory.h"
 #include "magics.h"
 
@@ -33,7 +39,7 @@
 #include "GribInterpretor.h"
 #include "MagDateTime.h"
 #include "MagJSon.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 #include "MetaData.h"
 #include "TextVisitor.h"
 #include "Timer.h"
@@ -152,7 +158,7 @@ long computeStep(const GribDecoder& grib, const string& key) {
 }
 
 long GribDecoder::getLong(const string& key, bool warnIfKeyAbsent) const {
-    if (!valid_)
+    if (!valid_ || !current_handle_ )
         return 0;
     long val;
     map<string, long>::const_iterator lk = lKeys_.find(key);
@@ -199,7 +205,7 @@ string GribDecoder::getstring(const string& key, bool warnIfKeyAbsent, bool cach
 }
 
 string GribDecoder::getString(const string& key, bool warnIfKeyAbsent) const {
-    if (!valid_)
+    if (!valid_ )
         return "";
     if (Data::dimension_ == 1) {
         current_handle_ = field_;
@@ -226,7 +232,7 @@ string GribDecoder::getString(const string& key, bool warnIfKeyAbsent) const {
 }
 
 double GribDecoder::getDouble(const string& key, bool warnIfKeyAbsent) const {
-    if (!valid_)
+    if (!valid_ || !current_handle_ )
         return 0;
     map<string, double>::const_iterator dk = dKeys_.find(key);
     if (dk != dKeys_.end()) {
@@ -257,6 +263,17 @@ void GribDecoder::setDouble(const string& key, double val) const {
     if (err) {
         MagLog::warning() << "ecCodes: cannot find key [" << key << "]  - " << grib_get_error_message(err) << "\n";
     }
+}
+
+const DateTime& GribDecoder::from() {
+    decode();
+    return from_;
+
+}
+const DateTime& GribDecoder::to()
+{
+    decode();
+    return to_;
 }
 
 void GribDecoder::scale(const string& metadata, double& scaling, double& offset) {
@@ -329,7 +346,7 @@ void GribDecoder::read() {
         }
     }
     catch (NoFactoryException&) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         ostringstream msg;
@@ -356,11 +373,11 @@ void GribDecoder::read(const Transformation& transformation) {
         // interpretor_->scaling(*this, *matrix);
     }
     catch (NoFactoryException&) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::error() << "Grib Decoder - read: Representation [" << grid << "] not supported.\n" << std::endl;
-        
+
         valid_ = false;
         throw MagicsException("Grib Decoder: Representation [] not supported.");
     }
@@ -464,7 +481,7 @@ void GribDecoder::decode2D() {
         interpretor_->keepOriginal(true);
     }
     catch (NoFactoryException&) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::warning() << "Grib Decoder: Vector cobination of representations [" << grid << "] not supported.\n"
@@ -513,7 +530,7 @@ void GribDecoder::customisedPoints(const AutomaticThinningMethod& thinning, cons
         customisedPoints(transformation, points, xstep, ystep, 0);
     }
     catch (NoFactoryException&) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::error() << "Grib Decoder - customisedPoints: Representation [" << grid << "] not supported.\n"
@@ -773,7 +790,7 @@ grib_handle* GribDecoder::open(grib_handle* grib, bool sendmsg) {
     FILE* file = fopen(file_name_.c_str(), "rb");
 
     if (!file) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw CannotOpenFile(file_name_);
         }
 
@@ -893,7 +910,7 @@ void GribDecoder::decodePoints() {
             defaultScaling(scaling, offset, originalUnits, derivedUnits);
         }
         catch (NoFactoryException&) {
-            if (MagicsSettings::strict()) {
+            if (MagicsGlobal::strict()) {
                 throw;
             }
             MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n" << std::endl;
@@ -1357,7 +1374,7 @@ public:
             tree.visit(*this);
         }
         catch (MagicsException& e) {
-            if (MagicsSettings::strict()) {
+            if (MagicsGlobal::strict()) {
                 throw;
             }
             MagLog::error() << e.what() << endl;
@@ -1468,7 +1485,7 @@ void GribDecoder::visit(ValuesCollector& points) {
         defaultScaling(scaling, offset, oriUnits, derivedUnits);
     }
     catch (NoFactoryException&) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
         MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n" << std::endl;
@@ -1565,9 +1582,10 @@ const LevelDescription& GribDecoder::level() {
 }
 
 void GribDecoder::ask(MetaDataCollector& meta) {
+    openField();  // just to be sure the file is opened!
     for (auto m = meta.begin(); m != meta.end(); ++m) {
         m->second = getString(m->first, false);
-        // cout << m->first << " = " << m->second << endl;
+        //cout << "ASK --> " << m->first << " = " << m->second << endl;
     }
 }
 
@@ -1682,7 +1700,7 @@ void GribDecoder::visit(MetaDataCollector& step) {
                         }
                     }
                     catch (NoFactoryException&) {
-                        if (MagicsSettings::strict()) {
+                        if (MagicsGlobal::strict()) {
                             throw;
                         }
                         MagLog::warning() << "Grib Decoder: Representation [" << grid << "] not supported.\n"
@@ -1742,7 +1760,7 @@ void GribDecoder::visit(MetaDataCollector& step) {
     }
 
     catch (...) {
-        if (MagicsSettings::strict()) {
+        if (MagicsGlobal::strict()) {
             throw;
         }
     }
@@ -1882,8 +1900,10 @@ void GribDecoder::decodeRaster(const Transformation& transformation) {
     }
 }
 
+
 void GribDecoder::initInfo() {
 #if defined(HAVE_METVIEW) && !defined(MAGICS_ON_WINDOWS)
+
     if (information_.find("_datatype") == information_.end()) {
         setInfo("_datatype", "GRIB");
 
@@ -1936,7 +1956,7 @@ public:
     ~GribLocalCriter() {}
     bool verify(const GribDecoder& grib, const string& param, const string& val) override {
         string key    = param;
-        string criter = grib.getstring(key);
+        string criter = grib.getstring(key, false);
         MagLog::debug() << "I am verifing " << param << " for a GribDecoder : " << criter << " ==  " << val << "???"
                         << "\n";
         return (criter == val);
@@ -1964,6 +1984,7 @@ public:
         string local = grib.getstring("localDefinitionNumber");
         out << "local definition =" << local << " ";
         title.back() += out.str();
+        title.back() += " ";
     }
 };
 
@@ -1977,6 +1998,7 @@ public:
         string local = grib.getstring("observationDiagnostic");
         out << "diagnostic =" << local << " ";
         title.back() += out.str();
+        title.back() += " ";
     }
 };
 
@@ -1998,6 +2020,7 @@ public:
         string code = grib.getstring(local_);
         out << local_ << "=" << code << " ";
         title.back() += out.str();
+        title.back() += " ";
     }
 
 protected:
@@ -2029,6 +2052,7 @@ public:
     virtual void operator()(TitleField&, vector<string>& title, const GribDecoder& grib) override {
         string param = grib.getString("name");
         title.back() += param;
+        title.back() += " ";
     }
 };
 
@@ -2045,6 +2069,7 @@ public:
         sprintf(x, format.c_str(), value.c_str());
 
         title.back() += string(x);
+        title.back() += " ";
     }
 };
 
@@ -2073,6 +2098,7 @@ public:
         string format = field.attribute("format", "%A %d %B %Y at %H%M UTC");
 
         title.back() += full.tostring(format);
+        title.back() += " ";
     }
 };
 
@@ -2099,6 +2125,7 @@ public:
         string format = field.attribute("format", "%A %d %B %Y %H%M UTC");
 
         title.back() += full.tostring(format);
+        title.back() += " ";
     }
 };
 
@@ -2115,6 +2142,7 @@ public:
             ostringstream step;
             step << "from t+" << startstep << " to t+" << endstep;
             title.back() += step.str();
+            title.back() += " ";
             return;
         }
 
@@ -2123,6 +2151,7 @@ public:
         string format = field.attribute("format", "t+%s");
         out << SimpleStringFormat(step.str(), format);
         title.back() += out.str();
+        title.back() += " ";
     }
 };
 
@@ -2154,6 +2183,7 @@ public:
             out << level << " ";
 
         title.back() += out.str();
+        title.back() += " ";
     }
 
 protected:
@@ -2210,6 +2240,7 @@ public:
         string centre = grib.getstring("centre");
 
         title.back() += centre;
+        title.back() += " ";
     }
 };
 
@@ -2262,6 +2293,7 @@ public:
             title.back() += sat->second;
         else
             title.back() += "satellite identifier " + tostring(ident);
+        title.back() += " ";
     }
 };
 
@@ -2324,19 +2356,23 @@ public:
         long ident = grib.getLong("ident");
         long band  = grib.getLong("channel");
 
+
         map<long, map<long, string> >::iterator sat = channels.find(ident);
 
         if (sat == channels.end()) {
             title.back() += "channel " + tostring(band);
+            title.back() += " ";
             return;
         }
         map<long, string>::iterator channel = sat->second.find(band);
         if (channel == sat->second.end()) {
             title.back() += "channel " + tostring(band);
+            title.back() += " ";
             return;
         }
 
         title.back() += channel->second;
+        title.back() += " ";
     }
 };
 
@@ -2347,6 +2383,7 @@ public:
     void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
         if (!grib.getExpver())
             return;
+        title.back() += " ";
         ostringstream out;
         string expver = grib.getstring("mars.experimentVersionNumber");
         string format = field.attribute("format", "Expver=%s");
@@ -2360,7 +2397,16 @@ public:
     GribEpsNumberInfoHandler() {}
     ~GribEpsNumberInfoHandler() {}
     void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
+        title.back() += " ";
         title.back() += "epsnumber?";
+    }
+};
+
+class GribIgnoreHandler : public TitleFieldHandler {
+public:
+    GribIgnoreHandler() {}
+    ~GribIgnoreHandler() {}
+    void operator()(TitleField& field, vector<string>& title, const GribDecoder& grib) override {
     }
 };
 
@@ -2412,6 +2458,7 @@ static SimpleObjectMaker<GribValidDateHandler, TitleFieldHandler> gribvaliddateh
 static SimpleObjectMaker<GribStepHandler, TitleFieldHandler> gribstephandler("step");
 static SimpleObjectMaker<GribEpsNumberInfoHandler, TitleFieldHandler> gribepsnumberhandler("eps_number_info");
 
+
 static SimpleObjectMaker<GribTimeHandler, TitleFieldHandler> gribTimehandler("time");
 static SimpleObjectMaker<GribLevelHandler, TitleFieldHandler> gribLevelhandler("level");
 static SimpleObjectMaker<NewLineHandler, TitleFieldHandler> newlinehandler("newline");
@@ -2429,6 +2476,7 @@ static SimpleObjectMaker<GribPlotTypeHandler, TitleFieldHandler> gribplottypehan
 static SimpleObjectMaker<SatelliteHandler, TitleFieldHandler> satellitehandler("satellite");
 static SimpleObjectMaker<ChannelHandler, TitleFieldHandler> channelhandler("channel");
 static SimpleObjectMaker<GribBaseDateHandler, TitleFieldHandler> datehandler("date");
+static SimpleObjectMaker<GribIgnoreHandler, TitleFieldHandler> texthandler("text");
 
 static SimpleObjectMaker<GribObsDiagCriter, MatchCriteria> gribobsdiagriter("observationDiagnostic");
 static SimpleObjectMaker<GribObsDiagHandler, TitleFieldHandler> gribobsdiaghandler("observationDiagnostic");

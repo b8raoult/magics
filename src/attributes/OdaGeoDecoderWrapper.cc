@@ -24,12 +24,14 @@
 #include "MagicsParameter.h"
 #include "Factory.h"
 #include "MagTranslator.h"
-#include "MagicsSettings.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
 
+
 OdaGeoDecoderWrapper::OdaGeoDecoderWrapper(): odageodecoder_(new OdaGeoDecoder())
+
 
 {
 
@@ -99,7 +101,7 @@ void OdaGeoDecoderWrapper::set(const MagRequest& request)
 		odb_binning_wrapper = SimpleFactory<BinningObjectWrapper>::create(odb_binning_value);
 	}
 	 catch (NoFactoryException&) {
-		if (MagicsSettings::strict()) {
+		if (MagicsGlobal::strict()) {
             throw;
         }
 		MagLog::warning() << "[" << odb_binning_value << "] is not a valid value for odb_binning: reset to default -> [off]" << endl;
