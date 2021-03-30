@@ -54,9 +54,12 @@ void MagClipper::clipOpened(const Polyline& subject, const Polyline& clip, vecto
     convert(clip.polygon(), path_clip);
 
     clipper.AddPath(path_clip, ClipperLib::ptClip, true);
-
-    clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
-
+    try {
+        clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+    }
+    catch (...) {
+        cout << "ERROR" << endl;
+    }
 
     ClipperLib::PolyNode* node = solution.GetFirst();
 
@@ -104,63 +107,68 @@ void MagClipper::clipClosed(const Polyline& subject, const Polyline& clip, vecto
     ClipperLib::Clipper clipper, clipper_holes;
 
     convert(subject.polygon(), path_subject);
-
-    int orientation = ClipperLib::Orientation(path_subject);
-    if (ClipperLib::Orientation(path_subject) == 0) {
-        ClipperLib::ReversePath(path_subject);
-    }
-
-    // cout << "Add line" << ClipperLib::Orientation(path_subject) << endl;
-    clipper.AddPath(path_subject, ClipperLib::ptSubject, true);
-    convert(clip.polygon(), path_clip);
-    for (auto hole = subject.beginHoles(); hole != subject.endHoles(); ++hole) {
-        ClipperLib::Path path;
-        convert(*hole, path);
-        if (ClipperLib::Orientation(path) == 1) {
-            ClipperLib::ReversePath(path);
+    try {
+        int orientation = ClipperLib::Orientation(path_subject);
+        if (ClipperLib::Orientation(path_subject) == 0) {
+            ClipperLib::ReversePath(path_subject);
         }
-        // cout << "Add Hole" << ClipperLib::Orientation(path) << endl;
-        clipper.AddPath(path, ClipperLib::ptSubject, true);
-    }
 
-    clipper.AddPath(path_clip, ClipperLib::ptClip, true);
-
-    clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
-
-
-    Polyline* poly = 0;
-    vector<ClipperLib::Paths::iterator> couters;
-    map<ClipperLib::Paths::iterator, Polyline*> helper;
-    vector<ClipperLib::Paths::iterator> choles;
-
-    for (auto path = solution.begin(); path != solution.end(); ++path) {
-        orientation = ClipperLib::Orientation(*path);
-        if (orientation == 1) {
-            couters.push_back(path);
-            Polyline* poly = new Polyline();
-            convert(*path, poly->polygon());
-            poly->close();
-            helper.insert(make_pair(path, poly));
-        }
-        else {
-            choles.push_back(path);
-        }
-    }
-
-    for (auto hole = choles.begin(); hole != choles.end(); ++hole) {
-        Polyline poly;
-        convert(**hole, poly.polygon());
-        poly.close();
-        for (auto outer = couters.begin(); outer != couters.end(); ++outer)
-            if (ClipperLib::PointInPolygon((*hole)->front(), **outer)) {
-                helper[*outer]->newHole(poly);
-
-                break;
+        // cout << "Add line" << ClipperLib::Orientation(path_subject) << endl;
+        clipper.AddPath(path_subject, ClipperLib::ptSubject, true);
+        convert(clip.polygon(), path_clip);
+        for (auto hole = subject.beginHoles(); hole != subject.endHoles(); ++hole) {
+            ClipperLib::Path path;
+            convert(*hole, path);
+            if (ClipperLib::Orientation(path) == 1) {
+                ClipperLib::ReversePath(path);
             }
-    }
+            // cout << "Add Hole" << ClipperLib::Orientation(path) << endl;
+            clipper.AddPath(path, ClipperLib::ptSubject, true);
+        }
 
-    for (auto outer = couters.begin(); outer != couters.end(); ++outer) {
-        out.push_back(helper[*outer]);
+        clipper.AddPath(path_clip, ClipperLib::ptClip, true);
+        try {
+            clipper.Execute(ClipperLib::ctIntersection, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+        }
+        catch (...) {
+        }
+
+        Polyline* poly = 0;
+        vector<ClipperLib::Paths::iterator> couters;
+        map<ClipperLib::Paths::iterator, Polyline*> helper;
+        vector<ClipperLib::Paths::iterator> choles;
+
+        for (auto path = solution.begin(); path != solution.end(); ++path) {
+            orientation = ClipperLib::Orientation(*path);
+            if (orientation == 1) {
+                couters.push_back(path);
+                Polyline* poly = new Polyline();
+                convert(*path, poly->polygon());
+                poly->close();
+                helper.insert(make_pair(path, poly));
+            }
+            else {
+                choles.push_back(path);
+            }
+        }
+
+        for (auto hole = choles.begin(); hole != choles.end(); ++hole) {
+            Polyline poly;
+            convert(**hole, poly.polygon());
+            poly.close();
+            for (auto outer = couters.begin(); outer != couters.end(); ++outer)
+                if (ClipperLib::PointInPolygon((*hole)->front(), **outer)) {
+                    helper[*outer]->newHole(poly);
+
+                    break;
+                }
+        }
+
+        for (auto outer = couters.begin(); outer != couters.end(); ++outer) {
+            out.push_back(helper[*outer]);
+        }
+    }
+    catch (...) {
     }
 }
 
@@ -179,9 +187,12 @@ void MagClipper::add(const Polyline& subject, const Polyline& clip, vector<Polyl
     convert(clip.polygon(), path_clip);
 
     clipper.AddPath(path_clip, ClipperLib::ptClip, true);
-
-    clipper.Execute(ClipperLib::ctUnion, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
-
+    try {
+        clipper.Execute(ClipperLib::ctUnion, solution, ClipperLib::pftNonZero, ClipperLib::pftNonZero);
+    }
+    catch (...) {
+        MagLog::warning() << "Clipping warning " << endl;
+    }
     for (auto path = solution.begin(); path != solution.end(); ++path) {
         Polyline* poly = new Polyline();
         convert(*path, poly->polygon());
@@ -194,8 +205,7 @@ bool MagClipper::in(const Polyline& poly, const PaperPoint& point) {
     ClipperLib::Path path;
     convert(poly.polygon(), path);
 
-    return ClipperLib::PointInPolygon(
-        ClipperLib::IntPoint(ClipperLib::cInt(point.x_ * scale_), ClipperLib::cInt(point.y_ * scale_)), path);
+    return ClipperLib::PointInPolygon(ClipperLib::IntPoint(long(point.x_ * scale_), long(point.y_ * scale_)), path);
 }
 
 MagClipper::MagClipper() {}

@@ -313,9 +313,9 @@ int Style::score(const MetaDataCollector& data) {
             if (dkey == data.end()) {
                 continue;
             }
-            if (dkey->second == "") {
-                continue;
-            }
+
+            
+            
             int tmpscore = 0;
             for (auto value = key->second.begin(); value != key->second.end(); ++value) {
                 string whitespaces(" \t\f\v\n\r");
@@ -334,7 +334,9 @@ int Style::score(const MetaDataCollector& data) {
             }
 
             if (!tmpscore) {
-                criteria.clear();
+                if ( score && debug ) 
+                    cout << "Match not possible" << endl;
+                //criteria.clear();
                 score = 0;
                 break;
             }
@@ -351,12 +353,13 @@ int Style::score(const MetaDataCollector& data) {
         }
 
         else {
-            MagLog::debug() << "----   Found style with score : " << bestscore << " Style --> " << styles_.front()
-                            << endl;
-            for (auto match = criteria.begin(); match != criteria.end(); ++match) {
-                MagLog::debug() << "    " << match->first << " == " << match->second << endl;
+            if (debug) {
+                cout << "----   Found style with score : " << bestscore << " Style --> " << styles_.front() << endl;
+                for (auto match = criteria.begin(); match != criteria.end(); ++match) {
+                    cout << "    " << match->first << " == " << match->second << endl;
+                }
+                cout  << "---------------------------------------------" << endl;
             }
-            MagLog::debug() << "----------------------------------------------------" << endl;
         }
     }
 

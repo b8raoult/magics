@@ -34,6 +34,7 @@
 #include "SceneVisitor.h"
 #include "TextVisitor.h"
 #include "Transformation.h"
+#include "MagicsGlobal.h"
 
 using namespace magics;
 
