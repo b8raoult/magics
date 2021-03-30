@@ -24,7 +24,7 @@
 
 using namespace magics;
 
-MagLog MagLog::log_;
+MAGICS_EXPORT MagLog MagLog::log_;
 bool MagLog::header_;
 
 namespace magics {
