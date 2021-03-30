@@ -367,35 +367,35 @@ void MagLog::unregisterObserver(MagicsObserver* observer) {
 }
 
 
-void MagLog::devMessage(bool dev = true) {
+void MagLog::devMessage(bool dev) {
     log_.dev_ = dev;
 }
 
-void MagLog::infoMessage(bool info = true) {
+void MagLog::infoMessage(bool info) {
     log_.info_ = info;
 }
 
-void MagLog::userInfoMessage(bool info = true) {
+void MagLog::userInfoMessage(bool info) {
     log_.userInfo_ = info;
 }
 
-void MagLog::warningMessage(bool warning = true) {
+void MagLog::warningMessage(bool warning) {
     log_.warning_ = warning;
 }
 
-void MagLog::debugMessage(bool debug = true) {
+void MagLog::debugMessage(bool debug) {
     log_.debug_ = debug;
 }
 
-void MagLog::errorMessage(bool error = true) {
+void MagLog::errorMessage(bool error) {
     log_.error_ = error;
 }
 
-void MagLog::profilingMessage(bool error = true) {
+void MagLog::profilingMessage(bool error) {
     log_.error_ = error;
 }
 
-void MagLog::fatalMessage(bool fatal = true) {
+void MagLog::fatalMessage(bool fatal) {
     log_.fatal_ = fatal;
 }
 
