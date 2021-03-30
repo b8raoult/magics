@@ -367,4 +367,47 @@ void MagLog::unregisterObserver(MagicsObserver* observer) {
 }
 
 
+void MagLog::devMessage(bool dev = true) {
+    log_.dev_ = dev;
+}
+
+void MagLog::infoMessage(bool info = true) {
+    log_.info_ = info;
+}
+
+void MagLog::userInfoMessage(bool info = true) {
+    log_.userInfo_ = info;
+}
+
+void MagLog::warningMessage(bool warning = true) {
+    log_.warning_ = warning;
+}
+
+void MagLog::debugMessage(bool debug = true) {
+    log_.debug_ = debug;
+}
+
+void MagLog::errorMessage(bool error = true) {
+    log_.error_ = error;
+}
+
+void MagLog::profilingMessage(bool error = true) {
+    log_.error_ = error;
+}
+
+void MagLog::fatalMessage(bool fatal = true) {
+    log_.fatal_ = fatal;
+}
+
+void MagLog::header(bool header) {
+    header_ = header;
+}
+
+void MagLog::setReporter(const ErrorReporter* reporter) {
+    log_.reporter_ = reporter;
+}
+void MagLog::registerObserver(MagicsObserver* observer) {
+    log_.observers_.push_back(observer);
+}
+
 }  // namespace magics
