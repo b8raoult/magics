@@ -106,7 +106,7 @@ private:
     MagLog& operator=(const MagLog&);
 
     // -- Members
-    static MagLog log_;
+    MAGICS_EXPORT static MagLog log_;
     static bool header_;
 
     ofstream devnull_;

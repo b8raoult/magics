@@ -554,6 +554,7 @@ grib_handle* GribDecoder::cHandle(string& name) {
     return colour_;
 }
 
+
 void GribDecoder::newPoint(const Transformation& transformation, double lat, double lon, double uc, double vc,
                            double cc, vector<CustomisedPoint*>& points, double grid) {
     std::stack<UserPoint> duplicates;

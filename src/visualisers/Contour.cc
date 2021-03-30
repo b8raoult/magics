@@ -65,6 +65,7 @@ public:
             return max_;
         return val;
     }
+    double interpolate(double row, double column) const { return matrix_.interpolate(row, column); }
     double min_;
     double max_;
 };
