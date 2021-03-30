@@ -174,7 +174,7 @@ public:
     void getStyle(MetaDataCollector&, MagDef&, StyleEntry&) override;
     void getStyle(const string&, MagDef&) override;
 
-    void getScaling(MetaDataCollector&, double&, double&) override;
+    void getScaling(MetaDataCollector&, double&, double&);
 
 
     static StyleLibrary* styles_;
