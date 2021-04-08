@@ -76,12 +76,7 @@ Matrix* InputMatrixRegularInterpretor::geoInterpret(Matrix* in, const InputMatri
         // The initialisation has already been done return;
         return in;
 
-    // Apply scaling !
-    double scaling = 1;
-    double offset = 0;
-    // info.scaling(scaling, offset);
-    for (int i = 0; i < in->size(); ++i)
-        (*in)[i] = ((*in)[i] * scaling) + offset;
+
 
     if (longitudes_.size() && latitudes_.size()) {
         for (auto lon = longitudes_.begin(); lon != longitudes_.end(); ++lon) {
@@ -183,13 +178,9 @@ Matrix* InputMatrixIrregularInterpretor::geoInterpret(Matrix* in, const InputMat
     vector<double>& rows    = matrix->rowsArray();
     vector<double>& columns = matrix->columnsArray();
 
-    double scaling = 1;
-    double offset = 0;
-    // info.scaling(scaling, offset);
-    for (int i = 0; i < in->size(); ++i)
-        (*in)[i] = ((*in)[i] * scaling) + offset;
+
     for (vector<double>::iterator val = in->begin(); val != in->end(); ++val) {
-        values.push_back(((*val) * scaling) + offset);
+        values.push_back(*val);
     }
 
 

@@ -302,57 +302,6 @@ void WebLibrary::getStyle(MetaDataCollector& data, MagDef& contour, StyleEntry& 
 void WebLibrary::getStyle(const string& name, MagDef& info) {
     styles_->findStyle(name, info);
 }
-// set the map to set the contour!
-// void WebLibrary::getScaling(MetaDataCollector& data, double& scaling, double& offset) {
-//     MagDef values;
-//     StyleEntry info;
-//     scaling = 1;
-//     offset  = 0;
 
-//     // cout << "SCALING" << endl;
-//     vector<string> keywords = {"preferred_units", "preferred_units"};
-
-//     auto unit = data.find("units");
-//     if (unit == data.end())
-//         unit = data.find("parameterUnits");
-//     if (unit == data.end())
-//         return;
-//     MagLog::debug() << " Found Unit " << unit->second << endl;
-//     bool found = styles_->findStyle(data, values, info);
-//     if (!found) {
-//         MagLog::debug() << "Can not find style" << endl;
-//         return;
-//     }
-//     MagLog::debug() << " TRYING to scale " << unit->second << endl;
-//     for (auto x = values.begin(); x != values.end(); ++x)
-//         MagLog::debug() << x->first << "--->" << x->second << endl;
-
-//     MagDef::iterator need;
-//     for (auto key = keywords.begin(); key != keywords.end(); ++key) {
-//         need = values.find(*key);
-//         if (need != values.end())
-//             break;
-//     }
-
-//     if (need == values.end())
-//         return;
-
-
-//     UnitsLibrary converter;
-
-//     string whitespaces(" \t\f\v\n\r");
-//     string clean    = unit->second;
-//     std::size_t pos = clean.find_last_not_of(whitespaces);
-//     if (pos != std::string::npos) {
-//         // cout << "clean" << pos << endl;
-//         clean = clean.substr(0, pos + 1);
-//     }
-//     // str is all whitespace
-
-//     // cout << "CLEAN " << clean << ": " << clean.size() << endl;
-//     converter.find(need->second, clean, scaling, offset);
-//     MagLog::debug() << "Need " << need->second << " get " << unit->second << "--->APPLY " << scaling << " and "
-//                     << offset << endl;
-// }
 
 void WebLibrary::print(ostream&) const {}

@@ -344,6 +344,7 @@ void GribDecoder::read() {
             MagLog::error() << msg.str() << std::endl;
             throw MagicsException(msg.str());
         }
+        
     }
     catch (NoFactoryException&) {
         if (MagicsGlobal::strict()) {
@@ -369,8 +370,6 @@ void GribDecoder::read(const Transformation& transformation) {
             interpretor_ = SimpleObjectMaker<GribInterpretor>::create(grid);
         }
         interpretor_->interpretAsMatrix(*this, transformation);
-        // Matrix* matrix = u();
-        // interpretor_->scaling(*this, *matrix);
     }
     catch (NoFactoryException&) {
         if (MagicsGlobal::strict()) {

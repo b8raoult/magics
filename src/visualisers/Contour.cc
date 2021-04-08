@@ -130,8 +130,8 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         contour_->legend_only_ = legend_only;
     }
 
+    
     data.applyScaling(units_);  // From contour_units
-
     data.getReady(parent.transformation());
     if (!data.valid()) {
         throw MagicsException("Invalid data for contouring");
@@ -141,7 +141,6 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         (*this->contour_)(data.matrix(), parent);
         return;
     }
-
     MatrixHandler* box = data.matrix().getReady(parent.transformation());
     if (!box) {
         throw MagicsException("Invalid data for contouring");
@@ -154,11 +153,8 @@ void Contour::operator()(Data& data, BasicGraphicsObjectContainer& parent) {
         return;
     }
 
+    matrix_ = method_->handler(*box, parent);
 
-    matrix_ = (*this->method_).handler(*box, parent);
-
-
-    // matrix_ = box;
 
     if (this->floor_ != -INT_MAX || this->ceiling_ != INT_MAX)
         matrix_ = new MatrixTreshold(*matrix_, this->floor_, this->ceiling_);
@@ -202,6 +198,7 @@ static SimpleObjectMaker<NoContourLibrary, ContourLibrary> off("off");
 static SimpleObjectMaker<WebLibrary, ContourLibrary> style_name("style_name");
 static SimpleObjectMaker<WebLibrary, ContourLibrary> ecmwf("ecmwf");
 static SimpleObjectMaker<WebLibrary, ContourLibrary> on("on");
+
 
 void Contour::visit(Data& data, LegendVisitor& legend) {
     if (!legend_)
