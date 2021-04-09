@@ -11,8 +11,8 @@ for n in sys.argv[1:]:
 
         x = json.loads(f.read())
         for p in x:
-            if "preferred_units" in p and "styles" not in p and "eccharts_layer" not in p:
-                pu = p["preferred_units"]
+            if "prefered_units" in p and "styles" not in p and "eccharts_layer" not in p:
+                pu = p["prefered_units"]
                 pm = p["match"]
                 P[pu].extend(pm)
 

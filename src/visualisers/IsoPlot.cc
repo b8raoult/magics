@@ -69,7 +69,7 @@ public:
     CellBox() : parent_(0), row1_(0), row2_(0), column1_(0), column2_(0) {}
 
     ~CellBox() {
-        for (map<int, SegmentJoiner*>::iterator index = helper_.begin(); index != helper_.end(); ++index) 
+        for (map<int, SegmentJoiner*>::iterator index = helper_.begin(); index != helper_.end(); ++index)
             if ( index->second )
                 delete index->second;
 
@@ -176,7 +176,7 @@ public:
             }
             helper_[index] = new SegmentJoiner();
 
-            
+
 
 
             std::vector<Polyline*> output;
@@ -185,14 +185,14 @@ public:
 
             MagClipper::add(pts, previous, output);
 
-            
+
             if (output.size() == 1) {
                 vector<PaperPoint> tmp;
                 for (auto pt = output.front()->begin(); pt != output.front()->end(); ++pt) {
                     tmp.push_back(*pt);
                 }
-                
-                
+
+
                 push_back(index, tmp);
             }
             else {
@@ -206,7 +206,7 @@ public:
 
             for (auto p = output.begin(); p != output.end(); ++p )
                 delete *p;
-           
+
         }
     }
 
@@ -359,7 +359,7 @@ public:
                         std::swap((*j), polys.back());
                     }
                 }
-                
+
 
             }
 
@@ -1677,6 +1677,12 @@ CellArray::CellArray(MatrixHandler& data, IntervalMap<int>& range, const Transfo
         double missing = data.missing();
 
 
+        points_.resize(xypoints.size());
+        // if(points_.size() != xypoints.size()) {
+        //     std::ostringstream oss;
+        //     oss << "Oops points=" << points_.size() << " xypoints=" << xypoints.size();
+        //     throw MagicsException(oss.str());
+        // }
         int i = 0;
 
         MagLog::dev() << "min = " << data.min() << "  max = " << data.max() << endl;

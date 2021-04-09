@@ -186,7 +186,7 @@ for path in os.listdir(ecmwf):
             x = json.loads(f.read())
             try:
                 assert isinstance(x, list) and len(x) == 1, (path, x)
-                assert "preferred_units" not in x[0], (path, x)
+                assert "prefered_units" not in x[0], (path, x)
                 assert "styles" in x[0], (path, x)
                 matches[path[:-5]] = x[0]
             except Exception as e:
@@ -194,7 +194,7 @@ for path in os.listdir(ecmwf):
 
 for k, v in matches.items():
     v.pop("eccharts_layer", None)
-    units = v.pop("preferred_units", None)
+    units = v.pop("prefered_units", None)
 
     for n in v["styles"]:
         if n in styles:
