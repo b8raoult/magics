@@ -70,6 +70,14 @@ int c_int(const char* name, T proc) {
     return -1;
 }
 
+static std::string fortran_string(const char* s_ptr, int s_len, bool lstrip = false) {
+    std::string s(s_ptr, s_len);
+    // remove the space at the start and end of the string
+    string::size_type index1 = lstrip ? s.find_first_not_of(" ") : 0;
+    string::size_type index2 = s.find_last_not_of(" ");
+    return (index1 == string::npos || index2 == string::npos) ? "" : s.substr(index1, index2 + 1);
+}
+
 
 extern "C" {
 
@@ -145,13 +153,6 @@ C_CHAR(metanetcdf)    // TODO: review name
 
 ****************************************************************************/
 
-static std::string fortran_string(const char* s_ptr, int s_len, bool lstrip = false) {
-    std::string s(s_ptr, s_len);
-    // remove the space at the start and end of the string
-    string::size_type index1 = lstrip ? s.find_first_not_of(" ") : 0;
-    string::size_type index2 = s.find_last_not_of(" ");
-    return (index1 == string::npos || index2 == string::npos) ? "" : s.substr(index1, index2 + 1);
-}
 
 //================================================================
 

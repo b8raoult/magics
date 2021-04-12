@@ -66,10 +66,13 @@ int LatLonProjP::convert(double& x, double& y) const {
     in.lpzt.t   = HUGE_VAL;
 
     out = proj_trans(converter_, PJ_FWD, in);
-    if (proj_errno(converter_)) {
+
+    int err = proj_errno(converter_);
+    if (err) {
         proj_errno_reset(converter_);
-        return 1;
+        return err;
     }
+
     x = out.xy.x;
     y = out.xy.y;
     return 0;
@@ -80,9 +83,10 @@ int LatLonProjP::revert(double& x, double& y) const {
     in.xy.y = y;
 
     out = proj_trans(converter_, PJ_INV, in);
-    if (proj_errno(converter_)) {
+    int err = proj_errno(converter_);
+    if (err) {
         proj_errno_reset(converter_);
-        return 1;
+        return err;
     }
 
     x = out.lpzt.lam;
@@ -96,9 +100,11 @@ int ProjP::convert(double& x, double& y) const {
     in.xy.x = x;
     in.xy.y = y;
     out     = proj_trans(converter_, PJ_FWD, in);
-    if (proj_errno(converter_)) {
+
+    int err = proj_errno(converter_);
+    if (err) {
         proj_errno_reset(converter_);
-        return 1;
+        return err;
     }
     x = out.xy.x;
     y = out.xy.y;
@@ -111,14 +117,15 @@ int ProjP::revert(double& x, double& y) const {
     in.xy.y = y;
 
     out = proj_trans(converter_, PJ_INV, in);
-    if (proj_errno(converter_)) {
+
+    int err = proj_errno(converter_);
+    if (err) {
         proj_errno_reset(converter_);
-        return 1;
+        return err;
     }
+
     x = out.xy.x;
     y = out.xy.y;
-
-
 
     return 0;
 }
